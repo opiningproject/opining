@@ -38,11 +38,7 @@ return [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
             'host' => 'smtp.gmail.com',
-            'port' => env('MAIL_PORT', 587),
-            'from' => [
-                'address' => 'inx.email001@gmail.com',
-                'name' => 'test',
-            ],
+            'port' => 465,
             'encryption' => 'ssl',
             'username' => 'inx.email001@gmail.com',
             'password' => 'phxqtwyftfbfvsxz',
@@ -103,8 +99,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'inx.email001@gmail.com',
+        'name' => 'test',
     ],
 
     /*

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\Admin\DishController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +18,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('change-lang/{lang}', function($lang) {
+    session(['Accept-Language' => $lang]);
+    return redirect()->back();
+})->name('app.setLocal');
+
+Route::middleware(['auth', 'localization'])->group(function () {
+    Route::get('/menu', [HomeController::class, 'index'])->name('home');
+    Route::get('/menu/add-dish', [HomeController::class, ''])->name('');
+
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+
+    Route::get('/coupons/claim-history', [CouponController::class, 'claimHistoryLog'])->name('claimHistoryLog');
+    Route::resource('/coupons', CouponController::class);
+
+    Route::resource('/menu/dish', DishController::class);
+});

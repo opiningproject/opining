@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('user_role', [0,1])->default(0)->comment('1 - Admin, 0 - Restaurant');
             $table->rememberToken();
             $table->timestamps();
         });

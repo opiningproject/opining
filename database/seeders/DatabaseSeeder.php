@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Restuarant Name',
+            'first_name' => 'Restuarant Name',
+            'last_name' => '',
             'email' => 'admin@admin.com',
             'password' => Hash::make('Inx@!123'),
-            'user_role' => 1,
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s'),
         ]);

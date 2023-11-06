@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,6 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'user_role'
@@ -44,6 +47,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $appends = ['first_name'];
     public function order(){
         return $this->hasMany(Order::class, 'user_id', 'id');
     }
@@ -54,5 +58,16 @@ class User extends Authenticatable
 
     public function restaurantDetails(){
         return $this->hasOne(RestaurantDetail::class,'user_id','id');
+    }
+
+    public function getFullNameAttribute(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    protected function firstName(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->first_name .' '.$this->last_name,
+        );
     }
 }

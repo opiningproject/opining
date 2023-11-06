@@ -51,4 +51,8 @@ class User extends Authenticatable
     public function address(){
         return $this->hasMany(Address::class, 'user_id', 'id');
     }
+
+    public function restaurantDetails(){
+        return $this->hasOne(RestaurantDetail::class,'user_id','id');
+    }
 }

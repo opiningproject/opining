@@ -22,4 +22,8 @@ class Dish extends Model
     public function order(){
         return $this->hasMany(OrderDetail::class, 'dish_id', 'id');
     }
+
+    public function option(){
+        return $this->hasMany(DishOption::class,'dish_id','id');
+    }
 }

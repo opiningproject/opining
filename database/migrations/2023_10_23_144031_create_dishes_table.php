@@ -18,11 +18,14 @@ return new class extends Migration
             $table->string('name_nl');
             $table->string('image');
             $table->double('price');
+            $table->string('desc_en');
+            $table->string('desc_nl');
             $table->integer('percentage_off');
             $table->integer('qty');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->softDeletes();
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
     }
 

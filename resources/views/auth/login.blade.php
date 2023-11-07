@@ -109,13 +109,11 @@
                                         fill="#FFC00B" stroke="#FFC00B" stroke-width="0.5"/>
                                 </svg>
                             </span>
-                                <input type="text" name="forgot-pwd-email" id="forgot-pwd-email"
-                                       class="form-control @error('email') is-invalid @enderror" placeholder="Email"
-                                       value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                <input type="text" name="forgot-pwd-email" id="forgot-pwd-email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ $email ?? old('email') }}" autocomplete="email" autofocus>
                             </div>
 
                             <span class="invalid-feedback" role="alert" style="display:block">
-                                        <strong id="forgot-pwd-error-msg"></strong>
+                                <strong id="forgot-pwd-error-msg"></strong>
                             </span>
 
                             <button type="submit" id="forgot-pwd--submit-btn"

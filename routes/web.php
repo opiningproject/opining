@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
@@ -36,6 +36,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/coupons/claim-history', [CouponController::class, 'claimHistoryLog'])->name('claimHistoryLog');
     Route::resource('/coupons', CouponController::class);
+    Route::post('/coupons/change-status', [CouponController::class, 'changeStatus']);
 
     Route::resource('/menu/dish', DishController::class);
 });

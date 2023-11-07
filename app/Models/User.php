@@ -47,7 +47,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $appends = ['first_name'];
+    protected $appends = ['full_name'];
     public function order(){
         return $this->hasMany(Order::class, 'user_id', 'id');
     }
@@ -62,12 +62,5 @@ class User extends Authenticatable
 
     public function getFullNameAttribute(){
         return $this->first_name . ' ' . $this->last_name;
-    }
-
-    protected function firstName(): Attribute
-    {
-        return new Attribute(
-            get: fn () => $this->first_name .' '.$this->last_name,
-        );
     }
 }

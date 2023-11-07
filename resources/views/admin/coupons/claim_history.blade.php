@@ -28,158 +28,24 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-center">Order Id</th>
-                                                    <th class="text-center">User Name</th>
-                                                    <th class="text-center">Date and Time</th>
+                                                    <th class="text-center">Username</th>
+                                                    <th class="text-center">Date & Time</th>
                                                     <th class="text-center">Points</th>
-                                                    <th class="text-center">Price</th>
+                                                    <th class="text-center">Order Price</th>
                                                     <th class="text-center">Coupon</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><span class="text-muted-1">1254522</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">Jonson Jole</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">20 Aug 2023 |
-                                                                8:00
-                                                                PM</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">5</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">€20</span>
-                                                    </td>
-                                                    <td class="text-center"><span class="text-muted-1">50%</span>
-                                                    </td>
-                                                </tr>
+                                                    @foreach($orders as $key => $order)
+                                                    <tr>
+                                                        <td class="text-center"><span class="text-muted-1">{{ $order->id }}</span></td>
+                                                        <td class="text-center"><span class="text-muted-1">{{ $order->user->full_name }}</span></td>
+                                                        <td class="text-center"><span class="text-muted-1">{{ date('d M Y | H:m A',strtotime($order->created_at)) }}</span></td>
+                                                        <td class="text-center"><span class="text-muted-1">{{ $order->points }}</span></td>
+                                                        <td class="text-center"><span class="text-muted-1">€{{ $order->total_amount }}</span></td>
+                                                        <td class="text-center"><span class="text-muted-1">€{{ $order->coupon_discount }}</span></td>
+                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                             <div>
@@ -206,18 +72,13 @@
                                                     <div class="pagenumberdp d-flex align-items-center">
                                                         <p class="mb-0">Rows Per page</p>
                                                         <div class="dropdown">
-                                                            <button class="btn dropdown-toggle" type="button"
-                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 15
-                                                                <i class="fa-solid fa-angle-down align-middle"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><button class="dropdown-item"
-                                                                            type="button">30</button></li>
-                                                                <li><button class="dropdown-item"
-                                                                            type="button">50</button></li>
-                                                                <li><button class="dropdown-item"
-                                                                            type="button">100</button></li>
+                                                                <li><button class="dropdown-item" type="button">30</button></li>
+                                                                <li><button class="dropdown-item" type="button">50</button></li>
+                                                                <li><button class="dropdown-item" type="button">100</button></li>
                                                             </ul>
                                                         </div>
                                                     </div>

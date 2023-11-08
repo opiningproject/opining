@@ -152,16 +152,16 @@
                 <div class="dropdown ">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                        <img src="images/english-flag.svg" class="img-fluid" alt="country-flag"
+                        <img src="{{ asset('images/english-flag.svg')}}" class="img-fluid" alt="country-flag"
                              width="28" height="28" />
                         <span class="">English</span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('app.setLocal', 'en') }}"> <img
-                                    src="images/english-flag.svg" class="img-fluid" width="28"
+                                    src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28"
                                     height="28" alt="country-flag" />English</a></li>
                         <li><a class="dropdown-item" href="{{ route('app.setLocal', 'dut') }}"><img
-                                    src="images/dutch-flag.svg" class="img-fluid" width="28" height="28"
+                                    src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" width="28" height="28"
                                     alt="country-flag" />Dutch</a></li>
                     </ul>
                 </div>

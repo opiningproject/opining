@@ -23,6 +23,6 @@ class WorkingDaysSeeder extends Seeder
             ['day'=>'Sunday'],
         ];
 
-        DB::table('operating_hours')->insert($createCmsData);
+        DB::table('restaurant_operating_hours')->insert($createCmsData);
     }
 }

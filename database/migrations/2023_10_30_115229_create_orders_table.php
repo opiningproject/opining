@@ -33,7 +33,6 @@ return new class extends Migration
             $table->enum('is_cart', [0,1])->default(0)->comment('1-In Cart, 0-Order Placed');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
-            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }

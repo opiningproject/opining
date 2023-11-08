@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('restaurant_operating_hours', function (Blueprint $table) {
-            $table->id();
-            $table->string('day');
-            $table->time('start_time')->nullable();
-            $table->time('end_time')->nullable();
-            $table->timestamps();
+        Schema::table('coupons', function (Blueprint $table) {
+            $table->enum('status',[0,1])->default(1)->after('description')->comment('1-Active, 0-Inactive');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('restaurant_operating_hours');
+        Schema::table('coupons', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };

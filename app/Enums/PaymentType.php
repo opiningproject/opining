@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class PaymentType extends Enum
 {
-    const Card = 1;
-    const Cash = 2;
-    const Idle = 3;
+    const Card = '1';
+    const Cash = '2';
+    const Idle = '3';
 }

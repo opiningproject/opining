@@ -116,12 +116,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="javascript:void(0)" id="Form">
+                    <form method="POST" id="Form">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="points" class="form-label">Points</label>
-                                    <input type="number" class="form-control" id="points" required>
+                                    <input type="number" class="form-control" id="points" name="points" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <input type="hidden" id="id" value="">
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="coupon-save-btn">Save</button>
+                        <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="coupon-save-btn">Save</button>
                     </form>
                 </div>
             </div>
@@ -211,7 +211,23 @@
 
 @section('script')
     <script type="text/javascript">
-        $(function () {
+        $(function () 
+        {
+            $("#Form").validate({
+                  rules: {
+                        points: {
+                            required: true
+                        },
+                  },
+                  submitHandler: function(form) {
+                     
+                     alert("df")
+
+                    form.submit();
+                  }
+             });
+            
+
             $('#expiry_date').datepicker({
                 format: 'mm-dd-yyyy',
                 autoclose: true,
@@ -324,8 +340,8 @@
             $('#addCouponModal').on('hidden.bs.modal', function () {
               //let validator = $("#Form").validate();
               //validator.resetForm();  
-              $('#Form').trigger('reset');
-              $(".modal-title").text("Add Coupon")
+              //$('#Form').trigger('reset');
+              //$(".modal-title").text("Add Coupon")
               //$("#addCouponModal").find('.error').removeClass("error");
             });
 

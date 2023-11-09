@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class OrderType extends Enum
 {
-    const Delivery = 1;
-    const TakeAway = 2;
+    const Delivery = '1';
+    const TakeAway = '2';
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('transactionId')->nullable();
             $table->dateTime('transaction_date')->nullable();
             $table->double('amount')->default(0);
-            $table->enum('payment_type', [1,3])->comment('1-Card, 3-Idle')->default(2);
-            $table->enum('transaction_status', [0,1,2])->comment('0-Pending, 1-Success, 2-Fail')->default(2);
+            $table->enum('payment_type', [1,2,3])->comment('1-Card, 2-Cash, 3-Idle')->default(2);
+            $table->enum('transaction_status', [0,1,2])->comment('0-Pending, 1-Success, 2-F ail')->default(2);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->softDeletes();

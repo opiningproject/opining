@@ -8,6 +8,8 @@ use App\Models\Coupon;
 use App\Models\Order;
 use Response;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\PaymentStatus;
+use App\Enums\OrderStatus;
 
 class CouponController extends Controller
 {
@@ -115,7 +117,7 @@ class CouponController extends Controller
 
     public function claimHistoryLog()
     {
-        $orders = Order::where('payment_status','1')->where('order_status','6')->orderBy('id','desc')->get();
+        $orders = Order::where('payment_status',PaymentStatus::Success)->where('order_status',OrderStatus::Delivered)->orderBy('id','desc')->get();
 
         return view('admin.coupons.claim_history',['orders' => $orders]);
     }

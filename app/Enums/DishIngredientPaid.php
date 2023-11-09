@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class DishIngredientPaid extends Enum
 {
-    const NotPaid = 0;
-    const Paid = 1;
+    const NotPaid = '0';
+    const Paid = '1';
 }

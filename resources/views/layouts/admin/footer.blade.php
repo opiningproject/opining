@@ -4,6 +4,7 @@
 <script type="text/javascript" src="{{ asset('js/swiper-bundle.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/dark-mode-switch.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/custom-modal.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>

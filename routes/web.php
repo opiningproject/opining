@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -40,3 +42,6 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::resource('/menu/dish', DishController::class);
 });
+
+//echo route('coupons.store');
+//exit;

@@ -850,9 +850,6 @@
                 </main>
             </div>
         </div>
-        <!-- start footer -->
-        <script src="js/footer.js"></script>
-        <!-- end footer -->
     </div>
     <!-- start edit category Modal -->
     <div class="modal fade custom-modal" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModal"

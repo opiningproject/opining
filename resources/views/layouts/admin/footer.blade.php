@@ -10,9 +10,10 @@
 <script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
 <script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/coupons.js')}}"></script>
 
 <script>
+    var baseURL = "{{ url('/') }}"
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -21,3 +22,4 @@
     });
     // timepicker
 </script>
+<script src="{{ asset('js/footer.js')}}"></script>

@@ -100,10 +100,6 @@
                 </main>
             </div>
         </div>
-
-        <!-- start footer -->
-        <script src="js/footer.js"></script>
-        <!-- end footer -->
     </div>
 
 
@@ -206,4 +202,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="{{ asset('js/coupons.js')}}"></script>
 @endsection

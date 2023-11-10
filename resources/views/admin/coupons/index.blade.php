@@ -116,7 +116,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="Form">
+                    <form method="POST" id="coupon-form">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -129,20 +129,20 @@
                                     <label for="price" class="form-label">minimum order price</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">€</span>
-                                        <input type="text" class="form-control" id="price" />
+                                        <input type="text" class="form-control" id="price" name="price" required/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="promocode" class="form-label">Promo Code</label>
-                                    <input type="text" class="form-control" id="promo_code">
+                                    <input type="text" class="form-control" id="promo_code" name="promo_code" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="percentageofoff" class="form-label">Percentage Off</label>
-                                    <input type="number" class="form-control" id="percentage_off">
+                                    <input type="number" class="form-control" id="percentage_off" name="percentage_off" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -167,14 +167,14 @@
                                                 <path d="M14.3446 14.618C14.1721 14.6176 14.0081 14.6907 13.888 14.8188C13.768 14.9468 13.7014 15.1193 13.7008 15.2981C13.7002 15.4769 13.7657 15.65 13.8848 15.7789C14.004 15.9078 14.1675 15.9822 14.34 15.9831L14.3446 14.618ZM14.3446 14.618C14.3449 14.618 14.3451 14.618 14.3454 14.618L14.345 14.718L14.3438 14.618C14.3441 14.618 14.3443 14.618 14.3446 14.618ZM15.5181 15.9831C15.6905 15.9834 15.8544 15.9102 15.9744 15.7821C16.0943 15.6541 16.1609 15.4815 16.1614 15.3027C16.1619 15.1239 16.0964 14.9509 15.9772 14.822C15.8579 14.693 15.6942 14.6187 15.5216 14.618L14.7287 15.9839C14.793 15.9835 14.857 15.9831 14.9203 15.9831C14.9856 15.9831 15.0514 15.9835 15.1175 15.9838C15.2504 15.9845 15.3846 15.9852 15.5181 15.9831ZM15.5181 15.9831C15.5177 15.9831 15.5174 15.9831 15.5171 15.9831L15.5174 15.8831L15.519 15.9831C15.5187 15.9831 15.5184 15.9831 15.5181 15.9831Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.2"/>
                                               </svg>
                                         </span>
-                                        <input type="text" class="form-control" id="expiry_date" value="" aria-label="dateofbirth" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control" id="expiry_date" value="" aria-label="dateofbirth" aria-describedby="basic-addon1" name="expiry_date" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-0">
                                     <label for="newpassword" class="form-label">Description</label>
-                                    <textarea class="form-control" rows="3" id="description"></textarea>
+                                    <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -206,145 +206,4 @@
             </div>
         </div>
     </div>
-
-@endsection
-
-@section('script')
-    <script type="text/javascript">
-        $(function () 
-        {
-            $("#Form").validate({
-                  rules: {
-                        points: {
-                            required: true
-                        },
-                  },
-                  submitHandler: function(form) {
-                     
-                     alert("df")
-
-                    form.submit();
-                  }
-             });
-            
-
-            $('#expiry_date').datepicker({
-                format: 'mm-dd-yyyy',
-                autoclose: true,
-                orientation: "bottom left",
-                startDate: new Date()
-            });
-
-            $(document).on('click', '#coupon-save-btn', function () {
-
-                $('#coupon-save-btn').prop('disabled',true);
-
-                var points = $('#points').val();
-                var price = $('#price').val();
-                var promo_code = $('#promo_code').val();
-                var percentage_off = $('#percentage_off').val();
-                var description = $('#description').val();
-                var expiry_date = $('#expiry_date').val();
-                var id = $('#id').val();
-
-                $.ajax({
-                    url: '{{ route('coupons.store') }}',
-                    type: 'post',
-                    data: {
-                        id,points,price,promo_code,percentage_off,description,expiry_date
-                    },
-                    success: function (response) {
-                        console.log('success')
-                        console.log(response)
-                        window.location.reload();
-                    },
-                    error: function (response) {
-                        var errorMessage = JSON.parse(response.responseText).message
-                        alert(errorMessage);
-                    }
-                })
-            })
-
-
-            $(document).on('click', '#coupon-delete-btn', function () {
-
-                $('#coupon-delete-btn').prop('disabled',true);
-                var id = $('#id').val();
-
-                $.ajax({
-                    url: 'coupons/'+id,
-                    type: 'DELETE',
-                    success: function (response) {
-                        console.log('success')
-                        console.log(response)
-                        window.location.reload();
-                    },
-                    error: function (response) {
-                        var errorMessage = JSON.parse(response.responseText).message
-                        alert(errorMessage);
-                    }
-                })
-            })
-
-            $('.form-check-input').change(function() {
-
-                var status = this.checked == true ? 1:0;
-                var id = $('#id').val();
-
-                $.ajax({
-                    url: 'coupons/change-status',
-                    type: 'POST',
-                    data: {
-                        id,status
-                    },
-                    success: function (response) {
-                        console.log('success')
-                        console.log(response)
-                    },
-                    error: function (response) {
-                        var errorMessage = JSON.parse(response.responseText).message
-                        alert(errorMessage);
-                    }
-                })
-            })
-
-            $(document).on('click', '#coupon-edit-btn', function () {
-
-                var id = $('#id').val();
-
-                $(".modal-title").text("Edit Coupon")
-
-                $.ajax({
-                    url: 'coupons/'+id+'/edit',
-                    type: 'GET',
-                    success: function (response) {
-                        var data = response.data;
-
-                        $("#addCouponModal").find("#points").val(data.points);
-                        $("#addCouponModal").find("#price").val(data.price);
-                        $("#addCouponModal").find("#promo_code").val(data.promo_code);
-                        $("#addCouponModal").find("#percentage_off").val(data.percentage_off);
-                        $("#addCouponModal").find("#expiry_date").val(data.expiry_date);
-                        $("#addCouponModal").find("#description").val(data.description);
-                        $("#addCouponModal").find("#id").val(data.id);
-
-                        $("#addCouponModal").modal('show');
-                    },
-                    error: function (response) {
-                        var errorMessage = JSON.parse(response.responseText).message
-                        alert(errorMessage);
-                    }
-                })
-            })
-
-            $('#addCouponModal').on('hidden.bs.modal', function () {
-              //let validator = $("#Form").validate();
-              //validator.resetForm();  
-              //$('#Form').trigger('reset');
-              //$(".modal-title").text("Add Coupon")
-              //$("#addCouponModal").find('.error').removeClass("error");
-            });
-
-        });
-    </script>
 @endsection

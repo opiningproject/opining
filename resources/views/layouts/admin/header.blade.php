@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.timepicker.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/slick.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/slick-theme.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dark-mode.css')}}" />

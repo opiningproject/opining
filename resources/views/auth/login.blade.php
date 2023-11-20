@@ -123,9 +123,6 @@
                 </div>
             </div>
         </div>
-        <!-- start footer -->
-        <script src="js/footer.js"></script>
-        <!-- end footer -->
     </div>
 @endsection
 

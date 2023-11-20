@@ -72,7 +72,7 @@
                                                     <div class="pagenumberdp d-flex align-items-center">
                                                         <p class="mb-0">Rows Per page</p>
                                                         <div class="dropdown">
-                                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <button class="btn dropdown-toggle pagination-dropdown-value" value="15" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 15
                                                             </button>
                                                             <ul class="dropdown-menu">
@@ -94,9 +94,6 @@
                 </main>
             </div>
         </div>
-        <!-- start footer -->
-        <script src="js/footer.js"></script>
-        <!-- end footer -->
     </div>
 
 
@@ -141,7 +138,7 @@
                                     <label for="percentageofoff" class="form-label">Validity date</label>
                                     <div class="prev-default-input-group">
                                         <span class="input-group-icon">
-                                            <img src="images/calender-icon.svg" alt="calender-icon" class="img-fluid">
+                                            <img src="{{ asset('images/calender-icon.svg')}}" alt="calender-icon" class="img-fluid">
                                         </span>
                                         <input type="text" class="form-control">
                                     </div>

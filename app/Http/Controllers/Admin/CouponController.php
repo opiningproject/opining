@@ -18,9 +18,9 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::orderBy('id','desc')->get();
+        $coupons = Coupon::orderBy('id', 'desc')->get();
 
-        return view('admin.coupons.index',['coupons' => $coupons]);
+        return view('admin.coupons.index', ['coupons' => $coupons]);
     }
 
     /**
@@ -36,19 +36,16 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        $date = date('Y-m-d',strtotime($request->expiry_date.' 00:00:00'));
+        $date = date('Y-m-d', strtotime($request->expiry_date . ' 00:00:00'));
         $request->merge(['expiry_date' => $date]);
 
-        try
-        {
+        try {
 
             Coupon::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()
             );
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
@@ -66,14 +63,11 @@ class CouponController extends Controller
      */
     public function edit(string $id)
     {
-        try
-        {
+        try {
             $coupon = Coupon::find($id);
 
             return response::json(['status' => 1, 'data' => $coupon]);
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
@@ -91,34 +85,28 @@ class CouponController extends Controller
      */
     public function destroy(string $id)
     {
-        try
-        {
-            Coupon::where('id',$id)->delete();  
-        }
-        catch(Exception $e)
-        {
+        try {
+            Coupon::where('id', $id)->delete();
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
 
     public function changeStatus(Request $request)
     {
-        try
-        {
+        try {
             $coupon = Coupon::find($request->id);
             $coupon->status = $request->status;
             $coupon->save();
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
 
     public function claimHistoryLog()
     {
-        $orders = Order::where('payment_status',PaymentStatus::Success)->where('order_status',OrderStatus::Delivered)->orderBy('id','desc')->get();
+        $orders = Order::where('payment_status', PaymentStatus::Success)->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 
-        return view('admin.coupons.claim_history',['orders' => $orders]);
+        return view('admin.coupons.claim_history', ['orders' => $orders]);
     }
 }

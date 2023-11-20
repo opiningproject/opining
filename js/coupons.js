@@ -1,7 +1,7 @@
 $(function () 
 {
     $("#coupon-form").validate({
-          debug:true,
+          //debug:true,
           submitHandler: function(form) {
             saveCoupon();
           }
@@ -105,7 +105,7 @@ function saveCoupon()
     var percentage_off = $('#percentage_off').val();
     var description = $('#description').val();
     var expiry_date = $('#expiry_date').val();
-    var id = $('#id').val();
+    var id = $('#addCouponModal #id').val();
 
     $.ajax({
         url: 'coupons',

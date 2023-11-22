@@ -13,64 +13,64 @@
                 <th scope="col" class="text-center" width="13%">Action </th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="est">
+              <tr class="zipcode-row-0">
                 <td>
-                  <input type="text" class="form-control text-center w-10r m-auto" id="zipcode" name="zipcode" required/>
+                  <input type="text" class="form-control text-center w-10r m-auto" id="zipcode_0" name="zipcode" />
                 </td>
                 <td class="text-center">
                   <div class="input-group w-5r m-auto">
                     <span class="input-group-text" id="basic-addon1">€</span>
-                    <input type="number" class="form-control m-auto" id="min_order_price" name="min_order_price" required/>
+                    <input type="number" class="form-control m-auto" id="min_order_price_0" name="min_order_price" />
                   </div>
                 </td>
                 <td class="text-center">
                   <div class="input-group w-5r m-auto">
                     <span class="input-group-text" id="basic-addon1">€</span>
-                    <input type="number" class="form-control m-auto" id="delivery_charge" name="delivery_charge" required/>
+                    <input type="number" class="form-control m-auto" id="delivery_charge_0" name="delivery_charge"/>
                   </div>
                 </td>
                 <td class="text-center">
                   <div class="form-check form-switch custom-switch justify-content-center ps-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="status" checked>
+                    <input class="form-check-input" type="checkbox" role="switch" id="status_0" checked>
                   </div>
                 </td>
                 <td class="text-center">
-                    <button type="submit" class="btn btn-custom-yellow text-uppercase font-sebibold w-100" id="zipcode-save-btn">Save</button>
+                    <button type="button" class="btn btn-custom-yellow text-uppercase font-sebibold w-100" id="zipcode-save-btn-0" onclick="saveZipcode(0)">Save</button>
                     <input type="hidden" id="id" value="">
                 </td>
               </tr>
               @foreach($zipcodes as $key => $zipcode)
-              <tr>
+              <tr class="zipcode-row-{{ $zipcode['id'] }}">
                 <td>
-                  <input type="text" class="form-control text-center w-10r m-auto" value="{{ $zipcode['zipcode'] }}" readonly />
+                  <input type="text" class="form-control text-center w-10r m-auto" value="{{ $zipcode['zipcode'] }}" id="zipcode_{{ $zipcode['id'] }}" readonly />
                 </td>
                 <td class="text-center">
                   <div class="input-group w-5r m-auto">
                     <span class="input-group-text" id="basic-addon1">€</span>
-                    <input type="number" class="form-control m-auto" value="{{ $zipcode['min_order_price'] }}" readonly />
+                    <input type="number" class="form-control m-auto" value="{{ $zipcode['min_order_price'] }}" id="min_order_price_{{ $zipcode['id'] }}" readonly />
                   </div>
                 </td>
                 <td class="text-center">
                   <div class="input-group w-5r m-auto">
                     <span class="input-group-text" id="basic-addon1">€</span>
-                    <input type="number" class="form-control m-auto" value="{{ $zipcode['delivery_charge'] }}" readonly />
+                    <input type="number" class="form-control m-auto" value="{{ $zipcode['delivery_charge'] }}" id="delivery_charge_{{ $zipcode['id'] }}" readonly />
                   </div>
                 </td>
                 <td class="text-center">
                   <div class="form-check form-switch custom-switch justify-content-center ps-0">
-                    <input class="form-check-input" type="checkbox" role="switch" {{ $zipcode["status"] ? "checked":"" }}>
+                    <input class="form-check-input" type="checkbox" role="switch" id="status_{{ $zipcode['id'] }}" {{ $zipcode["status"] ? "checked":"" }} onchange="changeStatus({{ $zipcode['id'] }})">
                   </div>
                 </td>
                 <td class="text-center">
-                  <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0" href="javascript:void(0);" id="zipcode-edit-btn" data-id="{{ $zipcode['id'] }}">
+                  <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0" href="javascript:void(0);" id="zipcode-edit-btn-{{ $zipcode['id'] }}" onclick="editZipcode({{ $zipcode['id'] }})">
                     <i class="fa-solid fa-pen-to-square"></i>
                   </a>
-                  <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal" id="zipcode-remove-btn" data-bs-target="#deleteZipcodeModal">
+                  <a class="btn btn-custom-yellow btn-icon" id="zipcode-remove-btn-{{ $zipcode['id'] }}" onclick="deleteZipcode({{ $zipcode['id'] }})">
                     <i class="fa-regular fa-trash-can"></i>
                   </a>
 
-                  <button type="submit" class="btn btn-custom-yellow text-uppercase font-sebibold w-100" id="zipcode-save-btns" style="display: none;">Save</button>
+                  <button type="button" class="btn btn-custom-yellow text-uppercase font-sebibold w-100" id="zipcode-save-btn-{{ $zipcode['id'] }}" style="display: none;" onclick="saveZipcode({{ $zipcode['id'] }})">Save</button>
                 </td>
               </tr>
               @endforeach

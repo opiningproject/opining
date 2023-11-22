@@ -10,6 +10,7 @@ class CMS extends Model
 {
     use HasFactory, softDeletes;
 
+    protected $table = 'cms';
     protected $fillable = ['content','lang','type'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;

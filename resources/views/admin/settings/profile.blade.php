@@ -16,7 +16,7 @@
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
           <div class="form-group">
             <label for="restaurantname" class="form-label">Restaurant Name</label>
-            <input type="text" class="form-control" value="Barbacue" />
+            <input type="text" class="form-control" value="Barbacue"  />
           </div>
         </div>
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">

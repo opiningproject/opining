@@ -121,10 +121,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{ asset('js/settings.js')}}"></script>
-@endsection
-
-@section('script')
+    
     <script type="text/javascript">
         $('.timepicker').timepicker({
             timeFormat: 'h:mm',
@@ -138,7 +135,7 @@
             scrollbar: true
         });
 
-        CKEDITOR.replace('editorcmdpagesen', {
+        var editor_config = {
             skin: 'moono',
             height: '40vh',
             enterMode: CKEDITOR.ENTER_BR,
@@ -153,23 +150,12 @@
                 { name: 'spell', items: ['jQuerySpellChecker'] },
                 { name: 'table', items: ['Table'] }
             ],
-        });
-        CKEDITOR.replace('editorcmdpagesdutch', {
-            skin: 'moono',
-            height: '40vh',
-            enterMode: CKEDITOR.ENTER_BR,
-            shiftEnterMode: CKEDITOR.ENTER_P,
-            toolbar: [{ name: 'basicstyles', groups: ['basicstyles'], items: ['Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor'] },
-                { name: 'styles', items: ['Format', 'Font', 'FontSize'] },
-                { name: 'scripts', items: ['Subscript', 'Superscript'] },
-                { name: 'justify', groups: ['blocks', 'align'], items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
-                { name: 'paragraph', groups: ['list', 'indent'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'insert', items: ['Image'] },
-                { name: 'spell', items: ['jQuerySpellChecker'] },
-                { name: 'table', items: ['Table'] }
-            ],
-        });
+        };
 
+        CKEDITOR.replace('privacy-en',editor_config);
+        CKEDITOR.replace('terms-en',editor_config);
+        CKEDITOR.replace('privacy-nl',editor_config);
+        CKEDITOR.replace('terms-nl',editor_config);
+        
     </script>
 @endsection

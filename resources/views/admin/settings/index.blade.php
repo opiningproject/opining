@@ -85,39 +85,25 @@
         </div>
     </div>
 
-
-    <!-- start change password Modal -->
-    <div class="modal fade custom-modal" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal"
-         aria-hidden="true">
+    <!-- start CMS save msg Modal -->
+    <div class="modal fade custom-modal" id="CMSCouponModal" tabindex="-1" aria-labelledby="dleteAlertModal" aria-hidden="true">
         <div class="modal-dialog custom-w-441px modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h1 class="modal-title mb-0">Change Password</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body ">
-                    <form>
-                        <div class="form-group">
-                            <label for="newpassword" class="form-label">Old Password</label>
-                            <input type="text" class="form-control">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="alert-text-1 mb-40px">Your content has been successfully saved !!</h4>
                         </div>
-                        <div class="form-group">
-                            <label for="newpassword" class="form-label">New Password</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group mb-0">
-                            <label for="newpassword" class="form-label">Confirm New Password</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <button type="button"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">Save
-                        </button>
-                    </form>
+                    </div>
+                    <div class="">
+                        <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-100" data-bs-dismiss="modal">Ok</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end change password  Modal -->
+    <!-- end Modal -->
+
 @endsection
 
 @section('script')

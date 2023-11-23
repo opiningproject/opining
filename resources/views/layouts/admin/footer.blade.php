@@ -11,6 +11,7 @@
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
 <script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
 
 <script>
     var baseURL = "{{ url('/') }}"

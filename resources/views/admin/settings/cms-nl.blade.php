@@ -1,12 +1,12 @@
 <div class="tab-pane fade cmsPagesdutch" id="cmsPagesdutch-tab-pane" role="tabpanel" aria-labelledby="cmsPagesdutch-tab" tabindex="0">
-  <div class="card-body">
+    <div class="card-body">
         <div class="d-flex align-items-center justify-content-between">
             <h3 class="text-custom-muted mb-0 tab-title"></h3>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" id="btnradio1" autocomplete="off" checked onchange="changeContent('privacy-nl');" />
+                <input type="radio" class="btn-check" name="content_nl" id="btnradio3" autocomplete="off" checked onchange="changeContent('privacy-nl');" />
                 <label class="btn btn-sm btn-outline-custom-yellow text-muted-default" for="btnradio3">Privacy Policy</label>
 
-                <input type="radio" class="btn-check" id="btnradio2" autocomplete="off" onchange="changeContent('terms-nl');" />
+                <input type="radio" class="btn-check" name="content_nl" id="btnradio4" autocomplete="off" onchange="changeContent('terms-nl');" />
                 <label class="btn btn-sm btn-outline-custom-yellow text-muted-default" for="btnradio4">Terms & Condition</label>
             </div>
         </div>

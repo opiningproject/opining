@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Zipcode;
 use App\Models\CMS;
+use App\Models\User;
+use App\Models\RestaurantDetail;
+use App\Models\OperatingHour;
+use Auth;
+use Hash;
+use Response;
 
 class SettingController extends Controller
 {
@@ -19,7 +25,10 @@ class SettingController extends Controller
         $privacy_policy_nl = CMS::where('type','privacy')->where('lang','nl')->pluck('content')->first();
         $terms_nl = CMS::where('type','terms')->where('lang','nl')->pluck('content')->first();
 
-        return view('admin.settings.index', ['zipcodes' => $zipcodes, 'privacy_policy_en' => $privacy_policy_en, 'terms_en' => $terms_en, 'privacy_policy_nl' => $privacy_policy_nl, 'terms_nl' => $terms_nl]);
+        $user = RestaurantDetail::findOrFail(Auth::user()->id);
+        $operating_days = OperatingHour::all();
+
+        return view('admin.settings.index', ['operating_days' => $operating_days,'user' => $user,'zipcodes' => $zipcodes, 'privacy_policy_en' => $privacy_policy_en, 'terms_en' => $terms_en, 'privacy_policy_nl' => $privacy_policy_nl, 'terms_nl' => $terms_nl]);
     }
 
     public function getZipcode()
@@ -120,5 +129,49 @@ class SettingController extends Controller
         $content->content = $request->content;
         $content->save();
         exit;
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        
+        if(!Hash::check($request->old_password, $user->password))
+        {
+            echo 2;
+            exit;
+        } 
+
+        $user->password = Hash::make($request->new_password);
+        
+        if($user->save()) 
+        {
+            echo 1;
+            exit;
+        } 
+        else 
+        {
+            return response::json(
+                [
+                    'status' => 0, 
+                    'message' => 'Something went wrong.'
+                ]
+            );
+        }   
+    }
+
+    public function saveProfile(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        $request->merge([
+            'online_order_accept' => $request->online_order_accept ? '1' : '0',
+        ]);
+
+        RestaurantDetail::updateOrCreate(
+                ['id' => $user_id],
+                $request->all()
+            );
+
+        return redirect("/settings");
     }
 }

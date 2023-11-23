@@ -161,7 +161,7 @@ function saveContent(lang)
     var type = $('#type').val();
     var content= CKEDITOR.instances[type+'-'+lang].getData();
 
-    alert(type+'-'+lang)
+    //alert(type+'-'+lang)
 
     $.ajax({
         url: 'settings/save-content',
@@ -170,7 +170,7 @@ function saveContent(lang)
             type,lang,content
         },
         success: function (response) {
-            console.log(response)
+            $('#CMSCouponModal').modal('show');
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -180,15 +180,11 @@ function saveContent(lang)
 }
 
 $('#cmsPagesen-tab').click(function () { 
-
-    var type = $('.cmsPagesen #type').val();
-
-  alert(type);
+  $('#btnradio1').prop('checked', true);
+  $("#type").val('privacy');
 });
 
 $('#cmsPagesdutch-tab').click(function () { 
-
-    var type = $('.cmsPagesdutch #type').val();
-
-  alert(type);
+  $('#btnradio3').prop('checked', true);
+  $("#type").val('privacy');
 });

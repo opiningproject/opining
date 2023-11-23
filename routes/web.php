@@ -50,6 +50,8 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::post('/settings/change-status', [SettingController::class, 'changeStatus']);
     Route::post('/settings/save-zipcode', [SettingController::class, 'saveZipcode']);
     Route::post('/settings/save-content', [SettingController::class, 'saveContent']);
+    Route::post('/settings/change-password', [SettingController::class, 'changePassword']);
+    Route::post('/settings/save-profile', [SettingController::class, 'saveProfile'])->name('settings.save-profile');
 
     Route::get('/coupons/claim-history', [CouponController::class, 'claimHistoryLog'])->name('claimHistoryLog');
     Route::resource('/coupons', CouponController::class);

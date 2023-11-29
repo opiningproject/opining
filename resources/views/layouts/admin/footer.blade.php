@@ -12,6 +12,7 @@
 <script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&libraries=places&callback=initMap" async defer></script>
 
 <script>
     var baseURL = "{{ url('/') }}"

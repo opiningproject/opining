@@ -1,6 +1,6 @@
-<form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}">
+<div class="tab-pane fade show active" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
+  <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}">
   {{ csrf_field() }}
-  <div class="tab-pane fade show active" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
     <div class="card-body">
       <nav class="page-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -51,7 +51,7 @@
           <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
             <div class="form-group">
               <label for="addressdetail" class="form-label">Address Details</label>
-              <input type="text" class="form-control" value="{{ $user->rest_address }}" name="rest_address" required/>
+              <input type="text" class="form-control" value="{{ $user->rest_address }}" name="rest_address" id="rest_address" required/>
               <input type="hidden" name="latitude" id="latitude" value="{{ $user->latitude }}">
               <input type="hidden" name="longitude" id="longitude" value="{{ $user->longitude }}">
             </div>
@@ -184,7 +184,7 @@
                         <div class="time-day-name">
                           <div class="form-group mb-0">
                             <input type="text" class="timepicker form-control time-form-control" value="12:00" />
-                          </div> - <div class="form-group mb-0">
+                            </div> - <div class="form-group mb-0">
                             <input type="text" class="timepicker form-control time-form-control" value="22:00" />
                           </div>
                         </div>
@@ -212,8 +212,8 @@
         </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>
 
 <!-- start change password Modal -->
 <div class="modal fade custom-modal" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true">
@@ -246,3 +246,21 @@
     </div>
 </div>
 <!-- end change password  Modal -->
+
+@section('script')
+<script type="text/javascript">
+
+function initMap() 
+{
+    var input = document.getElementById('rest_address');
+  
+    var autocomplete = new google.maps.places.Autocomplete(input);
+   
+    autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        $('#latitude').val(place.geometry.location.lat());
+        $('#longitude').val(place.geometry.location.lng());
+    });
+}
+</script>
+@endsection

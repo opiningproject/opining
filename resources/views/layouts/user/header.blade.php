@@ -15,7 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dark-mode.css')}}" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/user/style.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/user/style.scss')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/user-style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/user-style.scss')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/user-style.css.map')}}" />
     
 </head>

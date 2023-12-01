@@ -11,7 +11,7 @@
 <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
 <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.charts.js"></script>
 <script src="https://unpkg.com/jquery-fusioncharts@1.1.0/dist/fusioncharts.jqueryplugin.js"></script>
-<script type="text/javascript" src="{{ asset('js/jquery.datepicker.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.datepicker.min.js')}}"></script>
 
 <script>
     var baseURL = "{{ url('/') }}"

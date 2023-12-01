@@ -1,5 +1,39 @@
 $(function () 
 {
+    $('.timepicker').timepicker({
+            timeFormat: 'h:mm',
+            interval: 60,
+            minTime: '10',
+            maxTime: '6:00pm',
+            defaultTime: '11',
+            startTime: '10:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    
+    var editor_config = {
+        skin: 'moono',
+        height: '40vh',
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        toolbar: [{ name: 'basicstyles', groups: ['basicstyles'], items: ['Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor'] },
+            { name: 'styles', items: ['Format', 'Font', 'FontSize'] },
+            { name: 'scripts', items: ['Subscript', 'Superscript'] },
+            { name: 'justify', groups: ['blocks', 'align'], items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+            { name: 'paragraph', groups: ['list', 'indent'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'insert', items: ['Image'] },
+            { name: 'spell', items: ['jQuerySpellChecker'] },
+            { name: 'table', items: ['Table'] }
+        ],
+    };
+
+    CKEDITOR.replace('privacy-en',editor_config);
+    CKEDITOR.replace('terms-en',editor_config);
+    CKEDITOR.replace('privacy-nl',editor_config);
+    CKEDITOR.replace('terms-nl',editor_config);
+        
     $(document).on('click', '#zipcode-delete-btn', function () {
 
         //$('#zipcode-delete-btn').prop('disabled',true);

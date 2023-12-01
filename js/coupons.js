@@ -8,7 +8,7 @@ $(function ()
      });
 
     $('#expiry_date').datepicker({
-        format: 'mm-dd-yyyy',
+        format: 'dd-mm-yyyy',
         autoclose: true,
         orientation: "bottom left",
         startDate: new Date()
@@ -56,35 +56,6 @@ $(function ()
         })
     })
 
-    $(document).on('click', '#coupon-edit-btn', function () {
-
-        var id = $('#id').val();
-
-        $(".modal-title").text("Edit Coupon")
-
-        $.ajax({
-            url: 'coupons/'+id+'/edit',
-            type: 'GET',
-            success: function (response) {
-                var data = response.data;
-
-                $("#addCouponModal").find("#points").val(data.points);
-                $("#addCouponModal").find("#price").val(data.price);
-                $("#addCouponModal").find("#promo_code").val(data.promo_code);
-                $("#addCouponModal").find("#percentage_off").val(data.percentage_off);
-                $("#addCouponModal").find("#expiry_date").val(data.expiry_date);
-                $("#addCouponModal").find("#description").val(data.description);
-                $("#addCouponModal").find("#id").val(data.id);
-
-                $("#addCouponModal").modal('show');
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
-            }
-        })
-    })
-
     $('#addCouponModal').on('hidden.bs.modal', function () {
       let validator = $("#Form").validate();
       //validator.resetForm();  
@@ -117,6 +88,39 @@ function saveCoupon()
             console.log('success')
             console.log(response)
             window.location.reload();
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+function deleteCoupon(id) 
+{
+    $('#id').val(id);
+    $('#deleteCouponModal').modal('show');
+}
+
+function editCoupon(id) 
+{
+    $(".modal-title").text("Edit Coupon")
+
+    $.ajax({
+        url: 'coupons/'+id+'/edit',
+        type: 'GET',
+        success: function (response) {
+            var data = response.data;
+
+            $("#addCouponModal").find("#points").val(data.points);
+            $("#addCouponModal").find("#price").val(data.price);
+            $("#addCouponModal").find("#promo_code").val(data.promo_code);
+            $("#addCouponModal").find("#percentage_off").val(data.percentage_off);
+            $("#addCouponModal").find("#expiry_date").val(data.expiry_date);
+            $("#addCouponModal").find("#description").val(data.description);
+            $("#addCouponModal").find("#id").val(data.id);
+
+            $("#addCouponModal").modal('show');
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

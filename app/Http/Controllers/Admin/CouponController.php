@@ -36,7 +36,7 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        $date = date('Y-m-d', strtotime($request->expiry_date . ' 00:00:00'));
+        $date = date('Y-m-d', strtotime($request->expiry_date. ' 00:00:00'));
         $request->merge(['expiry_date' => $date]);
 
         try {

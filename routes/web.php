@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\CommonController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +33,8 @@ Route::get('/clear-all', function() {
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
+Route::get('/user', [App\Http\Controllers\User\HomeController::class, 'index']);
 
 Auth::routes();
 

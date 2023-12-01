@@ -64,10 +64,10 @@
                                                 <input class="form-check-input" type="checkbox" role="switch" {{ $coupon->status ? 'checked':'' }}>
                                             </div>
                                             <div>
-                                                <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0" href="javascript:void(0);" id="coupon-edit-btn">
+                                                <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0" href="javascript:void(0);" id="coupon-edit-btn" onclick="editCoupon({{ $coupon->id }})">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCouponModal">
+                                                <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCouponModal" onclick="deleteCoupon({{ $coupon->id }})">
                                                     <i class="fa-regular fa-trash-can"></i>
                                                 </a>
                                             </div>
@@ -193,10 +193,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button type="button"
-                            class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button"
-                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px" id="coupon-delete-btn">Delete</button>
+                        <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px" id="coupon-delete-btn">Delete</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
 
 if (!function_exists('activeMenu')) {
@@ -19,7 +20,7 @@ if (!function_exists('activeMenu')) {
 }
 
 if (!function_exists('uploadImageToBucket')) {
-    function uploadImageToBucket($request,$type,$deleteImg)
+    function uploadImageToBucket($request,$type,$deleteImg = '')
     {
         if(!empty($deleteImg) && Storage::disk('s3')->exists($type.'/'.$deleteImg))
         {
@@ -56,6 +57,17 @@ if (!function_exists('deleteImage')) {
             Storage::disk('s3')->delete($type.'/thumb/'.$image);
 
             $food_image->delete();
+        }
+    }
+}
+
+if(!function_exists('checkValidation')) {
+    function checkValidation($request,$validate){
+        $validator = Validator::make($request->all(), $validate);
+        if ($validator->fails()) {
+            return $validator->messages()->first();
+        }else{
+            return '';
         }
     }
 }

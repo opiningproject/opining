@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Dish;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        dd(app()->getLocale());
-        return view('admin.home');
+        $categories = Category::all();
+        $dishes = Dish::all();
+        return view('admin.home',['categories' => $categories, 'dishes' => $dishes]);
     }
 }

@@ -34,10 +34,18 @@ Route::get('/clear-all', function() {
 });
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('user.home');
 });
 
-Route::get('/user', [App\Http\Controllers\User\HomeController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
+Route::get('/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('dashboard');
+Route::post('/user/login', [App\Http\Controllers\User\AuthController::class, 'login']);
+
+Route::middleware(['localization'])->group(function () 
+{
+    Route::get('privacy-policy', [App\Http\Controllers\User\CMSController::class, 'privacyPolicy'])->name('privacy-policy');
+    Route::get('terms', [App\Http\Controllers\User\CMSController::class, 'terms'])->name('terms');
+});
 
 Auth::routes();
 

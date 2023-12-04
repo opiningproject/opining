@@ -7,10 +7,10 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Bootstrap CSS -->
-    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/font_bootstrap_icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/font-awesome_6.4.2_all.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}"  />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font_bootstrap_icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome_6.4.2_all.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datepicker.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.timepicker.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dark-mode.css')}}" />

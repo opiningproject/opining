@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
+use App\Models\RestaurantDetail;
 
 if (!function_exists('activeMenu')) {
 	function activeMenu($path)
@@ -69,5 +70,14 @@ if(!function_exists('checkValidation')) {
         }else{
             return '';
         }
+    }
+}
+
+if(!function_exists('getRestaurantDetail')) {
+    function getRestaurantDetail()
+    {
+        $rest = RestaurantDetail::findOrFail(1);
+
+        return $rest;
     }
 }

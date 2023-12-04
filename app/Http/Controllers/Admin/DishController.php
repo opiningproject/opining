@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Dish;
+use App\Models\Ingredient;
+use App\Models\IngredientCategory;
+use Exception;
+use Response;
 use Illuminate\Http\Request;
 
 class DishController extends Controller
@@ -12,7 +18,9 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        $ingredientCategories = IngredientCategory::all();
+        return view('admin.dish.create', ['categories' => $categories, 'ingredientCategories' => $ingredientCategories]);
     }
 
     /**
@@ -44,7 +52,8 @@ class DishController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $dish = Dish::with('category','option')->find($id);
+        return view('admin.dish.edit', ['dish' => $dish]);
     }
 
     /**

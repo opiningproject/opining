@@ -235,7 +235,7 @@
 
                                             <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a>
 
-                                            <a class="btn btn-custom-yellow btn-default w-100 btn-box-shadow mt-30px text-uppercase" href="javascript:void(0);">
+                                            <a class="btn btn-custom-yellow btn-default w-100 btn-box-shadow mt-30px text-uppercase" href="{{ route('login') }}">
                                                 <img src="images/restaurant-icon-svg.svg" alt="restaurant" class="img-fluid" width="22" height="22" />
                                                 <span class="align-middle ms-3">I’m a restaurant user</span>
                                             </a>

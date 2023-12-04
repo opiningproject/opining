@@ -3,6 +3,6 @@
 return [
     'available_lang' => [
 		'en',
-		'dut',
+		'nl',
 	],
 ];

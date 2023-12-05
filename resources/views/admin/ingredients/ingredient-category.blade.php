@@ -142,7 +142,9 @@
                 </main>
             </div>
         </div>
-
+        <!-- start footer -->
+        @include('layouts.admin.footer_design')
+        <!-- end footer -->
     </div>
     <!-- start delete category Modal -->
     <div class="modal fade custom-modal" id="deleteAlertModal" tabindex="-1"

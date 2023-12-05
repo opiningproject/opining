@@ -83,6 +83,9 @@
                 </main>
             </div>
         </div>
+        <!-- start footer -->
+        @include('layouts.admin.footer_design')
+        <!-- end footer -->
     </div>
 
     <!-- start CMS save msg Modal -->

@@ -19,7 +19,7 @@ class Ingredient extends Model
         return $this->belongsTo(IngredientCategory::class, 'category_id', 'id');
     }
 
-    public function dish(){
+    public function dishIngredient(){
         return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id');
     }
 }

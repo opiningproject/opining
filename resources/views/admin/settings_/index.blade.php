@@ -784,7 +784,7 @@
             </div>
         </div>
         <!-- start footer -->
-        <script src="js/footer.js"></script>
+        @include('layouts.admin.footer_design')
         <!-- end footer -->
     </div>
 

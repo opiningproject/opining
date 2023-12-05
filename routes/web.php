@@ -41,6 +41,8 @@ Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])-
 Route::get('/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('dashboard');
 Route::post('/user/login', [App\Http\Controllers\User\AuthController::class, 'login']);
 Route::post('/user/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
+Route::post('/user/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
+
 Route::get('email/verify/{id}',[App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::middleware(['localization'])->group(function () 

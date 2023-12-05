@@ -264,6 +264,9 @@
             </main>
         </div>
     </div>
+    <!-- start footer -->
+    <script src="{{ asset('js/user/footer.js')}}"></script>
+    <!-- end footer -->
 </div>
 
 @endsection

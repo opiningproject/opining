@@ -25,7 +25,7 @@ class SettingController extends Controller
         $privacy_policy_nl = CMS::where('type','privacy')->where('lang','nl')->pluck('content')->first();
         $terms_nl = CMS::where('type','terms')->where('lang','nl')->pluck('content')->first();
 
-        $user = RestaurantDetail::findOrFail(Auth::user()->id);
+        $user = RestaurantDetail::where('user_id',Auth::user()->id)->firstOrFail();
         $operating_days = OperatingHour::all();
 
         return view('admin.settings.index', ['operating_days' => $operating_days,'user' => $user,'zipcodes' => $zipcodes, 'privacy_policy_en' => $privacy_policy_en, 'terms_en' => $terms_en, 'privacy_policy_nl' => $privacy_policy_nl, 'terms_nl' => $terms_nl]);
@@ -63,7 +63,7 @@ class SettingController extends Controller
         /*print_r ($request->all());
         exit();*/
 
-        try 
+        try
         {
 
             $result = Zipcode::updateOrCreate(
@@ -116,8 +116,8 @@ class SettingController extends Controller
 
                   exit;
             }
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
@@ -134,29 +134,29 @@ class SettingController extends Controller
     public function changePassword(Request $request)
     {
         $user = User::findOrFail(Auth::user()->id);
-        
+
         if(!Hash::check($request->old_password, $user->password))
         {
             echo 2;
             exit;
-        } 
+        }
 
         $user->password = Hash::make($request->new_password);
-        
-        if($user->save()) 
+
+        if($user->save())
         {
             echo 1;
             exit;
-        } 
-        else 
+        }
+        else
         {
             return response::json(
                 [
-                    'status' => 0, 
+                    'status' => 0,
                     'message' => 'Something went wrong.'
                 ]
             );
-        }   
+        }
     }
 
     public function saveProfile(Request $request)

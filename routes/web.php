@@ -40,11 +40,16 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
 Route::get('/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('dashboard');
 Route::post('/user/login', [App\Http\Controllers\User\AuthController::class, 'login']);
+Route::post('/user/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
+Route::get('email/verify/{id}',[App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::middleware(['localization'])->group(function () 
 {
     Route::get('privacy-policy', [App\Http\Controllers\User\CMSController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('terms', [App\Http\Controllers\User\CMSController::class, 'terms'])->name('terms');
+
+    Route::get('google/auth', [App\Http\Controllers\User\AuthController::class, 'redirectToGoogle']);
+    Route::get('google/auth/callback', [App\Http\Controllers\User\AuthController::class, 'handleGoogleCallback']);
 });
 
 Auth::routes();

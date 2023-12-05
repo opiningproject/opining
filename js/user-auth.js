@@ -13,6 +13,15 @@ $(function ()
             signUp();
           }
      });
+
+    $("#forgot-pwd-form").validate({
+          //debug:true,
+          submitHandler: function(form) {
+            forgotPassword();
+          }
+     });
+
+
 });
 
 function signIn() 
@@ -63,6 +72,29 @@ function signUp()
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
             alert(errorMessage);
+        }
+    })
+}
+
+function forgotPassword() 
+{
+    //var email = $('#forgot-pwd-email').val();
+    var email = $('form#forgot-pwd-form').find('input[name=email]').val();
+
+    $.ajax({
+        url: 'user/forgot-password',
+        type: 'POST',
+        data: {
+            email
+        },
+        success: function (response) {
+            console.log('success')
+            console.log(response)
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            $('#forgot-pwd-error-msg').text(errorMessage)
+
         }
     })
 }

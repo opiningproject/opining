@@ -10,6 +10,8 @@ Use App\Models\User;
 use App\Enums\UserType;
 use Laravel\Socialite\Facades\Socialite;
 use Validator,Redirect,Response;
+use Illuminate\Support\Facades\Password;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -160,5 +162,55 @@ class AuthController extends Controller
         Auth::login($user);
      
         return redirect('/dashboard');
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $user = User::where('email', '=', $request->input('email'))->where('user_role', UserType::User)->first();
+
+        if(!$user || empty($user->email))
+        {
+            return response::json(
+                [
+                  'status' => 0, 
+                  'message' => 'Entered email id is not registered with us'
+                ]
+            );
+        }
+
+        if(!empty($user->social_id) && empty($user->password))
+        {
+            return response::json(
+                [
+                  'status' => 0, 
+                  'message' => 'Entered email id is registered with gmail login'
+                ]
+            );
+        }
+
+        $broker = $this->getPasswordBroker();
+        $sendingResponse = $broker->sendResetLink(['email' => $user->email]);
+
+        if($sendingResponse !== Password::RESET_LINK_SENT)
+        {
+            return response::json(
+                [
+                  'status' => 0, 
+                  'message' => 'something went wrong'
+                ]
+            );
+        }
+
+        return response::json(
+                [
+                  'status' => 0, 
+                  'message' => 'We have sent reset password link to your email'
+                ]
+            );
+    }
+    
+    private function getPasswordBroker()
+    {
+        return Password::broker();
     }
 }

@@ -8,7 +8,7 @@
         </h1>
       </div>
       <div class="modal-body signin-form">
-        <form>
+        <form id="sign-up-form" method="POST">
           <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -16,7 +16,7 @@
                 <path d="M8.27599 7.10976C6.40964 7.103 4.91016 5.58921 4.92194 3.72316C4.93288 1.87992 6.44078 0.387252 8.28693 0.390631C10.1508 0.39401 11.6519 1.90864 11.6418 3.77723C11.6317 5.61625 10.1171 7.11652 8.27599 7.11061V7.10976ZM8.27095 6.17209C9.62317 6.17632 10.7129 5.09504 10.7129 3.7502C10.7129 2.42479 9.63663 1.33759 8.31386 1.32661C6.95743 1.31563 5.86522 2.38086 5.8526 3.72823C5.83913 5.07223 6.92377 6.16787 8.27179 6.17209H8.27095Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.7" />
               </svg>
             </span>
-            <input type="text" class="form-control" placeholder="First Name">
+            <input type="text" class="form-control" placeholder="First Name" name="first_name" id="first_name" required>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
@@ -25,7 +25,7 @@
                 <path d="M8.27599 7.10976C6.40964 7.103 4.91016 5.58921 4.92194 3.72316C4.93288 1.87992 6.44078 0.387252 8.28693 0.390631C10.1508 0.39401 11.6519 1.90864 11.6418 3.77723C11.6317 5.61625 10.1171 7.11652 8.27599 7.11061V7.10976ZM8.27095 6.17209C9.62317 6.17632 10.7129 5.09504 10.7129 3.7502C10.7129 2.42479 9.63663 1.33759 8.31386 1.32661C6.95743 1.31563 5.86522 2.38086 5.8526 3.72823C5.83913 5.07223 6.92377 6.16787 8.27179 6.17209H8.27095Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.7" />
               </svg>
             </span>
-            <input type="text" class="form-control" placeholder="Last Name">
+            <input type="text" class="form-control" placeholder="Last Name" name="last_name" id="last_name" required>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
@@ -33,7 +33,7 @@
                 <path d="M1.00171 1.4636C1.08065 1.18582 1.18049 0.919994 1.38573 0.706647C1.67418 0.40796 2.02151 0.250083 2.43711 0.250083C6.92992 0.250083 11.4226 0.250083 15.9151 0.250083C16.1045 0.248033 16.2924 0.283785 16.4679 0.355249C16.6433 0.426712 16.8027 0.53245 16.9368 0.666274C17.0708 0.800098 17.1769 0.959319 17.2486 1.13462C17.3204 1.30992 17.3565 1.49777 17.3548 1.68719C17.3565 4.56226 17.3565 7.43733 17.3548 10.3124C17.3564 10.5018 17.3202 10.6896 17.2484 10.8649C17.1766 11.0402 17.0706 11.1994 16.9365 11.3332C16.8025 11.467 16.6431 11.5728 16.4678 11.6444C16.2924 11.7159 16.1045 11.7518 15.9151 11.7499C11.428 11.7499 6.94073 11.7499 2.45332 11.7499C1.75141 11.7499 1.19116 11.2976 1.0303 10.6089C1.0221 10.5842 1.01197 10.56 1 10.5368L1.00171 1.4636ZM2.68032 1.21228C2.72299 1.25836 2.74049 1.28311 2.76225 1.30487C4.76885 3.31887 6.77574 5.33244 8.78291 7.34559C9.01717 7.58027 9.35084 7.57344 9.59363 7.33151C11.5897 5.32946 13.5852 3.32698 15.5802 1.32407C15.6105 1.29421 15.6352 1.25879 15.6736 1.21228H2.68032ZM2.69099 10.783H15.6736C14.2958 9.41975 12.9338 8.0714 11.5718 6.72304C11.1562 7.13693 10.7218 7.5679 10.2891 8.00056C9.64611 8.64274 8.71037 8.64274 8.07033 7.99843C7.67578 7.60303 7.28123 7.20734 6.88668 6.81137C6.84657 6.77126 6.8039 6.73371 6.79494 6.72603L2.69099 10.783ZM1.96305 10.0385L6.05079 5.99979L1.96305 1.95046V10.0385ZM16.3905 10.0641V1.96284L12.2942 6.01174L16.3905 10.0641Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.5" />
               </svg>
             </span>
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
             <span class="input-group-icon">
@@ -42,7 +42,7 @@
                 <path d="M7.16701 15.0815C7.16552 15.0566 7.16552 15.0316 7.16701 15.0067C7.20524 14.6369 7.14864 14.3784 6.75194 14.1583C6.07622 13.7831 5.86819 12.8769 6.17651 12.1339C6.47043 11.4253 7.24148 11.0106 8.00807 11.1493C8.75727 11.2845 9.29547 11.8329 9.39079 12.558C9.49357 13.3405 9.1207 14.0206 8.40476 14.341C8.3646 14.3533 8.33012 14.3796 8.30755 14.4152C8.28498 14.4508 8.27578 14.4933 8.28163 14.5351C8.28759 14.8894 8.2861 15.2442 8.28163 15.5985C8.27865 15.9698 8.0592 16.1973 7.71712 16.1943C7.37504 16.1913 7.17098 15.9658 7.16602 15.604C7.16502 15.4298 7.16701 15.2542 7.16701 15.0815ZM7.71911 13.3669C8.05424 13.3669 8.28213 13.1454 8.28312 12.8145C8.28411 12.4837 8.05126 12.2526 7.72159 12.2551C7.39192 12.2576 7.17545 12.4772 7.16751 12.804C7.15956 13.1309 7.38745 13.3649 7.71911 13.3669Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.5"></path>
               </svg>
             </span>
-            <input type="password" class="form-control" placeholder="Password" id="signup_id_password">
+            <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
             <span class="input-group-icon passwordeye-icon">
               <i class="bi bi-eye-slash" id="toggleSignupPassword"></i>
             </span>
@@ -54,13 +54,14 @@
                 <path d="M7.16701 15.0815C7.16552 15.0566 7.16552 15.0316 7.16701 15.0067C7.20524 14.6369 7.14864 14.3784 6.75194 14.1583C6.07622 13.7831 5.86819 12.8769 6.17651 12.1339C6.47043 11.4253 7.24148 11.0106 8.00807 11.1493C8.75727 11.2845 9.29547 11.8329 9.39079 12.558C9.49357 13.3405 9.1207 14.0206 8.40476 14.341C8.3646 14.3533 8.33012 14.3796 8.30755 14.4152C8.28498 14.4508 8.27578 14.4933 8.28163 14.5351C8.28759 14.8894 8.2861 15.2442 8.28163 15.5985C8.27865 15.9698 8.0592 16.1973 7.71712 16.1943C7.37504 16.1913 7.17098 15.9658 7.16602 15.604C7.16502 15.4298 7.16701 15.2542 7.16701 15.0815ZM7.71911 13.3669C8.05424 13.3669 8.28213 13.1454 8.28312 12.8145C8.28411 12.4837 8.05126 12.2526 7.72159 12.2551C7.39192 12.2576 7.17545 12.4772 7.16751 12.804C7.15956 13.1309 7.38745 13.3649 7.71911 13.3669Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.5"></path>
               </svg>
             </span>
-            <input type="password" class="form-control" placeholder="Password" id="signup_confirm_id_password">
+            <input type="password" class="form-control" placeholder="Password" id="c_password" name="c_password" required>
             <span class="input-group-icon passwordeye-icon">
               <i class="bi bi-eye-slash" id="toggleSignupConfirmPassword"></i>
             </span>
           </div>
           <div class="form-group">
-            <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Sign In</a>
+           <!--  <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Sign In</a> -->
+           <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="sign-up-btn">Sign Up</button>
           </div>
           <div class="form-group">
             <p class="mb-0 singleline-text text-center text-custom-muted text-capitalize">Already have an account? <a href="#" class="text-yellow-2" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
@@ -68,7 +69,7 @@
               <br /> Or
             </p>
           </div>
-          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular font-18" href="javascript:void(0);">
+          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular font-18" href="{{ url('google/auth') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
               <path d="M18.8148 7.63924H18.0496V7.59982H9.49977V11.3997H14.8686C14.0853 13.6117 11.9806 15.1996 9.49977 15.1996C6.35202 15.1996 3.79991 12.6475 3.79991 9.49977C3.79991 6.35202 6.35202 3.79991 9.49977 3.79991C10.9528 3.79991 12.2747 4.34804 13.2812 5.2434L15.9682 2.55639C14.2715 0.975151 12.002 0 9.49977 0C4.25352 0 0 4.25352 0 9.49977C0 14.746 4.25352 18.9995 9.49977 18.9995C14.746 18.9995 18.9995 14.746 18.9995 9.49977C18.9995 8.86281 18.934 8.24105 18.8148 7.63924Z" fill="#FFC00B" />
               <path d="M1.09766 5.0781L4.21881 7.36707C5.06334 5.27617 7.10864 3.79991 9.5021 3.79991C10.9551 3.79991 12.277 4.34804 13.2835 5.2434L15.9705 2.55639C14.2738 0.975151 12.0043 0 9.5021 0C5.85324 0 2.68887 2.06003 1.09766 5.0781Z" fill="#FF3D00" />

@@ -30,5 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'client_id'     => '124244909968-m58gunpfnjq4nqghfkq01ugfhk6vttv6.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect'      => 'http://localhost/go-meal/google/auth/callback',
+    ],
 
 ];

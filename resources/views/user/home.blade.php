@@ -233,7 +233,7 @@
                                                 <input type="text" class="form-control" placeholder="House Number" />
                                             </div>
 
-                                            <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a>
+                                            <a href="{{ route('dashboard') }}" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a>
 
                                             <a class="btn btn-custom-yellow btn-default w-100 btn-box-shadow mt-30px text-uppercase" href="{{ route('login') }}">
                                                 <img src="images/restaurant-icon-svg.svg" alt="restaurant" class="img-fluid" width="22" height="22" />

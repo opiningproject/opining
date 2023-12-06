@@ -105,14 +105,11 @@
                                                             </button>
                                                             <select name="category_id">
                                                                 <option value="">Select Category</option>
-                                                                <?php
-                                                                foreach ($ingredientCategory as $category) {
-                                                                ?>
+                                                                @foreach ($ingredientCategory as $category) {
+
                                                                 <option
                                                                     value="{{ $category->id }}">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
-                                                                <?php
-                                                                }
-                                                                ?>
+                                                                @endforeach
                                                             </select>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item"
@@ -244,9 +241,7 @@
                                                     </a>
                                                 </td>
                                             </tr>--}}
-                                            <?php
-                                            foreach ($ingredients as $ingredient) {
-                                            ?>
+                                            @foreach ($ingredients as $ingredient)
                                             <tr>
                                                 <td scope="row" class="text-center">
                                                     <img
@@ -283,14 +278,10 @@
                                                                    href="javascript:void(0);">Category 3</a></li>
                                                         </ul>--}}
                                                         <select disabled id="catId{{$ingredient->id}}">
-                                                            <?php
-                                                            foreach ($ingredientCategory as $category) {
-                                                            ?>
+                                                            @foreach ($ingredientCategory as $category) {
                                                             <option
                                                                 value="{{ $category->id }}" {{ ($category->id == $ingredient->category_id) ? 'selected' : '' }}>{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
-                                                            <?php
-                                                            }
-                                                            ?>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </td>
@@ -321,9 +312,8 @@
                                                                    href="javascript:void(0);">Dish 3</a></li>
                                                         </ul>
                                                         <div class="table-dish-name">
-                                                            <?php
-                                                            foreach ($ingredient->dishIngredient as $ingr) {
-                                                            ?>
+                                                            @foreach ($ingredient->dishIngredient as $ingr) {
+
                                                             <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
                                                                     href="javascript:void(0);"><i
                                                                         class="fa-solid fa-xmark align-middle"></i></a></span>
@@ -331,9 +321,7 @@
                                                                     href="javascript:void(0);"><i
                                                                         class="fa-solid fa-xmark align-middle"></i></a></span>
 
-                                                            <?php
-                                                            }
-                                                            ?>
+                                                            @endforeach
 
                                                             <a class="text-more-sm float-end lh-30px"
                                                                data-bs-toggle="collapse" href="#collapseDishRowTwo"
@@ -371,9 +359,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <?php
-                                            }
-                                            ?>
+                                            @endforeach
                                             {{--<tr>
                                                 <td scope="row" class="text-center"><img
                                                         src="images/tomatoes-img.svg" class="img-fluid"

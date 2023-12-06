@@ -18,4 +18,7 @@
       </main>
     </div>
   </div>
+    <!-- start footer -->
+    @include('layouts.user.footer_design')
+    <!-- end footer -->
 </div> @endsection

@@ -52,8 +52,10 @@ class DishController extends Controller
      */
     public function edit(string $id)
     {
+        $ingredientCategories = IngredientCategory::all();
+        $categories = Category::all();
         $dish = Dish::with('category','option')->find($id);
-        return view('admin.dish.edit', ['dish' => $dish]);
+        return view('admin.dish.edit', ['dish' => $dish, 'categories' => $categories, 'ingredientCategories' => $ingredientCategories]);
     }
 
     /**

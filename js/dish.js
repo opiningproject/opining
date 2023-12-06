@@ -17,19 +17,12 @@ $(function () {
         })
     })
 
-    $(document).on('click', '.edit-ing-btn', function () {
+    $(document).on('click', '.free-ingredient-edit-btn', function () {
         var id = $(this).attr('data-id')
-        $('#dish-edit'+id)
+        $('#free-ingredient-delete'+id).hide()
+        $('#free-ingredient-save'+id).show()
+        $('#')
         $(this).hide()
-    })
-
-    $(document).on('click', '.save-edit-btn', function () {
-        $(this).parent().parent().siblings().children('input').attr("readonly", true);
-        $(this).siblings('a.del-ing-btn').show()
-        $(this).siblings('a.edit-ing-btn').show()
-        $(this).parent().parent().siblings().children('img').show()
-        $(this).parent().parent().siblings().children('div.imageupload-box').hide()
-        $(this).attr("style", "display: none !important");
     })
 
     $(document).on('change', '.ingred-category', function () {

@@ -265,7 +265,7 @@
         </div>
     </div>
     <!-- start footer -->
-    <script src="{{ asset('js/user/footer.js')}}"></script>
+    @include('layouts.user.footer_design')
     <!-- end footer -->
 </div>
 

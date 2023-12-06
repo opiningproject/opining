@@ -12,7 +12,7 @@ class Dish extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['category_id', 'name_en', 'name_nl', 'image', 'price', 'percentage_off', 'qty', 'out_of_stock'];
+    protected $fillable = ['category_id', 'name_en', 'name_nl', 'image', 'price', 'percentage_off', 'qty', 'out_of_stock', 'desc_en', 'desc_nl'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

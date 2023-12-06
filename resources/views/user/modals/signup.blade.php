@@ -34,6 +34,7 @@
               </svg>
             </span>
             <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+            <label id="email-error" class="error" for="email" style="display: none"></label>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
             <span class="input-group-icon">
@@ -42,7 +43,7 @@
                 <path d="M7.16701 15.0815C7.16552 15.0566 7.16552 15.0316 7.16701 15.0067C7.20524 14.6369 7.14864 14.3784 6.75194 14.1583C6.07622 13.7831 5.86819 12.8769 6.17651 12.1339C6.47043 11.4253 7.24148 11.0106 8.00807 11.1493C8.75727 11.2845 9.29547 11.8329 9.39079 12.558C9.49357 13.3405 9.1207 14.0206 8.40476 14.341C8.3646 14.3533 8.33012 14.3796 8.30755 14.4152C8.28498 14.4508 8.27578 14.4933 8.28163 14.5351C8.28759 14.8894 8.2861 15.2442 8.28163 15.5985C8.27865 15.9698 8.0592 16.1973 7.71712 16.1943C7.37504 16.1913 7.17098 15.9658 7.16602 15.604C7.16502 15.4298 7.16701 15.2542 7.16701 15.0815ZM7.71911 13.3669C8.05424 13.3669 8.28213 13.1454 8.28312 12.8145C8.28411 12.4837 8.05126 12.2526 7.72159 12.2551C7.39192 12.2576 7.17545 12.4772 7.16751 12.804C7.15956 13.1309 7.38745 13.3649 7.71911 13.3669Z" fill="#FFC00B" stroke="#FFC00B" stroke-width="0.5"></path>
               </svg>
             </span>
-            <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+            <input type="password" class="form-control" placeholder="Password" id="password" name="password" minlength="8" required>
             <span class="input-group-icon passwordeye-icon">
               <i class="bi bi-eye-slash" id="toggleSignupPassword"></i>
             </span>

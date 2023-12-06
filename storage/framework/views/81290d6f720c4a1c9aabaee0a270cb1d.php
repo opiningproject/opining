@@ -865,6 +865,9 @@
                 </main>
             </div>
         </div>
+        <!-- start footer -->
+        <?php echo $__env->make('layouts.admin.footer_design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <!-- end footer -->
     </div>
     <!-- start add category Modal -->
     <div class="modal fade custom-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModal"

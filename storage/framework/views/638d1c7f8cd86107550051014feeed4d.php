@@ -262,6 +262,9 @@
             </main>
         </div>
     </div>
+    <!-- start footer -->
+    <script src="<?php echo e(asset('js/user/footer.js')); ?>"></script>
+    <!-- end footer -->
 </div>
 
 <?php $__env->stopSection(); ?>

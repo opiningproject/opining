@@ -41,17 +41,19 @@ class AuthController extends Controller
           return response::json(
             [
               'status' => 0, 
+              'field' => 'email',
               'message' => 'Email not registered with us'
             ]
           );
         } 
 
-        if(!empty($user) && $user->email_verified_at)
+        if(!empty($user) && !$user->email_verified_at)
         {
             return response::json(
                 [
                   'status' => 0, 
-                  'message' => 'Please verify your email to login'
+                  'field' => 'email',
+                  'message' => 'Please verify your email first to login'
                 ]
             );
         }
@@ -61,6 +63,7 @@ class AuthController extends Controller
             return response::json(
                 [
                   'status' => 0, 
+                  'field' => 'email',
                   'message' => 'This email is registered with gmail login'
                 ]
             );
@@ -71,6 +74,7 @@ class AuthController extends Controller
           return response::json(
             [
               'status' => 0, 
+              'field' => 'password',
               'message' => 'Incorrect password'
             ]
           );
@@ -81,6 +85,7 @@ class AuthController extends Controller
             return response::json(
                 [
                   'status' => 0, 
+                  'field' => 'email',
                   'message' => 'Incorrect rights'
                 ]
           );
@@ -88,7 +93,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) 
         {
-          return response::json(['status' => 1, 'message' => "Successfully login."]);
+          return response::json(['status' => 1, 'message' => ""]);
         }
     }
 
@@ -101,6 +106,7 @@ class AuthController extends Controller
             return response::json(
                 [
                   'status' => 0, 
+                  'field' => 'email',
                   'message' => 'Entered email id is already registered with us'
                 ]
             );
@@ -135,7 +141,7 @@ class AuthController extends Controller
         return response::json(
                 [
                   'status' => 1, 
-                  'message' => 'sign up success'
+                  'message' => ''
                 ]
             );
     }
@@ -173,6 +179,7 @@ class AuthController extends Controller
             return response::json(
                 [
                   'status' => 0, 
+                  'field' => 'email',
                   'message' => 'Entered email id is not registered with us'
                 ]
             );
@@ -183,6 +190,7 @@ class AuthController extends Controller
             return response::json(
                 [
                   'status' => 0, 
+                  'field' => 'email',
                   'message' => 'Entered email id is registered with gmail login'
                 ]
             );
@@ -196,7 +204,8 @@ class AuthController extends Controller
             return response::json(
                 [
                   'status' => 0, 
-                  'message' => 'something went wrong'
+                  'field' => 'email',
+                  'message' => 'Something went wrong. Please try again later.'
                 ]
             );
         }

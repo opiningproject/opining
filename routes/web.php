@@ -72,7 +72,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::post('/settings/change-status', [SettingController::class, 'changeStatus']);
     Route::post('/settings/save-zipcode', [SettingController::class, 'saveZipcode']);
     Route::post('/settings/save-content', [SettingController::class, 'saveContent']);
-    Route::post('/settings/change-password', [SettingController::class, 'changePassword']);
+    Route::post('/settings/change-password', [SettingController::class, 'changePassword'])->name('change.password');
     Route::post('/settings/save-profile', [SettingController::class, 'saveProfile'])->name('settings.save-profile');
 
     Route::get('/coupons/claim-history', [CouponController::class, 'claimHistoryLog'])->name('claimHistoryLog');
@@ -87,6 +87,12 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::resource('/menu/ingredients/category',IngredientCategoryController::class, [
         'as' => 'ingred'
     ]);
+
+    Route::get('/user/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
+    Route::post('/user/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
+    Route::get('/user/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('favorite');
+    Route::get('/user/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
+    Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
 
     Route::get('/menu/ingredients/checkAttachedDish/{ingredient}', [IngredientController::class, 'checkAttachedDish']);
     Route::post('/menu/ingredients/update-status/{ingredient}',[IngredientController::class, 'updateIngredientStatus']);

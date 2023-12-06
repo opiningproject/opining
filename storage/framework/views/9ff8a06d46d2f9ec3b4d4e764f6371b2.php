@@ -25,6 +25,6 @@
     });
     // timepicker
 </script>
-<script src="<?php echo e(asset('js/footer.js')); ?>"></script>
+
 
 <?php /**PATH /var/www/html/go-meal/resources/views/layouts/admin/footer.blade.php ENDPATH**/ ?>

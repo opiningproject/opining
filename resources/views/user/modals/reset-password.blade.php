@@ -12,11 +12,11 @@
           <h3 class="authenticationform-title">Forgot Password</h3>
           <div class="form-group">
             <label for="newpassword" class="form-label">New Password</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" minlength="8">
           </div>
           <div class="form-group mb-0">
             <label for="newpassword" class="form-label">Confirm New Password</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" minlength="8">
           </div>
           <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">Save</button>
         </form>

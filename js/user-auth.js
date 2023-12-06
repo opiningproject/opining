@@ -38,9 +38,15 @@ function signIn()
             email,password
         },
         success: function (response) {
-            console.log('success')
-            console.log(response)
-            //window.location.reload();
+
+            if(response.status == 0)
+            {
+                $('#'+response.field+'-error').text(response.message);
+                $('#'+response.field+'-error').css("display", "block");
+
+                $('#sign-in-btn').removeAttr('disabled');
+            }
+            
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -64,10 +70,15 @@ function signUp()
         data: {
             first_name,last_name,email,password
         },
-        success: function (response) {
-            console.log('success')
-            console.log(response)
-            //window.location.reload();
+        success: function (response) 
+        {
+            if(response.status == 0)
+            {
+                $('form#sign-up-form').find('label[id=email-error]').text(response.message);
+                $('form#sign-up-form').find('label[id=email-error]').css("display", "block");
+
+                $('#sign-up-btn').removeAttr('disabled');
+            }
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -88,8 +99,13 @@ function forgotPassword()
             email
         },
         success: function (response) {
-            console.log('success')
-            console.log(response)
+            if(response.status == 0)
+            {
+                $('form#forgot-pwd-form').find('label[id=email-error]').text(response.message);
+                $('form#forgot-pwd-form').find('label[id=email-error]').css("display", "block");
+
+                $('#forgot-pwd-btn').removeAttr('disabled');
+            }
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

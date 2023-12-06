@@ -13,6 +13,9 @@
 <script type="text/javascript" src="{{ asset('js/jquery.datepicker.min.js')}}"></script>
 
 <script type="text/javascript" src="{{ asset('js/user-auth.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/user-settings.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/user-dishes.js')}}"></script>
 
 <script>
     var baseURL = "{{ url('/') }}"

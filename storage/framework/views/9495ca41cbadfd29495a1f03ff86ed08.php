@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/bootstrap.min.css')); ?>"  />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font_bootstrap_icons.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome_6.4.2_all.min.css')); ?>" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/datepicker.min.css')); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/jquery.timepicker.min.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/swiper-bundle.min.css')); ?>" />

@@ -17,6 +17,7 @@
               </svg>
             </span>
             <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
+            <label id="email-error" class="error" for="email" style="display: none"></label>
           </div>
           <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="forgot-pwd-btn">Send Password Reset Link</button>
         </form>

@@ -16,6 +16,7 @@
               </svg>
             </span>
             <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+            <label id="email-error" class="error" for="email" style="display: none"></label>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
             <span class="input-group-icon">
@@ -25,6 +26,7 @@
               </svg>
             </span>
             <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+            <label id="password-error" class="error" for="password" style="display: none"></label>
             <span class="input-group-icon passwordeye-icon">
               <i class="bi bi-eye-slash" id="toggleSignInPassword"></i>
             </span>

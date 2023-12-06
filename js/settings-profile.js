@@ -30,7 +30,7 @@ function changePassword()
     }
    
     $.ajax({
-        url: 'settings/change-password',
+        url: baseURL+'/settings/change-password',
         type: 'POST',
         data: {
             old_password,new_password

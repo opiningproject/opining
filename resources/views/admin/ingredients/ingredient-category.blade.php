@@ -89,9 +89,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php
-                                            foreach ($ingredientCategory as $category) {
-                                            ?>
+                                            @foreach ($ingredientCategory as $category)
                                             <tr>
                                                 <td class="text-center"><input type="text"
                                                                                class="form-control text-center w-10r m-auto"
@@ -128,9 +126,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <?php
-                                            }
-                                            ?>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>

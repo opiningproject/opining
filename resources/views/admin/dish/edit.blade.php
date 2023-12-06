@@ -22,7 +22,8 @@
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                             <nav class="page-breadcrumb" aria-label="breadcrumb">
                                                 <ol class="breadcrumb">
-                                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a></li>
+                                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a>
+                                                    </li>
                                                     <li class="breadcrumb-item active">Edit Dish</li>
                                                 </ol>
                                             </nav>
@@ -36,7 +37,7 @@
                                                            for="outofstock">Out
                                                         of
                                                         stock</label>
-                                                    <input class="form-check-input" type="checkbox" role="switch"
+                                                    <input class="form-check-input" type="checkbox" role="switch" {{ $dish->out_of_stock == 1 ? 'checked' : '' }}
                                                            id="outofstock">
                                                 </div>
                                             </div>
@@ -50,7 +51,8 @@
                                                 <label for="dishimage" class="form-label">Dish Image</label>
                                                 <label for="input-file" class="upload-file">
                                                     <input type="file" id="input-file">
-                                                    <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" class="img-fluid"
+                                                    <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
+                                                         class="img-fluid"
                                                          width="22" height="17">
                                                     <p class="mb-0">Upload Image of Item</p>
                                                 </label>
@@ -67,7 +69,7 @@
                                             <div class="form-group">
                                                 <label for="dishnamedutch" class="form-label">Dish Name <span
                                                         class="text-custom-muted">(Dutch)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->name_nl }}" />
+                                                <input type="text" class="form-control" value="{{ $dish->name_nl }}"/>
                                             </div>
                                         </div>
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -76,18 +78,13 @@
                                                         class="text-custom-muted">(English)</span></label>
                                                 <div class="input-group">
                                                     <div class="dropdown buttondropdown category-dropdown">
-                                                        <button class="form-control dropdown-toggle w-100" type="button"
+                                                        <select class="form-control dropdown-toggle w-100" type="button"
                                                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Burger
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Burger</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Burger 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Burger 2</a></li>
-                                                        </ul>
+                                                            <option value="">Select Category</option>
+                                                            @foreach($categories as $category)
+                                                                <option value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,7 +96,8 @@
                                             <div class="form-group">
                                                 <label for="discountpercentage" class="form-label">Discount
                                                     Percentage</label>
-                                                <input type="number" class="form-control" value="{{ $dish->percentage_off }}"/>
+                                                <input type="number" class="form-control"
+                                                       value="{{ $dish->percentage_off }}"/>
                                             </div>
                                         </div>
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -130,29 +128,18 @@
                                             <div class="form-group">
                                                 <label for="discountpercentage" class="form-label">Dish description
                                                     <span class="text-custom-muted">(Dutch)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->desc_nl }}" />
+                                                <input type="text" class="form-control" value="{{ $dish->desc_nl }}"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                    <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
+                                         style="float: left;margin-right: 10px;">
                                         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group ">
+                                            <div class="form-group">
                                                 <label for="password" class="form-label">Dish Option <span
                                                         class="text-custom-muted">(English)</span></label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control">
-                                                    <button class="input-group-btn btn btn-custom-gray btn-icon h-50px"
-                                                            type="button" id="button-addon2"><i
-                                                            class="fa-solid fa-xmark"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group ">
-                                                <label for="password" class="form-label">Dish Option <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="option_name_en" id="option_name_en">
                                                     <button
                                                         class="input-group-btn btn btn-custom-yellow btn-icon h-50px"
                                                         type="button" id="button-addon2"><i
@@ -160,30 +147,44 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group ">
+                                            <div class="form-group">
                                                 <label for="password" class="form-label">Dish Option <span
                                                         class="text-custom-muted">(Dutch)</span></label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control">
-                                                    <button class="input-group-btn btn btn-custom-gray btn-icon h-50px"
-                                                            type="button" id="button-addon2"><i
-                                                            class="fa-solid fa-xmark"></i></button>
+                                                    <input type="text" class="form-control" name="option_name_nl" id="option_name_nl">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group ">
-                                                <label for="password" class="form-label">Dish Option <span
-                                                        class="text-custom-muted">(Dutch)</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
+                                    @foreach($dish->option as $option)
+                                        <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
+                                             style="float:left;margin-right: 10px;">
+                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="password" class="form-label">Dish Option <span
+                                                            class="text-custom-muted">(English)</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="{{ $option->option_en }}">
+                                                        <button class="input-group-btn btn btn-custom-gray btn-icon h-50px"
+                                                                type="button" id="button-addon2"><i
+                                                                class="fa-solid fa-xmark"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="password" class="form-label">Dish Option <span
+                                                            class="text-custom-muted">(Dutch)</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="{{ $option->option_nl }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <hr class="my-0"/>
                                 <div class="card-body">
@@ -200,18 +201,24 @@
                                                             <div class="input-group w-100">
                                                                 <div
                                                                     class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <button
+                                                                    <select
                                                                         class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
                                                                         type="button" data-bs-toggle="dropdown"
                                                                         aria-expanded="false">
-                                                                        <div class="d-block">
+                                                                        <option value="">
+                                                                            Select Ingredient Category
+                                                                        </option>
+<!--                                                                        <option>
                                                                             <img src="images/american_cheese_img.svg"
                                                                                  class="img-fluid me-15px"
                                                                                  alt="ingredient img 1"/>
                                                                             Cheese
-                                                                        </div>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
+                                                                        </option>-->
+                                                                        @foreach($ingredientCategories as $ingredientCategory)
+                                                                            <option value="{{ $ingredientCategory->id }}">{{ (App()->getLocale() == 'en') ? $ingredientCategory->name_en : $ingredientCategory->name_nl }}</option>
+                                                                        @endforeach
+                                                                    </select>
+<!--                                                                    <ul class="dropdown-menu w-100">
                                                                         <li><a class="dropdown-item"
                                                                                href="javascript:void(0);">
                                                                                 <img src="images/ketchup_img.svg"
@@ -233,7 +240,7 @@
                                                                                      alt="ingredient img 1"/>Burger
                                                                                 2</a>
                                                                         </li>
-                                                                    </ul>
+                                                                    </ul>-->
 
                                                                 </div>
                                                             </div>
@@ -246,18 +253,19 @@
                                                             <div class="input-group w-100">
                                                                 <div
                                                                     class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <button
+                                                                    <select
                                                                         class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
                                                                         type="button" data-bs-toggle="dropdown"
                                                                         aria-expanded="false">
                                                                         <div class="d-block">
-                                                                            <img src="images/american_cheese_img.svg"
+                                                                            <img src="{{asset('images/american_cheese_img.svg')}}"
                                                                                  class="img-fluid me-15px"
                                                                                  alt="ingredient img 1"/>
                                                                             Cheese
                                                                         </div>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
+                                                                        <option>Select Ingredient</option>
+                                                                    </select>
+<!--                                                                    <ul class="dropdown-menu w-100">
                                                                         <li><a class="dropdown-item"
                                                                                href="javascript:void(0);">
                                                                                 <img src="images/ketchup_img.svg"
@@ -279,8 +287,7 @@
                                                                                      alt="ingredient img 1"/>Burger
                                                                                 2</a>
                                                                         </li>
-                                                                    </ul>
-
+                                                                    </ul>-->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -312,32 +319,17 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="text-center">
-                                                        <div class="imageupload-box inline-imageupload-box mb-0">
+                                                        <div class="imageupload-box inline-imageupload-box mb-0 free-ingredient-image-div" style="display: none">
                                                             <label for="input-file" class="upload-file">
                                                                 <input type="file" id="input-file">
-                                                                <img src="images/tomatoes-img.svg"
+                                                                <img src="{{ asset('images/tomatoes-img.svg')}}"
                                                                      alt="tomatoes image" class="img-fluid"
                                                                      width="25" height="25">
                                                                 <p class="mb-0 text-lowercase">Tomato.png</p>
                                                             </label>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Ketchup"/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a class="btn btn-custom-yellow btn-default d-block">
-                                                            <span class="align-middle">Save</span>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><img
-                                                            src="images/american_cheese_img.svg"
+                                                        <img
+                                                            src="{{ asset('images/american_cheese_img.svg')}}"
                                                             class="img-fluid me-15px" alt="ingredient img 1"/></td>
                                                     <td class="text-center"><input type="text"
                                                                                    class="form-control text-center w-10r m-auto"
@@ -348,10 +340,6 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon me-4"
-                                                               tabindex="0" href="javascript:void(0);">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
                                                             <a class="btn btn-custom-yellow btn-icon"
                                                                data-bs-toggle="modal"
                                                                data-bs-target="#deleteAlertModal">
@@ -362,7 +350,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text-center"><img
-                                                            src="images/quarter_pounder_bun_img.svg"
+                                                            src="{{ asset('images/quarter_pounder_bun_img.svg')}}"
                                                             class="img-fluid me-15px" alt="ingredient img 1"/></td>
                                                     <td class="text-center"><input type="text"
                                                                                    class="form-control text-center w-10r m-auto"
@@ -427,18 +415,22 @@
                                                             <div class="input-group w-100">
                                                                 <div
                                                                     class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <button
+                                                                    <select
                                                                         class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
                                                                         type="button" data-bs-toggle="dropdown"
                                                                         aria-expanded="false">
                                                                         <div class="d-block">
-                                                                            <img src="images/american_cheese_img.svg"
+                                                                            <img src="{{asset('images/american_cheese_img.svg')}}"
                                                                                  class="img-fluid me-15px"
                                                                                  alt="ingredient img 1"/>
                                                                             Cheese
                                                                         </div>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
+                                                                        <option value="">Select Ingredient Category</option>
+                                                                        @foreach($ingredientCategories as $ingredientCategory)
+                                                                            <option value="{{ $ingredientCategory->id }}">{{ (App()->getLocale() == 'en') ? $ingredientCategory->name_en : $ingredientCategory->name_nl }}</option>
+                                                                        @endforeach
+                                                                    </select>
+<!--                                                                    <ul class="dropdown-menu w-100">
                                                                         <li><a class="dropdown-item"
                                                                                href="javascript:void(0);">
                                                                                 <img src="images/ketchup_img.svg"
@@ -460,8 +452,7 @@
                                                                                      alt="ingredient img 1"/>Burger
                                                                                 2</a>
                                                                         </li>
-                                                                    </ul>
-
+                                                                    </ul>-->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -473,7 +464,7 @@
                                                             <div class="input-group w-100">
                                                                 <div
                                                                     class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <button
+                                                                    <select
                                                                         class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
                                                                         type="button" data-bs-toggle="dropdown"
                                                                         aria-expanded="false">
@@ -483,8 +474,9 @@
                                                                                  alt="ingredient img 1"/>
                                                                             Cheese
                                                                         </div>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
+                                                                        <option value="">Select Ingredient</option>
+                                                                    </select>
+<!--                                                                    <ul class="dropdown-menu w-100">
                                                                         <li><a class="dropdown-item"
                                                                                href="javascript:void(0);">
                                                                                 <img src="images/ketchup_img.svg"
@@ -506,7 +498,7 @@
                                                                                      alt="ingredient img 1"/>Burger
                                                                                 2</a>
                                                                         </li>
-                                                                    </ul>
+                                                                    </ul>-->
 
                                                                 </div>
                                                             </div>

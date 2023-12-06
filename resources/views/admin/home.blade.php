@@ -114,9 +114,7 @@
                             <div class="swiper-container">
                                 <div class="swiper category-swiper-slider">
                                     <div class="category-slider swiper-wrapper">
-                                        <?php
-                                        foreach ($categories as $category) {
-                                        ?>
+                                        @foreach ($categories as $category)
                                         <div class="category-element swiper-slide">
                                             <div class="card">
                                                 <span class="dish-item-icon">
@@ -138,9 +136,7 @@
 
                                             </div>
                                         </div>
-                                        <?php
-                                        }
-                                        ?>
+                                        @endforeach
                                         <div class="category-element swiper-slide">
                                             <div class="card active">
                                                 <span class="dish-item-icon">
@@ -355,10 +351,7 @@
                                 </a>
                             </div>
                             <div class="popular-item-grid">
-                                <?php
-                                foreach ($dishes as $dish) {
-
-                                ?>
+                                @foreach ($dishes as $dish)
                                     <div class="card food-detail-card">
                                     <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
                                     <div class="card-body p-0">
@@ -379,9 +372,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                                }
-                                ?>
+                                @endforeach
                                 <div class="card food-detail-card">
                                     <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
                                     <div class="card-body p-0">

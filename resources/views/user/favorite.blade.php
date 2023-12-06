@@ -44,9 +44,9 @@
        </main>
      </div>
    </div>
-   <!-- start footer -->
-   <script type="text/javascript" src="js/footer.js"></script>
-   <!-- end footer -->
+     <!-- start footer -->
+     @include('layouts.user.footer_design')
+     <!-- end footer -->
  </div>
 
 @include('user.modals.change-password')

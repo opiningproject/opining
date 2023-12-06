@@ -55,6 +55,9 @@
      </div>
      <!-- end toaster -->
    </div>
+     <!-- start footer -->
+     @include('layouts.user.footer_design')
+     <!-- end footer -->
  </div>
 @endsection
 
@@ -88,7 +91,7 @@
                         },
                         {
                             label: "05",
-                            value: "20",                            
+                            value: "20",
                             plotBorderThickness: 10
                             // "color": "#FFF8E2"
                         }
@@ -96,7 +99,7 @@
 
       const dataSourceData = {
                         caption: false,
-                        baseFontSize: "18",                        
+                        baseFontSize: "18",
                         subcaption: false,
                         showpercentvalues: "1",
                         defaultcenterlabel: "4 Points",

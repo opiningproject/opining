@@ -37,14 +37,6 @@ Route::get('/', function () {
     return redirect()->route('user.home');
 });
 
-Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
-Route::get('/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('dashboard');
-Route::post('/user/login', [App\Http\Controllers\User\AuthController::class, 'login']);
-Route::post('/user/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
-Route::post('/user/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
-
-Route::get('email/verify/{id}',[App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
-
 Route::middleware(['localization'])->group(function () 
 {
     Route::get('privacy-policy', [App\Http\Controllers\User\CMSController::class, 'privacyPolicy'])->name('privacy-policy');
@@ -52,6 +44,15 @@ Route::middleware(['localization'])->group(function ()
 
     Route::get('google/auth', [App\Http\Controllers\User\AuthController::class, 'redirectToGoogle']);
     Route::get('google/auth/callback', [App\Http\Controllers\User\AuthController::class, 'handleGoogleCallback']);
+
+    Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
+    Route::get('/user/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('/user/login', [App\Http\Controllers\User\AuthController::class, 'login']);
+    Route::post('/user/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
+    Route::post('/user/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
+    Route::get('email/verify/{id}',[App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
+    Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
+
 });
 
 Auth::routes();
@@ -90,9 +91,12 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/user/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
     Route::post('/user/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
-    Route::get('/user/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('favorite');
+    Route::get('/user/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('user.favorite');
     Route::get('/user/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
+    
+    Route::get('/user/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
+    Route::get('/user/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
 
     Route::get('/menu/ingredients/checkAttachedDish/{ingredient}', [IngredientController::class, 'checkAttachedDish']);
     Route::post('/menu/ingredients/update-status/{ingredient}',[IngredientController::class, 'updateIngredientStatus']);

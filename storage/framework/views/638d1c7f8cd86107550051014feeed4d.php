@@ -231,7 +231,7 @@
                                                 <input type="text" class="form-control" placeholder="House Number" />
                                             </div>
 
-                                            <a href="<?php echo e(route('dashboard')); ?>" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a>
+                                            <a href="<?php echo e(route('user.dashboard')); ?>" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a>
 
                                             <a class="btn btn-custom-yellow btn-default w-100 btn-box-shadow mt-30px text-uppercase" href="<?php echo e(route('login')); ?>">
                                                 <img src="images/restaurant-icon-svg.svg" alt="restaurant" class="img-fluid" width="22" height="22" />
@@ -263,7 +263,7 @@
         </div>
     </div>
     <!-- start footer -->
-    <script src="<?php echo e(asset('js/user/footer.js')); ?>"></script>
+    <?php echo $__env->make('layouts.user.footer_design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- end footer -->
 </div>
 

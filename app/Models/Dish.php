@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use function Symfony\Component\Translation\t;
+use Auth;
 
 class Dish extends Model
 {
@@ -16,6 +17,10 @@ class Dish extends Model
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 
+    protected $appends = [
+        'name',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
@@ -24,6 +29,30 @@ class Dish extends Model
     public function order()
     {
         return $this->hasMany(OrderDetail::class, 'dish_id', 'id');
+    }
+
+    public function favorite()
+    {
+        try
+        {
+            $user = Auth::user();
+
+            if(!empty($user))
+            {
+                 return $this->hasOne(DishFavorites::class,'dish_id','id')->select(['*'])->where('user_id',$user->id);
+            }
+            else
+            {
+                return $this->hasOne(DishFavorites::class,'dish_id','id')->select(['*'])->where('user_id',0);
+            }
+
+            return $this->hasOne(DishFavorites::class,'dish_id','id')->select(['*'])->where('user_id',$user->id);
+        }
+        catch(JWTException $e)
+        {
+            return $this->hasOne(DishFavorites::class,'dish_id','id')->select(['*'])->where('user_id',0);
+        }
+        
     }
 
     public function option()
@@ -37,5 +66,10 @@ class Dish extends Model
             return asset('');
         }
         return asset('images/blank-img.svg');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->attributes['name_' . app()->getlocale()];
     }
 }

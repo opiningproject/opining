@@ -16,6 +16,7 @@
 <script type="text/javascript" src="<?php echo e(asset('js/settings-profile.js')); ?>"></script>
 <script type="text/javascript" src="<?php echo e(asset('js/user-settings.js')); ?>"></script>
 <script type="text/javascript" src="<?php echo e(asset('js/user-dishes.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/user-address.js')); ?>"></script>
 
 <script>
     var baseURL = "<?php echo e(url('/')); ?>"

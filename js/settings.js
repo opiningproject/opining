@@ -133,8 +133,7 @@ function deleteZipcode(id)
 
 function changeStatus(id) 
 {
-    var status = this.checked == true ? 1:0;
-    //var id = $('#id').val();
+    var status = $("#status_"+id).prop('checked')  == true ? 1:0;
   
     $.ajax({
         url: 'settings/change-status',

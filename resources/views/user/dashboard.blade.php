@@ -55,168 +55,17 @@
             <div class="swiper-container">
               <div class="swiper category-swiper-slider">
                 <div class="category-slider swiper-wrapper">
+                  @foreach ($categories as $category)
                   <div class="category-element swiper-slide">
                     <div class="card">
                       <span class="dish-item-icon">
-                        <img src="images/bakery.svg" class="img-fluid" alt="bakery" width="56" height="56" />
+                        <img src="{{ $category->image }}" class="img-fluid" alt="bakery" width="56" height="56" />
                       </span>
-                      <p class="mb-0">Bakery</p>
+                      <p class="mb-0">{{ $category->name }}</p>
                       <a href="#" class="stretched-link"></a>
                     </div>
                   </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card active">
-                      <span class="dish-item-icon">
-                        <img src="images/Burger_svg.svg" class="img-fluid" alt="Burger" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Bakery</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Coffee.svg" class="img-fluid" alt="Coffee" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Beverage</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Chicken.svg" class="img-fluid" alt="Chicken" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Chicken</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Fast.svg" class="img-fluid" alt="Fast" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Pizza</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Fish.svg" class="img-fluid" alt="Fish" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Seafood</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/bakery.svg" class="img-fluid" alt="bakery" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Bakery</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card active">
-                      <span class="dish-item-icon">
-                        <img src="images/Burger_svg.svg" class="img-fluid" alt="Burger" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Bakery</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Coffee.svg" class="img-fluid" alt="Coffee" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Beverage</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Chicken.svg" class="img-fluid" alt="Chicken" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Chicken</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Fast.svg" class="img-fluid" alt="Fast" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Pizza</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Fish.svg" class="img-fluid" alt="Fish" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Seafood</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/bakery.svg" class="img-fluid" alt="bakery" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Bakery</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card active">
-                      <span class="dish-item-icon">
-                        <img src="images/Burger_svg.svg" class="img-fluid" alt="Burger" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Bakery</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Coffee.svg" class="img-fluid" alt="Coffee" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Beverage</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Chicken.svg" class="img-fluid" alt="Chicken" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Chicken</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Fast.svg" class="img-fluid" alt="Fast" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Pizza</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
-                  <div class="category-element swiper-slide">
-                    <div class="card">
-                      <span class="dish-item-icon">
-                        <img src="images/Fish.svg" class="img-fluid" alt="Fish" width="56" height="56" />
-                      </span>
-                      <p class="mb-0">Seafood</p>
-                      <a href="#" class="stretched-link"></a>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
               </div>
             </div>
@@ -226,7 +75,7 @@
           <section class="custom-section category-list-section pb-0">
             <div class="section-page-title">
               <h1 class="section-title">Burgers</h1>
-              <a href="#" type="button" class="viewall-btn">View all <span>
+              <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">View all <span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="chevron-down">
                       <path id="Vector" d="M15.0002 11.9998C15.0009 12.1314 14.9757 12.2619 14.926 12.3837C14.8762 12.5056 14.8029 12.6164 14.7102 12.7098L10.7102 16.7098C10.5219 16.8981 10.2665 17.0039 10.0002 17.0039C9.73388 17.0039 9.47849 16.8981 9.29018 16.7098C9.10188 16.5215 8.99609 16.2661 8.99609 15.9998C8.99609 15.7335 9.10188 15.4781 9.29018 15.2898L12.5902 11.9998L9.30018 8.70982C9.13636 8.51851 9.05075 8.27244 9.06047 8.02076C9.07019 7.76909 9.17453 7.53035 9.35262 7.35225C9.53072 7.17416 9.76945 7.06983 10.0211 7.06011C10.2728 7.05038 10.5189 7.13599 10.7102 7.29982L14.7102 11.2998C14.8949 11.4861 14.9991 11.7375 15.0002 11.9998Z" fill="#292929" />
@@ -236,37 +85,26 @@
               </a>
             </div>
             <div class="category-list-item-grid">
+              @foreach ($dishes as $dish)
               <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
+                <p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>
+
+                <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}" onclick="favorite({{ $dish->id }})" id="unfavorite-icon-{{ $dish->id }}">
                   <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
                   </svg>
                 </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
+
+                <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '':'d-none' }}" onclick="unFavorite({{ $dish->id }})" id="favorite-icon-{{ $dish->id }}">
                   <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
+                  <path d="M9.9369 18.2528C10.7426 18.9633 11.2314 18.9586 12.0411 18.2559C12.5184 17.8416 12.9987 17.4307 13.479 17.0198C14.0459 16.5349 14.6129 16.0499 15.175 15.5591C15.2862 15.462 15.3976 15.3651 15.5089 15.2681C16.8886 14.0669 18.2688 12.8652 19.3763 11.3906L9.9369 18.2528ZM9.9369 18.2528C9.36367 17.7472 8.78845 17.244 8.21325 16.7407M9.9369 18.2528L8.21325 16.7407M8.21325 16.7407C6.85099 15.5488 5.48887 14.3571 4.15378 13.1356L8.21325 16.7407ZM10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.5245 15.9276 7.88861 17.121C8.46282 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3709 16.9148 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978ZM11.2663 2.93477C11.2147 2.87335 11.1658 2.81481 11.1175 2.75462L12.1066 2.21041C11.8224 2.4428 11.5475 2.68604 11.2726 2.92925C11.2705 2.93109 11.2684 2.93293 11.2663 2.93477Z" fill="#FFC00B"></path>
                   </svg>
                 </p>
                 <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
+                  <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" width="100" height="100" />
                 </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
+                <h4 class="food-name-text">{{ $dish->name }}</h4>
+                <p class="food-price">€{{ $dish->price }}</p>
                 <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
                     <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
                     <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
@@ -274,196 +112,7 @@
                 </a>
                 <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
               </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                    <path d="M9.9369 18.2528C10.7426 18.9633 11.2314 18.9586 12.0411 18.2559C12.5184 17.8416 12.9987 17.4307 13.479 17.0198C14.0459 16.5349 14.6129 16.0499 15.175 15.5591C15.2862 15.462 15.3976 15.3651 15.5089 15.2681C16.8886 14.0669 18.2688 12.8652 19.3763 11.3906L9.9369 18.2528ZM9.9369 18.2528C9.36367 17.7472 8.78845 17.244 8.21325 16.7407M9.9369 18.2528L8.21325 16.7407M8.21325 16.7407C6.85099 15.5488 5.48887 14.3571 4.15378 13.1356L8.21325 16.7407ZM10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.5245 15.9276 7.88861 17.121C8.46282 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3709 16.9148 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978ZM11.2663 2.93477C11.2147 2.87335 11.1658 2.81481 11.1175 2.75462L12.1066 2.21041C11.8224 2.4428 11.5475 2.68604 11.2726 2.92925C11.2705 2.93109 11.2684 2.93293 11.2663 2.93477Z" fill="#FFC00B" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                    <path d="M9.9369 18.2528C10.7426 18.9633 11.2314 18.9586 12.0411 18.2559C12.5184 17.8416 12.9987 17.4307 13.479 17.0198C14.0459 16.5349 14.6129 16.0499 15.175 15.5591C15.2862 15.462 15.3976 15.3651 15.5089 15.2681C16.8886 14.0669 18.2688 12.8652 19.3763 11.3906L9.9369 18.2528ZM9.9369 18.2528C9.36367 17.7472 8.78845 17.244 8.21325 16.7407M9.9369 18.2528L8.21325 16.7407M8.21325 16.7407C6.85099 15.5488 5.48887 14.3571 4.15378 13.1356L8.21325 16.7407ZM10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.5245 15.9276 7.88861 17.121C8.46282 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3709 16.9148 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978ZM11.2663 2.93477C11.2147 2.87335 11.1658 2.81481 11.1175 2.75462L12.1066 2.21041C11.8224 2.4428 11.5475 2.68604 11.2726 2.92925C11.2705 2.93109 11.2684 2.93293 11.2663 2.93477Z" fill="#FFC00B" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
-                    <path d="M9.9369 18.2528C10.7426 18.9633 11.2314 18.9586 12.0411 18.2559C12.5184 17.8416 12.9987 17.4307 13.479 17.0198C14.0459 16.5349 14.6129 16.0499 15.175 15.5591C15.2862 15.462 15.3976 15.3651 15.5089 15.2681C16.8886 14.0669 18.2688 12.8652 19.3763 11.3906L9.9369 18.2528ZM9.9369 18.2528C9.36367 17.7472 8.78845 17.244 8.21325 16.7407M9.9369 18.2528L8.21325 16.7407M8.21325 16.7407C6.85099 15.5488 5.48887 14.3571 4.15378 13.1356L8.21325 16.7407ZM10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.5245 15.9276 7.88861 17.121C8.46282 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3709 16.9148 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978ZM11.2663 2.93477C11.2147 2.87335 11.1658 2.81481 11.1175 2.75462L12.1066 2.21041C11.8224 2.4428 11.5475 2.68604 11.2726 2.92925C11.2705 2.93109 11.2684 2.93293 11.2663 2.93477Z" fill="#FFC00B" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">15%</p>
-                <p class="mb-0 food-favorite-icon">
-                  <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.7905 1.82308L11.7902 1.8233C11.5031 2.05799 11.2207 2.30746 10.9468 2.54978C8.64995 -0.0915376 4.6793 -0.20716 2.25237 2.35955L2.25232 2.35959C0.4442 4.27233 -0.0130138 7.3889 1.10781 9.86143L1.10788 9.86158C1.75297 11.2834 2.69966 12.4819 3.81607 13.5044L3.81627 13.5045C5.15565 14.7299 6.52448 15.9275 7.88859 17.121C8.46281 17.6234 9.03619 18.1251 9.60618 18.6278L9.60621 18.6278C10.03 19.0015 10.4726 19.2846 10.9878 19.2843C11.5014 19.284 11.9445 19.0018 12.3688 18.6335L12.3688 18.6335C12.837 18.2271 13.3173 17.8162 13.7991 17.404C14.3708 16.9149 14.9449 16.4238 15.5039 15.9358L15.5039 15.9358C15.6168 15.8372 15.7302 15.7385 15.8439 15.6395C17.2162 14.445 18.6353 13.2097 19.7761 11.691C21.4889 9.41137 22.0466 6.87673 20.8837 4.13274L20.4233 4.32784L20.8837 4.13273C19.3398 0.49 14.8253 -0.654354 11.7905 1.82308Z" stroke="#AFAFAF" />
-                  </svg>
-                </p>
-                <div class="food-image">
-                  <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">big mac with Cheese</h4>
-                <p class="food-price">€20</p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
-                <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
-              </div>
+               @endforeach
             </div>
           </section>
           <!-- end category list section -->
@@ -526,11 +175,61 @@
 @section('script')
 <script type="text/javascript">
 
-      $(window).on("load", function() {
-        $("#signInModal").modal("show");
-      });
+function favorite(dish_id) 
+{
+    $.ajax({
+        url: baseURL+'/favorite',
+        type: 'POST',
+        data: {
+            dish_id
+        },
+        success: function (response) {
+            console.log('success')
+            if(response.status == 2)
+            {
+               $('#signInModal').modal('show');
+               return false;
+            }
 
-      $(document).ready(function() {
+            $("#unfavorite-icon-"+dish_id).addClass('d-none');
+            $("#favorite-icon-"+dish_id).removeClass('d-none');
+
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+function unFavorite(dish_id) 
+{
+    $.ajax({
+        url: baseURL+'/unFavorite',
+        type: 'POST',
+        data: {
+            dish_id
+        },
+        success: function (response) {
+            console.log('unFavorite')
+            console.log(response)
+
+            $("#unfavorite-icon-"+dish_id).removeClass('d-none');
+            $("#favorite-icon-"+dish_id).addClass('d-none');
+
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+$(window).on("load", function() {
+  $("#signInModal").modal("show");
+});
+
+$(document).ready(function() {
         var swiper = new Swiper(".category-swiper-slider", {
           slidesPerView: 1,
           spaceBetween: 6,
@@ -629,7 +328,7 @@
           },
         });
       });
-    </script>
+</script>
 @endsection
 
 

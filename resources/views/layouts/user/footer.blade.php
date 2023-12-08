@@ -16,6 +16,7 @@
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user-settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user-dishes.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/user-address.js')}}"></script>
 
 <script>
     var baseURL = "{{ url('/') }}"

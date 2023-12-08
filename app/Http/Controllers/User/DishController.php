@@ -8,6 +8,7 @@ use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 Use App\Models\User;
+use Validator,Redirect,Response;
 
 class DishController extends Controller
 {
@@ -41,8 +42,29 @@ class DishController extends Controller
     public function unFavorite(Request $request)
     {
         try {
-            DishFavorites::where('id', $request->id)->delete();
+            DishFavorites::where('dish_id', $request->dish_id)->delete();
         } catch (Exception $e) {
+            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+        }
+    }
+
+    public function favorite(Request $request)
+    {
+        if(!Auth::user())
+        {
+            return response::json(['status' => 2, 'message' => '']);
+        }
+
+        try 
+        {
+            $request->merge(["user_id"=>Auth::user()->id]);
+
+            DishFavorites::create(      
+              $request->all()
+            );
+        } 
+        catch (Exception $e) 
+        {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }

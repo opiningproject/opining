@@ -4,10 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Dish;
+use App\Models\DishFavorites;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+Use App\Models\User;
+Use App\Models\Coupon;
 
-class HomeController extends Controller
+class OrderController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,16 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.home');
+        return view('user.orders');
     }
 
-    public function dashboard(Request $request)
-    {
-        $categories = Category::all();
-        $dishes = Dish::with('favorite');
-
-        $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
-
-        return view('user.dashboard',['categories' => $categories, 'dishes' => $dishes]);
-    }
 }

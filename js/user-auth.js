@@ -21,7 +21,6 @@ $(function ()
           }
      });
 
-
 });
 
 function signIn() 
@@ -32,7 +31,7 @@ function signIn()
     var password = $('#password').val();
    
     $.ajax({
-        url: 'user/login',
+        url: baseURL+'/user/login',
         type: 'POST',
         data: {
             email,password
@@ -42,9 +41,13 @@ function signIn()
             if(response.status == 0)
             {
                 $('#'+response.field+'-error').text(response.message);
-                $('#'+response.field+'-error').css("display", "block");
+                $('#'+response.field+'-error').css("display", "block"); 
 
-                $('#sign-in-btn').removeAttr('disabled');
+                $('#sign-in-btn').prop('disabled',false); 
+            }
+            else
+            {
+                window.location.reload();
             }
             
         },

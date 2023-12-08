@@ -18,6 +18,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/user-style.css')); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/user-style.scss')); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/user-style.css.map')); ?>" />
-    
+
 </head>
 <?php /**PATH /var/www/html/go-meal/resources/views/layouts/user/header.blade.php ENDPATH**/ ?>

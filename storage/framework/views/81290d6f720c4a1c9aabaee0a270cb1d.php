@@ -113,9 +113,7 @@
                             <div class="swiper-container">
                                 <div class="swiper category-swiper-slider">
                                     <div class="category-slider swiper-wrapper">
-                                        <?php
-                                        foreach ($categories as $category) {
-                                        ?>
+                                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div class="category-element swiper-slide">
                                             <div class="card">
                                                 <span class="dish-item-icon">
@@ -137,9 +135,7 @@
 
                                             </div>
                                         </div>
-                                        <?php
-                                        }
-                                        ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <div class="category-element swiper-slide">
                                             <div class="card active">
                                                 <span class="dish-item-icon">
@@ -354,10 +350,7 @@
                                 </a>
                             </div>
                             <div class="popular-item-grid">
-                                <?php
-                                foreach ($dishes as $dish) {
-
-                                ?>
+                                <?php $__currentLoopData = $dishes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dish): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="card food-detail-card">
                                     <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
                                     <div class="card-body p-0">
@@ -378,9 +371,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                                }
-                                ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <div class="card food-detail-card">
                                     <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
                                     <div class="card-body p-0">

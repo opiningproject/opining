@@ -1,5 +1,6 @@
 $(function () {
     $("#categoryForm").validate({
+        ignore: [],
         rules: {
             name_en: {
                 required: true
@@ -100,7 +101,6 @@ function saveCategory() {
         data: catData,
         success: function (response) {
             console.log('success')
-            window.location.reload();
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

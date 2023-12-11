@@ -253,12 +253,12 @@
 
 <script type="text/javascript">
 
-function initMap() 
+function initMap()
 {
     var input = document.getElementById('rest_address');
-  
+
     var autocomplete = new google.maps.places.Autocomplete(input);
-   
+
     autocomplete.addListener('place_changed', function() {
         var place = autocomplete.getPlace();
         $('#latitude').val(place.geometry.location.lat());

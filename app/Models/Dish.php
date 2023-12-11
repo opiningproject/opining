@@ -52,7 +52,7 @@ class Dish extends Model
         {
             return $this->hasOne(DishFavorites::class,'dish_id','id')->select(['*'])->where('user_id',0);
         }
-        
+
     }
 
     public function option()
@@ -60,9 +60,19 @@ class Dish extends Model
         return $this->hasMany(DishOption::class, 'dish_id', 'id');
     }
 
+    public function freeIngredients()
+    {
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', 1);
+    }
+
+    public function paidIngredients()
+    {
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', '0');
+    }
+
     protected function getImageAttribute($value)
     {
-        if(!empty($value)){
+        if (!empty($value)) {
             return asset('');
         }
         return asset('images/blank-img.svg');

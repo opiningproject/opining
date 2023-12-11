@@ -52,6 +52,8 @@ Route::middleware(['localization'])->group(function ()
     Route::post('/user/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
     Route::get('email/verify/{id}',[App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
+    Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
+    Route::get('/user/delete-address/{id}',[App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
 
 });
 

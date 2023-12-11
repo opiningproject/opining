@@ -12,11 +12,12 @@
 <script src="https://unpkg.com/jquery-fusioncharts@1.1.0/dist/fusioncharts.jqueryplugin.js"></script>
 <script type="text/javascript" src="<?php echo e(asset('js/jquery.datepicker.min.js')); ?>"></script>
 
-<script type="text/javascript" src="<?php echo e(asset('js/user-auth.js')); ?>"></script>
+
 <script type="text/javascript" src="<?php echo e(asset('js/settings-profile.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('js/user-settings.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('js/user-dishes.js')); ?>"></script>
-<script type="text/javascript" src="<?php echo e(asset('js/user-address.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/user/user-auth.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/user/user-settings.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/user/user-dishes.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/user/user-address.js')); ?>"></script>
 
 <script>
     var baseURL = "<?php echo e(url('/')); ?>"

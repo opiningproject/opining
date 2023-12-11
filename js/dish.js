@@ -1,11 +1,33 @@
 $(function () {
 
     $("#addDishForm").validate({
+        ignore: [],
         rules: {
-            freeIngredientCategory: {
+            name_en: {
                 required: true
             },
-            ingredient_id: {
+            name_nl: {
+                required: true
+            },
+            image: {
+                required: true
+            },
+            category_id: {
+                required: true
+            },
+            percentage_off: {
+                required: true
+            },
+            qty: {
+                required: true
+            },
+            desc_en: {
+                required: true
+            },
+            desc_nl: {
+                required: true
+            },
+            price: {
                 required: true
             }
         },
@@ -83,13 +105,13 @@ $(function () {
                 price
             },
             success: function (response) {
-                if(response.status == 200){
+                if (response.status == 200) {
                     $('#price' + id).prop('readonly', true)
                     $('#paid-ingredient-delete' + id).show()
                     $('#paid-ingredient-edit' + id).show()
                     $('#paid-price' + id).prop('readonly', false)
-                    $('#paid-ingredient-save'+id).attr('style', 'display:none !important')
-                }else{
+                    $('#paid-ingredient-save' + id).attr('style', 'display:none !important')
+                } else {
                     alert(response.message);
                 }
             },
@@ -116,6 +138,47 @@ $(function () {
         } else {
             $('#paidIngredient').html('<option value="">Select Ingredient</option>')
         }
+    })
+
+
+    $(document).on('change', '#update-dish', function () {
+        var id = $('#dishId').val()
+
+        var name_en = $('#name_en').val()
+        var name_nl = $('#name_nl').val()
+        var category_id = $('#category_id').val()
+        var price = $('#price').val()
+        var percentage_off = $('#percentage_off').val()
+        var qty = $('#qty').val()
+        var desc_en = $('#desc_en').val()
+        var desc_nl = $('#desc_nl').val()
+        var out_of_stock = $('#outofstock').is(':checked') ? 1 : '0'
+
+            $.ajax({
+                url: baseURL + '/menu/update-dish/' + id,
+                type: 'PATCH',
+                data: {
+                    name_en,
+                    name_nl,
+                    category_id,
+                    price,
+                    percentage_off,
+                    qty,
+                    desc_en,
+                    desc_nl,
+                    out_of_stock
+                },
+                success: function (response) {
+                    if (response.status == 200) {
+                        location.reload()
+                    }
+
+                },
+                error: function (response) {
+                    var errorMessage = JSON.parse(response.responseText).message
+                    alert(errorMessage);
+                }
+            })
     })
 });
 
@@ -253,3 +316,4 @@ function addFreeIngredient(type) {
         }
     })
 }
+

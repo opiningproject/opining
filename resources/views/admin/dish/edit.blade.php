@@ -17,166 +17,146 @@
                         <!-- start edit dish card section -->
                         <section class="custom-section">
                             <div class="card editdish-card">
-                                <div class="card-header border-0 bg-white border-bottom-0">
-                                    <div class="row">
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <nav class="page-breadcrumb" aria-label="breadcrumb">
-                                                <ol class="breadcrumb">
-                                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a>
-                                                    </li>
-                                                    <li class="breadcrumb-item active">Edit Dish</li>
-                                                </ol>
-                                            </nav>
-                                        </div>
-                                        <div
-                                            class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end">
-                                            <div class="form-group mb-0 mt-2">
-                                                <div
-                                                    class="form-check form-switch custom-switch d-flex align-items-center justify-content-end ps-0">
-                                                    <label class="form-check-label form-label mb-0 me-2"
-                                                           for="outofstock">Out
-                                                        of
-                                                        stock</label>
-                                                    <input class="form-check-input" type="checkbox" role="switch"
-                                                           {{ $dish->out_of_stock == 1 ? 'checked' : '' }}
-                                                           id="outofstock">
-                                                </div>
+                                <form id="editIngredientForm">
+                                    <div class="card-header border-0 bg-white border-bottom-0">
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <nav class="page-breadcrumb" aria-label="breadcrumb">
+                                                    <ol class="breadcrumb">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{{ route('home') }}">Menu</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item active">Edit Dish</li>
+                                                    </ol>
+                                                </nav>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body py-0">
-                                    <div class="row">
-                                        <input type="hidden" value="{{ $dish->id }}" id="dishId">
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group imageupload-box inline-imageupload-box">
-                                                <label for="dishimage" class="form-label">Dish Image</label>
-                                                <label for="input-file" class="upload-file">
-                                                    <input type="file" id="input-file">
-                                                    <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
-                                                         class="img-fluid"
-                                                         width="22" height="17">
-                                                    <p class="mb-0">Upload Image of Item</p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="dishnameenglish" class="form-label">Dish Name <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <input type="text" class="form-control" name="name_en" value="{{ $dish->name_en }}"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="dishnamedutch" class="form-label">Dish Name <span
-                                                        class="text-custom-muted">(Dutch)</span></label>
-                                                <input type="text" class="form-control" name="name_nl" value="{{ $dish->name_nl }}"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group ">
-                                                <label for="dishcategory" class="form-label">Dish Category <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <div class="input-group">
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <select class="form-control dropdown-toggle w-100" type="button"
-                                                                data-bs-toggle="dropdown" name="category_id" aria-expanded="false">
-                                                            <option value="">Select Category</option>
-                                                            @foreach($categories as $category)
-                                                                <option
-                                                                    value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
-                                                            @endforeach
-                                                        </select>
+                                            <div
+                                                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end">
+                                                <div class="form-group mb-0 mt-2">
+                                                    <div
+                                                        class="form-check form-switch custom-switch d-flex align-items-center justify-content-end ps-0">
+                                                        <label class="form-check-label form-label mb-0 me-2"
+                                                               for="outofstock">Out
+                                                            of
+                                                            stock</label>
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                               {{ $dish->out_of_stock == 1 ? 'checked' : '' }}
+                                                               id="outofstock">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="card-body py-0">
+                                        <div class="row">
+                                            <input type="hidden" value="{{ $dish->id }}" id="dishId">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group imageupload-box inline-imageupload-box">
+                                                    <label for="dishimage" class="form-label">Dish Image</label>
+                                                    <label for="input-file" class="upload-file">
+                                                        <input type="file" id="input-file">
+                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
+                                                             class="img-fluid"
+                                                             width="22" height="17">
+                                                        <p class="mb-0">Upload Image of Item</p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="dishnameenglish" class="form-label">Dish Name <span
+                                                            class="text-custom-muted">(English)</span></label>
+                                                    <input type="text" class="form-control" name="name_en"
+                                                           value="{{ $dish->name_en }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="dishnamedutch" class="form-label">Dish Name <span
+                                                            class="text-custom-muted">(Dutch)</span></label>
+                                                    <input type="text" class="form-control" name="name_nl"
+                                                           value="{{ $dish->name_nl }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group ">
+                                                    <label for="dishcategory" class="form-label">Dish Category <span
+                                                            class="text-custom-muted">(English)</span></label>
+                                                    <div class="input-group">
+                                                        <div class="dropdown buttondropdown category-dropdown">
+                                                            <select class="form-control dropdown-toggle w-100"
+                                                                    type="button"
+                                                                    data-bs-toggle="dropdown" name="category_id"
+                                                                    aria-expanded="false">
+                                                                <option value="">Select Category</option>
+                                                                @foreach($categories as $category)
+                                                                    <option
+                                                                        value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="discountpercentage" class="form-label">Discount
-                                                    Percentage</label>
-                                                <input type="number" class="form-control"
-                                                       value="{{ $dish->percentage_off }}"/>
-                                            </div>
                                         </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="quantity" class="form-label">Quantity</label>
-                                                <input type="number" class="form-control" value="{{ $dish->qty }}"/>
+                                        <div class="row">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="discountpercentage" class="form-label">Discount
+                                                        Percentage</label>
+                                                    <input type="number" class="form-control"
+                                                           value="{{ $dish->percentage_off }}" id="percentage_off"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="dishprice" class="form-label">Dish Price</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text" id="basic-addon1">€</span>
-                                                    <input type="text" class="form-control" value="{{ $dish->price }}"/>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="quantity" class="form-label">Quantity</label>
+                                                    <input type="number" class="form-control" value="{{ $dish->qty }}" id="qty"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="dishprice" class="form-label">Dish Price</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">€</span>
+                                                        <input type="text" class="form-control"
+                                                               value="{{ $dish->price }}" id="price"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="discountpercentage" class="form-label">Dish description
-                                                    <span class="text-custom-muted">(English)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->desc_en }}"/>
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="discountpercentage" class="form-label">Dish description
+                                                        <span class="text-custom-muted">(English)</span></label>
+                                                    <input type="text" class="form-control"
+                                                           value="{{ $dish->desc_en }}" id="desc_en"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="discountpercentage" class="form-label">Dish description
-                                                    <span class="text-custom-muted">(Dutch)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->desc_nl }}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
-                                         style="float: left;margin-right: 10px;">
-                                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="password" class="form-label">Dish Option <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" name="option_name_en"
-                                                           id="option_name_en">
-                                                    <button
-                                                        class="input-group-btn btn btn-custom-yellow btn-icon h-50px"
-                                                        type="button" id="button-addon2"><i
-                                                            class="fa-solid fa-plus"></i></button>
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="discountpercentage" class="form-label">Dish description
+                                                        <span class="text-custom-muted">(Dutch)</span></label>
+                                                    <input type="text" class="form-control"
+                                                           value="{{ $dish->desc_nl }}" id="desc_nl"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="password" class="form-label">Dish Option <span
-                                                        class="text-custom-muted">(Dutch)</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" name="option_name_nl"
-                                                           id="option_name_nl">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    @foreach($dish->option as $option)
                                         <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
-                                             style="float:left;margin-right: 10px;">
+                                             style="float: left;margin-right: 10px;">
                                             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="password" class="form-label">Dish Option <span
                                                             class="text-custom-muted">(English)</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control"
-                                                               value="{{ $option->option_en }}">
+                                                        <input type="text" class="form-control" name="option_name_en"
+                                                               id="option_name_en">
                                                         <button
-                                                            class="input-group-btn btn btn-custom-gray btn-icon h-50px"
+                                                            class="input-group-btn btn btn-custom-yellow btn-icon h-50px"
                                                             type="button" id="button-addon2"><i
-                                                                class="fa-solid fa-xmark"></i></button>
+                                                                class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,15 +165,45 @@
                                                     <label for="password" class="form-label">Dish Option <span
                                                             class="text-custom-muted">(Dutch)</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control"
-                                                               value="{{ $option->option_nl }}">
+                                                        <input type="text" class="form-control" name="option_name_nl"
+                                                               id="option_name_nl">
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                    @endforeach
-                                </div>
+                                        @foreach($dish->option as $option)
+                                            <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
+                                                 style="float:left;margin-right: 10px;">
+                                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="password" class="form-label">Dish Option <span
+                                                                class="text-custom-muted">(English)</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                   value="{{ $option->option_en }}">
+                                                            <button
+                                                                class="input-group-btn btn btn-custom-gray btn-icon h-50px"
+                                                                type="button" id="button-addon2"><i
+                                                                    class="fa-solid fa-xmark"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="password" class="form-label">Dish Option <span
+                                                                class="text-custom-muted">(Dutch)</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                   value="{{ $option->option_nl }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </form>
                                 <hr class="my-0"/>
                                 <div class="card-body">
                                     <div class="addedit-table-row">
@@ -290,15 +300,18 @@
                                                                 class="img-fluid me-15px" alt="ingredient img 1"/></td>
                                                         <td class="text-center"><input type="text"
                                                                                        class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $freeIngredient->ingredient->name }}" readonly/>
+                                                                                       value="{{ $freeIngredient->ingredient->name }}"
+                                                                                       readonly/>
                                                         <td class="text-center"><input type="text"
                                                                                        class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $freeIngredient->ingredient->category->name }}" readonly/>
+                                                                                       value="{{ $freeIngredient->ingredient->category->name }}"
+                                                                                       readonly/>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="">
                                                                 <a class="btn btn-custom-yellow btn-icon free-ingredient-btn"
-                                                                   data-bs-toggle="modal" data-id="{{ $freeIngredient->id }}"
+                                                                   data-bs-toggle="modal"
+                                                                   data-id="{{ $freeIngredient->id }}"
                                                                    data-bs-target="#deleteAlertModal">
                                                                     <i class="fa-regular fa-trash-can"></i>
                                                                 </a>
@@ -385,7 +398,8 @@
                                                                 <div class="input-group">
                                                                 <span class="input-group-text"
                                                                       id="basic-addon1">€</span>
-                                                                    <input type="number" class="form-control" name="price" />
+                                                                    <input type="number" class="form-control"
+                                                                           name="price"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -394,7 +408,7 @@
                                                                 <label for="discountpercentage"
                                                                        class="form-label"></label>
                                                                 <button type="submit"
-                                                                    class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
                                                                     <span class="align-middle">Add</span>
                                                                 </button>
                                                             </div>
@@ -403,7 +417,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                         <div class="add-edit-dish-table custom-table">
+                                        <div class="add-edit-dish-table custom-table">
                                             <table class="table">
                                                 <thead>
                                                 <tr>
@@ -425,34 +439,41 @@
                                                                 class="img-fluid me-15px" alt="ingredient img 1"/></td>
                                                         <td class="text-center"><input type="text"
                                                                                        class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $paidIngredient->ingredient->name }}" readonly/>
+                                                                                       value="{{ $paidIngredient->ingredient->name }}"
+                                                                                       readonly/>
                                                         <td class="text-center"><input type="text"
                                                                                        class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $paidIngredient->ingredient->category->name }}" readonly>
+                                                                                       value="{{ $paidIngredient->ingredient->category->name }}"
+                                                                                       readonly>
                                                         </td>
                                                         <td class="text-custom-muted-1 text-center">
                                                             <div class="input-group w-5r m-auto">
                                                                 <span class="input-group-text"
                                                                       id="basic-addon1">€</span>
-                                                                <input type="number" class="form-control m-auto" id="price{{ $paidIngredient->id}}"
+                                                                <input type="number" class="form-control m-auto"
+                                                                       id="price{{ $paidIngredient->id}}"
                                                                        value="{{ $paidIngredient->price }}" readonly>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="">
                                                                 <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"
-                                                                   id="paid-ingredient-edit{{ $paidIngredient->id }}" data-id="{{ $paidIngredient->id }}"
+                                                                   id="paid-ingredient-edit{{ $paidIngredient->id }}"
+                                                                   data-id="{{ $paidIngredient->id }}"
                                                                    tabindex="0" href="javascript:void(0);">
                                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                                 </a>
                                                                 <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn"
                                                                    id="paid-ingredient-delete{{ $paidIngredient->id }}"
-                                                                   data-bs-toggle="modal" data-id="{{ $paidIngredient->id }}"
+                                                                   data-bs-toggle="modal"
+                                                                   data-id="{{ $paidIngredient->id }}"
                                                                    data-bs-target="#deleteAlertModal">
                                                                     <i class="fa-regular fa-trash-can"></i>
                                                                 </a>
-                                                                <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn" style="display: none !important;"
-                                                                   id="paid-ingredient-save{{ $paidIngredient->id }}" data-id="{{ $paidIngredient->id }}">
+                                                                <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn"
+                                                                   style="display: none !important;"
+                                                                   id="paid-ingredient-save{{ $paidIngredient->id }}"
+                                                                   data-id="{{ $paidIngredient->id }}">
                                                                     <span class="align-middle">Save</span>
                                                                 </a>
                                                             </div>
@@ -468,7 +489,7 @@
                                 <div class="card-footer bg-white border-0">
                                     <div class="row">
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <a class="btn btn-custom-yellow btn-default d-block">
+                                            <a class="btn btn-custom-yellow btn-default d-block" id="update-dish">
                                                 <span class="align-middle">Add</span>
                                             </a>
                                         </div>
@@ -482,8 +503,8 @@
             </div>
         </div>
         <!-- start footer -->
-        @include('layouts.admin.footer_design')
-        <!-- end footer -->
+    @include('layouts.admin.footer_design')
+    <!-- end footer -->
     </div>
 
 

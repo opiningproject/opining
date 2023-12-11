@@ -89,11 +89,11 @@ class IngredientController extends Controller
                     $request->all()
                 );
             }else{
-                return response::json(['status' => 0, 'message' => 'No such ingredient exist']);
+                return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
             }
-            return response::json(['status' => 1, 'data' => $ingredient]);
+            return response::json(['status' => 200, 'data' => $ingredient]);
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => 'Something went wrong.']);
         }
     }
 

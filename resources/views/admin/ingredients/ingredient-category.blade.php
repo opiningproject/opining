@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body py-0">
-                                    <form method="POST" name="ingCategoryForm" id="ingCategoryForm" action="{{ route('ingred.category.store') }}">
+                                    <form method="POST" name="ingCategoryForm" id="ingCategoryForm">
                                         @csrf
                                         <div class="row">
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
@@ -47,8 +47,6 @@
                                                         <span class="text-custom-muted">(English)</span></label>
                                                     <input type="text" class="form-control" name="name_en"
                                                            id="name_en"/>
-                                                    <label id="name_en-error" class="error" for="promo_code"
-                                                           style="display: none">This field is required.</label>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
@@ -58,8 +56,6 @@
                                                         <span class="text-custom-muted">(Dutch)</span></label>
                                                     <input type="text" class="form-control" name="name_nl"
                                                            id="name_nl"/>
-                                                    <label id="name_nl-error" class="error" for="promo_code"
-                                                           style="display: none">This field is required.</label>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
@@ -88,9 +84,9 @@
                                                 <th scope="col" class="text-center">Action</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="ingredientCategoryTbody">
                                             @foreach ($ingredientCategory as $category)
-                                            <tr>
+                                            <tr id="ing-tr{{ $category->id }}">
                                                 <td class="text-center"><input type="text"
                                                                                class="form-control text-center w-10r m-auto"
                                                                                data-id="{{ $category->id }}"

@@ -21,4 +21,12 @@ class DishIngredient extends Model
     public function dish(){
         return $this->belongsTo(Dish::class, 'dish_id', 'id');
     }
+
+    public function scopeFreeIngredient($query){
+        return $query->whereIsFree(1)->get();
+    }
+
+    public function scopePaidIngredient($query){
+        return $query->whereIsFree(0)->get();
+    }
 }

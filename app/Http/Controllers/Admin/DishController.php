@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dish;
+use App\Models\DishIngredient;
+use App\Models\DishOption;
 use App\Models\Ingredient;
 use App\Models\IngredientCategory;
 use Exception;
+use http\Encoding\Stream;
 use Response;
 use Illuminate\Http\Request;
 
@@ -19,8 +22,7 @@ class DishController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $ingredientCategories = IngredientCategory::all();
-        return view('admin.dish.create', ['categories' => $categories, 'ingredientCategories' => $ingredientCategories]);
+        return view('admin.dish.create', ['categories' => $categories]);
     }
 
     /**
@@ -36,7 +38,16 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+//            dd($request->all());
+            $dish = Dish::create(
+                $request->all()
+            );
+            return redirect()->route('editDish', ['dish' => $dish->id]);
+//            return response::json(['status' => 200, 'data' => $ingredients]);
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -54,7 +65,7 @@ class DishController extends Controller
     {
         $ingredientCategories = IngredientCategory::all();
         $categories = Category::all();
-        $dish = Dish::with('category','option')->find($id);
+        $dish = Dish::with('category','option', 'freeIngredients.ingredient.category', 'paidIngredients.ingredient.category')->find($id);
         return view('admin.dish.edit', ['dish' => $dish, 'categories' => $categories, 'ingredientCategories' => $ingredientCategories]);
     }
 
@@ -63,7 +74,19 @@ class DishController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $dish = Dish::find($id);
+            if($dish){
+                $dish->price = $request->price;
+                $dish->save();
+                return response::json(['status' => 200, 'data' => $dish]);
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+            }
+
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -72,5 +95,89 @@ class DishController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function ingredientDishBased(Request $request, string $id){
+        try {
+            $ingredients = Ingredient::doesntHave('dishIngredient', 'and', function ($query) use ($request, $id){
+                if($request->type == 'paid'){
+                    $query->where([
+                        ['dish_id', $id],
+                        ['is_free', '0']
+                    ]);
+                }else{
+                    $query->where([
+                        ['dish_id', $id],
+                        ['is_free', 1]
+                    ]);
+                }
+            })->get();
+
+            return response::json(['status' => 200, 'data' => $ingredients]);
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function addDishIngredient(Request $request, string $id){
+        try {
+            $dishIngredient = DishIngredient::create([
+                'dish_id' => $id,
+                'ingredient_id' => $request->ingredient_id,
+                'is_free' => $request->type == 'free' ? 1 : '0'
+            ]);
+//            dd($dishIngredient->toArray());
+            $dishIng = $dishIngredient->whereId($dishIngredient->id)->with('ingredient.category')->first();
+            return response::json(['status' => 200, 'data' => $dishIng]);
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updatePaidIngredient(Request $request, string $id){
+        try {
+            $dishIngredient = DishIngredient::find($id);
+            if($dishIngredient){
+                $dishIngredient->price = $request->price;
+                $dishIngredient->save();
+                return response::json(['status' => 200, 'data' => $dishIngredient]);
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+            }
+
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function addDishOption(Request $request, string $id){
+        try{
+            $dishIngredient = DishIngredient::find($id);
+            if($dishIngredient){
+                $dishIngredient->price = $request->price;
+                $dishIngredient->save();
+                return response::json(['status' => 200, 'data' => $dishIngredient]);
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+            }
+
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function deleteDishOption(Request $request, string $id){
+        try {
+            $dishOption = DishOption::find($id);
+            if($dishOption){
+                $dishOption->delete();
+                return response::json(['status' => 200, 'message' => 'Option deleted successfully.']);
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+            }
+
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
     }
 }

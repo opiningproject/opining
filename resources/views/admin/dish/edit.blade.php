@@ -17,159 +17,146 @@
                         <!-- start edit dish card section -->
                         <section class="custom-section">
                             <div class="card editdish-card">
-                                <div class="card-header border-0 bg-white border-bottom-0">
-                                    <div class="row">
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <nav class="page-breadcrumb" aria-label="breadcrumb">
-                                                <ol class="breadcrumb">
-                                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a>
-                                                    </li>
-                                                    <li class="breadcrumb-item active">Edit Dish</li>
-                                                </ol>
-                                            </nav>
-                                        </div>
-                                        <div
-                                            class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end">
-                                            <div class="form-group mb-0 mt-2">
-                                                <div
-                                                    class="form-check form-switch custom-switch d-flex align-items-center justify-content-end ps-0">
-                                                    <label class="form-check-label form-label mb-0 me-2"
-                                                           for="outofstock">Out
-                                                        of
-                                                        stock</label>
-                                                    <input class="form-check-input" type="checkbox" role="switch" {{ $dish->out_of_stock == 1 ? 'checked' : '' }}
-                                                           id="outofstock">
-                                                </div>
+                                <form id="editIngredientForm">
+                                    <div class="card-header border-0 bg-white border-bottom-0">
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <nav class="page-breadcrumb" aria-label="breadcrumb">
+                                                    <ol class="breadcrumb">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{{ route('home') }}">Menu</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item active">Edit Dish</li>
+                                                    </ol>
+                                                </nav>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body py-0">
-                                    <div class="row">
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group imageupload-box inline-imageupload-box">
-                                                <label for="dishimage" class="form-label">Dish Image</label>
-                                                <label for="input-file" class="upload-file">
-                                                    <input type="file" id="input-file">
-                                                    <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
-                                                         class="img-fluid"
-                                                         width="22" height="17">
-                                                    <p class="mb-0">Upload Image of Item</p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="dishnameenglish" class="form-label">Dish Name <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->name_en }}"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="dishnamedutch" class="form-label">Dish Name <span
-                                                        class="text-custom-muted">(Dutch)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->name_nl }}"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group ">
-                                                <label for="dishcategory" class="form-label">Dish Category <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <div class="input-group">
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <select class="form-control dropdown-toggle w-100" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <option value="">Select Category</option>
-                                                            @foreach($categories as $category)
-                                                                <option value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
-                                                            @endforeach
-                                                        </select>
+                                            <div
+                                                class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end">
+                                                <div class="form-group mb-0 mt-2">
+                                                    <div
+                                                        class="form-check form-switch custom-switch d-flex align-items-center justify-content-end ps-0">
+                                                        <label class="form-check-label form-label mb-0 me-2"
+                                                               for="outofstock">Out
+                                                            of
+                                                            stock</label>
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                               {{ $dish->out_of_stock == 1 ? 'checked' : '' }}
+                                                               id="outofstock">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="card-body py-0">
+                                        <div class="row">
+                                            <input type="hidden" value="{{ $dish->id }}" id="dishId">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group imageupload-box inline-imageupload-box">
+                                                    <label for="dishimage" class="form-label">Dish Image</label>
+                                                    <label for="input-file" class="upload-file">
+                                                        <input type="file" id="input-file">
+                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
+                                                             class="img-fluid"
+                                                             width="22" height="17">
+                                                        <p class="mb-0">Upload Image of Item</p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="dishnameenglish" class="form-label">Dish Name <span
+                                                            class="text-custom-muted">(English)</span></label>
+                                                    <input type="text" class="form-control" name="name_en"
+                                                           value="{{ $dish->name_en }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="dishnamedutch" class="form-label">Dish Name <span
+                                                            class="text-custom-muted">(Dutch)</span></label>
+                                                    <input type="text" class="form-control" name="name_nl"
+                                                           value="{{ $dish->name_nl }}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group ">
+                                                    <label for="dishcategory" class="form-label">Dish Category <span
+                                                            class="text-custom-muted">(English)</span></label>
+                                                    <div class="input-group">
+                                                        <div class="dropdown buttondropdown category-dropdown">
+                                                            <select class="form-control dropdown-toggle w-100"
+                                                                    type="button"
+                                                                    data-bs-toggle="dropdown" name="category_id"
+                                                                    aria-expanded="false">
+                                                                <option value="">Select Category</option>
+                                                                @foreach($categories as $category)
+                                                                    <option
+                                                                        value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="discountpercentage" class="form-label">Discount
-                                                    Percentage</label>
-                                                <input type="number" class="form-control"
-                                                       value="{{ $dish->percentage_off }}"/>
-                                            </div>
                                         </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="quantity" class="form-label">Quantity</label>
-                                                <input type="number" class="form-control" value="{{ $dish->qty }}"/>
+                                        <div class="row">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="discountpercentage" class="form-label">Discount
+                                                        Percentage</label>
+                                                    <input type="number" class="form-control"
+                                                           value="{{ $dish->percentage_off }}" id="percentage_off"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="dishprice" class="form-label">Dish Price</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text" id="basic-addon1">€</span>
-                                                    <input type="text" class="form-control" value="{{ $dish->price }}"/>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="quantity" class="form-label">Quantity</label>
+                                                    <input type="number" class="form-control" value="{{ $dish->qty }}" id="qty"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="dishprice" class="form-label">Dish Price</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">€</span>
+                                                        <input type="text" class="form-control"
+                                                               value="{{ $dish->price }}" id="price"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="discountpercentage" class="form-label">Dish description
-                                                    <span class="text-custom-muted">(English)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->desc_en }}"/>
+                                        <div class="row">
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="discountpercentage" class="form-label">Dish description
+                                                        <span class="text-custom-muted">(English)</span></label>
+                                                    <input type="text" class="form-control"
+                                                           value="{{ $dish->desc_en }}" id="desc_en"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="discountpercentage" class="form-label">Dish description
-                                                    <span class="text-custom-muted">(Dutch)</span></label>
-                                                <input type="text" class="form-control" value="{{ $dish->desc_nl }}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
-                                         style="float: left;margin-right: 10px;">
-                                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="password" class="form-label">Dish Option <span
-                                                        class="text-custom-muted">(English)</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" name="option_name_en" id="option_name_en">
-                                                    <button
-                                                        class="input-group-btn btn btn-custom-yellow btn-icon h-50px"
-                                                        type="button" id="button-addon2"><i
-                                                            class="fa-solid fa-plus"></i></button>
+                                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="discountpercentage" class="form-label">Dish description
+                                                        <span class="text-custom-muted">(Dutch)</span></label>
+                                                    <input type="text" class="form-control"
+                                                           value="{{ $dish->desc_nl }}" id="desc_nl"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="password" class="form-label">Dish Option <span
-                                                        class="text-custom-muted">(Dutch)</span></label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" name="option_name_nl" id="option_name_nl">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    @foreach($dish->option as $option)
                                         <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
-                                             style="float:left;margin-right: 10px;">
+                                             style="float: left;margin-right: 10px;">
                                             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="password" class="form-label">Dish Option <span
                                                             class="text-custom-muted">(English)</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" value="{{ $option->option_en }}">
-                                                        <button class="input-group-btn btn btn-custom-gray btn-icon h-50px"
-                                                                type="button" id="button-addon2"><i
-                                                                class="fa-solid fa-xmark"></i></button>
+                                                        <input type="text" class="form-control" name="option_name_en"
+                                                               id="option_name_en">
+                                                        <button
+                                                            class="input-group-btn btn btn-custom-yellow btn-icon h-50px"
+                                                            type="button" id="button-addon2"><i
+                                                                class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,14 +165,45 @@
                                                     <label for="password" class="form-label">Dish Option <span
                                                             class="text-custom-muted">(Dutch)</span></label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" value="{{ $option->option_nl }}">
+                                                        <input type="text" class="form-control" name="option_name_nl"
+                                                               id="option_name_nl">
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                    @endforeach
-                                </div>
+                                        @foreach($dish->option as $option)
+                                            <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
+                                                 style="float:left;margin-right: 10px;">
+                                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="password" class="form-label">Dish Option <span
+                                                                class="text-custom-muted">(English)</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                   value="{{ $option->option_en }}">
+                                                            <button
+                                                                class="input-group-btn btn btn-custom-gray btn-icon h-50px"
+                                                                type="button" id="button-addon2"><i
+                                                                    class="fa-solid fa-xmark"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="form-group">
+                                                        <label for="password" class="form-label">Dish Option <span
+                                                                class="text-custom-muted">(Dutch)</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                   value="{{ $option->option_nl }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </form>
                                 <hr class="my-0"/>
                                 <div class="card-body">
                                     <div class="addedit-table-row">
@@ -194,114 +212,71 @@
                                                 <h1 class="section-title">raw Ingredients(Free)</h1>
                                             </div>
                                             <div class="col">
-                                                <div class="row justify-content-end">
-                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Ingredients categories</label>
-                                                            <div class="input-group w-100">
-                                                                <div
-                                                                    class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <select
-                                                                        class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                        type="button" data-bs-toggle="dropdown"
-                                                                        aria-expanded="false">
-                                                                        <option value="">
-                                                                            Select Ingredient Category
-                                                                        </option>
-<!--                                                                        <option>
-                                                                            <img src="images/american_cheese_img.svg"
-                                                                                 class="img-fluid me-15px"
-                                                                                 alt="ingredient img 1"/>
-                                                                            Cheese
-                                                                        </option>-->
-                                                                        @foreach($ingredientCategories as $ingredientCategory)
-                                                                            <option value="{{ $ingredientCategory->id }}">{{ (App()->getLocale() == 'en') ? $ingredientCategory->name_en : $ingredientCategory->name_nl }}</option>
-                                                                        @endforeach
-                                                                    </select>
-<!--                                                                    <ul class="dropdown-menu w-100">
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/ketchup_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>
-                                                                                Burger</a></li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img
-                                                                                    src="images/american_cheese_img.svg"
-                                                                                    class="img-fluid me-15px"
-                                                                                    alt="ingredient img 1"/>Burger
-                                                                                1</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/mustard_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>Burger
-                                                                                2</a>
-                                                                        </li>
-                                                                    </ul>-->
+                                                <form id="freeIngredientForm" name="freeIngredientForm" method="post">
+                                                    <div class="row justify-content-end">
+                                                        <div
+                                                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Ingredients categories</label>
+                                                                <div class="input-group w-100">
+                                                                    <div
+                                                                        class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
+                                                                        <select
+                                                                            class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
+                                                                            data-bs-toggle="dropdown"
+                                                                            name="freeIngredientCategory"
+                                                                            id="freeIngredientCategory">
+                                                                            <option value="">
+                                                                                Select Ingredient Category
+                                                                            </option>
+                                                                            @foreach($ingredientCategories as $ingredientCategory)
+                                                                                <option
+                                                                                    value="{{ $ingredientCategory->id }}">{{ (App()->getLocale() == 'en') ? $ingredientCategory->name_en : $ingredientCategory->name_nl }}</option>
+                                                                            @endforeach
+                                                                        </select>
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                        <div class="form-group">
-                                                            <label for="ingredientslist" class="form-label">Ingredients
-                                                                List</label>
-                                                            <div class="input-group w-100">
-                                                                <div
-                                                                    class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <select
-                                                                        class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                        type="button" data-bs-toggle="dropdown"
-                                                                        aria-expanded="false">
-                                                                        <div class="d-block">
-                                                                            <img src="{{asset('images/american_cheese_img.svg')}}"
-                                                                                 class="img-fluid me-15px"
-                                                                                 alt="ingredient img 1"/>
-                                                                            Cheese
-                                                                        </div>
-                                                                        <option>Select Ingredient</option>
-                                                                    </select>
-<!--                                                                    <ul class="dropdown-menu w-100">
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/ketchup_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>
-                                                                                Burger</a></li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
+                                                        <div
+                                                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                            <div class="form-group">
+                                                                <label for="ingredientslist" class="form-label">Ingredients
+                                                                    List</label>
+                                                                <div class="input-group w-100">
+                                                                    <div
+                                                                        class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
+                                                                        <select
+                                                                            class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
+                                                                            type="button" data-bs-toggle="dropdown"
+                                                                            aria-expanded="false" name="ingredient_id"
+                                                                            id="freeIngredient">
+                                                                            <div class="d-block">
                                                                                 <img
-                                                                                    src="images/american_cheese_img.svg"
+                                                                                    src="{{asset('images/american_cheese_img.svg')}}"
                                                                                     class="img-fluid me-15px"
-                                                                                    alt="ingredient img 1"/>Burger
-                                                                                1</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/mustard_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>Burger
-                                                                                2</a>
-                                                                        </li>
-                                                                    </ul>-->
+                                                                                    alt="ingredient img 1"/>
+                                                                                Cheese
+                                                                            </div>
+                                                                            <option value="">Select Ingredient</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <div class="form-group">
-                                                            <label for="discountpercentage" class="form-label"></label>
-                                                            <a
-                                                                class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
-                                                                <span class="align-middle">Add</span>
-                                                            </a>
+                                                        <div class="col-auto">
+                                                            <div class="form-group">
+                                                                <label for="discountpercentage"
+                                                                       class="form-label"></label>
+                                                                <button type="submit"
+                                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                                    <span class="align-middle">Add</span>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="add-edit-dish-table custom-table">
@@ -316,88 +291,35 @@
                                                     <th scope="col" class="text-center" width="11%">Action</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <div class="imageupload-box inline-imageupload-box mb-0 free-ingredient-image-div" style="display: none">
-                                                            <label for="input-file" class="upload-file">
-                                                                <input type="file" id="input-file">
-                                                                <img src="{{ asset('images/tomatoes-img.svg')}}"
-                                                                     alt="tomatoes image" class="img-fluid"
-                                                                     width="25" height="25">
-                                                                <p class="mb-0 text-lowercase">Tomato.png</p>
-                                                            </label>
-                                                        </div>
-                                                        <img
-                                                            src="{{ asset('images/american_cheese_img.svg')}}"
-                                                            class="img-fluid me-15px" alt="ingredient img 1"/></td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Cheese" readonly/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables" readonly/>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteAlertModal">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><img
-                                                            src="{{ asset('images/quarter_pounder_bun_img.svg')}}"
-                                                            class="img-fluid me-15px" alt="ingredient img 1"/></td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Quarter Pound Bun" readonly/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables" readonly/>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon me-4"
-                                                               tabindex="0" href="javascript:void(0);">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a class="btn btn-custom-yellow btn-icon"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteAlertModal">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><img src="images/mustard_img.svg"
-                                                                                 class="img-fluid me-15px"
-                                                                                 alt="ingredient img 1"/></td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Mustard" readonly/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables" readonly/>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon me-4"
-                                                               tabindex="0" href="javascript:void(0);">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a class="btn btn-custom-yellow btn-icon"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteAlertModal">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <tbody id="freeIngredientTbody">
+                                                @foreach($dish->freeIngredients as $freeIngredient)
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <img
+                                                                src="{{ asset('images/american_cheese_img.svg')}}"
+                                                                class="img-fluid me-15px" alt="ingredient img 1"/></td>
+                                                        <td class="text-center"><input type="text"
+                                                                                       class="form-control text-center w-10r m-auto"
+                                                                                       value="{{ $freeIngredient->ingredient->name }}"
+                                                                                       readonly/>
+                                                        <td class="text-center"><input type="text"
+                                                                                       class="form-control text-center w-10r m-auto"
+                                                                                       value="{{ $freeIngredient->ingredient->category->name }}"
+                                                                                       readonly/>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="">
+                                                                <a class="btn btn-custom-yellow btn-icon free-ingredient-btn"
+                                                                   data-bs-toggle="modal"
+                                                                   data-id="{{ $freeIngredient->id }}"
+                                                                   data-bs-target="#deleteAlertModal">
+                                                                    <i class="fa-regular fa-trash-can"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -408,123 +330,91 @@
                                                 <h1 class="section-title">extra toppings Ingredients</h1>
                                             </div>
                                             <div class="col">
-                                                <div class="row justify-content-end">
-                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Ingredients categories</label>
-                                                            <div class="input-group w-100">
-                                                                <div
-                                                                    class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <select
-                                                                        class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                        type="button" data-bs-toggle="dropdown"
-                                                                        aria-expanded="false">
-                                                                        <div class="d-block">
-                                                                            <img src="{{asset('images/american_cheese_img.svg')}}"
-                                                                                 class="img-fluid me-15px"
-                                                                                 alt="ingredient img 1"/>
-                                                                            Cheese
-                                                                        </div>
-                                                                        <option value="">Select Ingredient Category</option>
-                                                                        @foreach($ingredientCategories as $ingredientCategory)
-                                                                            <option value="{{ $ingredientCategory->id }}">{{ (App()->getLocale() == 'en') ? $ingredientCategory->name_en : $ingredientCategory->name_nl }}</option>
-                                                                        @endforeach
-                                                                    </select>
-<!--                                                                    <ul class="dropdown-menu w-100">
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/ketchup_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>
-                                                                                Burger</a></li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
+                                                <form id="paidIngredientForm" name="paidIngredientForm" method="post">
+                                                    <div class="row justify-content-end">
+                                                        <div
+                                                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Ingredients categories</label>
+                                                                <div class="input-group w-100">
+                                                                    <div
+                                                                        class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
+                                                                        <select
+                                                                            class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
+                                                                            type="button" data-bs-toggle="dropdown"
+                                                                            name="paidIngredientCategory"
+                                                                            id="paidIngredientCategory"
+                                                                            aria-expanded="false">
+                                                                            <div class="d-block">
                                                                                 <img
-                                                                                    src="images/american_cheese_img.svg"
+                                                                                    src="{{asset('images/american_cheese_img.svg')}}"
                                                                                     class="img-fluid me-15px"
-                                                                                    alt="ingredient img 1"/>Burger
-                                                                                1</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/mustard_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>Burger
-                                                                                2</a>
-                                                                        </li>
-                                                                    </ul>-->
+                                                                                    alt="ingredient img 1"/>
+                                                                                Cheese
+                                                                            </div>
+                                                                            <option value="">Select Ingredient Category
+                                                                            </option>
+                                                                            @foreach($ingredientCategories as $ingredientCategory)
+                                                                                <option
+                                                                                    value="{{ $ingredientCategory->id }}">{{ (App()->getLocale() == 'en') ? $ingredientCategory->name_en : $ingredientCategory->name_nl }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                        <div class="form-group">
-                                                            <label for="ingredientslist" class="form-label">Ingredients
-                                                                List</label>
-                                                            <div class="input-group w-100">
-                                                                <div
-                                                                    class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <select
-                                                                        class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                        type="button" data-bs-toggle="dropdown"
-                                                                        aria-expanded="false">
-                                                                        <div class="d-block">
-                                                                            <img src="images/american_cheese_img.svg"
-                                                                                 class="img-fluid me-15px"
-                                                                                 alt="ingredient img 1"/>
-                                                                            Cheese
-                                                                        </div>
-                                                                        <option value="">Select Ingredient</option>
-                                                                    </select>
-<!--                                                                    <ul class="dropdown-menu w-100">
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/ketchup_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>
-                                                                                Burger</a></li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
+                                                        <div
+                                                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                            <div class="form-group">
+                                                                <label for="ingredientslist" class="form-label">Ingredients
+                                                                    List</label>
+                                                                <div class="input-group w-100">
+                                                                    <div
+                                                                        class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
+                                                                        <select
+                                                                            class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
+                                                                            type="button" data-bs-toggle="dropdown"
+                                                                            aria-expanded="false" id="paidIngredient"
+                                                                            name="ingredient_id">
+                                                                            <div class="d-block">
                                                                                 <img
                                                                                     src="images/american_cheese_img.svg"
-                                                                                    class="img-fluid me-15px"
-                                                                                    alt="ingredient img 1"/>Burger
-                                                                                1</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                               href="javascript:void(0);">
-                                                                                <img src="images/mustard_img.svg"
-                                                                                     class="img-fluid me-15px"
-                                                                                     alt="ingredient img 1"/>Burger
-                                                                                2</a>
-                                                                        </li>
-                                                                    </ul>-->
+                                                                                    class="img-fluid me-15px" id
+                                                                                    alt="ingredient img 1"/>
+                                                                                Cheese
+                                                                            </div>
+                                                                            <option value="">Select Ingredient</option>
+                                                                        </select>
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xxl-2 col-xl-1 col-lg-3 col-md-4 col-sm-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="discountpercentage"
-                                                                   class="form-label">Price</label>
-                                                            <div class="input-group">
+                                                        <div
+                                                            class="col-xxl-2 col-xl-1 col-lg-3 col-md-4 col-sm-6 col-12">
+                                                            <div class="form-group">
+                                                                <label for="discountpercentage"
+                                                                       class="form-label">Price</label>
+                                                                <div class="input-group">
                                                                 <span class="input-group-text"
                                                                       id="basic-addon1">€</span>
-                                                                <input type="number" class="form-control"/>
+                                                                    <input type="number" class="form-control"
+                                                                           name="price"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <div class="form-group">
+                                                                <label for="discountpercentage"
+                                                                       class="form-label"></label>
+                                                                <button type="submit"
+                                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                                    <span class="align-middle">Add</span>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-auto">
-                                                        <div class="form-group">
-                                                            <label for="discountpercentage" class="form-label"></label>
-                                                            <a
-                                                                class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
-                                                                <span class="align-middle">Add</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="add-edit-dish-table custom-table">
@@ -541,138 +431,55 @@
                                                     <th scope="col" class="text-center" width="11%">Action</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <div class="imageupload-box inline-imageupload-box mb-0">
-                                                            <label for="input-file" class="upload-file">
-                                                                <input type="file" id="input-file">
-                                                                <img src="images/tomatoes-img.svg" alt="tomatoes image"
-                                                                     class="img-fluid" width="25" height="25">
-                                                                <p class="mb-0 text-lowercase">Tomato.png</p>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Mustard"/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables">
-                                                    </td>
-                                                    <td class="text-custom-muted-1 text-center">
-                                                        <div class="input-group w-5r m-auto">
+                                                <tbody id="paidIngredientTbody">
+                                                @foreach($dish->paidIngredients as $paidIngredient)
+                                                    <tr>
+                                                        <td class="text-center"><img
+                                                                src="images/american_cheese_img.svg"
+                                                                class="img-fluid me-15px" alt="ingredient img 1"/></td>
+                                                        <td class="text-center"><input type="text"
+                                                                                       class="form-control text-center w-10r m-auto"
+                                                                                       value="{{ $paidIngredient->ingredient->name }}"
+                                                                                       readonly/>
+                                                        <td class="text-center"><input type="text"
+                                                                                       class="form-control text-center w-10r m-auto"
+                                                                                       value="{{ $paidIngredient->ingredient->category->name }}"
+                                                                                       readonly>
+                                                        </td>
+                                                        <td class="text-custom-muted-1 text-center">
+                                                            <div class="input-group w-5r m-auto">
                                                                 <span class="input-group-text"
                                                                       id="basic-addon1">€</span>
-                                                            <input type="number" class="form-control m-auto"
-                                                                   value="25">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a class="btn btn-custom-yellow btn-default d-block">
-                                                            <span class="align-middle">Save</span>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><img
-                                                            src="images/american_cheese_img.svg"
-                                                            class="img-fluid me-15px" alt="ingredient img 1"/></td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Cheese" readonly/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables" readonly>
-                                                    </td>
-                                                    <td class="text-custom-muted-1 text-center">
-                                                        <div class="input-group w-5r m-auto">
-                                                                <span class="input-group-text"
-                                                                      id="basic-addon1">€</span>
-                                                            <input type="number" class="form-control m-auto"
-                                                                   value="25" readonly>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon me-4"
-                                                               tabindex="0" href="javascript:void(0);">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a class="btn btn-custom-yellow btn-icon"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteAlertModal">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><img
-                                                            src="images/quarter_pounder_bun_img.svg"
-                                                            class="img-fluid me-15px" alt="ingredient img 1"/></td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Mustard" readonly/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables" readonly>
-                                                    </td>
-                                                    <td class="text-custom-muted-1 text-center">
-                                                        <div class="input-group w-5r m-auto">
-                                                                    <span class="input-group-text"
-                                                                          id="basic-addon1">€</span>
-                                                            <input type="number" class="form-control m-auto"
-                                                                   value="25" readonly>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon me-4"
-                                                               tabindex="0" href="javascript:void(0);">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a class="btn btn-custom-yellow btn-icon"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteAlertModal">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><img src="images/mustard_img.svg"
-                                                                                 class="img-fluid me-15px"
-                                                                                 alt="ingredient img 1"/></td>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="Mustard" readonly/>
-                                                    <td class="text-center"><input type="text"
-                                                                                   class="form-control text-center w-10r m-auto"
-                                                                                   value="vegetables" readonly/>
-                                                    </td>
-                                                    <td class="text-custom-muted-1 text-center">
-                                                        <div class="input-group w-5r m-auto">
-                                                                    <span class="input-group-text"
-                                                                          id="basic-addon1">€</span>
-                                                            <input type="number" class="form-control m-auto"
-                                                                   value="25" readonly/>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon me-4"
-                                                               tabindex="0" href="javascript:void(0);">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a class="btn btn-custom-yellow btn-icon"
-                                                               data-bs-toggle="modal"
-                                                               data-bs-target="#deleteAlertModal">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                                <input type="number" class="form-control m-auto"
+                                                                       id="price{{ $paidIngredient->id}}"
+                                                                       value="{{ $paidIngredient->price }}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="">
+                                                                <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"
+                                                                   id="paid-ingredient-edit{{ $paidIngredient->id }}"
+                                                                   data-id="{{ $paidIngredient->id }}"
+                                                                   tabindex="0" href="javascript:void(0);">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </a>
+                                                                <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn"
+                                                                   id="paid-ingredient-delete{{ $paidIngredient->id }}"
+                                                                   data-bs-toggle="modal"
+                                                                   data-id="{{ $paidIngredient->id }}"
+                                                                   data-bs-target="#deleteAlertModal">
+                                                                    <i class="fa-regular fa-trash-can"></i>
+                                                                </a>
+                                                                <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn"
+                                                                   style="display: none !important;"
+                                                                   id="paid-ingredient-save{{ $paidIngredient->id }}"
+                                                                   data-id="{{ $paidIngredient->id }}">
+                                                                    <span class="align-middle">Save</span>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -682,7 +489,7 @@
                                 <div class="card-footer bg-white border-0">
                                     <div class="row">
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <a class="btn btn-custom-yellow btn-default d-block">
+                                            <a class="btn btn-custom-yellow btn-default d-block" id="update-dish">
                                                 <span class="align-middle">Add</span>
                                             </a>
                                         </div>
@@ -696,8 +503,8 @@
             </div>
         </div>
         <!-- start footer -->
-        @include('layouts.admin.footer_design')
-        <!-- end footer -->
+    @include('layouts.admin.footer_design')
+    <!-- end footer -->
     </div>
 
 
@@ -731,5 +538,5 @@
 
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{ asset('js/ingredients.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dish.js')}}"></script>
 @endsection

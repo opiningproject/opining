@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body py-0">
-                                    <form method="POST" name="addIngredientForm" id="addIngredientForm" action="{{ route('ingredients.store') }}" enctype="multipart/form-data">
+                                    <form method="POST" name="addIngredientForm" id="addIngredientForm" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
 
@@ -99,26 +99,15 @@
                                                         categories</label>
                                                     <div class="input-group">
                                                         <div class="dropdown buttondropdown category-dropdown">
-                                                            <button class="form-control dropdown-toggle w-100"
-                                                                    type="button"
+                                                            <select class="form-control dropdown-toggle w-100"
+                                                                    type="button" name="category_id"
                                                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                                            </button>
-                                                            <select name="category_id">
                                                                 <option value="">Select Category</option>
                                                                 @foreach ($ingredientCategory as $category) {
-
                                                                 <option
                                                                     value="{{ $category->id }}">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item"
-                                                                       href="javascript:void(0);">Category 1</a></li>
-                                                                <li><a class="dropdown-item"
-                                                                       href="javascript:void(0);">Category 2</a></li>
-                                                                <li><a class="dropdown-item"
-                                                                       href="javascript:void(0);">Category 3</a></li>
-                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,6 +131,8 @@
                                                 <th scope="col" width="12%" class="text-center">Image</th>
                                                 <th scope="col" class="text-center">Name <span
                                                         class="text-custom-muted font-regularcustom">(English)</span>
+                                                <th scope="col" class="text-center">Name <span
+                                                        class="text-custom-muted font-regularcustom">(Dutch)</span>
                                                 </th>
                                                 <th scope="col" class="text-center">Ingredients categories
                                                 </th>
@@ -151,98 +142,8 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{--<tr>
-                                                <td class="text-center">
-                                                    <div class="imageupload-box inline-imageupload-box mb-0">
-                                                        <label for="input-file" class="upload-file">
-                                                            <input type="file" id="input-file">
-                                                            <img src="{{ asset('images/tomatoes-img.svg')}}"
-                                                                 alt="tomatoes image"
-                                                                 class="img-fluid" width="25" height="25">
-                                                            <p class="mb-0 text-lowercase">Tomato.png</p>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               value="Tomato"/>
-                                                </td>
-                                                <td>
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <button class="form-control dropdown-toggle w-100"
-                                                                type="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false">
-                                                            vegetables
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group mb-0">
-                                                        <div
-                                                            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
-                                                            <input class="form-check-input green-check-input"
-                                                                   type="checkbox" role="switch" id="action" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <div class="table-add-dish-bar">
-                                                        <button class="btn btn-light dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Dish name
-                                                        </button>
-                                                        <ul class="dropdown-menu custom-dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 3</a></li>
-                                                        </ul>
-                                                        <div class="table-dish-name">
-                                                                <span class="badge text-bg-yellow">Big mac with Cheese<a
-                                                                        href="javascript:void(0);"><i
-                                                                            class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                            <span class="badge text-bg-yellow">margarita pizza<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-
-                                                            <a class="text-more-sm float-end lh-30px"
-                                                               data-bs-toggle="collapse" href="#collapseDishRowOne"
-                                                               role="button" aria-expanded="false"
-                                                               aria-controls="collapseDishRowOne">+ 2 more</a>
-                                                            <div class="moredishname-collapse collapse"
-                                                                 id="collapseDishRowOne">
-                                                                <div
-                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
-                                                                        <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                    class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                    <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <a class="btn btn-custom-yellow btn-default d-block">
-                                                        <span class="align-middle">Save</span>
-                                                    </a>
-                                                </td>
-                                            </tr>--}}
                                             @foreach ($ingredients as $ingredient)
-                                            <tr>
+                                            <tr id="ingredient-tr{{ $ingredient->id }}">
                                                 <td scope="row" class="text-center">
                                                     <img
                                                         src="{{ asset('images/tomatoes-img.svg')}}" class="img-fluid"
@@ -262,21 +163,12 @@
                                                                                class="form-control text-center w-10r m-auto" id="name_en{{ $ingredient->id }}"
                                                                                value="{{ $ingredient->name_en }}"
                                                                                readonly/></td>
+                                                <td class="text-center"><input type="text"
+                                                                               class="form-control text-center w-10r m-auto" id="name_nl{{ $ingredient->id }}"
+                                                                               value="{{ $ingredient->name_nl }}"
+                                                                               readonly/></td>
                                                 <td>
                                                     <div class="dropdown buttondropdown category-dropdown">
-                                                        {{--<button class="form-control dropdown-toggle w-100"
-                                                                type="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false" disabled>
-                                                            vegetables
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 3</a></li>
-                                                        </ul>--}}
                                                         <select disabled id="catId{{$ingredient->id}}">
                                                             @foreach ($ingredientCategory as $category) {
                                                             <option
@@ -345,14 +237,14 @@
                                                 <td class="text-center">
                                                     <div class="">
                                                         <a class="btn btn-custom-yellow btn-icon edit-ing-btn"
-                                                           tabindex="0" data-id="{{ $ingredient->id }}">
+                                                           tabindex="0" data-id="{{ $ingredient->id }}" id="edit-btn{{ $ingredient->id }}">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
                                                         <a class="btn btn-custom-yellow btn-icon del-ing-btn"
-                                                           data-id="{{ $ingredient->id }}">
+                                                           data-id="{{ $ingredient->id }}" id="del-btn{{ $ingredient->id }}">
                                                             <i class="fa-regular fa-trash-can"></i>
                                                         </a>
-                                                        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
+                                                        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block" id="save-btn{{ $ingredient->id }}"
                                                            style="display:none !important;" data-id="{{ $ingredient->id }}">
                                                             <span class="align-middle">Save</span>
                                                         </a>
@@ -360,369 +252,6 @@
                                                 </td>
                                             </tr>
                                             @endforeach
-                                            {{--<tr>
-                                                <td scope="row" class="text-center"><img
-                                                        src="images/tomatoes-img.svg" class="img-fluid"
-                                                        alt="ingredient img 1"/></td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               value="Tomato"
-                                                                               readonly/></td>
-                                                <td>
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <button class="form-control dropdown-toggle w-100"
-                                                                type="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false" disabled>
-                                                            vegetables
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group mb-0">
-                                                        <div
-                                                            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
-                                                            <input class="form-check-input green-check-input"
-                                                                   type="checkbox" role="switch" id="action" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <div class="table-add-dish-bar">
-                                                        <button class="btn btn-light dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Dish name
-
-                                                        </button>
-                                                        <ul class="dropdown-menu custom-dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 3</a></li>
-                                                        </ul>
-                                                        <div class="table-dish-name">
-                                                                <span class="badge text-bg-yellow">Big mac with Cheese<a
-                                                                        href="javascript:void(0);"><i
-                                                                            class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                            <span class="badge text-bg-yellow">margarita pizza<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-
-                                                            <a class="text-more-sm float-end lh-30px"
-                                                               data-bs-toggle="collapse"
-                                                               href="#collapseDishRowThree" role="button"
-                                                               aria-expanded="false"
-                                                               aria-controls="collapseDishRowThree">+ 2 more</a>
-                                                            <div class="moredishname-collapse collapse"
-                                                                 id="collapseDishRowThree">
-                                                                <div
-                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
-                                                                        <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                    class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                    <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="">
-                                                        <a class="btn btn-custom-yellow btn-icon" tabindex="0">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon"
-                                                           data-bs-toggle="modal"
-                                                           data-bs-target="#deleteAlertModal">
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" class="text-center"><img
-                                                        src="images/tomatoes-img.svg" class="img-fluid"
-                                                        alt="ingredient img 1"/></td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               value="Tomato"
-                                                                               readonly/></td>
-                                                <td>
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <button class="form-control dropdown-toggle w-100"
-                                                                type="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false" disabled>
-                                                            vegetables
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group mb-0">
-                                                        <div
-                                                            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
-                                                            <input class="form-check-input green-check-input"
-                                                                   type="checkbox" role="switch" id="action" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <div class="table-add-dish-bar">
-                                                        <button class="btn btn-light dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Dish name
-
-                                                        </button>
-                                                        <ul class="dropdown-menu custom-dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 3</a></li>
-                                                        </ul>
-                                                        <div class="table-dish-name">
-                                                                <span class="badge text-bg-yellow">Big mac with Cheese<a
-                                                                        href="javascript:void(0);"><i
-                                                                            class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                            <span class="badge text-bg-yellow">margarita pizza<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-
-                                                            <a class="text-more-sm float-end lh-30px"
-                                                               data-bs-toggle="collapse"
-                                                               href="#collapseDishRowFour" role="button"
-                                                               aria-expanded="false"
-                                                               aria-controls="collapseDishRowFour">+ 2 more</a>
-                                                            <div class="moredishname-collapse collapse"
-                                                                 id="collapseDishRowFour">
-                                                                <div
-                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
-                                                                        <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                    class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                    <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="">
-                                                        <a class="btn btn-custom-yellow btn-icon" tabindex="0">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon"
-                                                           data-bs-toggle="modal"
-                                                           data-bs-target="#deleteAlertModal">
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" class="text-center"><img
-                                                        src="images/tomatoes-img.svg" class="img-fluid"
-                                                        alt="ingredient img 1"/></td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               value="Tomato"
-                                                                               readonly/></td>
-                                                <td>
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <button class="form-control dropdown-toggle w-100"
-                                                                type="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false" disabled>
-                                                            vegetables
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group mb-0">
-                                                        <div
-                                                            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
-                                                            <input class="form-check-input green-check-input"
-                                                                   type="checkbox" role="switch" id="action" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <div class="table-add-dish-bar">
-                                                        <button class="btn btn-light dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Dish name
-
-                                                        </button>
-                                                        <ul class="dropdown-menu custom-dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 3</a></li>
-                                                        </ul>
-                                                        <div class="table-dish-name">
-                                                                <span class="badge text-bg-yellow">Big mac with Cheese<a
-                                                                        href="javascript:void(0);"><i
-                                                                            class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                            <span class="badge text-bg-yellow">margarita pizza<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-
-                                                            <a class="text-more-sm float-end lh-30px"
-                                                               data-bs-toggle="collapse"
-                                                               href="#collapseDishRowFive" role="button"
-                                                               aria-expanded="false"
-                                                               aria-controls="collapseDishRowFive">+ 2 more</a>
-                                                            <div class="moredishname-collapse collapse"
-                                                                 id="collapseDishRowFive">
-                                                                <div
-                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
-                                                                        <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                    class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                    <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="">
-                                                        <a class="btn btn-custom-yellow btn-icon" tabindex="0">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon"
-                                                           data-bs-toggle="modal"
-                                                           data-bs-target="#deleteAlertModal">
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" class="text-center"><img
-                                                        src="images/tomatoes-img.svg" class="img-fluid"
-                                                        alt="ingredient img 1"/></td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               value="Tomato"
-                                                                               readonly/></td>
-                                                <td>
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <button class="form-control dropdown-toggle w-100"
-                                                                type="button" data-bs-toggle="dropdown"
-                                                                aria-expanded="false" disabled>
-                                                            vegetables
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Category 3</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group mb-0">
-                                                        <div
-                                                            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
-                                                            <input class="form-check-input green-check-input"
-                                                                   type="checkbox" role="switch" id="action" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <div class="table-add-dish-bar">
-                                                        <button class="btn btn-light dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Dish name
-
-                                                        </button>
-                                                        <ul class="dropdown-menu custom-dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 3</a></li>
-                                                        </ul>
-                                                        <div class="table-dish-name">
-                                                                <span class="badge text-bg-yellow">Big mac with Cheese<a
-                                                                        href="javascript:void(0);"><i
-                                                                            class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                            <span class="badge text-bg-yellow">margarita pizza<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-
-                                                            <a class="text-more-sm float-end lh-30px"
-                                                               data-bs-toggle="collapse" href="#collapseDishRowSix"
-                                                               role="button" aria-expanded="false"
-                                                               aria-controls="collapseDishRowSix">+ 2 more</a>
-                                                            <div class="moredishname-collapse collapse"
-                                                                 id="collapseDishRowSix">
-                                                                <div
-                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
-                                                                        <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                    class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                    <span class="badge text-bg-yellow">Big mac with
-                                                                            Cheese<a href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="">
-                                                        <a class="btn btn-custom-yellow btn-icon" tabindex="0">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon"
-                                                           data-bs-toggle="modal"
-                                                           data-bs-target="#deleteAlertModal">
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>--}}
                                             </tbody>
                                         </table>
                                     </div>

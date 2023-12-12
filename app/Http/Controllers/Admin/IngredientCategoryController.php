@@ -36,11 +36,10 @@ class IngredientCategoryController extends Controller
     public function store(Request $request)
     {
         try {
-            IngredientCategory::updateOrCreate(
-                ['id' => $request->id],
+            $category = IngredientCategory::create(
                 $request->all()
             );
-            return Redirect::back();
+            return response::json(['status' => 200, 'data' => $category]);
 
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
@@ -55,9 +54,9 @@ class IngredientCategoryController extends Controller
         try {
             $category = IngredientCategory::find($id);
 
-            return response::json(['status' => 1, 'data' => $category]);
+            return response::json(['status' => 200, 'data' => $category]);
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => 'Something went wrong.']);
         }
     }
 

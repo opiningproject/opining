@@ -12,9 +12,14 @@ class IngredientCategory extends Model
 
     protected $fillable = ['name_en','name_nl'];
     protected $dates = ['created_at', 'updated_at'];
+    protected $appends = ['name'];
     public $timestamps = true;
 
     public function ingredients(){
         return $this->hasMany(Ingredient::class, 'category_id', 'id');
+    }
+
+    public function getNameAttribute(){
+        return $this->attributes['name_' . app()->getlocale()];
     }
 }

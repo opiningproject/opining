@@ -13,6 +13,7 @@ class Ingredient extends Model
 
     protected $fillable = ['category_id','name_en','name_nl','image','status'];
     protected $dates = ['created_at', 'updated_at'];
+    protected $appends = ['name'];
     public $timestamps = true;
 
     public function category(){
@@ -21,5 +22,9 @@ class Ingredient extends Model
 
     public function dishIngredient(){
         return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id');
+    }
+
+    public function getNameAttribute(){
+        return $this->attributes['name_' . app()->getlocale()];
     }
 }

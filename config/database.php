@@ -42,7 +42,7 @@ return [
             'host' => '127.0.0.1',
             'port' => '3306',
             'username' => 'root',
-            'password' => '',
+            'password' => 'Inx@!123',
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

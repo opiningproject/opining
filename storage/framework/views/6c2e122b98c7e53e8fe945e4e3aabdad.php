@@ -4,6 +4,13 @@
 $zipcode = session('zipcode');
 $house_no = session('house_no');
 
+$showModal = 0;
+if(!session('showLoginModal'))
+{
+    $showModal = 1;
+    Session::put('showLoginModal', '1', '1440');
+}
+
 ?>
 <div class="main">
   <div class="main-view">
@@ -60,14 +67,14 @@ $house_no = session('house_no');
             <div class="swiper-container">
               <div class="swiper category-swiper-slider">
                 <div class="category-slider swiper-wrapper">
-                  <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <div class="category-element swiper-slide">
-                    <div class="card">
+                    <div class="card <?php echo e((isset($_GET['cat_id']) && $_GET['cat_id'] == $cat->id) ? 'active':''); ?>">
                       <span class="dish-item-icon">
-                        <img src="<?php echo e($category->image); ?>" class="img-fluid" alt="bakery" width="56" height="56" />
+                        <img src="<?php echo e($cat->image); ?>" class="img-fluid" alt="bakery" width="56" height="56" />
                       </span>
-                      <p class="mb-0"><?php echo e($category->name); ?></p>
-                      <a href="#" class="stretched-link"></a>
+                      <p class="mb-0"><?php echo e($cat->name); ?></p>
+                      <a href="<?php echo e(route('user.dashboard')); ?>?cat_id=<?php echo e($cat->id); ?>" class="stretched-link"></a>
                     </div>
                   </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -79,7 +86,7 @@ $house_no = session('house_no');
           <!-- start category list section -->
           <section class="custom-section category-list-section pb-0">
             <div class="section-page-title">
-              <h1 class="section-title">Burgers</h1>
+              <h1 class="section-title"><?php echo e($category ? $category->name : ''); ?></h1>
               <a href="<?php echo e(route('user.dashboard')); ?>?all=1" type="button" class="viewall-btn">View all <span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="chevron-down">
@@ -216,7 +223,11 @@ $house_no = session('house_no');
 </div>
 
 <?php if(!Auth::user()): ?>
-  <?php echo $__env->make('user.modals.signin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+  <?php if($showModal): ?>
+    <?php echo $__env->make('user.modals.signin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+  <?php endif; ?>
+
   <?php echo $__env->make('user.modals.signup', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   <?php echo $__env->make('user.modals.forgot-password', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php endif; ?>

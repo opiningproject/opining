@@ -5,6 +5,13 @@
 $zipcode = session('zipcode');
 $house_no = session('house_no');
 
+$showModal = 0;
+if(!session('showLoginModal'))
+{
+    $showModal = 1;
+    Session::put('showLoginModal', '1', '1440');
+}
+
 ?>
 <div class="main">
   <div class="main-view">
@@ -61,14 +68,14 @@ $house_no = session('house_no');
             <div class="swiper-container">
               <div class="swiper category-swiper-slider">
                 <div class="category-slider swiper-wrapper">
-                  @foreach ($categories as $category)
+                  @foreach ($categories as $cat)
                   <div class="category-element swiper-slide">
-                    <div class="card">
+                    <div class="card {{ (isset($_GET['cat_id']) && $_GET['cat_id'] == $cat->id) ? 'active':'' }}">
                       <span class="dish-item-icon">
-                        <img src="{{ $category->image }}" class="img-fluid" alt="bakery" width="56" height="56" />
+                        <img src="{{ $cat->image }}" class="img-fluid" alt="bakery" width="56" height="56" />
                       </span>
-                      <p class="mb-0">{{ $category->name }}</p>
-                      <a href="#" class="stretched-link"></a>
+                      <p class="mb-0">{{ $cat->name }}</p>
+                      <a href="{{ route('user.dashboard') }}?cat_id={{ $cat->id }}" class="stretched-link"></a>
                     </div>
                   </div>
                   @endforeach
@@ -80,7 +87,7 @@ $house_no = session('house_no');
           <!-- start category list section -->
           <section class="custom-section category-list-section pb-0">
             <div class="section-page-title">
-              <h1 class="section-title">Burgers</h1>
+              <h1 class="section-title">{{ $category ? $category->name : ''}}</h1>
               <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">View all <span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="chevron-down">
@@ -217,7 +224,11 @@ $house_no = session('house_no');
 </div>
 
 @if(!Auth::user())
-  @include('user.modals.signin')
+
+  @if($showModal)
+    @include('user.modals.signin')
+  @endif
+
   @include('user.modals.signup')
   @include('user.modals.forgot-password')
 @endif

@@ -100,7 +100,7 @@ function saveCategory() {
         contentType: false,
         data: catData,
         success: function (response) {
-            console.log('success')
+            location.reload()
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

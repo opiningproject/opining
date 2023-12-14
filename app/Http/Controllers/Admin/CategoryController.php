@@ -34,14 +34,17 @@ class CategoryController extends Controller
     {
         try {
             if($request->has('image')){
-                $imageName = uploadImageToBucket($request, 'category');
-                $request->merge(['image' => $imageName]);
+                $imageName = uploadImageToBucket($request, '/category');
+                $request->request->remove('image');
+                $request->request->add(['image' => $imageName]);
             }
 
-            Category::updateOrCreate(
+            $category = Category::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()
             );
+
+            return response::json(['status' => 200, 'data' => $category]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
@@ -55,9 +58,9 @@ class CategoryController extends Controller
         try {
             $category = Category::find($id);
 
-            return response::json(['status' => 1, 'data' => $category]);
+            return response::json(['status' => 200, 'data' => $category]);
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => 'Something went wrong.']);
         }
     }
 

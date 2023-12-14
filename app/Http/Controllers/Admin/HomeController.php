@@ -24,10 +24,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
-        $dishes = Dish::all();
-        return view('admin.home',['categories' => $categories, 'dishes' => $dishes]);
+        $dishes = Dish::orderBy('id');
+
+        if($request->has('search')){
+            if(app()->getLocale() == 'en'){
+                $dishes->orWhere('name_en', 'like', '%'.$request->search.'%');
+            }else{
+                $dishes->orWhere('name_nl', 'like', '%'.$request->search.'%');
+            }
+        }
+
+        return view('admin.home',['categories' => $categories, 'dishes' => $dishes->get()]);
     }
 }

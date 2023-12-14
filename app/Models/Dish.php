@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use function Symfony\Component\Translation\t;
 use Auth;
 
@@ -72,8 +73,9 @@ class Dish extends Model
 
     protected function getImageAttribute($value)
     {
-        if (!empty($value)) {
-            return asset('');
+        if(!empty($value)){
+            $s3 = Storage::disk('s3');
+            return $s3->url('/ingredients/'.$value);
         }
         return asset('images/blank-img.svg');
     }

@@ -78,8 +78,8 @@
                                                              class="img-fluid">
                                                         <div class="d-inline-block text-start userdp-text">
                                                             <a href="javascript:void(0);"
-                                                               class="text-yellow-2 d-block">Gomeal</a>
-                                                            <span>Gomeal@gmail.com</span>
+                                                               class="text-yellow-2 d-block">{{Auth::user()->name}}</a>
+                                                            <span>{{Auth::user()->email}}</span>
                                                         </div>
                                                     </button>
                                                     <ul class="dropdown-menu">
@@ -115,218 +115,28 @@
                                 <div class="swiper category-swiper-slider">
                                     <div class="category-slider swiper-wrapper">
                                         @foreach ($categories as $category)
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
+                                            <div class="category-element swiper-slide">
+                                                <div class="card">
                                                 <span class="dish-item-icon">
                                                     <img src="{{ $category->image }}" class="img-fluid" alt="bakery">
                                                 </span>
-                                                <p class="mb-0 category-item-name">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon category-edit-btn"
-                                                       data-id="{{ $category->id }}" data-bs-toggle="modal"
-                                                       data-bs-target="#addCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon del-cat-icon"
-                                                       data-bs-toggle="modal" data-id="{{ $category->id }}"
-                                                       data-bs-target="#deleteCategoryAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
+                                                    <p class="mb-0 category-item-name">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</p>
+                                                    <div class="categoryfood-detail-card-btn">
+                                                        <a class="btn btn-custom-yellow btn-icon category-edit-btn"
+                                                           data-id="{{ $category->id }}" data-bs-toggle="modal"
+                                                           data-bs-target="#addCategoryModal">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </a>
+                                                        <a class="btn btn-custom-yellow btn-icon del-cat-icon"
+                                                           data-bs-toggle="modal" data-id="{{ $category->id }}"
+                                                           data-bs-target="#deleteCategoryAlertModal">
+                                                            <i class="fa-regular fa-trash-can"></i>
+                                                        </a>
+                                                    </div>
 
+                                                </div>
                                             </div>
-                                        </div>
                                         @endforeach
-                                        <div class="category-element swiper-slide">
-                                            <div class="card active">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Burger_svg.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Burger</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Coffee.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Beverage</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Chicken.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Chicken</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Fast.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Pizza</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Fish.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Seafood</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Coffee.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Beverage</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/bakery.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Bakery</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Fish.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Seafood</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/Coffee.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Beverage</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="category-element swiper-slide">
-                                            <div class="card">
-                                                <span class="dish-item-icon">
-                                                    <img src="images/bakery.svg" class="img-fluid" alt="bakery">
-                                                </span>
-                                                <p class="mb-0 category-item-name">Bakery</p>
-                                                <div class="categoryfood-detail-card-btn">
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#editCategoryModal">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteAlertModal">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -353,106 +163,31 @@
                             <div class="popular-item-grid">
                                 @foreach ($dishes as $dish)
                                     <div class="card food-detail-card">
-                                    <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
-                                    <div class="card-body p-0">
-                                        <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <h4 class="food-name-text">{{ (app()->getLocale() == 'en') ? $dish->name_en : $dish->name_nl }}</h4>
-                                        <p class="food-price">€20</p>
-                                        <div class="food-detail-card-btn">
-                                            <a href="{{ route('editDish', $dish->id) }}" class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                               data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
+                                        @if($dish->out_of_stock == '1')
+                                            <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
+                                        @else
+                                            <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
+                                        @endif
+                                        <div class="card-body p-0">
+                                            <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
+                                            <div class="food-image">
+                                                <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
+                                            </div>
+                                            <h4 class="food-name-text">{{ $dish->name }}</h4>
+                                            <p class="food-price">€20</p>
+                                            <div class="food-detail-card-btn">
+                                                <a href="{{ route('editDish', $dish->id) }}"
+                                                   class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
+                                                   data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
-                                <div class="card food-detail-card">
-                                    <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
-                                    <div class="card-body p-0">
-                                        <p class="quantity-text badge">-</p>
-                                        <div class="food-image">
-                                            <img src="images/coladrink-svg.svg" alt="coladrink image" class="img-fluid">
-                                        </div>
-                                        <h4 class="food-name-text">Burger</h4>
-                                        <p class="food-price">€20</p>
-                                        <div class="food-detail-card-btn">
-                                            <a href="add-edit-dish.html" class="btn btn-custom-yellow btn-icon">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                               data-bs-target="#deleteAlertModal">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card food-detail-card">
-                                    <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
-                                    <div class="card-body p-0">
-                                        <p class="quantity-text badge">Qty 2530</p>
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <h4 class="food-name-text">Burger</h4>
-                                        <p class="food-price">€20</p>
-                                        <div class="food-detail-card-btn">
-                                            <a href="add-edit-dish.html" class="btn btn-custom-yellow btn-icon">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                               data-bs-target="#deleteAlertModal">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card food-detail-card">
-                                    <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
-                                    <div class="card-body p-0">
-                                        <p class="quantity-text badge">Qty 2530</p>
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <h4 class="food-name-text">Burger</h4>
-                                        <p class="food-price">€20</p>
-                                        <div class="food-detail-card-btn">
-                                            <a href="add-edit-dish.html" class="btn btn-custom-yellow btn-icon">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                               data-bs-target="#deleteAlertModal">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card food-detail-card">
-                                    <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
-                                    <div class="card-body p-0">
-                                        <p class="quantity-text badge">Qty 2530</p>
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <h4 class="food-name-text">Burger</h4>
-                                        <p class="food-price">€20</p>
-                                        <div class="food-detail-card-btn">
-                                            <a href="add-edit-dish.html" class="btn btn-custom-yellow btn-icon">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                               data-bs-target="#deleteAlertModal">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </section>
                         <!-- end dishes list section -->
@@ -876,7 +611,8 @@
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
                                 <input type="file" id="input-file" name="image">
-                                <img src="images/blank-img.svg" alt="blank image" id="img-preview" class="img-fluid mb-2">
+                                <img src="images/blank-img.svg" alt="blank image" id="img-preview"
+                                     class="img-fluid mb-2">
                                 <p class="mb-0" id="img-label">Please upload image of Category</p>
                             </label>
                         </div>

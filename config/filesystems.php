@@ -46,13 +46,13 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'AKIAZZVSO24YK6RGJ6NJ',
-            'secret' => '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',
-            'region' => 'eu-central-1',
-            'bucket' => 'gomeal',
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+//            'url' => env('AWS_URL'),
+//            'endpoint' => env('AWS_ENDPOINT'),
+//            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use function Symfony\Component\Translation\t;
 
 class Ingredient extends Model
@@ -26,5 +27,13 @@ class Ingredient extends Model
 
     public function getNameAttribute(){
         return $this->attributes['name_' . app()->getlocale()];
+    }
+
+    public function getImageAttribute($value){
+        if(!empty($value)){
+            $s3 = Storage::disk('s3');
+            return $s3->url('/ingredients/'.$value);
+        }
+        return asset('images/blank-img.svg');
     }
 }

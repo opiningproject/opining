@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -25,5 +26,13 @@ class Category extends Model
     public function getNameAttribute()
     {
         return $this->attributes['name_' . app()->getlocale()];
+    }
+
+    public function getImageAttribute($value){
+        if(!empty($value)){
+            $s3 = Storage::disk('s3');
+            return $s3->url('/category/'.$value);
+        }
+        return asset('images/blank-img.svg');
     }
 }

@@ -224,16 +224,12 @@ if(!session('showLoginModal'))
 </div>
 
 @if(!Auth::user())
-
-  @if($showModal)
-    @include('user.modals.signin')
-  @endif
-
   @include('user.modals.signup')
   @include('user.modals.forgot-password')
 @endif
 
 @include('user.modals.address')
+@include('user.modals.signin')
 
 @endsection
 
@@ -291,7 +287,14 @@ function unFavorite(dish_id)
 }
 
 $(window).on("load", function() {
-  $("#signInModal").modal("show");
+
+  var showModal = "<?php echo $showModal; ?>";
+
+  if(showModal == 1)
+  {
+    $("#signInModal").modal("show");
+  }
+  
 });
 
 $(document).ready(function() {

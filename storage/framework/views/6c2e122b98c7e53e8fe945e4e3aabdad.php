@@ -223,16 +223,12 @@ if(!session('showLoginModal'))
 </div>
 
 <?php if(!Auth::user()): ?>
-
-  <?php if($showModal): ?>
-    <?php echo $__env->make('user.modals.signin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-  <?php endif; ?>
-
   <?php echo $__env->make('user.modals.signup', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   <?php echo $__env->make('user.modals.forgot-password', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php endif; ?>
 
 <?php echo $__env->make('user.modals.address', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('user.modals.signin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>
 
@@ -290,7 +286,14 @@ function unFavorite(dish_id)
 }
 
 $(window).on("load", function() {
-  $("#signInModal").modal("show");
+
+  var showModal = "<?php echo $showModal; ?>";
+
+  if(showModal == 1)
+  {
+    $("#signInModal").modal("show");
+  }
+  
 });
 
 $(document).ready(function() {

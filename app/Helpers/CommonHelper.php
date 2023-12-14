@@ -35,12 +35,23 @@ if (!function_exists('uploadImageToBucket')) {
 
         if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png')
         {
-            $image = Image::make($file)->resize(300, 300);
-            Storage::disk('s3')->put('/'.$type.'/thumb/'.$file_name, $image->stream(), 'public');
+            //$image = Image::make($file)->resize(300, 300);
+            //Storage::disk('s3')->put('/'.$type.'/thumb/'.$file_name, $image->stream(), 'public');
+        }
+        
+        $filePath = $type.'/' . $file_name;
+       //$test = Storage::disk('s3')->put($filePath, file_get_contents($file));
+
+       try {
+           $test = Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
+        catch(\Throwable $e) {
+          echo 'Message: ' .$e->getMessage();
+          exit;
         }
 
-        $filePath = $type.'/' . $file_name;
-        Storage::disk('s3')->put($filePath, file_get_contents($file));
+       print_r($filePath);
+       exit;
 
         return $file_name;
     }

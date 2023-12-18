@@ -109,4 +109,6 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/user/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
     Route::get('/user/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+
+    Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
 });

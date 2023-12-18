@@ -20,6 +20,7 @@ class Dish extends Model
 
     protected $appends = [
         'name',
+        'cart'
     ];
 
     public function category()
@@ -83,5 +84,20 @@ class Dish extends Model
     public function getNameAttribute()
     {
         return $this->attributes['name_' . app()->getlocale()];
+    }
+
+    public function getCartAttribute()
+    {
+        try
+        {
+            $user = Auth::user();
+
+            return $this->hasOne(OrderDetail::class,'dish_id','id')->select(['*'])->where('is_cart','1')->where('user_id',$user->id)->count();
+        }
+        catch(JWTException $e)
+        {
+            return 0;
+        }
+        
     }
 }

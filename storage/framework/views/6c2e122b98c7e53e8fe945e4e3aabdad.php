@@ -1,4 +1,5 @@
 <?php $__env->startSection('content'); ?>
+
 <?php
 
 $zipcode = session('zipcode');
@@ -117,11 +118,17 @@ if(!session('showLoginModal'))
                 </div>
                 <h4 class="food-name-text"><?php echo e($dish->name); ?></h4>
                 <p class="food-price">€<?php echo e($dish->price); ?></p>
-                <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                    <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                  </svg>
-                </a>
+                <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart(<?php echo e($dish->id); ?>)" id="dish-cart-lbl-<?php echo e($dish->id); ?>" <?php echo e($dish->cart ? 'disabled':''); ?>>
+                  <?php if($dish->cart): ?>
+                    Added to cart
+                  <?php else: ?>
+                    Add 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                      <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
+                      <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
+                    </svg>
+                  <?php endif; ?>
+                </button>
                 <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customize</a>
               </div>
                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -229,6 +236,7 @@ if(!session('showLoginModal'))
 
 <?php echo $__env->make('user.modals.address', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('user.modals.signin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('user.modals.customize-dish', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>
 

@@ -28,11 +28,19 @@
                  </div>
                  <h4 class="food-name-text">{{ $dish->dish->name_en }}</h4>
                  <p class="food-price">€ {{ $dish->dish->price }}</p>
-                 <a class="btn btn-xs-sm btn-custom-yellow">Add <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                     <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
-                     <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
-                   </svg>
-                 </a>
+
+                 <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart({{ $dish->dish->id }})" id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $dish->dish->cart ? 'disabled':''}}>
+                    @if($dish->dish->cart)
+                      Added to cart
+                    @else
+                      Add  
+                      <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                       <path d="M4.77344 0.167969L4.77344 8.16797" stroke="#292929" stroke-width="2" />
+                       <line x1="8.88281" y1="4.16797" x2="0.664631" y2="4.16797" stroke="#292929" stroke-width="2" />
+                      </svg>
+                    @endif
+                 </button>
+
                  <a href="javascript:void(0);" class="customize-foodlink" data-bs-toggle="modal" data-bs-target="#customisableModal">Customisable</a>
                </div>
                @endforeach
@@ -50,6 +58,7 @@
  </div>
 
 @include('user.modals.change-password')
+@include('user.modals.customize-dish')
 
 @endsection
 

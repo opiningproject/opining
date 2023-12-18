@@ -11,7 +11,7 @@ class OrderDetail extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['order_id','dish_id','price','qty','total_price','notes'];
+    protected $fillable = ['order_id','dish_id','price','qty','total_price','notes','user_id','is_cart'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

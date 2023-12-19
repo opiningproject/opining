@@ -34,9 +34,9 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        $user = User::where('email', $request->email)->get()->first();
+        $user = User::where('email', $request->email)->first();
 
-        if(empty($user))
+        if(!isset($user->id))
         {
           return response::json(
             [

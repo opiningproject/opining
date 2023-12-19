@@ -27,8 +27,8 @@ function signIn()
 {
     $('#sign-in-btn').prop('disabled',true);
 
-    var email = $('#email').val();
-    var password = $('#password').val();
+    var email = $('form#sign-in-form').find('input[name=email]').val();
+    var password = $('form#sign-in-form').find('input[name=password]').val();
    
     $.ajax({
         url: baseURL+'/user/login',
@@ -40,8 +40,8 @@ function signIn()
 
             if(response.status == 0)
             {
-                $('#'+response.field+'-error').text(response.message);
-                $('#'+response.field+'-error').css("display", "block"); 
+                $('form#sign-in-form').find('#'+response.field+'-error').css("display", "block");
+                $('form#sign-in-form').find('#'+response.field+'-error').text(response.message);
 
                 $('#sign-in-btn').prop('disabled',false); 
             }

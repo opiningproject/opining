@@ -54,6 +54,7 @@ Route::middleware(['localization'])->group(function ()
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
     Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
     Route::get('/user/delete-address/{id}',[App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
+    Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
 
 });
 
@@ -109,6 +110,4 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/user/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
     Route::get('/user/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
-
-    Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
 });

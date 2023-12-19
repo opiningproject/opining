@@ -91,8 +91,9 @@ class Dish extends Model
         try
         {
             $user = Auth::user();
+            $user_id = ($user) ? $user->id : 0;
 
-            return $this->hasOne(OrderDetail::class,'dish_id','id')->select(['*'])->where('is_cart','1')->where('user_id',$user->id)->count();
+            return $this->hasOne(OrderDetail::class,'dish_id','id')->select(['*'])->where('is_cart','1')->where('user_id',$user_id)->count();
         }
         catch(JWTException $e)
         {

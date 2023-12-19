@@ -39,16 +39,18 @@ $(function () {
         })
     })
 
-    $(document).on('click', '#delete-category-btn', function () {
+    $(document).on('click', '#delete-ingredient-btn', function () {
         var id = $('#ingredientId').val()
 
         $.ajax({
             url: 'ingredients/' + id,
             type: 'DELETE',
             success: function (response) {
-                console.log('success')
-                console.log(response)
-                window.location.reload();
+                if(response.status == 200){
+                    $('#ingredient-tr'+id).remove()
+                }else{
+                    alert(response.message);
+                }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -61,6 +63,7 @@ $(function () {
     $(document).on('click', '.edit-ing-btn', function () {
         var id = $(this).attr('data-id');
         $('#catId' + id).prop('disabled', false)
+        $('#dish-list'+id).prop('disabled', false)
         $(this).siblings('a.save-edit-btn').show()
         $(this).parent().parent().siblings().children('input').attr("readonly", false).focus();
         $(this).siblings('a.del-ing-btn').hide()
@@ -87,6 +90,7 @@ $(function () {
             success: function (response) {
                 if (response.status == 200) {
                     $('#catId' + id).prop('disabled', true)
+                    $('#dish-list'+id).prop('disabled', true)
                     $('#name_en' + id).prop("readonly", true);
                     $('#name_nl' + id).prop("readonly", true);
                     $('#del-btn' + id).show()

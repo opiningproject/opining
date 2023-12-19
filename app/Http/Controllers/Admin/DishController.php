@@ -21,8 +21,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.dish.create', ['categories' => $categories]);
+        $dishes = Dish::all();
+        return view('admin.dish.list', ['dishes' => $dishes]);
     }
 
     /**
@@ -30,7 +30,8 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view();
+        $categories = Category::all();
+        return view('admin.dish.create', ['categories' => $categories]);
     }
 
     /**
@@ -39,12 +40,10 @@ class DishController extends Controller
     public function store(Request $request)
     {
         try {
-//            dd($request->all());
             $dish = Dish::create(
                 $request->all()
             );
             return redirect()->route('editDish', ['dish' => $dish->id]);
-//            return response::json(['status' => 200, 'data' => $ingredients]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
@@ -94,7 +93,17 @@ class DishController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $dish = Dish::find($id);
+            if($dish){
+                $dish->delete();
+                return response::json(['status' => 200, 'message' => 'Deleted Successfully.']);
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such dish exist.']);
+            }
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
     }
 
     public function ingredientDishBased(Request $request, string $id){
@@ -166,18 +175,80 @@ class DishController extends Controller
         }
     }
 
-    public function deleteDishOption(Request $request, string $id){
+    public function deleteDishIngredient(string $id){
         try {
-            $dishOption = DishOption::find($id);
-            if($dishOption){
-                $dishOption->delete();
-                return response::json(['status' => 200, 'message' => 'Option deleted successfully.']);
+            $dishIngredient = DishIngredient::find($id);
+            if($dishIngredient){
+                $dishIngredient->delete();
+                return response::json(['status' => 200, 'message' => 'Dish Ingredient Deleted successfully']);
             }else{
-                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+                return response::json(['status' => 400, 'message' => 'No such Ingredient Attached']);
             }
-
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
+    }
+
+    public function updateDishData(Request $request, string $id){
+        try{
+            $dish = Dish::find($id);
+            if($dish){
+                $dish->name_en = $request->name_en;
+                $dish->name_nl = $request->name_nl;
+                $dish->desc_en = $request->desc_en;
+                $dish->desc_nl = $request->desc_nl;
+                $dish->price = $request->price;
+                $dish->percentage_off = $request->percentage_off;
+                $dish->qty = $request->qty;
+                $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';
+                if($dish->save()){
+                    if(isset($request->deletedOption)){
+                        $deletedDishArray = explode(',', $request->deletedOption);
+                        DishOption::whereIn('id', $deletedDishArray)->delete();
+                    }
+
+                    if(isset($request->addedOption)){
+                        foreach ($request->addedOption as $addedOption){
+                            $addedOption = json_decode($addedOption);
+                            $dishOption = DishOption::find($addedOption->id);
+                            $dishOption->option_en = $addedOption->name_en;
+                            $dishOption->option_nl = $addedOption->name_nl;
+                            $dishOption->save();
+                        }
+                    }
+
+                    if(isset($request->newOption)){
+                        foreach ($request->newOption as $newOption){
+                            $newOption = json_decode($newOption);
+
+                            $dish->option()->create([
+                                'option_en' => $newOption->name_en,
+                                'option_nl' => $newOption->name_nl
+                            ]);
+                        }
+                    }
+
+                    return response::json(['status' => 200, 'message' => 'Successfully Updated']);
+                }else{
+                    return response::json(['status' => 400, 'message' => 'Something went wrong. Please try again.']);
+                }
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such Dish Exist']);
+            }
+        }catch (Exception $e){
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function searchDish(Request $request){
+        $dishes = Dish::orderBy('id');
+        if($request->has('search')){
+            if(app()->getLocale() == 'en'){
+                $dishes->orWhere('name_en', 'like', '%'.$request->search.'%');
+            }else{
+                $dishes->orWhere('name_nl', 'like', '%'.$request->search.'%');
+            }
+        }
+        return view('admin.dish.dish-list',['dishes' => $dishes->get()]);
     }
 }

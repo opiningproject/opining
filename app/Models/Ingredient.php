@@ -25,6 +25,14 @@ class Ingredient extends Model
         return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id');
     }
 
+    public function freeDishIngredient(){
+        return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id')->where('is_free','1');
+    }
+
+    public function paidDishIngredient(){
+        return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id')->where('is_free','0');
+    }
+
     public function getNameAttribute(){
         return $this->attributes['name_' . app()->getlocale()];
     }

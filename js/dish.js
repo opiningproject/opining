@@ -1,3 +1,4 @@
+var deletedOption = []
 $(function () {
 
     $("#addDishForm").validate({
@@ -36,6 +37,38 @@ $(function () {
         }
     });
 
+    $("#editDishForm").validate({
+        rules: {
+            name_en: {
+                required: true
+            },
+            name_nl: {
+                required: true
+            },
+            category_id: {
+                required: true
+            },
+            percentage_off: {
+                required: true
+            },
+            qty: {
+                required: true
+            },
+            desc_en: {
+                required: true
+            },
+            desc_nl: {
+                required: true
+            },
+            price: {
+                required: true
+            }
+        },
+        submitHandler: function (form) {
+            updateDishData()
+        }
+    });
+
     $("#freeIngredientForm").validate({
         rules: {
             freeIngredientCategory: {
@@ -46,7 +79,7 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            addFreeIngredient('free');
+            addIngredient('free');
         }
     });
 
@@ -63,7 +96,7 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            addFreeIngredient('paid');
+            addIngredient('paid');
         }
     });
 
@@ -140,45 +173,83 @@ $(function () {
         }
     })
 
+    $(document).on('click', '.del-dish-ingredient', function () {
+        $('#ingredientId').val($(this).attr('data-id'))
+    })
 
-    $(document).on('change', '#update-dish', function () {
-        var id = $('#dishId').val()
+    $(document).on('click', '#delete-dish-ingredient-btn', function () {
+        var id = $('#ingredientId').val()
 
-        var name_en = $('#name_en').val()
-        var name_nl = $('#name_nl').val()
-        var category_id = $('#category_id').val()
-        var price = $('#price').val()
-        var percentage_off = $('#percentage_off').val()
-        var qty = $('#qty').val()
-        var desc_en = $('#desc_en').val()
-        var desc_nl = $('#desc_nl').val()
-        var out_of_stock = $('#outofstock').is(':checked') ? 1 : '0'
-
-            $.ajax({
-                url: baseURL + '/menu/update-dish/' + id,
-                type: 'PATCH',
-                data: {
-                    name_en,
-                    name_nl,
-                    category_id,
-                    price,
-                    percentage_off,
-                    qty,
-                    desc_en,
-                    desc_nl,
-                    out_of_stock
-                },
-                success: function (response) {
-                    if (response.status == 200) {
-                        location.reload()
-                    }
-
-                },
-                error: function (response) {
-                    var errorMessage = JSON.parse(response.responseText).message
-                    alert(errorMessage);
+        $.ajax({
+            url: baseURL + '/menu/dish/deleteIngredient/' + id,
+            type: 'DELETE',
+            success: function (response) {
+                $('#deleteAlertModal').modal('hide')
+                if (response.status == 200) {
+                    $('#dishIngredient' + id).remove()
+                } else {
+                    alert(response.message);
                 }
-            })
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+
+    $(document).on('click', '#addOptionBtn', function (){
+
+        var name_en = $('#option_name_en').val()
+        var name_nl = $('#option_name_nl').val()
+
+        if(name_en == '' || name_nl == ''){
+            alert('Please fill option value to add data')
+            return false
+        }
+
+        $('#option_name_en').val('')
+        $('#option_name_nl').val('')
+
+        var html ='<div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 newOptionDiv"' +
+            'style="float:left;margin-right: 10px;">' +
+            '<div' +
+            '    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">' +
+            '    <div class="form-group">' +
+            '        <label for="password" class="form-label">Dish Option <span' +
+            '                class="text-custom-muted">(English)</span></label>' +
+            '        <div class="input-group">' +
+            '            <input type="text" class="form-control name_en"' +
+            '                   value="'+ name_en +'">' +
+            '            <button' +
+            '                class="input-group-btn btn btn-custom-gray btn-icon h-50px del-new-option"' +
+            '                type="button"><i' +
+            '                    class="fa-solid fa-xmark"></i></button>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>' +
+            '<div' +
+            '    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">' +
+            '    <div class="form-group">' +
+            '        <label for="password" class="form-label">Dish Option <span' +
+            '                class="text-custom-muted">(Dutch)</span></label>' +
+            '        <div class="input-group">' +
+            '            <input type="text" class="form-control name_nl"' +
+            '                   value="'+ name_nl +'">' +
+            '        </div>' +
+            '    </div>' +
+            '</div>' +
+            '</div>';
+        $('#dish-option-div').append(html)
+    })
+
+    $(document).on('click', '.del-added-option-btn', function (){
+        deletedOption.push($(this).attr('id'))
+        $(this).parent().parent().parent().parent().remove()
+    })
+
+    $(document).on('click', '.del-new-option', function (){
+        $(this).parent().parent().parent().parent().remove()
     })
 });
 
@@ -215,7 +286,7 @@ function getIngredientsList(categoryId, type) {
     })
 }
 
-function addFreeIngredient(type) {
+function addIngredient(type) {
     var id = $('#dishId').val()
     var ingredientData;
 
@@ -253,7 +324,7 @@ function addFreeIngredient(type) {
                         '    <div class="input-group w-5r m-auto">' +
                         '        <span class="input-group-text"' +
                         '              id="basic-addon1">€</span>' +
-                        '        <input type="number" class="form-control m-auto"' +
+                        '        <input type="number" id="price' + id + '" class="form-control m-auto"' +
                         '               value="' + response.data.price + '" readonly>' +
                         '    </div>' +
                         '</td>' +
@@ -317,3 +388,46 @@ function addFreeIngredient(type) {
     })
 }
 
+function updateDishData() {
+    var id = $('#dishId').val()
+    var dishData = new FormData(document.getElementById('editDishForm'));
+
+    dishData.append('deletedOption',deletedOption);
+
+    $('.addedOptionDiv').each(function(i, obj) {
+        var newArray = {
+            id: $(this).find('input.id').val(),
+            name_en:$(this).find('input.name_en').val(),
+            name_nl:$(this).find('input.name_nl').val()
+        }
+        dishData.append('addedOption[]', JSON.stringify(newArray))
+    });
+
+    $('.newOptionDiv').each(function(i, obj) {
+        var newArray = {
+            name_en:$(this).find('input.name_en').val(),
+            name_nl:$(this).find('input.name_nl').val()
+        }
+        dishData.append('newOption[]', JSON.stringify(newArray))
+    });
+
+    $.ajax({
+        url: baseURL + '/menu/dish/updateDish/' + id,
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: dishData,
+        success: function (response) {
+            if (response.status == 200) {
+                location.reload()
+            }else{
+                alert(response.message)
+            }
+
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}

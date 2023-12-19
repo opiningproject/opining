@@ -34,7 +34,11 @@ class CategoryController extends Controller
     {
         try {
             if($request->has('image')){
-                $imageName = uploadImageToBucket($request, '/category');
+                if($request->has('id')){
+                    $imageName = uploadImageToBucket($request, '/category', '');
+                }else{
+                    $imageName = uploadImageToBucket($request, '/category');
+                }
                 $request->request->remove('image');
                 $request->request->add(['image' => $imageName]);
             }

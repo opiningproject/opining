@@ -45,7 +45,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body py-0">
-                                    <form method="POST" name="addIngredientForm" id="addIngredientForm" enctype="multipart/form-data">
+                                    <form method="POST" name="addIngredientForm" id="addIngredientForm"
+                                          enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
 
@@ -54,7 +55,8 @@
                                                     <label for="ingredientsnameenglish" class="form-label">Image</label>
                                                     <label for="input-file" class="upload-file">
                                                         <input type="file" id="input-file" name="image">
-                                                        <svg class="me-2" xmlns="http://www.w3.org/2000/svg" id="img-preview" width="24"
+                                                        <svg class="me-2" xmlns="http://www.w3.org/2000/svg"
+                                                             id="img-preview" width="24"
                                                              height="17" viewBox="0 0 24 17" fill="none">
                                                             <path
                                                                 d="M10.233 8.23463C10.6719 8.23527 11.101 8.10951 11.4662 7.87324C11.8315 7.63697 12.1163 7.30081 12.2846 6.90729C12.453 6.51376 12.4974 6.08058 12.4121 5.66256C12.3267 5.24455 12.1156 4.86053 11.8055 4.55908C11.4953 4.25764 11.1 4.05232 10.6696 3.9691C10.2392 3.88587 9.79311 3.92848 9.38767 4.09152C8.98224 4.25457 8.63571 4.53074 8.39197 4.88509C8.14822 5.23945 8.01822 5.65606 8.01844 6.0822L8.1858 6.90612C8.29687 7.16739 8.45996 7.4048 8.6657 7.60475C8.87144 7.8047 9.11579 7.96326 9.38475 8.07134C9.6537 8.17942 9.94197 8.23491 10.233 8.23463ZM10.233 8.23463L10.2331 8.22963L10.2331 8.23463C10.2331 8.23463 10.2331 8.23463 10.233 8.23463ZM10.2331 6.99583L10.233 6.99583C10.1079 6.9973 9.98373 6.97433 9.86794 6.92828C9.75215 6.88224 9.64708 6.81408 9.55898 6.72784C9.47088 6.64161 9.40155 6.53906 9.35509 6.42631C9.30864 6.31356 9.286 6.1929 9.28854 6.0715L9.28853 6.07125C9.28482 5.94758 9.30677 5.82445 9.35309 5.70918C9.39941 5.59392 9.46916 5.48888 9.55818 5.40031C9.64719 5.31174 9.75367 5.24145 9.87126 5.19366C9.98885 5.14586 10.1152 5.12152 10.2427 5.1221C10.3701 5.12268 10.4962 5.14816 10.6133 5.19702C10.7305 5.24588 10.8363 5.31712 10.9244 5.40649C11.0126 5.49586 11.0813 5.60153 11.1265 5.71721C11.1717 5.83289 11.1925 5.95622 11.1876 6.07984L11.1876 6.08008C11.1885 6.20147 11.1644 6.32182 11.1166 6.43401C11.0688 6.54621 10.9984 6.64799 10.9094 6.73335C10.8205 6.81871 10.7148 6.88592 10.5987 6.931C10.4825 6.97609 10.3582 6.99813 10.2331 6.99583Z"
@@ -103,9 +105,10 @@
                                                                     type="button" name="category_id"
                                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <option value="">Select Category</option>
-                                                                @foreach ($ingredientCategory as $category) {
-                                                                <option
-                                                                    value="{{ $category->id }}">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
+                                                                @foreach ($ingredientCategory as $category)
+                                                                    {
+                                                                    <option
+                                                                        value="{{ $category->id }}">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -115,7 +118,8 @@
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="form-group">
                                                     <label for="discountpercentage" class="form-label"></label>
-                                                    <button type="submit" class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                    <button type="submit"
+                                                            class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
                                                         <span class="align-middle">Add</span>
                                                     </button>
                                                 </div>
@@ -137,120 +141,124 @@
                                                 <th scope="col" class="text-center">Ingredients categories
                                                 </th>
                                                 <th scope="col" class="text-center" width="5%">Action</th>
-                                                <th scope="col" class="text-center">Add For Individual dish</th>
+                                                <th scope="col" class="text-center">Add For Individual dish<span
+                                                        class="text-custom-muted font-regularcustom">(Free)</span></th>
                                                 <th scope="col" class="text-center" width="10%">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach ($ingredients as $ingredient)
-                                            <tr id="ingredient-tr{{ $ingredient->id }}">
-                                                <td scope="row" class="text-center">
-                                                    <img
-                                                        src="{{ asset('images/tomatoes-img.svg')}}" class="img-fluid"
-                                                        alt="ingredient img 1"/>
-                                                    <div class="imageupload-box inline-imageupload-box mb-0"
-                                                         style="display: none">
-                                                        <label for="input-file" class="upload-file">
-                                                            <input type="file" id="ing-image{{ $ingredient->id }}">
-                                                            <img src="{{ asset('images/tomatoes-img.svg')}}"
-                                                                 alt="tomatoes image"
-                                                                 class="img-fluid" width="25" height="25">
-                                                            <p class="mb-0 text-lowercase" >Tomato.png</p>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto" id="name_en{{ $ingredient->id }}"
-                                                                               value="{{ $ingredient->name_en }}"
-                                                                               readonly/></td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto" id="name_nl{{ $ingredient->id }}"
-                                                                               value="{{ $ingredient->name_nl }}"
-                                                                               readonly/></td>
-                                                <td>
-                                                    <div class="dropdown buttondropdown category-dropdown">
-                                                        <select disabled id="catId{{$ingredient->id}}">
-                                                            @foreach ($ingredientCategory as $category) {
-                                                            <option
-                                                                value="{{ $category->id }}" {{ ($category->id == $ingredient->category_id) ? 'selected' : '' }}>{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group mb-0">
-                                                        <div
-                                                            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
-                                                            <input
-                                                                class="form-check-input green-check-input update-ing-status"
-                                                                value="{{ $ingredient->id }}"
-                                                                type="checkbox" role="switch" id="action" {{ ($ingredient->status == 1) ? 'checked' : ''  }}>
+                                                <tr id="ingredient-tr{{ $ingredient->id }}">
+                                                    <td scope="row" class="text-center">
+                                                        <img
+                                                            src="{{ asset('images/tomatoes-img.svg')}}"
+                                                            class="img-fluid"
+                                                            alt="ingredient img 1"/>
+                                                        <div class="imageupload-box inline-imageupload-box mb-0"
+                                                             style="display: none">
+                                                            <label for="input-file" class="upload-file">
+                                                                <input type="file" id="ing-image{{ $ingredient->id }}">
+                                                                <img src="{{ asset('images/tomatoes-img.svg')}}"
+                                                                     alt="tomatoes image"
+                                                                     class="img-fluid" width="25" height="25">
+                                                                <p class="mb-0 text-lowercase">Tomato.png</p>
+                                                            </label>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-add-dish-bar">
-                                                        <button class="btn btn-light dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Dish name
+                                                    </td>
+                                                    <td class="text-center"><input type="text"
+                                                                                   class="form-control text-center w-10r m-auto"
+                                                                                   id="name_en{{ $ingredient->id }}"
+                                                                                   value="{{ $ingredient->name_en }}"
+                                                                                   readonly/></td>
+                                                    <td class="text-center"><input type="text"
+                                                                                   class="form-control text-center w-10r m-auto"
+                                                                                   id="name_nl{{ $ingredient->id }}"
+                                                                                   value="{{ $ingredient->name_nl }}"
+                                                                                   readonly/></td>
+                                                    <td>
+                                                        <div class="dropdown buttondropdown category-dropdown">
+                                                            <select disabled id="catId{{$ingredient->id}}">
+                                                                @foreach ($ingredientCategory as $category)
+                                                                    {
+                                                                    <option
+                                                                        value="{{ $category->id }}" {{ ($category->id == $ingredient->category_id) ? 'selected' : '' }}>{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group mb-0">
+                                                            <div
+                                                                class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
+                                                                <input
+                                                                    class="form-check-input green-check-input update-ing-status"
+                                                                    value="{{ $ingredient->id }}"
+                                                                    type="checkbox" role="switch"
+                                                                    id="action" {{ ($ingredient->status == 1) ? 'checked' : ''  }}>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="table-add-dish-bar">
+                                                            <select class="btn btn-light dropdown-toggle" type="button" id="dish-list{{ $ingredient->id }}" disabled>
+                                                                <?php
+                                                                    $dishLists = \App\Models\Dish::doesnthave('freeIngredients', 'and', function ($query) use ($ingredient){
+                                                                        $query->where('ingredient_id', $ingredient->id);
+                                                                    })->get();
+                                                                    ?>
+                                                                <option value="">Select Dish name</option>
+                                                                @foreach($dishLists as $dish)
+                                                                    <option value="{{ $dish->id }}">{{ $dish->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <div class="table-dish-name">
+                                                                @foreach ($ingredient->freeDishIngredient as $ingr)
 
-                                                        </button>
-                                                        <ul class="dropdown-menu custom-dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 1</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 2</a></li>
-                                                            <li><a class="dropdown-item"
-                                                                   href="javascript:void(0);">Dish 3</a></li>
-                                                        </ul>
-                                                        <div class="table-dish-name">
-                                                            @foreach ($ingredient->dishIngredient as $ingr) {
+                                                                    <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
+                                                                            href="javascript:void(0);"><i
+                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
+                                                                @endforeach
 
-                                                            <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                            <span class="badge text-bg-yellow">margarita pizza<a
-                                                                    href="javascript:void(0);"><i
-                                                                        class="fa-solid fa-xmark align-middle"></i></a></span>
-
-                                                            @endforeach
-
-                                                            <a class="text-more-sm float-end lh-30px"
-                                                               data-bs-toggle="collapse" href="#collapseDishRowTwo"
-                                                               role="button" aria-expanded="false"
-                                                               aria-controls="collapseDishRowTwo">+ 2 more</a>
-                                                            <div class="moredishname-collapse collapse"
-                                                                 id="collapseDishRowTwo">
-                                                                <div
-                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
+                                                                <div class="moredishname-collapse collapse"
+                                                                     id="collapseDishRowTwo">
+                                                                    <div
+                                                                        class="card card-body bg-lightgray d-block py-2 px-0 border-0">
                                                                         <span class="badge text-bg-yellow">Big mac with
                                                                             Cheese<a href="javascript:void(0);"><i
                                                                                     class="fa-solid fa-xmark align-middle"></i></a></span>
-                                                                    <span class="badge text-bg-yellow">Big mac with
+                                                                        <span class="badge text-bg-yellow">Big mac with
                                                                             Cheese<a href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
+                                                                                    class="fa-solid fa-xmark align-middle"></i></a></span>
+                                                                    </div>
                                                                 </div>
+                                                                <a class="text-more-sm float-end lh-30px"
+                                                                   data-bs-toggle="collapse" href="#collapseDishRowTwo"
+                                                                   role="button" aria-expanded="false"
+                                                                   aria-controls="collapseDishRowTwo">+ 2 more</a>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="">
-                                                        <a class="btn btn-custom-yellow btn-icon edit-ing-btn"
-                                                           tabindex="0" data-id="{{ $ingredient->id }}" id="edit-btn{{ $ingredient->id }}">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon del-ing-btn"
-                                                           data-id="{{ $ingredient->id }}" id="del-btn{{ $ingredient->id }}">
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block" id="save-btn{{ $ingredient->id }}"
-                                                           style="display:none !important;" data-id="{{ $ingredient->id }}">
-                                                            <span class="align-middle">Save</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="">
+                                                            <a class="btn btn-custom-yellow btn-icon edit-ing-btn"
+                                                               tabindex="0" data-id="{{ $ingredient->id }}"
+                                                               id="edit-btn{{ $ingredient->id }}">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </a>
+                                                            <a class="btn btn-custom-yellow btn-icon del-ing-btn"
+                                                               data-id="{{ $ingredient->id }}"
+                                                               id="del-btn{{ $ingredient->id }}">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                            <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
+                                                               id="save-btn{{ $ingredient->id }}"
+                                                               style="display:none !important;"
+                                                               data-id="{{ $ingredient->id }}">
+                                                                <span class="align-middle">Save</span>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -318,7 +326,7 @@
                     <div class="row">
                         <div class="col-12">
                             <h4 class="alert-text-1 mb-40px">Are you sure you want to
-                                delete this Ingredients?</h4>
+                                delete this Ingredient?</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -326,7 +334,7 @@
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">Cancel
                         </button>
-                        <button type="button" id="delete-category-btn"
+                        <button type="button" id="delete-ingredient-btn"
                                 class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">Delete
                         </button>
                     </div>
@@ -342,7 +350,6 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <input type="hidden" value="" id="catId">
                     <div class="row">
                         <div class="col-12">
                             <h4 class="alert-text-1 mb-40px">There are dishes added to this ingredients. Please remove
@@ -351,7 +358,8 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="button"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"  data-bs-dismiss="modal">Okay
+                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                                data-bs-dismiss="modal">Okay
                         </button>
                     </div>
                 </div>

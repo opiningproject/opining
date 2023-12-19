@@ -13,7 +13,21 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            saveCategory();
+            saveCategory('add');
+        }
+    });
+
+    $("#editCategoryForm").validate({
+        rules: {
+            name_en: {
+                required: true
+            },
+            name_nl: {
+                required: true
+            }
+        },
+        submitHandler: function (form) {
+            saveCategory('edit');
         }
     });
 
@@ -46,17 +60,15 @@ $(function () {
 
         var id = $(this).attr('data-id');
         $('#editCatId').val(id)
-        $('.modal-title').text('Edit Category')
 
         $.ajax({
             url: 'category/' + id,
             type: 'GET',
             success: function (response) {
                 var data = response.data;
-
-                $("#name_en").val(data.name_en);
-                $("#name_nl").val(data.name_nl);
-                $("#img-preview").attr('src',data.image);
+                $("#edit_name_en").val(data.name_en);
+                $("#edit_name_nl").val(data.name_nl);
+                $("#edit-img-preview").attr('src',data.image);
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -90,8 +102,13 @@ $(function () {
     }
 });
 
-function saveCategory() {
-    var catData = new FormData(document.getElementById('categoryForm'));
+function saveCategory(type) {
+    var catData = ''
+    if (type == 'add'){
+        catData = new FormData(document.getElementById('categoryForm'));
+    }else{
+        catData = new FormData(document.getElementById('editCategoryForm'));
+    }
 
     $.ajax({
         url: baseURL + '/category',

@@ -27,16 +27,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-        $dishes = Dish::orderBy('id');
+        $dishes = Dish::orderBy('id')->get();
 
-        if($request->has('search')){
-            if(app()->getLocale() == 'en'){
-                $dishes->orWhere('name_en', 'like', '%'.$request->search.'%');
-            }else{
-                $dishes->orWhere('name_nl', 'like', '%'.$request->search.'%');
-            }
-        }
+        $popularDishes = Dish::orderBy('id')->limit(4)->get();
 
-        return view('admin.home',['categories' => $categories, 'dishes' => $dishes->get()]);
+        $bestSellerDishes = Dish::orderBy('id')->limit(12)->get();
+
+        return view('admin.home', ['categories' => $categories, 'dishes' => $dishes, 'popularDishes' => $popularDishes, 'bestSellerDishes' => $bestSellerDishes]);
     }
 }

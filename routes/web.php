@@ -68,7 +68,7 @@ Route::get('change-lang/{lang}', function($lang) {
 Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/menu', [HomeController::class, 'index'])->name('home');
-    Route::get('/menu/add-dish', [DishController::class, 'index'])->name('addDish');
+    Route::get('/menu/add-dish', [DishController::class, 'create'])->name('addDish');
     Route::get('/menu/edit-dish/{dish}', [DishController::class, 'edit'])->name('editDish');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
@@ -88,6 +88,9 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::post('/menu/dish/getIngredientList/{dish}', [DishController::class, 'ingredientDishBased']);
     Route::post('/menu/dish/addIngredient/{dish}', [DishController::class, 'addDishIngredient']);
     Route::patch('/menu/dish/updateIngredient/{dish}', [DishController::class, 'updatePaidIngredient']);
+    Route::delete('/menu/dish/deleteIngredient/{dish}', [DishController::class, 'deleteDishIngredient']);
+    Route::post('/menu/dish/updateDish/{dish}', [DishController::class, 'updateDishData']);
+    Route::post('/menu/dish/searchDish', [DishController::class, 'searchDish']);
     Route::resource('/menu/dish', DishController::class);
 
     Route::resource('/category',CategoryController::class);

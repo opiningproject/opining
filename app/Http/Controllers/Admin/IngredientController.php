@@ -18,7 +18,7 @@ class IngredientController extends Controller
     {
         $ingredientCategory = IngredientCategory::all();
 
-        $ingredients = Ingredient::with('dishIngredient.dish')->get();
+        $ingredients = Ingredient::with('freeDishIngredient.dish')->get();
 
         return view('admin.ingredients.index', [
             'ingredientCategory' => $ingredientCategory,
@@ -51,7 +51,7 @@ class IngredientController extends Controller
 
             return redirect()->back();
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => $e->getMessage()]);
         }
     }
 
@@ -65,7 +65,7 @@ class IngredientController extends Controller
 
             return response::json(['status' => 1, 'data' => 'Ingredient deleted successfully']);
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => $e->getMessage()]);
         }
     }
 
@@ -93,7 +93,7 @@ class IngredientController extends Controller
             }
             return response::json(['status' => 200, 'data' => $ingredient]);
         } catch (Exception $e) {
-            return response::json(['status' => 400, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
 
@@ -104,8 +104,10 @@ class IngredientController extends Controller
     {
         try {
             Ingredient::find($id)->delete();
+            return response::json(['status' => 200, 'message' => 'Deleted Successfully.']);
+
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
 
@@ -116,13 +118,13 @@ class IngredientController extends Controller
             if ($ingredient) {
                 $ingredient->status = $request->status;
                 $ingredient->save();
-                return response::json(['status' => 1, 'data' => $ingredient]);
+                return response::json(['status' => 200, 'data' => $ingredient]);
             } else {
-                return response::json(['status' => 0, 'message' => 'No such ingredient exist']);
+                return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
             }
 
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
 

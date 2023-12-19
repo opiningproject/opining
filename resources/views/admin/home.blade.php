@@ -28,7 +28,8 @@
                                                                 fill="#FFC00B"/>
                                                         </svg>
                                                     </span>
-                                                    <input type="text" class="form-control text-transform-none"
+                                                    <input type="text" id="search-dish"
+                                                           class="form-control text-transform-none"
                                                            placeholder="What do you want eat today..."/>
                                                 </div>
                                             </div>
@@ -124,7 +125,7 @@
                                                     <div class="categoryfood-detail-card-btn">
                                                         <a class="btn btn-custom-yellow btn-icon category-edit-btn"
                                                            data-id="{{ $category->id }}" data-bs-toggle="modal"
-                                                           data-bs-target="#addCategoryModal">
+                                                           data-bs-target="#editCategoryModel">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
                                                         <a class="btn btn-custom-yellow btn-icon del-cat-icon"
@@ -147,7 +148,7 @@
                         <section class="custom-section">
                             <div class="section-page-title">
                                 <h1 class="section-title">Dishes</h1>
-                                <a href="javascript:void(0);" type="button" class="viewall-btn">View all
+                                <a href="{{ route('dish.index') }}" type="button" class="viewall-btn">View all
                                     <span class="ms-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -160,34 +161,36 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="popular-item-grid">
-                                @foreach ($dishes as $dish)
-                                    <div class="card food-detail-card">
-                                        @if($dish->out_of_stock == '1')
-                                            <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
-                                        @else
-                                            <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
-                                        @endif
-                                        <div class="card-body p-0">
-                                            <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
-                                            <div class="food-image">
-                                                <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                            </div>
-                                            <h4 class="food-name-text">{{ $dish->name }}</h4>
-                                            <p class="food-price">€20</p>
-                                            <div class="food-detail-card-btn">
-                                                <a href="{{ route('editDish', $dish->id) }}"
-                                                   class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-                                                <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
-                                                   data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </a>
+                            <div class=" dish-details-div">
+                                <div class="popular-item-grid">
+                                    @foreach ($dishes as $dish)
+                                        <div class="card food-detail-card">
+                                            @if($dish->out_of_stock == '1')
+                                                <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
+                                            @else
+                                                <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
+                                            @endif
+                                            <div class="card-body p-0">
+                                                <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
+                                                <div class="food-image">
+                                                    <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid"/>
+                                                </div>
+                                                <h4 class="food-name-text">{{ $dish->name }}</h4>
+                                                <p class="food-price">€{{ $dish->price }}</p>
+                                                <div class="food-detail-card-btn">
+                                                    <a href="{{ route('editDish', $dish->id) }}"
+                                                       class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <a class="btn btn-custom-yellow btn-icon del-dish-btn" data-bs-toggle="modal"
+                                                       data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </section>
                         <!-- end dishes list section -->
@@ -211,7 +214,32 @@
                                 </a>
                             </div>
                             <div class="bestselling-item-grid">
-                                <div class="card bestselling-detail-card">
+                                @foreach($popularDishes as $popularDish)
+                                    <div class="card bestselling-detail-card">
+                                        <div class="card-body p-0">
+                                            <div class="food-image">
+                                                <img src="{{ $popularDish->image }}" alt="burger imag" class="img-fluid"/>
+                                            </div>
+                                            <div class="text-start">
+                                                <h4 class="food-name-text text-start">{{ $popularDish->name }}</h4>
+                                                <p class="food-price d-inline-block">{{ $popularDish->price }}</p>
+                                                <p
+                                                    class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
+                                                    +15%
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
+                                                         viewBox="0 0 19 19" fill="none">
+                                                        <path
+                                                            d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
+                                                            fill="#FFC00B"/>
+                                                    </svg>
+                                                </p>
+                                                <p class="lead-1 mb-0">Sold 1k</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+<!--                                <div class="card bestselling-detail-card">
                                     <div class="card-body p-0">
                                         <div class="food-image">
                                             <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
@@ -276,29 +304,7 @@
                                             <p class="lead-1 mb-0">Sold 1k</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>-->
                             </div>
                         </section>
                         <!-- end Popluar item list section -->
@@ -321,270 +327,30 @@
                                 </a>
                             </div>
                             <div class="bestselling-item-grid">
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
+                                @foreach($bestSellerDishes as $bestSellerDish)
+                                    <div class="card bestselling-detail-card">
+                                        <div class="card-body p-0">
+                                            <div class="food-image">
+                                                <img src="{{ $bestSellerDish->image }}" alt="burger imag" class="img-fluid"/>
+                                            </div>
+                                            <div class="text-start">
+                                                <h4 class="food-name-text text-start">{{ $bestSellerDish->name }}</h4>
+                                                <p class="food-price d-inline-block">{{ $bestSellerDish->price }}</p>
+                                                <p
+                                                    class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
+                                                    +15%
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
+                                                         viewBox="0 0 19 19" fill="none">
+                                                        <path
+                                                            d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
+                                                            fill="#FFC00B"/>
+                                                    </svg>
+                                                </p>
+                                                <p class="lead-1 mb-0">Sold 1k</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </section>
                         <!-- end Best selling list section -->
@@ -607,7 +373,6 @@
                 </div>
                 <div class="modal-body ">
                     <form method="POST" id="categoryForm" enctype="multipart/form-data">
-                        <input type="hidden" name="id" id="editCatId">
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
                                 <input type="file" id="input-file" name="image">
@@ -637,6 +402,47 @@
     </div>
     <!-- end add category  Modal -->
 
+    <!-- start edit category Modal -->
+    <div class="modal fade custom-modal" id="editCategoryModel" tabindex="-1" aria-labelledby="editCategoryModel"
+         aria-hidden="true">
+        <div class="modal-dialog custom-w-441px modal-dialog-centered">
+            <div class="modal-content border-radius">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title mb-0">Edit Category</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <form method="POST" id="editCategoryForm" enctype="multipart/form-data">
+                        <input type="hidden" name="id" id="editCatId">
+                        <div class="imageupload-box">
+                            <label for="input-file" class="upload-file">
+                                <input type="file" id="input-file" name="image">
+                                <img src="images/blank-img.svg" alt="blank image" id="edit-img-preview"
+                                     class="img-fluid mb-2">
+                                <p class="mb-0" id="img-label">Please upload image of Category</p>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishnameenglish" class="form-label">Dish Category <span
+                                    class="text-custom-muted">(English)</span></label>
+                            <input type="text" name="name_en" id="edit_name_en" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label for="dishnameenglish" class="form-label">Dish Category <span
+                                    class="text-custom-muted">(Dutch)</span></label>
+                            <input type="text" name="name_nl" id="edit_name_nl" class="form-control" required>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end edit category  Modal -->
+
     <!-- start delete category Modal -->
     <div class="modal fade custom-modal" id="deleteCategoryAlertModal" tabindex="-1"
          aria-labelledby="dleteAlertModal" aria-hidden="true">
@@ -665,7 +471,7 @@
     </div>
     <!-- end delete category Modal -->
 
-    <!-- start delete category Modal -->
+    <!-- start delete dish Modal -->
     <div class="modal fade custom-modal" id="deleteDishAlertModal" tabindex="-1"
          aria-labelledby="deleteDishAlertModal" aria-hidden="true">
         <div class="modal-dialog custom-w-441px modal-dialog-centered">
@@ -683,7 +489,7 @@
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">Cancel
                         </button>
-                        <button type="button" id="delete-category-btn"
+                        <button type="button" id="delete-dish-btn"
                                 class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">Delete
                         </button>
                     </div>
@@ -691,61 +497,13 @@
             </div>
         </div>
     </div>
-    <!-- end delete category Modal -->
+    <!-- end delete dish Modal -->
 
     {{--    </div>--}}
 @endsection
 
 @section('script')
     <script type="text/javascript" src="{{ asset('js/category.js')}}"></script>
-    <script type="text/javascript">
-        var swiper = new Swiper(".category-swiper-slider", {
-            slidesPerView: 1,
-            spaceBetween: 4,
-            loop: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            pagination: false,
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                768: {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
-                },
-                1024: {
-                    slidesPerView: 8,
-                    spaceBetween: 30,
-                },
-                1024: {
-                    slidesPerView: 8,
-                    spaceBetween: 30,
-                },
-                1024: {
-                    slidesPerView: 5,
-                    spaceBetween: 30,
-                },
-                1700: {
-                    slidesPerView: 7,
-                    spaceBetween: 30,
-                },
-                1800: {
-                    slidesPerView: 7,
-                    spaceBetween: 30,
-                },
-                1920: {
-                    slidesPerView: 8,
-                    spaceBetween: 30,
-                },
-                2560: {
-                    slidesPerView: 11,
-                    spaceBetween: 30,
-                },
-            },
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('js/home.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dish-home-operations.js')}}"></script>
 @endsection

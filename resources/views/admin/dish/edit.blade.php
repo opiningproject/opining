@@ -40,7 +40,8 @@
                                                                for="outofstock">Out
                                                             of
                                                             stock</label>
-                                                        <input class="form-check-input" type="checkbox" role="switch" name="out_of_stock" value="1"
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                               name="out_of_stock" value="1"
                                                                {{ $dish->out_of_stock == 1 ? 'checked' : '' }}
                                                                id="outofstock">
                                                     </div>
@@ -178,8 +179,9 @@
                                         </div>
                                         <div id="dish-option-div">
                                             @foreach($dish->option as $option)
-                                                <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 addedOptionDiv"
-                                                     style="float:left;margin-right: 10px;">
+                                                <div
+                                                    class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 addedOptionDiv"
+                                                    style="float:left;margin-right: 10px;">
                                                     <div
                                                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                         <div class="form-group">
@@ -279,6 +281,17 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-auto">
+                                                            <div class="form-group">
+                                                                <label for="discountpercentage"
+                                                                       class="form-label"></label>
+                                                                <button type="submit"
+                                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                                    <span class="align-middle">Add</span>
+                                                                </button>
                                                             </div>
                                                         </div>
 
@@ -493,15 +506,15 @@
                                     </div>
                                 </div>
 
-<!--                                <div class="card-footer bg-white border-0">
-                                    <div class="row">
-                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                            <a class="btn btn-custom-yellow btn-default d-block" id="update-dish">
-                                                <span class="align-middle">Add</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="card-footer bg-white border-0">
+                                                                    <div class="row">
+                                                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                                            <a class="btn btn-custom-yellow btn-default d-block" id="update-dish">
+                                                                                <span class="align-middle">Add</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
                             </div>
                         </section>
                         <!-- end edit dish card section -->

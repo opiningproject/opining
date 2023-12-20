@@ -1,11 +1,10 @@
-$(function () 
-{
+$(function () {
     $("#coupon-form").validate({
-          //debug:true,
-          submitHandler: function(form) {
+        //debug:true,
+        submitHandler: function (form) {
             saveCoupon();
-          }
-     });
+        }
+    });
 
     $('#expiry_date').datepicker({
         format: 'dd-mm-yyyy',
@@ -16,11 +15,11 @@ $(function ()
 
     $(document).on('click', '#coupon-delete-btn', function () {
 
-        $('#coupon-delete-btn').prop('disabled',true);
+        $('#coupon-delete-btn').prop('disabled', true);
         var id = $('#id').val();
 
         $.ajax({
-            url: 'coupons/'+id,
+            url: 'coupons/' + id,
             type: 'DELETE',
             success: function (response) {
                 console.log('success')
@@ -34,16 +33,16 @@ $(function ()
         })
     })
 
-    $('.form-check-input').change(function() {
+    $('.form-check-input').change(function () {
 
-        var status = this.checked == true ? 1:0;
+        var status = this.checked == true ? 1 : 0;
         var id = $('#id').val();
 
         $.ajax({
             url: 'coupons/change-status',
             type: 'POST',
             data: {
-                id,status
+                id, status
             },
             success: function (response) {
                 console.log('success')
@@ -57,18 +56,15 @@ $(function ()
     })
 
     $('#addCouponModal').on('hidden.bs.modal', function () {
-      let validator = $("#Form").validate();
-      //validator.resetForm();  
-      $('#Form').trigger('reset');
-      $(".modal-title").text("Add Coupon")
-      $("#addCouponModal").find('.error').removeClass("error");
+        var alertas = $('#coupon-form');
+        alertas.validate().resetForm();
+        $(".modal-title").text("Add Coupon")
     });
 
 });
 
-function saveCoupon() 
-{
-    $('#coupon-save-btn').prop('disabled',true);
+function saveCoupon() {
+    $('#coupon-save-btn').prop('disabled', true);
 
     var points = $('#points').val();
     var price = $('#price').val();
@@ -82,7 +78,7 @@ function saveCoupon()
         url: 'coupons',
         type: 'POST',
         data: {
-            id,points,price,promo_code,percentage_off,description,expiry_date
+            id, points, price, promo_code, percentage_off, description, expiry_date
         },
         success: function (response) {
             console.log('success')
@@ -96,18 +92,16 @@ function saveCoupon()
     })
 }
 
-function deleteCoupon(id) 
-{
+function deleteCoupon(id) {
     $('#id').val(id);
     $('#deleteCouponModal').modal('show');
 }
 
-function editCoupon(id) 
-{
+function editCoupon(id) {
     $(".modal-title").text("Edit Coupon")
 
     $.ajax({
-        url: 'coupons/'+id+'/edit',
+        url: 'coupons/' + id + '/edit',
         type: 'GET',
         success: function (response) {
             var data = response.data;

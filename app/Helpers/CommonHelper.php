@@ -38,8 +38,8 @@ if (!function_exists('uploadImageToBucket')) {
         }
 
         $filePath = $type . '/' . $file_name;
-        $s3File = Storage::disk('s3')->put($filePath, file_get_contents($file));
-        dd($s3File);
+        Storage::disk('s3')->put($filePath, file_get_contents($file));
+
         return $file_name;
     }
 }

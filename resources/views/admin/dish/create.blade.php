@@ -40,7 +40,8 @@
                                                                for="outofstock">Out
                                                             of
                                                             stock</label>
-                                                        <input class="form-check-input" type="checkbox" role="switch" name="out_of_stock"
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                               name="out_of_stock"
                                                                id="outofstock" value="1">
                                                     </div>
                                                 </div>
@@ -80,18 +81,14 @@
                                                 <div class="form-group ">
                                                     <label for="dishcategory" class="form-label">Dish Category <span
                                                             class="text-custom-muted">(English)</span></label>
-                                                    <div class="input-group">
-                                                        <div class="dropdown buttondropdown category-dropdown">
-                                                            <select class="form-control w-100"
-                                                                    type="button" name="category_id">
-                                                                <option value="">Select Category</option>
-                                                                @foreach($categories as $category)
-                                                                    <option
-                                                                        value="{{ $category->id }}">{{$category->name_en}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                    <select class="form-control w-100"
+                                                            type="button" name="category_id">
+                                                        <option value="">Select Category</option>
+                                                        @foreach($categories as $category)
+                                                            <option
+                                                                value="{{ $category->id }}">{{$category->name_en}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -136,16 +133,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer bg-white border-0">
-                                        <div class="row">
-                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <button type="submit" class="btn btn-custom-yellow btn-default d-block">
+                                        <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="form-group">
+                                                <button type="submit"
+                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
                                                     <span class="align-middle">Add</span>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </section>
@@ -155,8 +152,8 @@
             </div>
         </div>
         <!-- start footer -->
-    @include('layouts.admin.footer_design')
-    <!-- end footer -->
+        @include('layouts.admin.footer_design')
+        <!-- end footer -->
     </div>
 @endsection
 @section('script')

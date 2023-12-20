@@ -28,8 +28,6 @@ class SettingController extends Controller
         $user = RestaurantDetail::where('user_id',Auth::user()->id)->firstOrFail();
         $operating_days = OperatingHour::all();
 
-
-
         return view('admin.settings.index', ['operating_days' => $operating_days,'user' => $user,'zipcodes' => $zipcodes, 'privacy_policy_en' => $privacy_policy_en, 'terms_en' => $terms_en, 'privacy_policy_nl' => $privacy_policy_nl, 'terms_nl' => $terms_nl]);
     }
 

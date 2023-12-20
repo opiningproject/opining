@@ -417,7 +417,7 @@
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
                                 <input type="file" id="edit-input-file" name="image">
-                                <img src="images/blank-img.svg" alt="blank image" id="edit-img-preview" height="100px"
+                                <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" id="edit-img-preview" height="100px"
                                      class="img-fluid mb-2">
                             </label>
                         </div>

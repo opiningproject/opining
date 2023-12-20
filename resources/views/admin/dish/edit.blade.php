@@ -84,20 +84,16 @@
                                                 <div class="form-group ">
                                                     <label for="dishcategory" class="form-label">Dish Category <span
                                                             class="text-custom-muted">(English)</span></label>
-                                                    <div class="input-group">
-                                                        <div class="dropdown buttondropdown category-dropdown">
-                                                            <select class="form-control dropdown-toggle w-100"
-                                                                    type="button"
-                                                                    data-bs-toggle="dropdown" name="category_id"
-                                                                    aria-expanded="false">
-                                                                <option value="">Select Category</option>
-                                                                @foreach($categories as $category)
-                                                                    <option
-                                                                        value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                    <select class="form-control dropdown-toggle w-100"
+                                                            type="button"
+                                                            data-bs-toggle="dropdown" name="category_id"
+                                                            aria-expanded="false">
+                                                        <option value="">Select Category</option>
+                                                        @foreach($categories as $category)
+                                                            <option
+                                                                value="{{ $category->id }}" {{ ($category->id == $dish->category_id) ? 'selected' : ''  }}>{{$category->name_en}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
 

@@ -78,6 +78,7 @@ $(function () {
         var category_id = $('#catId' + id).val()
         var name_en = $('#name_en' + id).val()
         var name_nl = $('#name_nl' + id).val()
+        var dishes =
 
         $.ajax({
             url: baseURL + '/menu/ingredients/' + id,
@@ -95,6 +96,8 @@ $(function () {
                     $('#name_nl' + id).prop("readonly", true);
                     $('#del-btn' + id).show()
                     $('#edit-btn' + id).show()
+                    $('#img-div'+id).hide()
+                    $('#ing-exist-img'+id).show()
                     $('#save-btn'+id).attr('style', 'display:none !important')
                 }
             },
@@ -132,6 +135,7 @@ $(function () {
     })
 
     $(document).on('change', '#input-file', function () {
+        $('#img-preview').attr('style','height:50px !important')
         readURL(this);
         $('#img-label').hide()
     });
@@ -158,151 +162,4 @@ $(function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
-
 });
-
-function saveIngredient() {
-    var ingredientData = new FormData(document.getElementById('addIngredientForm'));
-
-    $.ajax({
-        url: baseURL + 'menu/ingredients/category',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: ingredientData,
-        success: function (response) {
-            if (response.status == 200) {
-                var id = response.data.id
-
-
-                var html = '<tr id="ingredient-tr{{ $ingredient->id }}">' +
-                    '<td scope="row" class="text-center">' +
-                    '    <img' +
-                    '        src="{{ asset(\'images/tomatoes-img.svg\')}}" class="img-fluid"' +
-                    '        alt="ingredient img 1"/>' +
-                    '    <div class="imageupload-box inline-imageupload-box mb-0"' +
-                    '         style="display: none">' +
-                    '        <label for="input-file" class="upload-file">' +
-                    '            <input type="file" id="ing-image{{ $ingredient->id }}">' +
-                    '            <img src="{{ asset(\'images/tomatoes-img.svg\')}}"' +
-                    '                 alt="tomatoes image"' +
-                    '                 class="img-fluid" width="25" height="25">' +
-                    '            <p class="mb-0 text-lowercase" >Tomato.png</p>' +
-                    '        </label>' +
-                    '    </div>' +
-                    '</td>' +
-                    '<td class="text-center"><input type="text"' +
-                    '                               class="form-control text-center w-10r m-auto" id="name_en{{ $ingredient->id }}"' +
-                    '                               value="{{ $ingredient->name_en }}"' +
-                    '                               readonly/></td>' +
-                    '<td>' +
-                    '    <div class="dropdown buttondropdown category-dropdown">' +
-                    '        {{--<button class="form-control dropdown-toggle w-100"' +
-                    '                type="button" data-bs-toggle="dropdown"' +
-                    '                aria-expanded="false" disabled>' +
-                    '            vegetables' +
-                    '        </button>' +
-                    '        <ul class="dropdown-menu">' +
-                    '            <li><a class="dropdown-item"' +
-                    '                   href="javascript:void(0);">Category 1</a></li>' +
-                    '            <li><a class="dropdown-item"' +
-                    '                   href="javascript:void(0);">Category 2</a></li>' +
-                    '            <li><a class="dropdown-item"' +
-                    '                   href="javascript:void(0);">Category 3</a></li>' +
-                    '        </ul>--}}' +
-                    '        <select disabled id="catId{{$ingredient->id}}">' +
-                    '            @foreach ($ingredientCategory as $category) {' +
-                    '            <option' +
-                    '                value="{{ $category->id }}" {{ ($category->id == $ingredient->category_id) ? \'selected\' : \'\' }}>{{ (app()->getLocale() == \'en\') ? $category->name_en : $category->name_nl }}</option>' +
-                    '            @endforeach' +
-                    '        </select>' +
-                    '    </div>' +
-                    '</td>' +
-                    '<td class="text-center">' +
-                    '    <div class="form-group mb-0">' +
-                    '        <div' +
-                    '            class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">' +
-                    '            <input' +
-                    '                class="form-check-input green-check-input update-ing-status"' +
-                    '                value="{{ $ingredient->id }}"' +
-                    '                type="checkbox" role="switch" id="action" {{ ($ingredient->status == 1) ? \'checked\' : \'\'  }}>' +
-                    '        </div>' +
-                    '    </div>' +
-                    '</td>' +
-                    '<td>' +
-                    '    <div class="table-add-dish-bar">' +
-                    '        <button class="btn btn-light dropdown-toggle" type="button"' +
-                    '                data-bs-toggle="dropdown" aria-expanded="false">' +
-                    '            Select Dish name' +
-                    '' +
-                    '        </button>' +
-                    '        <ul class="dropdown-menu custom-dropdown-menu">' +
-                    '            <li><a class="dropdown-item"' +
-                    '                   href="javascript:void(0);">Dish 1</a></li>' +
-                    '            <li><a class="dropdown-item"' +
-                    '                   href="javascript:void(0);">Dish 2</a></li>' +
-                    '            <li><a class="dropdown-item"' +
-                    '                   href="javascript:void(0);">Dish 3</a></li>' +
-                    '        </ul>' +
-                    '        <div class="table-dish-name">' +
-                    '            @foreach ($ingredient->dishIngredient as $ingr) {' +
-                    '' +
-                    '            <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a' +
-                    '                    href="javascript:void(0);"><i' +
-                    '                        class="fa-solid fa-xmark align-middle"></i></a></span>' +
-                    '            <span class="badge text-bg-yellow">margarita pizza<a' +
-                    '                    href="javascript:void(0);"><i' +
-                    '                        class="fa-solid fa-xmark align-middle"></i></a></span>' +
-                    '' +
-                    '            @endforeach' +
-                    '' +
-                    '            <a class="text-more-sm float-end lh-30px"' +
-                    '               data-bs-toggle="collapse" href="#collapseDishRowTwo"' +
-                    '               role="button" aria-expanded="false"' +
-                    '               aria-controls="collapseDishRowTwo">+ 2 more</a>' +
-                    '            <div class="moredishname-collapse collapse"' +
-                    '                 id="collapseDishRowTwo">' +
-                    '                <div' +
-                    '                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">' +
-                    '                        <span class="badge text-bg-yellow">Big mac with' +
-                    '                            Cheese<a href="javascript:void(0);"><i' +
-                    '                                    class="fa-solid fa-xmark align-middle"></i></a></span>' +
-                    '                    <span class="badge text-bg-yellow">Big mac with' +
-                    '                            Cheese<a href="javascript:void(0);"><i' +
-                    '                                class="fa-solid fa-xmark align-middle"></i></a></span>' +
-                    '                </div>' +
-                    '            </div>' +
-                    '        </div>' +
-                    '    </div>' +
-                    '</td>' +
-                    '<td class="text-center">' +
-                    '    <div class="">' +
-                    '        <a class="btn btn-custom-yellow btn-icon edit-ing-btn"' +
-                    '           tabindex="0" data-id="{{ $ingredient->id }}">' +
-                    '            <i class="fa-solid fa-pen-to-square"></i>' +
-                    '        </a>' +
-                    '        <a class="btn btn-custom-yellow btn-icon del-ing-btn"' +
-                    '           data-id="{{ $ingredient->id }}">' +
-                    '            <i class="fa-regular fa-trash-can"></i>' +
-                    '        </a>' +
-                    '        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"' +
-                    '           style="display:none !important;" data-id="{{ $ingredient->id }}">' +
-                    '            <span class="align-middle">Save</span>' +
-                    '        </a>' +
-                    '    </div>' +
-                    '</td>' +
-                    '</tr>'
-                $('#paidIngredientTbody').append(html)
-                $('#paidIngredientCategory').val('')
-                $('#paidIngredient').html('<option value="">Select Ingredient</option>')
-
-            }
-
-        },
-        error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
-        }
-    })
-}
-

@@ -42,7 +42,7 @@ class CategoryController extends Controller
                 $request->request->remove('image');
                 $request->request->add(['image' => $imageName]);
             }
-            dd($request->all());
+
             $category = Category::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()

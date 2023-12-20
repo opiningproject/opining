@@ -141,11 +141,11 @@ $(function () {
     });
 
     $(document).on('change', '.dish-dropdown', function (){
-        var ingredientId = $(this).val()
+        var ingredientId = $(this).attr('data-id')
         var dishName = $(this).find(':selected').attr('data-name')
 
-        var html = '<span class="badge text-bg-yellow">' + dishName +'<a' +
-            'href="javascript:void(0);"><i class="fa-solid fa-xmark align-middle del-dish-icon" data-id="' + ingredientId +'" data-name="' + dishName + '"></i></a></span>';
+        var html = '<span class="badge text-bg-yellow">' + dishName +'<a ' +
+            'href="javascript:void(0);"><i class="fa-solid fa-xmark align-middle del-dish-icon new-added-dish" data-id="' + ingredientId +'" data-name="' + dishName + '"></i></a></span>';
         $('.dish-tray'+ingredientId).append(html)
         $(this).find(':selected').remove()
         $(this).val('')

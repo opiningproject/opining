@@ -34,6 +34,7 @@ class CategoryController extends Controller
     {
         try {
             if($request->has('image')){
+                dd('image');
                 if($request->has('id')){
                     $imageName = uploadImageToBucket($request, '/category', '');
                 }else{
@@ -42,7 +43,7 @@ class CategoryController extends Controller
                 $request->request->remove('image');
                 $request->request->add(['image' => $imageName]);
             }
-
+            dd($request->all());
             $category = Category::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()

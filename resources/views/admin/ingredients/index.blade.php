@@ -200,7 +200,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="table-add-dish-bar">
-                                                            <select class="btn btn-light dropdown-toggle" type="button" id="dish-list{{ $ingredient->id }}" disabled>
+                                                            <select class="btn btn-light dropdown-toggle dish-dropdown" data-id="{{ $ingredient->id }}" type="button" id="dish-list{{ $ingredient->id }}" disabled>
                                                                 <?php
                                                                     $dishLists = \App\Models\Dish::doesnthave('freeIngredients', 'and', function ($query) use ($ingredient){
                                                                         $query->where('ingredient_id', $ingredient->id);
@@ -208,17 +208,15 @@
                                                                     ?>
                                                                 <option value="">Select Dish name</option>
                                                                 @foreach($dishLists as $dish)
-                                                                    <option value="{{ $dish->id }}">{{ $dish->name }}</option>
+                                                                    <option value="{{ $dish->id }}" data-name="{{ $dish->name }}">{{ $dish->name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            <div class="table-dish-name">
+                                                            <div class="table-dish-name dish-tray{{ $ingredient->id }}">
                                                                 @foreach ($ingredient->freeDishIngredient as $ingr)
-
                                                                     <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
                                                                             href="javascript:void(0);"><i
-                                                                                class="fa-solid fa-xmark align-middle"></i></a></span>
+                                                                                class="fa-solid fa-xmark align-middle del-dish-icon" data-id="{{ $ingredient->id }}" data-name="{{ $ingr->dish->name_en }}"></i></a></span>
                                                                 @endforeach
-
                                                                 <div class="moredishname-collapse collapse"
                                                                      id="collapseDishRowTwo">
                                                                     <div

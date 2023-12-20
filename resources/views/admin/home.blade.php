@@ -416,10 +416,9 @@
                         <input type="hidden" name="id" id="editCatId">
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
-                                <input type="file" id="input-file" name="image">
-                                <img src="images/blank-img.svg" alt="blank image" id="edit-img-preview"
+                                <input type="file" id="edit-input-file" name="image">
+                                <img src="images/blank-img.svg" alt="blank image" id="edit-img-preview" height="100px"
                                      class="img-fluid mb-2">
-                                <p class="mb-0" id="img-label">Please upload image of Category</p>
                             </label>
                         </div>
                         <div class="form-group">

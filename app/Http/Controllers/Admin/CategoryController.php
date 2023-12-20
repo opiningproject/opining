@@ -34,7 +34,6 @@ class CategoryController extends Controller
     {
         try {
             if($request->has('image')){
-                dd('image');
                 if($request->has('id')){
                     $imageName = uploadImageToBucket($request, '/category', '');
                 }else{

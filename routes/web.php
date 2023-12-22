@@ -34,7 +34,7 @@ Route::get('/clear-all', function() {
 });
 
 Route::get('/', function () {
-    return redirect()->route('user.home');
+    return redirect()->route('home');
 });
 
 Route::middleware(['localization'])->group(function ()

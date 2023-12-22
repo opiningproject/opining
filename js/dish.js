@@ -258,6 +258,13 @@ $(function () {
     })
 
     $(document).on('change', '#input-file', function () {
+
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+            alert('You must select an image file only');
+            return false
+        }
+
         $('#img-preview').attr('style', 'height:50px !important; margin-top: -8px;')
         readURL(this);
         $('#img-label').hide()

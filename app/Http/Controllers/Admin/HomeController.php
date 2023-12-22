@@ -26,12 +26,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::all();
-        $dishes = Dish::orderBy('id')->get();
+        $categories = Category::orderBy('id', 'desc')->get();
+        $dishes = Dish::orderBy('id', 'desc')->get();
 
-        $popularDishes = Dish::orderBy('id')->limit(4)->get();
+        $popularDishes = Dish::orderBy('id', 'desc')->limit(4)->get();
 
-        $bestSellerDishes = Dish::orderBy('id')->limit(12)->get();
+        $bestSellerDishes = Dish::orderBy('id', 'desc')->limit(12)->get();
 
         return view('admin.home', ['categories' => $categories, 'dishes' => $dishes, 'popularDishes' => $popularDishes, 'bestSellerDishes' => $bestSellerDishes]);
     }

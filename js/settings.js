@@ -1,9 +1,8 @@
-$(function () 
+$(function ()
 {
     $('.timepicker').timepicker({
             timeFormat: 'h:mm',
             interval: 60,
-            minTime: '10',
             maxTime: '6:00pm',
             defaultTime: '11',
             startTime: '10:00',
@@ -11,7 +10,7 @@ $(function ()
             dropdown: true,
             scrollbar: true
         });
-    
+
     var editor_config = {
         skin: 'moono',
         height: '40vh',
@@ -33,7 +32,7 @@ $(function ()
     CKEDITOR.replace('terms-en',editor_config);
     CKEDITOR.replace('privacy-nl',editor_config);
     CKEDITOR.replace('terms-nl',editor_config);
-        
+
     $(document).on('click', '#zipcode-delete-btn', function () {
 
         //$('#zipcode-delete-btn').prop('disabled',true);
@@ -57,7 +56,7 @@ $(function ()
 
 });
 
-function saveZipcode(id) 
+function saveZipcode(id)
 {
     $('#zipcode-save-btn').prop('disabled',true);
 
@@ -88,7 +87,7 @@ function saveZipcode(id)
         data: {
             id,zipcode,min_order_price,delivery_charge,status
         },
-        success: function (response) 
+        success: function (response)
         {
             //alert(response);
 
@@ -115,7 +114,7 @@ function saveZipcode(id)
     })
 }
 
-function editZipcode(id) 
+function editZipcode(id)
 {
     $('.zipcode-row-'+id).find('input').removeAttr('readonly');
     $('#id').val(id);
@@ -125,16 +124,16 @@ function editZipcode(id)
     $("#zipcode-save-btn-"+id).css("display", "block");
 }
 
-function deleteZipcode(id) 
+function deleteZipcode(id)
 {
     $('#id').val(id);
     $('#deleteZipcodeModal').modal('show');
 }
 
-function changeStatus(id) 
+function changeStatus(id)
 {
     var status = $("#status_"+id).prop('checked')  == true ? 1:0;
-  
+
     $.ajax({
         url: 'settings/change-status',
         type: 'POST',
@@ -152,7 +151,7 @@ function changeStatus(id)
     })
 }
 
-function changeContent(type) 
+function changeContent(type)
 {
     if(type == 'privacy-en')
     {
@@ -189,7 +188,7 @@ function changeContent(type)
     }
 }
 
-function saveContent(lang) 
+function saveContent(lang)
 {
     var type = $('#type').val();
     var content= CKEDITOR.instances[type+'-'+lang].getData();
@@ -212,12 +211,12 @@ function saveContent(lang)
     })
 }
 
-$('#cmsPagesen-tab').click(function () { 
+$('#cmsPagesen-tab').click(function () {
   $('#btnradio1').prop('checked', true);
   $("#type").val('privacy');
 });
 
-$('#cmsPagesdutch-tab').click(function () { 
+$('#cmsPagesdutch-tab').click(function () {
   $('#btnradio3').prop('checked', true);
   $("#type").val('privacy');
 });

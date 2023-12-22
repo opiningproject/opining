@@ -12,6 +12,15 @@ $(function () {
             changePassword();
         }
     });
+
+    $(document).on('change', '#restaurant-logo-input-file', function () {
+        addLogoReadURL(this);
+    });
+
+    $(document).on('change', '#permit-doc-input-file', function () {
+        editPermitReadURL(this);
+    });
+
 });
 
 function changePassword() {
@@ -57,3 +66,27 @@ $('#changePasswordModal').on('hidden.bs.modal', function () {
     $("#new_password-error").addClass('d-none');
     $("#c_password-error").addClass('d-none');
 });
+
+function addLogoReadURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#profile-img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function editPermitReadURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#permit-img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}

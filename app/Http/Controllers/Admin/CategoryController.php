@@ -36,18 +36,16 @@ class CategoryController extends Controller
             if($request->has('image')){
                 if($request->has('id')){
                     $imageName = uploadImageToBucket($request, '/category', '');
+                    $category = Category::find($request->id);
                 }else{
+                    $category = new Category();
                     $imageName = uploadImageToBucket($request, '/category');
                 }
-//                dd($imageName);
-                $request->request->remove('image');
-                $request->request->add(['image' => $imageName]);
+                $category->image = $imageName;
             }
-
-            $category = Category::updateOrCreate(
-                ['id' => $request->id],
-                $request->all()
-            );
+            $category->name_en = $request->name_en;
+            $category->name_nl = $request->name_nl;
+            $category->save();
 
             return response::json(['status' => 200, 'data' => $category]);
         } catch (Exception $e) {

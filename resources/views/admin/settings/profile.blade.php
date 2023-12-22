@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
-    <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}">
+    <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="card-body">
             <nav class="page-breadcrumb" aria-label="breadcrumb">
@@ -80,24 +80,24 @@
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="servicecharge" class="form-label">Restaurant Logo</label>
-                            <div class="logowithtext-box">
-                                <img src="images/restaurantlogo-img.svg" alt="Restaurant Logo" class="img-fluid" />
-                                <span class="lead-3 text-custom-muted">Lorem Ipsum.png</span>
-                            </div>
+                            <label for="restaurant-logo-input-file" class="logowithtext-box">
+                                <input type="file" class="d-none" id="restaurant-logo-input-file" name="image">
+                                <img src="{{ $user->restaurant_logo }}" alt="Restaurant Logo" id="profile-img" class="img-fluid" />
+                            </label>
                         </div>
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="servicecharge" class="form-label">Company Permit Document</label>
-                            <div class="logowithtext-box">
-                                <img src="images/restaurantlogo-img.svg" alt="Restaurant Logo" class="img-fluid" />
-                                <span class="lead-3 text-custom-muted">Lorem Ipsum.png</span>
-                            </div>
+                            <label for="permit-doc-input-file" class="logowithtext-box">
+                                <input type="file" class="d-none" id="permit-doc-input-file" name="permit-doc">
+                                <img src="{{ $user->permit_doc }}" alt="Permit Doc" id="permit-img" class="img-fluid" />
+                            </label>
                         </div>
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
-                            <label for="servicecharge" class="form-label">service charge</label>
+                            <label for="servicecharge" class="form-label">Service charge</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">€</span>
                                 <input type="number" class="form-control" value="{{ $user->service_charge }}" name="service_charge" required />

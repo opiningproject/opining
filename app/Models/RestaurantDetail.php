@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantDetail extends Model
 {
@@ -16,5 +17,23 @@ class RestaurantDetail extends Model
 
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    public function getRestaurantLogoAttribute($value){
+        if(!empty($value)){
+            $s3 = Storage::disk('s3');
+            return $s3->url('/restaurant/'.$value);
+        }
+
+        return asset('images/blank-img.svg');
+    }
+
+    public function getPermitDocAttribute($value){
+        if(!empty($value)){
+            $s3 = Storage::disk('s3');
+            return $s3->url('/restaurant/'.$value);
+        }
+
+        return asset('images/blank-img.svg');
     }
 }

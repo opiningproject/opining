@@ -4,7 +4,6 @@ $(function ()
             timeFormat: 'h:mm',
             interval: 60,
             maxTime: '6:00pm',
-            defaultTime: '11',
             startTime: '10:00',
             dynamic: false,
             dropdown: true,

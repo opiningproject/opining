@@ -9,7 +9,7 @@ $(function () {
                 required: true
             },
             image: {
-                required: true
+                required: true,
             }
         },
         submitHandler: function (form) {
@@ -100,6 +100,13 @@ $(function () {
             return false
         }
 
+        var imgWidth = $(this).width();
+        var imgHeight =$(this).height();
+        if(imgWidth > 1080 || imgHeight > 1080){
+            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            return false
+        }
+
         $('#img-preview').attr('style','height:100px !important')
         addCategoryReadURL(this);
         $('#img-label').hide()
@@ -110,6 +117,13 @@ $(function () {
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
             alert('You must select an image file only');
+            return false
+        }
+
+        var imgWidth = $(this).width();
+        var imgHeight =$(this).height();
+        if(imgWidth > 1080 || imgHeight > 1080){
+            alert('Your image is too big, it must be within 1080 X 1080 pixels');
             return false
         }
 

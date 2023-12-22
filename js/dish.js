@@ -198,6 +198,11 @@ $(function () {
         })
     })
 
+    $(document).on('change', '#per_page_dropdown', function () {
+        var url = this.value;
+        window.open(url, '_blank');
+    })
+
     $(document).on('click', '#addOptionBtn', function (){
 
         var name_en = $('#option_name_en').val()
@@ -251,6 +256,12 @@ $(function () {
     $(document).on('click', '.del-new-option', function (){
         $(this).parent().parent().parent().parent().remove()
     })
+
+    $(document).on('change', '#input-file', function () {
+        $('#img-preview').attr('style', 'height:50px !important; margin-top: -8px;')
+        readURL(this);
+        $('#img-label').hide()
+    });
 });
 
 function getIngredientsList(categoryId, type) {
@@ -430,4 +441,16 @@ function updateDishData() {
             alert(errorMessage);
         }
     })
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#img-preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
 }

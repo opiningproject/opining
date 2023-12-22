@@ -14,11 +14,13 @@ class IngredientCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ingredientCategory = IngredientCategory::orderBy('id','DESC')->get();
+        $perPage = isset($request->per_page) ? $request->per_page : 10;
+        $ingredientCategory = IngredientCategory::orderBy('id','DESC')->paginate($perPage);
         return view('admin.ingredients.ingredient-category', [
-            'ingredientCategory' => $ingredientCategory
+            'ingredientCategory' => $ingredientCategory,
+            'perPage' => $perPage
         ]);
     }
 

@@ -101,6 +101,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/menu/ingredients/checkAttachedDish/{ingredient}', [IngredientController::class, 'checkAttachedDish']);
     Route::post('/menu/ingredients/update-status/{ingredient}',[IngredientController::class, 'updateIngredientStatus']);
+    Route::post('/menu/ingredients/update/{ingredient}',[IngredientController::class, 'updateIngredient']);
 
     Route::resource('/menu/ingredients',IngredientController::class);
     Route::post('/menu/ingredients/ing-cat-wise/{ingredient}',[IngredientController::class => 'ingredientCategoryWise']);

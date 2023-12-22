@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DishIngredient;
 use App\Models\Ingredient;
 use App\Models\IngredientCategory;
 use PHPUnit\Exception;
@@ -14,15 +15,17 @@ class IngredientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $perPage = isset($request->per_page) ? $request->per_page : 10;
         $ingredientCategory = IngredientCategory::all();
 
-        $ingredients = Ingredient::with('freeDishIngredient.dish')->get();
+        $ingredients = Ingredient::with('freeDishIngredient.dish')->orderBy('id', 'desc')->paginate($perPage);
 
         return view('admin.ingredients.index', [
             'ingredientCategory' => $ingredientCategory,
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'perPage' => $perPage
         ]);
     }
 
@@ -85,9 +88,28 @@ class IngredientController extends Controller
         try {
             $ingredient = Ingredient::find($id);
             if($ingredient){
+
+                if ($request->has('image')) {
+                    $imageName = uploadImageToBucket($request, 'ingredients', '');
+                    $request->merge(['image' => $imageName]);
+                }
+
                 $ingredient->update(
                     $request->all()
                 );
+
+                if(!empty($request->deletedDish)){
+                    $dishList = explode(',', $request->deletedDish);
+                    DishIngredient::whereIn('id',$dishList)->delete();
+                }
+
+                if($request->has('addedDish')){
+                    foreach ($request->addedDish as $addedDish) {
+                        $ingredient->dishIngredient()->create([
+                            'dish_id' => $addedDish
+                        ]);
+                    }
+                }
             }else{
                 return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
             }
@@ -148,6 +170,42 @@ class IngredientController extends Controller
                 return response::json(['status' => 200, 'data' => $ingredients]);
             }
 
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateIngredient(Request $request, string $id){
+        try {
+//            dd($request->all());
+            $ingredient = Ingredient::find($id);
+            if($ingredient){
+                $ingredient->update(
+                    $request->all()
+                );
+
+                if ($request->has('image')) {
+                    $imageName = uploadImageToBucket($request, 'ingredients', '');
+                    $request->merge(['image' => $imageName]);
+                }
+
+
+                if(!empty($request->deletedDish)){
+                    $dishList = explode(',', $request->deletedDish);
+                    DishIngredient::whereIn('id',$dishList)->delete();
+                }
+
+                if($request->has('addedDish')){
+                    foreach ($request->addedDish as $addedDish) {
+                        $ingredient->dishIngredient()->create([
+                            'dish_id' => $addedDish
+                        ]);
+                    }
+                }
+            }else{
+                return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
+            }
+            return response::json(['status' => 200, 'data' => $ingredient]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }

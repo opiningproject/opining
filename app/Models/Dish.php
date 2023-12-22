@@ -72,6 +72,10 @@ class Dish extends Model
         return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', '0');
     }
 
+    public function ingredients(){
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id');
+    }
+
     protected function getImageAttribute($value)
     {
         if(!empty($value)){
@@ -99,6 +103,6 @@ class Dish extends Model
         {
             return 0;
         }
-        
+
     }
 }

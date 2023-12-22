@@ -15,9 +15,10 @@ use Response;
 
 class SettingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $zipcodes = $this->getZipcode();
+        $perPage = isset($request->per_page) ? $request->per_page : 10;
+        $zipcodes = $this->getZipcode($perPage);
 
         $privacy_policy_en = CMS::where('type','privacy')->where('lang','en')->pluck('content')->first();
         $terms_en = CMS::where('type','terms')->where('lang','en')->pluck('content')->first();
@@ -28,12 +29,21 @@ class SettingController extends Controller
         $user = RestaurantDetail::where('user_id',Auth::user()->id)->firstOrFail();
         $operating_days = OperatingHour::all();
 
-        return view('admin.settings.index', ['operating_days' => $operating_days,'user' => $user,'zipcodes' => $zipcodes, 'privacy_policy_en' => $privacy_policy_en, 'terms_en' => $terms_en, 'privacy_policy_nl' => $privacy_policy_nl, 'terms_nl' => $terms_nl]);
+        return view('admin.settings.index', [
+            'operating_days' => $operating_days,
+            'user' => $user,
+            'zipcodes' => $zipcodes,
+            'privacy_policy_en' => $privacy_policy_en,
+            'terms_en' => $terms_en,
+            'privacy_policy_nl' => $privacy_policy_nl,
+            'terms_nl' => $terms_nl,
+            'perPage' => $perPage
+        ]);
     }
 
-    public function getZipcode()
+    public function getZipcode($perPage)
     {
-        $zipcodes = Zipcode::orderBy('id', 'desc')->get();
+        $zipcodes = Zipcode::orderBy('id', 'desc')->paginate($perPage);
 
         return $zipcodes;
     }
@@ -166,11 +176,20 @@ class SettingController extends Controller
         $request->merge([
             'online_order_accept' => $request->online_order_accept ? '1' : '0',
         ]);
+        $request->request->remove('_token');
 
         RestaurantDetail::updateOrCreate(
-                ['id' => $user_id],
+                ['user_id' => $user_id],
                 $request->all()
             );
+
+        foreach ($request->id as $key => $timeId){
+            $day = OperatingHour::find($timeId);
+            $day->start_time = $request->start_time[$key];
+            $day->end_time = $request->end_time[$key];
+            $day->save();
+        }
+
 
         return redirect("/settings");
     }

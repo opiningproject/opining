@@ -54,12 +54,11 @@
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group imageupload-box inline-imageupload-box">
                                                     <label for="dishimage" class="form-label">Dish Image</label>
-                                                    <label for="input-file" class="upload-file">
+                                                    <label for="input-file" class="upload-file justify-content-center">
                                                         <input type="file" id="input-file" name="image">
                                                         <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
-                                                             class="img-fluid"
-                                                             width="22" height="17">
-                                                        <p class="mb-0">Upload Image of Item</p>
+                                                             class="img-fluid" id="img-preview">
+                                                        <p class="mb-0" id="img-label">Upload Image of Item</p>
                                                     </label>
                                                 </div>
                                             </div>

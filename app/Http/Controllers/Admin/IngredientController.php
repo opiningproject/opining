@@ -44,13 +44,15 @@ class IngredientController extends Controller
     {
         try {
             if ($request->has('image')) {
-                $imageName = uploadImageToBucket($request, 'ingredients');
-                $request->merge(['image' => $imageName]);
+                $imageName = uploadImageToBucket($request, 'ingredients/');
             }
 
-            Ingredient::create(
-                $request->all()
-            );
+            $ingredient = new Ingredient();
+            $ingredient->image = $imageName;
+            $ingredient->name_en = $request->name_en;
+            $ingredient->name_nl = $request->name_nl;
+            $ingredient->category_id = $request->category_id;
+            $ingredient->save();
 
             return redirect()->back();
         } catch (Exception $e) {
@@ -90,13 +92,14 @@ class IngredientController extends Controller
             if($ingredient){
 
                 if ($request->has('image')) {
-                    $imageName = uploadImageToBucket($request, 'ingredients', '');
-                    $request->merge(['image' => $imageName]);
+                    $imageName = uploadImageToBucket($request, 'ingredients/', '');
+                    $ingredient->image = $imageName;
                 }
 
-                $ingredient->update(
-                    $request->all()
-                );
+                $ingredient->name_en = $request->name_en;
+                $ingredient->name_nl = $request->name_nl;
+                $ingredient->category_id = $request->category_id;
+                $ingredient->save();
 
                 if(!empty($request->deletedDish)){
                     $dishList = explode(',', $request->deletedDish);

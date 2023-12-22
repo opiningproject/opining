@@ -119,7 +119,7 @@
                                             <div class="category-element swiper-slide">
                                                 <div class="card">
                                                 <span class="dish-item-icon">
-                                                    <img src="{{ $category->image }}" class="img-fluid" alt="bakery">
+                                                    <img src="{{ $category->image }}" class="img-fluid" alt="bakery" style="height: 60px !important;">
                                                 </span>
                                                     <p class="mb-0 category-item-name text-truncate w-100" title="{{ $category->name }}">{{ $category->name }}</p>
                                                     <div class="categoryfood-detail-card-btn">
@@ -173,7 +173,7 @@
                                             <div class="card-body p-0">
                                                 <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
                                                 <div class="food-image">
-                                                    <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid"/>
+                                                    <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" style="height: 60px !important;"/>
                                                 </div>
                                                 <h4 class="food-name-text text-truncate w-100" title="{{ $dish->name }}">{{ $dish->name }}</h4>
                                                 <p class="food-price">€{{ $dish->price }}</p>
@@ -218,7 +218,7 @@
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $popularDish->image }}" alt="burger imag" class="img-fluid"/>
+                                                <img src="{{ $popularDish->image }}" style="height: 60px !important;" alt="burger imag" class="img-fluid"/>
                                             </div>
                                             <div class="text-start">
                                                 <h4 class="food-name-text text-start text-truncate w-100" title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
@@ -265,7 +265,7 @@
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $bestSellerDish->image }}" alt="burger imag" class="img-fluid"/>
+                                                <img src="{{ $bestSellerDish->image }}" style="height: 60px !important;" alt="burger imag" class="img-fluid"/>
                                             </div>
                                             <div class="text-start">
                                                 <h4 class="food-name-text text-start text-truncate w-100" title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>

@@ -46,14 +46,23 @@ class DishController extends Controller
     {
         try {
 
-            if($request->has('image')){
-                $imageName = uploadImageToBucket($request, 'dish');
-                $request->merge(['image' => $imageName]);
+            if ($request->has('image')) {
+                $imageName = uploadImageToBucket($request, '/dish');
             }
 
-            $dish = Dish::create(
-                $request->all()
-            );
+            $dish = new Dish();
+            $dish->name_en = $request->name_en;
+            $dish->category_id  = $request->category_id ;
+            $dish->name_nl = $request->name_nl;
+            $dish->desc_en = $request->desc_en;
+            $dish->desc_nl = $request->desc_nl;
+            $dish->image = $imageName;
+            $dish->price = $request->price;
+            $dish->percentage_off = $request->percentage_off;
+            $dish->qty = $request->qty;
+            $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';
+            $dish->save();
+
             return redirect()->route('editDish', ['dish' => $dish->id]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
@@ -204,12 +213,13 @@ class DishController extends Controller
                 $dish->percentage_off = $request->percentage_off;
                 $dish->qty = $request->qty;
                 $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';
-                if ($dish->save()) {
 
-                    if($request->has('image')){
-                        $imageName = uploadImageToBucket($request, 'dish','');
-                        $request->merge(['image' => $imageName]);
-                    }
+                if ($request->has('image')) {
+                    $imageName = uploadImageToBucket($request, 'dish', '');
+                    $dish->image = $imageName;
+                }
+
+                if ($dish->save()) {
 
                     if (isset($request->deletedOption)) {
                         $deletedDishArray = explode(',', $request->deletedOption);

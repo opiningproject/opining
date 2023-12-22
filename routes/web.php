@@ -114,4 +114,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/user/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
     Route::get('/user/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+
+    Route::post('/user/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
+    Route::get('/user/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
 });

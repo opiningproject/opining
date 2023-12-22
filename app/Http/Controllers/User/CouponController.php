@@ -29,7 +29,9 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view('user.coupons');
+        $coupons = Coupon::orderBy('id', 'desc')->get();
+
+        return view('user.coupons', ['coupons' => $coupons]);
     }
 
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Dish;
 use App\Models\Address;
+use App\Models\OrderDetail;
 use Auth;
 use Session;
 
@@ -38,6 +39,7 @@ class HomeController extends Controller
         $user = (Auth::user()) ? Auth::user() : '';
         $user_id = $user ? $user->id : 0;
         $addresses = Address::select('*')->orderBy('company_name', 'asc')->where('user_id',$user_id)->get();
+        $cart = OrderDetail::select('*')->orderBy('id', 'desc')->where('user_id',$user_id)->get();
         $category = '';
 
         if($request->cat_id)
@@ -52,6 +54,6 @@ class HomeController extends Controller
 
         $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
 
-        return view('user.dashboard',['categories' => $categories,'category' => $category, 'dishes' => $dishes, 'addresses' => $addresses, 'user' => $user]);
+        return view('user.dashboard',['categories' => $categories,'category' => $category, 'dishes' => $dishes, 'addresses' => $addresses, 'user' => $user, 'cart' => $cart]);
     }
 }

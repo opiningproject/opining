@@ -57,6 +57,7 @@ $(function () {
 
     $('#addCouponModal').on('hidden.bs.modal', function () {
         var alertas = $('#coupon-form');
+        alertas.trigger("reset");
         alertas.validate().resetForm();
         $(".modal-title").text("Add Coupon")
     });

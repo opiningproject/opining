@@ -50,6 +50,7 @@ function changePassword() {
 
 $('#changePasswordModal').on('hidden.bs.modal', function () {
     var alertas = $('#change-password-form');
+    alertas.trigger("reset");
     alertas.validate().resetForm();
 
     $("#old_password-error").addClass('d-none');

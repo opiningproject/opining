@@ -80,6 +80,7 @@ $(function () {
     $('#addCategoryModal').on('hidden.bs.modal', function () {
         var alertas = $('#categoryForm');
         alertas.validate().resetForm();
+        alertas.trigger("reset");
         alertas.find('.error').removeClass('error');
         $('#img-label').show()
         $('#img-preview').attr('src', 'images/blank-img.svg').attr('style','height:auto !important');
@@ -87,6 +88,7 @@ $(function () {
 
     $('#editCategoryModel').on('hidden.bs.modal', function () {
         var alertas = $('#editCategoryForm');
+        alertas.trigger("reset");
         alertas.validate().resetForm();
     });
 

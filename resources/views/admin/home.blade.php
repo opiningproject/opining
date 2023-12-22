@@ -121,7 +121,7 @@
                                                 <span class="dish-item-icon">
                                                     <img src="{{ $category->image }}" class="img-fluid" alt="bakery">
                                                 </span>
-                                                    <p class="mb-0 category-item-name">{{ (app()->getLocale() == 'en') ? $category->name_en : $category->name_nl }}</p>
+                                                    <p class="mb-0 category-item-name text-truncate w-100" title="{{ $category->name }}">{{ $category->name }}</p>
                                                     <div class="categoryfood-detail-card-btn">
                                                         <a class="btn btn-custom-yellow btn-icon category-edit-btn"
                                                            data-id="{{ $category->id }}" data-bs-toggle="modal"
@@ -175,7 +175,7 @@
                                                 <div class="food-image">
                                                     <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid"/>
                                                 </div>
-                                                <h4 class="food-name-text">{{ $dish->name }}</h4>
+                                                <h4 class="food-name-text text-truncate w-100" title="{{ $dish->name }}">{{ $dish->name }}</h4>
                                                 <p class="food-price">€{{ $dish->price }}</p>
                                                 <div class="food-detail-card-btn">
                                                     <a href="{{ route('editDish', $dish->id) }}"
@@ -221,7 +221,7 @@
                                                 <img src="{{ $popularDish->image }}" alt="burger imag" class="img-fluid"/>
                                             </div>
                                             <div class="text-start">
-                                                <h4 class="food-name-text text-start">{{ $popularDish->name }}</h4>
+                                                <h4 class="food-name-text text-start text-truncate w-100" title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
                                                 <p class="food-price d-inline-block">{{ $popularDish->price }}</p>
                                                 <p
                                                     class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
@@ -239,72 +239,6 @@
                                     </div>
                                 @endforeach
 
-<!--                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card bestselling-detail-card">
-                                    <div class="card-body p-0">
-                                        <div class="food-image">
-                                            <img src="images/burger-svg.svg" alt="burger imag" class="img-fluid"/>
-                                        </div>
-                                        <div class="text-start">
-                                            <h4 class="food-name-text text-start">Burger</h4>
-                                            <p class="food-price d-inline-block">20</p>
-                                            <p
-                                                class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                +15%
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                                     viewBox="0 0 19 19" fill="none">
-                                                    <path
-                                                        d="M18.5 9.25C18.5 4.13167 14.3683 -1.80601e-07 9.25 -4.0433e-07C4.13167 -6.2806e-07 -1.80601e-07 4.13167 -4.0433e-07 9.25C-6.2806e-07 14.3683 4.13167 18.5 9.25 18.5C14.3683 18.5 18.5 14.3683 18.5 9.25ZM8.63333 13.0117L8.63333 7.33833L7.03 8.75667C6.66 9.065 6.16667 9.00333 5.85833 8.695C5.735 8.51 5.67333 8.325 5.67333 8.14C5.67333 7.89333 5.79667 7.64667 5.98167 7.52333L8.94167 4.93333C9.00333 4.87167 9.065 4.87167 9.12667 4.81C9.18833 4.81 9.18833 4.81 9.25 4.74833C9.31167 4.74833 9.31167 4.74833 9.37333 4.74833L9.435 4.74833C9.49667 4.74833 9.49667 4.74833 9.55833 4.74833L9.62 4.74833C9.68167 4.74833 9.68167 4.74833 9.74333 4.81C9.74333 4.81 9.805 4.81 9.805 4.87167L9.86667 4.93333C9.86667 4.93333 9.86667 4.93333 9.92833 4.995L12.5183 7.64667C12.8267 7.955 12.8267 8.51 12.5183 8.81833C12.21 9.12667 11.655 9.12667 11.3467 8.81833L10.175 7.585L10.175 13.0733C10.175 13.505 9.805 13.9367 9.31167 13.9367C9.00333 13.8133 8.63333 13.4433 8.63333 13.0117Z"
-                                                        fill="#FFC00B"/>
-                                                </svg>
-                                            </p>
-                                            <p class="lead-1 mb-0">Sold 1k</p>
-                                        </div>
-                                    </div>
-                                </div>-->
                             </div>
                         </section>
                         <!-- end Popluar item list section -->
@@ -334,7 +268,7 @@
                                                 <img src="{{ $bestSellerDish->image }}" alt="burger imag" class="img-fluid"/>
                                             </div>
                                             <div class="text-start">
-                                                <h4 class="food-name-text text-start">{{ $bestSellerDish->name }}</h4>
+                                                <h4 class="food-name-text text-start text-truncate w-100" title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
                                                 <p class="food-price d-inline-block">{{ $bestSellerDish->price }}</p>
                                                 <p
                                                     class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">

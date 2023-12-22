@@ -53,7 +53,7 @@
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="imageupload-box inline-imageupload-box">
                                                     <label for="ingredientsnameenglish" class="form-label">Image</label>
-                                                    <label for="input-file" class="upload-file">
+                                                    <label for="input-file" class="upload-file justify-content-center">
                                                         <input type="file" id="input-file" name="image">
                                                         <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
                                                              id="img-preview"
@@ -135,7 +135,7 @@
                                                             alt="ingredient img 1"/>
                                                         <div class="imageupload-box inline-imageupload-box mb-0"
                                                              style="display: none" id="img-div{{ $ingredient->id }}">
-                                                            <label for="input-file" class="upload-file">
+                                                            <label for="ing-image{{ $ingredient->id }}" class="upload-file">
                                                                 <input type="file" id="ing-image{{ $ingredient->id }}">
                                                                 <img src="{{ $ingredient->image }}"
                                                                      alt="tomatoes image"
@@ -156,7 +156,7 @@
                                                                                    readonly/></td>
                                                     <td>
                                                         <div class="dropdown buttondropdown category-dropdown">
-                                                            <select class="form-control w-100" disabled
+                                                            <select class="form-control w-100 sm read-only" disabled
                                                                     id="catId{{$ingredient->id}}">
                                                                 @foreach ($ingredientCategory as $category)
                                                                     <option
@@ -182,11 +182,11 @@
                                                             <select class="btn btn-light dropdown-toggle dish-dropdown"
                                                                     data-id="{{ $ingredient->id }}" type="button"
                                                                     id="dish-list{{ $ingredient->id }}" disabled>
-                                                                <?php
-                                                                $dishLists = \App\Models\Dish::doesnthave('freeIngredients', 'and', function ($query) use ($ingredient) {
-                                                                    $query->where('ingredient_id', $ingredient->id);
-                                                                })->get();
-                                                                ?>
+                                                                    <?php
+                                                                    $dishLists = \App\Models\Dish::doesnthave('freeIngredients', 'and', function ($query) use ($ingredient) {
+                                                                        $query->where('ingredient_id', $ingredient->id);
+                                                                    })->get();
+                                                                    ?>
                                                                 <option value="">Select Dish name</option>
                                                                 @foreach($dishLists as $dish)
                                                                     <option value="{{ $dish->id }}"
@@ -194,9 +194,9 @@
                                                                 @endforeach
                                                             </select>
                                                             <div class="table-dish-name dish-tray{{ $ingredient->id }}">
-                                                                <?php
-                                                                $dishCount = 1;
-                                                                ?>
+                                                                    <?php
+                                                                    $dishCount = 1;
+                                                                    ?>
                                                                 @foreach ($ingredient->freeDishIngredient as $ingr)
 
                                                                     @if($dishCount > 2 )
@@ -215,13 +215,15 @@
                                                                                 @else
                                                                                     <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
                                                                                             href="javascript:void(0);"><i
-                                                                                                class="fa-solid fa-xmark align-middle del-dish-icon"
+                                                                                                class="fa-solid fa-xmark align-middle del-dish-icon existing-dish"
+                                                                                                data-dish-ing-id="{{ $ingr->id }}"
+                                                                                                data-dish-id="{{ $ingr->dish->id }}"
                                                                                                 data-id="{{ $ingredient->id }}"
                                                                                                 data-name="{{ $ingr->dish->name_en }}"></i></a></span>
                                                                                 @endif
-                                                                                <?php
-                                                                                $dishCount++
-                                                                                ?>
+                                                                                    <?php
+                                                                                    $dishCount++
+                                                                                    ?>
                                                                                 @endforeach
                                                                                 @if($dishCount > 3)
                                                                             </div>
@@ -248,6 +250,9 @@
                                                                id="del-btn{{ $ingredient->id }}">
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
+                                                            <input type="hidden" id="deleted-dish{{ $ingredient->id }}">
+                                                            <input type="hidden" id="is_edited{{ $ingredient->id }}"
+                                                                   value="0">
                                                             <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
                                                                id="save-btn{{ $ingredient->id }}"
                                                                style="display:none !important;"
@@ -261,6 +266,31 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        {{ $ingredients->links() }}
+                                        <div>
+                                            <label>Rows per Page</label>
+                                            <select id="per_page_dropdown" onchange="">
+                                                <option
+                                                    {{ $perPage == 5 ? 'selected' : '' }} value="{{ Request::url().'?per_page=5' }}">
+                                                    5
+                                                </option>
+                                                <option
+                                                    {{ $perPage == 10 ? 'selected' : '' }} value="{{ Request::url().'?per_page=10' }}">
+                                                    10
+                                                </option>
+                                                <option
+                                                    {{ $perPage == 15 ? 'selected' : '' }} value="{{ Request::url().'?per_page=15' }}">
+                                                    15
+                                                </option>
+                                                <option
+                                                    {{ $perPage == 20 ? 'selected' : '' }} value="{{ Request::url().'?per_page=20' }}">
+                                                    20
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </section>
@@ -270,8 +300,8 @@
             </div>
         </div>
         <!-- start footer -->
-    @include('layouts.admin.footer_design')
-    <!-- end footer -->
+        @include('layouts.admin.footer_design')
+        <!-- end footer -->
     </div>
 
     <!-- start add category Modal -->

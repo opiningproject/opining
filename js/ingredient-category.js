@@ -37,6 +37,11 @@ $(function () {
         $('#catId').val(id)
     })
 
+    $(document).on('change', '#per_page_dropdown', function () {
+        var url = this.value;
+        window.open(url, '_parent');
+    })
+
     $(document).on('click', '.edit-cat-icon', function () {
         var id = $(this).attr('data-id')
         $(this).parent().parent().siblings().children('input').attr("readonly", false).focus();

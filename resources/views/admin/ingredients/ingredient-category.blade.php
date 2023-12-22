@@ -126,9 +126,35 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        {{ $ingredientCategory->links() }}
+                                        <div>
+                                            <label>Rows per Page</label>
+                                            <select id="per_page_dropdown" onchange="">
+                                                <option
+                                                    {{ $perPage == 5 ? 'selected' : '' }} value="{{ Request::url().'?per_page=5' }}">
+                                                    5
+                                                </option>
+                                                <option
+                                                    {{ $perPage == 10 ? 'selected' : '' }} value="{{ Request::url().'?per_page=10' }}">
+                                                    10
+                                                </option>
+                                                <option
+                                                    {{ $perPage == 15 ? 'selected' : '' }} value="{{ Request::url().'?per_page=15' }}">
+                                                    15
+                                                </option>
+                                                <option
+                                                    {{ $perPage == 20 ? 'selected' : '' }} value="{{ Request::url().'?per_page=20' }}">
+                                                    20
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                         </section>
+
                         <!-- end edit dish card section -->
                     </div>
                 </main>

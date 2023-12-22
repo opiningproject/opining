@@ -55,12 +55,10 @@
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group imageupload-box inline-imageupload-box">
                                                     <label for="dishimage" class="form-label">Dish Image</label>
-                                                    <label for="input-file" class="upload-file">
+                                                    <label for="input-file" class="upload-file justify-content-center">
                                                         <input type="file" id="input-file">
-                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
-                                                             class="img-fluid"
-                                                             width="22" height="17">
-                                                        <p class="mb-0">Upload Image of Item</p>
+                                                        <img src="{{ $dish->image }}" alt="blank image" id="img-preview"
+                                                             class="img-fluid">
                                                     </label>
                                                 </div>
                                             </div>
@@ -263,16 +261,15 @@
                                                                         class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
                                                                         <select
                                                                             class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                            type="button" data-bs-toggle="dropdown"
-                                                                            aria-expanded="false" name="ingredient_id"
+                                                                            type="button" name="ingredient_id"
                                                                             id="freeIngredient">
-                                                                            <div class="d-block">
+<!--                                                                            <div class="d-block">
                                                                                 <img
                                                                                     src="{{asset('images/american_cheese_img.svg')}}"
                                                                                     class="img-fluid me-15px"
                                                                                     alt="ingredient img 1"/>
                                                                                 Cheese
-                                                                            </div>
+                                                                            </div>-->
                                                                             <option value="">Select Ingredient</option>
                                                                         </select>
                                                                     </div>
@@ -312,7 +309,7 @@
                                                     <tr id="dishIngredient{{ $freeIngredient->id }}">
                                                         <td class="text-center">
                                                             <img
-                                                                src="{{ asset('images/american_cheese_img.svg')}}"
+                                                                src="{{ $freeIngredient->ingredient->image  }}"
                                                                 class="img-fluid me-15px" alt="ingredient img 1"/></td>
                                                         <td class="text-center"><input type="text"
                                                                                        class="form-control text-center w-10r m-auto"
@@ -357,17 +354,9 @@
                                                                         class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
                                                                         <select
                                                                             class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                            type="button" data-bs-toggle="dropdown"
+                                                                            type="button"
                                                                             name="paidIngredientCategory"
-                                                                            id="paidIngredientCategory"
-                                                                            aria-expanded="false">
-                                                                            <div class="d-block">
-                                                                                <img
-                                                                                    src="{{asset('images/american_cheese_img.svg')}}"
-                                                                                    class="img-fluid me-15px"
-                                                                                    alt="ingredient img 1"/>
-                                                                                Cheese
-                                                                            </div>
+                                                                            id="paidIngredientCategory">
                                                                             <option value="">Select Ingredient Category
                                                                             </option>
                                                                             @foreach($ingredientCategories as $ingredientCategory)
@@ -392,13 +381,6 @@
                                                                             type="button" data-bs-toggle="dropdown"
                                                                             aria-expanded="false" id="paidIngredient"
                                                                             name="ingredient_id">
-                                                                            <div class="d-block">
-                                                                                <img
-                                                                                    src="images/american_cheese_img.svg"
-                                                                                    class="img-fluid me-15px" id
-                                                                                    alt="ingredient img 1"/>
-                                                                                Cheese
-                                                                            </div>
                                                                             <option value="">Select Ingredient</option>
                                                                         </select>
 

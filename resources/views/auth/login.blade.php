@@ -49,7 +49,7 @@
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password"
                                                placeholder="Password"
-                                               id="password" required autocomplete="current-password">
+                                               id="password" autocomplete="current-password">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

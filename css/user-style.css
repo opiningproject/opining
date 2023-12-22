@@ -2664,7 +2664,7 @@ input[type=number] {
     }
     .cart-section .cart-items .foodqty .minus i,
     .cart-section .cart-items .foodqty .plus i {
-        line-height: 18px;
+        line-height: 21px;
         font-size: 14px;
     }
     .custom-checkbox .form-check-label {

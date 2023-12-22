@@ -113,7 +113,8 @@
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                     <div class="form-group">
                       <label for="gender" class="form-label">Gender</label>
-                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="gender" name="gender">
+                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="gender" name="gender" required>
+                        <option value="" {{ !$user->gender ? 'selected':''}} >Please select</option>
                         <option value="1" {{ $user->gender=='1' ? 'selected':''}} >Male</option>
                         <option value="2" {{ $user->gender=='2' ? 'selected':''}} >Female</option>
                         <option value="3" {{ $user->gender=='3' ? 'selected':''}} >Other</option>

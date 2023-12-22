@@ -39,9 +39,9 @@ class CategoryController extends Controller
                 }else{
                     $imageName = uploadImageToBucket($request, '/category');
                 }
-                dd($imageName);
+//                dd($imageName);
                 $request->request->remove('image');
-                $request->merge->add(['image' => $imageName]);
+                $request->request->add(['image' => $imageName]);
             }
 
             $category = Category::updateOrCreate(

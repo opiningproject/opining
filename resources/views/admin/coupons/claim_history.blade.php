@@ -127,7 +127,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="promocode" class="form-label">Promo Code</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" maxlength="50">
                                 </div>
                             </div>
                             <div class="col-md-12">

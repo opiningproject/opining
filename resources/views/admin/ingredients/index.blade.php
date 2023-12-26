@@ -11,7 +11,7 @@
                         <div class="section-page-title main-page-title mb-0">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <h1 class="page-title">ingredients</h1>
+                                    <h1 class="page-title">Ingredients</h1>
                                 </div>
                                 <div class="col text-end">
                                     <a class="btn btn-custom-yellow" href="{{ route('ingred.category.index') }}">
@@ -38,7 +38,7 @@
                                                 <ol class="breadcrumb">
                                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a>
                                                     </li>
-                                                    <li class="breadcrumb-item active">ingredients</li>
+                                                    <li class="breadcrumb-item active">Ingredients</li>
                                                 </ol>
                                             </nav>
                                         </div>
@@ -54,12 +54,12 @@
                                                 <div class="imageupload-box inline-imageupload-box">
                                                     <label for="ingredientsnameenglish" class="form-label">Image</label>
                                                     <label for="input-file" class="upload-file justify-content-center">
-                                                        <input type="file" id="input-file" name="image">
                                                         <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
                                                              id="img-preview"
                                                              class="img-fluid">
                                                         <p class="mb-0" id="img-label">Upload Image of Item</p>
                                                     </label>
+                                                    <input type="file" id="input-file" class="d-none" name="image">
                                                 </div>
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
@@ -80,12 +80,10 @@
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    <label for="dishcategory" class="form-label">Ingredients
+                                                    <label for="category_id" class="form-label">Ingredients
                                                         categories</label>
-
-                                                    <select class="form-control dropdown-toggle w-100"
-                                                            type="button" name="category_id"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <select class="form-control w-100"
+                                                            type="button" name="category_id">
                                                         <option value="">Select Category</option>
                                                         @foreach ($ingredientCategory as $category)
                                                             <option
@@ -132,15 +130,20 @@
                                                         <img
                                                             src="{{ $ingredient->image }}"
                                                             class="img-fluid" id="ing-exist-img{{ $ingredient->id }}"
+                                                            height="40px"
                                                             alt="ingredient img 1"/>
                                                         <div class="imageupload-box inline-imageupload-box mb-0"
                                                              style="display: none" id="img-div{{ $ingredient->id }}">
-                                                            <label for="ing-image{{ $ingredient->id }}" class="upload-file">
-                                                                <input type="file" id="ing-image{{ $ingredient->id }}">
+                                                            <label for="ing-image{{ $ingredient->id }}"
+                                                                   class="upload-file">
+                                                                <input type="file" class="ing-image-file"
+                                                                       id="ing-image{{ $ingredient->id }}"
+                                                                       data-id="{{ $ingredient->id }}">
                                                                 <img src="{{ $ingredient->image }}"
                                                                      alt="tomatoes image"
+                                                                     id="ing-img-preview{{ $ingredient->id }}"
                                                                      class="img-fluid" width="25" height="25">
-                                                                <p class="mb-0 text-lowercase">{{ $ingredient->image }}</p>
+                                                                <p class="mb-0 text-lowercase">Click to update</p>
                                                             </label>
                                                         </div>
                                                     </td>
@@ -204,22 +207,22 @@
                                                                             <div class="moredishname-collapse collapse"
                                                                                  id="collapseDishRowTwo">
                                                                                 @endif
-                                                                                <div
-                                                                                    class="card card-body bg-lightgray d-block py-2 px-0 border-0">
-                                                                        <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="fa-solid fa-xmark align-middle"
-                                                                                    data-id="{{ $ingredient->id }}"
-                                                                                    data-name="{{ $ingr->dish->name_en }}"></i></a></span>
-                                                                                </div>
+
+                                                                                <span class="badge text-bg-yellow mt-1">{{ $ingr->dish->name }}<a
+                                                                                        href="javascript:void(0);"><i
+                                                                                            class="fa-solid fa-xmark align-middle"
+                                                                                            data-id="{{ $ingredient->id }}"
+                                                                                            data-name="{{ $ingr->dish->name }}"></i></a></span>
+
                                                                                 @else
-                                                                                    <span class="badge text-bg-yellow">{{ $ingr->dish->name_en }}<a
+                                                                                    <span
+                                                                                        class="badge text-bg-yellow mt-1">{{ $ingr->dish->name }}<a
                                                                                             href="javascript:void(0);"><i
                                                                                                 class="fa-solid fa-xmark align-middle del-dish-icon existing-dish"
                                                                                                 data-dish-ing-id="{{ $ingr->id }}"
                                                                                                 data-dish-id="{{ $ingr->dish->id }}"
                                                                                                 data-id="{{ $ingredient->id }}"
-                                                                                                data-name="{{ $ingr->dish->name_en }}"></i></a></span>
+                                                                                                data-name="{{ $ingr->dish->name }}"></i></a></span>
                                                                                 @endif
                                                                                     <?php
                                                                                     $dishCount++
@@ -227,13 +230,12 @@
                                                                                 @endforeach
                                                                                 @if($dishCount > 3)
                                                                             </div>
-                                                                            <a class="text-more-sm float-end lh-30px"
+                                                                            <a class="text-more-sm float-end lh-30px more-less-text"
                                                                                id="more-less-text{{ $ingredient->id }}"
                                                                                data-bs-toggle="collapse"
                                                                                href="#collapseDishRowTwo"
                                                                                role="button" aria-expanded="false"
-                                                                               aria-controls="collapseDishRowTwo">+
-                                                                                more</a>
+                                                                               aria-controls="collapseDishRowTwo">+ More</a>
                                                                         @endif
                                                             </div>
                                                         </div>
@@ -303,46 +305,6 @@
         @include('layouts.admin.footer_design')
         <!-- end footer -->
     </div>
-
-    <!-- start add category Modal -->
-    <div class="modal fade custom-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModal"
-         aria-hidden="true">
-        <div class="modal-dialog custom-w-441px modal-dialog-centered">
-            <div class="modal-content border-radius">
-                <div class="modal-header border-0">
-                    <h1 class="modal-title mb-0">Add Categories</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="imageupload-box">
-                        <label for="input-file" class="upload-file">
-                            <input type="file" id="input-file">
-                            <img src="images/blank-img.svg" alt="blank image" class="img-fluid mb-2">
-                            <p class="mb-0">Please upload image of <a href="javascript:void(0);"
-                                                                      class="upload-link">Dish</a></p>
-                        </label>
-                    </div>
-                    <form>
-                        <div class="form-group">
-                            <label for="dishnameenglish" class="form-label">Dish Category <span
-                                    class="text-custom-muted">(English)</span></label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group mb-0">
-                            <label for="dishnameenglish" class="form-label">Dish Category <span
-                                    class="text-custom-muted">(Dutch)</span></label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <button type="button"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">
-                            Add
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end add category  Modal -->
 
     <!-- start delete Ingredients Modal -->
     <div class="modal fade custom-modal" id="deleteAlertModal" tabindex="-1"

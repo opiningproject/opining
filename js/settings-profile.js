@@ -1,13 +1,31 @@
 $(function () {
     $("#rest-profile-form").validate({
-        //debug:true,
+        rules:{
+            phone_no:{
+                maxlength: 14,
+                minlength: 14
+            }
+        },
         submitHandler: function (form) {
             return true;
         }
     });
 
     $("#change-password-form").validate({
-        //debug:true,
+        rules:{
+            new_password: {
+                required: true,
+                minlength: 8,
+                regex: "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%&*])[a-zA-Z0-9!@#$%&*]+$",
+            },
+            old_password: {
+                required: true,
+            },
+            c_password: {
+                required: true,
+                equalTo: "#new_password"
+            }
+        },
         submitHandler: function (form) {
             changePassword();
         }
@@ -20,6 +38,15 @@ $(function () {
     $(document).on('change', '#permit-doc-input-file', function () {
         editPermitReadURL(this);
     });
+
+    $.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol"
+    );
 
 });
 
@@ -42,10 +69,8 @@ function changePassword() {
             old_password, new_password
         },
         success: function (response) {
-            //$('#change-password-btn').prop('enabled',true);
-
             if (response == 2) {
-                $("#old_password-error").removeClass('d-none');
+                $("#old_password-error-msg").removeClass('d-none');
             } else {
                 $("#changePasswordModal").modal('hide');
             }

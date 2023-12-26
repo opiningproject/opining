@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $categories = Category::orderBy('id', 'desc')->get();
-        $dishes = Dish::orderBy('id', 'desc')->get();
+        $dishes = Dish::orderBy('id', 'desc')->limit(5)->get();
 
         $popularDishes = Dish::orderBy('id', 'desc')->limit(4)->get();
 

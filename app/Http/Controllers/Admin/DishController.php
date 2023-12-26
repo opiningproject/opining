@@ -46,17 +46,17 @@ class DishController extends Controller
     {
         try {
 
+            $dish = new Dish();
             if ($request->has('image')) {
                 $imageName = uploadImageToBucket($request, '/dish');
+                $dish->image = $imageName;
             }
 
-            $dish = new Dish();
             $dish->name_en = $request->name_en;
             $dish->category_id  = $request->category_id ;
             $dish->name_nl = $request->name_nl;
             $dish->desc_en = $request->desc_en;
             $dish->desc_nl = $request->desc_nl;
-            $dish->image = $imageName;
             $dish->price = $request->price;
             $dish->percentage_off = $request->percentage_off;
             $dish->qty = $request->qty;
@@ -189,6 +189,7 @@ class DishController extends Controller
     {
         try {
             $dishIngredient = DishIngredient::find($id);
+
             if ($dishIngredient) {
                 $dishIngredient->delete();
                 return response::json(['status' => 200, 'message' => 'Dish Ingredient Deleted successfully']);

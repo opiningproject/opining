@@ -80,7 +80,7 @@ class Dish extends Model
     {
         if(!empty($value)){
             $s3 = Storage::disk('s3');
-            return $s3->url('/ingredients/'.$value);
+            return $s3->url('/dish/'.$value);
         }
         return asset('images/blank-img.svg');
     }

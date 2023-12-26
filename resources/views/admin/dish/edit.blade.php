@@ -229,7 +229,8 @@
                                                         <div
                                                             class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Ingredients categories</label>
+                                                                <label class="form-label"><strong>Ingredients
+                                                                        categories</strong></label>
                                                                 <div class="input-group w-100">
                                                                     <div
                                                                         class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
@@ -254,8 +255,8 @@
                                                         <div
                                                             class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                             <div class="form-group">
-                                                                <label for="ingredientslist" class="form-label">Ingredients
-                                                                    List</label>
+                                                                <label for="ingredientslist" class="form-label"><strong>Ingredients
+                                                                        List</strong></label>
                                                                 <div class="input-group w-100">
                                                                     <div
                                                                         class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
@@ -263,13 +264,6 @@
                                                                             class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
                                                                             type="button" name="ingredient_id"
                                                                             id="freeIngredient">
-<!--                                                                            <div class="d-block">
-                                                                                <img
-                                                                                    src="{{asset('images/american_cheese_img.svg')}}"
-                                                                                    class="img-fluid me-15px"
-                                                                                    alt="ingredient img 1"/>
-                                                                                Cheese
-                                                                            </div>-->
                                                                             <option value="">Select Ingredient</option>
                                                                         </select>
                                                                     </div>
@@ -305,33 +299,40 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="freeIngredientTbody">
-                                                @foreach($dish->freeIngredients as $freeIngredient)
-                                                    <tr id="dishIngredient{{ $freeIngredient->id }}">
-                                                        <td class="text-center">
-                                                            <img
-                                                                src="{{ $freeIngredient->ingredient->image  }}"
-                                                                class="img-fluid me-15px" alt="ingredient img 1"/></td>
-                                                        <td class="text-center"><input type="text"
-                                                                                       class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $freeIngredient->ingredient->name }}"
-                                                                                       readonly/>
-                                                        <td class="text-center"><input type="text"
-                                                                                       class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $freeIngredient->ingredient->category->name }}"
-                                                                                       readonly/>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="">
-                                                                <a class="btn btn-custom-yellow btn-icon free-ingredient-btn del-dish-ingredient"
-                                                                   data-bs-toggle="modal"
-                                                                   data-id="{{ $freeIngredient->id }}"
-                                                                   data-bs-target="#deleteAlertModal">
-                                                                    <i class="fa-regular fa-trash-can"></i>
-                                                                </a>
-                                                            </div>
-                                                        </td>
+                                                @if(count($dish->freeIngredients)>0)
+                                                    @foreach($dish->freeIngredients as $freeIngredient)
+                                                        <tr id="dishIngredient{{ $freeIngredient->id }}">
+                                                            <td class="text-center">
+                                                                <img
+                                                                    src="{{ $freeIngredient->ingredient->image  }}"
+                                                                    class="img-fluid me-15px" alt="ingredient img 1"/>
+                                                            </td>
+                                                            <td class="text-center"><input type="text"
+                                                                                           class="form-control text-center w-10r m-auto"
+                                                                                           value="{{ $freeIngredient->ingredient->name }}"
+                                                                                           readonly/>
+                                                            <td class="text-center"><input type="text"
+                                                                                           class="form-control text-center w-10r m-auto"
+                                                                                           value="{{ $freeIngredient->ingredient->category->name }}"
+                                                                                           readonly/>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="">
+                                                                    <a class="btn btn-custom-yellow btn-icon free-ingredient-btn del-dish-ingredient"
+                                                                       data-bs-toggle="modal"
+                                                                       data-id="{{ $freeIngredient->id }}"
+                                                                       data-bs-target="#deleteAlertModal">
+                                                                        <i class="fa-regular fa-trash-can"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr id="free-paid-ing-tr">
+                                                        <td colspan="5">No Ingredient Attached</td>
                                                     </tr>
-                                                @endforeach
+                                                @endif
 
                                                 </tbody>
                                             </table>
@@ -348,7 +349,8 @@
                                                         <div
                                                             class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Ingredients categories</label>
+                                                                <label class="form-label"><strong>Ingredients
+                                                                        categories</strong></label>
                                                                 <div class="input-group w-100">
                                                                     <div
                                                                         class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
@@ -371,8 +373,8 @@
                                                         <div
                                                             class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                             <div class="form-group">
-                                                                <label for="ingredientslist" class="form-label">Ingredients
-                                                                    List</label>
+                                                                <label for="ingredientslist" class="form-label"><strong>Ingredients
+                                                                        List</strong></label>
                                                                 <div class="input-group w-100">
                                                                     <div
                                                                         class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
@@ -392,12 +394,12 @@
                                                             class="col-xxl-2 col-xl-1 col-lg-3 col-md-4 col-sm-6 col-12">
                                                             <div class="form-group">
                                                                 <label for="discountpercentage"
-                                                                       class="form-label">Price</label>
+                                                                       class="form-label"><strong>Price</strong></label>
                                                                 <div class="input-group">
                                                                 <span class="input-group-text"
                                                                       id="basic-addon1">€</span>
                                                                     <input type="number" class="form-control"
-                                                                           name="price"/>
+                                                                           name="price" id="paid-price"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -430,69 +432,67 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="paidIngredientTbody">
-                                                @foreach($dish->paidIngredients as $paidIngredient)
-                                                    <tr id="dishIngredient{{ $paidIngredient->id }}">
-                                                        <td class="text-center"><img
-                                                                src="images/american_cheese_img.svg"
-                                                                class="img-fluid me-15px" alt="ingredient img 1"/></td>
-                                                        <td class="text-center"><input type="text"
-                                                                                       class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $paidIngredient->ingredient->name }}"
-                                                                                       readonly/>
-                                                        <td class="text-center"><input type="text"
-                                                                                       class="form-control text-center w-10r m-auto"
-                                                                                       value="{{ $paidIngredient->ingredient->category->name }}"
-                                                                                       readonly>
-                                                        </td>
-                                                        <td class="text-custom-muted-1 text-center">
-                                                            <div class="input-group w-5r m-auto">
+                                                @if(count($dish->paidIngredients)>0)
+                                                    @foreach($dish->paidIngredients as $paidIngredient)
+                                                        <tr id="dishIngredient{{ $paidIngredient->id }}">
+                                                            <td class="text-center"><img
+                                                                    src="images/american_cheese_img.svg"
+                                                                    class="img-fluid me-15px" alt="ingredient img 1"/>
+                                                            </td>
+                                                            <td class="text-center"><input type="text"
+                                                                                           class="form-control text-center w-10r m-auto"
+                                                                                           value="{{ $paidIngredient->ingredient->name }}"
+                                                                                           readonly/>
+                                                            <td class="text-center"><input type="text"
+                                                                                           class="form-control text-center w-10r m-auto"
+                                                                                           value="{{ $paidIngredient->ingredient->category->name }}"
+                                                                                           readonly>
+                                                            </td>
+                                                            <td class="text-custom-muted-1 text-center">
+                                                                <div class="input-group w-5r m-auto">
                                                                 <span class="input-group-text"
                                                                       id="basic-addon1">€</span>
-                                                                <input type="number" class="form-control m-auto"
-                                                                       id="price{{ $paidIngredient->id}}"
-                                                                       value="{{ $paidIngredient->price }}" readonly>
-                                                            </div>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="">
-                                                                <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"
-                                                                   id="paid-ingredient-edit{{ $paidIngredient->id }}"
-                                                                   data-id="{{ $paidIngredient->id }}"
-                                                                   tabindex="0" href="javascript:void(0);">
-                                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                                </a>
-                                                                <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient"
-                                                                   id="paid-ingredient-delete{{ $paidIngredient->id }}"
-                                                                   data-bs-toggle="modal"
-                                                                   data-id="{{ $paidIngredient->id }}"
-                                                                   data-bs-target="#deleteAlertModal">
-                                                                    <i class="fa-regular fa-trash-can"></i>
-                                                                </a>
-                                                                <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn"
-                                                                   style="display: none !important;"
-                                                                   id="paid-ingredient-save{{ $paidIngredient->id }}"
-                                                                   data-id="{{ $paidIngredient->id }}">
-                                                                    <span class="align-middle">Save</span>
-                                                                </a>
-                                                            </div>
-                                                        </td>
+                                                                    <input type="number" class="form-control m-auto"
+                                                                           id="price{{ $paidIngredient->id}}"
+                                                                           value="{{ $paidIngredient->price }}"
+                                                                           readonly>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="">
+                                                                    <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"
+                                                                       id="paid-ingredient-edit{{ $paidIngredient->id }}"
+                                                                       data-id="{{ $paidIngredient->id }}"
+                                                                       tabindex="0" href="javascript:void(0);">
+                                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                                    </a>
+                                                                    <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient"
+                                                                       id="paid-ingredient-delete{{ $paidIngredient->id }}"
+                                                                       data-bs-toggle="modal"
+                                                                       data-id="{{ $paidIngredient->id }}"
+                                                                       data-bs-target="#deleteAlertModal">
+                                                                        <i class="fa-regular fa-trash-can"></i>
+                                                                    </a>
+                                                                    <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn"
+                                                                       style="display: none !important;"
+                                                                       id="paid-ingredient-save{{ $paidIngredient->id }}"
+                                                                       data-id="{{ $paidIngredient->id }}">
+                                                                        <span class="align-middle">Save</span>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr id="no-paid-ing-tr">
+                                                        <td colspan="5">No Ingredient Attached</td>
                                                     </tr>
-                                                @endforeach
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--                                <div class="card-footer bg-white border-0">
-                                                                    <div class="row">
-                                                                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                                            <a class="btn btn-custom-yellow btn-default d-block" id="update-dish">
-                                                                                <span class="align-middle">Add</span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
                             </div>
                         </section>
                         <!-- end edit dish card section -->

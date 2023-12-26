@@ -18,7 +18,7 @@
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="restaurantname" class="form-label">Restaurant Name</label>
-                            <input type="text" class="form-control" name="restaurant_name" value="{{ $user->restaurant_name }}" required />
+                            <input type="text" class="form-control" name="restaurant_name" maxlength="25" value="{{ $user->restaurant_name }}" required />
                         </div>
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -39,7 +39,7 @@
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="ownername" class="form-label">Owner Name</label>
-                            <input type="text" class="form-control" value="{{ $user->user->first_name.' '.$user->user->last_name }}" name="owner_name" required/>
+                            <input type="text" class="form-control" value="{{ $user->user->first_name.' '.$user->user->last_name }}" maxlength="25" name="owner_name" required/>
                         </div>
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -100,7 +100,7 @@
                             <label for="servicecharge" class="form-label">Service charge</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">€</span>
-                                <input type="number" class="form-control" value="{{ $user->service_charge }}" name="service_charge" required />
+                                <input type="number" class="form-control" value="{{ $user->service_charge }}" min="1" name="service_charge" required />
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                                             <div class="time-day-name">
                                                 <div class="form-group mb-0">
                                                     <input type="text" class="timepicker form-control time-form-control"
-                                                           value="{{ $time->start_time }}" name="start_time[]"
+                                                           value="{{ date('',$time->start_time) }}" name="start_time[]"
                                                            style="max-height: fit-content">
                                                 </div>
                                                 -
@@ -164,17 +164,17 @@
                 <form method="POST" id="change-password-form">
                     <div class="form-group">
                         <label for="oldpassword" class="form-label">Old Password</label>
-                        <input type="text" class="form-control" name="old_password" id="old_password" required>
-                        <span class="help-block d-none" id="old_password-error">Old password is not correct</span>
+                        <input type="text" class="form-control" name="old_password" id="old_password">
+                        <span class="help-block d-none" id="old_password-error-msg">Old password is not correct</span>
                     </div>
                     <div class="form-group">
                         <label for="newpassword" class="form-label">New Password</label>
-                        <input type="text" class="form-control" name="new_password" id="new_password" min="8" required>
+                        <input type="text" class="form-control" name="new_password" id="new_password">
                         <span class="help-block d-none" id="c_password-error">Confirm password does not match with password</span>
                     </div>
                     <div class="form-group mb-0">
                         <label for="cnewpassword" class="form-label">Confirm New Password</label>
-                        <input type="text" class="form-control" name="c_password" id="c_password" min="8" required>
+                        <input type="text" class="form-control" name="c_password" id="c_password">
                     </div>
                     <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="change-password-btn">Save</button>
                 </form>

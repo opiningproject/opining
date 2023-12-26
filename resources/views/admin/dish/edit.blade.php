@@ -436,8 +436,8 @@
                                                     @foreach($dish->paidIngredients as $paidIngredient)
                                                         <tr id="dishIngredient{{ $paidIngredient->id }}">
                                                             <td class="text-center"><img
-                                                                    src="{{ $paidIngredient->image }}"
-                                                                    class="img-fluid me-15px" alt="ingredient img 1"/>
+                                                                    src="{{ $paidIngredient->ingredient->image }}"
+                                                                    class="img-fluid me-15px" alt="ingredient img 1" style="height: 40px"/>
                                                             </td>
                                                             <td class="text-center"><input type="text"
                                                                                            class="form-control text-center w-10r m-auto"

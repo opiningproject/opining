@@ -19,18 +19,17 @@
                                     <div class="page-control">
                                         <div class="row justify-content-end align-items-center g-0">
                                             <div class="col-auto">
-                                                <div class="form-group has-search position-relative searcheatbox mb-0">
-                                                    <span class="form-control-feedback">
+                                                <div class="d-flex align-items-center form-control bg-white border-0 h-100 new-searchbar">
+                                                    <div class="image">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                                              viewBox="0 0 32 32" fill="none">
                                                             <path
                                                                 d="M23.5119 23.1552L19.281 18.9243C20.1552 17.6068 20.6668 16.0293 20.6668 14.3334C20.6668 9.73837 16.9285 6 12.3334 6C7.73837 6 4 9.73837 4 14.3334C4 18.9285 7.73837 22.6668 12.3334 22.6668C14.0293 22.6668 15.6068 22.1552 16.9243 21.281L21.1552 25.5119C21.8052 26.1627 22.8619 26.1627 23.5119 25.5119C24.1627 24.861 24.1627 23.806 23.5119 23.1552ZM6.50003 14.3334C6.50003 11.1167 9.11672 8.50003 12.3334 8.50003C15.5501 8.50003 18.1668 11.1167 18.1668 14.3334C18.1668 17.5501 15.5501 20.1668 12.3334 20.1668C9.11672 20.1668 6.50003 17.5501 6.50003 14.3334Z"
-                                                                fill="#FFC00B"/>
+                                                                fill="#FFC00B" />
                                                         </svg>
-                                                    </span>
-                                                    <input type="text" id="search-dish"
-                                                           class="form-control text-transform-none"
-                                                           placeholder="What do you want eat today..."/>
+                                                    </div>
+                                                    <input type="text" id="search-dish" class="form-control border-0 outline-0 text-truncate"
+                                                           placeholder="What do you want to eat today..." />
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -119,9 +118,11 @@
                                             <div class="category-element swiper-slide">
                                                 <div class="card">
                                                 <span class="dish-item-icon">
-                                                    <img src="{{ $category->image }}" class="img-fluid" alt="bakery" style="height: 60px !important;">
+                                                    <img src="{{ $category->image }}" class="img-fluid" alt="bakery"
+                                                         style="height: 60px !important;">
                                                 </span>
-                                                    <p class="mb-0 category-item-name text-truncate w-100" title="{{ $category->name }}">{{ $category->name }}</p>
+                                                    <p class="mb-0 category-item-name text-truncate w-100"
+                                                       title="{{ $category->name }}">{{ $category->name }}</p>
                                                     <div class="categoryfood-detail-card-btn">
                                                         <a class="btn btn-custom-yellow btn-icon category-edit-btn"
                                                            data-id="{{ $category->id }}" data-bs-toggle="modal"
@@ -163,33 +164,44 @@
                             </div>
                             <div class=" dish-details-div">
                                 <div class="popular-item-grid">
-                                    @foreach ($dishes as $dish)
-                                        <div class="card food-detail-card">
-                                            @if($dish->out_of_stock == '1')
-                                                <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
-                                            @else
-                                                <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
-                                            @endif
-                                            <div class="card-body p-0">
-                                                <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
-                                                <div class="food-image">
-                                                    <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" style="height: 60px !important;"/>
-                                                </div>
-                                                <h4 class="food-name-text text-truncate w-100" title="{{ $dish->name }}">{{ $dish->name }}</h4>
-                                                <p class="food-price">€{{ $dish->price }}</p>
-                                                <div class="food-detail-card-btn">
-                                                    <a href="{{ route('editDish', $dish->id) }}"
-                                                       class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon del-dish-btn" data-bs-toggle="modal"
-                                                       data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
+                                    @if(count($dishes) > 0)
+                                        @foreach ($dishes as $dish)
+                                            <div class="card food-detail-card">
+                                                @if($dish->out_of_stock == '1')
+                                                    <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
+                                                @else
+                                                    <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
+                                                @endif
+                                                <div class="card-body p-0">
+                                                    <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
+                                                    <div class="food-image">
+                                                        <img src="{{ $dish->image }}" alt="burger imag"
+                                                             class="img-fluid" style="height: 60px !important;"/>
+                                                    </div>
+                                                    <h4 class="food-name-text text-truncate w-100"
+                                                        title="{{ $dish->name }}">{{ $dish->name }}</h4>
+                                                    <p class="food-price">€{{ $dish->price }}</p>
+                                                    <div class="food-detail-card-btn">
+                                                        <a href="{{ route('editDish', $dish->id) }}"
+                                                           class="btn btn-custom-yellow btn-icon"
+                                                           data-id="{{ $dish->id }}">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </a>
+                                                        <a class="btn btn-custom-yellow btn-icon del-dish-btn"
+                                                           data-bs-toggle="modal"
+                                                           data-bs-target="#deleteDishAlertModal"
+                                                           data-id="{{ $dish->id }}">
+                                                            <i class="fa-regular fa-trash-can"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        @endforeach
+                                    @else
+                                        <div>
+                                            No Dish Found
                                         </div>
-                                    @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </section>
@@ -218,10 +230,12 @@
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $popularDish->image }}" style="height: 60px !important;" alt="burger imag" class="img-fluid"/>
+                                                <img src="{{ $popularDish->image }}" style="height: 60px !important;"
+                                                     alt="burger imag" class="img-fluid"/>
                                             </div>
                                             <div class="text-start">
-                                                <h4 class="food-name-text text-start text-truncate w-100" title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
+                                                <h4 class="food-name-text text-start text-truncate w-100"
+                                                    title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
                                                 <p class="food-price d-inline-block">{{ $popularDish->price }}</p>
                                                 <p
                                                     class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
@@ -265,10 +279,12 @@
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $bestSellerDish->image }}" style="height: 60px !important;" alt="burger imag" class="img-fluid"/>
+                                                <img src="{{ $bestSellerDish->image }}" style="height: 60px !important;"
+                                                     alt="burger imag" class="img-fluid"/>
                                             </div>
                                             <div class="text-start">
-                                                <h4 class="food-name-text text-start text-truncate w-100" title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
+                                                <h4 class="food-name-text text-start text-truncate w-100"
+                                                    title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
                                                 <p class="food-price d-inline-block">{{ $bestSellerDish->price }}</p>
                                                 <p
                                                     class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
@@ -309,21 +325,21 @@
                     <form method="POST" id="categoryForm" enctype="multipart/form-data">
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
-                                <input type="file" id="input-file" name="image">
                                 <img src="images/blank-img.svg" alt="blank image" id="img-preview"
                                      class="img-fluid mb-2">
                                 <p class="mb-0" id="img-label">Please upload image of Category</p>
                             </label>
+                            <input type="file" id="input-file" class="d-none" name="image" >
                         </div>
                         <div class="form-group">
                             <label for="dishnameenglish" class="form-label">Dish Category <span
                                     class="text-custom-muted">(English)</span></label>
-                            <input type="text" name="name_en" id="name_en" class="form-control" required>
+                            <input type="text" name="name_en" id="name_en" class="form-control" maxlength="250">
                         </div>
                         <div class="form-group mb-0">
                             <label for="dishnameenglish" class="form-label">Dish Category <span
                                     class="text-custom-muted">(Dutch)</span></label>
-                            <input type="text" name="name_nl" id="name_nl" class="form-control" required>
+                            <input type="text" name="name_nl" id="name_nl" class="form-control" maxlength="250">
                         </div>
                         <button type="submit"
                                 class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">
@@ -351,19 +367,20 @@
                         <div class="imageupload-box">
                             <label for="edit-input-file" class="upload-file">
                                 <input type="file" id="edit-input-file" name="image">
-                                <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" id="edit-img-preview" height="100px"
+                                <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" id="edit-img-preview"
+                                     height="100px"
                                      class="img-fluid mb-2">
                             </label>
                         </div>
                         <div class="form-group">
                             <label for="dishnameenglish" class="form-label">Dish Category <span
                                     class="text-custom-muted">(English)</span></label>
-                            <input type="text" name="name_en" id="edit_name_en" class="form-control" required>
+                            <input type="text" name="name_en" id="edit_name_en" class="form-control" maxlength="250">
                         </div>
                         <div class="form-group mb-0">
                             <label for="dishnameenglish" class="form-label">Dish Category <span
                                     class="text-custom-muted">(Dutch)</span></label>
-                            <input type="text" name="name_nl" id="edit_name_nl" class="form-control" required>
+                            <input type="text" name="name_nl" id="edit_name_nl" class="form-control" maxlength="250">
                         </div>
                         <button type="submit"
                                 class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">

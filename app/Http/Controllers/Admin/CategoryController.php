@@ -33,12 +33,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            if($request->has('id')){
+                $category = Category::find($request->id);
+            }else{
+                $category = new Category();
+            }
             if($request->has('image')){
                 if($request->has('id')){
                     $imageName = uploadImageToBucket($request, '/category', '');
-                    $category = Category::find($request->id);
                 }else{
-                    $category = new Category();
                     $imageName = uploadImageToBucket($request, '/category');
                 }
                 $category->image = $imageName;

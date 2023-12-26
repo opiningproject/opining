@@ -180,18 +180,18 @@ class IngredientController extends Controller
 
     public function updateIngredient(Request $request, string $id){
         try {
-//            dd($request->all());
+
             $ingredient = Ingredient::find($id);
             if($ingredient){
-                $ingredient->update(
-                    $request->all()
-                );
-
                 if ($request->has('image')) {
-                    $imageName = uploadImageToBucket($request, 'ingredients', '');
-                    $request->merge(['image' => $imageName]);
+                    $imageName = uploadImageToBucket($request, 'ingredients/', '');
+                    $ingredient->image = $imageName;
                 }
 
+                $ingredient->name_en = $request->name_en;
+                $ingredient->name_nl = $request->name_nl;
+                $ingredient->category_id = $request->category_id;
+                $ingredient->save();
 
                 if(!empty($request->deletedDish)){
                     $dishList = explode(',', $request->deletedDish);

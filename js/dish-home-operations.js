@@ -7,7 +7,7 @@ $(document).on('click', '#delete-dish-btn', function (){
         success: function (response) {
             $('#deleteDishAlertModal').modal('hide')
             if (response.status == 200) {
-                $('#dish-card-div'+id).remove()
+                location.reload()
             } else {
                 alert(response.message);
             }

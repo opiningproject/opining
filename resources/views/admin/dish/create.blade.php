@@ -55,25 +55,25 @@
                                                 <div class="form-group imageupload-box inline-imageupload-box">
                                                     <label for="dishimage" class="form-label">Dish Image</label>
                                                     <label for="input-file" class="upload-file justify-content-center">
-                                                        <input type="file" id="input-file" name="image">
                                                         <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
                                                              class="img-fluid" id="img-preview">
                                                         <p class="mb-0" id="img-label">Upload Image of Item</p>
                                                     </label>
+                                                    <input type="file" id="input-file" name="image" class="d-none">
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="dishnameenglish" class="form-label">Dish Name <span
                                                             class="text-custom-muted">(English)</span></label>
-                                                    <input type="text" class="form-control" name="name_en"/>
+                                                    <input type="text" class="form-control" name="name_en" maxlength="250"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="dishnamedutch" class="form-label">Dish Name <span
                                                             class="text-custom-muted">(Dutch)</span></label>
-                                                    <input type="text" class="form-control" name="name_nl"/>
+                                                    <input type="text" class="form-control" name="name_nl" maxlength="250"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -97,13 +97,13 @@
                                                 <div class="form-group">
                                                     <label for="discountpercentage" class="form-label">Discount
                                                         Percentage</label>
-                                                    <input type="number" class="form-control" name="percentage_off"/>
+                                                    <input type="number" class="form-control" name="percentage_off" min="1" max="100"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="quantity" class="form-label">Quantity</label>
-                                                    <input type="number" class="form-control" name="qty"/>
+                                                    <input type="number" class="form-control" name="qty"  min="0"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -111,7 +111,7 @@
                                                     <label for="dishprice" class="form-label">Dish Price</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">€</span>
-                                                        <input type="number" class="form-control" name="price"/>
+                                                        <input type="number" class="form-control" name="price" min="0"/>
                                                     </div>
                                                 </div>
                                             </div>

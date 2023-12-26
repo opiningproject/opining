@@ -52,6 +52,7 @@ $(function () {
             success: function (response) {
                 if (response.status == 200) {
                     $('#ingredient-tr' + id).remove()
+                    $('#deleteAlertModal').modal('hide')
                 } else {
                     alert(response.message);
                 }
@@ -123,7 +124,7 @@ $(function () {
 
     $(document).on('change', '#per_page_dropdown', function () {
         var url = this.value;
-        window.open(url, '_blank');
+        window.open(url, '_parent');
     })
 
     $(document).on('click', '.update-ing-status', function () {
@@ -159,17 +160,44 @@ $(function () {
             return false
         }
 
-        $('#img-preview').attr('style', 'height:50px !important; margin-top: -8px;')
+        $('#img-preview').attr('style', 'height:40px !important;')
         readURL(this);
         $('#img-label').hide()
     });
+
+    $(document).on('change', '.ing-image-file', function () {
+        var id = $(this).attr('data-id')
+
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+            alert('You must select an image file only');
+            return false
+        }
+
+        var imgWidth = $(this).width();
+        var imgHeight =$(this).height();
+        if(imgWidth > 1080 || imgHeight > 1080){
+            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            return false
+        }
+
+        editReadURL(this, id);
+    });
+
+    $(document).on('click', '.more-less-text', function (){
+        if($(this).text() == '+ More'){
+            $(this).text('- Less')
+        }else{
+            $(this).text('+ More')
+        }
+    })
 
     $(document).on('change', '.dish-dropdown', function () {
         var id = $(this).val()
         var ingredientId = $(this).attr('data-id')
         var dishName = $(this).find(':selected').attr('data-name')
 
-        var html = '<span class="badge text-bg-yellow">' + dishName + '<a ' +
+        var html = '<span class="badge text-bg-yellow mt-1">' + dishName + '<a ' +
             'href="javascript:void(0);"><i class="fa-solid fa-xmark align-middle del-dish-icon new-dish new-added-dish' + ingredientId + '" data-dish-id="' + id + '" data-id="' + ingredientId + '" data-name="' + dishName + '"></i></a></span>';
         $('.dish-tray' + ingredientId).append(html)
         $(this).find(':selected').remove()
@@ -216,4 +244,17 @@ $(function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function editReadURL(input, id) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#ing-img-preview'+id).attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
 });

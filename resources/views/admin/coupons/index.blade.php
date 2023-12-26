@@ -135,7 +135,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="promocode" class="form-label">Promo Code</label>
-                                    <input type="text" class="form-control" id="promo_code" name="promo_code" required>
+                                    <input type="text" class="form-control" id="promo_code" name="promo_code" maxlength="50" required>
                                 </div>
                             </div>
                             <div class="col-md-12">

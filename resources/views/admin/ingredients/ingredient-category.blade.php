@@ -27,9 +27,9 @@
                                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a>
                                                     </li>
                                                     <li class="breadcrumb-item"><a
-                                                            href="{{ route('ingredients.index')}}">ingredients</a></li>
-                                                    <li class="breadcrumb-item active" aria-current="page">ingredients
-                                                        categories
+                                                            href="{{ route('ingredients.index')}}">Ingredients</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page">Ingredients
+                                                        Categories
                                                     </li>
                                                 </ol>
                                             </nav>
@@ -45,7 +45,7 @@
                                                     <label for="ingredientsnameenglish" class="form-label">Ingredients
                                                         categories
                                                         <span class="text-custom-muted">(English)</span></label>
-                                                    <input type="text" class="form-control" name="name_en"
+                                                    <input type="text" class="form-control" name="name_en" maxlength="250"
                                                            id="name_en"/>
                                                 </div>
                                             </div>
@@ -54,7 +54,7 @@
                                                     <label for="ingredientsnamedutch" class="form-label">Ingredients
                                                         categories
                                                         <span class="text-custom-muted">(Dutch)</span></label>
-                                                    <input type="text" class="form-control" name="name_nl"
+                                                    <input type="text" class="form-control" name="name_nl" maxlength="250"
                                                            id="name_nl"/>
                                                 </div>
                                             </div>

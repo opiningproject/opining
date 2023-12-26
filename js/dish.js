@@ -200,7 +200,7 @@ $(function () {
 
     $(document).on('change', '#per_page_dropdown', function () {
         var url = this.value;
-        window.open(url, '_blank');
+        window.open(url, '_parent');
     })
 
     $(document).on('click', '#addOptionBtn', function (){
@@ -272,7 +272,7 @@ $(function () {
             return false
         }
 
-        $('#img-preview').attr('style', 'height:50px !important; margin-top: -8px;')
+        $('#img-preview').attr('style', 'height:40px !important;')
         readURL(this);
         $('#img-label').hide()
     });
@@ -334,7 +334,8 @@ function addIngredient(type) {
                 var id = response.data.id
 
                 if (type == 'paid') {
-                    var html = '<tr>' +
+                    $('#no-paid-ing-tr').remove()
+                    var html = '<tr id="dishIngredient'+ id +'">' +
                         '<td class="text-center"><img' +
                         '        src="images/american_cheese_img.svg"' +
                         '        class="img-fluid me-15px" alt="ingredient img 1"/></td>' +
@@ -360,7 +361,7 @@ function addIngredient(type) {
                         '           tabindex="0" href="javascript:void(0);">' +
                         '            <i class="fa-solid fa-pen-to-square"></i>' +
                         '        </a>' +
-                        '        <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn"' +
+                        '        <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient"' +
                         '           id="paid-ingredient-delete' + id + '"' +
                         '           data-bs-toggle="modal" data-id="' + id + '"' +
                         '           data-bs-target="#deleteAlertModal">' +
@@ -375,9 +376,11 @@ function addIngredient(type) {
                         '</tr>';
                     $('#paidIngredientTbody').append(html)
                     $('#paidIngredientCategory').val('')
+                    $('#paid-price').val('')
                     $('#paidIngredient').html('<option value="">Select Ingredient</option>')
                 } else {
-                    var html = "<tr>" +
+                    $('#free-paid-ing-tr').remove()
+                    var html = "<tr id='dishIngredient"+ id +"'>" +
                         "<td class='text-center'>" +
                         "    <img" +
                         "        src=''" +
@@ -391,7 +394,7 @@ function addIngredient(type) {
                         "</td>" +
                         "<td class='text-center'>" +
                         "    <div class=''>" +
-                        "        <a class='btn btn-custom-yellow btn-icon free-ingredient-delete-btn'" +
+                        "        <a class='btn btn-custom-yellow btn-icon free-ingredient-delete-btn del-dish-ingredient'" +
                         "           data-bs-toggle='modal'" +
                         "           data-bs-target='#deleteAlertModal' data-id='" + id + "' id='free-ingredient-delete" + id + "'>" +
                         "            <i class='fa-regular fa-trash-can'></i>" +

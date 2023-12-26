@@ -3,7 +3,7 @@ $(function () {
         rules:{
             phone_no:{
                 maxlength: 14,
-                minlength: 14
+                minlength: 6
             }
         },
         submitHandler: function (form) {
@@ -38,6 +38,18 @@ $(function () {
     $(document).on('change', '#permit-doc-input-file', function () {
         editPermitReadURL(this);
     });
+
+    $(document).on('change', '.profile_start_time', function (){
+        var id = $(this).attr('data-id')
+        var startTime = $(this).val()
+        var endTime = $('#end_time'+id).val()
+
+        if(startTime > endTime){
+            console.log()
+        }
+        console.log(startTime)
+
+    })
 
     $.validator.addMethod(
         "regex",

@@ -1,10 +1,8 @@
 $(function ()
 {
     $('.timepicker').timepicker({
-            timeFormat: 'h:mm',
-            interval: 60,
-            maxTime: '6:00pm',
-            startTime: '10:00',
+            timeFormat: 'HH:mm',
+            interval: 30,
             dynamic: false,
             dropdown: true,
             scrollbar: true

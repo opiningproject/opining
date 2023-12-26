@@ -16,7 +16,8 @@
                         <section class="custom-section">
                             <div class="card editdish-card">
                                 <div class="card-header border-0 bg-white border-bottom-0">
-                                    <h3 class="text-custom-muted editdish-card-title mb-0">Coupons /
+                                    <h3 class="text-custom-muted editdish-card-title mb-0">
+                                        <a href="{{ route('coupons.index') }}">Coupons</a> /
                                         <span class="text-yellow-2">Claim History
                                         </span>
                                     </h3>

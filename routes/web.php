@@ -95,6 +95,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::resource('/category',CategoryController::class);
 
+    Route::get('/menu/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
     Route::resource('/menu/ingredients/category',IngredientCategoryController::class, [
         'as' => 'ingred'
     ]);

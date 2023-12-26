@@ -72,6 +72,11 @@ $(function () {
         var url = this.value;
         window.open(url, '_parent');
     })
+
+    $('.zipcode-text').on('keyup', function (event) {
+        this.value = this.value.replace(/[^a-zA-Z0-9 ]/g, '');
+
+    });
 });
 
 function saveZipcode(id) {
@@ -93,6 +98,16 @@ function saveZipcode(id) {
     if (delivery_charge == '') {
         $('#delivery_charge_' + id).focus();
         return false;
+    }
+
+    if (min_order_price < 0) {
+        alert('Minimum Order Price should be grater than 0')
+        return false
+    }
+
+    if (delivery_charge < 0) {
+        alert('Deliver Charges should be grater than 0')
+        return false
     }
 
     $.ajax({

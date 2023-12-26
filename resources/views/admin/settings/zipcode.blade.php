@@ -16,20 +16,20 @@
                         <tbody id="est">
                         <tr class="zipcode-row-0">
                             <td>
-                                <input type="text" class="form-control text-center w-10r m-auto" id="zipcode_0"
+                                <input type="text" class="form-control text-center w-10r m-auto zipcode-text" id="zipcode_0"
                                        name="zipcode"/>
                             </td>
                             <td class="text-center">
                                 <div class="input-group w-5r m-auto">
                                     <span class="input-group-text" id="basic-addon1">€</span>
-                                    <input type="number" class="form-control m-auto" id="min_order_price_0"
+                                    <input type="number" class="form-control m-auto" min="0" id="min_order_price_0"
                                            name="min_order_price"/>
                                 </div>
                             </td>
                             <td class="text-center">
                                 <div class="input-group w-5r m-auto">
                                     <span class="input-group-text" id="basic-addon1">€</span>
-                                    <input type="number" class="form-control m-auto" id="delivery_charge_0"
+                                    <input type="number" class="form-control m-auto" min="0" id="delivery_charge_0"
                                            name="delivery_charge"/>
                                 </div>
                             </td>
@@ -48,7 +48,7 @@
                         @foreach($zipcodes as $key => $zipcode)
                             <tr class="zipcode-row-{{ $zipcode['id'] }}">
                                 <td>
-                                    <input type="text" class="form-control text-center w-10r m-auto"
+                                    <input type="text" class="form-control text-center w-10r m-auto zipcode-text"
                                            value="{{ $zipcode['zipcode'] }}" id="zipcode_{{ $zipcode['id'] }}"
                                            readonly/>
                                 </td>

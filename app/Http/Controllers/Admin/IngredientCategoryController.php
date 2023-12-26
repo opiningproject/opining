@@ -104,4 +104,18 @@ class IngredientCategoryController extends Controller
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
+
+    public function checkAttachedItems(string $id){
+        try {
+            $ingredients = IngredientCategory::has('ingredients.dishIngredient')->find($id);
+            if($ingredients){
+                return response::json(['status' => 400, 'data' => $ingredients]);
+            }else{
+                return response::json(['status' => 200, 'data' => $ingredients]);
+            }
+
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
 }

@@ -187,6 +187,7 @@ $(function () {
                 $('#deleteAlertModal').modal('hide')
                 if (response.status == 200) {
                     $('#dishIngredient' + id).remove()
+                    toastr.success('Ingredient Removed Successfully')
                 } else {
                     alert(response.message);
                 }
@@ -406,6 +407,7 @@ function addIngredient(type) {
                     $('#freeIngredientCategory').val('')
                     $('#freeIngredient').html('<option value="">Select Ingredient</option>')
                 }
+                toastr.success('Ingredient Added Successfully')
             }
 
         },
@@ -447,6 +449,7 @@ function updateDishData() {
         data: dishData,
         success: function (response) {
             if (response.status == 200) {
+                toastr.success('Dish Updated Successfully')
                 location.reload()
             }else{
                 alert(response.message)

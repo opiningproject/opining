@@ -14,7 +14,7 @@
     </div>
 
     <div class="siderbarmenu-brand">
-        <a href="javascript:void(0);" class="navbar-brand sidebar-logo">
+        <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
             <p class="mb-0">Gomeal<span class="text-yellow-1">.</span></p>
         </a>
     </div>

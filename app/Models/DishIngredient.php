@@ -14,10 +14,6 @@ class DishIngredient extends Model
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 
-    protected $appends = [
-        'name'
-    ];
-
     public function ingredient(){
         return $this->belongsTo(Ingredient::class, 'ingredient_id', 'id');
     }
@@ -32,10 +28,5 @@ class DishIngredient extends Model
 
     public function scopePaidIngredient($query){
         return $query->whereIsFree(0)->get();
-    }
-
-    public function getNameAttribute()
-    {
-        return $this->attributes['name_' . app()->getlocale()];
     }
 }

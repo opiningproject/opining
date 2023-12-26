@@ -119,14 +119,14 @@
                                             <input type="hidden" value="{{ $time->id }}" name="id[]">
                                             <div class="time-day-name">
                                                 <div class="form-group mb-0">
-                                                    <input type="text" class="timepicker form-control time-form-control"
-                                                           value="{{ date('',$time->start_time) }}" name="start_time[]"
+                                                    <input type="text" class="timepicker form-control time-form-control profile_start_time" id="start_time{{ $time->id }}" data-id="{{ $time->id }}"
+                                                           value="{{ date('H:i',strtotime($time->start_time)) }}" name="start_time[]"
                                                            style="max-height: fit-content">
                                                 </div>
                                                 -
                                                 <div class="form-group mb-0">
-                                                    <input type="text" class="timepicker form-control time-form-control"
-                                                           value="{{ $time->end_time }}" name="end_time[]"
+                                                    <input type="text" class="timepicker form-control time-form-control profile_end_time" id="end_time{{ $time->id }}" data-id="{{ $time->id }}"
+                                                           value="{{ date('g:i',strtotime($time->end_time)) }}" name="end_time[]"
                                                            style="max-height: fit-content">
                                                 </div>
                                             </div>
@@ -142,9 +142,9 @@
         <div class="card-footer bg-white border-0">
             <div class="row">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                    <a class="btn btn-custom-yellow btn-default d-block">
+                    <a type="submit"  class="btn btn-custom-yellow btn-default d-block">
                         <!-- <span class="align-middle">Save</span> -->
-                        <button type="submit" class="align-middle border-0 bg-transparent" id="profile-save-btn">Save</button>
+                        <button class="align-middle border-0 bg-transparent" id="profile-save-btn">Save</button>
                     </a>
                 </div>
             </div>

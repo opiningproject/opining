@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
+<div class="tab-pane fade show {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? '' : 'active'}}" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
     <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="card-body">
@@ -39,7 +39,7 @@
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="ownername" class="form-label">Owner Name</label>
-                            <input type="text" class="form-control" value="{{ $user->user->first_name.' '.$user->user->last_name }}" maxlength="25" name="owner_name" required/>
+                            <input type="text" class="form-control" value="{{ $user->user->name }}" maxlength="25" name="owner_name" required/>
                         </div>
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -119,14 +119,14 @@
                                             <input type="hidden" value="{{ $time->id }}" name="id[]">
                                             <div class="time-day-name">
                                                 <div class="form-group mb-0">
-                                                    <input type="text" class="timepicker form-control time-form-control"
-                                                           value="{{ date('',$time->start_time) }}" name="start_time[]"
+                                                    <input type="text" class="timepicker form-control time-form-control profile_start_time" id="start_time{{ $time->id }}" data-id="{{ $time->id }}"
+                                                           value="{{ date('H:i',strtotime($time->start_time)) }}" name="start_time[]"
                                                            style="max-height: fit-content">
                                                 </div>
                                                 -
                                                 <div class="form-group mb-0">
-                                                    <input type="text" class="timepicker form-control time-form-control"
-                                                           value="{{ $time->end_time }}" name="end_time[]"
+                                                    <input type="text" class="timepicker form-control time-form-control profile_end_time" id="end_time{{ $time->id }}" data-id="{{ $time->id }}"
+                                                           value="{{ date('H:i',strtotime($time->end_time)) }}" name="end_time[]"
                                                            style="max-height: fit-content">
                                                 </div>
                                             </div>
@@ -142,10 +142,11 @@
         <div class="card-footer bg-white border-0">
             <div class="row">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                    <a class="btn btn-custom-yellow btn-default d-block">
+                    <button type="submit" id="profile-save-btn" class="btn btn-custom-yellow fw-400 font-sebibold w-100 mt-30px font-18">
                         <!-- <span class="align-middle">Save</span> -->
-                        <button type="submit" class="align-middle border-0 bg-transparent" id="profile-save-btn">Save</button>
-                    </a>
+{{--                        <button class="align-middle border-0 bg-transparent" id="profile-save-btn">Save</button>--}}
+                        Save
+                    </button>
                 </div>
             </div>
         </div>

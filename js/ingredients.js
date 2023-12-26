@@ -53,8 +53,9 @@ $(function () {
                 if (response.status == 200) {
                     $('#ingredient-tr' + id).remove()
                     $('#deleteAlertModal').modal('hide')
+                    toastr.success('Ingredient Deleted Successfully')
                 } else {
-                    alert(response.message);
+                    toastr.error(response.message)
                 }
             },
             error: function (response) {
@@ -96,6 +97,16 @@ $(function () {
         ingredientData.append('name_en', name_en)
         ingredientData.append('name_nl', name_nl)
 
+        if(name_en == ''){
+            alert('Please enter Name(English)')
+            return false
+        }
+
+        if(name_nl == ''){
+            alert('Please enter Name(Dutch)')
+            return false
+        }
+
         $('.new-dish').each(function(i, obj) {
             addedDish.push($(this).attr('data-dish-id'))
             ingredientData.append('addedDish[]', $(this).attr('data-dish-id'))
@@ -109,9 +120,10 @@ $(function () {
             data: ingredientData,
             success: function (response) {
                 if (response.status == 200) {
+                    toastr.success('Ingredient Updated successfully')
                     location.reload()
                 }else{
-                    alert(response.message);
+                    toastr.error(response.message)
                 }
             },
             error: function (response) {
@@ -143,7 +155,7 @@ $(function () {
                 status
             },
             success: function (response) {
-                // window.location.reload();
+                toastr.success("Ingredient Status Updated")
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message

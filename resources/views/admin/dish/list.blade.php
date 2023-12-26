@@ -38,7 +38,7 @@
                                             @include('admin.dish.dish-list')
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center" style="padding: 0 15px 15px 15px">
                                     {{ $dishes->links() }}
                                     <div>
                                         <label>Rows per Page</label>

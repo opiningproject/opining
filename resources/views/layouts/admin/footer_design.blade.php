@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-logo">
-        <a href="javascript:void(0);">
+        <a href="{{ route('home') }}">
             <p class="mb-0">Gomeal<span class="text-yellow-1">.</span></p>
         </a>
     </div>

@@ -25,9 +25,9 @@
                             <div class="customize-tab setting-tab">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="restaurantProfile-tab" data-bs-toggle="tab"
+                                        <button class="nav-link {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? '' : 'active'}}" id="restaurantProfile-tab" data-bs-toggle="tab"
                                                 data-bs-target="#restaurantProfile-tab-pane" type="button" role="tab"
-                                                aria-controls="restaurantProfile-tab-pane" aria-selected="true">
+                                                aria-controls="restaurantProfile-tab-pane" aria-selected="{{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? 'false' : 'true'}}">
                                             Restaurant
                                             Profile
                                         </button>
@@ -61,9 +61,9 @@
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="zipCode-tab" data-bs-toggle="tab"
+                                        <button class="nav-link {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? 'active' : ''}}" id="zipCode-tab" data-bs-toggle="tab"
                                                 data-bs-target="#zipCode-tab-pane" type="button" role="tab"
-                                                aria-controls="zipCode-tab-pane" aria-selected="false">Zip Code
+                                                aria-controls="zipCode-tab-pane" aria-selected="{{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? 'true' : 'false'}}">Zip Code
                                         </button>
                                     </li>
                                 </ul>

@@ -130,7 +130,7 @@
                                                         <img
                                                             src="{{ $ingredient->image }}"
                                                             class="img-fluid" id="ing-exist-img{{ $ingredient->id }}"
-                                                            height="40px"
+                                                            style="height: 60px !important;"
                                                             alt="ingredient img 1"/>
                                                         <div class="imageupload-box inline-imageupload-box mb-0"
                                                              style="display: none" id="img-div{{ $ingredient->id }}">

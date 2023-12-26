@@ -39,18 +39,6 @@ $(function () {
         editPermitReadURL(this);
     });
 
-    $(document).on('change', '.profile_start_time', function (){
-        var id = $(this).attr('data-id')
-        var startTime = $(this).val()
-        var endTime = $('#end_time'+id).val()
-
-        if(startTime > endTime){
-            console.log()
-        }
-        console.log(startTime)
-
-    })
-
     $.validator.addMethod(
         "regex",
         function(value, element, regexp) {

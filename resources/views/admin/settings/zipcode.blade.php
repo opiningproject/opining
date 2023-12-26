@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="zipCode-tab-pane" role="tabpanel" aria-labelledby="zipCode-tab" tabindex="0">
+<div class="tab-pane fade {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? 'show active' : ''}}" id="zipCode-tab-pane" role="tabpanel" aria-labelledby="zipCode-tab" tabindex="0">
     <div class="card-body">
         <div class="zipcode-card-body rounded-custom-12 border-custom-1 py-3">
             <div class="zipcode-table custom-table">

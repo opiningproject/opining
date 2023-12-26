@@ -3,7 +3,7 @@ $(function () {
         rules:{
             phone_no:{
                 maxlength: 14,
-                minlength: 14
+                minlength: 6
             }
         },
         submitHandler: function (form) {

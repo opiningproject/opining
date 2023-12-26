@@ -187,6 +187,10 @@ class SettingController extends Controller
         $restaurant->longitude = $request->longitude;
         $restaurant->save();
 
+        $owner = User::find($user_id);
+        $owner->name = $request->owner_name;
+        $owner->save();
+
         foreach ($request->id as $key => $timeId) {
             $day = OperatingHour::find($timeId);
             $day->start_time = $request->start_time[$key];

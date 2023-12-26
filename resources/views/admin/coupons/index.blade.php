@@ -120,7 +120,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="points" class="form-label">Points</label>
-                                    <input type="number" class="form-control" id="points" name="points" required>
+                                    <input type="number" class="form-control" id="points" name="points" min="1" max="1000" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -128,20 +128,20 @@
                                     <label for="price" class="form-label">minimum order price</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">€</span>
-                                        <input type="text" class="form-control" id="price" name="price" required/>
+                                        <input type="text" class="form-control" id="price" min="1" name="price" required/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="promocode" class="form-label">Promo Code</label>
-                                    <input type="text" class="form-control" id="promo_code" name="promo_code" maxlength="50" required>
+                                    <input type="text" class="form-control" id="promo_code" name="promo_code" maxlength="20" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="percentageofoff" class="form-label">Percentage Off</label>
-                                    <input type="number" class="form-control" id="percentage_off" name="percentage_off" required>
+                                    <input type="number" class="form-control" id="percentage_off" name="percentage_off" min="1" max="100" required>
                                 </div>
                             </div>
                             <div class="col-md-12">

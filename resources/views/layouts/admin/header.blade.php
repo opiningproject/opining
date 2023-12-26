@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dark-mode.css')}}" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

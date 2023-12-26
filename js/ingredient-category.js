@@ -24,6 +24,8 @@ $(function () {
             success: function (response) {
                 $('#ing-tr'+id).remove();
                 $('#deleteAlertModal').modal('hide')
+                toastr.success('Category Deleted successfully')
+
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -50,11 +52,43 @@ $(function () {
         $('#del-btn' + id).hide()
     })
 
+    $(document).on('click', '.del-cat-icon', function () {
+
+        var id = $(this).attr('data-id');
+
+        $.ajax({
+            url: baseURL + '/menu/ingredients/category/checkItems/' + id,
+            type: 'GET',
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#catId').val(id)
+                    $('#deleteAlertModal').modal('show')
+                } else {
+                    $('#deleteAlertModalMsg').modal('show')
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+
     $(document).on('click', '.save-edit-btn', function () {
         var id = $(this).attr('data-id')
 
         var name_en = $('#name_en' + id).val()
         var name_nl = $('#name_nl' + id).val()
+
+        if(name_en == ''){
+            alert('Please enter Name(English)')
+            return false
+        }
+
+        if(name_nl == ''){
+            alert('Please enter Name(Dutch)')
+            return false
+        }
 
         $.ajax({
             url: baseURL + '/menu/ingredients/category/' + id,
@@ -71,8 +105,9 @@ $(function () {
                     $('#edit-btn'+id).show()
                     $('#del-btn'+id).show()
                     $('#save-edit-btn'+id).attr('style','display:none !important')
+                    toastr.success('Category Updated Successfully')
                 } else {
-                    alert(response.message)
+                    toastr.error(response.message)
                 }
             },
             error: function (response) {
@@ -135,8 +170,11 @@ function saveIngredientCategory() {
                     '</tr>';
                 $('#ingredientCategoryTbody').prepend(html)
                 $('#ingCategoryForm').trigger('reset')
+
+                toastr.success('Category Added Successfully')
+
             }else{
-                alert(response.message)
+                toastr.error(response.message)
             }
 
         },

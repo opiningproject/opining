@@ -40,8 +40,7 @@ $(function () {
             url: 'category/' + id,
             type: 'DELETE',
             success: function (response) {
-                console.log('success')
-                console.log(response)
+                toastr.success('Category Deleted Successfully')
                 window.location.reload();
             },
             error: function (response) {
@@ -171,6 +170,11 @@ function saveCategory(type) {
         contentType: false,
         data: catData,
         success: function (response) {
+            if (type == 'add'){
+                toastr.success('Category Added Successfully')
+            }else{
+                toastr.success('Category Updated Successfully')
+            }
             location.reload()
         },
         error: function (response) {

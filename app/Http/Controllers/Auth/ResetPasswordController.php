@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules;
 
 class ResetPasswordController extends Controller
 {
@@ -41,5 +42,14 @@ class ResetPasswordController extends Controller
         event(new PasswordReset($user));
 
         redirect('/login');
+    }
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', Rules\Password::defaults(), 'regex:"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%&*])[a-zA-Z0-9!@#$%&*]+$"'],
+            'password_confirmation' => 'same:password'
+        ];
     }
 }

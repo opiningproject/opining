@@ -305,7 +305,7 @@
                                                             <td class="text-center">
                                                                 <img
                                                                     src="{{ $freeIngredient->ingredient->image  }}"
-                                                                    class="img-fluid me-15px" alt="ingredient img 1"/>
+                                                                    class="img-fluid me-15px" alt="ingredient img 1" style="height: 50px"/>
                                                             </td>
                                                             <td class="text-center"><input type="text"
                                                                                            class="form-control text-center w-10r m-auto"
@@ -436,7 +436,7 @@
                                                     @foreach($dish->paidIngredients as $paidIngredient)
                                                         <tr id="dishIngredient{{ $paidIngredient->id }}">
                                                             <td class="text-center"><img
-                                                                    src="images/american_cheese_img.svg"
+                                                                    src="{{ $paidIngredient->image }}"
                                                                     class="img-fluid me-15px" alt="ingredient img 1"/>
                                                             </td>
                                                             <td class="text-center"><input type="text"

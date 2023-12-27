@@ -149,7 +149,7 @@
         </div>
         <div class="offcanvas-footer">
             <div class="sidebar-bottom">
-                <div class="dropdown">
+                <div class="dropdown dropdown-center">
                   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     @if(App::isLocale('en'))
                       <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28" />

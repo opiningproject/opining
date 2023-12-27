@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 my-auto">
                         <div class="form-group mb-0 mt-2">
-                            <div class="form-check form-switch custom-switch d-flex align-items-center justify-content-between ps-0">
+                            <div class="form-check form-switch custom-switch d-flex align-items-center gap-3 ps-0">
                                 <label class="form-check-label form-label mb-0">Online Order Acceptance</label>
                                 <!-- <label class="text-yellow-2 float-end form-label mb-0 text-end">Active</label> -->
                                 <!-- switch online order Acceptance -->

@@ -2079,8 +2079,8 @@ label.error{
 #price-error {
     width: 100%;
 }
-
-.multi-language-div{
-    transform: translate3d(5px, 35px, 0px)!important;
+.countrycode-phone-control:has(.form-control.error) img{
+    margin-top: -12px;
 }
+
 /* Rekha Sharma */

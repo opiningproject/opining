@@ -22,8 +22,7 @@ $(function () {
             url: 'coupons/' + id,
             type: 'DELETE',
             success: function (response) {
-                console.log('success')
-                console.log(response)
+                toastr.success('Coupon deleted successfully')
                 window.location.reload();
             },
             error: function (response) {
@@ -45,8 +44,7 @@ $(function () {
                 id, status
             },
             success: function (response) {
-                console.log('success')
-                console.log(response)
+                toastr.success('Coupon status updated successfully')
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -82,8 +80,11 @@ function saveCoupon() {
             id, points, price, promo_code, percentage_off, description, expiry_date
         },
         success: function (response) {
-            console.log('success')
-            console.log(response)
+            if(id > 0){
+                toastr.success('Coupon updated successfully')
+            }else{
+                toastr.success('Coupon added Successfully')
+            }
             window.location.reload();
         },
         error: function (response) {

@@ -19,17 +19,19 @@
                                     <div class="page-control">
                                         <div class="row justify-content-end align-items-center g-0">
                                             <div class="col-auto">
-                                                <div class="d-flex align-items-center form-control bg-white border-0 h-100 new-searchbar">
+                                                <div
+                                                    class="d-flex align-items-center form-control bg-white border-0 h-100 new-searchbar">
                                                     <div class="image">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                                              viewBox="0 0 32 32" fill="none">
                                                             <path
                                                                 d="M23.5119 23.1552L19.281 18.9243C20.1552 17.6068 20.6668 16.0293 20.6668 14.3334C20.6668 9.73837 16.9285 6 12.3334 6C7.73837 6 4 9.73837 4 14.3334C4 18.9285 7.73837 22.6668 12.3334 22.6668C14.0293 22.6668 15.6068 22.1552 16.9243 21.281L21.1552 25.5119C21.8052 26.1627 22.8619 26.1627 23.5119 25.5119C24.1627 24.861 24.1627 23.806 23.5119 23.1552ZM6.50003 14.3334C6.50003 11.1167 9.11672 8.50003 12.3334 8.50003C15.5501 8.50003 18.1668 11.1167 18.1668 14.3334C18.1668 17.5501 15.5501 20.1668 12.3334 20.1668C9.11672 20.1668 6.50003 17.5501 6.50003 14.3334Z"
-                                                                fill="#FFC00B" />
+                                                                fill="#FFC00B"/>
                                                         </svg>
                                                     </div>
-                                                    <input type="text" id="search-dish" class="form-control border-0 outline-0 text-truncate"
-                                                           placeholder="What do you want to eat today..." />
+                                                    <input type="text" id="search-dish"
+                                                           class="form-control border-0 outline-0 text-truncate"
+                                                           placeholder="What do you want to eat today..."/>
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -114,31 +116,35 @@
                             <div class="swiper-container">
                                 <div class="swiper category-swiper-slider">
                                     <div class="category-slider swiper-wrapper">
-                                        @foreach ($categories as $category)
-                                            <div class="category-element swiper-slide">
-                                                <div class="card">
+                                        @if(count($categories) > 0)
+                                            @foreach ($categories as $category)
+                                                <div class="category-element swiper-slide">
+                                                    <div class="card">
                                                 <span class="dish-item-icon">
                                                     <img src="{{ $category->image }}" class="img-fluid" alt="bakery"
                                                          style="height: 60px !important;">
                                                 </span>
-                                                    <p class="mb-0 category-item-name text-truncate w-100"
-                                                       title="{{ $category->name }}">{{ $category->name }}</p>
-                                                    <div class="categoryfood-detail-card-btn">
-                                                        <a class="btn btn-custom-yellow btn-icon category-edit-btn"
-                                                           data-id="{{ $category->id }}" data-bs-toggle="modal"
-                                                           data-bs-target="#editCategoryModel">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon del-cat-icon"
-                                                           data-bs-toggle="modal" data-id="{{ $category->id }}"
-                                                           data-bs-target="#deleteCategoryAlertModal">
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                    </div>
+                                                        <p class="mb-0 category-item-name text-truncate w-100"
+                                                           title="{{ $category->name }}">{{ $category->name }}</p>
+                                                        <div class="categoryfood-detail-card-btn">
+                                                            <a class="btn btn-custom-yellow btn-icon category-edit-btn"
+                                                               data-id="{{ $category->id }}" data-bs-toggle="modal"
+                                                               data-bs-target="#editCategoryModel">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </a>
+                                                            <a class="btn btn-custom-yellow btn-icon del-cat-icon"
+                                                               data-bs-toggle="modal" data-id="{{ $category->id }}"
+                                                               data-bs-target="#deleteCategoryAlertModal">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @else
+                                            No Category exist
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -309,8 +315,8 @@
             </div>
         </div>
         <!-- start footer -->
-        @include('layouts.admin.footer_design')
-        <!-- end footer -->
+    @include('layouts.admin.footer_design')
+    <!-- end footer -->
     </div>
     <!-- start add category Modal -->
     <div class="modal fade custom-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModal"
@@ -329,7 +335,7 @@
                                      class="img-fluid mb-2">
                                 <p class="mb-0" id="img-label">Please upload image of Category</p>
                             </label>
-                            <input type="file" id="input-file" class="d-none" name="image" >
+                            <input type="file" id="input-file" class="d-none" name="image">
                         </div>
                         <div class="form-group">
                             <label for="dishnameenglish" class="form-label">Dish Category <span

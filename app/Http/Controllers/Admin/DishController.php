@@ -211,6 +211,7 @@ class DishController extends Controller
                 $dish->desc_en = $request->desc_en;
                 $dish->desc_nl = $request->desc_nl;
                 $dish->price = $request->price;
+                $dish->category_id = $request->category_id;
                 $dish->percentage_off = $request->percentage_off;
                 $dish->qty = $request->qty;
                 $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';

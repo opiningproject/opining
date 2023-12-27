@@ -159,7 +159,7 @@
                       <span class="">Dutch</span>
                     @endif
                   </button>
-                  <ul class="dropdown-menu">
+                  <ul class="multi-language-div dropdown-menu">
                       <li>
                         <a class="dropdown-item {{ (App::isLocale('en')) ? 'active': '' }}" href="{{ route('app.setLocal', 'en') }}">
                           <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />English

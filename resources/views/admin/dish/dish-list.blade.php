@@ -19,7 +19,7 @@
                            class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal"
+                        <a class="btn btn-custom-yellow btn-icon del-dish-btn" data-bs-toggle="modal"
                            data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
                             <i class="fa-regular fa-trash-can"></i>
                         </a>

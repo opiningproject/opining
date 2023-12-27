@@ -133,8 +133,8 @@
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
                                                             <a class="btn btn-custom-yellow btn-icon del-cat-icon"
-                                                               data-bs-toggle="modal" data-id="{{ $category->id }}"
-                                                               data-bs-target="#deleteCategoryAlertModal">
+                                                            data-id="{{ $category->id }}"
+                                                            >
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
                                                         </div>
@@ -455,6 +455,29 @@
     </div>
     <!-- end delete dish Modal -->
 
+    <!-- start delete Ingredients Modal -->
+    <div class="modal fade custom-modal" id="deleteAlertModalMsg" tabindex="-1"
+         aria-labelledby="deleteAlertModalMsg" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="alert-text-1 mb-40px">There are dishes added to this category. Please remove
+                                them to delete.</h4>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button"
+                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                                data-bs-dismiss="modal">Okay
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end delete Ingredients Modal -->
     {{--    </div>--}}
 @endsection
 

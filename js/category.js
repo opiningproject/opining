@@ -53,6 +53,23 @@ $(function () {
     $(document).on('click', '.del-cat-icon', function () {
         var id = $(this).attr('data-id')
         $('#catId').val(id)
+
+        $.ajax({
+            url: 'category/checkDishes/' + id,
+            type: 'GET',
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#catId').val(id)
+                    $('#deleteCategoryAlertModal').modal('show')
+                } else {
+                    $('#deleteAlertModalMsg').modal('show')
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
     })
 
     $(document).on('click', '.category-edit-btn', function () {

@@ -55,7 +55,7 @@ $(function () {
             success: function (response) {
                 $('#deleteZipcodeModal').modal('toggle');
                 $('.zipcode-row-' + id).remove();
-
+                toastr.success('Zipcode deleted successfully')
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -117,19 +117,20 @@ function saveZipcode(id) {
             id, zipcode, min_order_price, delivery_charge, status
         },
         success: function (response) {
-            //alert(response);
-
             if (id != 0 || id != '') {
                 $('.zipcode-row-' + id).find('input').attr('readonly', true);
                 $("#zipcode-remove-btn-" + id).show();
                 $("#zipcode-edit-btn-" + id).show();
                 $("#zipcode-save-btn-" + id).css("display", "none");
+                toastr.success('Zipcode updated successfully')
             } else {
                 $('#min_order_price_0').val('');
                 $('#zipcode_0').val('');
                 $('#delivery_charge_0').val('');
 
                 $('.zipcode-row-0').after(response);
+
+                toastr.success('Zipcode added successfully')
             }
         },
         error: function (response) {
@@ -163,8 +164,7 @@ function changeStatus(id) {
             id, status
         },
         success: function (response) {
-            console.log('success')
-            console.log(response)
+            toastr.success('Status updated successfully')
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -217,6 +217,7 @@ function saveContent(lang) {
         },
         success: function (response) {
             $('#CMSCouponModal').modal('show');
+            toastr.success('Content updated successfully')
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

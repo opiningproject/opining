@@ -102,4 +102,18 @@ class CategoryController extends Controller
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
+
+    public function checkDishCategory(string $id){
+        try {
+            $category = Category::has('dish')->find($id);
+            if($category){
+                return response::json(['status' => 400, 'data' => $category]);
+            }else{
+                return response::json(['status' => 200, 'data' => $category]);
+            }
+
+        } catch (Exception $e) {
+            return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
 }

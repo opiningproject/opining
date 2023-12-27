@@ -93,6 +93,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::post('/menu/dish/searchDish', [DishController::class, 'searchDish']);
     Route::resource('/menu/dish', DishController::class);
 
+    Route::get('/category/checkDishes/{category}', [CategoryController::class, 'checkDishCategory']);
     Route::resource('/category',CategoryController::class);
 
     Route::get('/menu/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);

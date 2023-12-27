@@ -7,6 +7,7 @@ $(function () {
             }
         },
         submitHandler: function (form) {
+            toastr.success('Settings updated successfully')
             return true;
         }
     });
@@ -73,6 +74,7 @@ function changePassword() {
                 $("#old_password-error-msg").removeClass('d-none');
             } else {
                 $("#changePasswordModal").modal('hide');
+                toastr.success('Password updated successfully')
             }
         },
         error: function (response) {

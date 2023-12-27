@@ -24,3 +24,8 @@ $(document).on('click', '.del-dish-btn', function (){
     var id = $(this).attr('data-id')
     $('#dishId').val(id)
 })
+
+$(document).on('change', '#per_page_dropdown', function () {
+    var url = this.value;
+    window.open(url, '_parent');
+})

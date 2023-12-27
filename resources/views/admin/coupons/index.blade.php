@@ -173,7 +173,7 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-0">
                                     <label for="newpassword" class="form-label">Description</label>
-                                    <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
+                                    <textarea class="form-control" rows="3" id="description" name="description" maxlength="200" required></textarea>
                                 </div>
                             </div>
                         </div>

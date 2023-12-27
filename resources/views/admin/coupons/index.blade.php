@@ -89,7 +89,7 @@
 
                                     </div>
                                     <div class="card-footer bg-white border-0">
-                                        <p class="mb-0 text-center coupons-card-footer-text">{{ $coupon->description }}</p>
+                                        <p class="mb-0 text-center coupons-card-footer-text text-truncate">{{ $coupon->description }}</p>
                                     </div>
                                 </div>
                                 @endforeach

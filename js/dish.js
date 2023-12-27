@@ -338,7 +338,7 @@ function addIngredient(type) {
                     $('#no-paid-ing-tr').remove()
                     var html = '<tr id="dishIngredient'+ id +'">' +
                         '<td class="text-center"><img' +
-                        '        src="images/american_cheese_img.svg"' +
+                        '        src="'+ response.data.ingredient.image +'"' +
                         '        class="img-fluid me-15px" alt="ingredient img 1"/></td>' +
                         '<td class="text-center"><input type="text"' +
                         '                               class="form-control text-center w-10r m-auto"' +
@@ -384,7 +384,7 @@ function addIngredient(type) {
                     var html = "<tr id='dishIngredient"+ id +"'>" +
                         "<td class='text-center'>" +
                         "    <img" +
-                        "        src=''" +
+                        "        src='"+ response.data.ingredient.image +"'" +
                         "        class='img-fluid me-15px' alt='ingredient img 1'/></td>" +
                         "<td class='text-center'><input type='text'" +
                         "                               class='form-control text-center w-10r m-auto'" +

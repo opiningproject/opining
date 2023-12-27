@@ -10,7 +10,7 @@ $(document).on('click', '#delete-dish-btn', function (){
                 toastr.success('Dish Deleted Successfully')
                 location.reload()
             } else {
-                alert(response.message);
+                toastr.error(response.message);
             }
         },
         error: function (response) {

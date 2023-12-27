@@ -26,8 +26,7 @@
                                                 <ol class="breadcrumb">
                                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a>
                                                     </li>
-                                                    <li class="breadcrumb-item"><a
-                                                            href="{{ route('dish.index')}}">Dishes</a></li>
+                                                    <li class="breadcrumb-item active">Dishes</li>
                                                 </ol>
                                             </nav>
                                         </div>

@@ -12,7 +12,7 @@
 <script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
 
 <script>
     var baseURL = "{{ url('/') }}"

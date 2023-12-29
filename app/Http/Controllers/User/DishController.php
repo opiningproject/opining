@@ -56,15 +56,15 @@ class DishController extends Controller
             return response::json(['status' => 2, 'message' => '']);
         }
 
-        try 
+        try
         {
             $request->merge(["user_id"=>Auth::user()->id]);
 
-            DishFavorites::create(      
+            DishFavorites::create(
               $request->all()
             );
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
@@ -80,22 +80,23 @@ class DishController extends Controller
         $dish = Dish::find($request->id);
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
+        $paidIngredients = $dish->paidIngredients;
 
         $html_options = '';
-        foreach ($options as $key => $option) 
+        foreach ($options as $key => $option)
         {
           $html_options .= "<option>$option->name</option>";
         }
 
         $html_free_ingredients = '';
-        foreach ($freeIngredients as $key => $ingredient) 
+        foreach ($freeIngredients as $key => $ingredient)
         {
           $ingredient_name = $ingredient->ingredient->name;
           $ingredient_image = $ingredient->ingredient->image;
 
           $html_free_ingredients .= "<tr>
                                   <td width='10%'>
-                                    <img src='$ingredient_image' class='img-fluid me-15px' alt='ingredient img 1' width='50' height='50'>
+                                    <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                   </td>
                                   <td class='text-left'>$ingredient_name</td>
                                   <td width='5%'>
@@ -104,6 +105,33 @@ class DishController extends Controller
                                     </div>
                                   </td>
                                 </tr>";
+        }
+
+        $html_paid_ingredients = '';
+        foreach ($paidIngredients as $key => $ingredient)
+        {
+            $ingredient_name = $ingredient->ingredient->name;
+            $ingredient_image = $ingredient->ingredient->image;
+            $ingredient_price = $ingredient->ingredient->price;
+
+            $html_paid_ingredients .= "<tr>
+                                    <td width='10%'>
+                                      <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
+                                    </td>
+                                    <td class='text-left'>$ingredient_name <span class='food-custom-price'>€$ingredient_price</span>
+                                    </td>
+                                    <td width='7%'>
+                                      <div class='foodqty'>
+                                        <span class='minus'>
+                                          <i class='fas fa-minus align-middle'></i>
+                                        </span>
+                                        <input type='number' class='count' name='qty' value='1'>
+                                        <span class='plus'>
+                                          <i class='fas fa-plus align-middle'></i>
+                                        </span>
+                                      </div>
+                                    </td>
+                                  </tr>";
         }
 
         $html = "<div class='modal-content'>
@@ -159,24 +187,7 @@ class DishController extends Controller
                             <div class='accordion-body'>
                               <table>
                                 <tbody>
-                                  <tr>
-                                    <td width='10%'>
-                                      <img src='' class='img-fluid me-15px' alt='ingredient img 1' width='50' height='50'>
-                                    </td>
-                                    <td class='text-left'>Ketchup <span class='food-custom-price'>€05</span>
-                                    </td>
-                                    <td width='7%'>
-                                      <div class='foodqty'>
-                                        <span class='minus'>
-                                          <i class='fas fa-minus align-middle'></i>
-                                        </span>
-                                        <input type='number' class='count' name='qty' value='1'>
-                                        <span class='plus'>
-                                          <i class='fas fa-plus align-middle'></i>
-                                        </span>
-                                      </div>
-                                    </td>
-                                  </tr>
+                                  $html_paid_ingredients
                                 </tbody>
                               </table>
                             </div>

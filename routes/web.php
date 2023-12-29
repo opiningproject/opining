@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/clear-all', function() {
+Route::get('/clear-all', function () {
     Artisan::call('cache:clear');
 
     Artisan::call('config:clear');
@@ -37,86 +37,111 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
-Route::middleware(['localization'])->group(function ()
-{
+Route::middleware(['localization'])->group(function () {
     Route::get('privacy-policy', [App\Http\Controllers\User\CMSController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('terms', [App\Http\Controllers\User\CMSController::class, 'terms'])->name('terms');
 
     Route::get('google/auth', [App\Http\Controllers\User\AuthController::class, 'redirectToGoogle']);
     Route::get('google/auth/callback', [App\Http\Controllers\User\AuthController::class, 'handleGoogleCallback']);
 
+    Route::group(['prefix' => '/user'], function () {
+        Route::get('/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('user.dashboard');
+        Route::post('/login', [App\Http\Controllers\User\AuthController::class, 'login']);
+        Route::post('/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
+        Route::post('/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
+        Route::get('/delete-address/{id}', [App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
+        Route::get('/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
+    });
+
     Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
-    Route::get('/user/dashboard', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('user.dashboard');
-    Route::post('/user/login', [App\Http\Controllers\User\AuthController::class, 'login']);
-    Route::post('/user/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
-    Route::post('/user/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
-    Route::get('email/verify/{id}',[App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
+
+    Route::get('email/verify/{id}', [App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
     Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
-    Route::get('/user/delete-address/{id}',[App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
-    Route::get('/user/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
 
 });
 
 Auth::routes();
 
-Route::get('change-lang/{lang}', function($lang) {
+Route::get('change-lang/{lang}', function ($lang) {
     session(['Accept-Language' => $lang]);
     return redirect()->back();
 })->name('app.setLocal');
 
 Route::middleware(['auth', 'localization'])->group(function () {
 
-    Route::get('/menu', [HomeController::class, 'index'])->name('home');
-    Route::get('/menu/add-dish', [DishController::class, 'create'])->name('addDish');
-    Route::get('/menu/edit-dish/{dish}', [DishController::class, 'edit'])->name('editDish');
+    // Restaurant Menu Routes
+    Route::group(['prefix' => '/menu'], function () {
 
-    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
-    Route::get('/settings/delete-zipcode', [SettingController::class, 'deleteZipcode']);
-    Route::post('/settings/change-status', [SettingController::class, 'changeStatus']);
-    Route::post('/settings/save-zipcode', [SettingController::class, 'saveZipcode']);
-    Route::post('/settings/save-content', [SettingController::class, 'saveContent']);
-    Route::post('/settings/change-password', [SettingController::class, 'changePassword'])->name('change.password');
-    Route::post('/settings/save-profile', [SettingController::class, 'saveProfile'])->name('settings.save-profile');
+        Route::get('', [HomeController::class, 'index'])->name('home');
+        Route::get('/add-dish', [DishController::class, 'create'])->name('addDish');
+        Route::get('/edit-dish/{dish}', [DishController::class, 'edit'])->name('editDish');
 
-    Route::get('/coupons/claim-history', [CouponController::class, 'claimHistoryLog'])->name('claimHistoryLog');
+        Route::group(['prefix' => '/dish'], function () {
+            Route::post('/getIngredientList/{dish}', [DishController::class, 'ingredientDishBased']);
+            Route::post('/addIngredient/{dish}', [DishController::class, 'addDishIngredient']);
+            Route::patch('/updateIngredient/{dish}', [DishController::class, 'updatePaidIngredient']);
+            Route::delete('/deleteIngredient/{dish}', [DishController::class, 'deleteDishIngredient']);
+            Route::post('/updateDish/{dish}', [DishController::class, 'updateDishData']);
+            Route::post('/searchDish', [DishController::class, 'searchDish']);
+        });
+
+        Route::resource('/dish', DishController::class);
+
+        Route::group(['prefix' => '/ingredients'], function () {
+            Route::get('/checkAttachedDish/{ingredient}', [IngredientController::class, 'checkAttachedDish']);
+            Route::post('/update-status/{ingredient}', [IngredientController::class, 'updateIngredientStatus']);
+            Route::post('/update/{ingredient}', [IngredientController::class, 'updateIngredient']);
+            Route::post('/ing-cat-wise/{ingredient}', [IngredientController::class => 'ingredientCategoryWise']);
+        });
+
+        Route::resource('/ingredients', IngredientController::class);
+
+        Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
+        Route::resource('/ingredients/category', IngredientCategoryController::class, [
+            'as' => 'ingred'
+        ]);
+    });
+    // Restaurant Menu Routes
+
+    // Restaurant Setting Routes
+    Route::group(['prefix' => '/settings'], function () {
+        Route::get('/', [SettingController::class, 'index'])->name('settings');
+        Route::get('/delete-zipcode', [SettingController::class, 'deleteZipcode']);
+        Route::post('/change-status', [SettingController::class, 'changeStatus']);
+        Route::post('/save-zipcode', [SettingController::class, 'saveZipcode']);
+        Route::post('/save-content', [SettingController::class, 'saveContent']);
+        Route::post('/change-password', [SettingController::class, 'changePassword'])->name('change.password');
+        Route::post('/save-profile', [SettingController::class, 'saveProfile'])->name('settings.save-profile');
+    });
+    // Restaurant Setting Routes
+
+    // Restaurant Coupons Routes
+    Route::group(['prefix' => '/coupons'], function () {
+        Route::get('/claim-history', [CouponController::class, 'claimHistoryLog'])->name('claimHistoryLog');
+        Route::post('/change-status', [CouponController::class, 'changeStatus']);
+    });
     Route::resource('/coupons', CouponController::class);
-    Route::post('/coupons/change-status', [CouponController::class, 'changeStatus']);
+    // Restaurant Coupons Routes
 
-    Route::post('get-paginate-data', [CommonController::class, 'getPaginateData'])->name('getPaginateData');
-
-    Route::post('/menu/dish/getIngredientList/{dish}', [DishController::class, 'ingredientDishBased']);
-    Route::post('/menu/dish/addIngredient/{dish}', [DishController::class, 'addDishIngredient']);
-    Route::patch('/menu/dish/updateIngredient/{dish}', [DishController::class, 'updatePaidIngredient']);
-    Route::delete('/menu/dish/deleteIngredient/{dish}', [DishController::class, 'deleteDishIngredient']);
-    Route::post('/menu/dish/updateDish/{dish}', [DishController::class, 'updateDishData']);
-    Route::post('/menu/dish/searchDish', [DishController::class, 'searchDish']);
-    Route::resource('/menu/dish', DishController::class);
-
+    // Restaurant Category Routes
     Route::get('/category/checkDishes/{category}', [CategoryController::class, 'checkDishCategory']);
-    Route::resource('/category',CategoryController::class);
+    Route::resource('/category', CategoryController::class);
+    // Restaurant Category Routes
 
-    Route::get('/menu/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
-    Route::resource('/menu/ingredients/category',IngredientCategoryController::class, [
-        'as' => 'ingred'
-    ]);
 
-    Route::get('/menu/ingredients/checkAttachedDish/{ingredient}', [IngredientController::class, 'checkAttachedDish']);
-    Route::post('/menu/ingredients/update-status/{ingredient}',[IngredientController::class, 'updateIngredientStatus']);
-    Route::post('/menu/ingredients/update/{ingredient}',[IngredientController::class, 'updateIngredient']);
+    Route::group(['prefix' => '/user'], function () {
+        Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
+        Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
+        Route::get('/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('user.favorite');
+        Route::get('/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
+        Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
+        Route::get('/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+        Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
+        Route::get('/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
+    });
+    // User Routes
 
-    Route::resource('/menu/ingredients',IngredientController::class);
-    Route::post('/menu/ingredients/ing-cat-wise/{ingredient}',[IngredientController::class => 'ingredientCategoryWise']);
-
-    Route::get('/user/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
-    Route::post('/user/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
-    Route::get('/user/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('user.favorite');
-    Route::get('/user/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
 
-    Route::get('/user/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
-    Route::get('/user/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
-
-    Route::post('/user/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
-    Route::get('/user/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
 });

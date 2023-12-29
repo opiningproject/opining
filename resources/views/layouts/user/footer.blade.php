@@ -29,5 +29,11 @@
         }
 
     });
+
+    $('#loader').bind('ajaxStart', function(){
+        $(this).show();
+    }).bind('ajaxStop', function(){
+        $(this).hide();
+    })
     // timepicker
 </script>

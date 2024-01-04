@@ -1,38 +1,63 @@
+@import "./dark-mode";
+@import "./light-mode";
 
+$dark1: var(--theme-dark1);
+$dark2: var(--theme-dark2);
 
-$dark1: #2E2E2E;
-$dark2: #292929;
-$dark3: #4d4d4d;
-$gray1: #F5F5F5;
-$gray2: #DBDBDB;
-$gray3: #929292;
-$gray4: #857e7e;
-$gray5: #727272;
-$gray6: #949494;
-// $gray7: #9C9C9C;
-$gray7: #F1F1F1;
-$gray8: #FAFAFA;
-$gray9: #F8F8F8;
-$gray10: #BCBCBC;
-$white: #ffffff;
-$white1: #f6f6f6;
-$white2: #fefefe;
-$white3: #d9d9d9;
-$white4: #D1D1D1;
-$yellow1: #F8B602;
-$yellow2: #FFC00B;
-$yellow3: #f0c868;
-$yellow4: #af8e40;
-$yellow5: #d7a209;
-$lightyellow: #FFF8E2;
-$darkyellow: #947313;
-$muted: #A098AE;
-$success1: #3BCE62;
-$success2: #049A2C;
-$success3: #4ECA39;
-$black: #000000;
-$danger1: #E36E49;
+$gray1: var(--theme-gray1);
+$gray2: var(--theme-gray2);
+$gray3: var(--theme-gray3);
+$gray4: var(--theme-gray4);
+$gray5: var(--theme-gray5);
+$gray6: var(--theme-gray6);
+$gray7: var(--theme-gray7);
+$gray8: var(--theme-gray8);
+$gray9: var(--theme-gray9);
+$gray10: var(--theme-gray10);
+$gray11: var(--theme-gray11);
+$gray12: var(--theme-gray12);
 
+$text-white: var(--theme-text-white);
+$bg-white: var(--theme-bg-white);
 
-$light: #dddddd;
-$dark: #000;
+$white1: var(--theme-white1);
+$white2: var(--theme-white2);
+$white3: var(--theme-white3);
+$white4: var(--theme-white4);
+$white5: var(--theme-white5);
+
+$yellow1: var(--theme-yellow1);
+$yellow2: var(--theme-yellow2);
+$yellow3: var(--theme-yellow3);
+$yellow4: var(--theme-yellow4);
+$yellow5: var(--theme-yellow5);
+
+$lightyellow: var(--theme-lightyellow);
+$lightyellow2: var(--theme-lightyellow2);
+$darkyellow: var(--theme-darkyellow);
+
+$muted: var(--theme-muted);
+
+$success1: var(--theme-success1);
+$success2: var(--theme-success2);
+$success3: var(--theme-success3);
+$success4: var(--theme-success4);
+
+$text-black: var(--theme-text-black);
+$bg-black: var(--theme-bg-black);
+
+$lightgray: var(--theme-lightgray);
+$lightgray1: var(--theme-lightgray1);
+$lightgray2: var(--theme-lightgray2);
+
+$cyan1: var(--theme-cyan1);
+
+$shadow: var(--theme-shadow);
+
+$button-bg: var(--theme-button-bg);
+
+$chat-box: var(--theme-chat-box);
+
+$input-textcolor: var(--theme-input-textcolor);
+
+$input-bgcolor: var(--theme-input-bgcolor);

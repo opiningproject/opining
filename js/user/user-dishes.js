@@ -1,12 +1,12 @@
-function unFavorite(id) 
+function unFavorite(dish_id) 
 {
-    $('#dish-box-'+id).hide();
+    $('#dish-box-'+dish_id).hide();
 
     $.ajax({
         url: baseURL+'/unFavorite',
         type: 'POST',
         data: {
-            id
+            dish_id
         },
         success: function (response) {
             console.log('success')

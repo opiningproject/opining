@@ -27,11 +27,24 @@
                             <input type="number" class="form-control" value="{{ $user->permit_id }}" name="permit_id" required/>
                         </div>
                     </div>
-                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                    <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="restaurantpermit" class="form-label">Phone</label>
                             <div class="countrycode-phone-control position-relative">
                                 <img src="images/netherlands-flag.svg" alt="netherlands Flag" class="img-fluid">
+                                <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="restaurantpermit" class="form-label">Phone</label>
+                            <div class="input-group countrycode-phone-control">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/netherlands-flag.svg" alt="netherlands Flag" class="img-fluid">
+                                </button>
+                                <input type="text"
+                                    class="form-control countrycode-input" value="+31">
                                 <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
                             </div>
                         </div>

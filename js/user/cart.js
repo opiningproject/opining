@@ -29,13 +29,13 @@ function addToCart(id)
         })
 }
 
-function updateDishQty(id,operator,maxQty,dishID) 
+function updateDishQty(operator,maxQty,dish_id) 
 {
-    var current_qty = parseInt($('input[name=qty-'+id+']').val());
+    var current_qty = parseInt($('input[name=qty-'+dish_id+']').val());
 
     if (operator == '-' && !isNaN(current_qty) && current_qty > 0) 
     {
-        $('input[name=qty-'+id+']').val(current_qty - 1);
+        $('input[name=qty-'+dish_id+']').val(current_qty - 1);
     } 
 
     if (operator == '+' && !isNaN(current_qty)) 
@@ -45,23 +45,23 @@ function updateDishQty(id,operator,maxQty,dishID)
              return false;
         }
 
-        $('input[name=qty-'+id+']').val(current_qty + 1);
+        $('input[name=qty-'+dish_id+']').val(current_qty + 1);
     }
 
-    var current_qty = parseInt($('input[name=qty-'+id+']').val());
+    var current_qty = parseInt($('input[name=qty-'+dish_id+']').val());
 
     $.ajax({
             type: 'POST',
             url: baseURL+'/user/update-dish-qty',
             data: {
-                id,operator,current_qty
+                dish_id,operator,current_qty
             },
             success: function (response) {
                 if(response.status == 1 && parseInt(current_qty) == 0)
                 {
-                    $("#cart-"+id).remove();
-                    $("#dish-cart-lbl-"+dishID).text('Add +');
-                    $("#dish-cart-lbl-"+dishID).prop('disabled', false);
+                    $("#cart-"+dish_id).remove();
+                    $("#dish-cart-lbl-"+dish_id).text('Add +');
+                    $("#dish-cart-lbl-"+dish_id).prop('disabled', false);
                 }
             },
             error: function (response) {

@@ -30,7 +30,7 @@ class Dish extends Model
 
     public function order()
     {
-        return $this->hasMany(OrderDetail::class, 'dish_id', 'id');
+        return $this->hasOne(OrderDetail::class, 'dish_id', 'id');
     }
 
     public function favorite()

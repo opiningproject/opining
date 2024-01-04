@@ -150,13 +150,13 @@ class CartController extends Controller
         {  
             if($request->current_qty >= 1)
             {
-                OrderDetail::where('id',$request->id)->update(array(
+                OrderDetail::where('dish_id',$request->dish_id)->update(array(
                     'qty' => DB::raw('qty '.$request->operator.'1')
                 ));
             }
             else
             {
-                OrderDetail::where('id',$request->id)->forceDelete();
+                OrderDetail::where('dish_id',$request->dish_id)->forceDelete();
             }
 
             return response::json(['status' => 1, 'message' => '']);

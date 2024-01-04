@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -129,7 +132,11 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::resource('/category', CategoryController::class);
     // Restaurant Category Routes
 
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
+    Route::get('/payments', [PaymentsController::class, 'index'])->name('payments');
 
+    Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
         Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
@@ -139,6 +146,9 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::get('/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
+
+        Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
+        Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');
     });
     // User Routes
 

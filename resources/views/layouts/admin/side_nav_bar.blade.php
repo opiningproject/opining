@@ -30,7 +30,7 @@
                         <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                             id="menu">
                             <li class="nav-item">
-                                <a href="{{ route('home') }} " class="nav-link {{ activeMenu('menu') }} align-middle">
+                                <a href="{{ route('home') }}" class="nav-link {{ activeMenu('menu') }} align-middle">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                          viewBox="0 0 40 40" fill="none">
                                         <rect x="8.85547" y="12.5707" width="13.9282" height="10.214"
@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="javascript:void(0);" class="nav-link {{ activeMenu('orders') }} align-middle">
+                                <a href="{{ route('orders') }}" class="nav-link {{ activeMenu('orders') }} align-middle">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                          viewBox="0 0 40 40" fill="none">
                                         <path
@@ -85,7 +85,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="javascript:void(0);" class="nav-link {{ activeMenu('finances') }} align-middle">
+                                <a href="{{ route('payments') }}" class="nav-link {{ activeMenu('payments') }} align-middle">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -128,7 +128,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="javascript:void(0);" class="nav-link {{ activeMenu('chats') }} align-middle">
+                                <a href="{{ route('chat') }}" class="nav-link {{ activeMenu('chat') }} align-middle">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                          viewBox="0 0 40 40" fill="none">
                                         <path

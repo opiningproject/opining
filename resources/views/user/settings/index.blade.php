@@ -85,12 +85,31 @@
                     </div>
                   </div>
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="restaurantpermit" class="form-label">Phone</label>
                       <div class="countrycode-phone-control position-relative">
                         <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
                         <input type="text" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
                       </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="restaurantpermit" class="form-label">Phone</label>
+                        <div class="input-group countrycode-phone-control">
+                            <div class="dropdown">
+                              <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li>
+                                    <button class="dropdown-item" type="button">
+                                      <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
+                                    </button>
+                                  </li>
+                              </ul>
+                            </div>
+                            <input type="text" class="form-control countrycode-input" value="+31">
+                            <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
+                        </div>
                     </div>
                   </div>
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">

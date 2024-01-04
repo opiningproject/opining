@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="col text-end">
                                     <div class="page-control">
-                                        <div class="row justify-content-end align-items-center g-0">
+                                        <div class="row justify-content-end align-items-center g-2">
                                             <div class="col-auto">
                                                 <div
                                                     class="d-flex align-items-center form-control bg-white border-0 h-100 new-searchbar">
@@ -85,18 +85,13 @@
                                                         </div>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item" href="#"
-                                                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                                {{ __('Logout') }}
-                                                            </a>
-
-                                                            <form id="logout-form" action="{{ route('logout') }}"
-                                                                  method="POST" class="d-none">
-                                                                @csrf
-                                                            </form>
-                                                        </li>
+                                                      <li>
+                                                        <a class="dropdown-item" href="#" onclick="event.preventDefault();
+                                                                                                         document.getElementById('logout-form').submit();">
+                                                          {{ __('Logout') }}
+                                                        </a>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
+                                                      </li>
                                                     </ul>
                                                 </div>
                                             </div>

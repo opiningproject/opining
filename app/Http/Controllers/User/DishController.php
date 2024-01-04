@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 Use App\Models\User;
 Use App\Models\Dish;
+Use App\Models\OrderDetail;
 use Validator,Redirect,Response;
 
 class DishController extends Controller
@@ -78,6 +79,7 @@ class DishController extends Controller
     public function getDishDetails(Request $request)
     {
         $dish = Dish::find($request->id);
+        
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
         $paidIngredients = $dish->paidIngredients;
@@ -232,16 +234,16 @@ class DishController extends Controller
                       <div class='col'>
                         <div class='foodqty'>
                           <span class='minus'>
-                            <i class='fas fa-minus align-middle'></i>
+                            <i class='fas fa-minus align-middle' onclick=updateDishQty('-',".$dish->qty.",".$dish->id.")></i>
                           </span>
-                          <input type='number' class='count' name='qty' value='1'>
+                          <input type='number' class='count' name='qty-$dish->id' value=".$dish->order->qty.">
                           <span class='plus'>
-                            <i class='fas fa-plus align-middle'></i>
+                            <i class='fas fa-plus align-middle' onclick=updateDishQty('+',".$dish->qty.",".$dish->id.")></i>
                           </span>
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100'>Add To cart <span>| €30</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addToCart(".$dish->id.")>Add To cart <span>| €30</span>
                         </a>
                       </div>
                     </div>

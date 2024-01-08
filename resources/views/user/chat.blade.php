@@ -172,9 +172,7 @@
                 <input type="text" class="form-control w-100 bg-transparent border-none outline-none" placeholder="Write your message..." />
                 <div class="d-flex gap-2 gap-sm-3">
                   <button class="border-none outline-none bg-transparent svg-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                      <path d="M14.326 34.2a6.25 6.25 0 0 1-4.412-10.663l10.6-10.612a3.755 3.755 0 1 1 5.312 5.312l-10.613 10.6a1.25 1.25 0 1 1-1.762-1.762l10.6-10.613a1.25 1.25 0 0 0-1.762-1.762L11.675 25.3a3.757 3.757 0 0 0 5.312 5.312L27.588 20a6.25 6.25 0 0 0-8.837-8.838l-6.188 6.25a1.25 1.25 0 1 1-1.762-1.775l6.187-6.25a8.75 8.75 0 0 1 12.375 12.375L18.752 32.375a6.252 6.252 0 0 1-4.425 1.825Z" fill="#929292" />
-                    </svg>
+                    <img src="images/attach.svg">
                   </button>
                   <button class="btn btn-xs-sm btn-custom-yellow">Send</button>
                 </div>

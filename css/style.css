@@ -116,6 +116,9 @@
 :root[data-theme=dark] [stroke="#292929"] {
   stroke: var(--theme-dark2);
 }
+:root[data-theme=dark] [fill="#000"] {
+  fill: var(--theme-text-black);
+}
 
 :root,
 :root[data-theme=light] {
@@ -1798,7 +1801,7 @@ input[type=number] {
   padding: 11px 20px;
 }
 .countrycode-phone-control .dropdown-toggle::after {
-  display: none;
+  display: none !important;
 }
 .countrycode-phone-control .form-control {
   border-left: 0;

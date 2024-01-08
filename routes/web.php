@@ -71,6 +71,11 @@ Route::get('change-lang/{lang}', function ($lang) {
     return redirect()->back();
 })->name('app.setLocal');
 
+Route::get('change-theme/{theme}', function($currency) {
+    session(['theme' => $currency]);
+    return redirect()->back();
+});
+
 Route::middleware(['auth', 'localization'])->group(function () {
 
     // Restaurant Menu Routes

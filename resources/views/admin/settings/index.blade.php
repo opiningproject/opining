@@ -10,14 +10,6 @@
                     <div class="main-content">
                         <div class="section-page-title mb-0">
                             <h1 class="page-title">Settings</h1>
-                            <div class="form-group mb-0">
-                                <div
-                                    class="form-check form-switch custom-switch dark-theme-switch d-flex align-items-center justify-content-between ps-0">
-{{--                                    <label class="form-check-label form-label mb-0 text-muted-default"--}}
-{{--                                           for="darkSwitch">Dark Theme</label>--}}
-{{--                                    <input class="form-check-input" type="checkbox" role="switch" id="darkSwitch">--}}
-                                </div>
-                            </div>
                         </div>
 
                         <!-- start Setting section -->
@@ -107,4 +99,12 @@
     </div>
     <!-- end Modal -->
 
+@endsection
+
+@section('script') 
+<script type="text/javascript">
+
+
+
+</script>
 @endsection

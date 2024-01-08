@@ -66,7 +66,7 @@
                       <span class="dish-item-icon">
                         <img src="{{ $cat->image }}" class="img-fluid" alt="bakery" width="56" height="56" />
                       </span>
-                      <p class="mb-0 text-truncate" title="{{ $cat->name }}">{{ $cat->name }}</p>
+                      <p class="mb-0 text-truncate text-muted" title="{{ $cat->name }}">{{ $cat->name }}</p>
                       <a href="{{ route('user.dashboard') }}?cat_id={{ $cat->id }}" class="stretched-link"></a>
                     </div>
                   </div> @endforeach </div>
@@ -81,7 +81,7 @@
               <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">View all <span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="chevron-down">
-                      <path id="Vector" d="M15.0002 11.9998C15.0009 12.1314 14.9757 12.2619 14.926 12.3837C14.8762 12.5056 14.8029 12.6164 14.7102 12.7098L10.7102 16.7098C10.5219 16.8981 10.2665 17.0039 10.0002 17.0039C9.73388 17.0039 9.47849 16.8981 9.29018 16.7098C9.10188 16.5215 8.99609 16.2661 8.99609 15.9998C8.99609 15.7335 9.10188 15.4781 9.29018 15.2898L12.5902 11.9998L9.30018 8.70982C9.13636 8.51851 9.05075 8.27244 9.06047 8.02076C9.07019 7.76909 9.17453 7.53035 9.35262 7.35225C9.53072 7.17416 9.76945 7.06983 10.0211 7.06011C10.2728 7.05038 10.5189 7.13599 10.7102 7.29982L14.7102 11.2998C14.8949 11.4861 14.9991 11.7375 15.0002 11.9998Z" fill="#292929" />
+                      <path id="Vector" d="<img src="images/view.svg">" fill="#292929" />
                     </g>
                   </svg>
                 </span>
@@ -127,8 +127,8 @@
             <div class="offcanvas-body h-100">
               <div class="navbar navbar-expand-lg pt-0 h-100">
                 <div class="cart-sidebar-content position-relative h-100">
-                  <div class="navbar-collapse cartbox-collapse">
-                    <div class="cart-tab custom-tabs cart-custom-tab">
+                  <div class="navbar-collapse cartbox-collapse h-100">
+                    <div class="cart-custom-tab cart-tab custom-tabs d-flex flex-column h-100">
                       <ul class="nav nav-fill" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                           <button class="nav-link {{ $zipcode ? 'active' : ''}}" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
@@ -156,7 +156,7 @@
                             </svg> Take Away </button>
                         </li>
                       </ul>
-                      <div class="tab-content" id="pills-tabContent">
+                      <div class="d-flex flex-column flex-fill tab-content" id="pills-tabContent">
                         <div class="tab-pane fade {{ $zipcode ? 'show active' : ''}}" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                           <div class="form-group">
                             <label class="form-label">Delivery Address</label>
@@ -339,7 +339,8 @@
                             </a>
                           </div>
                         </div>
-                        <!-- End cart section --> @else
+                        <!-- End cart section --> 
+                        @else
                         <!-- start empty cart section -->
                         <div class="empty-card-div w-100">
                           <p class="empty-card-text text-muted-1"> Your cart is empty </p>

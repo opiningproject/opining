@@ -15,13 +15,7 @@
                                 </div>
                                 <div class="col text-end">
                                     <a class="btn btn-custom-yellow" href="{{ route('ingred.category.index') }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                             viewBox="0 0 20 20" fill="none">
-                                            <circle cx="10" cy="10" r="10" fill="#292929"></circle>
-                                            <path
-                                                d="M11.0475 9.48672H14.7416V11.1306H11.0475V14.8616H9.4036V11.1306H5.71875V9.48672H9.4036V5.71875H11.0475V9.48672Z"
-                                                fill="#FFC00B"></path>
-                                        </svg>
+                                        <img src="images/add.svg">
                                         <span class="align-middle ms-3">Add New Ingredients Categories</span>
                                     </a>
                                 </div>

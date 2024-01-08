@@ -24,6 +24,12 @@
 
     });
     // timepicker
+
+    $(function () {
+        setTimeout(() => {
+            $(".cke_wysiwyg_frame").contents().find("body").css({ 'background-color': 'black', 'color': 'white'});
+        }, 600);
+    })
 </script>
 
 

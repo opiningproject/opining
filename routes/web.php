@@ -142,6 +142,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments');
 
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
+
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
         Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
@@ -154,8 +155,11 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
         Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');
+
+        Route::post('/coupon/apply', [App\Http\Controllers\User\CouponController::class, 'apply']);
     });
     // User Routes
+    
 
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
 

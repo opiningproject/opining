@@ -71,4 +71,51 @@ function updateDishQty(operator,maxQty,dish_id)
         })
 }
 
+function apply() 
+{
+    var coupon_code = $('#coupon_code').val();
+    var order_amount = 30;
+
+    if(coupon_code == '')
+    {
+        return false;
+    }
+
+    $.ajax({
+            type: 'POST',
+            url: baseURL+'/user/coupon/apply',
+            data: {
+                coupon_code,order_amount
+            },
+            success: function (response) {
+                if(response.status == 1)
+                {
+                    $("#coupon_code_remove_btn").removeClass('d-none');
+                    $("#coupon_code_apply_btn").addClass('d-none');
+                    $("#coupon_code").prop('readonly', true);
+
+                    $("#coupon-code-error").addClass('d-none');
+                    $('#coupon-code-error').text('');
+                }
+                else
+                {
+                    $("#coupon-code-error").removeClass('d-none');
+                    $('#coupon-code-error').text(response.message);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+}
+
+function remove() 
+{
+    $("#coupon_code_apply_btn").removeClass('d-none');
+    $("#coupon_code_remove_btn").addClass('d-none');
+    $('#coupon_code').val('');
+    $("#coupon_code").prop('readonly', false);
+
+}
 

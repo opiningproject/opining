@@ -31,7 +31,7 @@
                             id="menu">
                             <li class="nav-item">
                                 <a href="{{ route('home') }}" class="nav-link {{ activeMenu('menu') }} align-middle">
-                                    <img src="images/menu-menu.svg">
+                                    <img class="svg" src="images/menu-menu.svg" alt="" height="40" width="40">
                                     <span class="ms-1 d-sm-inline align-middle">Menu</span>
                                 </a>
                             </li>

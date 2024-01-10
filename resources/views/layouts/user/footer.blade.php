@@ -12,8 +12,9 @@
 <script src="https://unpkg.com/jquery-fusioncharts@1.1.0/dist/fusioncharts.jqueryplugin.js"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.datepicker.min.js')}}"></script>
 
-
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/inline-svg.js')}}"></script>
+
 <script type="text/javascript" src="{{ asset('js/user/user-auth.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-dishes.js')}}"></script>
@@ -36,4 +37,11 @@
         $(this).hide();
     })
     // timepicker
+
+    const svg_options = {
+            svgSelector: 'img.svg', // the class attached to all images that should be inlined
+            initClass: 'js-inlinesvg', // class added to <html>
+        }
+
+    inlineSVG.init(svg_options, () => console.log('All SVGs inlined'));
 </script>

@@ -39,7 +39,7 @@
                     </div>
                     <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3">
                       <p>Hello... 1111</p>
-                      <p>Your order according to application yes?</p>
+                      <p>Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?Your order according to application yes?</p>
                       <small>12:45 PM</small>
                     </div>
                   </div>

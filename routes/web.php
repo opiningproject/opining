@@ -104,12 +104,13 @@ Route::middleware(['auth', 'localization'])->group(function () {
             Route::post('/ing-cat-wise/{ingredient}', [IngredientController::class => 'ingredientCategoryWise']);
         });
 
-        Route::resource('/ingredients', IngredientController::class);
-
         Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
         Route::resource('/ingredients/category', IngredientCategoryController::class, [
             'as' => 'ingred'
         ]);
+
+        Route::resource('/ingredients', IngredientController::class);
+
     });
     // Restaurant Menu Routes
 
@@ -158,7 +159,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::post('/coupon/apply', [App\Http\Controllers\User\CouponController::class, 'apply']);
     });
     // User Routes
-    
+
 
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
 

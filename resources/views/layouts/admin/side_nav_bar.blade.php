@@ -16,12 +16,16 @@
     <div class="siderbarmenu-brand">
         <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
             <p class="mb-0">Gomeal<span class="text-yellow-1">.</span></p>
+{{--            <img src="{{ Auth::user()->restaurantDetails->restaurant_logo }}">--}}
+            <div class="text-start" style="padding-left: 140px;padding-right: 90px;">
+                <img src="{{ asset('images/logo_dummy.png') }}" style="max-width: 100%;">
+            </div>
         </a>
     </div>
 
     <div class="offcanvas-lg offcanvas-start position-relative" tabindex="-1" id="bdSidebar"
          aria-labelledby="bdSidebarOffcanvasLabel">
-        <div class="offcanvas-body">
+        <div class="offcanvas-body py-4">
             <nav class="">
                 <div
                     class="menu-sidebar-content d-flex flex-column align-items-center align-items-sm-start">

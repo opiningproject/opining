@@ -25,8 +25,14 @@ function customizeDish(id)
             url: baseURL+'/user/get-dish-details/'+id,
             type: 'GET',
             success: function (response) {
-
+                
                 var data = response.data;
+
+                if(response.status == 2)
+                {
+                   $('#signInModal').modal('show');
+                   return false;
+                }
 
                 $('.modal-dialog').html(data);
 

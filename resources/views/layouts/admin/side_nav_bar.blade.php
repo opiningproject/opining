@@ -27,11 +27,10 @@
                     class="menu-sidebar-content d-flex flex-column align-items-center align-items-sm-start">
                     <div class="navbar-collapse menunavbar-collapse w-100 d-block"
                          id="navbarSupportedContent">
-                        <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                            id="menu">
+                        <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                             <li class="nav-item">
                                 <a href="{{ route('home') }}" class="nav-link {{ activeMenu('menu') }} align-middle">
-                                    <img class="svg" src="images/menu-menu.svg" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/menu-menu.svg') }}" alt="" height="40" width="40">
                                     <span class="ms-1 d-sm-inline align-middle">Menu</span>
                                 </a>
                             </li>

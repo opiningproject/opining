@@ -106,11 +106,11 @@ class CartController extends Controller
                     <img src=".$dish->image." alt='burger image' class='img-fluid' width='86' height='74px' />
                     <div class='foodqty'>
                       <span class='minus'>
-                        <i class='fas fa-minus align-middle' onclick=updateDishQty(".$cart->id.",'-',".$dish->qty.",".$dish->id.")></i>
+                        <i class='fas fa-minus align-middle' onclick=updateDishQty('-',".$dish->qty.",".$dish->id.")></i>
                       </span>
-                      <input type='number' class='count' name='qty-$cart->id' value=".$cart->qty.">
+                      <input type='number' class='count' name='qty-$dish->id' value=".$cart->qty.">
                       <span class='plus'>
-                        <i class='fas fa-plus align-middle' onclick=updateDishQty(".$cart->id.",'+',".$dish->qty.",".$dish->id.")></i>
+                        <i class='fas fa-plus align-middle' onclick=updateDishQty('+',".$dish->qty.",".$dish->id.")></i>
                       </span>
                     </div>
                   </div>

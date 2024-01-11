@@ -93,7 +93,7 @@
         <div class="offcanvas-body p-0">
             <nav class="">
                 <div
-                    class="menu-sidebar-content d-flex flex-column align-items-center align-items-sm-start  min-vh-100">
+                    class="menu-sidebar-content d-flex flex-column align-items-center align-items-sm-start">
 
                     <div class="navbar-collapse menunavbar-collapse" id="navbarSupportedContent">
                         <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -293,12 +293,12 @@
                                   <ul class="dropdown-menu">
                                       <li>
                                         <a class="dropdown-item {{ (App::isLocale('en')) ? 'active': '' }}" href="{{ route('app.setLocal', 'en') }}">
-                                          <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />English 
+                                          <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />English
                                         </a>
                                       </li>
                                       <li>
                                         <a class="dropdown-item {{ (App::isLocale('nl')) ? 'active': '' }}" href="{{ route('app.setLocal', 'nl') }}">
-                                          <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />Dutch 
+                                          <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />Dutch
                                         </a>
                                       </li>
                                     </ul>

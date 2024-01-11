@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\IngredientCategory;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-Use App\Models\User;
-Use App\Models\Dish;
-Use App\Models\OrderDetail;
-use Validator,Redirect,Response;
+use App\Models\User;
+use App\Models\Dish;
+use App\Models\OrderDetail;
+use Validator, Redirect, Response;
 
 class DishController extends Controller
 {
@@ -36,9 +37,9 @@ class DishController extends Controller
 
     public function getFavoriteDishes()
     {
-        $dishes = DishFavorites::with('dish')->where('user_id',Auth::user()->id)->get();
+        $dishes = DishFavorites::with('dish')->where('user_id', Auth::user()->id)->get();
 
-        return view('user.favorite',['dishes' => $dishes]);
+        return view('user.favorite', ['dishes' => $dishes]);
     }
 
     public function unFavorite(Request $request)
@@ -52,21 +53,17 @@ class DishController extends Controller
 
     public function favorite(Request $request)
     {
-        if(!Auth::user())
-        {
+        if (!Auth::user()) {
             return response::json(['status' => 2, 'message' => '']);
         }
 
-        try
-        {
-            $request->merge(["user_id"=>Auth::user()->id]);
+        try {
+            $request->merge(["user_id" => Auth::user()->id]);
 
             DishFavorites::create(
-              $request->all()
+                $request->all()
             );
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
@@ -78,30 +75,30 @@ class DishController extends Controller
 
     public function getDishDetails(Request $request)
     {
-        if(!Auth::user())
-        {
+        if (!Auth::user()) {
             return response::json(['status' => 2, 'message' => '']);
         }
-        
+
         $dish = Dish::find($request->id);
-        
+
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
-        $paidIngredients = $dish->paidIngredients;
+        $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredient', function ($query) use ($request) {
+            $query->where('dish_id', $request->id);
+        })->with('ingredients.paidDishIngredient')->get();
+//        $paidIngredients = $dish->paidIngredients;
 
-        $html_options = '';
-        foreach ($options as $key => $option)
-        {
-          $html_options .= "<option>$option->name</option>";
+        $html_options = '<option value="">Please select option</option>';
+        foreach ($options as $key => $option) {
+            $html_options .= "<option>$option->name</option>";
         }
 
         $html_free_ingredients = '';
-        foreach ($freeIngredients as $key => $ingredient)
-        {
-          $ingredient_name = $ingredient->ingredient->name;
-          $ingredient_image = $ingredient->ingredient->image;
+        foreach ($freeIngredients as $key => $ingredient) {
+            $ingredient_name = $ingredient->ingredient->name;
+            $ingredient_image = $ingredient->ingredient->image;
 
-          $html_free_ingredients .= "<tr>
+            $html_free_ingredients .= "<tr>
                                   <td width='10%'>
                                     <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                   </td>
@@ -115,13 +112,25 @@ class DishController extends Controller
         }
 
         $html_paid_ingredients = '';
-        foreach ($paidIngredients as $key => $ingredient)
-        {
-            $ingredient_name = $ingredient->ingredient->name;
-            $ingredient_image = $ingredient->ingredient->image;
-            $ingredient_price = $ingredient->ingredient->price;
+        foreach ($paidIngredients as $key => $category) {
+            $show = ($key == 0) ? ' show' : '';
+            $collapsed = ($key != 0) ? ' collapsed' : '';
+            $html_paid_ingredients .= "<div class='accordion-item'>
+                          <h2 class='accordion-header'>
+                            <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
+                          </h2>
+                          <div id='collapse$category->id' class='accordion-collapse collapse $show' data-bs-parent='#accordionExample'>
+                            <div class='accordion-body'>
+                              <table>
+                                <tbody>";
 
-            $html_paid_ingredients .= "<tr>
+            foreach ($category->ingredients as $ingredient) {
+
+                $ingredient_name = $ingredient->name;
+                $ingredient_image = $ingredient->image;
+                $ingredient_price = $ingredient->price;
+
+                $html_paid_ingredients .= "<tr>
                                     <td width='10%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
@@ -139,6 +148,12 @@ class DishController extends Controller
                                       </div>
                                     </td>
                                   </tr>";
+            }
+            $html_paid_ingredients .= "</tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>";
         }
 
         $html = "<div class='modal-content'>
@@ -186,51 +201,7 @@ class DishController extends Controller
                         </thead>
                       </table>
                       <div class='accordion accordion-flush customisable-accordion' id='accordionExample'>
-                        <div class='accordion-item'>
-                          <h2 class='accordion-header'>
-                            <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'> Sauce </button>
-                          </h2>
-                          <div id='collapseOne' class='accordion-collapse collapse show' data-bs-parent='#accordionExample'>
-                            <div class='accordion-body'>
-                              <table>
-                                <tbody>
-                                  $html_paid_ingredients
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                        <div class='accordion-item'>
-                          <h2 class='accordion-header'>
-                            <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo'> Bun </button>
-                          </h2>
-                          <div id='collapseTwo' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>
-                            <div class='accordion-body'>
-                              <table>
-                                <tbody>
-                                  <tr>
-                                    <td width='10%'>
-                                      <img src='' class='img-fluid me-15px' alt='ingredient img 2' width='50' height='50'>
-                                    </td>
-                                    <td class='text-left'>Ketchup <span class='food-custom-price'>€20</span>
-                                    </td>
-                                    <td width='7%'>
-                                      <div class='foodqty'>
-                                        <span class='minus'>
-                                          <i class='fas fa-minus align-middle'></i>
-                                        </span>
-                                        <input type='number' class='count' name='qty' value='1'>
-                                        <span class='plus'>
-                                          <i class='fas fa-plus align-middle'></i>
-                                        </span>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
+                        $html_paid_ingredients
                       </div>
                     </div>
                   </div>
@@ -239,16 +210,16 @@ class DishController extends Controller
                       <div class='col'>
                         <div class='foodqty'>
                           <span class='minus'>
-                            <i class='fas fa-minus align-middle' onclick=updateDishQty('-',".$dish->qty.",".$dish->id.")></i>
+                            <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $dish->id . ")></i>
                           </span>
-                          <input type='number' class='count' name='qty-$dish->id' value=".$dish->order->qty.">
+                          <input type='number' class='count' name='qty-$dish->id' value=" . $dish->order->qty . ">
                           <span class='plus'>
-                            <i class='fas fa-plus align-middle' onclick=updateDishQty('+',".$dish->qty.",".$dish->id.")></i>
+                            <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $dish->id . ")></i>
                           </span>
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addToCart(".$dish->id.")>Add To cart <span>| €30</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addToCart(" . $dish->id . ")>Add To cart <span>| €30</span>
                         </a>
                       </div>
                     </div>

@@ -191,70 +191,49 @@
                                                                 @endforeach
                                                             </select>
 
-                                                            <div class="table-dish-name dish-tray{{ $ingredient->id }}"> 
+                                                            <div class="table-dish-name align-items-start dish-tray{{ $ingredient->id }}">
+                                                                <div class="table-dish-name-wrp">
+                                                                    <div class="table-dish-name-inner">
                                                                 <?php
                                                                     $dishCount = 1;
-                                                                ?> 
-                                                                @foreach ($ingredient->freeDishIngredient as $ingr) 
+                                                                ?>
+                                                                @foreach ($ingredient->freeDishIngredient as $ingr)
+
                                                                     @if($dishCount > 2 )
 
-                                                                        @if($dishCount == 3) 
-                                                                        <div class="moredishname-collapse collapse" id="collapseDishRowTwo"> 
-                                                                        @endif 
+                                                                        @if($dishCount == 3)
+                                                                    </div>
+                                                                    <div class="moredishname-collapse collapse" id="collapseDishRowTwo">
+                                                                        <div class="card card-body bg-lightgray d-block py-2 px-0 pb-0 border-0">
+                                                                        @endif
 
                                                                         <span class="badge text-bg-yellow mt-1">
                                                                           {{ $ingr->dish->name }}
                                                                           <a href="javascript:void(0);">
                                                                             <i class="fa-solid fa-xmark align-middle" data-id="{{ $ingredient->id }}" data-name="{{ $ingr->dish->name }}"></i>
                                                                           </a>
-                                                                        </span> 
-                                                                    @else 
+                                                                        </span>
+                                                                    @else
                                                                     <span class="badge text-bg-yellow mt-1">
                                                                       {{ $ingr->dish->name }}
                                                                       <a href="javascript:void(0);">
                                                                         <i class="fa-solid fa-xmark align-middle del-dish-icon existing-dish" data-dish-ing-id="{{ $ingr->id }}" data-dish-id="{{ $ingr->dish->id }}" data-id="{{ $ingredient->id }}" data-name="{{ $ingr->dish->name }}"></i>
                                                                       </a>
-                                                                    </span> 
-                                                                    @endif 
+                                                                    </span>
+                                                                    @endif
                                                                 <?php
                                                                     $dishCount++
-                                                                ?> 
-                                                                @endforeach 
+                                                                ?>
+                                                                @endforeach
 
-                                                                        @if($dishCount > 3) 
+                                                                        @if($dishCount > 3)
                                                                         </div>
-                                                                        <a class="text-more-sm float-end lh-30px more-less-text" id="more-less-text{{ $ingredient->id }}" data-bs-toggle="collapse" href="#collapseDishRowTwo" role="button" aria-expanded="false" aria-controls="collapseDishRowTwo">+ More
-                                                                        </a> 
+                                                                        </div>
+                                                                        </div>
+                                                                            <a class="text-more-sm align-self-end float-end lh-base text-center pt-2 more-less-text" id="more-less-text{{ $ingredient->id }}" data-bs-toggle="collapse" href="#collapseDishRowTwo" role="button" aria-expanded="false" aria-controls="collapseDishRowTwo">+ More</a>
                                                                         @endif
+
                                                             </div>
-                                                            <!-- Harsh
-                                                            <div class="table-dish-name align-items-start">
-                                                              <div class="table-dish-name-wrp">
-                                                                <div class="table-dish-name-inner">
-                                                                  <span class="badge text-bg-yellow">Big mac with Cheese <a href="javascript:void(0);">
-                                                                      <i class="fa-solid fa-xmark align-middle"></i>
-                                                                    </a>
-                                                                  </span>
-                                                                  <span class="badge text-bg-yellow">margarita pizza <a href="javascript:void(0);">
-                                                                      <i class="fa-solid fa-xmark align-middle"></i>
-                                                                    </a>
-                                                                  </span>
-                                                                </div>
-                                                                <div class="moredishname-collapse collapse" id="collapseDishRowTwo">
-                                                                  <div class="card card-body bg-lightgray d-block py-2 px-0 pb-0 border-0">
-                                                                    <span class="badge text-bg-yellow">Big mac with Cheese <a href="javascript:void(0);">
-                                                                        <i class="fa-solid fa-xmark align-middle"></i>
-                                                                      </a>
-                                                                    </span>
-                                                                    <span class="badge text-bg-yellow">Big mac with Cheese <a href="javascript:void(0);">
-                                                                        <i class="fa-solid fa-xmark align-middle"></i>
-                                                                      </a>
-                                                                    </span>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                              <a class="text-more-sm float-end lh-base text-center pt-2" data-bs-toggle="collapse" href="#collapseDishRowTwo" role="button" aria-expanded="false" aria-controls="collapseDishRowTwo">+ 2 more</a>
-                                                            </div>-->
                                                         </div>
                                                     </td>
                                                     <td class="text-center">

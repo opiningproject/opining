@@ -240,17 +240,19 @@
               </button>
             </div>
           </div>
-          <div class="text-center pagination-item">
+          <div class="text-center pagination-item"> 
             <div class="d-flex gap-2 align-items-center">
-              <div class="text text-muted"> Rows per page </div>
-              <select class="form-select rounded-2" style="max-width: 65px;min-height: auto;font-size: 14px;">
-                <option selected>15</option>
-                <option value="1">16</option>
-                <option value="2">17</option>
-                <option value="3">18</option>
-              </select>
+                <div class="text text-muted">
+                  Rows per page 
+              </div>
+              <select class="form-select rounded-2" style="max-width: 70px;min-height: auto;font-size: 14px;">
+                  <option selected>05</option>
+                  <option value="1">06</option>
+                  <option value="2">07</option>
+                  <option value="3">08</option>
+                </select>
             </div>
-          </div>
+        </div>
         </div>
       </div>
     </div>

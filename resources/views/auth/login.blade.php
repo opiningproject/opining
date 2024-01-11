@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="main">
+    <div class="main" style="min-height: 100vh;">
         <div class="main-view signin-view">
-            <div class="container-fluid bd-gutter bd-layout signin-layout">
+            <div class="container-fluid bd-gutter bd-layout signin-layout py-3">
                 <main class="w-100">
                     <div class="main-content">
                         <div class="card signin-card">

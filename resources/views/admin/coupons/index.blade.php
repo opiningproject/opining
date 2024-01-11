@@ -57,7 +57,7 @@
                                             <div class="form-check form-switch custom-switch justify-content-center ps-0">
                                                 <input class="form-check-input" type="checkbox" role="switch" {{ $coupon->status ? 'checked':'' }}>
                                             </div>
-                                            <div>
+                                            <div class="d-flex align-items-center">
                                                 <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0" href="javascript:void(0);" id="coupon-edit-btn" onclick="editCoupon({{ $coupon->id }})">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>

@@ -15,7 +15,7 @@
                         <!-- start Setting section -->
                         <section class=" custom-section">
                             <div class="customize-tab setting-tab">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <ul class="nav nav-tabs flex-nowrap" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? '' : 'active'}}" id="restaurantProfile-tab" data-bs-toggle="tab"
                                                 data-bs-target="#restaurantProfile-tab-pane" type="button" role="tab"

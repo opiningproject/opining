@@ -3,16 +3,16 @@
     <div class="container-fluid bd-gutter bd-layout"> @include('layouts.admin.side_nav_bar') <main class="w-100">
         <div class="main-content">
           <div class="section-page-title main-page-title mb-0">
-            <div class="row align-items-center">
+            <div class="row">
               <div class="col-auto">
-                <div class="">
+                <div class="pt-2">
                   <h1 class="page-title">Menu</h1>
                 </div>
               </div>
               <div class="col text-end">
                 <div class="page-control">
-                  <div class="row justify-content-end align-items-center g-2">
-                    <div class="col-auto">
+                  <div class="d-flex flex-wrap gap-3 justify-content-end align-items-center">
+                    <div class="flex-shrink-0">
                       <div class="d-flex align-items-center form-control bg-white border-0 h-100 new-searchbar">
                         <div class="image">
                           <img src="images/search.svg">
@@ -20,25 +20,25 @@
                         <input type="text" id="search-dish" class="form-control border-0 outline-0 text-truncate bg-transparent" placeholder="What do you want to eat today..." />
                       </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="flex-shrink-0">
                       <a class="btn btn-custom-yellow" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                         <img src="images/add.svg">
                         <span class="align-middle ms-3">Add New Category</span>
                       </a>
                     </div>
-                    <div class="col-auto">
+                    <div class="flex-shrink-0">
                       <a class="btn btn-custom-yellow" href="{{ route('ingredients.index') }}">
                         <img src="images/add.svg">
                         <span class="align-middle ms-3">Add New ingredients</span>
                       </a>
                     </div>
-                    <div class="col-auto">
+                    <div class="flex-shrink-0">
                       <a class="btn btn-custom-yellow" href="{{ route('addDish') }}">
                         <img src="images/add.svg">
                         <span class="align-middle ms-3">Add New Dish</span>
                       </a>
                     </div>
-                    <div class="col-auto">
+                    <div class="flex-shrink-0">
                       <div class="dropdown userlogin-dropdown custom-default-dropdown">
                         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                           <img src="images/user-img.png" alt="user image" class="img-fluid">
@@ -134,7 +134,7 @@
                   <div class="food-image">
                     <img src="{{ $popularDish->image }}" style="height: 60px !important;" alt="burger imag" class="img-fluid" />
                   </div>
-                  <div class="text-start">
+                  <div class="text-start flex-fill">
                     <h4 class="food-name-text text-start text-truncate w-100" title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
                     <p class="food-price d-inline-block">{{ $popularDish->price }}</p>
                     <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2"> +15% 
@@ -160,7 +160,7 @@
                   <div class="food-image">
                     <img src="{{ $bestSellerDish->image }}" style="height: 60px !important;" alt="burger imag" class="img-fluid" />
                   </div>
-                  <div class="text-start">
+                  <div class="text-start flex-fill">
                     <h4 class="food-name-text text-start text-truncate w-100" title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
                     <p class="food-price d-inline-block">{{ $bestSellerDish->price }}</p>
                     <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2"> +15% <img src="images/up-arrow.svg">

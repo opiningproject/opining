@@ -72,7 +72,7 @@
                                                     </ul>
                                                     <div class="pagenumberdp d-flex align-items-center">
                                                         <p class="mb-0">Rows Per page</p>
-                                                        <div class="dropdown">
+                                                        <div class="dropdown couponperpage-dropdown">
                                                             <button class="btn dropdown-toggle pagination-dropdown-value" value="15" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 15
                                                             </button>

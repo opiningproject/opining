@@ -275,12 +275,12 @@
                                 </div>
                             </div>
                             <div class="foodorder-box-details bg-white w-100 d-flex flex-column">
-                                <div class="footer-box-details-header d-flex align-items-center justify-content-between gap-2">
-                                    <ul class="list-inline text-grp mb-0 p-0 d-flex align-items-center">
+                                <div class="footer-box-details-header d-flex align-items-center justify-content-between gap-lg-3 flex-wrap">
+                                    <ul class="list-inline text-grp mb-0 p-0 d-flex align-items-center flex-fill">
                                         <li class="list-inline-item d-flex align-items-center">Order #1022</li>
                                         <li class="list-inline-item d-flex align-items-center">June 1, 2020, 08:22 AM</li>
                                     </ul>
-                                    <ul class="list-inline contact-list mb-0 p-0">
+                                    <ul class="d-inline-flex flex-wrap gap-3 contact-list mb-0 p-0 justify-content-end">
                                         <li class="list-inline-item">
                                             <a href="#" class="d-flex align-items-center gap-2">
                                                 <img src="images/user-yellow.svg" alt="user" class="img-fluid" width="18">

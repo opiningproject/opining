@@ -54,6 +54,7 @@ Route::middleware(['localization'])->group(function () {
         Route::post('/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
         Route::get('/delete-address/{id}', [App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
         Route::get('/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
+        Route::get('/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
     });
 
     Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
@@ -151,8 +152,6 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
         Route::get('/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
-        Route::get('/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
-
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
         Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');
 

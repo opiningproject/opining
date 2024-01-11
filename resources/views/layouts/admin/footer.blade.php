@@ -18,21 +18,22 @@
 
 <script>
     var baseURL = "{{ url('/') }}"
+    var theme = "{{ session('theme') }}";
 
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-
     });
     // timepicker
 
-    $(function () {
-        setTimeout(() => {
-            $(".cke_wysiwyg_frame").contents().find("body").css({ 'background-color': 'black', 'color': 'white'});
-        }, 600);
-    })
-
+    if(theme == 'dark')
+    {
+        $(window).on('load', function() {
+         $(".cke_wysiwyg_frame").contents().find("body").css({ 'background-color': 'black', 'color': 'white'});
+        });
+    }
+    
     const svg_options = {
             svgSelector: 'img.svg', // the class attached to all images that should be inlined
             initClass: 'js-inlinesvg', // class added to <html>

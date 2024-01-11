@@ -78,6 +78,11 @@ class DishController extends Controller
 
     public function getDishDetails(Request $request)
     {
+        if(!Auth::user())
+        {
+            return response::json(['status' => 2, 'message' => '']);
+        }
+        
         $dish = Dish::find($request->id);
         
         $options = $dish->option;

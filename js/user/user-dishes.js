@@ -34,7 +34,7 @@ function customizeDish(id)
                    return false;
                 }
 
-                $('.modal-dialog').html(data);
+                $('.customisable-modal-body').html(data);
 
                 $("#customisableModal").modal("show"); 
 

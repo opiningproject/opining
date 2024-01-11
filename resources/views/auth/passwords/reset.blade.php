@@ -1,24 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="main">
+    <div class="main" style="min-height: 100vh;">
         <div class="main-view signin-view">
-            <div class="container-fluid bd-gutter bd-layout signin-layout">
+            <div class="container-fluid bd-gutter bd-layout signin-layout py-3">
                 @if(Session::has('message'))
                     <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('status') }}</p>
                 @endif
                 <main class="w-100">
                     <div class="main-content">
                         <div class="card signin-card">
-                            <div class="card-header">
-                                <h1 class="logo-text text-dark-1"><a href="javascript:void(0);">
+                            <div class="card-header pb-0">
+                                <h1 class="logo-text text-dark-1 text-center"><a href="javascript:void(0);">
                                         Gomeal<span class="text-yellow-1">.</span>
                                     </a></h1>
                             </div>
                             <div class="card-body signin-form">
                                 <form method="POST" action="{{ route('password.update') }}">
                                     @csrf
-                                    <h3 class="authenticationform-title">{{ __('Forgot Password') }}</h3>
+                                    <h3 class="authenticationform-title text-center">{{ __('Forgot Password') }}</h3>
 
                                     <input type="hidden" name="token" value="{{ $token }}">
 

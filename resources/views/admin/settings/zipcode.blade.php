@@ -75,23 +75,25 @@
                                                {{ $zipcode["status"] ? "checked":"" }} onchange="changeStatus({{ $zipcode['id'] }})">
                                     </div>
                                 </td>
-                                <td class="text-center">
-                                    <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0"
-                                       href="javascript:void(0);" id="zipcode-edit-btn-{{ $zipcode['id'] }}"
-                                       onclick="editZipcode({{ $zipcode['id'] }})">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a class="btn btn-custom-yellow btn-icon"
-                                       id="zipcode-remove-btn-{{ $zipcode['id'] }}"
-                                       onclick="deleteZipcode({{ $zipcode['id'] }})">
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </a>
+                                <td class="">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a class="btn btn-custom-yellow btn-icon" tabindex="0"
+                                           href="javascript:void(0);" id="zipcode-edit-btn-{{ $zipcode['id'] }}"
+                                           onclick="editZipcode({{ $zipcode['id'] }})">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a class="btn btn-custom-yellow btn-icon"
+                                           id="zipcode-remove-btn-{{ $zipcode['id'] }}"
+                                           onclick="deleteZipcode({{ $zipcode['id'] }})">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </a>
 
-                                    <button type="button"
-                                            class="btn btn-custom-yellow text-uppercase font-sebibold w-100"
-                                            id="zipcode-save-btn-{{ $zipcode['id'] }}" style="display: none;"
-                                            onclick="saveZipcode({{ $zipcode['id'] }})">Save
-                                    </button>
+                                        <button type="button"
+                                                class="btn btn-custom-yellow text-uppercase font-sebibold w-100"
+                                                id="zipcode-save-btn-{{ $zipcode['id'] }}" style="display: none;"
+                                                onclick="saveZipcode({{ $zipcode['id'] }})">Save
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

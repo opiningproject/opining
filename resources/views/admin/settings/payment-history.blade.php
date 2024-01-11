@@ -191,7 +191,7 @@
           </div>
           <div class="text-center pagination-item">
             <div class="d-flex gap-2 align-items-center">
-              <div class="text text-muted" style="min-width: fit-content;"> Rows per page </div>
+              <div class="text text-muted"> Rows per page </div>
               <select class="form-select rounded-2" style="max-width: 70px;min-height: auto;font-size: 14px;">
                 <option selected>05</option>
                 <option value="1">06</option>

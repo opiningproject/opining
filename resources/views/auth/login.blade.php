@@ -14,7 +14,7 @@
                                 <h1 class="logo-text text-dark-1">
                                     <a href="javascript:void(0);">
                                         Gomeal<span class="text-yellow-1">.</span>
-                                        <div class="text-start" style="padding-left: 140px;padding-right: 90px;margin-top: -20px;">
+                                        <div class="text-start" style="padding-left: 140px;padding-right: 90px;margin-top: -12px;">
                                             <img src="{{ $logo->restaurant_logo }}" style="max-width: 100%;">
                                         </div>
                                     </a>

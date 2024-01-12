@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <?php
+        $logo = \App\Models\RestaurantDetail::find(1);
+        ?>
     <div class="main" style="min-height: 100vh;">
         <div class="main-view signin-view">
             <div class="container-fluid bd-gutter bd-layout signin-layout py-3">
@@ -8,9 +11,14 @@
                     <div class="main-content">
                         <div class="card signin-card">
                             <div class="card-header">
-                                <h1 class="logo-text text-dark-1"><a href="javascript:void(0);">
+                                <h1 class="logo-text text-dark-1">
+                                    <a href="javascript:void(0);">
                                         Gomeal<span class="text-yellow-1">.</span>
-                                    </a></h1>
+                                        <div class="text-start" style="padding-left: 140px;padding-right: 90px;margin-top: -20px;">
+                                            <img src="{{ $logo->restaurant_logo }}" style="max-width: 100%;">
+                                        </div>
+                                    </a>
+                                </h1>
                             </div>
                             <div class="card-body signin-form">
                                 <form method="POST" action="{{ route('login') }}">

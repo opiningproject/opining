@@ -12,15 +12,15 @@
 @if($theme == 'dark')
 <a href="{{ url('/change-theme/light') }}">
     <div class="dark-light-btn p-3 cursor-pointer">
-        <img src="images/light-theme.svg">
+        <img src="{{ asset('images/light-theme.svg')}}">
     </div>
 </a>
 @else
 <a href="{{ url('/change-theme/dark') }}">
     <div class="dark-light-btn p-3 cursor-pointer">
-        <img src="images/dark-theme.svg">
+        <img src="{{ asset('images/dark-theme.svg')}}">
     </div>
-</a>  
+</a>
 @endif
 
 

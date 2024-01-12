@@ -13,17 +13,15 @@
         </button>
     </div>
 
+    
+
     <div class="siderbarmenu-brand">
         <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
             <p class="mb-0">Gomeal<span class="text-yellow-1">.</span></p>
-<<<<<<< Updated upstream
+
             <div class="text-start" style="padding-left: 140px;padding-right: 96px;margin-top: -15px;">
                 <img src="{{ Auth::user()->restaurantDetails->restaurant_logo }}" style="max-width: 100%;">
-=======
-<!-- {{--            <img src="{{ Auth::user()->restaurantDetails->restaurant_logo }}">--}} -->
-            <div class="text-start" style="padding-left: 140px;padding-right: 90px;">
-                <img src="{{ asset('images/logo_dummy.png') }}" style="max-width: 100%;">
->>>>>>> Stashed changes
+
             </div>
         </a>
     </div>

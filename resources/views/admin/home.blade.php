@@ -88,8 +88,7 @@
                                                 <div class="category-element swiper-slide">
                                                     <div class="card">
                                                       <span class="dish-item-icon">
-                                                        <img src="{{ $category->image }}" class="img-fluid" alt="bakery"
-                                                             style="height: 60px !important;">
+                                                        <img src="{{ $category->image }}" class="img-fluid" alt="bakery">
                                                       </span>
                                                         <p class="mb-0 category-item-name text-truncate w-100"
                                                            title="{{ $category->name }}">{{ $category->name }}</p>
@@ -137,7 +136,7 @@
                                                     <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
                                                     <div class="food-image">
                                                         <img src="{{ $dish->image }}" alt="burger imag"
-                                                             class="img-fluid" style="height: 60px !important;"/>
+                                                             class="img-fluid"/>
                                                     </div>
                                                     <h4 class="food-name-text text-truncate w-100"
                                                         title="{{ $dish->name }}">{{ $dish->name }}</h4>

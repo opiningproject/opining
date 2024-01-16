@@ -45,7 +45,7 @@
                                                 <div class="form-group imageupload-box inline-imageupload-box">
                                                     <label for="dishimage" class="form-label">Dish Image</label>
                                                     <label for="input-file" class="upload-file justify-content-center">
-                                                        <input type="file" id="input-file">
+                                                        <input type="file" id="input-file" name="image">
                                                         <img src="{{ $dish->image }}" style="height: 40px"
                                                             alt="blank image" id="img-preview" class="img-fluid">
                                                     </label>

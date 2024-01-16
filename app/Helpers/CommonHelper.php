@@ -34,7 +34,7 @@ if (!function_exists('uploadImageToBucket')) {
 
         if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png') {
             $image = Image::make($file)->resize(300, 300);
-            Storage::disk('s3')->put('/' . $type . '/thumb/' . $file_name, $image->stream(), 'public');
+            Storage::disk('s3')->put('/' . $type . '/thumb/' . $file_name, $image->stream());
         }
 
         $filePath = $type . '/' . $file_name;

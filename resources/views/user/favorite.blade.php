@@ -33,7 +33,7 @@
                       Added to cart
                     @else
                       Add  
-                      <img src="{{ asset('images/add1.svg') }}" alt="" class="svg" height="9" width="9">
+                      <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">
                       
                     @endif
                  </button>

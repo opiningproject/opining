@@ -15,8 +15,7 @@
                                 <textarea class="form-control"></textarea>
                         </div>
                         <div class="col-12">
-                            <a href="#"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">SEND</a>
+                            <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">SEND</a>
                         </div>
                     </div>
                 </form>

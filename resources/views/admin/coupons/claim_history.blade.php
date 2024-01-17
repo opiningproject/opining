@@ -142,7 +142,7 @@
                                     <label for="percentageofoff" class="form-label">Validity date</label>
                                     <div class="prev-default-input-group">
                                         <span class="input-group-icon">
-                                            <img src="{{ asset('images/calender-icon.svg')}}" alt="calender-icon" class="img-fluid">
+                                            <img src="{{ asset('images/calender-icon.svg')}}" alt="calender-icon" class="img-fluid svg" height="20" width="20">
                                         </span>
                                         <input type="text" class="form-control">
                                     </div>

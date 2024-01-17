@@ -14,13 +14,11 @@
                                 <div class="form-group mb-0">
                                     <a class="btn btn-outline-secondary border-light btn-default me-4 btn-box-shadow"
                                        href="{{ route('claimHistoryLog') }}">
-                                        <img class="svg" src="{{ asset('images/claim-history.svg') }}" alt="" height="40" width="40">
+                                        <img class="svg" src="{{ asset('images/claim-history.svg') }}" alt="" height="20" width="20">
                                         <span class="align-middle ms-3">Claim History</span>
                                     </a>
-                                    <a class="btn btn-custom-yellow btn-default btn-box-shadow"
-                                       href="javascript:void(0);" data-bs-toggle="modal"
-                                       data-bs-target="#addCouponModal">
-                                        <img src="{{ asset('images/add.svg') }}">
+                                    <a class="btn btn-custom-yellow btn-default btn-box-shadow" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addCouponModal">
+                                        <img src="{{ asset('images/add.svg') }}" alt="" height="20" width="20" class="svg">
                                         <span class="align-middle ms-3">Add Coupon</span>
                                     </a>
                                 </div>

@@ -22,7 +22,7 @@
               </td>
               <td class="text-center">
                 <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
+                  <img src="{{ asset('images/location-icon.svg') }}" alt="" class="svg" height="18" width="13">
                   <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
                 </div>
               </td>
@@ -32,145 +32,7 @@
               <td class="text-center">
                 <div class="d-flex align-items-center gap-2 justify-content-center">
                   <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div>1215151</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="images/location-icon.svg" alt="" class="ima-fluid">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
-              </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
-                  <img src="images/checkmark.svg" alt="" class="ima-fluid">
+                  <img src="{{ asset('images/checkmark.svg') }}" alt="" class="svg" height="14" width="14">
                 </div>
               </td>
             </tr>
@@ -180,12 +42,12 @@
           <div class="text-center pagination-item">
             <div class="d-flex align-items-center gap-3">
               <button class="border-0 outline-0 bg-transparent">
-                <img src="images/left-icon.svg" alt="Prev" class="ima-fluid">
+                <img src="{{ asset('images/left-icon.svg') }}" alt="" class="svg" height="24" width="24">
               </button>
               <div class="text text-muted"> 01 of <span class="text-dark fw-600">05</span>
               </div>
               <button class="border-0 outline-0 bg-transparent" style="transform: rotate(180deg);">
-                <img src="images/left-icon.svg" alt="Next" class="ima-fluid">
+                <img src="{{ asset('images/left-icon.svg') }}" alt="" class="svg" height="24" width="24">
               </button>
             </div>
           </div>

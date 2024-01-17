@@ -2,26 +2,17 @@
     <div class="bd-navbar-toggle">
         <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi"
-                 fill="currentColor" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
-                </path>
-            </svg>
-
+            <img src="{{ asset('images/expand.svg') }}" alt="" width="24" height="24" class="svg">
             <span class="d-none fs-6 pe-1">Browse</span>
         </button>
     </div>
-
-    
 
     <div class="siderbarmenu-brand">
         <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
             <p class="mb-0">Gomeal<span class="text-yellow-1">.</span></p>
 
             <div class="text-start" style="padding-left: 140px;padding-right: 96px;margin-top: -15px;">
-                <img src="{{ Auth::user()->restaurantDetails->restaurant_logo }}" style="max-width: 100%;">
-
+                <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
             </div>
         </a>
     </div>

@@ -15,12 +15,10 @@
                     <h4 class="food-name-text">{{ $dish->name }}</h4>
                     <p class="food-price">€{{ $dish->price }}</p>
                     <div class="food-detail-card-btn">
-                        <a href="{{ route('editDish', $dish->id) }}"
-                           class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
+                        <a href="{{ route('editDish', $dish->id) }}" class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <a class="btn btn-custom-yellow btn-icon del-dish-btn" data-bs-toggle="modal"
-                           data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
+                        <a class="btn btn-custom-yellow btn-icon del-dish-btn" data-bs-toggle="modal" data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
                             <i class="fa-regular fa-trash-can"></i>
                         </a>
                     </div>

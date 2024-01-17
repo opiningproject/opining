@@ -1,9 +1,7 @@
 <aside class="menu-sidebar sticky-top">
     <div class="bd-navbar-toggle">
-        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
-           <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" 
-                                                    width="24" height="21">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+           <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="24" height="21">
             <span class="d-none fs-6 pe-1">Browse</span>
         </button>
     </div>
@@ -18,14 +16,11 @@
         <button class="navbar-toggler p-2 searcheatboxbtn" type="button">
             <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
         </button>
-        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart"
-            aria-label="Toggle docs navigation">
+        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">
              <img src="{{ asset('images/sidebar-toggle.svg') }}" class="svg" width="18" height="22">
-           
         </button>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
-            data-bs-target="#bdSidebarCart"></button>
+
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button>
     </div>
 
     <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar" aria-labelledby="bdSidebarOffcanvasLabel">
@@ -50,8 +45,7 @@
                             </div>
                             <ul class="dropdown-menu">
                               <li>
-                                <a class="dropdown-item" href="#" onclick="event.preventDefault();
-                                                                                 document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                   {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
@@ -79,14 +73,13 @@
                             <li class="nav-item">
                                  <a href="{{ route('user.dashboard') }}" class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
                                     <img src="{{ asset('images/dashboard-menu.svg') }}" class="svg" width="40" height="40">
-                                    
                                     <span class="ms-1 d-sm-inline align-middle">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.orders') }}" class="nav-link {{ activeMenu('user.orders') }} align-middle">
                                    <img src="{{ asset('images/myorder-menu.svg') }}" class="svg" width="40" height="40">
-                                    <span class="ms-1 d-sm-inline align-middle">My Order</span>
+                                   <span class="ms-1 d-sm-inline align-middle">My Order</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -98,23 +91,18 @@
                             <li class="nav-item">
                                 <a href="{{ route('user.chat') }}" class="nav-link {{ activeMenu('user.chat') }} align-middle">
                                     <img src="{{ asset('images/user-chat-menu.svg') }}" class="svg" width="40" height="40">
-                                    
                                     <span class="ms-1 d-sm-inline align-middle">Chat Support</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.settings') }}" class="nav-link {{ activeMenu('user.settings') }} align-middle">
-                                  
                                     <img src="{{ asset('images/settings-menu.svg') }}" class="svg" width="40" height="40">
-                                    
                                     <span class="ms-1 d-sm-inline align-middle">Setting</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.points') }}" class="nav-link {{ activeMenu('user.points') }} align-middle">
-
                                     <img src="{{ asset('images/collected-points-menu.svg') }}" class="svg" width="40" height="40">
-                                   
                                     <span class="ms-1 d-sm-inline align-middle">Collected points</span>
                                 </a>
                             </li>
@@ -128,11 +116,9 @@
                         <div class="sidebar-bottom">
                             <div class="card sidebar-offer-card position-relative">
                                 <div class="card-body">
-                                    <p class="mb-0">Every 5th order you will get a 20% discount coupon!
-                                    </p>
+                                    <p class="mb-0">Every 5th order you will get a 20% discount coupon!</p>
                                     <div class="circle-bg-shape">
                                         <img src="{{ asset('images/nav-grade.svg') }}" class="svg" width="90" height="95">
-                                        
                                     </div>
                                 </div>
                             </div>

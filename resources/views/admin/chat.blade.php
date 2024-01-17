@@ -15,11 +15,6 @@
                         </div>
                         <div class="d-flex ChatDiv-main">
                             <div class="ChatDiv">
-                                <!-- <div class="active ChatDiv-type">
-                                    <div class="ChatDiv-list">
-                                        
-                                    </div>
-                                </div> -->
                                 <div class="ChatDiv-type">
                                     <div class="ChatDiv-list">
                                         <div class="active ChatDiv-item d-flex align-items-center justify-content-start gap-3">
@@ -29,85 +24,11 @@
                                                 <div class="text">10:00 am | 22, Aug2023</div>
                                             </div>
                                         </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-2.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Mila Crystal</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-3.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">John Hill</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-4.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Jonson singh</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-5.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Lorem Ipsum</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-6.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Lorem Ipsum</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-2.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Mila Crystal</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-3.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">John Hill</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-4.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Jonson singh</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-5.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Lorem Ipsum</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
-                                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3">
-                                            <img src="images/user-profile-6.png" alt="Profile-Img" class="img-fluid" width="56" height="56">
-                                            <div class="text-grp d-flex flex-column">
-                                                <div class="title">Lorem Ipsum</div>
-                                                <div class="text">10:00 am | 22, Aug2023</div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                                 <div class="chatbox">
                                     <div class="chatbox-header d-flex gap-3">
-                                        <button class="back-btn">
-                                            <img src="images/cheveron-left.svg" class="img-fluid" alt="gomel"
-                                                    width="10" height="16">
-                                        </button>
                                         <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
                                             <div class="profile-img">
                                                 <img src="images/user-profile.png" class="img-fluid" alt="gomel"
@@ -133,19 +54,6 @@
                                                     <small>12:45 PM</small>
                                                 </div>
                                             </div>
-                                            <div class="chat-item d-flex align-items-end justify-content-end gap-3 gap-sm-4">
-                                                <div class="chat-item-img position-relative">
-                                                    <img src="images/gomeal-chat-icon.svg" class="img-fluid" alt="user"
-                                                    width="60" height="60">
-                                                    <span class="activicon"></span>
-                                                </div>
-                                                <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3">
-                                                    <p>Hello...</p>
-                                                    <p>Yes, my order according to 
-                                                        application. Thank you</p>
-                                                    <small>12:45 PM</small>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="chatbox-footer">
@@ -154,7 +62,7 @@
                                             <input type="text" class="form-control w-100 bg-transparent border-0 outline-0" placeholder="Write your message..." />
                                             <div class="d-flex gap-2 gap-sm-3">
                                                 <button class="border-0 outline-0 bg-transparent svg-btn">
-                                                    <img src="images/attach.svg">
+                                                    <img src="{{ asset('images/attach.svg') }}" alt="" height="40" width="40" class="svg">
                                                 </button>
                                                 <button class="btn btn-xs-sm btn-custom-yellow">Send</button>
                                             </div>

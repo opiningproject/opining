@@ -9,7 +9,7 @@
               </div>
               <div class="hero-incomebox bg-white">
                 <div class="hero-incomebox-item d-flex align-items-center">
-                  <img src="images/totalincome-icon.svg" alt="img" class="img-fluid" width="90" height="90">
+                  <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
                   <div class="text-grp d-flex flex-column gap-2">
                     <div class="title">Total Income</div>
                     <div class="number">

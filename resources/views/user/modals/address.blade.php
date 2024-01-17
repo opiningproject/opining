@@ -15,7 +15,7 @@
                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12">
                   <div class="form-group prev-input-group custom-icon-input-group">
                     <span class="input-group-icon">
-                      <img src="{{ asset('images/zipcode-svg.svg') }}" alt="zipcode" class="img-fluid" width="22" height="22" />
+                      <img src="{{ asset('images/zipcode-svg.svg') }}" alt="zipcode" class="img-fluid svg" width="22" height="16" />
                     </span>
                     <input type="text" class="form-control" placeholder="Zip Code" value="{{ $zipcode }}" name="zipcode" id="zipcode" required />
                   </div>
@@ -23,7 +23,7 @@
                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12">
                   <div class="form-group prev-input-group custom-icon-input-group">
                     <span class="input-group-icon">
-                      <img src="{{ asset('images/home-icon-svg.svg') }}" alt="home address" class="img-fluid" width="22" height="22" />
+                      <img src="{{ asset('images/home-icon-svg.svg') }}" alt="home address" class="img-fluid svg" width="19" height="18" />
                     </span>
                     <input type="text" class="form-control" placeholder="House Number" value="{{ $house_no }}" name="house_no" id="house_no" required/>
                   </div>

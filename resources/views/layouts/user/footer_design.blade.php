@@ -35,26 +35,21 @@
                         <ul>
                             <li>
                                 <a href="javascript:void(0);">
-                                   
-                                    <img src="{{ asset('images/phone-icon.svg') }}" class="img-fluid"
-                                                    width="16" height="16">
+                                    <img src="{{ asset('images/phone-icon.svg') }}" class="img-fluid" width="16" height="16">
                                     +31 655185972
-
                                 </a>
                             </li>
                             <li><a href="javascript:void(0);">
-                                    <img src="{{ asset('images/mail-icon.svg') }}" class="img-fluid" 
-                                                    width="18" height="13">
+                                    <img src="{{ asset('images/mail-icon.svg') }}" class="img-fluid"  width="18" height="13">
                                     gomeal@gmail.com
                                 </a></li>
                             <li><a href="javascript:void(0);">
-                                    <img src="{{ asset('images/address-icon.svg') }}" class="img-fluid" 
-                                                    width="13" height="17">
-                                   
+                                    <img src="{{ asset('images/address-icon.svg') }}" class="img-fluid" width="13" height="17">
                                     Johannes Elsevierlaan 32,
                                     3771 KK Barneveld,
                                     Netherlands
-                                </a></li>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

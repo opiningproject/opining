@@ -18,13 +18,11 @@
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
                                             <img src="{{ asset('images/scoter1.svg') }}" alt="" class="svg" height="23" width="26">
-                                           
                                             Delivery
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                                            
                                             <img src="{{ asset('images/takeaway-icon.svg') }}" alt="" class="svg" height="23" width="23">
                                             Take Away
                                         </button>
@@ -52,7 +50,7 @@
                                             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">Save</button>
 
                                             <a class="btn btn-custom-yellow btn-default w-100 btn-box-shadow mt-30px text-uppercase" href="{{ route('login') }}">
-                                                <img src="images/restaurant-icon-svg.svg" alt="restaurant" class="img-fluid" width="22" height="22" />
+                                                <img src="{{ asset('images/restaurant-icon-svg.svg') }}" alt="restaurant" class="img-fluid svg" width="22" height="22" />
                                                 <span class="align-middle ms-3">I’m a restaurant user</span>
                                             </a>
                                         </form>
@@ -61,11 +59,10 @@
                                         <form id="take-away-add-form">
                                             <div class="form-group prev-input-group custom-icon-input-group">
                                                 <span class="input-group-icon">
-                                                    <img src="images/call-icon.svg" alt="call" class="img-fluid" width="22" height="22" />
+                                                    <img src="{{ asset('images/call-icon.svg') }}" alt="call" class="img-fluid svg" width="22" height="22" />
                                                 </span>
                                                 <input type="number" class="form-control" placeholder="Phone Number" name="phone_no" required/>
                                             </div>
-                                            <!-- <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a> -->
                                             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">Save</button>
                                         </form>
                                     </div>

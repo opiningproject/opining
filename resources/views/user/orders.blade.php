@@ -25,8 +25,7 @@
                                     </div>
                                     <div class="price"><span>€</span>202.00</div>
                                     <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
+                                        <img src="{{ asset('images/chevron-down.svg') }}" class="img-fluid svg" alt="" width="32" height="32">
                                     </button>
                                 </div>
                             </div>
@@ -36,112 +35,12 @@
                             <div class="orders-list py-3 px-1">
                                 <div class="orders-item d-flex align-items-center justify-content-between gap-2">
                                     <div class="text-grp">
-                                        <div class="title">Order #1</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #2</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #3</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #4</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #5</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #6</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #7</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #8</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
-                                        <div class="title">Order #9</div>
-                                        <div class="text">June 1, 2020, 08:22 AM</div>
-                                    </div>
-                                    <div class="price"><span>€</span>202.00</div>
-                                    <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
-                                    </button>
-                                </div>
-                                <div class="orders-item d-flex align-items-center justify-content-between gap-2">
-                                    <div class="text-grp">
                                         <div class="title">Order #10</div>
                                         <div class="text">June 1, 2020, 08:22 AM</div>
                                     </div>
                                     <div class="price"><span>€</span>202.00</div>
                                     <button class="border-none outline-none">
-                                        <img src="images/chevron-down.svg" class="img-fluid" alt=""
-                                        width="32" height="32">
+                                        <img src="{{ asset('images/chevron-down.svg') }}" class="img-fluid svg" alt="" width="32" height="32">
                                     </button>
                                 </div>
                             </div>
@@ -153,28 +52,14 @@
                             <div class="ordersdetails-title">Order Details</div>
                             <div class="btn-grp d-flex flex-wrap">
                                 <button>
-                                    <img src="images/trackorder-icon.svg" class="img-fluid" alt=""
-                                        width="34">
-                                    Track order
+                                    <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt="" width="35" height="32"> Track order
                                 </button>
                                 <button>
-                                    <img src="images/needhelp-icon.svg" class="img-fluid" alt=""
-                                        width="27">
-                                    Need help
+                                    <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg" alt="" width="27" height="25">Need help
                                 </button>
                             </div>
                         </div>
-                        <!-- with one button -->
-                        <!-- <div class="ordersdetails-header d-flex justify-content-between align-items-center">
-                            <div class="ordersdetails-title">Order Details</div>
-                            <div class="btn-grp d-flex flex-wrap">
-                                <button>
-                                    <img src="images/needhelp-icon.svg" class="img-fluid" alt=""
-                                        width="27">
-                                    Need help
-                                </button>
-                            </div>
-                        </div> -->
+
                         <div class="orderdetails-main">
                             <div class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
                                 <div class="textgrp d-flex flex-column gap-1 gap-sm-3" >
@@ -183,44 +68,32 @@
                                 </div>
                                 <!-- order accepted btn -->
                                 <button class="border-none outline-none">
-                                    <img src="images/order-accepted.svg" class="img-fluid" alt=""
-                                        width="20">
-                                        Order Accepted
+                                    <img src="{{ asset('images/order-accepted.svg') }}" class="img-fluid svg" alt="" width="20" height="20"> Order Accepted
                                 </button>
 
                                 <!-- order in kitchen btn -->
                                 <!-- <button class="border-none outline-none">
-                                    <img src="images/orderinkitchen-icon.svg" class="img-fluid" alt=""
-                                        width="20">
-                                        Order in a kitchen
+                                    <img src="{{ asset('images/orderinkitchen-icon.svg') }}" class="img-fluid svg" alt="" width="26" height="20">Order in a kitchen
                                 </button> -->
 
                                 <!-- ready to pickup -->
                                 <!-- <button class="border-none outline-none">
-                                    <img src="images/readytopickup-icon.svg" class="img-fluid" alt=""
-                                        width="20">
-                                        ready for pickup
+                                    <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt="" width="16" height="20">Ready for pickup
                                 </button>  -->
 
                                 <!-- Out For Delivery  -->
                                 <!-- <button class="border-none outline-none">
-                                    <img src="images/outfordelivery-icon.svg" class="img-fluid" alt=""
-                                        width="20">
-                                        Out For Delivery
+                                    <img src="{{ asset('images/outfordelivery-icon.svg') }}" class="img-fluid svg" alt="" width="31" height="20"> Out For Delivery
                                 </button> -->
 
                                 <!-- delivered  -->
                                 <!-- <button class="border-none outline-none">
-                                    <img src="images/delivered-icon.svg" class="img-fluid" alt=""
-                                        width="20">
-                                        Delivered
+                                    <img src="{{ asset('images/delivered-icon.svg') }}" class="img-fluid svg" alt="" width="31" height="20">Delivered
                                 </button> -->
 
                                  <!-- order delivered  -->
                                 <!-- <button class="border-none outline-none">
-                                    <img src="images/delivered-icon.svg" class="img-fluid" alt=""
-                                        width="20">
-                                        order delivered
+                                    <img src="{{ asset('images/delivered-icon.svg') }}" class="img-fluid svg" alt="" width="21" height="20"> Order delivered
                                 </button> -->
                             </div>
                             <div class="orderdetails-address d-flex justify-content-between flex-wrap gap-3">
@@ -235,9 +108,7 @@
                                 <div class="textgrp">
                                     <div class="title">Delivery Address</div>
                                     <div class="text">
-                                        <img src="images/location-yellowicon.svg" class="img-fluid" alt=""
-                                        width="12">
-                                        Tochtstraat 40,
+                                        <img src="{{ asset('images/location-yellowicon.svg') }}" class="img-fluid svg" alt="" width="12" height="16"> Tochtstraat 40,
                                     </div>
                                 </div>
 
@@ -245,9 +116,7 @@
                                 <!-- <div class="textgrp">
                                     <div class="title">Restaurant Address</div>
                                     <div class="text">
-                                        <img src="images/house-icon.svg" class="img-fluid" alt=""
-                                        width="12">
-                                        ABC 5562, New York
+                                        <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg" alt="" width="18" height="18">ABC 5562, New York
                                     </div>
                                 </div> -->
                                 <div class="textgrp">
@@ -264,58 +133,6 @@
                                 </div>
                             </div>
                             <div class="orderdetails-desclist">
-                                <div class="orderdetails-desc">
-                                    <div class="orderdetails-desc-main">
-                                        <div class="orderdetails-desc-count">
-                                            x1
-                                        </div>
-                                        <div class="orderdetails-desc-card">
-                                            <img src="images/burger-icon.png" class="img-fluid" alt=""
-                                            width="85">
-                                            <div class="text-grp">
-                                                <div class="title">big mac with Cheese</div>
-                                                <small>grilled </small>
-                                                <div class="text">
-                                                    - Ketchup, Crispy veg patty(2x), fresh onion, Cheese, Quarter Pound Bun
-                                                    <a href="">Read More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="orderdetails-desc-note">
-                                        <Label>Notes</Label>
-                                        <input type="text" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry.">
-                                    </div>
-                                    <div class="orderdetails-desc-price">
-                                        +€20
-                                    </div>
-                                </div>
-                                <div class="orderdetails-desc">
-                                    <div class="orderdetails-desc-main">
-                                        <div class="orderdetails-desc-count">
-                                            x1
-                                        </div>
-                                        <div class="orderdetails-desc-card">
-                                            <img src="images/burger-icon.png" class="img-fluid" alt=""
-                                            width="85">
-                                            <div class="text-grp">
-                                                <div class="title">big mac with Cheese</div>
-                                                <small>grilled </small>
-                                                <div class="text">
-                                                    - Ketchup, Crispy veg patty(2x), fresh onion, Cheese, Quarter Pound Bun
-                                                    <a href="">Read More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="orderdetails-desc-note">
-                                        <Label>Notes</Label>
-                                        <input type="text" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry.">
-                                    </div>
-                                    <div class="orderdetails-desc-price">
-                                        +€20
-                                    </div>
-                                </div>
                                 <div class="orderdetails-desc">
                                     <div class="orderdetails-desc-main">
                                         <div class="orderdetails-desc-count">
@@ -376,15 +193,13 @@
                         <div class="orderdetails-footer">
                             <div class="btn-grp d-flex flex-wrap">
                                 <a href="javascript:void(0);" class="customize-foodlink button active" data-bs-toggle="modal" data-bs-target="#refundModal">
-                                    <img src="images/download-icon.svg" class="img-fluid" alt=""
-                                        width="14">
+                                    <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg" alt="" width="14" height="14">
                                     <div class="text-truncate">
                                     Download invoice
                                     </div>
                                 </a>
                                 <a href="javascript:void(0);" class="customize-foodlink button" data-bs-toggle="modal" data-bs-target="#refundModal">
-                                    <img src="images/refund-icon.svg" class="img-fluid" alt=""
-                                        width="16">
+                                    <img src="{{ asset('images/refund-icon.svg') }}" class="img-fluid svg" alt="" width="18" height="18">
                                     <div class="text-truncate">
                                         Refund request submitted
                                     </div>

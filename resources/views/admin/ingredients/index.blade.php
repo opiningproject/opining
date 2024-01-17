@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="col text-end">
                                     <a class="btn btn-custom-yellow" href="{{ route('ingred.category.index') }}">
-                                        <img src="{{ asset('images/add.svg')}}">
+                                        <img src="{{ asset('images/add.svg')}}" alt="" class="svg" height="20" width="20">
                                         <span class="align-middle ms-3">Add New Ingredients Categories</span>
                                     </a>
                                 </div>
@@ -48,9 +48,7 @@
                                                 <div class="imageupload-box inline-imageupload-box">
                                                     <label for="ingredientsnameenglish" class="form-label">Image<span class="invisible">Ingredients Name</span></label>
                                                     <label for="input-file" class="upload-file justify-content-center">
-                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
-                                                             id="img-preview"
-                                                             class="img-fluid">
+                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" id="img-preview" class="img-fluid svg" height="35" width="27">
                                                         <p class="mb-0" id="img-label">Upload Image of Item</p>
                                                     </label>
                                                     <input type="file" id="input-file" class="d-none" name="image">
@@ -311,8 +309,7 @@
                     <input type="hidden" value="" id="ingredientId">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">Are you sure you want to
-                                delete this Ingredient?</h4>
+                            <h4 class="alert-text-1 mb-40px">Are you sure you want to delete this Ingredient?</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -338,14 +335,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">There are dishes added to this ingredients. Please remove
-                                them to delete this ingredient.</h4>
+                            <h4 class="alert-text-1 mb-40px">There are dishes added to this ingredients. Please remove them to delete this ingredient.</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
-                                data-bs-dismiss="modal">Okay
+                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">Okay
                         </button>
                     </div>
                 </div>

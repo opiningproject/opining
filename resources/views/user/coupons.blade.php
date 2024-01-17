@@ -42,29 +42,6 @@
                    </div>
                  </div>
                  @endforeach
-                 <!-- <div class="card custom-card coupons-card p-0">
-                   <div class="card-body p-0">
-                     <div class="inner-card">
-                       <div class="inner-card-body">
-                         <h3>50 <sup>%</sup>
-                           <sub>off</sub>
-                         </h3>
-                         <h6>Off in your next food purchase</h6>
-                         <div class="dotted-divider"></div>
-                         <p class="valid-date mb-0">Valid Until 31-12-2023</p>
-                       </div>
-                       <div class="promocode-box">
-                         <p class="mb-0 d-inline-block">Promo code</p>
-                         <span class="badge text-bg-lightyellow d-inline-block">GOMEAl50</span>
-                       </div>
-                       <div class="circle1"></div>
-                       <div class="circle2"></div>
-                       <div class="checkcircle">
-                         <i class="fas fa-check text-light align-middle"></i>
-                       </div>
-                     </div>
-                   </div>
-                 </div> --> 
                </div>
              </div>
            </section>

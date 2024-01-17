@@ -25,8 +25,7 @@
                                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                                 <nav class="page-breadcrumb" aria-label="breadcrumb">
                                                     <ol class="breadcrumb">
-                                                        <li class="breadcrumb-item"><a
-                                                                href="{{ route('home') }}">Menu</a></li>
+                                                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Menu</a></li>
                                                         <li class="breadcrumb-item active">Add Dish</li>
                                                     </ol>
                                                 </nav>
@@ -36,13 +35,8 @@
                                                 <div class="form-group mb-0 mt-2">
                                                     <div
                                                         class="form-check form-switch custom-switch d-flex align-items-center justify-content-end ps-0">
-                                                        <label class="form-check-label form-label mb-0 me-2"
-                                                               for="outofstock">Out
-                                                            of
-                                                            stock</label>
-                                                        <input class="form-check-input" type="checkbox" role="switch"
-                                                               name="out_of_stock"
-                                                               id="outofstock" value="1">
+                                                        <label class="form-check-label form-label mb-0 me-2" for="outofstock">Out of stock</label>
+                                                        <input class="form-check-input" type="checkbox" role="switch" name="out_of_stock" id="outofstock" value="1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -55,8 +49,7 @@
                                                 <div class="form-group imageupload-box inline-imageupload-box">
                                                     <label for="dishimage" class="form-label">Dish Image</label>
                                                     <label for="input-file" class="upload-file justify-content-center">
-                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image"
-                                                             class="img-fluid" id="img-preview">
+                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" class="img-fluid svg" id="img-preview" height="27" width="35">
                                                         <p class="mb-0" id="img-label">Upload Image of Item</p>
                                                     </label>
                                                     <input type="file" id="input-file" name="image" class="d-none">
@@ -78,25 +71,20 @@
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group ">
-                                                    <label for="dishcategory" class="form-label">Dish Category <span
-                                                            class="text-custom-muted">(English)</span></label>
-                                                    <select class="form-control w-100"
-                                                            type="button" name="category_id">
+                                                    <label for="dishcategory" class="form-label">Dish Category <span class="text-custom-muted">(English)</span></label>
+                                                    <select class="form-control w-100" type="button" name="category_id">
                                                         <option value="">Select Category</option>
                                                         @foreach($categories as $category)
-                                                            <option
-                                                                value="{{ $category->id }}">{{$category->name_en}}</option>
+                                                            <option value="{{ $category->id }}">{{$category->name_en}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="row">
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    <label for="discountpercentage" class="form-label">Discount
-                                                        Percentage</label>
+                                                    <label for="discountpercentage" class="form-label">Discount Percentage</label>
                                                     <input type="number" class="form-control" name="percentage_off" min="1" max="100"/>
                                                 </div>
                                             </div>
@@ -134,8 +122,7 @@
                                         </div>
                                         <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <button type="submit"
-                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                <button type="submit" class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
                                                     <span class="align-middle">Add</span>
                                                 </button>
                                             </div>

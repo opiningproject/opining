@@ -1,8 +1,8 @@
-@extends('layouts.app') @section('content') 
+@extends('layouts.app') @section('content')
 <div class="main">
         <div class="main-view">
-            <div class="container-fluid bd-gutter bd-layout"> 
-                @include('layouts.admin.side_nav_bar') 
+            <div class="container-fluid bd-gutter bd-layout">
+                @include('layouts.admin.side_nav_bar')
                 <main class="w-100">
                     <div class="main-content">
                         <div class="section-page-title main-page-title mb-0">
@@ -136,7 +136,7 @@
                                                     <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
                                                     <div class="food-image">
                                                         <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid"
-                                                            style="height: 60px !important;" />
+                                                        />
                                                     </div>
                                                     <h4 class="food-name-text text-truncate w-100"
                                                         title="{{ $dish->name }}">{{ $dish->name }}</h4>
@@ -167,7 +167,7 @@
                         <section class="custom-section ">
                             <div class="section-page-title">
                                 <h1 class="section-title">Popular This Week</h1>
-                                <a href="javascript:void(0);" type="button" class="viewall-btn">View all 
+                                <a href="javascript:void(0);" type="button" class="viewall-btn">View all
                                     <span class="ms-2">
                                         <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
                                     </span>
@@ -178,7 +178,7 @@
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $popularDish->image }}" style="height: 60px !important;"
+                                                <img src="{{ $popularDish->image }}"
                                                     alt="burger imag" class="img-fluid" />
                                             </div>
                                             <div class="text-start flex-fill">
@@ -212,7 +212,7 @@
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $bestSellerDish->image }}" style="height: 60px !important;"
+                                                <img src="{{ $bestSellerDish->image }}"
                                                     alt="burger imag" class="img-fluid" />
                                             </div>
                                             <div class="text-start flex-fill">
@@ -220,7 +220,7 @@
                                                     title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
                                                 <p class="food-price d-inline-block">{{ $bestSellerDish->price }}</p>
                                                 <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                    +15% 
+                                                    +15%
                                                     <img src="{{ asset('images/up-arrow.svg') }}" alt="" class="svg" height="19" width="19">
                                                 </p>
                                                 <p class="lead-1 mb-0">Sold 1k</p>

@@ -11,9 +11,7 @@
                     <div class="main-content">
                         <div class="card signin-card">
                             <div class="card-header pb-0">
-                                <h1 class="logo-text text-dark-1 text-center"><a href="javascript:void(0);">
-                                        Gomeal<span class="text-yellow-1">.</span>
-                                    </a></h1>
+                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
                             </div>
                             <div class="card-body signin-form">
                                 <form method="POST" action="{{ route('password.update') }}">

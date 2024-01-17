@@ -1,16 +1,16 @@
-$(function () 
+$(function ()
 {
- 
+
 });
 
 
-function addToCart(id) 
+function addToCart(id)
 {
     $.ajax({
             url: baseURL+'/user/add-to-cart/' + id,
             type: 'GET',
             success: function (response) {
-              
+
                 if(response.status == 2)
                 {
                    $('#signInModal').modal('show');
@@ -20,7 +20,7 @@ function addToCart(id)
                 $("#dish-cart-lbl-"+id).text('Added to cart');
                 $("#dish-cart-lbl-"+id).prop('disabled', true);
                 $('.cart-items').append(response);
-                
+
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -29,16 +29,16 @@ function addToCart(id)
         })
 }
 
-function updateDishQty(operator,maxQty,dish_id) 
+function updateDishQty(operator,maxQty,dish_id)
 {
     var current_qty = parseInt($('input[name=qty-'+dish_id+']').val());
 
-    if (operator == '-' && !isNaN(current_qty) && current_qty > 0) 
+    if (operator == '-' && !isNaN(current_qty) && current_qty > 0)
     {
         $('input[name=qty-'+dish_id+']').val(current_qty - 1);
-    } 
+    }
 
-    if (operator == '+' && !isNaN(current_qty)) 
+    if (operator == '+' && !isNaN(current_qty))
     {
         if(current_qty >= maxQty)
         {
@@ -71,7 +71,7 @@ function updateDishQty(operator,maxQty,dish_id)
         })
 }
 
-function apply() 
+function apply()
 {
     var coupon_code = $('#coupon_code').val();
     var order_amount = 30;
@@ -110,7 +110,7 @@ function apply()
         })
 }
 
-function remove() 
+function remove()
 {
     $("#coupon_code_apply_btn").removeClass('d-none');
     $("#coupon_code_remove_btn").addClass('d-none');
@@ -119,3 +119,41 @@ function remove()
 
 }
 
+function addSubDishQuantities(dishId,operator,maxQty){
+
+    var currentQty = parseInt($('input[name=qty-'+dishId+']').val());
+
+    if (operator == '-')
+    {
+        if(currentQty != 1){
+            $('input[name=qty-'+dishId+']').val(currentQty - 1);
+        }
+    }
+
+    if (operator == '+')
+    {
+        if(currentQty >= maxQty)
+        {
+            return false;
+        }
+
+        $('input[name=qty-'+dishId+']').val(currentQty + 1);
+    }
+}
+
+function addSubDishIngredientQuantities(IngDishId,operator){
+
+    var currentQty = parseInt($('#dishIng'+IngDishId).val());
+
+    if (operator == '-')
+    {
+        if(currentQty != 0){
+            $('#dishIng'+IngDishId).val(currentQty - 1);
+        }
+    }
+
+    if (operator == '+')
+    {
+        $('#dishIng'+IngDishId).val(currentQty + 1);
+    }
+}

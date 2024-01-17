@@ -86,7 +86,6 @@ class DishController extends Controller
         $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredient', function ($query) use ($request) {
             $query->where('dish_id', $request->id);
         })->with('ingredients.paidDishIngredient')->get();
-//        $paidIngredients = $dish->paidIngredients;
 
         $html_options = '<option value="">Please select option</option>';
         foreach ($options as $key => $option) {
@@ -94,28 +93,51 @@ class DishController extends Controller
         }
 
         $html_free_ingredients = '';
-        foreach ($freeIngredients as $key => $ingredient) {
-            $ingredient_name = $ingredient->ingredient->name;
-            $ingredient_image = $ingredient->ingredient->image;
+        if(count($freeIngredients) > 0){
+            $html_free_ingredients .= "<div class='customisable-table custom-table'>
+                      <table class='w-100'>
+                        <thead>
+                          <tr>
+                            <th colspan='3'>Existing Ingredients</th>
+                          </tr>
+                        </thead>
+                        <tbody>";
+            foreach ($freeIngredients as $key => $ingredient) {
+                $ingredient_name = $ingredient->ingredient->name;
+                $ingredient_image = $ingredient->ingredient->image;
 
-            $html_free_ingredients .= "<tr>
+                $html_free_ingredients .= "<tr>
                                   <td width='10%'>
                                     <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                   </td>
                                   <td class='text-left'>$ingredient_name</td>
                                   <td width='5%'>
                                     <div class='form-check'>
-                                      <input class='form-check-input from-check-input-yellow' type='checkbox' checked>
+                                      <input class='form-check-input from-check-input-yellow dishFreeIngQty' data-id='$ingredient->id' type='checkbox' name='dishFreeIngQty[]' checked>
                                     </div>
                                   </td>
                                 </tr>";
+            }
+            $html_free_ingredients .= "</tbody>
+                      </table>
+                    </div>";
         }
 
         $html_paid_ingredients = '';
-        foreach ($paidIngredients as $key => $category) {
-            $show = ($key == 0) ? ' show' : '';
-            $collapsed = ($key != 0) ? ' collapsed' : '';
-            $html_paid_ingredients .= "<div class='accordion-item'>
+        if(count($paidIngredients) > 0){
+            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-4'>
+                      <table class='w-100'>
+                        <thead>
+                          <tr>
+                            <th colspan='3'>Add Extra Ingredients</th>
+                          </tr>
+                        </thead>
+                      </table>
+                      <div class='accordion accordion-flush customisable-accordion' id='accordionExample'>";
+            foreach ($paidIngredients as $key => $category) {
+                $show = ($key == 0) ? ' show' : '';
+                $collapsed = ($key != 0) ? ' collapsed' : '';
+                $html_paid_ingredients .= "<div class='accordion-item'>
                           <h2 class='accordion-header'>
                             <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
                           </h2>
@@ -124,13 +146,13 @@ class DishController extends Controller
                               <table>
                                 <tbody>";
 
-            foreach ($category->ingredients as $ingredient) {
+                foreach ($category->ingredients as $ingredient) {
 
-                $ingredient_name = $ingredient->name;
-                $ingredient_image = $ingredient->image;
-                $ingredient_price = $ingredient->price;
+                    $ingredient_name = $ingredient->name;
+                    $ingredient_image = $ingredient->image;
+                    $ingredient_price = $ingredient->price;
 
-                $html_paid_ingredients .= "<tr>
+                    $html_paid_ingredients .= "<tr>
                                     <td width='10%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
@@ -139,21 +161,24 @@ class DishController extends Controller
                                     <td width='7%'>
                                       <div class='foodqty'>
                                         <span class='minus'>
-                                          <i class='fas fa-minus align-middle'></i>
+                                          <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-')></i>
                                         </span>
-                                        <input type='number' class='count' name='qty' value='1'>
+                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient->id' id='dishIng$ingredient->id' value='1'>
                                         <span class='plus'>
-                                          <i class='fas fa-plus align-middle'></i>
+                                          <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+')></i>
                                         </span>
                                       </div>
                                     </td>
                                   </tr>";
-            }
-            $html_paid_ingredients .= "</tbody>
+                }
+                $html_paid_ingredients .= "</tbody>
                               </table>
                             </div>
                           </div>
                         </div>";
+            }
+            $html_paid_ingredients .= "</div>
+                    </div>";
         }
 
         $html = "<div class='modal-content'>
@@ -180,41 +205,19 @@ class DishController extends Controller
                     </div>
                   </div>
                   <div class='modal-body pt-0'>
-                    <div class='customisable-table custom-table'>
-                      <table class='w-100'>
-                        <thead>
-                          <tr>
-                            <th colspan='3'>Existing Ingredients</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          $html_free_ingredients
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class='customisable-table custom-table mt-4'>
-                      <table class='w-100'>
-                        <thead>
-                          <tr>
-                            <th colspan='3'>Add Extra Ingredients</th>
-                          </tr>
-                        </thead>
-                      </table>
-                      <div class='accordion accordion-flush customisable-accordion' id='accordionExample'>
-                        $html_paid_ingredients
-                      </div>
-                    </div>
+                    $html_free_ingredients
+                    $html_paid_ingredients
                   </div>
                   <div class='modal-footer border-top-0 d-block'>
                     <div class='row'>
                       <div class='col'>
                         <div class='foodqty'>
                           <span class='minus'>
-                            <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $dish->id . ")></i>
+                            <i class='fas fa-minus align-middle' onclick=addSubDishQuantities($dish->id,'-',$dish->qty)></i>
                           </span>
-                          <input type='number' class='count' name='qty-$dish->id' value=" . $dish->order->qty . ">
+                          <input type='number' class='count' name='qty-$dish->id' value='1'>
                           <span class='plus'>
-                            <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $dish->id . ")></i>
+                            <i class='fas fa-plus align-middle' onclick=addSubDishQuantities($dish->id,'+',$dish->qty)></i>
                           </span>
                         </div>
                       </div>

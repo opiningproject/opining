@@ -10,8 +10,7 @@
                         <div class="card-header">
                             <h1 class="logo-text text-dark-1">
                                 <a href="javascript:void(0);">
-                                    Gomeal<span class="text-yellow-1">.</span>
-                                    <div class="text-start d-flex" style="padding-left: 140px;padding-right: 90px;margin-top: -12px;">
+                                    <div class="d-flex">
                                         <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
                                     </div>
                                 </a>
@@ -25,7 +24,7 @@
                                         class="form-group prev-input-group mb-0 @error('email') is-invalid @enderror">
                                     <span class="input-group-icon">
                                         <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
-                                       
+
                                     </span>
                                         <input type="text" class="form-control" autocomplete="off" name="email" placeholder="Email" value="{{ old('email') }}">
                                     </div>
@@ -38,7 +37,7 @@
                                 <div class="mb-3">
                                     <div class="form-group mb-0 prev-input-group @error('password') is-invalid @enderror">
                                     <span class="input-group-icon">
-                                        <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20">  
+                                        <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20">
                                     </span>
 
                                         <input type="password"
@@ -81,9 +80,7 @@
         <div class="modal-dialog custom-w-441px resendpwdmodal">
             <div class="modal-content">
                 <div class="modal-header border-0 justify-content-center">
-                    <h1 class="logo-text text-dark-1"><a href="javascript:void(0);">
-                            Gomeal<span class="text-yellow-1">.</span>
-                        </a></h1>
+                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
                 </div>
                 <div class="modal-body signin-form">
                     <form method="POST" id="reset-pwd-form" action="javascript:void(0)">
@@ -92,7 +89,7 @@
                         <div class="form-group prev-input-group mb-0">
                         <span class="input-group-icon">
                             <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
-                            
+
                         </span>
                             <input type="text" name="forgot-pwd-email" id="forgot-pwd-email"
                                    class="form-control" placeholder="Email"

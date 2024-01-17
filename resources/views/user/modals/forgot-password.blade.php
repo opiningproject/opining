@@ -3,7 +3,10 @@
     <div class="modal-content">
       <div class="modal-header border-0 justify-content-center">
         <h1 class="logo-text text-dark-1">
-          <a href="javascript:void(0);"> Gomeal <span class="text-yellow-1">.</span>
+          <a href="javascript:void(0);">
+              <div class="d-flex">
+                  <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+              </div>
           </a>
         </h1>
       </div>

@@ -7,12 +7,13 @@
         </button>
     </div>
 
+
+
     <div class="siderbarmenu-brand">
         <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
-            <p class="mb-0">Gomeal<span class="text-yellow-1">.</span></p>
-
-            <div class="text-start" style="padding-left: 140px;padding-right: 96px;margin-top: -15px;">
+            <div class="">
                 <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+
             </div>
         </a>
     </div>

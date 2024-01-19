@@ -20,7 +20,8 @@ class Dish extends Model
 
     protected $appends = [
         'name',
-        'cart'
+        'cart',
+        'description'
     ];
 
     public function category()
@@ -104,5 +105,10 @@ class Dish extends Model
             return 0;
         }
 
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->attributes['desc_' . app()->getlocale()];
     }
 }

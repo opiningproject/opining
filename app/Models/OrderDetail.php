@@ -22,4 +22,8 @@ class OrderDetail extends Model
     public function dish(){
         return $this->belongsTo(Dish::class, 'dish_id', 'id');
     }
+
+    public function orderDishDetails(){
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
+    }
 }

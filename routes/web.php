@@ -55,6 +55,8 @@ Route::middleware(['localization'])->group(function () {
         Route::get('/delete-address/{id}', [App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
         Route::get('/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
         Route::get('/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
+
+        Route::post('/add-cart/{id}', [\App\Http\Controllers\User\CartController::class, 'addCustomizedDish']);
     });
 
     Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');

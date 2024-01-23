@@ -39,7 +39,10 @@ class HomeController extends Controller
         $user = (Auth::user()) ? Auth::user() : '';
         $user_id = $user ? $user->id : 0;
         $addresses = Address::select('*')->orderBy('company_name', 'asc')->where('user_id',$user_id)->get();
-        $cart = OrderDetail::select('*')->orderBy('id', 'desc')->where('user_id',$user_id)->get();
+        $cart = OrderDetail::select('*')->orderBy('id', 'desc')->where([
+            ['user_id',$user_id],
+            ['is_cart', '1']
+        ])->get();
         $category = '';
 
         if($request->cat_id)

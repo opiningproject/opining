@@ -178,15 +178,25 @@ class CartController extends Controller
             $order->fresh();
             $dish = Dish::find($id);
 
-            /*dd($order->whereHas('dishDetails', function ($query) use ($id){
-                $query->whereDishId($id);
-            })->with('dishDetails')->get()->toArray());*/
-
             $dishDetail = $order->whereHas('dishDetails', function ($query) use ($id){
                 $query->whereDishId($id)->whereIsCart('1');
             })->with('dishDetails')->first();
 
             if($dishDetail){
+                $orderDetails = OrderDetail::find($dishDetail->dishDetails[0]->id);
+
+                $orderDetails->orderDishDetails()->delete();
+
+                $cartArr = [
+                    "price" => $dish->price,
+                    "qty" => $request->dishQty,
+                    "dish_option_id" => $request->option ?? null,
+                    "total_price" => $dish->price * $request->dishQty,
+                ];
+
+                $orderDetails->update(
+                    $cartArr
+                );
 
             }else{
                 $cartArr = [
@@ -195,7 +205,7 @@ class CartController extends Controller
                     "price" => $dish->price,
                     "qty" => $request->dishQty,
                     "dish_option_id" => $request->option ?? null,
-                    "total_price" => $dish->price,
+                    "total_price" => $dish->price * $request->dishQty,
                     "notes" => '',
                 ];
 
@@ -203,24 +213,26 @@ class CartController extends Controller
                     $cartArr
                 );
                 $orderDetails->fresh();
-                if (isset($request->freeIng)) {
-                    foreach ($request->freeIng as $freeIng) {
-                        $orderDetails->orderDishDetails()->create([
-                            'dish_id' => $id,
-                            'dish_ingredient_id' => $freeIng
-                        ]);
-                    }
-                }
 
-                if (isset($request->paidIng)) {
-                    foreach ($request->paidIng as $key => $paidIng) {
-                        $orderDetails->orderDishDetails()->create([
-                            'dish_id' => $id,
-                            'dish_ingredient_id' => $key,
-                            'is_free' => '0',
-                            'quantity' => $paidIng
-                        ]);
-                    }
+            }
+
+            if (isset($request->freeIng)) {
+                foreach ($request->freeIng as $freeIng) {
+                    $orderDetails->orderDishDetails()->create([
+                        'dish_id' => $id,
+                        'dish_ingredient_id' => $freeIng
+                    ]);
+                }
+            }
+
+            if (isset($request->paidIng)) {
+                foreach ($request->paidIng as $key => $paidIng) {
+                    $orderDetails->orderDishDetails()->create([
+                        'dish_id' => $id,
+                        'dish_ingredient_id' => $key,
+                        'is_free' => '0',
+                        'quantity' => $paidIng
+                    ]);
                 }
             }
 

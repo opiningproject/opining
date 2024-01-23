@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\IngredientCategory;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
@@ -76,16 +77,37 @@ class DishController extends Controller
     public function getDishDetails(string $id)
     {
         if (!Auth::user()) {
-            return response::json(['status' => 2, 'message' => '']);
+            return response::json(['status' => 401, 'message' => '']);
         }
 
         $dish = Dish::find($id);
+
+        $user = Auth::user();
+
+        $user_id = $user->id;
+        $order = Order::where([
+            ['user_id', $user_id],
+            ['is_cart', '1']
+        ])->first();
+
+        $dishDetail = $order->whereHas('dishDetails', function ($query) use ($id){
+            $query->whereDishId($id)->whereIsCart('1');
+        })->with('dishDetails.orderDishFreeIngredients','dishDetails.orderDishPaidIngredients')->first();
 
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
         $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredient', function ($query) use ($id) {
             $query->where('dish_id', $id);
         })->with('ingredients.paidDishIngredient')->get();
+
+        $selectedOption =  $dishDetail->dishDetails[0]->dish_option_id ?? '';
+        $freeSelectedIngredients = [];
+        $paidSelectedIngredients = [];
+
+        if($dishDetail){
+            $freeSelectedIngredients = $dishDetail->dishDetails[0]->orderDishFreeIngredients ? $dishDetail->dishDetails[0]->orderDishFreeIngredients->pluck('dish_ingredient_id')->toArray() : [];
+            $paidSelectedIngredients = $dishDetail->dishDetails[0]->orderDishPaidIngredients ? $dishDetail->dishDetails[0]->orderDishPaidIngredients->pluck('quantity','dish_ingredient_id')->toArray() : [];
+        }
 
         $html_options = '';
         if(count($options) > 0){
@@ -98,7 +120,8 @@ class DishController extends Controller
                                 <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100' id='dish-option$dish->id'>
                                 <option value=''>Please select option</option>";
             foreach ($options as $option) {
-                $html_options .= "<option value='$option->id'>$option->name</option>";
+                $selected =  $selectedOption == $option->id ? 'selected' : '';
+                $html_options .= "<option value='$option->id' $selected >$option->name</option>";
             }
             $html_options .= "</select>
                               </div>
@@ -107,7 +130,6 @@ class DishController extends Controller
                         </div>
                       </div>";
         }
-
 
         $html_free_ingredients = '';
         if(count($freeIngredients) > 0){
@@ -120,6 +142,9 @@ class DishController extends Controller
                         </thead>
                         <tbody>";
             foreach ($freeIngredients as $key => $ingredient) {
+                $checked = in_array($ingredient->id, $freeSelectedIngredients) ? 'checked' : '' ;
+                $defaultCheck = $dishDetail ? '' : 'checked';
+
                 $ingredient_name = $ingredient->ingredient->name;
                 $ingredient_image = $ingredient->ingredient->image;
 
@@ -130,7 +155,7 @@ class DishController extends Controller
                                   <td class='text-left'>$ingredient_name</td>
                                   <td width='5%'>
                                     <div class='form-check'>
-                                      <input class='form-check-input from-check-input-yellow dishFreeIngQty' data-id='$ingredient->id' type='checkbox' value='1' name='dishFreeIngQty[]' checked>
+                                      <input class='form-check-input from-check-input-yellow dishFreeIngQty' data-id='$ingredient->id' $checked type='checkbox' value='1' name='dishFreeIngQty[]' $defaultCheck>
                                     </div>
                                   </td>
                                 </tr>";
@@ -164,7 +189,7 @@ class DishController extends Controller
                                 <tbody>";
 
                 foreach ($category->ingredients as $ingredient) {
-
+                    $paidQty = array_key_exists($ingredient->id, $paidSelectedIngredients) ? $paidSelectedIngredients[$ingredient->id] : 0 ;
                     $ingredient_name = $ingredient->name;
                     $ingredient_image = $ingredient->image;
                     $ingredient_price = $ingredient->price;
@@ -180,7 +205,7 @@ class DishController extends Controller
                                         <span class='minus'>
                                           <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-')></i>
                                         </span>
-                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient->id' id='dishIng$ingredient->id' value='0'>
+                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient->id' id='dishIng$ingredient->id' value='$paidQty'>
                                         <span class='plus'>
                                           <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+')></i>
                                         </span>
@@ -197,6 +222,8 @@ class DishController extends Controller
             $html_paid_ingredients .= "</div>
                     </div>";
         }
+
+        $addUpdateText = $dishDetail ? 'Update Cart' : 'Add to cart';
 
         $html = "<div class='modal-content'>
                   <div class='modal-header border-0 d-block'>
@@ -227,7 +254,7 @@ class DishController extends Controller
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addCustomizedCart(" . $dish->id . ")>Add To cart <span>| €30</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>| €30</span>
                         </a>
                       </div>
                     </div>

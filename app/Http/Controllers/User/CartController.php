@@ -160,6 +160,7 @@ class CartController extends Controller
             return response::json(['status' => 401, 'message' => '']);
         }
 
+
         try {
             $user = Auth::user();
 
@@ -213,8 +214,9 @@ class CartController extends Controller
                     $cartArr
                 );
                 $orderDetails->fresh();
-
+//                $response['cartHtml'] = $this->cartHtml($orderDetails);
             }
+            $response['cartHtml'] = $this->cartHtml($orderDetails);
 
             if (isset($request->freeIng)) {
                 foreach ($request->freeIng as $freeIng) {
@@ -235,8 +237,8 @@ class CartController extends Controller
                     ]);
                 }
             }
-
-            return response::json(['status' => 200, 'message' => 'Cart Added Successfully']);
+            $response['msg'] = 'Cart Added Successfully';
+            return response::json(['status' => 200, 'message' => $response]);
 
 
         } catch (Exception $e) {

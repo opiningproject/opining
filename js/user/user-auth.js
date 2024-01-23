@@ -1,4 +1,4 @@
-$(function () 
+$(function ()
 {
     $("#sign-in-form").validate({
           //debug:true,
@@ -23,13 +23,13 @@ $(function ()
 
 });
 
-function signIn() 
+function signIn()
 {
     $('#sign-in-btn').prop('disabled',true);
 
     var email = $('form#sign-in-form').find('input[name=email]').val();
     var password = $('form#sign-in-form').find('input[name=password]').val();
-   
+
     $.ajax({
         url: baseURL+'/user/login',
         type: 'POST',
@@ -43,13 +43,13 @@ function signIn()
                 $('form#sign-in-form').find('#'+response.field+'-error').css("display", "block");
                 $('form#sign-in-form').find('#'+response.field+'-error').text(response.message);
 
-                $('#sign-in-btn').prop('disabled',false); 
+                $('#sign-in-btn').prop('disabled',false);
             }
             else
             {
                 window.location.reload();
             }
-            
+
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -58,7 +58,7 @@ function signIn()
     })
 }
 
-function signUp() 
+function signUp()
 {
     $('#sign-up-btn').prop('disabled',true);
 
@@ -66,14 +66,14 @@ function signUp()
     var last_name = $('#last_name').val();
     var email = $('form#sign-up-form').find('input[name=email]').val();
     var password = $('form#sign-up-form').find('input[name=password]').val();
-   
+
     $.ajax({
-        url: 'user/signup',
+        url: baseURL + '/user/signup',
         type: 'POST',
         data: {
             first_name,last_name,email,password
         },
-        success: function (response) 
+        success: function (response)
         {
             if(response.status == 0)
             {
@@ -90,13 +90,13 @@ function signUp()
     })
 }
 
-function forgotPassword() 
+function forgotPassword()
 {
     //var email = $('#forgot-pwd-email').val();
     var email = $('form#forgot-pwd-form').find('input[name=email]').val();
 
     $.ajax({
-        url: 'user/forgot-password',
+        url: baseURL + + '/user/forgot-password',
         type: 'POST',
         data: {
             email

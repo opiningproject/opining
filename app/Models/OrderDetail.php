@@ -26,4 +26,12 @@ class OrderDetail extends Model
     public function orderDishDetails(){
         return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
     }
+
+    public function orderDishFreeIngredients(){
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','1');
+    }
+
+    public function orderDishPaidIngredients(){
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','0');
+    }
 }

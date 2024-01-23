@@ -77,7 +77,7 @@ class DishController extends Controller
     public function getDishDetails(string $id)
     {
         if (!Auth::user()) {
-            return response::json(['status' => 401, 'message' => '']);
+            return response::json(['status' => 2, 'message' => '']);
         }
 
         $dish = Dish::find($id);
@@ -96,13 +96,14 @@ class DishController extends Controller
 
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
-        $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredient', function ($query) use ($id) {
+        $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredientWise', function ($query) use ($id) {
             $query->where('dish_id', $id);
-        })->with('ingredients.paidDishIngredient')->get();
+        })->with('ingredients.paidDishIngredientWise')->get();
 
         $selectedOption =  $dishDetail->dishDetails[0]->dish_option_id ?? '';
         $freeSelectedIngredients = [];
         $paidSelectedIngredients = [];
+        $totalAmt = $dish->price;
 
         if($dishDetail){
             $freeSelectedIngredients = $dishDetail->dishDetails[0]->orderDishFreeIngredients ? $dishDetail->dishDetails[0]->orderDishFreeIngredients->pluck('dish_ingredient_id')->toArray() : [];
@@ -189,25 +190,31 @@ class DishController extends Controller
                                 <tbody>";
 
                 foreach ($category->ingredients as $ingredient) {
-                    $paidQty = array_key_exists($ingredient->id, $paidSelectedIngredients) ? $paidSelectedIngredients[$ingredient->id] : 0 ;
+                    $paidQty = 0 ;
+
                     $ingredient_name = $ingredient->name;
                     $ingredient_image = $ingredient->image;
-                    $ingredient_price = $ingredient->price;
+                    $ingredient_price = $ingredient->paidDishIngredientWise->price;
+
+                    if(array_key_exists($ingredient->id, $paidSelectedIngredients)){
+                        $paidQty = $paidSelectedIngredients[$ingredient->id];
+                        $totalAmt += ($paidQty * $ingredient_price);
+                    }
 
                     $html_paid_ingredients .= "<tr>
                                     <td width='10%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
-                                    <td class='text-left'>$ingredient_name <span class='food-custom-price'>€$ingredient_price</span>
+                                    <td class='text-left'>$ingredient_name <span class='food-custom-price'>€ <span id='ing-price-val$ingredient->id'>$ingredient_price</span></span>
                                     </td>
                                     <td width='7%'>
                                       <div class='foodqty'>
                                         <span class='minus'>
-                                          <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-')></i>
+                                          <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)></i>
                                         </span>
                                         <input type='number' class='count dishPaidIngQty' data-id='$ingredient->id' id='dishIng$ingredient->id' value='$paidQty'>
                                         <span class='plus'>
-                                          <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+')></i>
+                                          <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+',$dish->id)></i>
                                         </span>
                                       </div>
                                     </td>
@@ -233,6 +240,7 @@ class DishController extends Controller
                       <h4>$dish->name</h4>
                       <p> $dish->description</p>
                       <span class='food-custom-price' id='dish_price'>€$dish->price</span>
+                      <input type='hidden' id='dish-org-price' value='$dish->price'>
                       $html_options
                     </div>
                   </div>
@@ -254,7 +262,7 @@ class DishController extends Controller
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>| €30</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>| €</span><span id='total-amt$dish->id'>$totalAmt</span>
                         </a>
                       </div>
                     </div>

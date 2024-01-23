@@ -3,29 +3,27 @@ $(function () {
 });
 
 
-function addToCart(id)
-{
+function addToCart(id) {
     $.ajax({
-            url: baseURL+'/user/add-to-cart/' + id,
-            type: 'GET',
-            success: function (response) {
+        url: baseURL + '/user/add-to-cart/' + id,
+        type: 'GET',
+        success: function (response) {
 
-                if(response.status == 2)
-                {
-                   $('#signInModal').modal('show');
-                   return false;
-                }
-
-                $("#dish-cart-lbl-"+id).text('Added to cart');
-                $("#dish-cart-lbl-"+id).prop('disabled', true);
-                $('.cart-items').append(response);
-
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+            if (response.status == 2) {
+                $('#signInModal').modal('show');
+                return false;
             }
-        })
+
+            $("#dish-cart-lbl-" + id).text('Added to cart');
+            $("#dish-cart-lbl-" + id).prop('disabled', true);
+            $('.cart-items').append(response);
+
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
 }
 
 function updateDishQty(operator, maxQty, dish_id) {
@@ -109,12 +107,14 @@ function remove() {
 
 function addSubDishQuantities(dishId, operator, maxQty) {
 
+    var dishAmt = $('#dish-org-price').val()
     var currentQty = parseInt($('input[name=qty-' + dishId + ']').val());
 
     if (operator == '-') {
         if (currentQty != 1) {
             $('input[name=qty-' + dishId + ']').val(currentQty - 1);
         }
+        updateCartAmount(dishId, dishAmt, 'sub')
     }
 
     if (operator == '+') {
@@ -123,21 +123,25 @@ function addSubDishQuantities(dishId, operator, maxQty) {
         }
 
         $('input[name=qty-' + dishId + ']').val(currentQty + 1);
+        updateCartAmount(dishId, dishAmt, 'add')
     }
 }
 
-function addSubDishIngredientQuantities(IngDishId, operator) {
+function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
 
     var currentQty = parseInt($('#dishIng' + IngDishId).val());
+    var amount = parseInt($('#ing-price-val' + IngDishId).text())
 
     if (operator == '-') {
         if (currentQty != 0) {
             $('#dishIng' + IngDishId).val(currentQty - 1);
+            updateCartAmount(dishId, amount, 'sub')
         }
     }
 
     if (operator == '+') {
         $('#dishIng' + IngDishId).val(currentQty + 1);
+        updateCartAmount(dishId, amount, 'add')
     }
 }
 
@@ -146,7 +150,6 @@ function addCustomizedCart(id) {
     var dishData = new FormData();
 
     if ($("#dish-option" + id).length) {
-        console.log('option', 1)
         dishData.append('option', $("#dish-option" + id).val())
     }
 
@@ -158,30 +161,33 @@ function addCustomizedCart(id) {
 
     if ($('.dishPaidIngQty').length) {
         $('.dishPaidIngQty').each(function (index, element) {
-            if($(element).val() > 0){
+            if ($(element).val() > 0) {
                 dishData.append('paidIng[' + $(element).data('id') + ']', $(element).val())
             }
         })
     }
 
-    dishData.append('dishQty',$('#totalDishQty').val())
+    dishData.append('dishQty', $('#totalDishQty').val())
 
     $.ajax({
         url: baseURL + '/user/add-cart/' + id,
         type: 'POST',
         data: dishData,
         processData: false,
-        contentType:false,
+        contentType: false,
         success: function (response) {
 
-            /* if (response.status == 401) {
-                 $('#signInModal').modal('show');
-                 return false;
-             }
+            if (response.status == 401) {
+                $('#signInModal').modal('show');
+                return false;
+            }
+            if ($('#qty-' + id)) {
 
-             $("#dish-cart-lbl-" + id).text('Added to cart');
-             $("#dish-cart-lbl-" + id).prop('disabled', true);
-             $('.cart-items').append(response);*/
+            } else {
+                $("#dish-cart-lbl-" + id).text('Added to cart');
+                $("#dish-cart-lbl-" + id).prop('disabled', true);
+                $('.cart-items').append(response.message.cartHtml);
+            }
 
         },
         error: function (response) {
@@ -190,3 +196,16 @@ function addCustomizedCart(id) {
         }
     })
 }
+
+function updateCartAmount(dishId, amount, type) {
+    debugger
+    var currentVal = $('#total-amt' + dishId).text()
+
+    if (type == 'add') {
+        $('#total-amt' + dishId).text(parseInt(currentVal) + parseInt(amount))
+    } else if (type == 'sub') {
+        $('#total-amt' + dishId).text(parseInt(currentVal) - parseInt(amount))
+    }
+
+}
+

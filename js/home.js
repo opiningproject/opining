@@ -48,10 +48,13 @@ var swiper = new Swiper(".category-swiper-slider", {
 });
 
 $(document).on('keyup', '#search-dish', function () {
-    var search = $(this).val()
+    var search = $(this).val();
+
+    let searchParams = new URLSearchParams(window.location.search)
+    const cat_id = searchParams.get('cat_id');
 
     $.ajax({
-        url: baseURL + '/menu/dish/searchDish',
+        url: baseURL + '/dish/searchDish?cat_id='+cat_id,
         type: 'POST',
         data: {
             search

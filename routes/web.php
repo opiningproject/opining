@@ -64,6 +64,7 @@ Route::middleware(['localization'])->group(function () {
     Route::get('email/verify/{id}', [App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
     Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
+    Route::post('/dish/searchDish', [DishController::class, 'searchDish']);
 
 });
 
@@ -94,7 +95,6 @@ Route::middleware(['auth', 'localization'])->group(function () {
             Route::patch('/updateIngredient/{dish}', [DishController::class, 'updatePaidIngredient']);
             Route::delete('/deleteIngredient/{dish}', [DishController::class, 'deleteDishIngredient']);
             Route::post('/updateDish/{dish}', [DishController::class, 'updateDishData']);
-            Route::post('/searchDish', [DishController::class, 'searchDish']);
         });
 
         Route::resource('/dish', DishController::class);
@@ -154,6 +154,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::get('/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
         Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
         Route::get('/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+        Route::get('/order-location', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
         Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');

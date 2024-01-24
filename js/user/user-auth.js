@@ -82,6 +82,10 @@ function signUp()
 
                 $('#sign-up-btn').removeAttr('disabled');
             }
+            else
+            {
+                window.location.reload();
+            }
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -117,4 +121,14 @@ function forgotPassword()
         }
     })
 }
+
+$(document).on("click", ".nav-link", function ()
+{
+    if($('#auth-check').val() == 0)
+    {
+        $('#signInModal').modal('show');
+        event.preventDefault();s
+    }
+
+});
 

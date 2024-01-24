@@ -1373,7 +1373,7 @@ footer {
                 text-transform: capitalize;
 
                 &::after {
-                    display: none;
+                    display: none !important;
                 }
             }
         }
@@ -2307,7 +2307,7 @@ input[type="number"] {
         padding: 11px 20px;
 
         &::after {
-            display: none;
+            display: none !important;
         }
     }
 

@@ -13,5 +13,5 @@ final class PaymentType extends Enum
 {
     const Card = '1';
     const Cash = '2';
-    const Idle = '3';
+    const Ideal = '3';
 }

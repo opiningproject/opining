@@ -25,10 +25,16 @@ class SettingController extends Controller
     public function saveProfile(Request $request)
     {
         $user_id = Auth::user()->id;
-        
+        $reqParamsArr = $request->all();
+
+        if ($request->has('image')) {
+            $imageName = uploadImageToBucket($request, '/user');
+            $reqParamsArr['image'] = $imageName;
+        }
+
         User::updateOrCreate(
                 ['id' => $user_id],
-                $request->all()
+                $reqParamsArr
             );
 
         return redirect("user/settings");

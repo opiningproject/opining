@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Dish;
+use App\Models\OrderDishDetail;
 use Validator, Redirect, Response;
 use DB;
 
@@ -36,15 +37,6 @@ class CartController extends Controller
         //return view('user.home');
     }
 
-    public function removeToCart(Request $request)
-    {
-        try {
-            DishFavorites::where('dish_id', $request->dish_id)->delete();
-        } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
-        }
-    }
-
     public function addToCart(Request $request)
     {
         if (!Auth::user()) {
@@ -55,15 +47,17 @@ class CartController extends Controller
             $user_id = Auth::user()->id;
             $order = Order::where('user_id', $user_id)->where('is_cart', '1')->first();
 
-            if (!empty($order)) {
-                $order->is_cart = '1';
-            } else {
-                $order = new Order();
-                $order->user_id = $user_id;
-                $order->is_cart = '1';
-            }
+            if (empty($order)) 
+            {
+               $order = new Order();
+               $order->user_id = $user_id;
+            } 
 
-            if ($order->save()) {
+            $order->is_cart = '1';
+            $order->order_status = '1';
+
+            if ($order->save()) 
+            {
                 $dish = Dish::find($request->id);
 
                 $cartArr = [
@@ -80,6 +74,17 @@ class CartController extends Controller
                     $cartArr
                 );
 
+                if(count($dish->freeIngredients) > 0)
+                {
+                    foreach ($dish->freeIngredients as $key => $ingredient) 
+                    {
+                        $cartDetail->orderDishDetails()->create([
+                            'dish_id' => $dish->id,
+                            'dish_ingredient_id' =>  $ingredient->id
+                        ]);
+                    }
+                }
+               
                 echo $this->cartHtml($cartDetail);
                 exit;
             }

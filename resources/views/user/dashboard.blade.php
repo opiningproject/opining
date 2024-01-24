@@ -16,7 +16,8 @@ if (!session('showLoginModal')) {
 ?>
 <div class="main">
   <div class="main-view">
-    <div class="container-fluid bd-gutter bd-layout"> @include('layouts.user.side_nav_bar') <main class="bd-main order-1">
+    <div class="container-fluid bd-gutter bd-layout"> @include('layouts.user.side_nav_bar') 
+      <main class="bd-main">
         <div class="main-content">
           <div class="section-page-title main-page-title row justify-content-between">
             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
@@ -25,9 +26,12 @@ if (!session('showLoginModal')) {
             <div class="form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
               <span class="form-control-feedback">
                 <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
               </span>
-              <input type="text" class="form-control text-transform-none" placeholder="What do you want eat today..." />
+              <input type="text" class="form-control text-transform-none" placeholder="What do you want eat today..." id="search-dish" />
             </div>
           </div>
           <div class="offer-card-banner offercard-slider">
@@ -85,6 +89,7 @@ if (!session('showLoginModal')) {
                 </span>
               </a>
             </div>
+<<<<<<< Updated upstream
             <div class="category-list-item-grid">
               @foreach ($dishes as $dish)
               <div class="card food-detail-card">
@@ -113,13 +118,49 @@ if (!session('showLoginModal')) {
                 </button>
                 <a href="javascript:void(0);" class="customize-foodlink" onclick="customizeDish({{ $dish->id }});">Customize</a>
               </div> @endforeach </div>
+=======
+
+            <div class="dish-details-div">
+              <div class="category-list-item-grid"> 
+                @foreach ($dishes as $dish) 
+                <div class="card food-detail-card">
+                  <p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>
+                  <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}" onclick="favorite({{ $dish->id }})" id="unfavorite-icon-{{ $dish->id }}">
+                     <img src="{{ asset('images/favorite-before-icon.svg') }}" alt="" class="svg" height="20" width="22">
+                    
+                    </svg>
+                  </p>
+                  <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '':'d-none' }}" onclick="unFavorite({{ $dish->id }})" id="favorite-icon-{{ $dish->id }}">
+                    <img src="{{ asset('images/favorite-after-icon.svg') }}" alt="" class="svg" height="20" width="22">
+                    
+                  </p>
+                  <div class="food-image">
+                    <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" width="100" height="100" />
+                  </div>
+                  <h4 class="food-name-text">{{ $dish->name }}</h4>
+                  <p class="food-price">€{{ $dish->price }}</p>
+                  <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart({{ $dish->id }})" id="dish-cart-lbl-{{ $dish->id }}" {{ $dish->cart ? 'disabled':''}}> 
+                    @if($dish->cart) 
+                      Added to cart 
+                    @else 
+                      Add 
+                      <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">
+                       @endif 
+                  </button>
+                  <a href="javascript:void(0);" class="customize-foodlink" onclick="customizeDish({{ $dish->id }});">Customize</a>
+                </div> 
+                @endforeach 
+              </div>
+            </div>
+>>>>>>> Stashed changes
           </section>
           <!-- end category list section -->
         </div>
-        <aside class="cart-sidebar position-relative">
-          <div class="offcanvas-lg offcanvas-end h-100" tabindex="-1" id="bdSidebarCart" aria-labelledby="bdSidebarCartOffcanvasLabel">
+      </main>
+      <aside class="cart-sidebar sticky-top h-100vh">
+          <div class="offcanvas-lg offcanvas-end h-100 overflow-auto" tabindex="-1" id="bdSidebarCart" aria-labelledby="bdSidebarCartOffcanvasLabel">
             <div class="offcanvas-header p-0" style="display: block"></div>
-            <div class="offcanvas-body h-100">
+            <div class="offcanvas-body">
               <div class="navbar navbar-expand-lg pt-0 h-100">
                 <div class="cart-sidebar-content position-relative h-100">
                   <div class="navbar-collapse cartbox-collapse h-100">
@@ -310,7 +351,6 @@ if (!session('showLoginModal')) {
             </div>
           </div>
         </aside>
-      </main>
     </div>
   </div>
   <!-- start footer --> @include('layouts.user.footer_design')
@@ -463,4 +503,11 @@ if (!session('showLoginModal')) {
       },
     });
   });
+<<<<<<< Updated upstream
 </script> @endsection
+=======
+</script> 
+
+<script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
+@endsection
+>>>>>>> Stashed changes

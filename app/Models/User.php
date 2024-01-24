@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'dob',
         'phone_no',
         'gender',
+        'image',
         'email_verified_at'
     ];
 
@@ -67,5 +69,14 @@ class User extends Authenticatable
 
     public function getFullNameAttribute(){
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    protected function getImageAttribute($value)
+    {
+        if(!empty($value)){
+            $s3 = Storage::disk('s3');
+            return $s3->url('/user/thumb/'.$value);
+        }
+        return asset('images/blank-img.svg');
     }
 }

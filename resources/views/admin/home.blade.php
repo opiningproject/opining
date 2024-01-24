@@ -122,7 +122,7 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class=" dish-details-div">
+                            <div class="dish-details-div">
                                 <div class="popular-item-grid">
                                     @if (count($dishes) > 0)
                                         @foreach ($dishes as $dish)

@@ -24,4 +24,9 @@ class Order extends Model
     public function orderUserDetails(){
         return $this->hasOne(OrderUserDetail::class, 'order_id' ,'id');
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date('F d, Y, g:i A',strtotime($value));
+    }
 }

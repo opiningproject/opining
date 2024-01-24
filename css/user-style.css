@@ -2531,6 +2531,15 @@ input[type=number] {
   color: var(--theme-dark2);
 }
 
+.orders .orders-type.active .no-data{
+    color: var(--theme-gray5);
+    font-family: "SebinoRegular", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.19px;
+    border-radius: 20px;
+}
+
 .ordersdetails {
   background-color: var(--theme-bg-white);
   padding: 30px;

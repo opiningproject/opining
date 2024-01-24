@@ -13,20 +13,19 @@
           <!-- start profile section -->
           <section class="custom-section profile-section h-100">
             <div class="card custom-card h-100">
-              <form class="form" id="user-profile-form" action="{{ route('user.settings.save-profile') }}" method="POST">
+              <form class="form" id="user-profile-form" action="{{ route('user.settings.save-profile') }}" method="POST" enctype="multipart/form-data">
               {{ csrf_field() }}
               <div class="card-body pb-0 ">
                 <div class="row">
                   <div class="col-xxl-12 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 custom-w-col-15">
                     <div class="form-group">
-                      <img src="{{ asset('images/profile-img.png') }}" class="img-thumbnail profile-image" alt="profile image" width="120" height="120">
+                      <img src="{{ $user->image }}" class="img-thumbnail profile-image" alt="profile image" width="120" height="120">
                     </div>
                   </div>
                   <div class="col-xxl-3 col-xl-5 col-lg-4 col-md-6 col-sm-12 col-12 lg-my-auto custom-w-col-fileupload">
                     <div class="form-group">
-
                         <div class="file-upload-wrapper form-control" data-text="Upload">
-                          <input name="file-upload-field" type="file" class="file-upload-field" value="">
+                          <input name="image" type="file" class="file-upload-field" value="">
                         </div>
                     </div>
                   </div>
@@ -66,18 +65,10 @@
                     <div class="form-group">
                         <label for="restaurantpermit" class="form-label">Phone</label>
                         <div class="input-group countrycode-phone-control">
-                            <div class="dropdown">
-                              <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
-                              </button>
-                              <ul class="dropdown-menu">
-                                  <li>
-                                    <button class="dropdown-item" type="button">
-                                      <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
-                                    </button>
-                                  </li>
-                              </ul>
-                            </div>
+                            <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
+                            </button>
+                            
                             <input type="text" class="form-control countrycode-input" value="+31">
                             <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
                         </div>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Enums\UserType;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,23 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function logout(Request $request)
+    {
+        $user = Auth::user();
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        if($user->user_role == UserType::Admin)
+        {
+            return redirect()->route('login');
+        }
+        else
+        {
+            return redirect()->route('user.home');
+        }  
+        
     }
 }

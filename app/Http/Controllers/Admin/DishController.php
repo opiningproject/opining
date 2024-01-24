@@ -14,6 +14,8 @@ use http\Encoding\Stream;
 use Response;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
+use Auth;
+use App\Enums\UserType;
 
 class DishController extends Controller
 {
@@ -263,6 +265,8 @@ class DishController extends Controller
 
     public function searchDish(Request $request)
     {
+        $user = Auth::user();
+
         $dishes = Dish::orderBy('id');
         if ($request->has('search')) {
             if (app()->getLocale() == 'en') {
@@ -271,6 +275,21 @@ class DishController extends Controller
                 $dishes->orWhere('name_nl', 'like', '%' . $request->search . '%');
             }
         }
-        return view('admin.dish.dish-list', ['dishes' => $dishes->get()]);
+
+        if ($request->has('cat_id') && $request->cat_id != 'null') 
+        {
+            $dishes->where('category_id',$request->cat_id);
+        }
+
+        if($user && $user->user_role == UserType::Admin)
+        {
+            return view('admin.dish.dish-list', ['dishes' => $dishes->get()]);
+        }
+        else
+        {
+            return view('user.dish.dish-list', ['dishes' => $dishes->get()]);
+        }
+
+        
     }
 }

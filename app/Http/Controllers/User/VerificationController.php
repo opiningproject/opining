@@ -24,7 +24,7 @@ class VerificationController extends Controller
             $user->markEmailAsVerified();
         }
 
-        return redirect('dashboard');
+        return redirect(route('user.dashboard'));
     }
 
     public function resend(Request $request) 

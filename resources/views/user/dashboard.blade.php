@@ -26,10 +26,6 @@ if (!session('showLoginModal')) {
             <div class="form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
               <span class="form-control-feedback">
                 <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
               </span>
               <input type="text" class="form-control text-transform-none" placeholder="What do you want eat today..." id="search-dish" />
             </div>
@@ -89,36 +85,6 @@ if (!session('showLoginModal')) {
                 </span>
               </a>
             </div>
-<<<<<<< Updated upstream
-            <div class="category-list-item-grid">
-              @foreach ($dishes as $dish)
-              <div class="card food-detail-card">
-                <p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>
-                <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}" onclick="favorite({{ $dish->id }})" id="unfavorite-icon-{{ $dish->id }}">
-                   <img src="{{ asset('images/favorite-before-icon.svg') }}" alt="" class="svg" height="20" width="22">
-
-                  </svg>
-                </p>
-                <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '':'d-none' }}" onclick="unFavorite({{ $dish->id }})" id="favorite-icon-{{ $dish->id }}">
-                  <img src="{{ asset('images/favorite-after-icon.svg') }}" alt="" class="svg" height="20" width="22">
-
-                </p>
-                <div class="food-image">
-                  <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" width="100" height="100" />
-                </div>
-                <h4 class="food-name-text">{{ $dish->name }}</h4>
-                <p class="food-price">€{{ $dish->price }}</p>
-                <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart({{ $dish->id }})" id="dish-cart-lbl-{{ $dish->id }}" {{ $dish->cart ? 'disabled':''}}>
-                  @if($dish->cart)
-                    Added to cart
-                  @else
-                    Add
-                    <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">
-                     @endif
-                </button>
-                <a href="javascript:void(0);" class="customize-foodlink" onclick="customizeDish({{ $dish->id }});">Customize</a>
-              </div> @endforeach </div>
-=======
 
             <div class="dish-details-div">
               <div class="category-list-item-grid"> 
@@ -152,7 +118,6 @@ if (!session('showLoginModal')) {
                 @endforeach 
               </div>
             </div>
->>>>>>> Stashed changes
           </section>
           <!-- end category list section -->
         </div>
@@ -355,7 +320,15 @@ if (!session('showLoginModal')) {
   </div>
   <!-- start footer --> @include('layouts.user.footer_design')
   <!-- end footer -->
-</div> @if(!Auth::user()) @include('user.modals.signup') @include('user.modals.forgot-password') @endif @include('user.modals.address') @include('user.modals.signin') @include('user.modals.customize-dish') @endsection @section('script') <script type="text/javascript">
+</div> 
+
+
+@include('user.modals.address')
+@include('user.modals.customize-dish') 
+@endsection 
+@section('script') 
+
+<script type="text/javascript">
   function favorite(dish_id) {
     $.ajax({
       url: baseURL + '/favorite',
@@ -503,11 +476,9 @@ if (!session('showLoginModal')) {
       },
     });
   });
-<<<<<<< Updated upstream
-</script> @endsection
-=======
+
 </script> 
 
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection
->>>>>>> Stashed changes
+

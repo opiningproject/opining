@@ -58,39 +58,29 @@
 
                             $days = App\Models\OperatingHour::all();
 
-                            if(!empty($days))
+                            $sameTimeDays = array();
+                            $differentTimeDays = array();
+
+                            foreach($days as $key => $day)
                             {
-                                // Initialize an array to store grouped days
-                                $groupedDays = array();
-
-                                // Group days with the same opening and closing times
-                                foreach ($days as $day => $times) 
+                                if($days[0]->start_time == $day->start_time && $days[0]->end_time == $day->end_time)
                                 {
-                                    $formattedTimes =  date("H:i", strtotime($times['start_time'])) .' - '. date("H:i", strtotime($times['end_time']));
-
-                                    if (!isset($groupedDays[$formattedTimes])) 
-                                    {
-                                        $groupedDays[$formattedTimes] = array();
-                                    }
-
-                                    $groupedDays[$formattedTimes][] = $times->day;
+                                    $sameTimeDays[] = $day->day;
                                 }
-
-                                // Display the result
-                                foreach ($groupedDays as $formattedTimes => $days) 
+                                else 
                                 {
-                                    if(count($days) > 2)
-                                    {
-                                         echo '<li><a>'.$days[0].' - '.$days[count($days)-1]." : $formattedTimes</a></li>";
-                                    }
-                                    else
-                                    {
-                                         echo '<li><a>'.implode(' - ', $days) . " : $formattedTimes</a></li>";
-                                    }
+                                    $differentTimeDays[] = $day->day;
                                 }
                             }
 
+                            print_r($sameTimeDays);
+                            print_r($differentTimeDays);
+                            exit;
+
                             ?>
+
+                            <!-- <li><a>Mon - Fri : 08:00 - 16:00</a></li>
+                            <li><a>Sat - Sun : 08:00 - 16:00</a></li> -->
                         </ul>
                     </div>
                 </div>

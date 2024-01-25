@@ -29,15 +29,14 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-
     });
 
-    $('#loader').bind('ajaxStart', function(){
-        $(this).show();
-    }).bind('ajaxStop', function(){
-        $(this).hide();
+    jQuery(document).ajaxStart(function(){
+        $('#loader').removeClass('d-none');
     })
-    // timepicker
+    jQuery(document).ajaxStop(function(){
+        $('#loader').addClass('d-none');
+    })
 
     const svg_options = {
             svgSelector: 'img.svg', // the class attached to all images that should be inlined

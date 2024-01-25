@@ -5,6 +5,10 @@
 @include('layouts.user.header')
 <body>
 
+<div class="position-fixed inset-0 bg-transparent-layer d-none" id="loader">
+    <img src="{{ asset('images/loader.gif') }}" style="height: 250px">
+</div>
+
 @yield('content')
 
 @if($theme == 'dark')
@@ -22,6 +26,12 @@
 </a>  
 @endif
 
+@if(!Auth::user()) 
+  @include('user.modals.signup') 
+  @include('user.modals.forgot-password') 
+@endif 
+
+@include('user.modals.signin') 
 @include('layouts.user.footer')
 @yield('script')
 </body>

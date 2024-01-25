@@ -38,6 +38,8 @@ function signIn()
         },
         success: function (response) {
 
+            //alert(localStorage.getItem('user_id'))
+
             if(response.status == 0)
             {
                 $('form#sign-in-form').find('#'+response.field+'-error').css("display", "block");
@@ -47,7 +49,9 @@ function signIn()
             }
             else
             {
-                window.location.reload();
+                //window.location.reload();
+                window.location.href = localStorage.getItem('target_url'); 
+
             }
 
         },
@@ -124,10 +128,12 @@ function forgotPassword()
 
 $(document).on("click", ".nav-link", function ()
 {
+    localStorage.setItem('target_url',$(this).attr('href'));
+
     if($('#auth-check').val() == 0)
     {
         $('#signInModal').modal('show');
-        event.preventDefault();s
+        event.preventDefault();
     }
 
 });

@@ -3088,4 +3088,16 @@ label.error{
 .category-section .category-slider .category-element .card:hover .dish-item-icon img, .category-section .category-slider .category-element .card.active .dish-item-icon img {
     filter: none;
 }
+
+.inset-0{
+    inset: 0;
+}
+.bg-transparent-layer{
+    background-color: rgba(0,0,0,0.6);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Rekha Sharma */

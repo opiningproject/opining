@@ -4,9 +4,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ $theme }}">
 @include('layouts.admin.header')
 <body>
-<div class="position-fixed inset-0 bg-transparent-layer" style="display:none;" id="loader">
+
+<div class="position-fixed inset-0 bg-transparent-layer d-none" id="loader">
     <img src="{{ asset('images/loader.gif') }}" style="height: 250px">
 </div>
+
 @yield('content')
 
 @if($theme == 'dark')
@@ -18,7 +20,6 @@
 @else
 <a href="{{ url('/change-theme/dark') }}">
     <div class="dark-light-btn p-3 cursor-pointer">
-    
         <img src="{{ asset('images/dark-theme.svg') }}" alt="" height="20" width="20" class="svg">
     </div>
 </a>  

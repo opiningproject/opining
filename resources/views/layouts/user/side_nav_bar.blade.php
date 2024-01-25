@@ -8,7 +8,7 @@
 
     <div class="siderbarmenu-brand">
         <a href="#" class="navbar-brand sidebar-logo">
-            Gomeal<span class="text-yellow-1">.</span>
+            <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
         </a>
     </div>
 

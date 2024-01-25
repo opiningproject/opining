@@ -9,9 +9,7 @@
                     <div class="delivery-card">
                         <div class="card card-body signin-card">
                             <div class="card-header text-center">
-                                <h1 class="logo-text text-dark-1 mb-0">
-                                    <a href="javascript:void(0);"> Gomeal<span class="text-yellow-1">.</span> </a>
-                                </h1>
+                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
                             </div>
                             <div class="card-body">
                                 <ul class="nav nav-fill" id="pills-tab" role="tablist">

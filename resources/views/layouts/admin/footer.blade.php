@@ -25,7 +25,14 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // timepicker
+    
+    jQuery(document).ajaxStart(function(){
+        $('#loader').removeClass('d-none');
+         
+    })
+    jQuery(document).ajaxStop(function(){
+        $('#loader').addClass('d-none');
+    })
 
     if(theme == 'dark')
     {

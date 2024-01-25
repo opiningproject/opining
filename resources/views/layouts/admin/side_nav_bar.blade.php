@@ -6,9 +6,6 @@
             <span class="d-none fs-6 pe-1">Browse</span>
         </button>
     </div>
-
-
-
     <div class="siderbarmenu-brand">
         <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
             <div class="">

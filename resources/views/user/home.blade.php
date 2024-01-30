@@ -9,7 +9,7 @@
                     <div class="delivery-card">
                         <div class="card card-body signin-card">
                             <div class="card-header text-center">
-                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
                             </div>
                             <div class="card-body">
                                 <ul class="nav nav-fill" id="pills-tab" role="tablist">
@@ -29,12 +29,14 @@
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                                         <form id="delivery-add-form">
-                                            <div class="form-group prev-input-group custom-icon-input-group">
-                                                <span class="input-group-icon">
-                                                    <img src="{{ asset('images/zipcode-svg.svg') }}" alt="" class="svg" height="16" width="24">
-                                                    
-                                                </span>
-                                                <input type="text" class="form-control" placeholder="Zip Code" name="zipcode" id="zipcode" required />
+                                            <div class="mb-3">
+                                                <div class="form-group prev-input-group custom-icon-input-group mb-0">
+                                                    <span class="input-group-icon">
+                                                        <img src="{{ asset('images/zipcode-svg.svg') }}" alt="" class="svg" height="16" width="24">
+                                                        
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Zip Code" name="zipcode" id="zipcode" required />
+                                                </div>
                                                 <label id="zipcode-error" class="error" for="zipcode" style="display: none"></label>
                                             </div>
                                             <div class="form-group prev-input-group custom-icon-input-group">

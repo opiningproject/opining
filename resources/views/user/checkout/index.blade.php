@@ -82,7 +82,7 @@
                                 <label for="restaurantpermit" class="form-label">Phone</label>
                                 <div class="input-group countrycode-phone-control">
                                   <button class="dropdown-toggle no-arrow" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/netherlands-flag.svg" alt="netherlands Flag" class="img-fluid">
+                                    <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
                                   </button>
                                   <input type="text" class="form-control countrycode-input" value="+31">
                                   <input type="number" class="form-control" value="655185972">

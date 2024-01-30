@@ -3464,7 +3464,7 @@ input[type=number] {
   }
   .track-order-main .iframe-box .clock-icon {
     left: 10px;
-    bottom: -90px;
+    bottom: -50px;
   }
   .track-order-main .text-row {
     margin: 50px 0 0;
@@ -3867,3 +3867,28 @@ input[type=number] {
     justify-content: center;
 }
 
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+#map {
+  height: 680px;
+ }
+
+@media (max-width: 767px) {
+  #map {
+    height: 400px;
+  }
+}
+
+.web-logo
+{
+  max-width: 100%; 
+  width: 250px; 
+  height: auto; 
+  max-height: 100px; 
+  object-fit: contain;
+}

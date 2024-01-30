@@ -11,7 +11,7 @@
                     <div class="main-content">
                         <div class="card signin-card">
                             <div class="card-header pb-0">
-                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
                             </div>
                             <div class="card-body signin-form">
                                 <form method="POST" action="{{ route('password.update') }}">

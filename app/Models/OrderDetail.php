@@ -23,6 +23,10 @@ class OrderDetail extends Model
         return $this->belongsTo(Dish::class, 'dish_id', 'id');
     }
 
+    public function dishOption(){
+        return $this->belongsTo(DishOption::class, 'dish_option_id', 'id');
+    }
+
     public function orderDishDetails(){
         return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
     }
@@ -33,5 +37,9 @@ class OrderDetail extends Model
 
     public function orderDishPaidIngredients(){
         return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','0');
+    }
+
+    public function orderDishIngredients(){
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
     }
 }

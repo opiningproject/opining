@@ -227,22 +227,24 @@ if (!session('showLoginModal')) {
                             </span>
                             <input type="text" class="form-control bg-gray" placeholder="Add Delivery instruction" />
                           </div>
-                          <div class="form-group prev-input-group position-relative d-flex align-items-center">
-                              <span class="input-group-icon">
-                                <img src="{{ asset('images/coupon-code.svg') }}" alt="" class="svg" height="18" width="29">
+                          <div class="mb-3">
+                            <div class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
+                                <span class="input-group-icon">
+                                  <img src="{{ asset('images/coupon-code.svg') }}" alt="" class="svg" height="18" width="29">
 
-                              </span>
-                              <input type="text" class="form-control bg-gray" placeholder="Coupon Code" id="coupon_code">
-                              <div class="coupon-apply-btn">
-                                  <button class="btn btn-xs-sm btn-custom-yellow" onclick="apply()" id="coupon_code_apply_btn">
-                                      Apply
-                                  </button>
-                                  <button class="btn btn-xs-sm btn-custom-yellow d-none" onclick="remove()" id="coupon_code_remove_btn">
-                                      Remove
-                                  </button>
-                              </div>
+                                </span>
+                                <input type="text" class="form-control bg-gray" placeholder="Coupon Code" id="coupon_code">
+                                <div class="coupon-apply-btn">
+                                    <button class="btn btn-xs-sm btn-custom-yellow" onclick="apply()" id="coupon_code_apply_btn">
+                                        Apply
+                                    </button>
+                                    <button class="btn btn-xs-sm btn-custom-yellow d-none" onclick="remove()" id="coupon_code_remove_btn">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <label id="coupon-code-error" class="error d-none"></label>
                           </div>
-                          <label id="coupon-code-error" class="error d-none"></label>
                           <div class="bill-detail-invoice">
                             <h6 class="cart-title">Bill Details</h6>
                             <div class="table-responsive">

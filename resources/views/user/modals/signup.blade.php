@@ -3,8 +3,7 @@
     <div class="modal-content">
       <div class="modal-header border-0 justify-content-center">
         <h1 class="logo-text text-dark-1">
-          <a href="javascript:void(0);"> Gomeal <span class="text-yellow-1">.</span>
-          </a>
+          <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
         </h1>
       </div>
       <div class="modal-body signin-form">

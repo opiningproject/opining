@@ -103,3 +103,25 @@ if (!function_exists('getRestaurantDetail')) {
         return $rest;
     }
 }
+
+if (!function_exists('getOrderDishIngredients')) 
+{
+    function getOrderDishIngredients($dish)
+    {
+        $ingredients = '';
+
+        if(!empty($dish->orderDishIngredients))
+        {
+            foreach($dish->orderDishIngredients as $key => $ingredient)
+            {
+                $ingredients .= $ingredient->dishIngredient->ingredient->name;
+
+                $ingredients .= $ingredient->is_free ? ', ': "($ingredient->quantity"."x), ";
+
+            } 
+        }
+
+        return trim($ingredients,', ');
+                                                                                
+    }
+}

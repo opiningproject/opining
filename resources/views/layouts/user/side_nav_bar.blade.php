@@ -8,7 +8,7 @@
 
     <div class="siderbarmenu-brand">
         <a href="#" class="navbar-brand sidebar-logo">
-            <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+            <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
         </a>
     </div>
 

@@ -2,6 +2,15 @@ $(function ()
 {
     $("#sign-in-form").validate({
           //debug:true,
+        errorElement: "span",
+
+        highlight : function(element) {
+            $(element).closest('.form-group, .has-feedback').removeClass('has-success').addClass('has-error');
+        },
+
+        unhighlight : function(element) {
+            $(element).closest('.form-group, .has-feedback').removeClass('has-error').addClass('has-success');
+        },
           submitHandler: function(form) {
             signIn();
           }

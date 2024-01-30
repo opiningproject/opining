@@ -153,11 +153,12 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::get('/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('user.favorite');
         Route::get('/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
         Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
-        Route::get('/orders', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
-        Route::get('/order-location', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
+        Route::get('/orders/{order_id?}', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+        Route::get('/order-location/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
         Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');
+        Route::get('/ideal-payment', [App\Http\Controllers\User\CheckoutController::class, 'idealPayment'])->name('user.ideal');
 
         Route::post('/coupon/apply', [App\Http\Controllers\User\CouponController::class, 'apply']);
     });

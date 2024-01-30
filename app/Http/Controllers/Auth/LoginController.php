@@ -41,6 +41,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    protected function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt(
+            ['email' => $request->input('email'), 'password' => $request->input('password'), 'user_role' => [UserType::Admin]], $request->has('remember')
+        );
+    }
+
     public function logout(Request $request)
     {
         $user = Auth::user();

@@ -9,7 +9,7 @@
     <div class="siderbarmenu-brand">
         <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
             <div class="">
-                <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
 
             </div>
         </a>

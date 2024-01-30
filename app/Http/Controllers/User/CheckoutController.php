@@ -31,5 +31,18 @@ class CheckoutController extends Controller
         return view('user.checkout.index');
     }
 
+    public function idealPayment()
+    {
+        $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
+
+        $paymentIntent = $stripe->paymentIntents->create([
+          'payment_method_types' => ['ideal'],
+          'amount' => 4,
+          'currency' => 'eur',
+        ]);
+
+        return view('user.checkout.ideal-payment',['paymentIntent' => $paymentIntent]);
+    }
+
     
 }

@@ -69,7 +69,7 @@ use App\Enums\PaymentType;
                         <div class="ordersdetails-header d-flex justify-content-between align-items-center">
                             <div class="ordersdetails-title">Order Details</div>
                             <div class="btn-grp d-flex flex-wrap">
-                                <button onclick="location.href='{{ route('user.order-location') }}'">
+                                <button onclick="location.href='{{ route('user.order-location',['order_id' => $order_detail->id]) }}'">
                                     <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt="" width="35" height="32"> Track order
                                 </button>
                                 
@@ -143,34 +143,41 @@ use App\Enums\PaymentType;
                                     </div>
                                 </div>
                             </div>
+
                             <div class="orderdetails-desclist">
+
+                                @foreach($order_detail->dishDetails as $key => $dish)
                                 <div class="orderdetails-desc">
                                     <div class="orderdetails-desc-main">
                                         <div class="orderdetails-desc-count">
-                                            x1
+                                            x{{ $dish->qty }}
                                         </div>
                                         <div class="orderdetails-desc-card">
-                                            <img src="images/burger-icon.png" class="img-fluid" alt=""
-                                            width="85">
+                                            <img src="images/burger-icon.png" class="img-fluid" alt="" width="85">
                                             <div class="text-grp">
-                                                <div class="title">big mac with Cheese</div>
-                                                <small>grilled </small>
+                                                <div class="title">{{ $dish->dish->name }}</div>
+                                                <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
+                                                    <b class="mb-0 item-options"> {{ $dish->dishOption->name }} </b> - {{ getOrderDishIngredients($dish) }}
+                                                </div>
                                                 <div class="text">
-                                                    - Ketchup, Crispy veg patty(2x), fresh onion, Cheese, Quarter Pound Bun
-                                                    <a href="">Read More</a>
+                                                    <a href="javascript:void(0)" id="read-more-{{ $dish->id}}" onclick="readMore({{ $dish->id}})">Read More</a>
+                                                    <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}" onclick="hideReadMore({{ $dish->id}})">Close</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="orderdetails-desc-note">
                                         <Label>Notes</Label>
-                                        <input type="text" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry.">
+                                        <input type="text" placeholder="{{ $dish->notes }}" readonly>
                                     </div>
                                     <div class="orderdetails-desc-price">
                                         +€20
                                     </div>
                                 </div>
+                                @endforeach
+
                             </div>
+
                             <div class="orderdetails-bill">
                                 <div class="title">Bill Details</div>
                                 <div class="list">

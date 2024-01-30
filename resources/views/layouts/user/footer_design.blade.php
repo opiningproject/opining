@@ -5,7 +5,7 @@
         <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-lg-center text-left mb-4 mb-md-0">
             <div class="footer-logo">
                 <a href="javascript:void(0);">
-                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
                 </a>
             </div>
         </div>

@@ -5,7 +5,7 @@
         <h1 class="logo-text text-dark-1">
           <a href="javascript:void(0);">
               <div class="d-flex">
-                  <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                  <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
               </div>
           </a>
         </h1>

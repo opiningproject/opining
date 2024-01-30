@@ -11,7 +11,7 @@
                             <div class="logo-text text-dark-1">
                                 <a href="javascript:void(0);">
                                     <div>
-                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
                                     </div>
                                 </a>
                             </div>
@@ -80,7 +80,7 @@
         <div class="modal-dialog custom-w-441px resendpwdmodal">
             <div class="modal-content">
                 <div class="modal-header border-0 justify-content-center">
-                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" style="max-width: 100%;">
+                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
                 </div>
                 <div class="modal-body signin-form">
                     <form method="POST" id="reset-pwd-form" action="javascript:void(0)">

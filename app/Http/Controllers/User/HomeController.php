@@ -38,25 +38,34 @@ class HomeController extends Controller
         $categories = Category::all();
         $user = (Auth::user()) ? Auth::user() : '';
         $user_id = $user ? $user->id : 0;
-        $addresses = Address::select('*')->orderBy('company_name', 'asc')->where('user_id',$user_id)->get();
+        $addresses = Address::select('*')->orderBy('company_name', 'asc')->where('user_id', $user_id)->get();
         $cart = OrderDetail::select('*')->orderBy('id', 'desc')->where([
-            ['user_id',$user_id],
+            ['user_id', $user_id],
             ['is_cart', '1']
         ])->get();
         $category = '';
 
-        if($request->cat_id)
-        {
-            $dishes = Dish::with('favorite')->where('category_id',$request->cat_id);
+        if ($request->cat_id) {
+            $dishes = Dish::with('favorite')->where('category_id', $request->cat_id);
             $category = Category::find($request->cat_id);
-        }
-        else
-        {
+        } else {
             $dishes = Dish::with('favorite');
         }
 
         $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
 
-        return view('user.dashboard',['categories' => $categories,'category' => $category, 'dishes' => $dishes, 'addresses' => $addresses, 'user' => $user, 'cart' => $cart]);
+        $serviceCharge = getRestaurantDetail()->service_charge;
+
+        return view('user.dashboard', [
+            'categories' => $categories,
+            'category' => $category,
+            'dishes' => $dishes,
+            'addresses' => $addresses,
+            'user' => $user,
+            'cart' => $cart,
+            'serviceCharge' => $serviceCharge,
+            'couponCode' => $user ? (isset($user->cart) ? $user->cart->coupon_code : '') : '',
+            'couponDiscount' => $user ? (isset($user->cart) ? $user->cart->coupon_discount : 0) : 0,
+        ]);
     }
 }

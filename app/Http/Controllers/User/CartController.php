@@ -47,16 +47,16 @@ class CartController extends Controller
             $user_id = Auth::user()->id;
             $order = Order::where('user_id', $user_id)->where('is_cart', '1')->first();
 
-            if (empty($order)) 
+            if (empty($order))
             {
                $order = new Order();
                $order->user_id = $user_id;
-            } 
+            }
 
             $order->is_cart = '1';
             $order->order_status = '1';
 
-            if ($order->save()) 
+            if ($order->save())
             {
                 $dish = Dish::find($request->id);
 
@@ -76,7 +76,7 @@ class CartController extends Controller
 
                 if(count($dish->freeIngredients) > 0)
                 {
-                    foreach ($dish->freeIngredients as $key => $ingredient) 
+                    foreach ($dish->freeIngredients as $key => $ingredient)
                     {
                         $cartDetail->orderDishDetails()->create([
                             'dish_id' => $dish->id,
@@ -84,7 +84,7 @@ class CartController extends Controller
                         ]);
                     }
                 }
-               
+
                 echo $this->cartHtml($cartDetail);
                 exit;
             }
@@ -97,17 +97,20 @@ class CartController extends Controller
     public function cartHtml($cart)
     {
         $dish = $cart->dish;
+        $dishId = $dish->id;
+        $dishPrice = $dish->price;
 
         $html = "<div class='row' id=cart-$cart->id>
                 <div class='col-xx-3 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4 cart-custom-w-col-img'>
                     <img src=" . $dish->image . " alt='burger image' class='img-fluid' width='86' height='74px' />
                     <div class='foodqty'>
                       <span class='minus'>
-                        <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $dish->id . ")></i>
+                        <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $dishId . ")></i>
                       </span>
-                      <input type='number' class='count' name='qty-$dish->id' value=" . $cart->qty . ">
+                      <input type='number' class='count cart-amt' id='qty-$dishId' name='qty-$dishId' value=" . $cart->qty . "  data-id='$dishId'>
+                      <input type='hidden' id='dish-price-$dishId' value='$dishPrice'/>
                       <span class='plus'>
-                        <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $dish->id . ")></i>
+                        <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $dishId . ")></i>
                       </span>
                     </div>
                   </div>
@@ -164,7 +167,6 @@ class CartController extends Controller
         if (!Auth::user()) {
             return response::json(['status' => 401, 'message' => '']);
         }
-
 
         try {
             $user = Auth::user();

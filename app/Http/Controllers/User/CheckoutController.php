@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Dish;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class CheckoutController extends Controller
@@ -28,7 +29,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view('user.checkout.index');
+        $user = Auth::user();
+        $cartTotal = $user->cart->dishDetails()->select(DB::raw('sum(qty * price) as total'))->get()->sum('total');
+        return view('user.checkout.index', ['user' => $user, 'cartAmount' => $cartTotal]);
     }
 
     public function idealPayment()
@@ -44,5 +47,5 @@ class CheckoutController extends Controller
         return view('user.checkout.ideal-payment',['paymentIntent' => $paymentIntent]);
     }
 
-    
+
 }

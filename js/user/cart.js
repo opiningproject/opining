@@ -17,6 +17,9 @@ function addToCart(id) {
             $("#dish-cart-lbl-" + id).text('Added to cart');
             $("#dish-cart-lbl-" + id).prop('disabled', true);
             $('.cart-items').append(response);
+            $('#cart-amount-cal-data').show()
+
+            $('#empty-cart-div').hide()
 
         },
         error: function (response) {
@@ -50,11 +53,21 @@ function updateDishQty(operator, maxQty, dish_id) {
             dish_id, operator, current_qty
         },
         success: function (response) {
+            debugger
             if (response.status == 1 && parseInt(current_qty) == 0) {
                 $("#cart-" + dish_id).remove();
                 $("#dish-cart-lbl-" + dish_id).text('Add +');
                 $("#dish-cart-lbl-" + dish_id).prop('disabled', false);
+
+                if ($('.cart-amt').length > 0) {
+                    $('#empty-cart-div').hide()
+                } else {
+                    $('#empty-cart-div').show()
+                    $('#cart-amount-cal-data').hide()
+                }
             }
+
+            calculateTotalCartAmount()
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -63,11 +76,11 @@ function updateDishQty(operator, maxQty, dish_id) {
     })
 }
 
-function apply() {
-    var coupon_code = $('#coupon_code').val();
-    var order_amount = 30;
+function applyCoupon() {
+    var couponCode = $('#coupon_code').val();
+    var orderAmount = $('#total-cart-bill-amount').val();
 
-    if (coupon_code == '') {
+    if (couponCode == '') {
         return false;
     }
 
@@ -75,16 +88,22 @@ function apply() {
         type: 'POST',
         url: baseURL + '/user/coupon/apply',
         data: {
-            coupon_code, order_amount
+            couponCode,
+            orderAmount
         },
         success: function (response) {
-            if (response.status == 1) {
+            if (response.status == 200) {
                 $("#coupon_code_remove_btn").removeClass('d-none');
                 $("#coupon_code_apply_btn").addClass('d-none');
                 $("#coupon_code").prop('readonly', true);
 
                 $("#coupon-code-error").addClass('d-none');
                 $('#coupon-code-error').text('');
+
+                $('#coupon-discount-text').text('-€' + response.data.discount_amount)
+                $('#coupon-discount').val(response.data.discount_amount)
+                $('#item-discount').show()
+                calculateTotalCartAmount()
             } else {
                 $("#coupon-code-error").removeClass('d-none');
                 $('#coupon-code-error').text(response.message);
@@ -97,12 +116,16 @@ function apply() {
     })
 }
 
-function remove() {
+function removeCoupon() {
     $("#coupon_code_apply_btn").removeClass('d-none');
     $("#coupon_code_remove_btn").addClass('d-none');
     $('#coupon_code').val('');
     $("#coupon_code").prop('readonly', false);
+    $('#coupon-discount').val(0)
+    $('#coupon-discount-text').val('-€0')
+    $('#item-discount').hide()
 
+    calculateTotalCartAmount()
 }
 
 function addSubDishQuantities(dishId, operator, maxQty) {
@@ -181,12 +204,19 @@ function addCustomizedCart(id) {
                 $('#signInModal').modal('show');
                 return false;
             }
-            if ($('#qty-' + id)) {
 
-            } else {
-                $("#dish-cart-lbl-" + id).text('Added to cart');
-                $("#dish-cart-lbl-" + id).prop('disabled', true);
-                $('.cart-items').append(response.message.cartHtml);
+            if (response.status == 200) {
+                $('#customisableModal').modal('hide');
+
+                if ($('#qty-' + id).length > 0) {
+                    $('#qty-' + id).val($('#totalDishQty').val())
+                } else {
+                    $("#dish-cart-lbl-" + id).text('Added to cart');
+                    $("#dish-cart-lbl-" + id).prop('disabled', true);
+                    $('.cart-items').append(response.message.cartHtml);
+                }
+                $('#cart-amount-cal-data').show()
+                calculateTotalCartAmount()
             }
 
         },
@@ -198,7 +228,6 @@ function addCustomizedCart(id) {
 }
 
 function updateCartAmount(dishId, amount, type) {
-    debugger
     var currentVal = $('#total-amt' + dishId).text()
 
     if (type == 'add') {
@@ -207,5 +236,25 @@ function updateCartAmount(dishId, amount, type) {
         $('#total-amt' + dishId).text(parseInt(currentVal) - parseInt(amount))
     }
 
+}
+
+function calculateTotalCartAmount() {
+    var totalAmt = 0;
+    var serviceCharge = $('#service-charge').val()
+    var couponDiscount = $('#coupon-discount').val()
+
+    $('.cart-amt').each(function (index, element) {
+        var id = $(element).data('id')
+
+        totalAmt += (parseInt($(element).val()) * parseInt($('#dish-price-' + id).val()))
+    })
+
+    $('#total-cart-bill').text('€' + totalAmt)
+    $('#total-cart-bill-amount').val(totalAmt)
+
+    totalAmt += parseInt(serviceCharge)
+    totalAmt -= parseInt(couponDiscount)
+
+    $('#gross-total-bill').text('€' + totalAmt)
 }
 

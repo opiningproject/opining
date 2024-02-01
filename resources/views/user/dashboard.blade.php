@@ -13,10 +13,12 @@ if (!session('showLoginModal')) {
     Session::put('showLoginModal', '1', '1440');
 }
 
+$cartValue = 0;
+
 ?>
 <div class="main">
   <div class="main-view">
-    <div class="container-fluid bd-gutter bd-layout"> @include('layouts.user.side_nav_bar') 
+    <div class="container-fluid bd-gutter bd-layout"> @include('layouts.user.side_nav_bar')
       <main class="bd-main">
         <div class="main-content">
           <div class="section-page-title main-page-title row justify-content-between">
@@ -87,35 +89,35 @@ if (!session('showLoginModal')) {
             </div>
 
             <div class="dish-details-div">
-              <div class="category-list-item-grid"> 
-                @foreach ($dishes as $dish) 
+              <div class="category-list-item-grid">
+                @foreach ($dishes as $dish)
                 <div class="card food-detail-card">
                   <p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>
                   <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}" onclick="favorite({{ $dish->id }})" id="unfavorite-icon-{{ $dish->id }}">
                      <img src="{{ asset('images/favorite-before-icon.svg') }}" alt="" class="svg" height="20" width="22">
-                    
+
                     </svg>
                   </p>
                   <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '':'d-none' }}" onclick="unFavorite({{ $dish->id }})" id="favorite-icon-{{ $dish->id }}">
                     <img src="{{ asset('images/favorite-after-icon.svg') }}" alt="" class="svg" height="20" width="22">
-                    
+
                   </p>
                   <div class="food-image">
                     <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" width="100" height="100" />
                   </div>
                   <h4 class="food-name-text">{{ $dish->name }}</h4>
                   <p class="food-price">€{{ $dish->price }}</p>
-                  <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart({{ $dish->id }})" id="dish-cart-lbl-{{ $dish->id }}" {{ $dish->cart ? 'disabled':''}}> 
-                    @if($dish->cart) 
-                      Added to cart 
-                    @else 
-                      Add 
+                  <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart({{ $dish->id }})" id="dish-cart-lbl-{{ $dish->id }}" {{ $dish->cart ? 'disabled':''}}>
+                    @if($dish->cart)
+                      Added to cart
+                    @else
+                      Add
                       <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">
-                       @endif 
+                       @endif
                   </button>
                   <a href="javascript:void(0);" class="customize-foodlink" onclick="customizeDish({{ $dish->id }});">Customize</a>
-                </div> 
-                @endforeach 
+                </div>
+                @endforeach
               </div>
             </div>
           </section>
@@ -177,8 +179,11 @@ if (!session('showLoginModal')) {
                         <div class="cart-section">
                           <h6 class="cart-title">Your Cart</h6>
                           <div class="cart-items">
-                          @if(!empty($cart))
+                          @if(count($cart) > 0)
                             @foreach($cart as $key => $dish)
+                                <?php
+                                    $cartValue += ($dish->qty * $dish->dish->price);
+                                    ?>
                             <div class="row" id="cart-{{ $dish->dish->id }}">
                               <div class="col-xx-3 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4 cart-custom-w-col-img">
                                 <img src="{{ $dish->dish->image }}" alt="burger image" class="img-fluid" width="86" height="74px" />
@@ -186,7 +191,8 @@ if (!session('showLoginModal')) {
                                   <span class="minus">
                                     <i class="fas fa-minus align-middle" onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->dish->id }})"></i>
                                   </span>
-                                  <input type="number" class="count" name="qty-{{ $dish->dish->id }}" value="{{ $dish->qty }}" />
+                                  <input type="number" class="count cart-amt" id="qty-{{ $dish->dish->id }}" name="qty-{{ $dish->dish->id }}" value="{{ $dish->qty }}" data-id="{{ $dish->dish->id }}"/>
+                                  <input type="hidden" id="dish-price-{{ $dish->dish->id }}" value="{{ $dish->dish->price }}"/>
                                   <span class="plus">
                                     <i class="fas fa-plus align-middle" onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->dish->id }})"></i>
                                   </span>
@@ -220,85 +226,98 @@ if (!session('showLoginModal')) {
                             @endforeach
                           @endif
                           </div>
-                          <div class="form-group prev-input-group custom-icon-input-group">
+                            <div class="cart-amount-cal-data" id="cart-amount-cal-data" {{ count($cart) > 0 ? '' : "style=display:none" }}>
+                                <div class="form-group prev-input-group custom-icon-input-group">
                             <span class="input-group-icon">
                               <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg" height="22" width="25">
 
                             </span>
-                            <input type="text" class="form-control bg-gray" placeholder="Add Delivery instruction" />
-                          </div>
-                          <div class="mb-3">
-                            <div class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
+                                    <input type="text" class="form-control bg-gray" placeholder="Add Delivery instruction" />
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
                                 <span class="input-group-icon">
                                   <img src="{{ asset('images/coupon-code.svg') }}" alt="" class="svg" height="18" width="29">
 
                                 </span>
-                                <input type="text" class="form-control bg-gray" placeholder="Coupon Code" id="coupon_code">
-                                <div class="coupon-apply-btn">
-                                    <button class="btn btn-xs-sm btn-custom-yellow" onclick="apply()" id="coupon_code_apply_btn">
-                                        Apply
-                                    </button>
-                                    <button class="btn btn-xs-sm btn-custom-yellow d-none" onclick="remove()" id="coupon_code_remove_btn">
-                                        Remove
-                                    </button>
+                                        <input type="text" class="form-control bg-gray" placeholder="Coupon Code" value="{{ $couponCode }}" {{ !empty($couponCode) ? 'readonly' : '' }} id="coupon_code">
+                                        <div class="coupon-apply-btn">
+                                            <button class="btn btn-xs-sm btn-custom-yellow" onclick="applyCoupon()" id="coupon_code_apply_btn" {{ !empty($couponCode) ? 'style=display:none' : '' }}>
+                                                Apply
+                                            </button>
+                                            <button class="btn btn-xs-sm btn-custom-yellow" onclick="removeCoupon()" id="coupon_code_remove_btn" {{ !empty($couponCode) ? '' : 'style=display:none' }}>
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <label id="coupon-code-error" class="error d-none"></label>
+                                </div>
+                                <div class="bill-detail-invoice">
+                                    <h6 class="cart-title">Bill Details</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless">
+                                            <tbody></tbody>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-start">
+                                                    <span class="text-muted-1 bill-count-name">Item Total </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="bill-count" id="total-cart-bill">€{{ $cartValue }}</span>
+                                                    <input type="hidden" id="total-cart-bill-amount" value="{{ $cartValue }}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-start">
+                                                    <span class="text-muted-1 bill-count-name">Service</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="bill-count">€{{ $serviceCharge }}</span>
+                                                    <input type="hidden" id="service-charge" value="{{ $serviceCharge }}">
+                                                </td>
+                                            </tr>
+                                            <!--                                  <tr>
+                                                                                <td class="text-start">
+                                                                                  <span class="text-muted-1 bill-count-name">Free Delivery (25 mins)</span>
+                                                                                </td>
+                                                                                <td class="text-end">
+                                                                                  <span class="bill-count">-€00</span>
+                                                                                </td>
+                                                                              </tr>-->
+                                            <tr class="item-discount" id="item-discount" {{ !empty($couponCode) ? '' : 'style=display:none' }}>
+                                                <td class="text-start">
+                                                    <span class="text-custom-light-green bill-count-name">Item discount</span>
+                                                    <input type="hidden" id="coupon-discount" value="{{ $couponDiscount }}">
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="text-custom-light-green bill-count" id="coupon-discount-text">-€{{ $couponDiscount }}</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td class="text-start">Total</td>
+                                                <td class="text-end">
+                                                    <span class="bill-total-count" id="gross-total-bill">{{ ($cartValue + $serviceCharge) - $couponDiscount }}</span>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <a class="btn btn-custom-yellow btn-default d-block"  href="{{ route('user.checkout') }}">
+                                        <span class="align-middle">Checkout</span>
+                                    </a>
                                 </div>
                             </div>
-                            <label id="coupon-code-error" class="error d-none"></label>
-                          </div>
-                          <div class="bill-detail-invoice">
-                            <h6 class="cart-title">Bill Details</h6>
-                            <div class="table-responsive">
-                              <table class="table table-borderless">
-                                <tbody></tbody>
-                                <tbody>
-                                  <tr>
-                                    <td class="text-start">
-                                      <span class="text-muted-1 bill-count-name">Item Total </span>
-                                    </td>
-                                    <td class="text-end">
-                                      <span class="bill-count">+€40</span>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="text-start">
-                                      <span class="text-muted-1 bill-count-name">Service</span>
-                                    </td>
-                                    <td class="text-end">
-                                      <span class="bill-count">+€01</span>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="text-start">
-                                      <span class="text-muted-1 bill-count-name">Free Delivery (25 mins)</span>
-                                    </td>
-                                    <td class="text-end">
-                                      <span class="bill-count">-€00</span>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="text-start">
-                                      <span class="text-custom-light-green bill-count-name">Item discount</span>
-                                    </td>
-                                    <td class="text-end">
-                                      <span class="text-custom-light-green bill-count">-€01</span>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                                <tfoot>
-                                  <tr>
-                                    <td class="text-start">Total</td>
-                                    <td class="text-end">
-                                      <span class="bill-total-count">€40</span>
-                                    </td>
-                                  </tr>
-                                </tfoot>
-                              </table>
-                            </div>
-                            <a class="btn btn-custom-yellow btn-default d-block"  href="{{ route('user.checkout') }}">
-                              <span class="align-middle">Checkout</span>
-                            </a>
-                          </div>
+
                         </div>
+                              <div class="empty-card-div w-100" id="empty-cart-div" {{ count($cart) > 0 ? 'style=display:none' : "" }}>
+                                  <p class="empty-card-text text-muted-1"> Your cart is empty </p>
+                                  <span>
+                            <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">
+
+                          </span>
+                              </div>
                         <!-- End cart section -->
                         @else
                         <!-- start empty cart section -->
@@ -309,7 +328,8 @@ if (!session('showLoginModal')) {
 
                           </span>
                         </div>
-                        <!--end empty cart section --> @endif
+                        <!--end empty cart section -->
+                          @endif
                       </div>
                     </div>
                   </div>
@@ -322,13 +342,13 @@ if (!session('showLoginModal')) {
   </div>
   <!-- start footer --> @include('layouts.user.footer_design')
   <!-- end footer -->
-</div> 
+</div>
 
 
 @include('user.modals.address')
-@include('user.modals.customize-dish') 
-@endsection 
-@section('script') 
+@include('user.modals.customize-dish')
+@endsection
+@section('script')
 
 <script type="text/javascript">
   function favorite(dish_id) {
@@ -479,7 +499,7 @@ if (!session('showLoginModal')) {
     });
   });
 
-</script> 
+</script>
 
 <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection

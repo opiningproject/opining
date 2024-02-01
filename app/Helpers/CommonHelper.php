@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Zipcode;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
@@ -104,7 +105,7 @@ if (!function_exists('getRestaurantDetail')) {
     }
 }
 
-if (!function_exists('getOrderDishIngredients')) 
+if (!function_exists('getOrderDishIngredients'))
 {
     function getOrderDishIngredients($dish)
     {
@@ -122,11 +123,23 @@ if (!function_exists('getOrderDishIngredients'))
 
                 $ingredients .= $ingredient->is_free ? ', ': "($ingredient->quantity"."x), ";
 
-            } 
+            }
         }
 
         return trim($ingredients,', ');
-                                                                                
+
+    }
+}
+
+if (!function_exists('getDeliveryCharges')) {
+    function getDeliveryCharges($zipcode)
+    {
+        $zipcode = Zipcode::where([
+            ['zipcode', 'like', '%'.$zipcode.'%'],
+            ['status', '1']
+        ])->first();
+
+        return $zipcode;
     }
 }
 

@@ -37,20 +37,21 @@ class CouponController extends Controller
 
     public function apply(Request $request)
     {
-        $coupon = Coupon::where('status','1')->where('promo_code', $request->coupon_code)->get()->first();
+        $coupon = Coupon::where('status','1')->where('promo_code', $request->couponCode)->first();
 
         if(!empty($coupon))
         {
+            $user = Auth::user();
             if(strtotime(now()) > strtotime($coupon->expiry_date.' 23:59:59'))
             {
                  return Response::json([
-                    'status' => '0', 
+                    'status' => '401',
                     'message' => trans('message.coupon.expired'),
 
-                ]);   
+                ]);
             }
 
-            if($request->order_amount < $coupon->price)
+            if($request->orderAmount < $coupon->price)
             {
                 return response()->json([
                     'status' => '0',
@@ -58,10 +59,16 @@ class CouponController extends Controller
                     ], 200);
             }
 
-            $discount_amount = $request->order_amount * $coupon->percentage_off/100;
+            $discount_amount = $request->orderAmount * ($coupon->percentage_off/100);
+
+            $user->cart()->update([
+                'coupon_id' => $coupon->id,
+                'coupon_code' => $coupon->promo_code,
+                'coupon_discount' => $discount_amount
+            ]);
 
             return Response::json([
-                'status' => '1', 
+                'status' => '200',
                 'message' => trans('message.coupon.applied'),
                 'data' => [
                     'coupon_id' => $coupon->id,
@@ -72,7 +79,7 @@ class CouponController extends Controller
         else
         {
             return response()->json([
-                'status' => '0',
+                'status' => '401',
                     'message' => trans('message.coupon.invalid_coupon'),
                 ], 200);
         }

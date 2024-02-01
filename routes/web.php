@@ -154,6 +154,12 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::get('/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
         Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
         Route::get('/orders/{order_id?}', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+
+        Route::get('/orders/order-detail/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderDetail'])->name('user.order-detail');
+        Route::get('/orders/download-invoice/{order_id}', [App\Http\Controllers\User\OrderController::class, 'downloadInvoice'])->name('user.download-invoice');
+
+        Route::post('/orders/send-refund-req', [App\Http\Controllers\User\OrderController::class, 'sendRefundRequest']);
+
         Route::get('/order-location/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');

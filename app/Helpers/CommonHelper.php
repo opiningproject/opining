@@ -108,6 +108,10 @@ if (!function_exists('getOrderDishIngredients'))
 {
     function getOrderDishIngredients($dish)
     {
+        /*echo "<pre>";
+        print_r($dish->orderDishPaidIngredients->sum('total'));
+        exit;*/
+
         $ingredients = '';
 
         if(!empty($dish->orderDishIngredients))
@@ -125,3 +129,14 @@ if (!function_exists('getOrderDishIngredients'))
                                                                                 
     }
 }
+
+if (!function_exists('getOrderTotalPrice')) 
+{
+    function getOrderTotalPrice($itemPrice,$order)
+    {
+        return $itemPrice + $order->platform_charge + $order->delivery_charge - $order->coupon_discount;
+
+    }
+
+}
+

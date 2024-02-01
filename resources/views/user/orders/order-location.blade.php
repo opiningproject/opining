@@ -81,7 +81,21 @@
 
 <script>
 
-      var MapPoints = '[{"lat":"23.022505","lng":"72.571365"},{"lat":"23.215635","lng":"72.636940"}]';
+      var order_type = "<?php echo $order->order->order_type; ?>";
+      var latitude = "<?php echo $order->latitude; ?>";
+      var logitude = "<?php echo $order->longitude; ?>";
+
+      var rest_latitude = "<?php echo getRestaurantDetail()->latitude; ?>";
+      var rest_logitude = "<?php echo getRestaurantDetail()->longitude; ?>";
+
+      if(order_type == 1)
+      {
+        var MapPoints = '[{"lat":'+latitude+',"lng":'+logitude+'},{"lat":'+rest_latitude+',"lng":'+rest_logitude+'}]';
+      }
+      else
+      {
+        var MapPoints = '[{"lat":'+rest_latitude+',"lng":'+rest_logitude+'}]';
+      }
        
       var MY_MAPTYPE_ID = 'custom_style';
        

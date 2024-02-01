@@ -1751,10 +1751,10 @@ svg > g[class^=raphael-group-] g.raphael-group-9-plots text {
 }
 .prev-input-group .input-group-icon {
   position: absolute;
-  left: 30px;
+  left: 15px;
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 15px;
+/*  transform: translate(-50%, -50%);*/
   line-height: 0;
 }
 .prev-input-group .input-group-icon.passwordeye-icon {
@@ -2513,7 +2513,7 @@ input[type=number] {
   border-radius: 8px;
   background-color: var(--theme-button-bg);
 }
-.orders .orders-type.active .orders-title {
+.orders .orders-type .orders-title {
   color: var(--theme-dark2);
   font-size: 24px;
   font-weight: 400;
@@ -2522,16 +2522,16 @@ input[type=number] {
   margin: 0 0 1rem;
   font-family: "SebinoRegular", sans-serif;
 }
-.orders .orders-type.active .orders-list .orders-item {
+.orders .orders-type .orders-list .orders-item.active {
   border: 1px solid var(--theme-yellow2);
   background-color: var(--theme-yellow2);
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.15));
 }
-.orders .orders-type.active .orders-list .orders-item .text-grp .text {
+.orders .orders-type.active .orders-list .orders-item.active .text-grp .text {
   color: var(--theme-dark2);
 }
 
-.orders .orders-type.active .no-data{
+.orders .orders-type .active .no-data{
     color: var(--theme-gray5);
     font-family: "SebinoRegular", sans-serif;
     font-size: 22px;

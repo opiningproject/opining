@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Zipcode;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
@@ -135,7 +136,7 @@ if (!function_exists('getDeliveryCharges')) {
     function getDeliveryCharges($zipcode)
     {
         $zipcode = Zipcode::where([
-            ['zipcode', 'like', '%'.$zipcode.'%'],
+            ['zipcode', $zipcode],
             ['status', '1']
         ])->first();
 
@@ -143,12 +144,11 @@ if (!function_exists('getDeliveryCharges')) {
     }
 }
 
-if (!function_exists('getOrderTotalPrice')) 
+if (!function_exists('getOrderTotalPrice'))
 {
     function getOrderTotalPrice($itemPrice,$order)
     {
-        return $itemPrice + $order->platform_charge + $order->delivery_charge - $order->coupon_discount;
-
+        return $itemPrice + ($order->platform_charge + $order->delivery_charge) - $order->coupon_discount;
     }
 }
 
@@ -188,3 +188,13 @@ if (!function_exists('createPaymentIntent'))
     }
 }
 
+if (!function_exists('getCartTotalAmount'))
+{
+    function getCartTotalAmount()
+    {
+        $user = Auth::user();
+        $cartTotal = $user->cart->dishDetails()->select(\Illuminate\Support\Facades\DB::raw('sum(qty * price) as total'))->get()->sum('total');
+        return $cartTotal;
+    }
+
+}

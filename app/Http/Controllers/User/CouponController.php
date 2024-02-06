@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-Use App\Models\User;
-Use App\Models\Coupon;
+use App\Models\User;
+use App\Models\Coupon;
 Use App\Models\CouponTransaction;
 use Response;
 use DB;
@@ -41,51 +42,46 @@ class CouponController extends Controller
 
     public function apply(Request $request)
     {
-        $coupon = Coupon::where('status','1')->where('promo_code', $request->couponCode)->first();
+        $coupon = Coupon::where('status', '1')->where('promo_code', $request->couponCode)->first();
 
-        if(!empty($coupon))
-        {
+        if (!empty($coupon)) {
             $user = Auth::user();
-            if(strtotime(now()) > strtotime($coupon->expiry_date.' 23:59:59'))
-            {
-                 return Response::json([
-                    'status' => '401',
+            if (strtotime(now()) > strtotime($coupon->expiry_date . ' 23:59:59')) {
+                return Response::json([
+                    'status' => 401,
                     'message' => trans('message.coupon.expired'),
 
                 ]);
             }
 
-            if($request->orderAmount < $coupon->price)
-            {
+            if ($request->orderAmount < $coupon->price) {
                 return response()->json([
-                    'status' => '0',
-                        'message' => trans('message.coupon.min_order_amount',['min_order_amount'=>$coupon->price]),
-                    ], 200);
+                    'status' => 401,
+                    'message' => trans('message.coupon.min_order_amount', ['min_order_amount' => $coupon->price]),
+                ], 200);
             }
 
-            $discount_amount = $request->orderAmount * ($coupon->percentage_off/100);
+            $discount_amount = $request->orderAmount * ($coupon->percentage_off / 100);
 
             $user->cart()->update([
                 'coupon_id' => $coupon->id,
                 'coupon_code' => $coupon->promo_code,
-                'coupon_discount' => $discount_amount
             ]);
 
             return Response::json([
-                'status' => '200',
+                'status' => 200,
                 'message' => trans('message.coupon.applied'),
                 'data' => [
                     'coupon_id' => $coupon->id,
                     'discount_amount' => $discount_amount,
+                    'coupon_percent' => ($coupon->percentage_off / 100)
                 ]
             ]);
-        }
-        else
-        {
+        } else {
             return response()->json([
-                'status' => '401',
-                    'message' => trans('message.coupon.invalid_coupon'),
-                ], 200);
+                'status' => 500                                ,
+                'message' => trans('message.coupon.invalid_coupon'),
+            ], 200);
         }
     }
 
@@ -101,6 +97,24 @@ class CouponController extends Controller
         CouponTransaction::create(['user_id' => $user->id,'coupon_id' => $coupon->id]);
 
         return response::json(['status' => 1, 'message' => '']);
+    }
+
+    public function removeCoupon(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $user->cart->update([
+                'coupon_id' => null,
+                'coupon_code' => '',
+                'coupon_discount' => '',
+            ]);
+            return Response::json([
+                'status' => 200,
+                'message' => trans('message.coupon.removed'),
+            ]);
+        } catch (Exception $e) {
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
     }
 
 }

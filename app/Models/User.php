@@ -22,6 +22,8 @@ class User extends Authenticatable
     protected $fillable = [
         'stripe_cust_id',
         'name',
+        'stripe_cust_id',
+        'collected_points',
         'first_name',
         'last_name',
         'email',
@@ -58,7 +60,7 @@ class User extends Authenticatable
 
     protected $appends = ['full_name'];
     public function order(){
-        return $this->hasMany(Order::class, 'user_id', 'id');
+        return $this->hasMany(Order::class, 'user_id', 'id')->where('is_cart','0');
     }
 
     public function cart(){

@@ -3886,10 +3886,10 @@ input[type=number] {
 
 .web-logo
 {
-  max-width: 100%; 
-  width: 250px; 
-  height: auto; 
-  max-height: 100px; 
+  max-width: 100%;
+  width: 250px;
+  height: auto;
+  max-height: 100px;
   object-fit: contain;
 }
 
@@ -3960,3 +3960,13 @@ border-radius: 8px;
 }
 }
 
+
+
+/* Rekha Sharma*/
+label.error{
+    color: red;
+}
+
+#phone_no-error{
+    width: 100%;
+}

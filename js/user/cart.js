@@ -1,7 +1,66 @@
 $(function () {
 
-});
+    $('.pills-delivery-tab').click(function () {
 
+        var type = $(this).data('type')
+        var zipcode = $('#del-zipcode').val()
+        var houseNo = $('#del-house-no').val()
+
+        $.ajax({
+            type: 'PATCH',
+            url: baseURL + '/user/cart/update-delivery-type',
+            data: {
+                type,
+                zipcode,
+                houseNo
+            },
+            success: function (response) {
+                if (response.status == 200) {
+                    if (type == '1') {
+                        $('#addressChangeModal').modal('show')
+                    }
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (response) {
+
+                if (response.status == 401) {
+                    $('#signInModal').modal('show');
+                } else {
+                    var errorMessage = JSON.parse(response.responseText).message
+                    alert(errorMessage);
+                }
+            }
+        })
+    })
+
+    $('#checkout-cart').click(function () {
+        var totalAmt = $('#total-cart-bill-amount').val()
+
+        $.ajax({
+            url: baseURL + '/user/validate-cart',
+            type: 'POST',
+            data: {
+                totalAmt
+            },
+            success: function (response) {
+
+                if (response.status == 400) {
+                    $('#addressChangeModal').modal('show')
+                } else if (response.status == 200) {
+                    window.location.replace(baseURL + '/user/checkout')
+                } else {
+                    alert(response.message)
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+});
 
 function addToCart(id) {
     $.ajax({
@@ -53,7 +112,6 @@ function updateDishQty(operator, maxQty, dish_id) {
             dish_id, operator, current_qty
         },
         success: function (response) {
-            debugger
             if (response.status == 1 && parseInt(current_qty) == 0) {
                 $("#cart-" + dish_id).remove();
                 $("#dish-cart-lbl-" + dish_id).text('Add +');
@@ -93,8 +151,8 @@ function applyCoupon() {
         },
         success: function (response) {
             if (response.status == 200) {
-                $("#coupon_code_remove_btn").removeClass('d-none');
-                $("#coupon_code_apply_btn").addClass('d-none');
+                $("#coupon_code_remove_btn").show();
+                $("#coupon_code_apply_btn").hide();
                 $("#coupon_code").prop('readonly', true);
 
                 $("#coupon-code-error").addClass('d-none');
@@ -102,11 +160,13 @@ function applyCoupon() {
 
                 $('#coupon-discount-text').text('-€' + response.data.discount_amount)
                 $('#coupon-discount').val(response.data.discount_amount)
+                $('#coupon-discount-percent').val(response.data.coupon_percent)
                 $('#item-discount').show()
                 calculateTotalCartAmount()
             } else {
                 $("#coupon-code-error").removeClass('d-none');
                 $('#coupon-code-error').text(response.message);
+                $('#coupon-discount-percent').val(0)
             }
         },
         error: function (response) {
@@ -117,15 +177,28 @@ function applyCoupon() {
 }
 
 function removeCoupon() {
-    $("#coupon_code_apply_btn").removeClass('d-none');
-    $("#coupon_code_remove_btn").addClass('d-none');
-    $('#coupon_code').val('');
-    $("#coupon_code").prop('readonly', false);
-    $('#coupon-discount').val(0)
-    $('#coupon-discount-text').val('-€0')
-    $('#item-discount').hide()
 
-    calculateTotalCartAmount()
+    $.ajax({
+        type: 'PATCH',
+        url: baseURL + '/user/remove-coupon',
+        success: function (response) {
+            if (response.status == 200) {
+                $("#coupon_code_apply_btn").show();
+                $("#coupon_code_remove_btn").hide();
+                $('#coupon_code').val('');
+                $("#coupon_code").prop('readonly', false);
+                $('#coupon-discount').val(0)
+                $('#coupon-discount-percent').val(0.0)
+                $('#coupon-discount-text').val('-€0')
+                $('#item-discount').hide()
+                calculateTotalCartAmount()
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
 }
 
 function addSubDishQuantities(dishId, operator, maxQty) {
@@ -153,7 +226,7 @@ function addSubDishQuantities(dishId, operator, maxQty) {
 function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
 
     var currentQty = parseInt($('#dishIng' + IngDishId).val());
-    var amount = parseInt($('#ing-price-val' + IngDishId).text())
+    var amount = parseFloat($('#ing-price-val' + IngDishId).text())
 
     if (operator == '-') {
         if (currentQty != 0) {
@@ -231,9 +304,9 @@ function updateCartAmount(dishId, amount, type) {
     var currentVal = $('#total-amt' + dishId).text()
 
     if (type == 'add') {
-        $('#total-amt' + dishId).text(parseInt(currentVal) + parseInt(amount))
+        $('#total-amt' + dishId).text(parseFloat(currentVal) + parseFloat(amount))
     } else if (type == 'sub') {
-        $('#total-amt' + dishId).text(parseInt(currentVal) - parseInt(amount))
+        $('#total-amt' + dishId).text(parseFloat(currentVal) - parseFloat(amount))
     }
 
 }
@@ -241,19 +314,27 @@ function updateCartAmount(dishId, amount, type) {
 function calculateTotalCartAmount() {
     var totalAmt = 0;
     var serviceCharge = $('#service-charge').val()
-    var couponDiscount = $('#coupon-discount').val()
+    var couponDiscountPercent = $('#coupon-discount-percent').val()
+    var couponDiscount
 
     $('.cart-amt').each(function (index, element) {
         var id = $(element).data('id')
 
-        totalAmt += (parseInt($(element).val()) * parseInt($('#dish-price-' + id).val()))
+        totalAmt += (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
     })
 
     $('#total-cart-bill').text('€' + totalAmt)
     $('#total-cart-bill-amount').val(totalAmt)
 
-    totalAmt += parseInt(serviceCharge)
-    totalAmt -= parseInt(couponDiscount)
+    console.log('couponDiscountPercent', couponDiscountPercent)
+    couponDiscount = parseFloat(couponDiscountPercent) * totalAmt
+    console.log(couponDiscount)
+    totalAmt += parseFloat(serviceCharge)
+
+    totalAmt -= parseFloat(couponDiscount)
+
+    $('#coupon-discount-text').text('-€' + couponDiscount)
+    $('#coupon-discount').val(couponDiscount)
 
     $('#gross-total-bill').text('€' + totalAmt)
 }

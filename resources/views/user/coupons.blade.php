@@ -18,7 +18,7 @@
                <div class="card-body coupon-card-grid">
                  @foreach($coupons as $key => $coupon)
                  <div class="card custom-card coupons-card p-0">
-                   <div class="card-body p-0 {{ $user->collected_points >= $coupon->points ? '': 'locked-coupon' }} ">
+                   <div class="card-body p-0 {{ ($user->collected_points >= $coupon->points || $coupon->couponTransaction) ? '': 'locked-coupon' }} ">
                      <div class="inner-card">
                        <div class="inner-card-body">
                          <h3>{{ $coupon->percentage_off }}<sup>%</sup>

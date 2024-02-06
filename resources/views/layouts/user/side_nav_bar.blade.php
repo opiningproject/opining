@@ -13,12 +13,15 @@
     </div>
 
     <div class="bd-navbar-toggle cartsidebar-icon">
-        <button class="navbar-toggler p-2 searcheatboxbtn" type="button">
+        <button class="navbar-toggler p-2 searcheatboxbtn d-none" type="button">
             <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
         </button>
+
+        @if(Route::currentRouteName() == 'user.dashboard')
         <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">
              <img src="{{ asset('images/sidebar-toggle.svg') }}" class="svg" width="18" height="22">
         </button>
+        @endif
 
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button>
     </div>
@@ -34,7 +37,7 @@
                   </a>
                 </div>
                 @else
-                <div class="d-flex gap-3">
+                <div class="d-flex gap-3 align-items-center">
                     <div class="rounded">
                         <img src="{{ Auth::user()->image }}" alt="" class="" width="60" height="60">
                     </div>

@@ -15,7 +15,7 @@
             <div class="card custom-card h-100">
               <form class="form" id="user-profile-form" action="{{ route('user.settings.save-profile') }}" method="POST" enctype="multipart/form-data">
               {{ csrf_field() }}
-              <div class="card-body pb-0 ">
+              <div class="card-body ">
                 <div class="row">
                   <div class="col-xxl-12 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 custom-w-col-15">
                     <div class="form-group">

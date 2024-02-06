@@ -20,6 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'stripe_cust_id',
         'name',
         'first_name',
         'last_name',
@@ -31,6 +32,7 @@ class User extends Authenticatable
         'phone_no',
         'gender',
         'image',
+        'collected_points',
         'email_verified_at'
     ];
 

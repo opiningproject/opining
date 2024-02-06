@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 Use App\Models\User;
 Use App\Models\Coupon;
+Use App\Models\CouponTransaction;
 use Response;
+use DB;
 
 class CouponController extends Controller
 {
@@ -30,9 +32,11 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::orderBy('id', 'desc')->get();
+        $user = Auth::user();
 
-        return view('user.coupons', ['coupons' => $coupons]);
+        $coupons = Coupon::where('expiry_date','>=',date('Y-m-d'))->withActive()->orderBy('id', 'desc')->get();
+
+        return view('user.coupons', ['coupons' => $coupons,'user' => $user]);
     }
 
     public function apply(Request $request)
@@ -83,6 +87,20 @@ class CouponController extends Controller
                     'message' => trans('message.coupon.invalid_coupon'),
                 ], 200);
         }
+    }
+
+    public function confirm(Request $request)
+    {
+        $user = Auth::user();
+        $coupon = Coupon::find($request->id);
+
+        User::where('id', $user->id)->update(array(
+                    'collected_points' => DB::raw('collected_points -'.$coupon->points)
+                ));
+
+        CouponTransaction::create(['user_id' => $user->id,'coupon_id' => $coupon->id]);
+
+        return response::json(['status' => 1, 'message' => '']);
     }
 
 }

@@ -3892,3 +3892,54 @@ input[type=number] {
   max-height: 100px; 
   object-fit: contain;
 }
+
+
+.locked-coupon .inner-card {
+  background: rgba(255, 248n 226, 0.3);
+}
+
+.locked-coupon .inner-card * {
+  opacity: 0.70;
+}
+
+.locked-coupon .inner-card .promocode-box {
+opacity: 0.7;
+}
+.locked-coupon .inner-card .promocode-box * {
+opacity: 1;
+}
+
+.locked-coupon .inner-card .circle2, .locked-coupon .inner-card .circle1 {
+opacity: 1;
+}
+
+.coupon-code-box {
+    border-radius: 8px;
+    border: 0px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: rgb(177,159,107);
+    background: linear-gradient(90deg, rgb(199 174 104) 0%, rgb(255 196 27) 35%, rgba(208,172,65,1) 100%);
+    padding: 10px 15px;
+    font-size: 18px;
+    position: relative;
+}
+.coupon-code-box:after {
+border-radius: 8px;
+    border: 1px dashed #ffffff;
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    height: calc(100% - 8px);
+    width: calc(100% - 8px);
+    pointer-events: none;
+}

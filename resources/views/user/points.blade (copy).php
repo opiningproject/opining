@@ -15,18 +15,16 @@
            </div>
            <!-- start category list section -->
            <section class="custom-section informativeterms-section h-100">
-             <div class="card custom-card h-100 overflow-hidden px-2">
-               <div class="row align-items-center">
-                  <div class="col-md-6">
-                    <div id="chart-container-one" class="collected-points-charts"></div>
-                  </div>
-                  <div class="col-md-6 text-center text-md-start">
-                    <h3 class="fs-4">Get 1 point order above €20 plus</h3>
-                    <h3 class="mt-4 mb-0 fs-4">Get 2 points order above €30 plus</h3>
-                    <a class="btn btn-custom-yellow track-order-btn"  href="{{ route('user.dashboard') }}">
-                      <span class="align-middle">Order Now</span>
-                    </a>
-                  </div>
+             <div class="card custom-card h-100 overflow-hidden">
+               <div class="row">
+                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 position-relative p-0">
+                   <div id="chart-container-one" class="collected-points-charts"></div>
+                   <h3 class="chart-caption">Get 1 point order above €20 plus</h3>
+                 </div>
+                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 position-relative p-0">
+                   <div id="chart-container-two" class="collected-points-charts"></div>
+                   <h3 class="chart-caption">Get 2 point order above €30 plus</h3>
+                 </div>
                </div>
                <div class="card-body pb-0">
                  <div class="collected-points-list">
@@ -61,16 +59,33 @@
 @section('script')
 <script type="text/javascript">
 
-      var collected_points = "<?php echo Auth::user()->collected_points; ?>";
-
-      const chartData =  [{
-                            label: "",
-                            value: "80",
+      const chartData =  [
+                        {
+                            label: "04",
+                            value: "20",
                             color: "#FFC00B",
                             plotBorderThickness: 10
                         },
                         {
-                            label: "",
+                            label: "03",
+                            value: "20",
+                            color: "#FFC00B",
+                            plotBorderThickness: 10
+                        },
+                        {
+                            label: "02",
+                            value: "20",
+                            color: "#FFC00B",
+                            plotBorderThickness: 10
+                        },
+                        {
+                            label: "01",
+                            value: "20",
+                            color: "#FFC00B",
+                            plotBorderThickness: 10
+                        },
+                        {
+                            label: "05",
                             value: "20",
                             plotBorderThickness: 10
                             // "color": "#FFF8E2"
@@ -82,11 +97,11 @@
                         baseFontSize: "18",
                         subcaption: false,
                         showpercentvalues: "1",
-                        defaultcenterlabel: collected_points+" Points Collected",
+                        defaultcenterlabel: "4 Points",
                         captionFontSize: "3rem",
                         decimals: "1",
                         doughnutRadius: "60",
-                        useDataPlotColorForLabels: "0",
+                        useDataPlotColorForLabels: "1",
                         labelFontColor: "#292929",
                         theme: "fusion",
                         enableMultiSlicing: "0",
@@ -111,6 +126,21 @@
             var myChart = new FusionCharts({
                 type: "doughnut2d",
                 renderAt: "chart-container-one",
+                plotBorderThickness: 90,
+                width: "100%",
+                height: "100%",
+                dataFormat: "json",
+                dataSource: {
+                    chart : dataSourceData,
+                    data: chartData
+                }
+            }).render();
+        });
+
+      FusionCharts.ready(function () {
+            var myChart = new FusionCharts({
+                type: "doughnut2d",
+                renderAt: "chart-container-two",
                 plotBorderThickness: 90,
                 width: "100%",
                 height: "100%",

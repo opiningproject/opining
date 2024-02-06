@@ -19,6 +19,7 @@ class CheckoutController extends Controller
      */
     public function __construct()
     {
+    
 //        $this->middleware('auth');
     }
 
@@ -36,16 +37,37 @@ class CheckoutController extends Controller
 
     public function idealPayment()
     {
-        $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
+        $user = Auth::user();
 
-        $paymentIntent = $stripe->paymentIntents->create([
-          'payment_method_types' => ['ideal'],
-          'amount' => 4,
-          'currency' => 'eur',
-        ]);
+        $paymentIntent = createPaymentIntent($user->stripe_cust_id,300);
 
         return view('user.checkout.ideal-payment',['paymentIntent' => $paymentIntent]);
     }
 
+    public function cardPayment()
+    {
+        $user = Auth::user();
+
+        $paymentIntent = createPaymentIntent($user->stripe_cust_id,400);
+        $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
+
+        try 
+        {
+            $source = $stripe->customers->createSource($user->stripe_cust_id, ['source' => 'tok_visa']);
+
+            $chargeResult = $stripe->paymentIntents->confirm(
+                  $paymentIntent->id,
+                  ['payment_method' => $source->id],
+                  
+                );
+        }
+        catch(\Stripe\Exception\ApiErrorException $e) 
+        {
+            return response::json(['status' => 0, 'message' => $e->getError()->message]);
+        }
+
+        print_r($chargeResult);
+        exit;
+    }
 
 }

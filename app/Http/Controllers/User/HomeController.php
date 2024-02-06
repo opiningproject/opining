@@ -35,6 +35,10 @@ class HomeController extends Controller
 
     public function dashboard(Request $request)
     {
+        $couponCode = 0;
+        $couponDiscount = 0;
+        $couponPercent = 0;
+
         $categories = Category::all();
         $user = (Auth::user()) ? Auth::user() : '';
         $user_id = $user ? $user->id : 0;
@@ -56,6 +60,15 @@ class HomeController extends Controller
 
         $serviceCharge = getRestaurantDetail()->service_charge;
 
+        if ($user) {
+            if (isset($user->cart)) {
+                $couponCode = $user->cart->coupon_code;
+                $couponDiscount = $user->cart->coupon_discount;
+                if ($user->cart->coupon)
+                    $couponPercent = $user->cart->coupon->percentage_off/100;
+            }
+        }
+
         return view('user.dashboard', [
             'categories' => $categories,
             'category' => $category,
@@ -64,8 +77,9 @@ class HomeController extends Controller
             'user' => $user,
             'cart' => $cart,
             'serviceCharge' => $serviceCharge,
-            'couponCode' => $user ? (isset($user->cart) ? $user->cart->coupon_code : '') : '',
-            'couponDiscount' => $user ? (isset($user->cart) ? $user->cart->coupon_discount : 0) : 0,
+            'couponCode' => $couponCode,
+            'couponDiscount' => $couponDiscount,
+            'couponDiscountPercent' => $couponPercent,
         ]);
     }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dish;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
@@ -26,6 +28,10 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.orders');
+        $user = Auth::user();
+
+        return view('admin.orders',[
+            'active_orders' => $user->order()
+        ]);
     }
 }

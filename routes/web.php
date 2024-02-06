@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
-use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -171,6 +170,13 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::get('/card-payment', [App\Http\Controllers\User\CheckoutController::class, 'cardPayment'])->name('user.card');
 
         Route::post('/coupon/apply', [App\Http\Controllers\User\CouponController::class, 'apply']);
+        Route::patch('/remove-coupon', [App\Http\Controllers\User\CouponController::class, 'removeCoupon']);
+
+
+        Route::patch('/cart/update-delivery-type', [\App\Http\Controllers\User\CartController::class, 'updateDeliveryType']);
+        Route::post('/validate-cart', [\App\Http\Controllers\User\CartController::class, 'validateCart']);
+        Route::post('/place-order-cod', [\App\Http\Controllers\User\CheckoutController::class, 'placeOrderCashOnDelivery']);
+
     });
     // User Routes
 

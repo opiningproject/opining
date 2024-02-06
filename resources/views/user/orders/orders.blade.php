@@ -1,12 +1,12 @@
 @extends('layouts.user-app')
 
 @section('content')
-<?php 
-    use App\Enums\OrderStatus; 
-    use App\Enums\OrderType; 
-    use App\Enums\PaymentStatus; 
-    use App\Enums\PaymentType; 
-    use App\Enums\RefundStatus; 
+<?php
+    use App\Enums\OrderStatus;
+    use App\Enums\OrderType;
+    use App\Enums\PaymentStatus;
+    use App\Enums\PaymentType;
+    use App\Enums\RefundStatus;
 ?>
  <div class="main">
    <div class="main-view">
@@ -115,8 +115,8 @@
                                     <div class="title">Delivery Address</div>
                                     <div class="text">
                                         <img src="{{ asset('images/location-yellowicon.svg') }}" class="img-fluid svg" alt="" width="12" height="16">
-                                        <?php 
-                                            $address = $order->orderUserDetails; 
+                                        <?php
+                                            $address = $order->orderUserDetails;
 
                                             echo $address->house_no.', '.$address->street_name.', '.$address->city.', '.$address->zipcode;
                                         ?>
@@ -128,7 +128,7 @@
                                     <div class="text">
                                         <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg" alt="" width="18" height="18">{{ getRestaurantDetail()->rest_address }}
                                     </div>
-                                </div> 
+                                </div>
                                 @endif
 
                                 <div class="textgrp">
@@ -158,7 +158,7 @@
                                             <div class="text-grp">
                                                 <div class="title">{{ $dish->dish->name }}</div>
                                                 <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
-                                                    <b class="mb-0 item-options"> {{ $dish->dishOption->name }} </b> - {{ getOrderDishIngredients($dish) }}
+                                                    <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b> - {{ getOrderDishIngredients($dish) }}
                                                 </div>
                                                 <div class="text">
                                                     <a href="javascript:void(0)" id="read-more-{{ $dish->id}}" onclick="readMore({{ $dish->id}})">Read More</a>
@@ -251,7 +251,7 @@
         </main>
      </div>
   </div>
-     
+
    <!-- start footer -->
    @include('layouts.user.footer_design')
    <!-- end footer -->

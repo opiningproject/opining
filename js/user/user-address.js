@@ -1,4 +1,4 @@
-$(function () 
+$(function ()
 {
     var url = baseURL +'/user/dashboard';
 
@@ -17,14 +17,21 @@ $(function ()
 
     $("#address-form").validate({
           submitHandler: function(form) {
-            //validateZipcode();
-            window.location.href = url;
+              validateZipcode()
           }
      });
+
+    $('#addressChangeModal').on('hidden.bs.modal', function () {
+        var alertas = $('#address-form');
+        alertas.trigger("reset");
+        alertas.validate().resetForm();
+
+        $("#zipcode-error").addClass('d-none');
+    });
 });
 
 
-function validateZipcode() 
+function validateZipcode()
 {
   var zipcode = $('#zipcode').val();
   var house_no = $('#house_no').val();
@@ -42,7 +49,7 @@ function validateZipcode()
             if(response.status == 2)
             {
                 $('#zipcode-error').text(response.message);
-                $('#zipcode-error').css("display", "block"); 
+                $('#zipcode-error').css("display", "block");
             }
             else
             {
@@ -56,7 +63,7 @@ function validateZipcode()
     })
 }
 
-function deleteAddress(id) 
+function deleteAddress(id)
 {
     $.ajax({
             url: baseURL+'/user/delete-address/' + id,
@@ -72,6 +79,5 @@ function deleteAddress(id)
             }
         })
 }
-
 
 

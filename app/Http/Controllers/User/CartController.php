@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,7 @@ use App\Models\Dish;
 use App\Models\OrderDishDetail;
 use Validator, Redirect, Response;
 use DB;
+use function Symfony\Component\String\s;
 
 class CartController extends Controller
 {
@@ -178,7 +181,7 @@ class CartController extends Controller
             ])->first();
 
             if (empty($order)) {
-                $order = $user->order()->create([
+                $order = $user->cart()->create([
                     'is_cart' => 1
                 ]);
             }
@@ -249,6 +252,59 @@ class CartController extends Controller
 
 
         } catch (Exception $e) {
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateDeliveryType(Request $request){
+        try{
+            $user = Auth::user();
+
+            $user->cart->update([
+                'order_type' => $request->type
+            ]);
+
+            if($request->type == OrderType::Delivery){
+                session(['zipcode' => $request->zipcode]);
+                session(['house_no' => $request->houseNo]);
+
+            }else{
+                session()->forget(['house_no','zipcode']);
+            }
+
+            return response::json(['status' => 200, 'message' => 'Delivery type updated successfully']);
+
+        }catch (Exception $e){
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function validateCart(Request $request){
+        try{
+            $user = Auth::user();
+
+            if(strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())){
+                return response::json(['status' => 406, 'message' => "Coupon is expired."]);
+            }
+
+            if($user->cart->order_type == '1'){
+                if(session('zipcode')){
+                    $deliveryCharges = getDeliveryCharges(session('zipcode'));
+                    if($deliveryCharges){
+                        if($request->totalAmt >= $deliveryCharges->min_order_price){
+                            return response::json(['status' => 200, 'message' => 'Delivery']);
+                        }else{
+                            return response::json(['status' => 412, 'message' => "The minimum order should be $deliveryCharges->min_order_price"]);
+                        }
+                    }
+                }else{
+                    return response::json(['status' => 400, 'message' => 'Add delivery data']);
+                }
+            }else{
+                return response::json(['status' => 200, 'message' => 'Takeaway']);
+            }
+
+        }catch (Exception $e){
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }

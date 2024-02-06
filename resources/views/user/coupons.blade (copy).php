@@ -18,27 +18,21 @@
                <div class="card-body coupon-card-grid">
                  @foreach($coupons as $key => $coupon)
                  <div class="card custom-card coupons-card p-0">
-                   <div class="card-body p-0 {{ $user->collected_points >= $coupon->points ? '': 'locked-coupon' }} ">
+                   <div class="card-body p-0 locked-coupon">
                      <div class="inner-card">
                        <div class="inner-card-body">
                          <h3>{{ $coupon->percentage_off }}<sup>%</sup>
                            <sub>off</sub>
                          </h3>
-                         <h6>On min. order value of €{{ $coupon->price }}</h6>
+                         <h6>Off in your next food purchase</h6>
                          <div class="dotted-divider"></div>
-                         <p class="valid-date mb-0">Valid till {{ $coupon->expiry_date }}</p>
+                         <p class="valid-date mb-0">Valid Until {{ $coupon->expiry_date }}</p>
                        </div>
                        <div class="promocode-box">
-                         @if($coupon->couponTransaction)
-                            <p class="mb-0 d-inline-block">Promo code</p>
-                            <a href="javascript:void(0);" class="badge text-bg-white d-inline-block">{{ $coupon->promo_code }}</a>
-                         @elseif($user->collected_points >= $coupon->points)
-                           <p class="mb-0 d-inline-block">Promo code</p>
-                           <a href="javascript:void(0);" class="badge text-bg-white d-inline-block" id="coupon-code-{{ $coupon->id }}" data-code="{{ $coupon->promo_code }}" onclick='showCouponPopup({{ $coupon->id }})'>
-                           Get Code</a>
-                         @else
-                           <p class="mb-0 d-inline-block">Earn 29 points to unlock coupon</p>
-                         @endif 
+                         <!-- <p class="mb-0 d-inline-block">Earn 29 points to unlock coupon</p> -->
+                         <p class="mb-0 d-inline-block">Promo code</p>
+                         <a href="javascript:void(0);" class="badge text-bg-white d-inline-block" id="coupon-code-{{ $coupon->id }}" data-code="{{ $coupon->promo_code }}" onclick='showCouponPopup({{ $coupon->id }})'>
+                         Get Code</a>
                        </div>
                        <div class="circle1"></div>
                        <div class="circle2"></div>
@@ -65,9 +59,9 @@
    <!-- end footer -->
 
  </div>
- 
-@include('user.modals.coupon-confirmation') 
 @endsection
+
+@include('user.modals.coupon-confirmation') 
 
 @section('script')
 <script type="text/javascript">
@@ -75,7 +69,6 @@
  $(".coupons-card").click(function () {
       $(".checkcircle").toggle();
   });
-
   $(".coupons-card").hover(function () {
       $(".checkcircle").css("display", "block");
   }, function () {
@@ -92,7 +85,6 @@
     $('#couponConfirmationModal').modal('show')
     $('#coupon-code').val(code);
     $('#coupon-id').val(id);
-    $('#coupon-code-name').text(code)
   }
 
   function couponCodeConfirmation() 
@@ -101,26 +93,8 @@
     var id = $('#coupon-id').val();
 
     $('#coupon-code-'+id).text(code)
-
-    $.ajax({
-        url: baseURL + '/user/coupons/confirm/'+id,
-        type: 'GET',
-        success: function (response) {
-          $(".coupon-code-box").removeClass("d-none");
-          $("#submit-btn").addClass("d-none");
-          $("#coupon-code-text").addClass("d-none");
-          //location.reload()
-        },
-        error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
-        }
-    })
+    $('#couponConfirmationModal').modal('hide')
   }
-
-  $('#couponConfirmationModal').on('hidden.bs.modal', function () {
-    location.reload()
-  })
 </script>
 @endsection
 

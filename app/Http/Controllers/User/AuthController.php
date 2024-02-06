@@ -119,10 +119,13 @@ class AuthController extends Controller
 
         if(empty($user))
         {
+            $stripeCustomer = createStripeCustomer($request->first_name.' '.$request->last_name,$request->email);
+        
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'user_role' => '0',
+                'stripe_cust_id' => $stripeCustomer->id,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
 
@@ -154,6 +157,12 @@ class AuthController extends Controller
     public function handleGoogleCallback()
     {
         $google_user = Socialite::driver('google')->user();
+        $user = User::where('email', $google_user->email)->first();
+
+        if(empty($user))
+        {
+            $stripeCustomer = createStripeCustomer($google_user->user['given_name'].' '.$google_user->user['family_name'],$google_user->email);
+        }
  
         $user = User::updateOrCreate([
             'email' => $google_user->email,
@@ -162,6 +171,7 @@ class AuthController extends Controller
             'last_name' => $google_user->user['family_name'],
             'email' => $google_user->email,
             'social_id' => $google_user->id,
+            'stripe_cust_id' => $user ? $user->stripe_cust_id : $stripeCustomer->id,
             'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
      

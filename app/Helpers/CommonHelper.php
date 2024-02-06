@@ -150,6 +150,41 @@ if (!function_exists('getOrderTotalPrice'))
         return $itemPrice + $order->platform_charge + $order->delivery_charge - $order->coupon_discount;
 
     }
+}
 
+if (!function_exists('createStripeCustomer')) 
+{
+    function createStripeCustomer($name,$email)
+    {
+        try 
+        {
+            $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
+            
+            return $stripe->customers->create([
+                  'name' => $name,
+                  'email' => $email,
+                ]);
+        } 
+        catch (Exception $e) 
+        {
+            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+        }
+    }
+}
+
+if (!function_exists('createPaymentIntent')) 
+{
+    function createPaymentIntent($stripe_cust_id,$price)
+    {
+        $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
+        
+        return $stripe->paymentIntents->create([
+              'payment_method_types' => ['ideal','card'],
+              'amount' => $price,
+              'currency' => 'eur',
+              'customer' => $stripe_cust_id
+            ]);
+
+    }
 }
 

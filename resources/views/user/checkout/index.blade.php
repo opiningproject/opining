@@ -275,8 +275,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                         </section>
                     </div>
                     <aside class="cart-sidebar position-relative">
-                        <div class="offcanvas-lg offcanvas-end h-100" tabindex="-1" id="bdSidebarCart"
-                             aria-labelledby="bdSidebarCartOffcanvasLabel">
+                        <div class="offcanvas-lg offcanvas-end h-100" tabindex="-1" id="bdSidebarCart" aria-labelledby="bdSidebarCartOffcanvasLabel">
                             <div class="offcanvas-header p-0" style="display: block;"></div>
                             <div class="offcanvas-body h-100">
                                 <div class="navbar navbar-expand-lg pt-0 h-100">

@@ -3943,3 +3943,20 @@ border-radius: 8px;
     width: calc(100% - 8px);
     pointer-events: none;
 }
+
+@media (max-width: 767px) {
+.navbar-brand .web-logo {
+  max-width: 170px;
+}
+}
+
+
+@media (max-width: 991px) {
+.menu-sidebar .offcanvas-lg .offcanvas-header {
+  padding: 25px 15px 15px 15px;
+}
+.menu-sidebar .menu-sidebar-content .side-bar-menu {
+    padding: 24px 12px 20px 12px;
+}
+}
+

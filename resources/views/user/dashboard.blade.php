@@ -124,11 +124,15 @@ $cartValue = 0;
           <!-- end category list section -->
         </div>
       </main>
-      <aside class="cart-sidebar sticky-top h-100vh">
+      <aside class="cart-sidebar sticky-top h-lg-100vh">
           <div class="offcanvas-lg offcanvas-end h-100 overflow-auto" tabindex="-1" id="bdSidebarCart" aria-labelledby="bdSidebarCartOffcanvasLabel">
             <div class="offcanvas-header p-0" style="display: block"></div>
-            <div class="offcanvas-body">
-              <div class="navbar navbar-expand-lg pt-0 h-100">
+            <div class="offcanvas-body position-relative">
+
+            <button type="button" class="btn-close d-block position-absolute d-lg-none top-0 mt-2 start-0 ms-2" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
+            </button>
+
+              <div class="navbar navbar-expand-lg pt-0 h-lg-100">
                 <div class="cart-sidebar-content position-relative h-100">
                   <div class="navbar-collapse cartbox-collapse h-100">
                     <div class="cart-custom-tab cart-tab custom-tabs d-flex flex-column h-100">

@@ -70,7 +70,7 @@ $cartValue = 0;
                         <img src="{{ $cat->image }}" class="img-fluid" alt="bakery" width="56" height="56" />
                       </span>
                       <p class="mb-0 text-truncate text-muted" title="{{ $cat->name }}">{{ $cat->name }}</p>
-                      <a href="{{ route('user.dashboard') }}?cat_id={{ $cat->id }}" class="stretched-link"></a>
+                      <a href="{{ route('user.dashboard',['cat_id'=>$cat->id]) }}" class="stretched-link"></a>
                     </div>
                   </div> @endforeach </div>
               </div>

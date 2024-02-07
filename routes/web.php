@@ -179,6 +179,8 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::post('/validate-cart', [\App\Http\Controllers\User\CartController::class, 'validateCart']);
         Route::post('/place-order-cod', [\App\Http\Controllers\User\CheckoutController::class, 'placeOrderCashOnDelivery']);
 
+        Route::get('/validate-address/{address_id}',[\App\Http\Controllers\User\AddressController::class,'validateSelectedAddress']);
+
     });
     // User Routes
 

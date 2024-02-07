@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
+use App\Models\DishIngredient;
+use App\Models\Zipcode;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
@@ -189,9 +191,9 @@ class CartController extends Controller
             $order->fresh();
             $dish = Dish::find($id);
 
-            $dishDetail = $order->whereHas('dishDetails', function ($query) use ($id){
+            $dishDetail = $order->whereHas('dishDetails')->with(['dishDetails' =>function ($query) use ($id){
                 $query->whereDishId($id)->whereIsCart('1');
-            })->with('dishDetails')->first();
+            }])->first();
 
             if($dishDetail){
                 $orderDetails = OrderDetail::find($dishDetail->dishDetails[0]->id);
@@ -224,9 +226,8 @@ class CartController extends Controller
                     $cartArr
                 );
                 $orderDetails->fresh();
-//                $response['cartHtml'] = $this->cartHtml($orderDetails);
+                $response['cartHtml'] = $this->cartHtml($orderDetails);
             }
-            $response['cartHtml'] = $this->cartHtml($orderDetails);
 
             if (isset($request->freeIng)) {
                 foreach ($request->freeIng as $freeIng) {
@@ -236,18 +237,23 @@ class CartController extends Controller
                     ]);
                 }
             }
-
+            $paidIngAmt = 0.00;
             if (isset($request->paidIng)) {
                 foreach ($request->paidIng as $key => $paidIng) {
+
+                    $ing = DishIngredient::find($key);
+                    $paidIngAmt += ($paidIng * $ing->price);
                     $orderDetails->orderDishDetails()->create([
                         'dish_id' => $id,
                         'dish_ingredient_id' => $key,
                         'is_free' => '0',
-                        'quantity' => $paidIng
+                        'quantity' => $paidIng,
+                        'price' =>$ing->price
                     ]);
                 }
             }
             $response['msg'] = 'Cart Added Successfully';
+            $response['paidIngAmt'] = $paidIngAmt;
             return response::json(['status' => 200, 'message' => $response]);
 
 
@@ -260,10 +266,12 @@ class CartController extends Controller
         try{
             $user = Auth::user();
 
-            $user->cart->update([
-                'order_type' => $request->type
-            ]);
+            if($user->cart){
+                $user->cart->update([
+                    'order_type' => $request->type
+                ]);
 
+            }
             if($request->type == OrderType::Delivery){
                 session(['zipcode' => $request->zipcode]);
                 session(['house_no' => $request->houseNo]);
@@ -289,13 +297,24 @@ class CartController extends Controller
 
             if($user->cart->order_type == '1'){
                 if(session('zipcode')){
-                    $deliveryCharges = getDeliveryCharges(session('zipcode'));
-                    if($deliveryCharges){
-                        if($request->totalAmt >= $deliveryCharges->min_order_price){
-                            return response::json(['status' => 200, 'message' => 'Delivery']);
-                        }else{
-                            return response::json(['status' => 412, 'message' => "The minimum order should be $deliveryCharges->min_order_price"]);
+
+                    $zipcode = Zipcode::select('id')->where([
+                        ['zipcode',session('zipcode')],
+                        ['status' , '1']
+                    ])->first();
+
+                    if($zipcode){
+
+                        $deliveryCharges = getDeliveryCharges(session('zipcode'));
+                        if($deliveryCharges){
+                            if($request->totalAmt >= $deliveryCharges->min_order_price){
+                                return response::json(['status' => 200, 'message' => 'Delivery']);
+                            }else{
+                                return response::json(['status' => 412, 'message' => "The minimum order should be $deliveryCharges->min_order_price"]);
+                            }
                         }
+                    }else{
+                        return response::json(['status' => 406, 'message' => 'Currently, we are not delivering food to this location.']);
                     }
                 }else{
                     return response::json(['status' => 400, 'message' => 'Add delivery data']);

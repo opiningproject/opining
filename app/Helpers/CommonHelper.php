@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Address;
+use App\Models\OrderDetail;
 use App\Models\Zipcode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
@@ -106,8 +109,7 @@ if (!function_exists('getRestaurantDetail')) {
     }
 }
 
-if (!function_exists('getOrderDishIngredients'))
-{
+if (!function_exists('getOrderDishIngredients')) {
     function getOrderDishIngredients($dish)
     {
         /*echo "<pre>";
@@ -116,18 +118,16 @@ if (!function_exists('getOrderDishIngredients'))
 
         $ingredients = '';
 
-        if(!empty($dish->orderDishIngredients))
-        {
-            foreach($dish->orderDishIngredients as $key => $ingredient)
-            {
+        if (!empty($dish->orderDishIngredients)) {
+            foreach ($dish->orderDishIngredients as $key => $ingredient) {
                 $ingredients .= $ingredient->dishIngredient->ingredient->name;
 
-                $ingredients .= $ingredient->is_free ? ', ': "($ingredient->quantity"."x), ";
+                $ingredients .= $ingredient->is_free ? ', ' : "($ingredient->quantity" . "x), ";
 
             }
         }
 
-        return trim($ingredients,', ');
+        return trim($ingredients, ', ');
 
     }
 }
@@ -144,57 +144,59 @@ if (!function_exists('getDeliveryCharges')) {
     }
 }
 
-if (!function_exists('getOrderTotalPrice'))
-{
-    function getOrderTotalPrice($itemPrice,$order)
+if (!function_exists('getOrderTotalPrice')) {
+    function getOrderTotalPrice($itemPrice, $order)
     {
         return $itemPrice + ($order->platform_charge + $order->delivery_charge) - $order->coupon_discount;
     }
 }
 
-if (!function_exists('createStripeCustomer')) 
-{
-    function createStripeCustomer($name,$email)
+if (!function_exists('createStripeCustomer')) {
+    function createStripeCustomer($name, $email)
     {
-        try 
-        {
+        try {
             $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
-            
+
             return $stripe->customers->create([
-                  'name' => $name,
-                  'email' => $email,
-                ]);
-        } 
-        catch (Exception $e) 
-        {
+                'name' => $name,
+                'email' => $email,
+            ]);
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
         }
     }
 }
 
-if (!function_exists('createPaymentIntent')) 
-{
-    function createPaymentIntent($stripe_cust_id,$price)
+if (!function_exists('createPaymentIntent')) {
+    function createPaymentIntent($stripe_cust_id, $price)
     {
         $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
-        
+
         return $stripe->paymentIntents->create([
-              'payment_method_types' => ['ideal','card'],
-              'amount' => $price,
-              'currency' => 'eur',
-              'customer' => $stripe_cust_id
-            ]);
+            'payment_method_types' => ['ideal', 'card'],
+            'amount' => $price,
+            'currency' => 'eur',
+            'customer' => $stripe_cust_id
+        ]);
 
     }
 }
 
-if (!function_exists('getCartTotalAmount'))
-{
+if (!function_exists('getCartTotalAmount')) {
     function getCartTotalAmount()
     {
         $user = Auth::user();
-        $cartTotal = $user->cart->dishDetails()->select(\Illuminate\Support\Facades\DB::raw('sum(qty * price) as total'))->get()->sum('total');
-        return $cartTotal;
+        $cartTotal = $user->cart->dishDetails()->select(DB::raw('sum(qty * price) as total'))->get()->sum('total');
+        $cartIngredient = $user->cart->dishDetails()->get()->sum('paid_ingredient_total');
+        return ($cartTotal + $cartIngredient);
     }
 
+}
+
+if(!function_exists('getAddressDetails')){
+    function getAddressDetails($addressId){
+        $addressData = Address::find($addressId);
+
+        return $addressData;
+    }
 }

@@ -233,6 +233,8 @@
                                                                 @foreach($cart as $key => $dish)
                                                                         <?php
                                                                         $cartValue += ($dish->qty * $dish->dish->price);
+                                                                        $paidIngredient = isset($dish->orderDishPaidIngredients) ? $dish->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
+                                                                        $cartValue += $paidIngredient;
                                                                         ?>
                                                                     <div class="row" id="cart-{{ $dish->dish->id }}">
                                                                         <div
@@ -249,7 +251,7 @@
                                                                                        class="count cart-amt"
                                                                                        id="qty-{{ $dish->dish->id }}"
                                                                                        name="qty-{{ $dish->dish->id }}"
-                                                                                       value="{{ $dish->qty }}"
+                                                                                       value="{{ $dish->qty }}" data-ing="{{ $paidIngredient }}"
                                                                                        data-id="{{ $dish->dish->id }}"/>
                                                                                 <input type="hidden"
                                                                                        id="dish-price-{{ $dish->dish->id }}"

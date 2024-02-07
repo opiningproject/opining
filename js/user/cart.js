@@ -288,6 +288,7 @@ function addCustomizedCart(id) {
                     $("#dish-cart-lbl-" + id).prop('disabled', true);
                     $('.cart-items').append(response.message.cartHtml);
                 }
+                $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()
             }
@@ -320,17 +321,14 @@ function calculateTotalCartAmount() {
     $('.cart-amt').each(function (index, element) {
         var id = $(element).data('id')
 
-        totalAmt += (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
+        totalAmt += (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val())) + parseFloat($(element).data('ing'))
     })
 
     $('#total-cart-bill').text('€' + totalAmt)
     $('#total-cart-bill-amount').val(totalAmt)
 
-    console.log('couponDiscountPercent', couponDiscountPercent)
     couponDiscount = parseFloat(couponDiscountPercent) * totalAmt
-    console.log(couponDiscount)
     totalAmt += parseFloat(serviceCharge)
-
     totalAmt -= parseFloat(couponDiscount)
 
     $('#coupon-discount-text').text('-€' + couponDiscount)

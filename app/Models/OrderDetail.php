@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use function Symfony\Component\Translation\t;
 
 class OrderDetail extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['order_id','dish_id','price','qty','total_price','notes','user_id','is_cart'];
+    protected $fillable = ['order_id','dish_id','dish_option_id','price','qty','total_price','notes','user_id','is_cart'];
     protected $dates = ['created_at', 'updated_at'];
+    protected $appends = ['paid_ingredient_total'];
     public $timestamps = true;
 
     public function order(){
@@ -41,5 +43,10 @@ class OrderDetail extends Model
 
     public function orderDishIngredients(){
         return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
+    }
+
+    public function getPaidIngredientTotalAttribute()
+    {
+        return $this->orderDishPaidIngredients()->select(DB::raw('sum(quantity * price) as total'))->get()->sum('total');
     }
 }

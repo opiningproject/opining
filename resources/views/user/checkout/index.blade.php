@@ -2,10 +2,19 @@
 <?php
 $zipcode = session('zipcode');
 $house_no = session('house_no');
-$cartAmount = 0;
+$cartAmount = 0.00;
+$deliveryCharges = 0.00;
 
-$deliveryCharges = getDeliveryCharges($zipcode);
-$serviceCharge = getRestaurantDetail()->service_charge
+if($zipcode){
+    $deliveryCharges = getDeliveryCharges($zipcode)->delivery_charge;
+}
+$serviceCharge = getRestaurantDetail()->service_charge;
+
+$address = session('address');
+if($address){
+    $addressData = getAddressDetails($address);
+}
+
 ?>
 @section('content')
     <div class="main">
@@ -43,7 +52,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                                         <label for="streetname" class="form-label">Street
                                                                             Name</label>
                                                                         <input type="text" name="street_name" id="street_name" class="form-control" required
-                                                                               value=""/>
+                                                                               value="{{ $addressData->street_name ?? '' }}"/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -52,7 +61,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                                         <label for="housenumber" class="form-label">House
                                                                             Number</label>
                                                                         <input type="number" maxlength="4" min="0" name="house_no" id="house_no" class="form-control"
-                                                                               value="{{ $house_no }}" required/>
+                                                                               value="{{ $addressData->house_no ?? $house_no }}" required/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -61,7 +70,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                                         <label for="zipcode" class="form-label">Zip
                                                                             Code</label>
                                                                         <input type="text" name="zipcode" class="form-control"
-                                                                               value="{{ $zipcode }}" readonly/>
+                                                                               value="{{ $addressData->zipcode ?? $zipcode }}" readonly/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -70,7 +79,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                                         <label for="city"
                                                                                class="form-label">City</label>
                                                                         <input type="text" maxlength="25" required name="city" id="city" class="form-control"
-                                                                               value=""/>
+                                                                               value="{{ $addressData->city ?? '' }}"/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -331,7 +340,8 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                 <h6 class="cart-title">Order Details</h6>
                                                 @foreach($user->cart->dishDetails as $dishDetails)
                                                         <?php
-                                                        $cartAmount += ($dishDetails->qty * $dishDetails->dish->price)
+                                                        $cartAmount += ($dishDetails->qty * $dishDetails->dish->price);
+                                                        $cartAmount += isset($dishDetails->orderDishPaidIngredients) ? $dishDetails->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
                                                         ?>
                                                     <div class="cart-items">
                                                         <div class="row">
@@ -428,7 +438,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                                     <span class="text-muted-1 bill-count-name">Delivery Charges</span>
                                                                 </td>
                                                                 <td class="text-end">
-                                                                    <span class="bill-count">€0</span>
+                                                                    <span class="bill-count">€{{ $deliveryCharges }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -450,7 +460,7 @@ $serviceCharge = getRestaurantDetail()->service_charge
                                                                 <td class="text-start">Total</td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="bill-total-count">€{{ $cartAmount + ($serviceCharge - $couponDiscount) }}</span>
+                                                                        class="bill-total-count">€{{ ($cartAmount + $serviceCharge + $deliveryCharges)- $couponDiscount }}</span>
                                                                 </td>
                                                             </tr>
                                                             </tfoot>

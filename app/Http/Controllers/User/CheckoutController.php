@@ -76,15 +76,16 @@ class CheckoutController extends Controller
 
             $serviceCharges = getRestaurantDetail()->service_charge;
             $cartTotal = getCartTotalAmount();
-            $deliveryCharges = 0;
-            $couponDiscount = 0;
+
+            $deliveryCharges = 0.00;
+            $couponDiscount = 0.00;
             $pointsRedeemed = 0;
             $pointClaimed = 0;
             $orderTime = null;
 
-            if($cartTotal > 20){
+            if($cartTotal > 20.00){
                 $pointClaimed = 1;
-                if($cartTotal > 30){
+                if($cartTotal > 30.00){
                     $pointClaimed = 2;
                 }
             }

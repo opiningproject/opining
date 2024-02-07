@@ -3,27 +3,32 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Zipcode;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\RestaurantDetail;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class AddressController extends Controller
 {
     public function index()
     {
-        
+
     }
 
     public function validateZipcode(Request $request)
     {
-        $zipcode = Zipcode::select('id')->where('zipcode',$request->zipcode)->first();
+        $zipcode = Zipcode::select('id')->where([
+            ['zipcode',$request->zipcode],
+            ['status' , '1']
+        ])->first();
 
         if($zipcode)
         {
+            session()->forget('address');
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);
 
@@ -39,6 +44,35 @@ class AddressController extends Controller
             Address::where('id', $id)->delete();
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+        }
+    }
+
+    public function validateSelectedAddress(string $id){
+        try{
+            $address = Address::find($id);
+            $zipcode = Zipcode::select('id')->where([
+                ['zipcode',$address->zipcode],
+                ['status' , '1']
+            ])->first();
+
+            $response['zipcode'] = $address->zipcode;
+            $response['house_no'] = $address->house_no;
+
+            if($zipcode){
+
+                session(['zipcode'=> $address->zipcode]);
+                session(['house_no'=> $address->house_no]);
+                session(['address' => $id]);
+                $response['message'] = 'Successfully validated';
+
+                return response::json(['status' => 200, 'data' => $response]);
+            }else{
+                $response['message'] = 'Currently, we are not delivering food to this location.';
+                return response::json(['status' => 406, 'data' => $response]);
+            }
+
+        }catch (Exception $e){
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }
 }

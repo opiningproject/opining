@@ -94,6 +94,14 @@ class DishController extends Controller
             $query->whereDishId($id)->whereIsCart('1');
         })->with('dishDetails.orderDishFreeIngredients','dishDetails.orderDishPaidIngredients')->first();
 
+        $paidDishDetail = $order->dishDetails()->whereHas('orderDishPaidIngredients', function ($query) use ($id){
+            $query->whereDishId($id)->whereIsCart('1');
+        })->with('orderDishPaidIngredients')->first();
+
+        $freeDishDetail = $order->dishDetails()->whereHas('orderDishFreeIngredients', function ($query) use ($id){
+            $query->whereDishId($id)->whereIsCart('1');
+        })->with('orderDishFreeIngredients')->first();
+
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
         $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredientWise', function ($query) use ($id) {
@@ -105,9 +113,12 @@ class DishController extends Controller
         $paidSelectedIngredients = [];
         $totalAmt = $dish->price;
 
-        if($dishDetail){
-            $freeSelectedIngredients = $dishDetail->dishDetails[0]->orderDishFreeIngredients ? $dishDetail->dishDetails[0]->orderDishFreeIngredients->pluck('dish_ingredient_id')->toArray() : [];
-            $paidSelectedIngredients = $dishDetail->dishDetails[0]->orderDishPaidIngredients ? $dishDetail->dishDetails[0]->orderDishPaidIngredients->pluck('quantity','dish_ingredient_id')->toArray() : [];
+        if($paidDishDetail){
+            $paidSelectedIngredients = $paidDishDetail->orderDishPaidIngredients->pluck('quantity','dish_ingredient_id')->toArray();
+        }
+
+        if($freeDishDetail){
+            $freeSelectedIngredients = $freeDishDetail->orderDishFreeIngredients->pluck('dish_ingredient_id')->toArray();
         }
 
         $html_options = '';
@@ -195,9 +206,10 @@ class DishController extends Controller
                     $ingredient_name = $ingredient->name;
                     $ingredient_image = $ingredient->image;
                     $ingredient_price = $ingredient->paidDishIngredientWise->price;
+                    $ingredient_id = $ingredient->paidDishIngredientWise->id;
 
-                    if(array_key_exists($ingredient->id, $paidSelectedIngredients)){
-                        $paidQty = $paidSelectedIngredients[$ingredient->id];
+                    if(array_key_exists($ingredient_id, $paidSelectedIngredients)){
+                        $paidQty = $paidSelectedIngredients[$ingredient_id];
                         $totalAmt += ($paidQty * $ingredient_price);
                     }
 
@@ -212,7 +224,7 @@ class DishController extends Controller
                                         <span class='minus'>
                                           <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)></i>
                                         </span>
-                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient->id' id='dishIng$ingredient->id' value='$paidQty'>
+                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient_id' id='dishIng$ingredient->id' value='$paidQty'>
                                         <span class='plus'>
                                           <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+',$dish->id)></i>
                                         </span>

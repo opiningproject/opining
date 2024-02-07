@@ -11,7 +11,7 @@ class OrderUserDetail extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['order_id','order_name','order_contact_number','company_name','house_no','street_name','city','zipcode'];
+    protected $fillable = ['order_id','order_name','order_contact_number','company_name','house_no','street_name','city','zipcode','latitude','longitude'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

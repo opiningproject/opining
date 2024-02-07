@@ -28,6 +28,32 @@ $(function ()
 
         $("#zipcode-error").addClass('d-none');
     });
+
+    $(document).on('click','.select-address-btn', function (){
+
+        var addressId = $(this).data('id')
+
+        $.ajax({
+            url: baseURL+'/user/validate-address/'+addressId,
+            type: 'GET',
+            success: function (response) {
+                $('#zipcode').val(response.data.zipcode)
+                $('#house_no').val(response.data.house_no)
+                if(response.status == 406)
+                {
+
+                    $('#zipcode-error').text(response.data.message);
+                    $('#zipcode-error').css("display", "block");
+                }else{
+                    location.reload()
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
 });
 
 
@@ -79,5 +105,3 @@ function deleteAddress(id)
             }
         })
 }
-
-

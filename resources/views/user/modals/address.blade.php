@@ -43,30 +43,40 @@
                         </div>
                     </div>
                 </form>
-                <div class="address-box">
-                    <h1 class="modal-title mb-0 font-sebinomedium">My Address</h1>
-                    <hr/>
-                    <div class="row">
-                        @foreach($addresses as $key => $add)
-                            <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10"
-                                 id="address-{{ $add->id }}">
-                                <div class="card card-body h-100 address-card active">
-                                    <!-- <p> Tochtstraat 10, 3036 SK, Nieuwegein, Netherlands 3950009 </p> -->
-                                    <p>{{ $add->company_name }} {{ $add->house_no }}, {{ $add->street_name }}
-                                        , {{ $add->city }} {{ $add->zipcode }}</p>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <a href="javascript:void(0);"
-                                           class="btn btn-xs-sm btn-custom-yellow text-capitalize">Deliver Here</a>
-                                        <a class="btn btn-custom-yellow btn-icon"
-                                           onclick="deleteAddress({{ $add->id }})">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </a>
+                @if(count($addresses))
+                    <div class="address-box">
+                        <h1 class="modal-title mb-0 font-sebinomedium">My Address</h1>
+                        <hr/>
+                        <div class="row">
+                            @foreach($addresses as $key => $add)
+                                <?php
+                                    $addressText = 'Deliver Here';
+                                    $style='';
+                                    if(session('address') == $add->id){
+                                        $addressText = 'Selected';
+                                        $style = 'style=pointer-events:none;cursor:default';
+                                    }
+                                    ?>
+                                <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10"
+                                     id="address-{{ $add->id }}">
+                                    <div class="card card-body h-100 address-card active">
+                                        <p>{{ $add->company_name }} {{ $add->house_no }}, {{ $add->street_name }}
+                                            , {{ $add->city }} {{ $add->zipcode }}</p>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <a href="javascript:void(0);"
+                                               class="btn btn-xs-sm btn-custom-yellow text-capitalize select-address-btn"
+                                               {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a>
+                                            <a class="btn btn-custom-yellow btn-icon"
+                                               onclick="deleteAddress({{ $add->id }})">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

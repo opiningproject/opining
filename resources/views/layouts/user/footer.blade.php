@@ -33,10 +33,10 @@
         }
     });
 
-    jQuery(document).ajaxStart(function(){
+    $(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');
     })
-    jQuery(document).ajaxStop(function(){
+    $(document).ajaxStop(function(){
         $('#loader').addClass('d-none');
     })
 

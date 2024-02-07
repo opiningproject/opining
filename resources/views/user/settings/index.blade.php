@@ -55,13 +55,6 @@
                     </div>
                   </div>
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
-                    <!-- <div class="form-group">
-                      <label for="restaurantpermit" class="form-label">Phone</label>
-                      <div class="countrycode-phone-control position-relative">
-                        <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
-                        <input type="text" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
-                      </div>
-                    </div> -->
                     <div class="form-group">
                         <label for="restaurantpermit" class="form-label">Phone</label>
                         <div class="input-group countrycode-phone-control">
@@ -94,7 +87,7 @@
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                     <div class="form-group">
                       <label for="gender" class="form-label">Gender</label>
-                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="gender" name="gender" required>
+                      <select class="form-select form-select-lg" aria-label=".form-select-lg example" id="gender" name="gender" required>
                         <option value="" {{ !$user->gender ? 'selected':''}} >Please select</option>
                         <option value="1" {{ $user->gender=='1' ? 'selected':''}} >Male</option>
                         <option value="2" {{ $user->gender=='2' ? 'selected':''}} >Female</option>
@@ -106,7 +99,6 @@
                 <div class="row">
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
                     <a class="btn btn-custom-yellow btn-default d-block">
-                      <!-- <span class="align-middle">Save</span> -->
                       <button type="submit" class="align-middle border-0 bg-transparent" id="profile-save-btn">Save</button>
                     </a>
                   </div>

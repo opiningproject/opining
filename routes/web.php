@@ -39,6 +39,8 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
+Route::post('/paymentCallback', [App\Http\Controllers\User\WebhookController::class, 'paymentCallback']);
+
 Route::middleware(['localization'])->group(function () {
     Route::get('privacy-policy', [App\Http\Controllers\User\CMSController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('terms', [App\Http\Controllers\User\CMSController::class, 'terms'])->name('terms');

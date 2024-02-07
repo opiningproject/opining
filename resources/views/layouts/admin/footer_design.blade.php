@@ -6,6 +6,6 @@
             </div>
         </a>
     </div>
-    <p class="mb-0 footer-copyright-text">Gomeal &copy; 2023 Gomeal - ALL
+    <p class="mb-0 footer-copyright-text">Gomeal &copy; 2024 Gomeal - ALL
         Rights Reserved</p>
 </footer>

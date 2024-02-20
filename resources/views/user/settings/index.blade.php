@@ -61,8 +61,8 @@
                             <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
                             </button>
-                            
-                            <input type="text" class="form-control countrycode-input" value="+31">
+
+                            <input type="text" class="form-control countrycode-input" readonly value="+31">
                             <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
                         </div>
                     </div>
@@ -98,8 +98,9 @@
                 </div>
                 <div class="row">
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
-                    <a class="btn btn-custom-yellow btn-default d-block">
-                      <button type="submit" class="align-middle border-0 bg-transparent" id="profile-save-btn">Save</button>
+                    <a type="submit" class="btn btn-custom-yellow btn-default d-block align-middle">
+                        Save
+{{--                      <button type="submit" class="align-middle" id="profile-save-btn">Save</button>--}}
                     </a>
                   </div>
                 </div>

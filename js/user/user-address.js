@@ -1,25 +1,25 @@
-$(function ()
-{
-    var url = baseURL +'/user/dashboard';
+$(function () {
+    var url = baseURL + '/user/dashboard';
 
     $("#delivery-add-form").validate({
-          submitHandler: function(form) {
+        submitHandler: function (form) {
             validateZipcode();
             //window.location.href = url;
-          }
-     });
+        }
+    });
 
-     $("#take-away-add-form").validate({
-          submitHandler: function(form) {
-            window.location.href = url;
-          }
-     });
+    $("#take-away-add-form").validate({
+        submitHandler: function (form) {
+            // window.location.href = url;
+            addTakeawayPhone()
+        }
+    });
 
     $("#address-form").validate({
-          submitHandler: function(form) {
-              validateZipcode()
-          }
-     });
+        submitHandler: function (form) {
+            validateZipcode()
+        }
+    });
 
     $('#addressChangeModal').on('hidden.bs.modal', function () {
         var alertas = $('#address-form');
@@ -29,22 +29,21 @@ $(function ()
         $("#zipcode-error").addClass('d-none');
     });
 
-    $(document).on('click','.select-address-btn', function (){
+    $(document).on('click', '.select-address-btn', function () {
 
         var addressId = $(this).data('id')
 
         $.ajax({
-            url: baseURL+'/user/validate-address/'+addressId,
+            url: baseURL + '/user/validate-address/' + addressId,
             type: 'GET',
             success: function (response) {
                 $('#zipcode').val(response.data.zipcode)
                 $('#house_no').val(response.data.house_no)
-                if(response.status == 406)
-                {
+                if (response.status == 406) {
 
                     $('#zipcode-error').text(response.data.message);
                     $('#zipcode-error').css("display", "block");
-                }else{
+                } else {
                     location.reload()
                 }
             },
@@ -57,28 +56,24 @@ $(function ()
 });
 
 
-function validateZipcode()
-{
-  var zipcode = $('#zipcode').val();
-  var house_no = $('#house_no').val();
+function validateZipcode() {
+    var zipcode = $('#zipcode').val();
+    var house_no = $('#house_no').val();
 
-  var url = baseURL +'/user/dashboard';
+    var url = baseURL + '/user/dashboard';
 
-  $.ajax({
-        url: baseURL+'/validateZipcode',
+    $.ajax({
+        url: baseURL + '/validateZipcode',
         type: 'POST',
         data: {
-            zipcode,house_no
+            zipcode, house_no
         },
         success: function (response) {
 
-            if(response.status == 2)
-            {
+            if (response.status == 2) {
                 $('#zipcode-error').text(response.message);
                 $('#zipcode-error').css("display", "block");
-            }
-            else
-            {
+            } else {
                 window.location.href = url;
             }
         },
@@ -89,19 +84,38 @@ function validateZipcode()
     })
 }
 
-function deleteAddress(id)
-{
+function addTakeawayPhone() {
+
+    var phone_no = $('#phone_no').val();
+
     $.ajax({
-            url: baseURL+'/user/delete-address/' + id,
-            type: 'GET',
-            success: function (response) {
-                console.log('success')
-                console.log(response)
-                $('#address-'+id).remove();
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
-            }
-        })
+        url: baseURL + '/takeawayPhone',
+        type: 'POST',
+        data: {
+            phone_no
+        },
+        success: function (response) {
+            window.location.href = baseURL + '/user/dashboard';
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+function deleteAddress(id) {
+    $.ajax({
+        url: baseURL + '/user/delete-address/' + id,
+        type: 'GET',
+        success: function (response) {
+            console.log('success')
+            console.log(response)
+            $('#address-' + id).remove();
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
 }

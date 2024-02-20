@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
 use App\Models\DishIngredient;
+use App\Models\RestaurantDetail;
 use App\Models\Zipcode;
 use Exception;
 use Illuminate\Http\Request;
@@ -81,7 +82,7 @@ class CartController extends Controller
 
                 if(count($dish->freeIngredients) > 0)
                 {
-                    foreach ($dish->freeIngredients as $key => $ingredient)
+                    foreach ($dish->freeIngredients as $ingredient)
                     {
                         $cartDetail->orderDishDetails()->create([
                             'dish_id' => $dish->id,
@@ -152,12 +153,18 @@ class CartController extends Controller
     public function updateDishQty(Request $request)
     {
         try {
+            $user = Auth::user();
             if ($request->current_qty >= 1) {
-                OrderDetail::where('dish_id', $request->dish_id)->update(array(
+                $user->cart->dishDetails()->where('dish_id', $request->dish_id)->update([
                     'qty' => DB::raw('qty ' . $request->operator . '1')
-                ));
+                    ]
+                );
+                /*OrderDetail::where('dish_id', $request->dish_id)->update(array(
+                    'qty' => DB::raw('qty ' . $request->operator . '1')
+                ));*/
             } else {
-                OrderDetail::where('dish_id', $request->dish_id)->forceDelete();
+                $user->cart->dishDetails()->where('dish_id', $request->dish_id)->forceDelete();
+//                OrderDetail::where('dish_id', $request->dish_id)->forceDelete();
             }
 
             return response::json(['status' => 1, 'message' => '']);
@@ -193,9 +200,9 @@ class CartController extends Controller
 
             $dishDetail = $order->whereHas('dishDetails')->with(['dishDetails' =>function ($query) use ($id){
                 $query->whereDishId($id)->whereIsCart('1');
-            }])->first();
+            }])->where('is_cart', '1')->first();
 
-            if($dishDetail){
+            if(count($dishDetail->dishDetails) > 0){
                 $orderDetails = OrderDetail::find($dishDetail->dishDetails[0]->id);
 
                 $orderDetails->orderDishDetails()->delete();
@@ -264,6 +271,19 @@ class CartController extends Controller
 
     public function updateDeliveryType(Request $request){
         try{
+            if($request->type == OrderType::Delivery){
+                session()->forget('address');
+                session(['zipcode' => $request->zipcode]);
+                session(['house_no' => $request->houseNo]);
+
+            }else{
+                session()->forget(['house_no','zipcode','address']);
+            }
+
+            if (!Auth::user()) {
+                return response::json(['status' => 401, 'message' => 'Unauthorized']);
+            }
+
             $user = Auth::user();
 
             if($user->cart){
@@ -271,13 +291,6 @@ class CartController extends Controller
                     'order_type' => $request->type
                 ]);
 
-            }
-            if($request->type == OrderType::Delivery){
-                session(['zipcode' => $request->zipcode]);
-                session(['house_no' => $request->houseNo]);
-
-            }else{
-                session()->forget(['house_no','zipcode']);
             }
 
             return response::json(['status' => 200, 'message' => 'Delivery type updated successfully']);
@@ -290,9 +303,28 @@ class CartController extends Controller
     public function validateCart(Request $request){
         try{
             $user = Auth::user();
+            $restaurantHours = getRestaurantOpenTime();
+            $now = date('H:i');
 
-            if(strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())){
-                return response::json(['status' => 406, 'message' => "Coupon is expired."]);
+            if($user->cart->coupon){
+                if(strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())){
+                    return response::json(['status' => 406, 'message' => "Coupon is expired."]);
+                }
+            }
+
+            $outOfStockDishes = OrderDetail::with('dish')->whereHas('dish', function($query){
+                $query->where('qty',0)->orWhere('out_of_stock','1');
+            })->where([
+                ['order_id', $user->cart->id],
+                ['is_cart', '1']
+            ])->get();
+
+            if(count($outOfStockDishes) > 0){
+                return response::json(['status' => 412, 'message' => "Few items are out of stock. Please remove them to continue."]);
+            }
+
+            if($now < $restaurantHours->start_time || $now > $restaurantHours->end_time){
+                return response::json(['status' => 412, 'message' => "The restaurant doesn't deliver at this time. Please try again after sometime."]);
             }
 
             if($user->cart->order_type == '1'){
@@ -323,6 +355,33 @@ class CartController extends Controller
                 return response::json(['status' => 200, 'message' => 'Takeaway']);
             }
 
+        }catch (Exception $e){
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function removeCartDish(string $id){
+        try{
+            $orderDish = OrderDetail::find($id);
+            $orderDish->orderDishDetails()->forceDelete();
+            $orderDish->forceDelete();
+            return response::json(['status' => 200, 'message' => 'Dish Deleted']);
+        }catch (Exception $e){
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateDishNotes(Request $request, string $id){
+        try{
+
+            $orderDish = OrderDetail::find($id);
+            $orderDish->notes = $request->notes;
+
+            if($orderDish->save()){
+                return response::json(['status' => 200, 'message' => 'Notes Added']);
+            }else{
+                return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
+            }
         }catch (Exception $e){
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }

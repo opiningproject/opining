@@ -65,6 +65,7 @@ Route::middleware(['localization'])->group(function () {
     Route::get('email/verify/{id}', [App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
     Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
+    Route::post('/takeawayPhone', [App\Http\Controllers\User\AddressController::class, 'takeawayPhone']);
     Route::post('/dish/searchDish', [DishController::class, 'searchDish']);
 
 });
@@ -174,12 +175,15 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::post('/coupon/apply', [App\Http\Controllers\User\CouponController::class, 'apply']);
         Route::patch('/remove-coupon', [App\Http\Controllers\User\CouponController::class, 'removeCoupon']);
 
-
+        Route::delete('/cart/remove-dish/{cart_dish_id}', [\App\Http\Controllers\User\CartController::class, 'removeCartDish']);
         Route::patch('/cart/update-delivery-type', [\App\Http\Controllers\User\CartController::class, 'updateDeliveryType']);
         Route::post('/validate-cart', [\App\Http\Controllers\User\CartController::class, 'validateCart']);
-        Route::post('/place-order-cod', [\App\Http\Controllers\User\CheckoutController::class, 'placeOrderCashOnDelivery']);
+        Route::post('/place-order', [\App\Http\Controllers\User\CheckoutController::class, 'placeOrderData']);
 
         Route::get('/validate-address/{address_id}',[\App\Http\Controllers\User\AddressController::class,'validateSelectedAddress']);
+        Route::get('/redirect-ideal-payment',[\App\Http\Controllers\User\CheckoutController::class,'redirectedIdealPayment']);
+
+        Route::patch('/cart/update-notes/{dish_id}',[\App\Http\Controllers\User\CartController::class, 'updateDishNotes']);
 
     });
     // User Routes

@@ -5,15 +5,20 @@ $house_no = session('house_no');
 $cartAmount = 0.00;
 $deliveryCharges = 0.00;
 
-if($zipcode){
+if ($zipcode) {
     $deliveryCharges = getDeliveryCharges($zipcode)->delivery_charge;
 }
 $serviceCharge = getRestaurantDetail()->service_charge;
 
 $address = session('address');
-if($address){
+$phone_no = session('phone_no');
+
+if ($address) {
     $addressData = getAddressDetails($address);
 }
+$restaurantOpen = getRestaurantOpenTime();
+
+$couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartAmount : 0;
 
 ?>
 @section('content')
@@ -30,6 +35,8 @@ if($address){
                         </div>
                         <section class="custom-section checkout-section">
                             <form id="final-checkout-form">
+                                <input type="hidden" name="is_address_elected" value="{{ $address ?? 0 }}"
+                                       id="address_selected">
                                 <div class="row checkout-form-steps">
                                     <div class="checkout-form-item">
                                         <div class="form-step-icon">
@@ -51,7 +58,9 @@ if($address){
                                                                     <div class="form-group">
                                                                         <label for="streetname" class="form-label">Street
                                                                             Name</label>
-                                                                        <input type="text" name="street_name" id="street_name" class="form-control" required
+                                                                        <input type="text" name="street_name"
+                                                                               id="street_name" class="form-control"
+                                                                               required
                                                                                value="{{ $addressData->street_name ?? '' }}"/>
                                                                     </div>
                                                                 </div>
@@ -60,8 +69,11 @@ if($address){
                                                                     <div class="form-group">
                                                                         <label for="housenumber" class="form-label">House
                                                                             Number</label>
-                                                                        <input type="number" maxlength="4" min="0" name="house_no" id="house_no" class="form-control"
-                                                                               value="{{ $addressData->house_no ?? $house_no }}" required/>
+                                                                        <input type="number" maxlength="4" min="0"
+                                                                               name="house_no" id="house_no"
+                                                                               class="form-control"
+                                                                               value="{{ $addressData->house_no ?? $house_no }}"
+                                                                               required/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -69,8 +81,10 @@ if($address){
                                                                     <div class="form-group">
                                                                         <label for="zipcode" class="form-label">Zip
                                                                             Code</label>
-                                                                        <input type="text" name="zipcode" class="form-control"
-                                                                               value="{{ $addressData->zipcode ?? $zipcode }}" readonly/>
+                                                                        <input type="text" name="zipcode" id="zipcode"
+                                                                               class="form-control"
+                                                                               value="{{ $addressData->zipcode ?? $zipcode }}"
+                                                                               readonly/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -78,7 +92,9 @@ if($address){
                                                                     <div class="form-group">
                                                                         <label for="city"
                                                                                class="form-label">City</label>
-                                                                        <input type="text" maxlength="25" required name="city" id="city" class="form-control"
+                                                                        <input type="text" maxlength="25" required
+                                                                               name="city" id="city"
+                                                                               class="form-control"
                                                                                value="{{ $addressData->city ?? '' }}"/>
                                                                     </div>
                                                                 </div>
@@ -88,8 +104,9 @@ if($address){
                                                                         <label for="companyname" class="form-label">Company
                                                                             Name
                                                                             (optional)</label>
-                                                                        <input type="text" maxlength="30" class="form-control" name="company_name"
-                                                                               value=""/>
+                                                                        <input type="text" maxlength="30"
+                                                                               class="form-control" name="company_name"
+                                                                               value="{{ $addressData->company_name ?? '' }}"/>
                                                                     </div>
                                                                 </div>
                                                                 <div
@@ -98,7 +115,8 @@ if($address){
                                                                         <label for="companyname" class="form-label">Add
                                                                             Delivery
                                                                             instruction</label>
-                                                                        <input type="text" class="form-control" name="instructions" maxlength="50"
+                                                                        <input type="text" class="form-control"
+                                                                               name="instructions" maxlength="50"
                                                                                value=""/>
                                                                     </div>
                                                                 </div>
@@ -114,7 +132,9 @@ if($address){
                                                             <div class="form-group">
                                                                 <label for="firstname" class="form-label">First
                                                                     Name</label>
-                                                                <input type="text" class="form-control" name="first_name" required value=""/>
+                                                                <input type="text" class="form-control"
+                                                                       name="first_name" required
+                                                                       value="{{ $user->first_name }}"/>
                                                             </div>
                                                         </div>
                                                         <div
@@ -122,7 +142,8 @@ if($address){
                                                             <div class="form-group">
                                                                 <label for="lastname" class="form-label">Last
                                                                     Name</label>
-                                                                <input type="text" class="form-control" name="last_name" value=""/>
+                                                                <input type="text" class="form-control" name="last_name"
+                                                                       value="{{ $user->last_name }}"/>
                                                             </div>
                                                         </div>
                                                         <div
@@ -142,8 +163,10 @@ if($address){
                                                                     <input type="text"
                                                                            class="form-control countrycode-input"
                                                                            value="+31">
-                                                                    <input type="number" class="form-control" maxlength="9" required name="phone_no"
-                                                                           value="">
+                                                                    <input type="number" class="form-control"
+                                                                           minlength="9" maxlength="9" required
+                                                                           name="phone_no" min="1"
+                                                                           value="{{ $user->phone_no == '' ? $phone_no : $user->phone_no }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -151,8 +174,9 @@ if($address){
                                                             class="col-xxl-6 col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12">
                                                             <div class="form-group">
                                                                 <label for="email" class="form-label">Email</label>
-                                                                <input type="email" required name="email" class="form-control"
-                                                                       value=""/>
+                                                                <input type="email" required name="email"
+                                                                       class="form-control" readonly
+                                                                       value="{{ $user->email }}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -201,12 +225,13 @@ if($address){
                                                             <div class="form-group">
                                                                 <label for="selecttime" class="form-label">Select
                                                                     Time</label>
-                                                                <select class="form-select"
-                                                                        aria-label="Default select example">
-                                                                    <option value="1" selected>11:05</option>
-                                                                    <option value="2">12:10</option>
-                                                                    <option value="3">01:30</option>
-                                                                </select>
+
+                                                                <input type="text"
+                                                                       class="timepicker form-control time-form-control"
+                                                                       name="custom-delivery-time"
+                                                                       id="custom-delivery-time"
+                                                                       style="max-height: fit-content">
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -230,14 +255,15 @@ if($address){
                                                             <h4 class="custom-card-title-1 form-group">Payment</h4>
                                                             <div class="nav flex-column nav-pills" id="v-pills-tab"
                                                                  role="tablist" aria-orientation="vertical">
-                                                                <button class="nav-link active payment-type-tab" id="v-pills-ideal-tab" data-type="3"
+                                                                <button class="nav-link active payment-type-tab"
+                                                                        id="v-pills-ideal-tab" data-type="3"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-ideal" type="button"
                                                                         role="tab" aria-controls="v-pills-ideal"
                                                                         aria-selected="true">
                                                                     <img src="{{ asset('images/ideal.svg') }}" alt=""
                                                                          height="22" width="25" class="svg">
-                                                                    Ideal
+                                                                    iDEAL
                                                                 </button>
                                                                 <button class="nav-link payment-type-tab" data-type="1"
                                                                         id="v-pills-creditanddebitcard-tab"
@@ -250,7 +276,8 @@ if($address){
                                                                          height="20" width="27" class="svg">
                                                                     Credit & Debit cards
                                                                 </button>
-                                                                <button class="nav-link payment-type-tab" id="v-pills-cashondelivery-tab" data-type="2"
+                                                                <button class="nav-link payment-type-tab"
+                                                                        id="v-pills-cashondelivery-tab" data-type="2"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-cashondelivery"
                                                                         type="button" role="tab"
@@ -264,9 +291,46 @@ if($address){
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="tab-content w-100" id="v-pills-tabContent">
-                                                                <div class="tab-pane fade show active" id="v-pills-ideal"
+                                                                <div class="tab-pane fade show active"
+                                                                     id="v-pills-ideal"
                                                                      role="tabpanel" aria-labelledby="v-pills-ideal-tab"
-                                                                     tabindex="0"></div>
+                                                                     tabindex="0">
+                                                                    <main class="bd-main order-1">
+                                                                        <div class="main-content d-flex flex-column ">
+                                                                            <div
+                                                                                class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
+                                                                                <div
+                                                                                    class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
+                                                                                    <h1 class="page-title">Order
+                                                                                        payment</h1>
+                                                                                </div>
+                                                                            </div>
+                                                                            <form id="payment-form">
+                                                                                <!--
+                                                                                  Using a label with a for attribute that matches the ID of the
+                                                                                  Element container enables the Element to automatically gain focus
+                                                                                  when the customer clicks on the label.
+                                                                                -->
+                                                                                <label for="ideal-bank-element"
+                                                                                       class="mb-3">
+                                                                                    iDEAL Banks
+                                                                                </label>
+                                                                                <div id="ideal-bank-element">
+                                                                                    <!-- A Stripe Element will be inserted here. -->
+                                                                                </div>
+
+                                                                                {{--                                                                                <button type="submit">Pay</button>--}}
+
+                                                                                <!-- Used to display form errors. -->
+                                                                                <div id="error-message"
+                                                                                     role="alert"></div>
+                                                                            </form>
+
+                                                                            <div id="messages" role="alert"
+                                                                                 style="display: none;"></div>
+                                                                        </div>
+                                                                    </main>
+                                                                </div>
                                                                 <div class="tab-pane fade"
                                                                      id="v-pills-creditanddebitcard" role="tabpanel"
                                                                      aria-labelledby="v-pills-creditanddebitcard-tab"
@@ -274,25 +338,25 @@ if($address){
                                                                     <h4 class="custom-card-title-1 form-group">Add new
                                                                         card </h4>
                                                                     <div class="payment-form-card">
-                                                                        <input type="number" class="form-control"
-                                                                               placeholder="card number">
+                                                                        <input type="text" class="form-control cardNumber" name="card_number" required
+                                                                               placeholder="Card number">
                                                                         <div class="row g-0">
                                                                             <div
                                                                                 class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                                                <input type="number"
-                                                                                       class="form-control"
+                                                                                <input type="text" name="exp_date" required
+                                                                                       class="form-control expireYear"
                                                                                        placeholder="Valid through (MM/YY)">
                                                                             </div>
                                                                             <div
                                                                                 class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                                                <input type="number"
+                                                                                <input type="number" name="cvv" required
                                                                                        class="form-control form-control-br-left"
-                                                                                       placeholder="CVV" min="3"
-                                                                                       max="3">
+                                                                                       placeholder="CVV" minlength="3"
+                                                                                       maxlength="3">
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" class="form-control border-0"
-                                                                               placeholder="name on card">
+                                                                        <input type="text" class="form-control border-0" name="card_name" required
+                                                                               placeholder="Name on card">
                                                                     </div>
                                                                 </div>
                                                                 <div class="tab-pane fade" id="v-pills-cashondelivery"
@@ -301,12 +365,14 @@ if($address){
                                                                      tabindex="0"></div>
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" value="3" id="payment_type" name="payment_type">
+                                                        <input type="hidden" value="3" id="payment_type"
+                                                               name="payment_type">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-check form-group custom-checkbox">
-                                                <input class="form-check-input check-input-secondary" type="checkbox" name="receive_mail"
+                                                <input class="form-check-input check-input-secondary" type="checkbox"
+                                                       name="receive_mail"
                                                        id="receiveemail" value="1">
                                                 <label class="form-check-label text-capitalize align-middle"
                                                        for="receiveemail"> Receive emails about discounts, push-mails
@@ -318,7 +384,10 @@ if($address){
                                                     <div class="form-group">
                                                         <a class="btn btn-custom-yellow btn-default d-block">
                                                             <button type="submit"
-                                                                class="align-middle bg-transparent border-0">Pay €202.00 with Credit Card</button>
+                                                                    class="align-middle bg-transparent border-0">Pay
+                                                                €{{ orderTotalPayAmount() }} with <span
+                                                                    id="total-amt-pay-btn">iDEAL</span>
+                                                            </button>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -330,7 +399,8 @@ if($address){
                         </section>
                     </div>
                     <aside class="cart-sidebar position-relative">
-                        <div class="offcanvas-lg offcanvas-end h-100" tabindex="-1" id="bdSidebarCart" aria-labelledby="bdSidebarCartOffcanvasLabel">
+                        <div class="offcanvas-lg offcanvas-end h-100" tabindex="-1" id="bdSidebarCart"
+                             aria-labelledby="bdSidebarCartOffcanvasLabel">
                             <div class="offcanvas-header p-0" style="display: block;"></div>
                             <div class="offcanvas-body h-100">
                                 <div class="navbar navbar-expand-lg pt-0 h-100">
@@ -373,7 +443,7 @@ if($address){
                                                                             <label for="dishnameenglish"
                                                                                    class="form-label">Add
                                                                                 notes</label>
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="text" class="form-control dish-notes" value="{{ $dishDetails->notes }}" data-id="{{ $dishDetails->id }}"
                                                                                    placeholder="Type here...">
                                                                         </div>
                                                                     </div>
@@ -420,7 +490,8 @@ if($address){
                                                                     <span class="text-muted-1 bill-count-name">Item Total </span>
                                                                 </td>
                                                                 <td class="text-end">
-                                                                    <span class="bill-count">€{{ $cartAmount }}</span>
+                                                                    <span
+                                                                        class="bill-count">€{{ getCartTotalAmount() }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -438,13 +509,12 @@ if($address){
                                                                     <span class="text-muted-1 bill-count-name">Delivery Charges</span>
                                                                 </td>
                                                                 <td class="text-end">
-                                                                    <span class="bill-count">€{{ $deliveryCharges }}</span>
+                                                                    <span
+                                                                        class="bill-count">€{{ $deliveryCharges }}</span>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <?php
-                                                                $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartAmount : 0;
-                                                                ?>
+                                                            <tr {{ isset($user->cart->coupon) ? '' : 'style=display:none' }}>
+
                                                                 <td class="text-start">
                                                                     <span
                                                                         class="text-custom-light-green bill-count-name">Coupon Discount({{ $user->cart->coupon_code }})</span>
@@ -460,7 +530,8 @@ if($address){
                                                                 <td class="text-start">Total</td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="bill-total-count">€{{ ($cartAmount + $serviceCharge + $deliveryCharges)- $couponDiscount }}</span>
+                                                                        class="bill-total-count"
+                                                                        id="total-payment-text">€{{ orderTotalPayAmount() }}</span>
                                                                 </td>
                                                             </tr>
                                                             </tfoot>
@@ -484,6 +555,111 @@ if($address){
 @endsection
 
 @section('script')
-    <script type="text/javascript" async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&loading=async"></script>
+    <script type="text/javascript" async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&loading=async"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
+    <script>
+        $(function () {
+            var startTime = '<?= date('H:i', strtotime('+30 mins')) ?>';
+            var endTime = '<?= $restaurantOpen->end_time ?>';
+            $('.timepicker').timepicker({
+                timeFormat: 'HH:mm',
+                interval: 30,
+                dynamic: true,
+                dropdown: true,
+                scrollbar: true,
+                minTime: startTime,
+                maxTime: endTime,
+            });
+        })
+        var public_key = '{{ config('params.stripe.sandbox.public_key') }}';
+        const stripe = Stripe(public_key, {
+            apiVersion: '2020-08-27'
+        });
+
+        const elements = stripe.elements();
+        const idealBank = elements.create('idealBank');
+        idealBank.mount('#ideal-bank-element');
+
+        async function addOrder() {
+
+            var deliveryType = $('input[name=del_radio]:checked').val()
+            var paymentType = $('#payment_type').val()
+
+            var zipcode = $('#zipcode').val()
+            console.log('zipcode',zipcode)
+
+            if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
+                alert('Please select time')
+                return false
+            }
+
+            var checkoutData = new FormData(document.getElementById('final-checkout-form'))
+            var latitude = ''
+            var longitude = ''
+
+            if(zipcode != undefined){
+                var streetName = $('#street_name').val()
+                var houseNo = $('#house_no').val()
+                var city = $('#city').val()
+                var address = houseNo + ' ' + streetName + ' ' + city
+                var geocoder = new google.maps.Geocoder();
+
+                await geocoder.geocode({'address': address}, function (results, status) {
+
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        latitude = results[0].geometry.location.lat();
+                        longitude = results[0].geometry.location.lng();
+                    }
+                });
+            }
+
+            checkoutData.append('longitude', longitude)
+            checkoutData.append('latitude', latitude)
+
+            await $.ajax({
+                url: baseURL + '/user/place-order',
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                data: checkoutData,
+                async success(response) {
+                    if (response.status == 200) {
+                        if(paymentType == '2'){
+                            window.location.replace(baseURL + '/user/orders')
+                        }else if(paymentType == '3'){
+                            const {error, paymentIntent} = await stripe.confirmIdealPayment(
+                                response.message.paymentIntent.client_secret, {
+                                    payment_method: {
+                                        ideal: idealBank,
+                                    },
+                                    return_url: 'http://localhost/go-meal/user/redirect-ideal-payment',
+                                },
+                            );
+                            if (error) {
+                                alert(error.message);
+                                return;
+                            }
+                        }else{
+                            if(response.message.cardPayment){
+                                window.location.replace(baseURL + '/user/orders')
+                            }else{
+                                alert(response.message)
+                            }
+                        }
+                    } else {
+                        alert(response.message)
+                    }
+                },
+                error(response) {
+
+                }
+            })
+
+
+            // window.location.replace(baseURL + '/user/ideal-payment')
+
+        }
+    </script>
 @endsection

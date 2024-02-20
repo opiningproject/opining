@@ -75,4 +75,13 @@ class AddressController extends Controller
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }
+
+    public function takeawayPhone(Request $request){
+        try {
+            session(['phone_no'=> $request->phone_no]);
+            return response::json(['status' => 200, 'data' => 'Phone number stored']);
+        }catch (Exception $e){
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
 }

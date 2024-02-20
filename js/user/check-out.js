@@ -16,49 +16,51 @@ $(function () {
     });
 
     $('.payment-type-tab').click(function () {
-        $('#payment_type').val($(this).data('type'))
+        var paymentType = $(this).data('type')
+        var paymentBtnText = ''
+
+        // 1-Card, 2-Cash, 3-Idle
+        if(paymentType == '1'){
+            paymentBtnText = 'Card'
+        }else if(paymentType == '2'){
+            paymentBtnText = 'Cash'
+        }else{
+            paymentBtnText = 'iDEAL'
+        }
+        $('#payment_type').val(paymentType)
+        $('#total-amt-pay-btn').text(paymentBtnText)
+    })
+
+    $('.cardNumber').keypress(function (e) {
+        var charCode = (e.which) ? e.which : event.keyCode
+
+        if (String.fromCharCode(charCode).match(/[^0-9]/g)) {
+            return false;
+        }
+        if($(this).val().length < 19){
+            let value = $(this).val().replace(/\s/g, '');
+
+            // Update the input value with space after every 4 digits
+            $(this).val(value.replace(/(\d{4})/g, '$1 '));
+        }else{
+            return false
+        }
+
+    })
+
+    $('.expireYear').keypress(function (e) {
+        var charCode = (e.which) ? e.which : event.keyCode
+
+        if (String.fromCharCode(charCode).match(/[^0-9]/g)) {
+            return false;
+        }
+        if($(this).val().length < 5){
+            if ($(this).val().length == 2) {
+                $(this).val($(this).val() + '/');
+            }
+        }else{
+            return false
+        }
+
     })
 });
-
-async function addOrder() {
-
-    var streetName = $('#street_name').val()
-    var houseNo = $('#house_no').val()
-    var city = $('#city').val()
-    var address = houseNo + ' ' + streetName + ' ' + city
-
-    var geocoder = new google.maps.Geocoder();
-    var latitude = ''
-    var longitude = ''
-    await geocoder.geocode( { 'address': address}, function(results, status) {
-
-        if (status == google.maps.GeocoderStatus.OK) {
-            latitude = results[0].geometry.location.lat();
-            longitude = results[0].geometry.location.lng();
-            console.log('longitude 1',longitude)
-            console.log('latitude 2',latitude)
-        }
-    });
-
-    var checkoutData = new FormData(document.getElementById('final-checkout-form'))
-    checkoutData.append('longitude', longitude)
-    checkoutData.append('latitude', latitude)
-
-    await $.ajax({
-        url: baseURL+'/user/place-order-cod',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: checkoutData,
-        success(response){
-            if(response.status == 200){
-                window.location.replace(baseURL+'/user/orders')
-            }else{
-                alert(response.message)
-            }
-        },
-        error(response){
-
-        }
-    })
-}

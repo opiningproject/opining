@@ -14,16 +14,16 @@
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4 mb-md-0">
                     <div class="footer-link">
                         <ul>
-                            <li><a href="{{ route('user.dashboard') }}" class="nav-link">Dashboard</a></li>
-                            <li><a href="{{ route('user.settings') }}" class="nav-link">Profile</a></li>
-                            <li><a href="{{ route('user.coupons') }}" class="nav-link">My Coupon</a></li>
+                            <li><a href="{{ route('user.dashboard') }}" class="nav-link auth-link-check">Dashboard</a></li>
+                            <li><a href="{{ route('user.settings') }}" class="nav-link auth-link-check">Profile</a></li>
+                            <li><a href="{{ route('user.coupons') }}" class="nav-link auth-link-check">My Coupon</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4 mb-md-0">
                     <div class="footer-link">
                         <ul>
-                            <li><a href="{{ route('user.chat') }}" class="nav-link">Chat Support</a></li>
+                            <li><a href="{{ route('user.chat') }}" class="nav-link auth-link-check">Chat Support</a></li>
                             <li><a href="{{ route('terms') }}">Terms & Condition</a></li>
                             <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
                         </ul>
@@ -33,12 +33,12 @@
                     <div class="footer-link">
                         <ul>
                             <li>
-                                <a href="javascript:void(0);">
+                                <a href="tel:+31{{ getRestaurantDetail()->phone_no }}">
                                     <img src="{{ asset('images/phone-icon.svg') }}" class="img-fluid" width="16" height="16">
                                     +31 {{ getRestaurantDetail()->phone_no }}
                                 </a>
                             </li>
-                            <li><a href="javascript:void(0);">
+                            <li><a href="mailto:{{ getRestaurantDetail()->user->email }}">
                                     <img src="{{ asset('images/mail-icon.svg') }}" class="img-fluid"  width="18" height="13">
                                     {{ getRestaurantDetail()->user->email }}
                                 </a></li>
@@ -54,7 +54,7 @@
                     <div class="footer-link">
                         <ul>
                             <li><a>Opening Hours</a></li>
-                            <?php 
+                            <?php
 
                             $days = App\Models\OperatingHour::all();
 
@@ -64,11 +64,11 @@
                                 $groupedDays = array();
 
                                 // Group days with the same opening and closing times
-                                foreach ($days as $day => $times) 
+                                foreach ($days as $day => $times)
                                 {
                                     $formattedTimes =  date("H:i", strtotime($times['start_time'])) .' - '. date("H:i", strtotime($times['end_time']));
 
-                                    if (!isset($groupedDays[$formattedTimes])) 
+                                    if (!isset($groupedDays[$formattedTimes]))
                                     {
                                         $groupedDays[$formattedTimes] = array();
                                     }
@@ -77,7 +77,7 @@
                                 }
 
                                 // Display the result
-                                foreach ($groupedDays as $formattedTimes => $days) 
+                                foreach ($groupedDays as $formattedTimes => $days)
                                 {
                                     if(count($days) > 2)
                                     {

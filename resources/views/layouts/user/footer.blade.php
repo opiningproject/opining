@@ -11,6 +11,7 @@
 <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.charts.js"></script>
 <script src="https://unpkg.com/jquery-fusioncharts@1.1.0/dist/fusioncharts.jqueryplugin.js"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.datepicker.min.js')}}"></script>
+<script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
 
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/inline-svg.js')}}"></script>

@@ -15,6 +15,7 @@ $(function () {
                 houseNo
             },
             success: function (response) {
+
                 if (response.status == 200) {
                     if (type == '1') {
                         $('#addressChangeModal').modal('show')
@@ -60,6 +61,50 @@ $(function () {
             }
         })
     })
+
+    $('.remove-cart-dish').click(function (){
+        var id = $(this).data('id')
+        var dishId = $(this).data('dish-id')
+
+        $.ajax({
+            url: baseURL + '/user/cart/remove-dish/'+ id,
+            type: 'DELETE',
+            success: function (response) {
+                if(response.status == 200){
+                    $('#cart-'+dishId).remove()
+                    calculateTotalCartAmount()
+                }else{
+                    alert(response.message);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage)
+            }
+        })
+    })
+
+    $('.dish-notes').focusout(function (){
+        var notes = $(this).val()
+        var id = $(this).data('id')
+
+        $.ajax({
+            url: baseURL + '/user/cart/update-notes/'+ id,
+            type: 'PATCH',
+            data: {
+                notes
+            },
+            success: function (response) {
+                if(response.status != 200){
+                    alert(response.message);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage)
+            }
+        })
+    })
 });
 
 function addToCart(id) {
@@ -79,7 +124,8 @@ function addToCart(id) {
             $('#cart-amount-cal-data').show()
 
             $('#empty-cart-div').hide()
-
+            $('#qty-'+id).attr('data-ing',0)
+            calculateTotalCartAmount()
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

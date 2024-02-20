@@ -101,14 +101,22 @@
                             <div class="dish-details-div">
                                 <div class="category-list-item-grid">
                                     @foreach ($dishes as $dish)
+                                        <?php
+                                            $disableBtn = '';
+                                            $customizeBtn = false;
+                                            if($dish->qty == 0 || $dish->out_of_stock == '1'){
+                                                $disableBtn = 'disabled';
+                                                $customizeBtn = true;
+                                            }else if($dish->cart){
+                                                $disableBtn = 'disabled';
+                                            }
+                                            ?>
                                         <div class="card food-detail-card">
                                             <p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>
                                             <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}"
                                                onclick="favorite({{ $dish->id }})" id="unfavorite-icon-{{ $dish->id }}">
                                                 <img src="{{ asset('images/favorite-before-icon.svg') }}" alt=""
                                                      class="svg" height="20" width="22">
-
-                                                </svg>
                                             </p>
                                             <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '':'d-none' }}"
                                                onclick="unFavorite({{ $dish->id }})" id="favorite-icon-{{ $dish->id }}">
@@ -124,17 +132,23 @@
                                             <p class="food-price">€{{ $dish->price }}</p>
                                             <button type="button" class="btn btn-xs-sm btn-custom-yellow"
                                                     onclick="addToCart({{ $dish->id }})"
-                                                    id="dish-cart-lbl-{{ $dish->id }}" {{ $dish->cart ? 'disabled':''}}>
-                                                @if($dish->cart)
-                                                    Added to cart
+                                                    id="dish-cart-lbl-{{ $dish->id }}" {{ $disableBtn }}>
+                                                @if($dish->qty == 0 || $dish->out_of_stock == '1')
+                                                    Out of stock
                                                 @else
-                                                    Add
-                                                    <img src="{{ asset('images/plus.svg') }}" alt="" class="svg"
-                                                         height="9" width="9">
+                                                    @if($dish->cart)
+                                                        Added to cart
+                                                    @else
+                                                        Add
+                                                        <img src="{{ asset('images/plus.svg') }}" alt="" class="svg"
+                                                             height="9" width="9">
+                                                    @endif
                                                 @endif
                                             </button>
+                                            @if(!$customizeBtn)
                                             <a href="javascript:void(0);" class="customize-foodlink"
                                                onclick="customizeDish({{ $dish->id }});">Customize</a>
+                                            @endif
                                         </div>
                                     @endforeach
                                 </div>
@@ -149,8 +163,10 @@
                         <div class="offcanvas-header p-0" style="display: block"></div>
                         <div class="offcanvas-body position-relative">
 
-            <button type="button" class="btn-close d-block position-absolute d-lg-none top-0 mt-2 start-0 ms-2" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
-            </button>
+                            <button type="button"
+                                    class="btn-close d-block position-absolute d-lg-none top-0 mt-2 start-0 ms-2"
+                                    data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
+                            </button>
 
                             <div class="navbar navbar-expand-lg pt-0 h-lg-100">
                                 <div class="cart-sidebar-content position-relative h-100">
@@ -235,8 +251,19 @@
                                                                         $cartValue += ($dish->qty * $dish->dish->price);
                                                                         $paidIngredient = isset($dish->orderDishPaidIngredients) ? $dish->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
                                                                         $cartValue += $paidIngredient;
+                                                                        $outOfStock = '';
+                                                                        $outOfStockDisplay = 'd-none';
+                                                                        if($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1'){
+                                                                            $outOfStock = 'nostock-card';
+                                                                            $outOfStockDisplay = '';
+                                                                        }
                                                                         ?>
-                                                                    <div class="row" id="cart-{{ $dish->dish->id }}">
+                                                                    <div class="row stock-card {{ $outOfStock }}" id="cart-{{ $dish->dish->id }}">
+
+                                                                        <div class="col-12 text-end d-flex align-items-center gap-2 mb-3 justify-content-end outof-stock-text {{ $outOfStockDisplay }}">
+                                                                            <strong>Out of stock</strong> <a class="remove-cart-dish" data-id="{{ $dish->id }}" data-dish-id="{{ $dish->dish->id }}" href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" fill="#ff0000"  viewBox="0 0 24 24" width="20px" height="20px"><path d="M 10 2 L 9 3 L 4 3 L 4 5 L 5 5 L 5 20 C 5 20.522222 5.1913289 21.05461 5.5683594 21.431641 C 5.9453899 21.808671 6.4777778 22 7 22 L 17 22 C 17.522222 22 18.05461 21.808671 18.431641 21.431641 C 18.808671 21.05461 19 20.522222 19 20 L 19 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 7 5 L 17 5 L 17 20 L 7 20 L 7 5 z M 9 7 L 9 18 L 11 18 L 11 7 L 9 7 z M 13 7 L 13 18 L 15 18 L 15 7 L 13 7 z"/></svg></a>
+                                                                        </div>
+
                                                                         <div
                                                                             class="col-xx-3 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4 cart-custom-w-col-img">
                                                                             <img src="{{ $dish->dish->image }}"
@@ -251,7 +278,8 @@
                                                                                        class="count cart-amt"
                                                                                        id="qty-{{ $dish->dish->id }}"
                                                                                        name="qty-{{ $dish->dish->id }}"
-                                                                                       value="{{ $dish->qty }}" data-ing="{{ $paidIngredient }}"
+                                                                                       value="{{ $dish->qty }}"
+                                                                                       data-ing="{{ $paidIngredient }}"
                                                                                        data-id="{{ $dish->dish->id }}"/>
                                                                                 <input type="hidden"
                                                                                        id="dish-price-{{ $dish->dish->id }}"
@@ -293,8 +321,8 @@
                                                                                         <label for="dishnameenglish"
                                                                                                class="form-label">Add
                                                                                             notes</label>
-                                                                                        <input type="text"
-                                                                                               class="form-control"
+                                                                                        <input type="text" data-id="{{ $dish->id }}"
+                                                                                               class="form-control dish-notes" value="{{ $dish->notes }}"
                                                                                                placeholder="Type here..."/>
                                                                                     </div>
                                                                                 </div>
@@ -413,8 +441,9 @@
                                                                         </tfoot>
                                                                     </table>
                                                                 </div>
-                                                                <a class="btn btn-custom-yellow btn-default d-block" id="checkout-cart"
-{{--                                                                   href="{{ route('user.checkout') }}">--}}
+                                                                <a class="btn btn-custom-yellow btn-default d-block"
+                                                                   id="checkout-cart"
+                                                                   {{--                                                                   href="{{ route('user.checkout') }}">--}}
                                                                    href="javascript:void(0)">
                                                                     <span class="align-middle">Checkout</span>
                                                                 </a>

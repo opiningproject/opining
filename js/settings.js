@@ -238,7 +238,6 @@ $('#cmsPagesdutch-tab').click(function () {
 
 
 function changeTime() {
-    console.log($(this).val())
 
     var id = $(this).attr('data-id')
     var startTime = $('#start_time' + id).val()

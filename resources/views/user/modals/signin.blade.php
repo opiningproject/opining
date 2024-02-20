@@ -19,9 +19,9 @@
             <span class="input-group-icon">
                <img src="{{ asset('images/password.svg') }}" alt="" width="15" height="20"  class="svg">
             </span>
-            <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+            <input type="password" class="form-control login-pwd-icon" placeholder="Password" id="password" name="password" required>
             <label id="password-error" class="error" for="password" style="display: none"></label>
-            <span class="input-group-icon passwordeye-icon">
+            <span class="input-group-icon passwordeye-icon login-signup-pwd-icon">
               <i class="bi bi-eye-slash" id="toggleSignInPassword"></i>
             </span>
           </div>

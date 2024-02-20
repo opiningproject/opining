@@ -55,7 +55,7 @@
         const stripe = Stripe(public_key, {
           apiVersion: '2020-08-27'
         });
-        
+
         const elements = stripe.elements();
         const idealBank = elements.create('idealBank');
         idealBank.mount('#ideal-bank-element');

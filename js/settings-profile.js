@@ -70,8 +70,9 @@ function changePassword() {
             old_password, new_password
         },
         success: function (response) {
-            if (response == 2) {
-                $("#old_password-error-msg").removeClass('d-none');
+
+            if (response == '2') {
+                $("#old_password-error").removeClass('d-none');
             } else {
                 $("#changePasswordModal").modal('hide');
                 toastr.success('Password updated successfully')

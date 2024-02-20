@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\RestaurantOperatingHour;
 use App\Models\Zipcode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -193,10 +195,49 @@ if (!function_exists('getCartTotalAmount')) {
 
 }
 
-if(!function_exists('getAddressDetails')){
-    function getAddressDetails($addressId){
+if (!function_exists('orderTotalPayAmount')) {
+    function orderTotalPayAmount()
+    {
+        $user = Auth::user();
+        $cartTotal = $user->cart->dishDetails()->select(DB::raw('sum(qty * price) as total'))->get()->sum('total');
+        $cartIngredient = $user->cart->dishDetails()->get()->sum('paid_ingredient_total');
+        $cartTotal = $cartTotal + $cartIngredient;
+        $serviceCharge = getRestaurantDetail()->service_charge;
+        $zipcode = session('zipcode');
+        $deliveryCharges = 0.00;
+
+        if ($zipcode) {
+            $deliveryCharges = getDeliveryCharges($zipcode)->delivery_charge;
+        }
+        $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartTotal : 0;
+
+        return ($cartTotal + $serviceCharge + $deliveryCharges) - $couponDiscount;
+    }
+}
+
+if (!function_exists('getAddressDetails')) {
+    function getAddressDetails($addressId)
+    {
         $addressData = Address::find($addressId);
 
         return $addressData;
+    }
+}
+
+
+if (!function_exists('getOrderGrossAmount')) {
+    function getOrderGrossAmount($order)
+    {
+        return ($order->total_amount - $order->platform_charge - $order->delivery_charge + $order->coupon_discount);
+    }
+}
+
+if (!function_exists('getRestaurantOpenTime')) {
+    function getRestaurantOpenTime()
+    {
+        $today = date('l');
+
+        $openingHours = RestaurantOperatingHour::where('day', $today)->first();
+        return $openingHours;
     }
 }

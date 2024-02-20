@@ -40,18 +40,18 @@ class AuthController extends Controller
         {
           return response::json(
             [
-              'status' => 0, 
+              'status' => 0,
               'field' => 'email',
               'message' => 'Email not registered with us'
             ]
           );
-        } 
+        }
 
         if(!empty($user) && !$user->email_verified_at)
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'Please verify your email first to login'
                 ]
@@ -62,36 +62,36 @@ class AuthController extends Controller
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'This email is registered with gmail login'
                 ]
             );
         }
-        
+
         if(!Hash::check($request->password, $user->password))
         {
           return response::json(
             [
-              'status' => 0, 
+              'status' => 0,
               'field' => 'password',
               'message' => 'Incorrect password'
             ]
           );
-        } 
+        }
 
         if($user->user_role != UserType::User)
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'Incorrect rights'
                 ]
           );
-        }  
+        }
 
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) 
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
         {
           return response::json(['status' => 1, 'message' => ""]);
         }
@@ -105,13 +105,13 @@ class AuthController extends Controller
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'Entered email id is already registered with us'
                 ]
             );
         }
-        
+
         if(!empty($user) && !$user->email_verified_at)
         {
             $user->forceDelete();
@@ -120,7 +120,7 @@ class AuthController extends Controller
         if(empty($user))
         {
             $stripeCustomer = createStripeCustomer($request->first_name.' '.$request->last_name,$request->email);
-        
+
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -143,7 +143,7 @@ class AuthController extends Controller
 
         return response::json(
                 [
-                  'status' => 1, 
+                  'status' => 1,
                   'message' => ''
                 ]
             );
@@ -163,7 +163,7 @@ class AuthController extends Controller
         {
             $stripeCustomer = createStripeCustomer($google_user->user['given_name'].' '.$google_user->user['family_name'],$google_user->email);
         }
- 
+
         $user = User::updateOrCreate([
             'email' => $google_user->email,
         ], [
@@ -174,9 +174,9 @@ class AuthController extends Controller
             'stripe_cust_id' => $user ? $user->stripe_cust_id : $stripeCustomer->id,
             'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
-     
+
         Auth::login($user);
-     
+
         return redirect(route('user.dashboard'));
     }
 
@@ -188,7 +188,7 @@ class AuthController extends Controller
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'Entered email id is not registered with us'
                 ]
@@ -199,7 +199,7 @@ class AuthController extends Controller
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'Entered email id is registered with gmail login'
                 ]
@@ -213,7 +213,7 @@ class AuthController extends Controller
         {
             return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 0,
                   'field' => 'email',
                   'message' => 'Something went wrong. Please try again later.'
                 ]
@@ -222,12 +222,12 @@ class AuthController extends Controller
 
         return response::json(
                 [
-                  'status' => 0, 
+                  'status' => 1,
                   'message' => 'We have sent reset password link to your email'
                 ]
             );
     }
-    
+
     private function getPasswordBroker()
     {
         return Password::broker();

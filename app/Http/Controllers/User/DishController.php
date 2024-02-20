@@ -90,9 +90,18 @@ class DishController extends Controller
             ['is_cart', '1']
         ])->first();
 
-        $dishDetail = $order->whereHas('dishDetails', function ($query) use ($id){
-            $query->whereDishId($id)->whereIsCart('1');
-        })->with('dishDetails.orderDishFreeIngredients','dishDetails.orderDishPaidIngredients')->first();
+        if (empty($order))
+        {
+            $order = new Order();
+            $order->user_id = $user_id;
+            $order->is_cart = '1';
+            $order->save();
+        }
+
+        $dishDetail = $user->cart()
+            ->with(['dishDetails' => function ($query) use ($id){
+                $query->whereDishId($id)->whereIsCart('1');
+            }])->first();
 
         $paidDishDetail = $order->dishDetails()->whereHas('orderDishPaidIngredients', function ($query) use ($id){
             $query->whereDishId($id)->whereIsCart('1');
@@ -207,7 +216,6 @@ class DishController extends Controller
                     $ingredient_image = $ingredient->image;
                     $ingredient_price = $ingredient->paidDishIngredientWise->price;
                     $ingredient_id = $ingredient->paidDishIngredientWise->id;
-
                     if(array_key_exists($ingredient_id, $paidSelectedIngredients)){
                         $paidQty = $paidSelectedIngredients[$ingredient_id];
                         $totalAmt += ($paidQty * $ingredient_price);
@@ -242,8 +250,17 @@ class DishController extends Controller
                     </div>";
         }
 
-        $addUpdateText = $dishDetail ? 'Update Cart' : 'Add to cart';
+        $addUpdateText = 'Add to Cart';
+        $orderQty = 1;
 
+        if($dishDetail){
+            if(count($dishDetail->dishDetails) > 0){
+                $addUpdateText = 'Update Cart';
+                $orderQty = $dishDetail->dishDetails[0]->qty;
+            }
+        }
+
+        $totalAmt *= $orderQty;
         $html = "<div class='modal-content'>
                   <div class='modal-header border-0 d-block'>
                     <button type='button' class='btn-close float-end' data-bs-dismiss='modal' aria-label='Close'></button>
@@ -267,7 +284,7 @@ class DishController extends Controller
                           <span class='minus'>
                             <i class='fas fa-minus align-middle' onclick=addSubDishQuantities($dish->id,'-',$dish->qty)></i>
                           </span>
-                          <input type='number' class='count' name='qty-$dish->id' value='1' id='totalDishQty'>
+                          <input type='number' class='count' name='qty-$dish->id' value='$orderQty' id='totalDishQty'>
                           <span class='plus'>
                             <i class='fas fa-plus align-middle' onclick=addSubDishQuantities($dish->id,'+',$dish->qty)></i>
                           </span>

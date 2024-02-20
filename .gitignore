@@ -20,3 +20,4 @@ yarn-error.log
 composer.lock
 config/database.php
 storage/framework
+package-lock.json

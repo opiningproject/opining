@@ -80,37 +80,37 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.orders') }}" class="nav-link {{ activeMenu('user.orders') }} align-middle">
+                                <a href="{{ route('user.orders') }}" class="nav-link {{ activeMenu('user.orders') }} align-middle auth-link-check">
                                    <img src="{{ asset('images/myorder-menu.svg') }}" class="svg" width="40" height="40">
                                    <span class="ms-1 d-sm-inline align-middle">My Order</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.favorite') }}" class="nav-link {{ activeMenu('user.favorite') }} align-middle">
+                                <a href="{{ route('user.favorite') }}" class="nav-link {{ activeMenu('user.favorite') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/favorite-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">Favorite</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.chat') }}" class="nav-link {{ activeMenu('user.chat') }} align-middle">
+                                <a href="{{ route('user.chat') }}" class="nav-link {{ activeMenu('user.chat') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/user-chat-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">Chat Support</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.settings') }}" class="nav-link {{ activeMenu('user.settings') }} align-middle">
+                                <a href="{{ route('user.settings') }}" class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/settings-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">Setting</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.points') }}" class="nav-link {{ activeMenu('user.points') }} align-middle">
+                                <a href="{{ route('user.points') }}" class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/collected-points-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">Collected points</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle">
+                                <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">My coupons</span>
                                 </a>

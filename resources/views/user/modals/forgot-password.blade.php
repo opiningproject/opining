@@ -17,6 +17,7 @@
             <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12"  class="svg">
             <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
             <label id="email-error" class="error" for="email" style="display: none"></label>
+            <label id="success-msg" for="email" style="display: none;color: green;"></label>
           </div>
           <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="forgot-pwd-btn">Send Password Reset Link</button>
         </form>

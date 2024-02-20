@@ -20,30 +20,30 @@
         border-collapse: collapse;
     }
     .tblClass td,th {
-        border: 1px solid gray; 
+        border: 1px solid gray;
         padding: 15px;
     }
     .invoice_align{
         text-align:right;
     }
 </style>
-<?php 
-    use App\Enums\OrderStatus; 
-    use App\Enums\OrderType; 
-    use App\Enums\PaymentStatus; 
-    use App\Enums\PaymentType; 
+<?php
+    use App\Enums\OrderStatus;
+    use App\Enums\OrderType;
+    use App\Enums\PaymentStatus;
+    use App\Enums\PaymentType;
 ?>
 <div class="invoice-box">
     <table>
         <tr>
             <td colspan="4">
-                <?php 
-                    
+                <?php
+
                     if($order->order_type == OrderType::Delivery)
                     {
                         echo "<b>Address</b><br>";
 
-                        $address = $order->orderUserDetails; 
+                        $address = $order->orderUserDetails;
 
                         echo $address->house_no.' '.$address->street_name.'<br>'.$address->city.'<br>'.$address->zipcode;
                     }
@@ -55,12 +55,12 @@
                     }
                 ?>
             </td>
-            <td style="padding-top: 0px;"> 
+            <td style="padding-top: 0px;">
                 <table cellpadding="0" cellspacing="0" border="0" width="auto" align="right" style="width: auto;">
                     <tr>
                         <td colspan="2" align="right" style="padding-top: 0px;">
                             <h2 style="margin-top: 0px;margin-bottom: 10px;line-height: 16px;">Invoice</h2>
-                        </td>       
+                        </td>
                     </tr>
 
                     <tr>
@@ -76,7 +76,7 @@
                         </td>
                     </tr>
                 </table>
-            </td>     
+            </td>
         </tr>
     </table>
     <br>
@@ -93,17 +93,17 @@
 
         @foreach($order->dishDetails as $key => $dish)
         <tr>
-            <td colspan="4">{{ $dish->dish->name }}<br><b>{{ $dish->dishOption->name }}</b>-{{ getOrderDishIngredients($dish) }}</td>
+            <td colspan="4">{{ $dish->dish->name }}<br><b>{{ $dish->dishOption->name ?? '' }}</b>-{{ getOrderDishIngredients($dish) }}</td>
             <td>€{{ $dish->price }}</td>
             <td>{{ $dish->dish->percentage_off }}%</td>
             <td>{{ $dish->qty }}</td>
             <td>
             <?php
-                    $itemPrice = $dish->price + $dish->orderDishPaidIngredients->sum('total');
+                    $itemPrice = ($dish->price * $dish->qty) + $dish->orderDishPaidIngredients->sum('total');
                     $itemTotalPrice += $itemPrice;
                     echo '€'.$itemPrice;
             ?>
-            </td>    
+            </td>
         </tr>
         @endforeach
 
@@ -114,7 +114,7 @@
         <tr>
             <td colspan="4"></td>
             <td colspan="3">Subtotal</td>
-            <td>€{{ $itemPrice }}</td>
+            <td>€{{ $itemTotalPrice }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
@@ -129,12 +129,12 @@
         <tr>
             <td colspan="4"></td>
             <td colspan="3">Coupon Discount</td>
-            <td>-€{{ $order->coupon_discount }}</td>
+            <td>€{{ $order->coupon_discount }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
             <td colspan="3">Amount Paid</td>
-            <td>€{{ getOrderTotalPrice($itemPrice,$order) }}</td>
+            <td>€{{ $order->total_amount }}</td>
         </tr>
     </table>
 </div>

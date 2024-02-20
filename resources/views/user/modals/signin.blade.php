@@ -22,7 +22,7 @@
             <input type="password" class="form-control login-pwd-icon" placeholder="Password" id="password" name="password" required>
             <label id="password-error" class="error" for="password" style="display: none"></label>
             <span class="input-group-icon passwordeye-icon login-signup-pwd-icon">
-              <i class="bi bi-eye-slash" id="toggleSignInPassword"></i>
+                 <img src="{{ asset('images/passwordeye-icon.svg') }}" id="toggleSignInPassword" class="svg" width="21" height="19" />
             </span>
           </div>
           <div class="form-group d-flex justify-content-between align-items-center">

@@ -312,10 +312,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                   when the customer clicks on the label.
                                                                                 -->
                                                                                 <label for="ideal-bank-element"
-                                                                                       class="mb-3">
-                                                                                    iDEAL Banks
+                                                                                       class="mb-2">
+                                                                                    <strong>iDEAL Banks</strong>
                                                                                 </label>
-                                                                                <div id="ideal-bank-element">
+                                                                                <div id="ideal-bank-element" class="custom_select">
                                                                                     <!-- A Stripe Element will be inserted here. -->
                                                                                 </div>
 

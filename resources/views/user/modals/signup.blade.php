@@ -36,7 +36,8 @@
                         <input type="password" class="form-control login-pwd-icon" placeholder="Password" id="password" name="password"
                                minlength="8" required>
                         <span class="input-group-icon passwordeye-icon login-signup-pwd-icon">
-              <i class="bi bi-eye-slash" id="toggleSignupPassword"></i>
+
+                            <img src="{{ asset('images/passwordeye-icon.svg') }}" id="toggleSignInPassword" class="svg" width="21" height="19">
             </span>
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">

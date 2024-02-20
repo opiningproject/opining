@@ -181,12 +181,12 @@
                                         <div class="orderdetails-desclist">
                                                 <?php $itemTotalPrice = 0; ?>
                                             @foreach($order->dishDetails as $key => $dish)
-                                                <div class="orderdetails-desc">
-                                                    <div class="orderdetails-desc-main">
+                                                <div class="orderdetails-desc custom-orderdetails-desc">
+                                                    <div class="orderdetails-desc-main orderdetails-desc-320">
                                                         <div class="orderdetails-desc-count">
                                                             x{{ $dish->qty }}
                                                         </div>
-                                                        <div class="orderdetails-desc-card">
+                                                        <div class="orderdetails-desc-card orderdetails-flex-200">
                                                             <img src="{{ $dish->dish->image }}" class="img-fluid" alt=""
                                                                  width="85">
                                                             <div class="text-grp">

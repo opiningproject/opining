@@ -98,10 +98,7 @@
                 </div>
                 <div class="row">
                   <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
-                    <a type="submit" class="btn btn-custom-yellow btn-default d-block align-middle">
-                        Save
-{{--                      <button type="submit" class="align-middle" id="profile-save-btn">Save</button>--}}
-                    </a>
+                      <button type="submit" class="align-middle btn btn-custom-yellow btn-default d-block w-100" id="profile-save-btn">Save</button>
                   </div>
                 </div>
               </div>

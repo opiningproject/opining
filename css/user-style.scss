@@ -4710,6 +4710,7 @@ input[type="number"] {
 
         .outof-stock-text {
             display: flex !important;
+
             * {
                 pointer-events: auto !important;
             }
@@ -4720,9 +4721,43 @@ input[type="number"] {
         }
     }
 
-  .item-customize {
+    .item-customize {
         display: flex !important;
         gap: 10px !important;
-      align-items: center;
+        align-items: center;
     }
 }
+
+.orderdetails-desc-320 {
+    flex: 0 0 320px !important;
+    max-width: 320px !important;
+
+    .orderdetails-desc-count {
+        flex: 0 0 40px !important;
+        max-width: 40px !important;
+        text-align: center;
+    }
+
+    .orderdetails-flex-200 {
+        .img-fluid {
+            width: 85px;
+            flex: 0 0 85px;
+            max-width: 85px;
+        }
+    }
+}
+
+.orderdetails-flex-200 {
+    flex: 0 0 200px;
+    max-width: 200px;
+}
+
+.orderdetails-desclist .orderdetails-desc.custom-orderdetails-desc {
+    justify-content: flex-start;
+
+    .orderdetails-desc-price {
+        margin-left: auto;
+    }
+}
+
+

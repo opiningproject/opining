@@ -184,25 +184,22 @@ class CartController extends Controller
             $user = Auth::user();
 
             $user_id = $user->id;
-            $order = Order::where([
-                ['user_id', $user_id],
-                ['is_cart', '1']
-            ])->first();
+            $order = $user->cart;
 
             if (empty($order)) {
                 $order = $user->cart()->create([
                     'is_cart' => 1
                 ]);
             }
-
+//            dd($order->toArray());
             $order->fresh();
             $dish = Dish::find($id);
 
-            $dishDetail = $order->whereHas('dishDetails')->with(['dishDetails' =>function ($query) use ($id){
+            $dishDetail = $user->cart()->withWhereHas('dishDetails',function ($query) use ($id){
                 $query->whereDishId($id)->whereIsCart('1');
-            }])->where('is_cart', '1')->first();
+            })->first();
 
-            if(count($dishDetail->dishDetails) > 0){
+            if($dishDetail && count($dishDetail->dishDetails) > 0){
                 $orderDetails = OrderDetail::find($dishDetail->dishDetails[0]->id);
 
                 $orderDetails->orderDishDetails()->delete();

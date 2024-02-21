@@ -113,9 +113,11 @@ class DishController extends Controller
 
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
-        $paidIngredients = IngredientCategory::whereHas('ingredients.paidDishIngredientWise', function ($query) use ($id) {
-            $query->where('dish_id', $id);
-        })->with('ingredients.paidDishIngredientWise')->get();
+        $paidIngredients = IngredientCategory::withWhereHas('ingredients', function($query) use ($id){
+            $query->withWhereHas('paidDishIngredientWise', function($q)  use ($id) {
+                $q->whereDishId($id);
+            });
+        })->get();
 
         $selectedOption =  $dishDetail->dishDetails[0]->dish_option_id ?? '';
         $freeSelectedIngredients = [];
@@ -162,9 +164,9 @@ class DishController extends Controller
                           </tr>
                         </thead>
                         <tbody>";
-            foreach ($freeIngredients as $key => $ingredient) {
+            foreach ($freeIngredients as $ingredient) {
                 $checked = in_array($ingredient->id, $freeSelectedIngredients) ? 'checked' : '' ;
-                $defaultCheck = $dishDetail ? '' : 'checked';
+                $defaultCheck = count($dishDetail->dishDetails) > 0 ? '' : 'checked';
 
                 $ingredient_name = $ingredient->ingredient->name;
                 $ingredient_image = $ingredient->ingredient->image;
@@ -187,6 +189,7 @@ class DishController extends Controller
         }
 
         $html_paid_ingredients = '';
+
         if(count($paidIngredients) > 0){
             $html_paid_ingredients .= "<div class='customisable-table custom-table mt-4'>
                       <table class='w-100'>
@@ -197,6 +200,7 @@ class DishController extends Controller
                         </thead>
                       </table>
                       <div class='accordion accordion-flush customisable-accordion' id='accordionExample'>";
+
             foreach ($paidIngredients as $key => $category) {
                 $show = ($key == 0) ? ' show' : '';
                 $collapsed = ($key != 0) ? ' collapsed' : '';

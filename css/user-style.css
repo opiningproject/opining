@@ -619,7 +619,7 @@ a {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .category-section .category-slider .category-element .card:hover .dish-item-icon img, .category-section .category-slider .category-element .card.active .dish-item-icon img {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(102%) contrast(102%);
+  /*filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(102%) contrast(102%);*/
 }
 .category-section .category-slider .category-element .card .dish-item-icon {
   margin-bottom: 16px;

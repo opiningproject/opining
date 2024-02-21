@@ -634,7 +634,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                     payment_method: {
                                         ideal: idealBank,
                                     },
-                                    return_url: 'http://localhost/go-meal/user/redirect-ideal-payment',
+                                    return_url: baseURL + '/user/redirect-ideal-payment',
                                 },
                             );
                             if (error) {

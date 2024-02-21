@@ -334,6 +334,7 @@ function addCustomizedCart(id) {
                     $("#dish-cart-lbl-" + id).prop('disabled', true);
                     $('.cart-items').append(response.message.cartHtml);
                 }
+                $('#empty-cart-div').hide()
                 $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()

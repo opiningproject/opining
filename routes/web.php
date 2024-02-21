@@ -77,7 +77,7 @@ Route::get('change-lang/{lang}', function ($lang) {
     return redirect()->back();
 })->name('app.setLocal');
 
-Route::get('change-theme/{theme}', function($currency) {
+Route::get('change-theme/{theme}', function ($currency) {
     session(['theme' => $currency]);
     return redirect()->back();
 });
@@ -180,10 +180,10 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::post('/validate-cart', [\App\Http\Controllers\User\CartController::class, 'validateCart']);
         Route::post('/place-order', [\App\Http\Controllers\User\CheckoutController::class, 'placeOrderData']);
 
-        Route::get('/validate-address/{address_id}',[\App\Http\Controllers\User\AddressController::class,'validateSelectedAddress']);
-        Route::get('/redirect-ideal-payment',[\App\Http\Controllers\User\CheckoutController::class,'redirectedIdealPayment']);
+        Route::get('/validate-address/{address_id}', [\App\Http\Controllers\User\AddressController::class, 'validateSelectedAddress']);
+        Route::get('/redirect-ideal-payment', [\App\Http\Controllers\User\CheckoutController::class, 'redirectedIdealPayment']);
 
-        Route::patch('/cart/update-notes/{dish_id}',[\App\Http\Controllers\User\CartController::class, 'updateDishNotes']);
+        Route::patch('/cart/update-notes/{dish_id}', [\App\Http\Controllers\User\CartController::class, 'updateDishNotes']);
 
     });
     // User Routes

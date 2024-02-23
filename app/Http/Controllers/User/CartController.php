@@ -53,17 +53,16 @@ class CartController extends Controller
             $user_id = Auth::user()->id;
             $order = Order::where('user_id', $user_id)->where('is_cart', '1')->first();
 
-            if (empty($order))
-            {
-               $order = new Order();
-               $order->user_id = $user_id;
+            if (empty($order)) {
+                $order = new Order();
+                $order->user_id = $user_id;
+                $order->order_type = session('zipcode') ? '1' : '2';
             }
 
             $order->is_cart = '1';
             $order->order_status = '1';
 
-            if ($order->save())
-            {
+            if ($order->save()) {
                 $dish = Dish::find($request->id);
 
                 $cartArr = [
@@ -80,13 +79,11 @@ class CartController extends Controller
                     $cartArr
                 );
 
-                if(count($dish->freeIngredients) > 0)
-                {
-                    foreach ($dish->freeIngredients as $ingredient)
-                    {
+                if (count($dish->freeIngredients) > 0) {
+                    foreach ($dish->freeIngredients as $ingredient) {
                         $cartDetail->orderDishDetails()->create([
                             'dish_id' => $dish->id,
-                            'dish_ingredient_id' =>  $ingredient->id
+                            'dish_ingredient_id' => $ingredient->id
                         ]);
                     }
                 }
@@ -156,7 +153,7 @@ class CartController extends Controller
             $user = Auth::user();
             if ($request->current_qty >= 1) {
                 $user->cart->dishDetails()->where('dish_id', $request->dish_id)->update([
-                    'qty' => DB::raw('qty ' . $request->operator . '1')
+                        'qty' => DB::raw('qty ' . $request->operator . '1')
                     ]
                 );
                 /*OrderDetail::where('dish_id', $request->dish_id)->update(array(
@@ -188,18 +185,19 @@ class CartController extends Controller
 
             if (empty($order)) {
                 $order = $user->cart()->create([
-                    'is_cart' => 1
+                    'is_cart' => 1,
+                    'order_type' => session('zipcode') ? '1' : '2'
                 ]);
             }
 //            dd($order->toArray());
             $order->fresh();
             $dish = Dish::find($id);
 
-            $dishDetail = $user->cart()->withWhereHas('dishDetails',function ($query) use ($id){
+            $dishDetail = $user->cart()->withWhereHas('dishDetails', function ($query) use ($id) {
                 $query->whereDishId($id)->whereIsCart('1');
             })->first();
 
-            if($dishDetail && count($dishDetail->dishDetails) > 0){
+            if ($dishDetail && count($dishDetail->dishDetails) > 0) {
                 $orderDetails = OrderDetail::find($dishDetail->dishDetails[0]->id);
 
                 $orderDetails->orderDishDetails()->delete();
@@ -215,7 +213,7 @@ class CartController extends Controller
                     $cartArr
                 );
 
-            }else{
+            } else {
                 $cartArr = [
                     "user_id" => $user_id,
                     "dish_id" => $id,
@@ -252,7 +250,7 @@ class CartController extends Controller
                         'dish_ingredient_id' => $key,
                         'is_free' => '0',
                         'quantity' => $paidIng,
-                        'price' =>$ing->price
+                        'price' => $ing->price
                     ]);
                 }
             }
@@ -266,15 +264,16 @@ class CartController extends Controller
         }
     }
 
-    public function updateDeliveryType(Request $request){
-        try{
-            if($request->type == OrderType::Delivery){
+    public function updateDeliveryType(Request $request)
+    {
+        try {
+            if ($request->type == OrderType::Delivery) {
                 session()->forget('address');
                 session(['zipcode' => $request->zipcode]);
                 session(['house_no' => $request->houseNo]);
 
-            }else{
-                session()->forget(['house_no','zipcode','address']);
+            } else {
+                session()->forget(['house_no', 'zipcode', 'address']);
             }
 
             if (!Auth::user()) {
@@ -283,7 +282,7 @@ class CartController extends Controller
 
             $user = Auth::user();
 
-            if($user->cart){
+            if ($user->cart) {
                 $user->cart->update([
                     'order_type' => $request->type
                 ]);
@@ -292,94 +291,114 @@ class CartController extends Controller
 
             return response::json(['status' => 200, 'message' => 'Delivery type updated successfully']);
 
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }
 
-    public function validateCart(Request $request){
-        try{
+    public function validateCart(Request $request)
+    {
+        try {
             $user = Auth::user();
             $restaurantHours = getRestaurantOpenTime();
             $now = date('H:i');
 
-            if($user->cart->coupon){
-                if(strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())){
+            if ($user->cart->coupon) {
+                if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
                     return response::json(['status' => 406, 'message' => "Coupon is expired."]);
                 }
             }
 
-            $outOfStockDishes = OrderDetail::with('dish')->whereHas('dish', function($query){
-                $query->where('qty',0)->orWhere('out_of_stock','1');
+            $outOfStockDishes = OrderDetail::with('dish')->whereHas('dish', function ($query) {
+                $query->where('qty', 0)->orWhere('out_of_stock', '1');
             })->where([
                 ['order_id', $user->cart->id],
                 ['is_cart', '1']
             ])->get();
 
-            if(count($outOfStockDishes) > 0){
+            if (count($outOfStockDishes) > 0) {
                 return response::json(['status' => 412, 'message' => "Few items are out of stock. Please remove them to continue."]);
             }
 
-            if($now < $restaurantHours->start_time || $now > $restaurantHours->end_time){
+            if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
                 return response::json(['status' => 412, 'message' => "The restaurant doesn't deliver at this time. Please try again after sometime."]);
             }
 
-            if($user->cart->order_type == '1'){
-                if(session('zipcode')){
+            if ($user->cart->order_type == OrderType::Delivery) {
+                if (session('zipcode')) {
 
                     $zipcode = Zipcode::select('id')->where([
-                        ['zipcode',session('zipcode')],
-                        ['status' , '1']
+                        ['zipcode', session('zipcode')],
+                        ['status', '1']
                     ])->first();
 
-                    if($zipcode){
+                    if ($zipcode) {
 
                         $deliveryCharges = getDeliveryCharges(session('zipcode'));
-                        if($deliveryCharges){
-                            if($request->totalAmt >= $deliveryCharges->min_order_price){
+                        if ($deliveryCharges) {
+                            if ($request->totalAmt >= $deliveryCharges->min_order_price) {
                                 return response::json(['status' => 200, 'message' => 'Delivery']);
-                            }else{
+                            } else {
                                 return response::json(['status' => 412, 'message' => "The minimum order should be $deliveryCharges->min_order_price"]);
                             }
                         }
-                    }else{
+                    } else {
                         return response::json(['status' => 406, 'message' => 'Currently, we are not delivering food to this location.']);
                     }
-                }else{
-                    return response::json(['status' => 400, 'message' => 'Add delivery data']);
+                } else {
+                    return response::json(['status' => 200, 'message' => 'Takeaway']);
                 }
-            }else{
+            } else {
                 return response::json(['status' => 200, 'message' => 'Takeaway']);
             }
 
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }
 
-    public function removeCartDish(string $id){
-        try{
+    public function removeCartDish(string $id)
+    {
+        try {
             $orderDish = OrderDetail::find($id);
             $orderDish->orderDishDetails()->forceDelete();
             $orderDish->forceDelete();
             return response::json(['status' => 200, 'message' => 'Dish Deleted']);
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }
 
-    public function updateDishNotes(Request $request, string $id){
-        try{
+    public function updateDishNotes(Request $request, string $id)
+    {
+        try {
 
             $orderDish = OrderDetail::find($id);
             $orderDish->notes = $request->notes;
 
-            if($orderDish->save()){
+            if ($orderDish->save()) {
                 return response::json(['status' => 200, 'message' => 'Notes Added']);
-            }else{
+            } else {
                 return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
+            return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateDeliveryNotes(Request $request)
+    {
+        try {
+
+            $order = Auth::user()->cart;
+            $order->delivery_note = $request->delivery_notes;
+
+            if ($order->save()) {
+                return response::json(['status' => 200, 'message' => 'Notes Added']);
+            } else {
+                return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
+            }
+        } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }

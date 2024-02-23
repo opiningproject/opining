@@ -167,22 +167,34 @@ class CheckoutController extends Controller
                 'coupon_discount' => $couponDiscount,
                 'points_claimed' => $pointClaimed,
                 'payment_status' => '0',
-                'is_cart' => $request->payment_type == '2' ? '0' : '1'
             ]);
 
             if ($request->payment_type == '2') {
+
                 foreach ($user->cart->dishDetails() as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                 }
+
                 $user->cart->dishDetails()->update([
                     'is_cart' => '0'
                 ]);
+
+                if(!empty($user->cart->coupon)){
+                    $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                        'is_redeemed' => '1'
+                    ]);
+                }
+
+                $user->cart->dishDetails()->update([
+                    'is_cart' => '0'
+                ]);
+
             } elseif ($request->payment_type == '1') {
                 $expiryDate = explode('/', $request->exp_date);
                 $paymentIntent = createPaymentIntent($user->stripe_cust_id, ($totalAmtPaid * 100));
                 $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
 
-                /*$source = $stripe->customers->createSource($user->stripe_cust_id, [
+                $source = $stripe->customers->createSource($user->stripe_cust_id, [
                     'source' => [
                         'exp_month' => $expiryDate[0],
                         'exp_year' => $expiryDate[1],
@@ -191,18 +203,19 @@ class CheckoutController extends Controller
                         'name' => $request->card_name,
                         'object' => 'card'
                     ]
-                ]);*/
-                $source = $stripe->customers->createSource($user->stripe_cust_id, [
-                    'source' => 'tok_visa'
                 ]);
+                /*  $source = $stripe->customers->createSource($user->stripe_cust_id, [
+                      'source' => 'tok_visa'
+                  ]);*/
 
                 $cardPaymentResponse = $stripe->paymentIntents->confirm(
                     $paymentIntent->id,
                     [
                         'payment_method' => $source->id,
-                        'return_url' => 'http://localhost/go-meal/user/redirect-ideal-payment'
+                        'return_url' => url('/').'/user/redirect-online-payment'
                     ]
                 );
+
                 if ($cardPaymentResponse->status == 'succeeded') {
                     foreach ($user->cart->dishDetails() as $dish) {
                         Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
@@ -211,13 +224,22 @@ class CheckoutController extends Controller
                         'is_cart' => '0'
                     ]);
 
+                    if(!empty($user->cart->coupon)){
+                        $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                            'is_redeemed' => '1'
+                        ]);
+                    }
+
                     $user->cart->update([
                         'is_cart' => '0',
                         'payment_status' => '1',
                     ]);
-                    $response['cardPayment'] = true;
-                } else {
+                    $response['cardPayment'] = 200;
 
+                } else if ($cardPaymentResponse->status == 'requires_action'){
+                    $response['cardPayment'] = 402;
+                    $response['redirectionUrl'] = $cardPaymentResponse->next_action->redirect_to_url->url;
+                }else{
                     $user->decrement('collected_points', $user->cart->points_claimed);
 
                     $user->cart->update([
@@ -237,14 +259,15 @@ class CheckoutController extends Controller
                     ]);
 
                     $user->cart->orderUserDetails->forceDelete();
-                    $response['cardPayment'] = false;
+                    $response['cardPayment'] = 500;
+                }
+            }elseif ($request->payment_type == '3'){
+                if ($request->payment_type == '3') {
+                    $response['paymentIntent'] = createPaymentIntent($user->stripe_cust_id, ($totalAmtPaid * 100));
                 }
             }
 
             $response['data'] = 'Order Places successfully';
-            if ($request->payment_type == '3') {
-                $response['paymentIntent'] = createPaymentIntent($user->stripe_cust_id, ($totalAmtPaid * 100));
-            }
 
             return response::json(['status' => 200, 'message' => $response]);
         } catch (Exception $e) {
@@ -252,7 +275,7 @@ class CheckoutController extends Controller
         }
     }
 
-    public function redirectedIdealPayment(Request $request)
+    public function redirectedOnlinePayment(Request $request)
     {
         try {
             $user = Auth::user();
@@ -265,14 +288,21 @@ class CheckoutController extends Controller
                     'is_cart' => '0'
                 ]);
 
+                if(!empty($user->cart->coupon)){
+                    $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                        'is_redeemed' => '1'
+                    ]);
+                }
+
                 $user->cart->update([
+                    'transaction_id' => $request->payment_intent,
                     'is_cart' => '0',
                     'payment_status' => '1',
                 ]);
 
                 return redirect()->route('user.orders');
 
-            } else {
+            } else if($request->redirect_status == 'failed'){
                 $user->decrement('collected_points', $user->cart->points_claimed);
 
                 $user->cart->update([
@@ -294,6 +324,58 @@ class CheckoutController extends Controller
                 $user->cart->orderUserDetails->forceDelete();
 
                 return redirect()->route('user.checkout');
+            }else{
+                if(isset($request->payment_intent)){
+
+                    $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
+                    $paymentIntent = $stripe->paymentIntents->retrieve($request->payment_intent, []);
+
+                    if($paymentIntent->status == 'requires_payment_method'){
+                        $user->decrement('collected_points', $user->cart->points_claimed);
+
+                        $user->cart->update([
+                            'payment_status' => null,
+                            'payment_type' => null,
+                            'delivery_charge' => 0,
+                            'platform_charge' => 0,
+                            'total_amount' => 0,
+                            'order_status' => null,
+                            'order_time' => null,
+                            'delivery_date' => null,
+                            'delivery_note' => '',
+                            'receive_update_emails' => '0',
+                            'points_redeemed' => 0,
+                            'coupon_discount' => 0,
+                            'points_claimed' => 0,
+                        ]);
+
+                        $user->cart->orderUserDetails->forceDelete();
+
+                        return redirect()->route('user.checkout');
+                    }else{
+                        foreach ($user->cart->dishDetails() as $dish) {
+                            Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
+                        }
+
+                        $user->cart->dishDetails()->update([
+                            'is_cart' => '0'
+                        ]);
+
+                        if(!empty($user->cart->coupon)){
+                            $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                                'is_redeemed' => '1'
+                            ]);
+                        }
+
+                        $user->cart->update([
+                            'transaction_id' => $request->payment_intent,
+                            'is_cart' => '0',
+                            'payment_status' => '1',
+                        ]);
+
+                        return redirect()->route('user.orders');
+                    }
+                }
             }
         } catch (Exception $e) {
             return response::json([500, 'message' => $e->getMessage()]);

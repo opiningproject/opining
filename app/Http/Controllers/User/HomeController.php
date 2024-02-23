@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function dashboard(Request $request)
     {
-        $couponCode = 0;
+        $couponCode = '';
         $couponDiscount = 0;
         $couponPercent = 0;
 

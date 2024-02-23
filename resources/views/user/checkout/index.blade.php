@@ -18,7 +18,7 @@ if ($address) {
 }
 $restaurantOpen = getRestaurantOpenTime();
 
-$couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartAmount : 0;
+$couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * getCartTotalAmount() : 0;
 
 ?>
 @section('content')
@@ -117,7 +117,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             instruction</label>
                                                                         <input type="text" class="form-control"
                                                                                name="instructions" maxlength="50"
-                                                                               value=""/>
+                                                                               value="{{ $user->cart->delivery_note }}"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -634,7 +634,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                     payment_method: {
                                         ideal: idealBank,
                                     },
-                                    return_url: baseURL + '/user/redirect-ideal-payment',
+                                    return_url: baseURL + '/user/redirect-online-payment',
                                 },
                             );
                             if (error) {
@@ -642,10 +642,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                 return;
                             }
                         }else{
-                            if(response.message.cardPayment){
+                            if(response.message.cardPayment == 200){
                                 window.location.replace(baseURL + '/user/orders')
-                            }else{
-                                alert(response.message)
+                            }else if(response.message.cardPayment == 402){
+                                window.location.replace(response.message.redirectionUrl)
                             }
                         }
                     } else {

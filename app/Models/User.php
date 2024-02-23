@@ -87,4 +87,8 @@ class User extends Authenticatable
         }
         return asset('images/blank-img.svg');
     }
+
+    public function coupons(){
+        return $this->hasMany(CouponTransaction::class, 'user_id', 'id');
+    }
 }

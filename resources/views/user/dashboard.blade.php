@@ -301,9 +301,9 @@
                                                                                 </div>
                                                                                 <div class="d-flex">
                                                                                     <p class="mb-0 item-options mb-0">
-                                                                                        grilled, </p>
-                                                                                    <span class="item-desc">-Ketchup,fresh onion(2X) kvjbvwjk fkjfbeqjfb</span>
-                                                                                    <p class="item-customize mb-0">
+                                                                                        {{ $dish->dishOption->name ?? '' }}</p>
+                                                                                    <span class="item-desc">-{{ getOrderDishIngredients($dish) }}</span>
+                                                                                    <p class="item-customize mb-0 ms-auto justify-content-end">
                                                                                         customize
                                                                                         <a href="javascript:void(0);"
                                                                                            onclick="customizeDish({{ $dish->dish->id }});">
@@ -341,7 +341,7 @@
                                    width="25">
 
                             </span>
-                                                                <input type="text" class="form-control bg-gray"
+                                                                <input type="text" class="form-control bg-gray" id="delivery_instruction" value="{{ $user->cart ? $user->cart->delivery_note : '' }}"
                                                                        placeholder="Add Delivery instruction"/>
                                                             </div>
                                                             <div class="mb-3">

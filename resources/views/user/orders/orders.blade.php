@@ -28,7 +28,7 @@
                                     @if(count($active_orders))
                                         <div class="orders-list py-3 px-1">
                                             @foreach($active_orders as $key => $a_order)
-                                                <div
+                                                <div onclick="orderDetail({{ $a_order->id }})" style="cursor: pointer;"
                                                     class="{{ $a_order->id == $order->id ? 'active':'' }} orders-item d-flex align-items-center justify-content-between gap-2"
                                                     id="order-{{ $a_order->id }}">
                                                     <div class="text-grp">
@@ -36,8 +36,7 @@
                                                         <div class="text">{{ $a_order->created_at }}</div>
                                                     </div>
                                                     <div class="price"><span>€</span>{{ $a_order->total_amount}}</div>
-                                                    <button class="border-none outline-none"
-                                                            onclick="orderDetail({{ $a_order->id }})">
+                                                    <button class="border-none outline-none">
                                                         <img src="{{ asset('images/chevron-down.svg') }}"
                                                              class="img-fluid svg" alt="" width="32" height="32">
                                                     </button>
@@ -54,7 +53,7 @@
                                         <div class="orders-title">Orders overview</div>
                                         <div class="orders-list py-3 px-1">
                                             @foreach($orders as $key => $ord)
-                                                <div
+                                                <div  onclick="orderDetail({{ $ord->id }})" style="cursor: pointer;"
                                                     class="{{ $ord->id == $order->id ? 'active':'' }} orders-item d-flex align-items-center justify-content-between gap-2"
                                                     id="order-{{ $ord->id }}">
                                                     <div class="text-grp">
@@ -62,8 +61,7 @@
                                                         <div class="text">{{ $ord->created_at }}</div>
                                                     </div>
                                                     <div class="price"><span>€</span>{{ $ord->total_amount}}</div>
-                                                    <button class="border-none outline-none"
-                                                            onclick="orderDetail({{ $ord->id }})">
+                                                    <button class="border-none outline-none">
                                                         <img src="{{ asset('images/chevron-down.svg') }}"
                                                              class="img-fluid svg" alt="" width="32" height="32">
                                                     </button>
@@ -233,7 +231,7 @@
                                                     <div class="text">Service Charge</div>
                                                     <div class="number">€{{ $order->platform_charge }}</div>
                                                 </div>
-                                                <div class="list-item">
+                                                <div class="list-item" {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
                                                     <div
                                                         class="text">{{ $order->delivery_charge ? 'Delivery Charge':'Free Delivery' }}</div>
                                                     <div class="number">€{{ $order->delivery_charge }}</div>

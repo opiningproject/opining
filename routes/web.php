@@ -181,9 +181,10 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::post('/place-order', [\App\Http\Controllers\User\CheckoutController::class, 'placeOrderData']);
 
         Route::get('/validate-address/{address_id}', [\App\Http\Controllers\User\AddressController::class, 'validateSelectedAddress']);
-        Route::get('/redirect-ideal-payment', [\App\Http\Controllers\User\CheckoutController::class, 'redirectedIdealPayment']);
+        Route::get('/redirect-online-payment', [\App\Http\Controllers\User\CheckoutController::class, 'redirectedOnlinePayment']);
 
         Route::patch('/cart/update-notes/{dish_id}', [\App\Http\Controllers\User\CartController::class, 'updateDishNotes']);
+        Route::patch('/cart/update-del-ins', [\App\Http\Controllers\User\CartController::class, 'updateDeliveryNotes']);
 
     });
     // User Routes

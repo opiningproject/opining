@@ -35,7 +35,7 @@
 
                                             </a>
                                             <div class="food-image">
-                                                <img src="{{ $dish->dish->price }}" class="img-fluid" width="100"
+                                                <img src="{{ $dish->dish->image }}" class="img-fluid" width="100"
                                                      height="100"/>
                                             </div>
                                             <h4 class="food-name-text">{{ $dish->dish->name_en }}</h4>

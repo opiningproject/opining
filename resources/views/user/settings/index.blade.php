@@ -63,7 +63,7 @@
                             </button>
 
                             <input type="text" class="form-control countrycode-input" readonly value="+31">
-                            <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
+                            <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" maxlength="9" minlength="9" min="1" required>
                         </div>
                     </div>
                   </div>

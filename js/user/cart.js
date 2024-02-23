@@ -105,6 +105,27 @@ $(function () {
             }
         })
     })
+
+    $('#delivery_instruction').focusout(function (){
+        var delivery_notes = $(this).val()
+
+        $.ajax({
+            url: baseURL + '/user/cart/update-del-ins/',
+            type: 'PATCH',
+            data: {
+                delivery_notes
+            },
+            success: function (response) {
+                if(response.status != 200){
+                    alert(response.message);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage)
+            }
+        })
+    })
 });
 
 function addToCart(id) {

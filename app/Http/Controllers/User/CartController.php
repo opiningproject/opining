@@ -103,7 +103,7 @@ class CartController extends Controller
         $dishId = $dish->id;
         $dishPrice = $dish->price;
 
-        $html = "<div class='row' id=cart-$cart->id>
+        $html = "<div class='row' id=cart-$dishId>
                 <div class='col-xx-3 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4 cart-custom-w-col-img'>
                     <img src=" . $dish->image . " alt='burger image' class='img-fluid' width='86' height='74px' />
                     <div class='foodqty'>
@@ -150,6 +150,7 @@ class CartController extends Controller
     public function updateDishQty(Request $request)
     {
         try {
+            $coupon = false;
             $user = Auth::user();
             if ($request->current_qty >= 1) {
                 $user->cart->dishDetails()->where('dish_id', $request->dish_id)->update([
@@ -164,7 +165,17 @@ class CartController extends Controller
 //                OrderDetail::where('dish_id', $request->dish_id)->forceDelete();
             }
 
-            return response::json(['status' => 1, 'message' => '']);
+            if(count($user->cart->dishDetails) == 0){
+                $coupon = true;
+                $user->cart()->update([
+                    'coupon_id' => null,
+                    'coupon_code' => null,
+                    'coupon_discount' => 0.00
+                ]);
+
+            }
+
+            return response::json(['status' => 1, 'message' => $coupon]);
 
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => 'Something went wrong.']);

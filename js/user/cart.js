@@ -179,6 +179,7 @@ function updateDishQty(operator, maxQty, dish_id) {
             dish_id, operator, current_qty
         },
         success: function (response) {
+
             if (response.status == 1 && parseInt(current_qty) == 0) {
                 $("#cart-" + dish_id).remove();
                 $("#dish-cart-lbl-" + dish_id).text('Add +');
@@ -190,6 +191,19 @@ function updateDishQty(operator, maxQty, dish_id) {
                     $('#empty-cart-div').show()
                     $('#cart-amount-cal-data').hide()
                 }
+
+                if(response.message){
+                    $("#coupon_code_apply_btn").show();
+                    $("#coupon_code_remove_btn").hide();
+                    $('#coupon_code').val('');
+                    $("#coupon_code").prop('readonly', false);
+                    $('#coupon-discount').val(0)
+                    $('#coupon-discount-percent').val(0.0)
+                    $('#coupon-discount-text').val('-€0')
+                    $('#item-discount').hide()
+                    calculateTotalCartAmount()
+                }
+
             }
 
             calculateTotalCartAmount()

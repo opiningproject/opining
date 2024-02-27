@@ -35,7 +35,7 @@
                                                         <img src="{{ asset('images/zipcode-svg.svg') }}" alt="" class="svg" height="16" width="24">
 
                                                     </span>
-                                                    <input type="text" class="form-control" placeholder="Zip Code" name="zipcode" id="zipcode" required />
+                                                    <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="Zip Code" name="zipcode" id="zipcode" required />
                                                 </div>
                                                 <label id="zipcode-error" class="error" for="zipcode" style="display: none"></label>
                                             </div>
@@ -43,7 +43,7 @@
                                                 <span class="input-group-icon">
                                                     <img src="{{ asset('images/home-icon-svg.svg') }}" alt="home address" class="img-fluid" width="22" height="22" />
                                                 </span>
-                                                <input type="text" class="form-control" placeholder="House Number" name="house_no" id="house_no" required />
+                                                <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="House Number" name="house_no" id="house_no" required />
                                             </div>
 
                                             <!-- <a href="{{ route('user.dashboard') }}" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a> -->

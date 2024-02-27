@@ -144,6 +144,7 @@ class CheckoutController extends Controller
                 'order_name' => $request->first_name . ' ' . $request->last_name,
                 'order_contact_number' => $request->phone_no,
                 'company_name' => $request->company_name,
+                'order_email' => $request->email,
                 'house_no' => $request->house_no ?? null,
                 'street_name' => $request->street_name ?? null,
                 'city' => $request->city ?? null,

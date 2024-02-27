@@ -167,7 +167,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             alt="netherlands Flag" class="img-fluid">
                                                                     </button>
                                                                     <input type="text"
-                                                                           class="form-control countrycode-input"
+                                                                           class="form-control countrycode-input" readonly
                                                                            value="+31">
                                                                     <input type="number" class="form-control"
                                                                            minlength="9" maxlength="9" required
@@ -181,7 +181,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                             <div class="form-group">
                                                                 <label for="email" class="form-label">Email</label>
                                                                 <input type="email" required name="email"
-                                                                       class="form-control" readonly
+                                                                       class="form-control"
                                                                        value="{{ $user->email }}"/>
                                                             </div>
                                                         </div>
@@ -388,13 +388,9 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             <div class="row">
                                                 <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12">
                                                     <div class="form-group">
-                                                        <a class="btn btn-custom-yellow btn-default d-block">
-                                                            <button type="submit"
-                                                                    class="align-middle bg-transparent border-0">Pay
+                                                            <button type="submit" class="align-middle btn btn-custom-yellow btn-default d-block w-100">Pay
                                                                 €{{ orderTotalPayAmount() }} with <span
-                                                                    id="total-amt-pay-btn">iDEAL</span>
-                                                            </button>
-                                                        </a>
+                                                                    id="total-amt-pay-btn">iDEAL</span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -428,7 +424,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 class="col-xx-3 col-xl-3 col-lg-col-md-12 col-sm-12 col-12 position-relative">
                                                                 <span
                                                                     class="order-total-item">x{{ $dishDetails->qty}}</span>
-                                                                <img src="images/burger-common-img.svg"
+                                                                <img src="{{ $dishDetails->dish->image}}"
                                                                      alt="{{ $dishDetails->dish->name }}"
                                                                      class="img-fluid" width="86" height="74px">
                                                             </div>
@@ -442,10 +438,18 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             class="cart-item-price">+€{{ $dishDetails->dish->price }}</span>
                                                                     </div>
                                                                     <div class="d-flex">
-                                                                        <p class="mb-0 item-options mb-0"> grilled, </p>
-                                                                        <span class="item-desc">-Ketchup,fresh onion(2X) kvjbvwjk fkjfbeqjfb</span>
-                                                                        <a class="item-customize"
-                                                                           href="javascript:void(0);">read more</a>
+                                                                        <div class="text line-clamp-2" id="order-ingredient-{{ $dishDetails->id}}">
+                                                                            <p class="mb-0 item-options mb-0"> {{ $dishDetails->dishOption->name ?? ''}} </p>
+                                                                        -{{ getOrderDishIngredients($dishDetails) }}
+                                                                        </div>
+                                                                        {{--<a class="item-customize"
+                                                                           href="javascript:void(0);">read more</a>--}}
+                                                                        <div class="text">
+                                                                            <a class="item-customize" href="javascript:void(0)" id="read-more-{{ $dishDetails->id}}"
+                                                                               onclick="readMore({{ $dishDetails->id}})">Read More</a>
+                                                                            <a class="item-customize" href="javascript:void(0)" style="display:none;" id="close-{{ $dishDetails->id}}"
+                                                                               onclick="hideReadMore({{ $dishDetails->id}})">Close</a>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="from-group addnote-from-group mb-0">
                                                                         <div class="form-group">
@@ -636,6 +640,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 async success(response) {
                     if (response.status == 200) {
                         if(paymentType == '2'){
+                            toastr.success('order placed successfully')
                             window.location.replace(baseURL + '/user/orders')
                         }else if(paymentType == '3'){
                             const {error, paymentIntent} = await stripe.confirmIdealPayment(
@@ -652,6 +657,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                             }
                         }else{
                             if(response.message.cardPayment == 200){
+                                toastr.success('order placed successfully')
                                 window.location.replace(baseURL + '/user/orders')
                             }else if(response.message.cardPayment == 402){
                                 window.location.replace(response.message.redirectionUrl)

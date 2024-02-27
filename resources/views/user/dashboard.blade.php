@@ -100,6 +100,7 @@
 
                             <div class="dish-details-div">
                                 <div class="category-list-item-grid">
+                                    @if(count($dishes) > 0 )
                                     @foreach ($dishes as $dish)
                                         <?php
                                             $disableBtn = '';
@@ -151,6 +152,9 @@
                                             @endif
                                         </div>
                                     @endforeach
+                                    @else
+                                        No Dish Found
+                                    @endif
                                 </div>
                             </div>
                         </section>
@@ -207,7 +211,7 @@
                                                     <div class="form-group">
                                                         <label class="form-label">Delivery Address</label>
                                                         <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
+                                                            <div class="d-flex align-items-center delivery-address-span">
                                                                 <img src="{{ asset('images/delivery-address.svg') }}"
                                                                      alt="" class="svg" height="23" width="32">
 
@@ -297,7 +301,7 @@
                                                                                     class="d-flex align-items-center justify-content-between">
                                                                                     <p class="d-inline-block item-name mb-0"> {{ $dish->dish->name }} </p>
                                                                                     <span
-                                                                                        class="cart-item-price">+€{{ $dish->dish->price }}</span>
+                                                                                        class="cart-item-price" id="cart-item-price{{$dish->dish->id}}">+€{{ $dish->qty * $dish->dish->price }}</span>
                                                                                 </div>
                                                                                 <div class="d-flex">
                                                                                     <p class="mb-0 item-options mb-0">
@@ -321,7 +325,7 @@
                                                                                         <label for="dishnameenglish"
                                                                                                class="form-label">Add
                                                                                             notes</label>
-                                                                                        <input type="text" data-id="{{ $dish->id }}"
+                                                                                        <input type="text" readonly data-id="{{ $dish->id }}"
                                                                                                class="form-control dish-notes" value="{{ $dish->notes }}"
                                                                                                placeholder="Type here..."/>
                                                                                     </div>

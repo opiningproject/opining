@@ -2,6 +2,14 @@ $(function () {
     var url = baseURL + '/user/dashboard';
 
     $("#delivery-add-form").validate({
+        rules:{
+            zipcode: {
+                alphaNumericalRegex: "^[a-zA-Z0-9]+$"
+            },
+            house_no: {
+                alphaNumericalRegex: "^[a-zA-Z0-9]+$"
+            },
+        },
         submitHandler: function (form) {
             validateZipcode();
             //window.location.href = url;
@@ -16,6 +24,14 @@ $(function () {
     });
 
     $("#address-form").validate({
+        rules:{
+            zipcode: {
+                alphaNumericalRegex: "^[a-zA-Z0-9]+$"
+            },
+            house_no: {
+                alphaNumericalRegex: "^[a-zA-Z0-9]+$"
+            },
+        },
         submitHandler: function (form) {
             validateZipcode()
         }
@@ -53,6 +69,15 @@ $(function () {
             }
         })
     })
+
+    $.validator.addMethod(
+        "alphaNumericalRegex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Only Alphabet and numeric values are allowed"
+    );
 });
 
 

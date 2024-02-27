@@ -37,8 +37,8 @@
                            <a href="javascript:void(0);" class="badge text-bg-white d-inline-block" id="coupon-code-{{ $coupon->id }}" data-code="{{ $coupon->promo_code }}" onclick='showCouponPopup({{ $coupon->id }})'>
                            Get Code</a>
                          @else
-                           <p class="mb-0 d-inline-block">Earn 29 points to unlock coupon</p>
-                         @endif 
+                           <p class="mb-0 d-inline-block">Earn {{ $coupon->points }} points to unlock coupon</p>
+                         @endif
                        </div>
                        <div class="circle1"></div>
                        <div class="circle2"></div>
@@ -65,8 +65,8 @@
    <!-- end footer -->
 
  </div>
- 
-@include('user.modals.coupon-confirmation') 
+
+@include('user.modals.coupon-confirmation')
 @endsection
 
 @section('script')
@@ -85,17 +85,17 @@
       $(".checkcircle").toggle();
   });
 
-  function showCouponPopup(id) 
+  function showCouponPopup(id)
   {
     var code = $('#coupon-code-'+id).data('code');
-  
+
     $('#couponConfirmationModal').modal('show')
     $('#coupon-code').val(code);
     $('#coupon-id').val(id);
     $('#coupon-code-name').text(code)
   }
 
-  function couponCodeConfirmation() 
+  function couponCodeConfirmation()
   {
     var code = $('#coupon-code').val();
     var id = $('#coupon-id').val();

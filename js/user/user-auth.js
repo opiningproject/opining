@@ -8,6 +8,12 @@ $(function () {
     $("#sign-up-form").validate({
         //debug:true,
         rules: {
+            first_name:{
+                alphaRegex: "^[a-zA-Z]+$"
+            },
+            last_name:{
+                alphaRegex: "^[a-zA-Z]+$"
+            },
             password: {
                 required: true,
                 minlength: 8,
@@ -70,6 +76,15 @@ $(function () {
         alertas.trigger("reset");
         alertas.find('.error').removeClass('error');
     });
+
+    $.validator.addMethod(
+        "alphaRegex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Only Alphabet values are allowed"
+    );
 });
 
 function signIn() {

@@ -5,6 +5,8 @@
 <script type="text/javascript" src="{{ asset('js/dark-mode-switch.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js')}}"></script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+
 <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
 <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
@@ -24,7 +26,6 @@
 <script type="text/javascript" src="{{ asset('js/user/orders.js')}}"></script>
 
 <input type="hidden" id="auth-check" value="{{ auth()->check() ? 1 : 0 }}">
-
 <script>
     var baseURL = "{{ url('/') }}"
 

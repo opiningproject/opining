@@ -283,15 +283,15 @@ function removeCoupon() {
 }
 
 function addSubDishQuantities(dishId, operator, maxQty) {
-
+    debugger
     var dishAmt = $('#dish-org-price').val()
     var currentQty = parseInt($('input[name=qty-' + dishId + ']').val());
 
     if (operator == '-') {
         if (currentQty != 1) {
             $('input[name=qty-' + dishId + ']').val(currentQty - 1);
+            updateCartAmount(dishId, dishAmt, 'sub')
         }
-        updateCartAmount(dishId, dishAmt, 'sub')
     }
 
     if (operator == '+') {
@@ -369,6 +369,7 @@ function addCustomizedCart(id) {
                     $("#dish-cart-lbl-" + id).prop('disabled', true);
                     $('.cart-items').append(response.message.cartHtml);
                 }
+
                 $('#empty-cart-div').hide()
                 $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
@@ -395,15 +396,20 @@ function updateCartAmount(dishId, amount, type) {
 }
 
 function calculateTotalCartAmount() {
+
     var totalAmt = 0;
     var serviceCharge = $('#service-charge').val()
     var couponDiscountPercent = $('#coupon-discount-percent').val()
-    var couponDiscount
+    var couponDiscount = 0
 
     $('.cart-amt').each(function (index, element) {
         var id = $(element).data('id')
 
-        totalAmt += (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val())) + parseFloat($(element).data('ing'))
+        var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
+
+        $('#cart-item-price'+id).text('+€'+itemAmount)
+        totalAmt += itemAmount + parseFloat($(element).attr('data-ing'))
+
     })
 
     $('#total-cart-bill').text('€' + totalAmt)

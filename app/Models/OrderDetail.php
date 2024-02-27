@@ -14,7 +14,7 @@ class OrderDetail extends Model
 
     protected $fillable = ['order_id','dish_id','dish_option_id','price','qty','total_price','notes','user_id','is_cart'];
     protected $dates = ['created_at', 'updated_at'];
-    protected $appends = ['paid_ingredient_total'];
+    protected $appends = ['paid_ingredient_total','dish_price'];
     public $timestamps = true;
 
     public function order(){
@@ -48,5 +48,9 @@ class OrderDetail extends Model
     public function getPaidIngredientTotalAttribute()
     {
         return $this->orderDishPaidIngredients()->select(DB::raw('sum(quantity * price) as total'))->get()->sum('total');
+    }
+
+    public function getDishPriceAttribute(){
+        return $this->qty * $this->dish->price;
     }
 }

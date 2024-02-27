@@ -20,4 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/user-style.css.map')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/user-payment-base.css')}}" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+
 </head>

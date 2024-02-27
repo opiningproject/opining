@@ -90,13 +90,13 @@ class CouponController extends Controller
             }else{
                 return response()->json([
                     'status' => 500                                ,
-                    'message' => trans('message.coupon.invalid_coupon'),
+                    'message' => trans('Invalid Coupon'),
                 ], 200);
             }
         } else {
             return response()->json([
                 'status' => 500                                ,
-                'message' => trans('message.coupon.invalid_coupon'),
+                'message' => trans('Invalid Coupon'),
             ], 200);
         }
     }

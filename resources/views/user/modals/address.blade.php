@@ -20,7 +20,7 @@
                       <img src="{{ asset('images/zipcode-svg.svg') }}" alt="zipcode" class="img-fluid svg" width="22"
                            height="16"/>
                     </span>
-                                <input type="text" class="form-control" placeholder="Zip Code" value="{{ $zipcode }}"
+                                <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="Zip Code" value="{{ $zipcode }}"
                                        name="zipcode" id="zipcode" required/>
                                 <label id="zipcode-error" class="error" for="zipcode" style="display: none"></label>
                             </div>
@@ -31,7 +31,7 @@
                       <img src="{{ asset('images/home-icon-svg.svg') }}" alt="home address" class="img-fluid svg"
                            width="19" height="18"/>
                     </span>
-                                <input type="text" class="form-control" placeholder="House Number"
+                                <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="House Number"
                                        value="{{ $house_no }}" name="house_no" id="house_no" required/>
                             </div>
                         </div>
@@ -50,14 +50,15 @@
                         <div class="row">
                             @foreach($addresses as $key => $add)
                                 <?php
-                                    $addressText = 'Deliver Here';
-                                    $style='';
-                                    if(session('address') == $add->id){
-                                        $addressText = 'Selected';
-                                        $style = 'style=pointer-events:none;cursor:default';
-                                    }
-                                    ?>
+                                $addressText = 'Deliver Here';
+                                $style = '';
+                                if (session('address') == $add->id) {
+                                    $addressText = 'Selected';
+                                    $style = 'style=pointer-events:none;cursor:default';
+                                }
+                                ?>
                                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10"
+                                     style="padding: 5px !important;"
                                      id="address-{{ $add->id }}">
                                     <div class="card card-body h-100 address-card active">
                                         <p>{{ $add->company_name }} {{ $add->house_no }}, {{ $add->street_name }}

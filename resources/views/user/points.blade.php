@@ -32,7 +32,9 @@
                  <div class="collected-points-list">
                    <p class="text-capitalize">instruction</p>
                    <ul>
-                     <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply</li>
+                     <li>Get 1 point order above €20 plus</li>
+                     <li>Get 2 points order above €30 plus
+                     </li>
                    </ul>
                  </div>
                </div>

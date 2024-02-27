@@ -12,14 +12,14 @@
             <span class="input-group-icon">
                <img src="{{ asset('images/user-icon.svg') }}" alt="" width="16" height="16" class="svg">
             </span>
-                        <input type="text" class="form-control" placeholder="First Name" name="first_name"
+                        <input type="text" class="form-control" placeholder="First Name" maxlength="25" name="first_name"
                                id="first_name" required>
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
              <img src="{{ asset('images/user-icon.svg') }}" alt="" width="16" height="16" class="svg">
             </span>
-                        <input type="text" class="form-control" placeholder="Last Name" name="last_name" id="last_name"
+                        <input type="text" class="form-control" placeholder="Last Name" name="last_name" id="last_name" maxlength="25"
                                required>
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group">

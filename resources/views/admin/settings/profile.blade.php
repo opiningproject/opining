@@ -1,4 +1,4 @@
-<div class="tab-pane fade show {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? '' : 'active'}}" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
+<div class="tab-pane fade" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
     <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="card-body">
@@ -27,15 +27,6 @@
                             <input type="number" class="form-control" value="{{ $user->permit_id }}" name="permit_id" required/>
                         </div>
                     </div>
-                    <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                        <div class="form-group">
-                            <label for="restaurantpermit" class="form-label">Phone</label>
-                            <div class="countrycode-phone-control position-relative">
-                                <img src="images/netherlands-flag.svg" alt="netherlands Flag" class="img-fluid">
-                                <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" required>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
                             <label for="restaurantpermit" class="form-label">Phone</label>

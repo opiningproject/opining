@@ -29,8 +29,14 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 <main class="bd-main order-1">
                     <div class="main-content">
                         <div class="section-page-title main-page-title mb-0">
-                            <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
-                                <h1 class="page-title">Checkout</h1>
+                            <div class="col-12">
+                               <div class="d-flex align-items-center justify-content-between">
+ <h1 class="page-title">Checkout</h1>
+
+                                <button class="navbar-toggler cart-navbar-toggler  p-2 d-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">
+                                      <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
+                                </button>
+                               </div>
                             </div>
                         </div>
                         <section class="custom-section checkout-section">
@@ -199,7 +205,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                     <div class="row">
                                                         <div
                                                             class="col-xxl-6 col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 my-auto">
-                                                            <div class="custom-radio custom-checkbox-group mobile-mb-10"
+                                                            <div class="custom-radio custom-checkbox-group mobile-mb-10 flex-wrap"
                                                                  style="margin-bottom: 30px">
                                                                 <div class="radio">
                                                                     <input id="radio-1" name="del_radio" type="radio"
@@ -300,7 +306,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             <div
                                                                                 class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                                                                                 <div
-                                                                                    class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
+                                                                                    class="col-12">
                                                                                     <h1 class="page-title">Order
                                                                                         payment</h1>
                                                                                 </div>
@@ -399,10 +405,13 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                         </section>
                     </div>
                     <aside class="cart-sidebar position-relative">
-                        <div class="offcanvas-lg offcanvas-end h-100" tabindex="-1" id="bdSidebarCart"
+                        <div class="offcanvas-xxl offcanvas-end h-100" tabindex="-1" id="bdSidebarCart"
                              aria-labelledby="bdSidebarCartOffcanvasLabel">
-                            <div class="offcanvas-header p-0" style="display: block;"></div>
-                            <div class="offcanvas-body h-100">
+                            <div class="offcanvas-header p-0" style="display: block;">
+
+                            </div>
+                            <div class="offcanvas-body pt-3 h-100">
+                                   <div class="d-flex justify-content-end mb-2">  <button type="button" class="btn-close d-block" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button></div>
                                 <div class="navbar navbar-expand-lg pt-0 h-100">
                                     <div class="cart-sidebar-content position-relative h-100">
                                         <div class="navbar-collapse cartbox-collapse">

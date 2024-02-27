@@ -9,6 +9,12 @@ use App\Models\CMS;
 use App\Models\User;
 use App\Models\RestaurantDetail;
 use App\Models\OperatingHour;
+Use App\Models\Order;
+Use App\Models\OrderDetail;
+use App\Models\OrderUserDetail;
+use App\Enums\OrderStatus;
+use App\Enums\RefundStatus;
+use App\Enums\OrderType;
 use Auth;
 use Hash;
 use Response;
@@ -18,7 +24,10 @@ class SettingController extends Controller
     public function index(Request $request)
     {
         $perPage = isset($request->per_page) ? $request->per_page : 10;
+
         $zipcodes = $this->getZipcode($perPage);
+        $orders = $this->getOrders($perPage);
+        $refundRequests = $this->getRefundRequests($perPage);
 
         $privacy_policy_en = CMS::where('type', 'privacy')->where('lang', 'en')->pluck('content')->first();
         $terms_en = CMS::where('type', 'terms')->where('lang', 'en')->pluck('content')->first();
@@ -29,6 +38,11 @@ class SettingController extends Controller
         $user = RestaurantDetail::where('user_id', Auth::user()->id)->firstOrFail();
         $operating_days = OperatingHour::all();
 
+
+        /*echo "<pre>";
+        print_r($orders);
+        exit;*/
+        
         return view('admin.settings.index', [
             'operating_days' => $operating_days,
             'user' => $user,
@@ -37,7 +51,10 @@ class SettingController extends Controller
             'terms_en' => $terms_en,
             'privacy_policy_nl' => $privacy_policy_nl,
             'terms_nl' => $terms_nl,
-            'perPage' => $perPage
+            'perPage' => $perPage,
+
+            'orders' => $orders,
+            'refundRequests' => $refundRequests
         ]);
     }
 
@@ -198,7 +215,55 @@ class SettingController extends Controller
             $day->save();
         }
 
-
         return redirect("/settings");
     }
+
+    public function getOrders($perPage)
+    {
+        $orders = Order::where('is_cart','0')->where('order_status',OrderStatus::Delivered)->orderBy('id','desc')->paginate($perPage);
+
+        return $orders;
+    }
+
+    public function getRefundRequests($perPage)
+    {
+        $refundReq = Order::where('is_cart','0')->where('order_status',OrderStatus::Delivered)->where('refund_status','>=',0)->orderBy('id','desc')->paginate($perPage);
+
+        return $refundReq;
+    }
+
+    public function changeRefundStatus(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->refund_status = $request->status;
+
+        $status_text = $request->status == RefundStatus::Rejected ? 'Rejected' : 'Accepted';
+
+        if($request->status == RefundStatus::Accepted && $order->transaction_id)
+        {
+            $paymentCtrl = new \App\Http\Controllers\User\WebhookController;
+            $result = $paymentCtrl->refundPayment($order->transaction_id,$order->total_amount);
+
+            if(!empty($result) && isset($result->status) && $result->status == 'succeeded')
+            {
+                if($order->save())
+                {
+                    return response::json(['status' => 1, 'message' => '','data' => ['status_text' => $status_text]]);
+                }
+            }
+            else
+            {
+                return $result;
+            }
+        }
+
+        if($order->save())
+        {
+            return response::json(['status' => 1, 'message' => '','data' => ['status_text' => $status_text]]);
+        }
+
+        return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+    }
+
+    
 }

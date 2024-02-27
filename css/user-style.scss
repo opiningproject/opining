@@ -3528,6 +3528,7 @@ input[type="number"] {
     }
 
     .cart-sidebar {
+
         .navbar-expand-lg {
             justify-content: center;
         }
@@ -4531,6 +4532,8 @@ input[type="number"] {
 }
 
 @media screen and (min-width: 1440px) {
+
+
     .swiper-container {
         width: 47vw;
     }
@@ -4759,5 +4762,24 @@ input[type="number"] {
         margin-left: auto;
     }
 }
+@media screen and (min-width: 1400px) {
 
+.cart-sidebar {
+    min-width: 344px;
+    max-width: 344px;
+  }
+  }
+@media screen and (max-width: 1400px) {
 
+.cart-sidebar {
+height: auto !important;
+width: auto !important;
+min-width: auto !important;
+    max-width: initial !important;
+
+}
+.cart-navbar-toggler {
+display: inline-block !important;
+}
+
+}

@@ -249,5 +249,18 @@ function changeTime() {
         selectedTime = ''
         return false
     }
-
 }
+
+// Tab active management code
+$(document).ready(function() {
+    $('button[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', jQuery(e.target).attr('data-bs-target'));
+    });
+
+    // Here, save the index to which the tab corresponds. You can see it in the chrome dev tool.
+    var activeTab = localStorage.getItem('activeTab');
+
+    if (activeTab) {
+       $('button[data-bs-target="' + activeTab + '"]').tab('show');
+    }
+});

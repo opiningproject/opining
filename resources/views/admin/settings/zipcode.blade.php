@@ -1,7 +1,7 @@
-<div class="tab-pane fade {{ (isset($_GET['per_page']) || isset($_GET['page_no'])) ? 'show active' : ''}}" id="zipCode-tab-pane" role="tabpanel" aria-labelledby="zipCode-tab" tabindex="0">
+<div class="tab-pane fade" id="zipCode-tab-pane" role="tabpanel" aria-labelledby="zipCode-tab" tabindex="0">
     <div class="card-body">
-        <div class="zipcode-card-body rounded-custom-12 border-custom-1 py-3">
-            <div class="zipcode-table custom-table">
+        <div class="zipcode-card-body rounded-custom-12">
+            <div class="zipcode-table custom-table mb-3">
                 <form method="POST" id="zipcode-form">
                     <table class="table mb-0">
                         <thead>
@@ -103,35 +103,22 @@
             </div>
             <div class="d-flex justify-content-between align-items-center" style="padding: 0 20px 0 20px;">
                 {{ $zipcodes->links() }}
-                <div>
-                    <label>Rows per Page</label>
-                    <select id="per_page_dropdown" onchange="">
-                        <option
-                            {{ $perPage == 5 ? 'selected' : '' }} value="{{ Request::url().'?per_page=5' }}">
-                            5
+                <div class="ms-auto d-flex align-items-center custom-pagination justify-content-end w-100">
+                    <label class="text-nowrap">Rows per Page</label>
+                    <select id="per_page_dropdown" onchange="" class="form-control bg-white ms-2">
+                        @for($i=5; $i<=20; $i+=5)
+                        <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                            {{ $i }}
                         </option>
-                        <option
-                            {{ $perPage == 10 ? 'selected' : '' }} value="{{ Request::url().'?per_page=10' }}">
-                            10
-                        </option>
-                        <option
-                            {{ $perPage == 15 ? 'selected' : '' }} value="{{ Request::url().'?per_page=15' }}">
-                            15
-                        </option>
-                        <option
-                            {{ $perPage == 20 ? 'selected' : '' }} value="{{ Request::url().'?per_page=20' }}">
-                            20
-                        </option>
+                        @endfor
                     </select>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
-<div class="modal fade custom-modal" id="deleteZipcodeModal" tabindex="-1" aria-labelledby="dleteAlertModal"
-     aria-hidden="true">
+<div class="modal fade custom-modal" id="deleteZipcodeModal" tabindex="-1" aria-labelledby="dleteAlertModal" aria-hidden="true">
     <div class="modal-dialog custom-w-441px modal-dialog-centered">
         <div>
             <div class="modal-content">

@@ -108,7 +108,7 @@ class WebhookController extends Controller
 
             if($result->status == 'pending')
             {
-                return response::json(['status' => '1', 'message' => trans('message.claim_resolve_fail')]);
+                return response::json(['status' => '1', 'message' => trans('message.something_wrong')]);
             }
             else
             {
@@ -118,6 +118,7 @@ class WebhookController extends Controller
         }
         catch(\Stripe\Exception\ApiErrorException $e) 
         {
+            //echo $e->getError()->message;
             return response::json(['status' => '0', 'message' => $e->getError()->message]);
         } 
     }

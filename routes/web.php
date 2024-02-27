@@ -127,6 +127,7 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::post('/save-content', [SettingController::class, 'saveContent']);
         Route::post('/change-password', [SettingController::class, 'changePassword'])->name('change.password');
         Route::post('/save-profile', [SettingController::class, 'saveProfile'])->name('settings.save-profile');
+        Route::post('/change-refund-status', [SettingController::class, 'changeRefundStatus'])->name('settings.change-refund-status');
     });
     // Restaurant Setting Routes
 

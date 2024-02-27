@@ -3111,3 +3111,12 @@ label.error{
 /* Rekha Sharma */
 
 
+  .custom-table ul.pagination {margin-bottom: 0px}
+.custom-pagination select.form-control {
+flex: 0 0 80px;
+max-width: 80px;
+}
+
+nav .pagination {
+margin-bottom: 0px; 
+}

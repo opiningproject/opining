@@ -1,11 +1,22 @@
+<?php
+
+use App\Enums\OrderStatus;
+use App\Enums\OrderType;
+use App\Enums\PaymentStatus;
+use App\Enums\PaymentType;
+use App\Enums\RefundStatus;
+
+?>
+
 <div class="tab-pane fade" id="paymentHistory-tab-pane" role="tabpanel" aria-labelledby="paymentHistory-tab" tabindex="0">
   <div class="card-body">
-    <div class="paymentHistory-card-body rounded-custom-12 border-custom-1 py-3 pb-0">
+    <div class="paymentHistory-card-body rounded-custom-12 border-custom-1 py-3 ">
       <div class="paymentHistory-table custom-table">
-        <table class="table mb-0">
+        <table class="table mb-3">
           <thead>
             <tr>
               <th scope="col" class="text-center">Order Id</th>
+              <th scope="col" class="text-center">Payment Type</th>
               <th scope="col" class="text-center">Transaction ID </th>
               <th scope="col" class="text-center">Delivery Address </th>
               <th scope="col" class="text-center">Date and Time </th>
@@ -13,55 +24,61 @@
             </tr>
           </thead>
           <tbody>
+            @foreach($orders as $key => $order)
             <tr>
               <td class="text-center">
-                <div>1215151</div>
+                <div>{{ $order->id }}</div>
               </td>
               <td class="text-center">
-                <div>1215151</div>
+                <div>{{ $order->payment_type == PaymentType::Card ? 'Card': ($order->payment_type == PaymentType::Cash ? 'Cash':'Ideal') }}</div>
+              </td>
+              <td class="text-center">
+                <div>{{ $order->transaction_id ? $order->transaction_id : '-' }}</div>
               </td>
               <td class="text-center">
                 <div class="d-flex align-items-center gap-2 justify-content-center">
                   <img src="{{ asset('images/location-icon.svg') }}" alt="" class="svg" height="18" width="13">
-                  <div class="text">Elm Street, 23 Yogyakarta (2.5 km)</div>
+                  <div class="text">
+                    <?php
+                      if($order->order_type == OrderType::Delivery)
+                      {
+                        $address = $order->orderUserDetails;
+
+                        echo $address->house_no . ', ' . $address->street_name . ', ' . $address->city . ', ' . $address->zipcode;
+                      }
+                      else
+                      {
+                        echo getRestaurantDetail()->rest_address;
+                      }
+                    ?>
+                  </div>
                 </div>
               </td>
               <td class="text-center">
-                <div class="text">Delivered Jun 17, 2023, 09:52 PM</div>
+                <div class="text">{{ $order->created_at }}</div>
               </td>
               <td class="text-center">
                 <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <div class="text fw-600">€33.54</div>
+                  <div class="text fw-600">€{{ $order->total_amount }}</div>
                   <img src="{{ asset('images/checkmark.svg') }}" alt="" class="svg" height="14" width="14">
                 </div>
               </td>
             </tr>
+            @endforeach
           </tbody>
         </table>
-        <div class="d-flex flex-wrap pagination-row">
-          <div class="text-center pagination-item">
-            <div class="d-flex align-items-center gap-3">
-              <button class="border-0 outline-0 bg-transparent">
-                <img src="{{ asset('images/left-icon.svg') }}" alt="" class="svg" height="24" width="24">
-              </button>
-              <div class="text text-muted"> 01 of <span class="text-dark fw-600">05</span>
-              </div>
-              <button class="border-0 outline-0 bg-transparent" style="transform: rotate(180deg);">
-                <img src="{{ asset('images/left-icon.svg') }}" alt="" class="svg" height="24" width="24">
-              </button>
+        <div class="d-flex justify-content-between align-items-center" style="padding: 0 20px 0 20px;">
+            {{ $orders->links() }}
+             <div class="ms-auto d-flex align-items-center custom-pagination justify-content-end w-100">
+                <label class="text-nowrap">Rows per Page</label>
+                <select id="per_page_dropdown" class="form-control bg-white ms-2">
+                    @for($i=5; $i<=20; $i+=5)
+                    <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                        {{ $i }}
+                    </option>
+                    @endfor
+                </select>
             </div>
-          </div>
-          <div class="text-center pagination-item">
-            <div class="d-flex gap-2 align-items-center">
-              <div class="text text-muted"> Rows per page </div>
-              <select class="form-select rounded-2" style="max-width: 70px;min-height: auto;font-size: 14px;">
-                <option selected>05</option>
-                <option value="1">06</option>
-                <option value="2">07</option>
-                <option value="3">08</option>
-              </select>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@
                                 </button>
                             </div>
 
-                           
+
                         </div>
                         <div class="offer-card-banner offercard-slider">
                             <div class="card position-relative">
@@ -286,7 +286,7 @@
                                     <i class="fas fa-minus align-middle"
                                        onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->dish->id }})"></i>
                                   </span>
-                                                                                <input type="number"
+                                                                                <input type="number" readonly
                                                                                        class="count cart-amt"
                                                                                        id="qty-{{ $dish->dish->id }}"
                                                                                        name="qty-{{ $dish->dish->id }}"

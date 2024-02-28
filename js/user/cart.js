@@ -220,7 +220,9 @@ function applyCoupon() {
     var orderAmount = $('#total-cart-bill-amount').val();
 
     if (couponCode == '') {
-        return false;
+        $("#coupon-code-error").removeClass('d-none');
+        $('#coupon-code-error').text('Please Enter coupon');
+        return;
     }
 
     $.ajax({

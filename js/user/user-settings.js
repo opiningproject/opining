@@ -23,18 +23,16 @@ $(function () {
         },
         "Only Alphabet"
     );
-    $('#image').change(function () {
-        var ext = this.value.match(/\.(.+)$/)[1];
-        switch (ext) {
-            case 'jpg':
-            case 'jpeg':
-            case 'png':
-            case 'gif':
-                $('#uploadButton').attr('disabled', false);
-                break;
-            default:
-                alert('This is not an allowed file type.');
-                this.value = '';
+    $('#image').change(function (e) {
+
+        var type = e.target.files[0].type;
+
+        if(type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg')
+        {
+            alert('Please upload valid image.');
+
+            $("#image").val('');
+            return false;
         }
     });
 })

@@ -30,7 +30,7 @@
                                                 class="col-xxl-3 col-xl-5 col-lg-4 col-md-6 col-sm-12 col-12 lg-my-auto custom-w-col-fileupload">
                                                 <div class="form-group">
                                                     <div class="file-upload-wrapper form-control" data-text="Upload">
-                                                        <input name="image" id="image" type="file"
+                                                        <input name="image" id="image" type="file" accept="image/png, image/gif, image/jpeg"
                                                                class="file-upload-field" value="">
                                                     </div>
                                                 </div>

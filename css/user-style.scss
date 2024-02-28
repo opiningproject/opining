@@ -595,7 +595,7 @@ a {
     &:hover,
     &:active {
         background-color: $yellow5;
-        border-color: $yellow5;
+         border-color: $yellow5;
     }
 
     &.btn:active {
@@ -4765,8 +4765,8 @@ input[type="number"] {
 @media screen and (min-width: 1400px) {
 
 .cart-sidebar {
-    min-width: 344px;
-    max-width: 344px;
+    min-width: 364px;
+    max-width: 364px;
   }
   }
 @media screen and (max-width: 1400px) {

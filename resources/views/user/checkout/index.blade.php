@@ -407,7 +407,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                             </div>
                             <div class="offcanvas-body pt-3 h-100">
-                                   <div class="d-flex justify-content-end mb-2">  
+                                   <div class="d-flex justify-content-end mb-2">
                                     <button type="button" class="btn-close d-block d-xxl-none" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button></div>
                                 <div class="navbar navbar-expand-lg pt-0 h-100">
                                     <div class="cart-sidebar-content position-relative h-100">
@@ -618,21 +618,24 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 var houseNo = $('#house_no').val()
                 var city = $('#city').val()
                 var address = houseNo + ' ' + streetName + ' ' + city
-                var geocoder = new google.maps.Geocoder();
 
-                await geocoder.geocode({'address': address}, function (results, status) {
-                    console.log('result', results)
-                    console.log('status',status)
-                    console.log('google.maps.GeocoderStatus',google.maps.GeocoderStatus)
-                    if(status != google.maps.GeocoderStatus.ZERO_RESULTS){
+                try
+                {
+                    var geocoder = new google.maps.Geocoder();
+
+                    await geocoder.geocode({'address': address}, function (results, status) {
+
                         if (status == google.maps.GeocoderStatus.OK) {
-                            if(results){
-                                latitude = results[0].geometry.location.lat();
-                                longitude = results[0].geometry.location.lng();
-                            }
+                            latitude = results[0].geometry.location.lat();
+                            longitude = results[0].geometry.location.lng();
                         }
-                    }
-                });
+                    });
+
+                }
+                catch(err)
+                {
+                    //alert(err)
+                }
             }
 
             checkoutData.append('longitude', longitude)

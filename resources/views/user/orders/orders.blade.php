@@ -87,10 +87,11 @@
                                                     order
                                                 </button>
                                             @endif
-                                            <button onclick="location.href='{{ route('user.chat') }}'">
+{{--                                            Commenting as this is not of Milestone 2 feature--}}
+                                            {{--<button onclick="location.href='{{ route('user.chat') }}'">
                                                 <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg"
                                                      alt="" width="27" height="25">Need help
-                                            </button>
+                                            </button>--}}
                                         </div>
                                     </div>
 

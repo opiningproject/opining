@@ -302,7 +302,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                      role="tabpanel" aria-labelledby="v-pills-ideal-tab"
                                                                      tabindex="0">
                                                                     <main class="bd-main order-1">
-                                                                        <div class="main-content d-flex flex-column ">
+                                                                        <div class="main-content d-flex flex-column px-2">
                                                                             <div
                                                                                 class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                                                                                 <div
@@ -407,7 +407,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                             </div>
                             <div class="offcanvas-body pt-3 h-100">
-                                   <div class="d-flex justify-content-end mb-2">  <button type="button" class="btn-close d-block" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button></div>
+                                   <div class="d-flex justify-content-end mb-2">  
+                                    <button type="button" class="btn-close d-block d-xxl-none" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button></div>
                                 <div class="navbar navbar-expand-lg pt-0 h-100">
                                     <div class="cart-sidebar-content position-relative h-100">
                                         <div class="navbar-collapse cartbox-collapse">

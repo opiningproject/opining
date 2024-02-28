@@ -4762,6 +4762,11 @@ input[type="number"] {
         margin-left: auto;
     }
 }
+
+.custom-control-with-icon {
+    text-indent: initial !important;
+}
+
 @media screen and (min-width: 1400px) {
 
 .cart-sidebar {
@@ -4769,7 +4774,32 @@ input[type="number"] {
     max-width: 364px;
   }
   }
-@media screen and (max-width: 1400px) {
+
+  @media screen and (max-width: 1500px) {
+    .cart-section .cart-items .foodqty .plus, .cart-section .cart-items .foodqty .minus {
+        border-width: 1px;
+        height: 20px;
+        min-width: 20px;
+    }
+    .cart-section .cart-items .foodqty .count {
+    font-size: 20px;
+    width: 55px;
+    min-width: 25px;
+    }
+    .cart-section .cart-items .foodqty .plus i, .cart-section .cart-items .foodqty .minus i {
+        line-height: 20px;
+        font-size: 12px;
+    }
+    .checkout-form {
+        .payment-nav {
+            column-gap: 8px;
+        }
+    }
+    .payment-nav .page-title {
+        font-size: 26px;
+    }
+  }
+@media screen and (max-width: 1399px) {
 .form-control-icon{
     text-indent: initial !important;
 }
@@ -4779,6 +4809,7 @@ height: auto !important;
 width: auto !important;
 min-width: auto !important;
     max-width: initial !important;
+    padding-left: 0px;
 .delivery-address-span{
     flex: 0 0 230px;
     max-width: 230px;
@@ -4794,4 +4825,13 @@ min-width: auto !important;
 display: inline-block !important;
 }
 
+.space-for-close {
+    padding-top: 40px !important;
+}
+}
+
+@media screen and (max-width: 991px) {
+.dashboard-cart-navbar-toggler {
+display: none !important;
+}
 }

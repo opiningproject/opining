@@ -110,7 +110,7 @@ class CartController extends Controller
                       <span class='minus'>
                         <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $dishId . ")></i>
                       </span>
-                      <input type='number' class='count cart-amt' id='qty-$dishId' name='qty-$dishId' value=" . $cart->qty . "  data-id='$dishId'>
+                      <input type='number' readonly class='count cart-amt' id='qty-$dishId' name='qty-$dishId' value=" . $cart->qty . "  data-id='$dishId'>
                       <input type='hidden' id='dish-price-$dishId' value='$dishPrice'/>
                       <span class='plus'>
                         <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $dishId . ")></i>

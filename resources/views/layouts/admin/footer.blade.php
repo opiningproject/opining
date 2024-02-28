@@ -26,10 +26,10 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    
+
     jQuery(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');
-         
+
     })
     jQuery(document).ajaxStop(function(){
         $('#loader').addClass('d-none');
@@ -41,7 +41,7 @@
          $(".cke_wysiwyg_frame").contents().find("body").css({ 'background-color': 'black', 'color': 'white'});
         });
     }
-    
+
     const svg_options = {
             svgSelector: 'img.svg', // the class attached to all images that should be inlined
             initClass: 'js-inlinesvg', // class added to <html>

@@ -75,7 +75,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                     <div class="form-group">
                                                                         <label for="housenumber" class="form-label">House
                                                                             Number</label>
-                                                                        <input type="number" maxlength="4" min="0"
+                                                                        <input type="number" maxlength="9" min="0"
                                                                                name="house_no" id="house_no"
                                                                                class="form-control"
                                                                                value="{{ $addressData->house_no ?? $house_no }}"
@@ -621,10 +621,16 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 var geocoder = new google.maps.Geocoder();
 
                 await geocoder.geocode({'address': address}, function (results, status) {
-
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        latitude = results[0].geometry.location.lat();
-                        longitude = results[0].geometry.location.lng();
+                    console.log('result', results)
+                    console.log('status',status)
+                    console.log('google.maps.GeocoderStatus',google.maps.GeocoderStatus)
+                    if(status != google.maps.GeocoderStatus.ZERO_RESULTS){
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if(results){
+                                latitude = results[0].geometry.location.lat();
+                                longitude = results[0].geometry.location.lng();
+                            }
+                        }
                     }
                 });
             }

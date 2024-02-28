@@ -43,7 +43,7 @@
                     </div>
                     <div class="text-start">
                         <div class="dropdown">
-                            <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown" style="color: #FFC00A;">
+                            <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown" style="color: #FFC00A;text-wrap: wrap;">
                                 {{ Auth::user()->full_name }}
                             </div>
                             <ul class="dropdown-menu">

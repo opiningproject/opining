@@ -31,7 +31,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                         <div class="section-page-title main-page-title mb-0">
                             <div class="col-12">
                                <div class="d-flex align-items-center justify-content-between">
- <h1 class="page-title">Checkout</h1>
+                                <h1 class="page-title">Checkout</h1>
 
                                 <button class="navbar-toggler cart-navbar-toggler  p-2 d-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">
                                       <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">

@@ -46,7 +46,8 @@ $(function () {
                 totalAmt
             },
             success: function (response) {
-
+                $("#coupon-code-error").addClass('d-none');
+                $('#coupon-code-error').text('');
                 if (response.status == 400) {
                     $('#addressChangeModal').modal('show')
                 } else if (response.status == 200) {
@@ -285,7 +286,6 @@ function removeCoupon() {
 }
 
 function addSubDishQuantities(dishId, operator, maxQty) {
-    debugger
     var dishAmt = $('#dish-org-price').val()
     var currentQty = parseInt($('input[name=qty-' + dishId + ']').val());
 

@@ -59,7 +59,7 @@ class CouponController extends Controller
                 if (strtotime(now()) > strtotime($coupon->expiry_date . ' 23:59:59')) {
                     return Response::json([
                         'status' => 401,
-                        'message' => trans('message.coupon.expired'),
+                        'message' => trans('Coupon Expired'),
 
                     ]);
                 }
@@ -67,7 +67,7 @@ class CouponController extends Controller
                 if ($request->orderAmount < $coupon->price) {
                     return response()->json([
                         'status' => 401,
-                        'message' => trans('message.coupon.min_order_amount', ['min_order_amount' => $coupon->price]),
+                        'message' => trans("Minimum Order for this coupon is $coupon->price", ['min_order_amount' => $coupon->price]),
                     ], 200);
                 }
 
@@ -80,7 +80,7 @@ class CouponController extends Controller
 
                 return Response::json([
                     'status' => 200,
-                    'message' => trans('message.coupon.applied'),
+                    'message' => trans('Coupon Applied'),
                     'data' => [
                         'coupon_id' => $coupon->id,
                         'discount_amount' => $discount_amount,

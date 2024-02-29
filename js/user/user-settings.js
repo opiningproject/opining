@@ -10,7 +10,6 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            debugger
             toastr.success('Settings updated')
             return true;
         }

@@ -333,7 +333,7 @@
                                                                                         <label for="dishnameenglish"
                                                                                                class="form-label">Add
                                                                                             notes</label>
-                                                                                        <input type="text" readonly data-id="{{ $dish->id }}"
+                                                                                        <input type="text" data-id="{{ $dish->id }}" maxlength="50"
                                                                                                class="form-control dish-notes" value="{{ $dish->notes }}"
                                                                                                placeholder="Type here..."/>
                                                                                     </div>
@@ -353,7 +353,7 @@
                                    width="25">
 
                             </span>
-                                                                <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" value="{{ $user->cart ? $user->cart->delivery_note : '' }}"
+                                                                <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}"
                                                                        placeholder="Add Delivery instruction"/>
                                                             </div>
                                                             <div class="mb-3">
@@ -447,7 +447,7 @@
                                                                             <td class="text-start">Total</td>
                                                                             <td class="text-end">
                                                                                 <span class="bill-total-count"
-                                                                                      id="gross-total-bill">{{ ($cartValue + $serviceCharge) - ($cartValue * $couponDiscountPercent) }}</span>
+                                                                                      id="gross-total-bill">€{{ ($cartValue + $serviceCharge) - ($cartValue * $couponDiscountPercent) }}</span>
                                                                             </td>
                                                                         </tr>
                                                                         </tfoot>

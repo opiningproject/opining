@@ -12,14 +12,14 @@
             <span class="input-group-icon">
               <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12"  class="svg">
             </span>
-            <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+            <input type="email" class="form-control custom-control-with-icon ps-5" placeholder="Email" name="email" id="email" required>
             <label id="email-error" class="error" for="email" style="display: none"></label>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
             <span class="input-group-icon">
                <img src="{{ asset('images/password.svg') }}" alt="" width="15" height="20"  class="svg">
             </span>
-            <input type="password" class="form-control login-pwd-icon" placeholder="Password" id="password" name="password" required>
+            <input type="password" class="form-control login-pwd-icon custom-control-with-icon ps-5" placeholder="Password" id="password" name="password" required>
             <label id="password-error" class="error" for="password" style="display: none"></label>
             <span class="input-group-icon passwordeye-icon login-signup-pwd-icon">
                  <img src="{{ asset('images/passwordeye-icon.svg') }}" id="toggleSignInPassword" class="svg" width="21" height="19" />

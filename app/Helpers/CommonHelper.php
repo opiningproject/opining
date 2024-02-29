@@ -199,7 +199,7 @@ if (!function_exists('orderTotalPayAmount')) {
     function orderTotalPayAmount()
     {
         $user = Auth::user();
-        $cartTotal = $user->cart->dishDetails()->select(DB::raw('sum(qty * price) as total'))->get()->sum('total');
+        $cartTotal = $user->cart->dishDetails()->get()->sum('dish_price');
         $cartIngredient = $user->cart->dishDetails()->get()->sum('paid_ingredient_total');
         $cartTotal = $cartTotal + $cartIngredient;
         $serviceCharge = getRestaurantDetail()->service_charge;

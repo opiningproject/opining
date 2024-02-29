@@ -51,6 +51,8 @@ class OrderDetail extends Model
     }
 
     public function getDishPriceAttribute(){
-        return $this->qty * $this->dish->price;
+        if($this->dish != null){
+            return $this->qty * $this->dish->price;
+        }
     }
 }

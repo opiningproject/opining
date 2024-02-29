@@ -30,13 +30,16 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                     <div class="main-content">
                         <div class="section-page-title main-page-title mb-0">
                             <div class="col-12">
-                               <div class="d-flex align-items-center justify-content-between">
-                                <h1 class="page-title">Checkout</h1>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h1 class="page-title">Checkout</h1>
 
-                                <button class="navbar-toggler cart-navbar-toggler  p-2 d-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">
-                                      <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
-                                </button>
-                               </div>
+                                    <button class="navbar-toggler cart-navbar-toggler  p-2 d-none" type="button"
+                                            data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart"
+                                            aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">
+                                        <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18"
+                                             height="18">
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <section class="custom-section checkout-section">
@@ -167,7 +170,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             alt="netherlands Flag" class="img-fluid">
                                                                     </button>
                                                                     <input type="text"
-                                                                           class="form-control countrycode-input" readonly
+                                                                           class="form-control countrycode-input"
+                                                                           readonly
                                                                            value="+31">
                                                                     <input type="number" class="form-control"
                                                                            minlength="9" maxlength="9" required
@@ -205,8 +209,9 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                     <div class="row">
                                                         <div
                                                             class="col-xxl-6 col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 my-auto">
-                                                            <div class="custom-radio custom-checkbox-group mobile-mb-10 flex-wrap"
-                                                                 style="margin-bottom: 30px">
+                                                            <div
+                                                                class="custom-radio custom-checkbox-group mobile-mb-10 flex-wrap"
+                                                                style="margin-bottom: 30px">
                                                                 <div class="radio">
                                                                     <input id="radio-1" name="del_radio" type="radio"
                                                                            class="radio-del-time" checked value="asap">
@@ -302,7 +307,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                      role="tabpanel" aria-labelledby="v-pills-ideal-tab"
                                                                      tabindex="0">
                                                                     <main class="bd-main order-1">
-                                                                        <div class="main-content d-flex flex-column px-2">
+                                                                        <div
+                                                                            class="main-content d-flex flex-column px-2">
                                                                             <div
                                                                                 class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                                                                                 <div
@@ -321,13 +327,14 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                        class="mb-2">
                                                                                     <strong>iDEAL Banks</strong>
                                                                                 </label>
-                                                                                <div id="ideal-bank-element" class="custom_select">
+                                                                                <div id="ideal-bank-element"
+                                                                                     class="custom_select">
                                                                                     <!-- A Stripe Element will be inserted here. -->
                                                                                 </div>
 
-                                                                                {{--                                                                                <button type="submit">Pay</button>--}}
+                                                                            {{--                                                                                <button type="submit">Pay</button>--}}
 
-                                                                                <!-- Used to display form errors. -->
+                                                                            <!-- Used to display form errors. -->
                                                                                 <div id="error-message"
                                                                                      role="alert"></div>
                                                                             </form>
@@ -344,12 +351,15 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                     <h4 class="custom-card-title-1 form-group">Add new
                                                                         card </h4>
                                                                     <div class="payment-form-card">
-                                                                        <input type="text" class="form-control cardNumber" name="card_number" required
+                                                                        <input type="text"
+                                                                               class="form-control cardNumber"
+                                                                               name="card_number" required
                                                                                placeholder="Card number">
                                                                         <div class="row g-0">
                                                                             <div
                                                                                 class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                                                <input type="text" name="exp_date" required
+                                                                                <input type="text" name="exp_date"
+                                                                                       required
                                                                                        class="form-control expireYear"
                                                                                        placeholder="Valid through (MM/YY)">
                                                                             </div>
@@ -361,7 +371,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                        maxlength="3">
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" class="form-control border-0" name="card_name" required
+                                                                        <input type="text" class="form-control border-0"
+                                                                               name="card_name" required
                                                                                placeholder="Name on card">
                                                                     </div>
                                                                 </div>
@@ -388,9 +399,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             <div class="row">
                                                 <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12">
                                                     <div class="form-group">
-                                                            <button type="submit" class="align-middle btn btn-custom-yellow btn-default d-block w-100">Pay
-                                                                €{{ orderTotalPayAmount() }} with <span
-                                                                    id="total-amt-pay-btn">iDEAL</span></button>
+                                                        <button type="submit"
+                                                                class="align-middle btn btn-custom-yellow btn-default d-block w-100">
+                                                            Pay
+                                                            €{{ orderTotalPayAmount() }} with <span
+                                                                id="total-amt-pay-btn">iDEAL</span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -407,18 +420,21 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                             </div>
                             <div class="offcanvas-body pt-3 h-100">
-                                   <div class="d-flex justify-content-end mb-2">
-                                    <button type="button" class="btn-close d-block d-xxl-none" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart"></button></div>
+                                <div class="d-flex justify-content-end mb-2">
+                                    <button type="button" class="btn-close d-block d-xxl-none"
+                                            data-bs-dismiss="offcanvas" aria-label="Close"
+                                            data-bs-target="#bdSidebarCart"></button>
+                                </div>
                                 <div class="navbar navbar-expand-lg pt-0 h-100">
                                     <div class="cart-sidebar-content position-relative h-100">
                                         <div class="navbar-collapse cartbox-collapse">
                                             <div class="cart-section cart-checkout-section">
                                                 <h6 class="cart-title">Order Details</h6>
                                                 @foreach($user->cart->dishDetails as $dishDetails)
-                                                        <?php
-                                                        $cartAmount += ($dishDetails->qty * $dishDetails->dish->price);
-                                                        $cartAmount += isset($dishDetails->orderDishPaidIngredients) ? $dishDetails->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
-                                                        ?>
+                                                    <?php
+                                                    $cartAmount += ($dishDetails->qty * $dishDetails->dish->price);
+                                                    $cartAmount += isset($dishDetails->orderDishPaidIngredients) ? $dishDetails->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
+                                                    ?>
                                                     <div class="cart-items">
                                                         <div class="row">
                                                             <div
@@ -439,16 +455,23 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             class="cart-item-price">+€{{ $dishDetails->dish->price }}</span>
                                                                     </div>
                                                                     <div class="d-flex">
-                                                                        <div class="text line-clamp-2" id="order-ingredient-{{ $dishDetails->id}}">
+                                                                        <div class="text line-clamp-2"
+                                                                             id="order-ingredient-{{ $dishDetails->id}}">
                                                                             <p class="mb-0 item-options mb-0"> {{ $dishDetails->dishOption->name ?? ''}} </p>
-                                                                        -{{ getOrderDishIngredients($dishDetails) }}
+                                                                            -{{ getOrderDishIngredients($dishDetails) }}
                                                                         </div>
                                                                         {{--<a class="item-customize"
                                                                            href="javascript:void(0);">read more</a>--}}
                                                                         <div class="text">
-                                                                            <a class="item-customize" href="javascript:void(0)" id="read-more-{{ $dishDetails->id}}"
-                                                                               onclick="readMore({{ $dishDetails->id}})">Read More</a>
-                                                                            <a class="item-customize" href="javascript:void(0)" style="display:none;" id="close-{{ $dishDetails->id}}"
+                                                                            <a class="item-customize"
+                                                                               href="javascript:void(0)"
+                                                                               id="read-more-{{ $dishDetails->id}}"
+                                                                               onclick="readMore({{ $dishDetails->id}})">Read
+                                                                                More</a>
+                                                                            <a class="item-customize"
+                                                                               href="javascript:void(0)"
+                                                                               style="display:none;"
+                                                                               id="close-{{ $dishDetails->id}}"
                                                                                onclick="hideReadMore({{ $dishDetails->id}})">Close</a>
                                                                         </div>
                                                                     </div>
@@ -457,7 +480,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             <label for="dishnameenglish"
                                                                                    class="form-label">Add
                                                                                 notes</label>
-                                                                            <input type="text" class="form-control dish-notes" value="{{ $dishDetails->notes }}" data-id="{{ $dishDetails->id }}"
+                                                                            <input type="text"
+                                                                                   class="form-control dish-notes"
+                                                                                   value="{{ $dishDetails->notes }}"
+                                                                                   data-id="{{ $dishDetails->id }}"
                                                                                    placeholder="Type here...">
                                                                         </div>
                                                                     </div>
@@ -465,8 +491,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
-                                                <!--                          <div class="cart-items">
+                                            @endforeach
+                                            <!--                          <div class="cart-items">
                             <div class="row">
                               <div class="col-xx-3 col-xl-3 col-lg-col-md-12 col-sm-12 col-12 position-relative">
                                 <span class="order-total-item">x1</span>
@@ -563,8 +589,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             </div>
         </div>
         <!-- start footer -->
-        @include('layouts.user.footer_design')
-        <!-- end footer -->
+    @include('layouts.user.footer_design')
+    <!-- end footer -->
     </div>
 @endsection
 
@@ -574,6 +600,16 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
     <script>
+        var public_key = '{{ config('params.stripe.sandbox.public_key') }}';
+        const stripe = Stripe(public_key, {
+            apiVersion: '2020-08-27'
+        });
+
+        const elements = stripe.elements();
+        const idealBank = elements.create('idealBank');
+        idealBank.mount('#ideal-bank-element');
+        var selectedBank = false
+
         $(function () {
             var startTime = '<?= date('H:i', strtotime('+30 mins')) ?>';
             var endTime = '<?= $restaurantOpen->end_time ?>';
@@ -586,23 +622,17 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 minTime: startTime,
                 maxTime: endTime,
             });
+            idealBank.on('change', function (event) {
+                selectedBank = true
+            });
         })
-        var public_key = '{{ config('params.stripe.sandbox.public_key') }}';
-        const stripe = Stripe(public_key, {
-            apiVersion: '2020-08-27'
-        });
-
-        const elements = stripe.elements();
-        const idealBank = elements.create('idealBank');
-        idealBank.mount('#ideal-bank-element');
 
         async function addOrder() {
-
             var deliveryType = $('input[name=del_radio]:checked').val()
             var paymentType = $('#payment_type').val()
 
             var zipcode = $('#zipcode').val()
-            console.log('zipcode',zipcode)
+            console.log('zipcode', zipcode)
 
             if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
                 alert('Please select time')
@@ -613,14 +643,18 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             var latitude = ''
             var longitude = ''
 
-            if(zipcode != undefined){
+            if (paymentType == '3' && selectedBank == false) {
+                alert('Please select bank to continue')
+                return false
+            }
+
+            if (zipcode != undefined) {
                 var streetName = $('#street_name').val()
                 var houseNo = $('#house_no').val()
                 var city = $('#city').val()
                 var address = houseNo + ' ' + streetName + ' ' + city
 
-                try
-                {
+                try {
                     var geocoder = new google.maps.Geocoder();
 
                     await geocoder.geocode({'address': address}, function (results, status) {
@@ -631,9 +665,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                         }
                     });
 
-                }
-                catch(err)
-                {
+                } catch (err) {
                     //alert(err)
                 }
             }
@@ -649,10 +681,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 data: checkoutData,
                 async success(response) {
                     if (response.status == 200) {
-                        if(paymentType == '2'){
+                        if (paymentType == '2') {
                             toastr.success('order placed successfully')
                             window.location.replace(baseURL + '/user/orders')
-                        }else if(paymentType == '3'){
+                        } else if (paymentType == '3') {
                             const {error, paymentIntent} = await stripe.confirmIdealPayment(
                                 response.message.paymentIntent.client_secret, {
                                     payment_method: {
@@ -665,11 +697,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                 alert(error.message);
                                 return;
                             }
-                        }else{
-                            if(response.message.cardPayment == 200){
+                        } else {
+                            if (response.message.cardPayment == 200) {
                                 toastr.success('order placed successfully')
                                 window.location.replace(baseURL + '/user/orders')
-                            }else if(response.message.cardPayment == 402){
+                            } else if (response.message.cardPayment == 402) {
                                 window.location.replace(response.message.redirectionUrl)
                             }
                         }
@@ -681,9 +713,6 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                 }
             })
-
-
-            // window.location.replace(baseURL + '/user/ideal-payment')
 
         }
     </script>

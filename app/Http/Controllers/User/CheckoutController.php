@@ -100,7 +100,7 @@ class CheckoutController extends Controller
                 $orderTime = date('H:i:s', strtotime($request->del_time));
             }
 
-            if ($user->cart->order_type == '1' || session('zipcode')) {
+            if ($user->cart->order_type == '1' && session('zipcode')) {
                 $deliveryCharges = getDeliveryCharges(session('zipcode'))->delivery_charge;
             }
 
@@ -175,10 +175,6 @@ class CheckoutController extends Controller
                 foreach ($user->cart->dishDetails() as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                 }
-
-                $user->cart->dishDetails()->update([
-                    'is_cart' => '0'
-                ]);
 
                 if(!empty($user->cart->coupon)){
                     $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([

@@ -19,7 +19,7 @@
             <span class="input-group-icon">
                <img src="{{ asset('images/password.svg') }}" alt="" width="15" height="20"  class="svg">
             </span>
-            <input type="password" class="form-control login-pwd-icon custom-control-with-icon ps-5" placeholder="Password" id="password" name="password" required>
+            <input type="password" class="form-control login-pwd-icon custom-control-with-icon ps-5 pe-5" placeholder="Password" id="password" name="password" required>
             <label id="password-error" class="error" for="password" style="display: none"></label>
             <span class="input-group-icon passwordeye-icon login-signup-pwd-icon">
                  <img src="{{ asset('images/passwordeye-icon.svg') }}" id="toggleSignInPassword" class="svg" width="21" height="19" />

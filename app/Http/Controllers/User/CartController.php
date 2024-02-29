@@ -137,7 +137,7 @@ class CartController extends Controller
                       <div class='from-group addnote-from-group mb-0'>
                         <div class='form-group'>
                           <label for='dishnameenglish' class='form-label'>Add notes</label>
-                          <input type='text' class='form-control' placeholder='Type here...'/>
+                          <input type='text' class='form-control dish-notes' maxlength='50' placeholder='Type here...'/>
                         </div>
                       </div>
                     </div>

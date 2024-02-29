@@ -30,7 +30,7 @@
               <span class="form-control-feedback">
                 <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
               </span>
-                                <input type="text" class="form-control text-transform-none"
+                                <input type="text" class="form-control text-transform-none form-control-icon ps-5"
                                        placeholder="What do you want eat today..." id="search-dish"/>
 
                                        <button class="navbar-toggler  dashboard-cart-navbar-toggler cart-navbar-toggler ms-2  p-2 d-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart" aria-label="Toggle docs navigation">

@@ -25,6 +25,7 @@ $(function () {
     $('#image').change(function (e) {
 
         var type = e.target.files[0].type;
+        var extension = e.target.files[0].name.split('.').pop()
 
         if(type != 'image/jpeg' && type != 'image/png' && type != 'image/jpg')
         {
@@ -32,6 +33,13 @@ $(function () {
 
             $("#image").val('');
             return false;
+        }else{
+            if(extension != 'jpeg' && extension != 'png' && extension != 'jpg'){
+                alert('Please upload valid image.');
+
+                $("#image").val('');
+                return false;
+            }
         }
     });
 })

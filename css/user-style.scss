@@ -4586,7 +4586,7 @@ input[type="number"] {
 
                     i {
                         line-height: 18px;
-                        font-size: 14px;
+                        font-size: 12px;
                     }
                 }
             }
@@ -4597,6 +4597,19 @@ input[type="number"] {
         font-size: 18px;
     }
 }
+
+.cart-section {
+    .cart-items {
+        .foodqty, .count {
+            font-size: 18px !important;
+            border: 0px;
+            outline: none;
+            letter-spacing: -1px;
+        }
+    }
+}
+
+
 
 @media screen and (min-width: 1600px) {
     .cart-sidebar {
@@ -4767,6 +4780,25 @@ input[type="number"] {
     text-indent: initial !important;
 }
 
+.cart-section .cart-items .foodqty .plus i, .cart-section .cart-items .foodqty .minus i {
+margin-left: 0px;
+} 
+
+.cart-section .cart-items img {
+    object-fit: contain;
+}
+
+.cart-section .cart-items .order-total-item {
+    font-size: 12px;
+    top: -10px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 5px;
+    background: #ffc00b;
+    border-radius: 5px;
+}
 @media screen and (min-width: 1400px) {
 
 .cart-sidebar {
@@ -4780,11 +4812,13 @@ input[type="number"] {
         border-width: 1px;
         height: 20px;
         min-width: 20px;
+        width: 20px;
     }
     .cart-section .cart-items .foodqty .count {
-    font-size: 20px;
+    font-size: 14px !important;
     width: 55px;
-    min-width: 25px;
+    min-width: 30px;
+    width: 30px;
     }
     .cart-section .cart-items .foodqty .plus i, .cart-section .cart-items .foodqty .minus i {
         line-height: 20px;

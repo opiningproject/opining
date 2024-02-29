@@ -186,6 +186,10 @@ class CheckoutController extends Controller
                     'is_cart' => '0'
                 ]);
 
+                $user->cart()->update([
+                    'is_cart' => '0'
+                ]);
+
             } elseif ($request->payment_type == '1') {
                 $expiryDate = explode('/', $request->exp_date);
                 $paymentIntent = createPaymentIntent($user->stripe_cust_id, ($totalAmtPaid * 100));
@@ -264,7 +268,7 @@ class CheckoutController extends Controller
                 }
             }
 
-            $response['data'] = 'Order Places successfully';
+            $response['data'] = 'Order Placed successfully';
 
             return response::json(['status' => 200, 'message' => $response]);
         } catch (Exception $e) {

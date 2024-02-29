@@ -33,7 +33,7 @@ return [
     'google' => [
         'client_id'     => '124244909968-m58gunpfnjq4nqghfkq01ugfhk6vttv6.apps.googleusercontent.com',
         'client_secret' => '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',
-        'redirect'      => 'https://php.inheritxdev.in/go-meal/qa/google/auth/callback',
+        'redirect'      => 'https://php.inheritxdev.in/go-meal/prod/google/auth/callback',
     ],
 
 ];

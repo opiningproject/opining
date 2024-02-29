@@ -481,7 +481,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                    class="form-label">Add
                                                                                 notes</label>
                                                                             <input type="text"
-                                                                                   class="form-control dish-notes"
+                                                                                   class="form-control dish-notes" maxlength="50"
                                                                                    value="{{ $dishDetails->notes }}"
                                                                                    data-id="{{ $dishDetails->id }}"
                                                                                    placeholder="Type here...">
@@ -524,7 +524,6 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                     <div class="table-responsive">
                                                         <table class="table table-borderless">
                                                             <tbody>
-                                                            <tbody>
                                                             <tr>
                                                                 <td class="text-start">
                                                                     <span class="text-muted-1 bill-count-name">Item Total </span>
@@ -541,7 +540,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="bill-count">{{ $serviceCharge }}</span>
+                                                                        class="bill-count">€{{ $serviceCharge }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -568,11 +567,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                             <tfoot>
                                                             <tr>
                                                                 <td class="text-start">Total</td>
-                                                                <td class="text-end">
-                                                                    <span
-                                                                        class="bill-total-count"
-                                                                        id="total-payment-text">€{{ orderTotalPayAmount() }}</span>
-                                                                </td>
+                                                                    <td class="text-end">
+                                                                        <span
+                                                                            class="bill-total-count"
+                                                                            id="total-payment-text">€{{ orderTotalPayAmount() }}</span>
+                                                                    </td>
                                                             </tr>
                                                             </tfoot>
                                                         </table>

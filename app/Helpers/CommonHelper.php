@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
 use App\Models\RestaurantDetail;
+use App\Models\User;
 
 if (!function_exists('activeMenu')) {
     function activeMenu($path)
@@ -239,5 +240,42 @@ if (!function_exists('getRestaurantOpenTime')) {
 
         $openingHours = RestaurantOperatingHour::where('day', $today)->first();
         return $openingHours;
+    }
+}
+
+if (!function_exists('isEmpty')) {
+    function isEmpty($data) 
+    {
+        foreach ($data as $val)
+        {
+          if($val == '')
+          {
+             $is_empty = true;
+             break;
+          }
+          else
+          {
+             $is_empty = false;
+          }
+        }
+        
+        return $is_empty;
+    }
+}
+
+if (!function_exists('getProfile')) {
+    function getProfile($user_id) 
+    {
+        $user = User::select('id','user_role','social_id','first_name','last_name','email','image','phone_no','password')->find($user_id);
+        $user->country_code = '+'.$user->country_code;
+        return $user;
+    }
+}
+if (!function_exists('logs')) {
+    function logs($data) 
+    {
+        $myfile = fopen('log.txt', "a") or die("Unable to open file!");
+        fwrite($myfile, json_encode($data)."\r\n");
+        fclose($myfile);
     }
 }

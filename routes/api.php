@@ -39,8 +39,23 @@ Route::group([
     	Route::post('logout', 'App\Http\Controllers\Api\v1\AuthController@logout');
         Route::post('changeLanguage', 'App\Http\Controllers\Api\v1\ProfileController@changeLanguage');
         Route::post('deleteAccount', 'App\Http\Controllers\Api\v1\ProfileController@deleteAccount');
-	});
+       
+        Route::post('favoriteUnfavorite', 'App\Http\Controllers\Api\v1\DishController@favoriteUnfavorite');
+       
+        Route::post('validateZipcode', 'App\Http\Controllers\Api\v1\AddressController@validateZipcode');
+        Route::post('getFavouriteDishes', 'App\Http\Controllers\Api\v1\DishController@getFavouriteDishes');
+        Route::get('deleteAddress/{id}', 'App\Http\Controllers\Api\v1\AddressController@deleteAddress');
+        Route::post('getOrders', 'App\Http\Controllers\Api\v1\OrderController@getOrders');
+        Route::post('refundRequest', 'App\Http\Controllers\Api\v1\OrderController@refundRequest');
+        Route::get('getCoupons', 'App\Http\Controllers\Api\v1\CouponController@getCoupons');
+        Route::post('buyCouponCode', 'App\Http\Controllers\Api\v1\CouponController@buyCouponCode');
+        
+        
 
+        
+	});
+    Route::post('getCategories', 'App\Http\Controllers\Api\v1\CategoryController@getCategories');
+    Route::post('getDishes', 'App\Http\Controllers\Api\v1\DishController@getDishes');
     
 });
 

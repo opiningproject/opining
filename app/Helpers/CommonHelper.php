@@ -229,6 +229,7 @@ if (!function_exists('getAddressDetails')) {
 if (!function_exists('getOrderGrossAmount')) {
     function getOrderGrossAmount($order)
     {
+       
         return ($order->total_amount - $order->platform_charge - $order->delivery_charge + $order->coupon_discount);
     }
 }

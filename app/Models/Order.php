@@ -11,6 +11,8 @@ class Order extends Model
 
     protected $fillable = ['user_id','transaction_id','coupon_id','refund_status','refund_description','payment_type','payment_status','delivery_charge','platform_charge','total_amount','order_status','order_type','order_date','delivery_date','delivery_time','delivery_note','receive_update_emails','points','coupon_code','payment_response','is_cart'];
     protected $dates = ['created_at', 'updated_at'];
+    protected $appends=['item_total'];
+
     public $timestamps = true;
 
     public function user(){
@@ -32,5 +34,10 @@ class Order extends Model
     public function getCreatedAtAttribute($value)
     {
         return date('F d, Y, g:i A',strtotime($value));
+    }
+
+    public function getItemTotalAttribute()
+    {
+        return $this->total_amount - $this->platform_charge - $this->delivery_charge + $this->coupon_discount;
     }
 }

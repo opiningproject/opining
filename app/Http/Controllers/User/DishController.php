@@ -54,6 +54,7 @@ class DishController extends Controller
 
     public function favorite(Request $request)
     {
+       
         if (!Auth::user()) {
             return response::json(['status' => 2, 'message' => '']);
         }

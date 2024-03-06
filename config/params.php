@@ -16,4 +16,5 @@ return [
 			'public_key' => 'pk_test_51OhX4ZGqnbPoF3NJpdQqiqvCtCn2i9uY6QE0o0qofeuUVVpF5iDyqhoF01ksUtWuwS8C4OAxy3IJT49qG7fDyOdi00r9mwFey0',
 		]
 	],
+	'page_limit' => 5,
 ];

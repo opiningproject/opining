@@ -3988,7 +3988,7 @@ display: none;
         overflow: auto;
         width: 100% !important;
         max-width: 92%;
-        margin: 0px auto;
+        margin: -90px auto;
         height: 83vh !important;
        visibility: hidden;
         opacity: 0;

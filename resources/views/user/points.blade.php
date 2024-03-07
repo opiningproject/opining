@@ -45,7 +45,7 @@
        </main>
      </div>
      <!-- start toaster -->
-     <div class="toast align-items-center bg-yellow border-yellow show custom-toast rounded-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="500">
+     <div class="toast align-items-center bg-yellow border-yellow show custom-toast rounded-0 d-none" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="500">
        <div class="d-flex text-center justify-content-center">
          <div class="toast-body">
            <p class="mb-0 alert-custom-text"> To have your food delivery to your area, please add €10 worth of items to your order</p>

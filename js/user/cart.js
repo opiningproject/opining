@@ -148,6 +148,9 @@ function addToCart(id) {
             $('#empty-cart-div').hide()
             $('#qty-'+id).attr('data-ing',0)
             calculateTotalCartAmount()
+
+            $('.cart-item-count').text(parseInt($('.cart-item-count').text()) + 1)
+            // alert(parseInt($('.cart-item-count').text()) + 1)
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -370,6 +373,8 @@ function addCustomizedCart(id) {
                     $("#dish-cart-lbl-" + id).text('Added to cart');
                     $("#dish-cart-lbl-" + id).prop('disabled', true);
                     $('.cart-items').append(response.message.cartHtml);
+                    var cartTotal = $('.cart-item-count').text()
+                    $('.cart-item-count').text(parseInt(cartTotal)+1)
                 }
 
                 $('#empty-cart-div').hide()

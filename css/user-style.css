@@ -3711,7 +3711,7 @@ input[type=number] {
     gap: 30px;
   }
   .swiper-container {
-    width: 44vw;
+    width: 80vw;
   }
   .coupon-card-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -3944,10 +3944,93 @@ border-radius: 8px;
     pointer-events: none;
 }
 
+@media (min-width: 768px) {
+    .category-section  .category-slider-navigation {
+display: none;
+    }
+}
 @media (max-width: 767px) {
 .navbar-brand .web-logo {
   max-width: 170px;
 }
+
+    .category-section .swiper-container  {
+        max-width: 80%;
+        width: 100% !important;
+        position: relative;
+    }
+
+
+    .category-section  .swiper-button-next:after, .category-section .swiper-button-prev:after {
+        font-size: 30px;
+    }
+
+    .category-section .swiper-container .swiper-button-next,  .category-section .swiper-container .swiper-button-prev {
+        top: 50%;
+        transform: translateY(-50%);
+        margin: -6px 0px 0px;
+    }
+
+    .category-section .swiper-container .swiper-button-next {
+        right: -40px;
+    }
+
+    .category-section .swiper-container .swiper-button-prev {
+        left: -40px;
+    }
+
+    .ordersdetails_sidebar {
+        position: fixed;
+        z-index: 99999;
+        top: 136px;
+        left: 0px;
+        right: 0px;
+        overflow: auto;
+        width: 100% !important;
+        max-width: 92%;
+        margin: 0px auto;
+        height: 83vh !important;
+       visibility: hidden;
+        opacity: 0;
+    }
+
+    .ordersdetails_sidebar.open {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    body.sidebar-open {
+        overflow: hidden !important;
+    }
+
+    .overlay-custom {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000;
+        opacity: 0.5;
+    }
+
+    body.sidebar-open .overlay-custom {
+        display: block;
+    }
+
+    .track-order-main .clock-icon {
+        bottom: -40px !important;
+    }
+
+    .order-non-active .orders .orders-type .orders-list .orders-item.active {
+        border: 1px solid var(--theme-gray2);
+        background-color: #ffffff;
+        filter: initial;
+    }
+
+
 }
 
 
@@ -3957,6 +4040,10 @@ border-radius: 8px;
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu {
     padding: 24px 12px 20px 12px;
+}
+
+.menu-sidebar .bag-count {
+    display: flex !important;
 }
 }
 
@@ -3975,3 +4062,26 @@ label.error{
     width: 100%;
 }
 /*Rekha Sharma*/
+
+.bag-count {
+    position: relative;
+}
+.bag-count .count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #ffffff;
+    background: #3BCE62;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 9999px;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: -5px;
+    right: -7px;
+    line-height: initial;
+    pointer-events: none;
+    line-height: 10px;
+}

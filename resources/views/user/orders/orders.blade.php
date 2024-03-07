@@ -10,6 +10,9 @@
     use App\Enums\RefundStatus;
 
     ?>
+
+    <div class="overlay-custom"></div>
+
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
@@ -21,7 +24,7 @@
                                 <h1 class="page-title">My Orders</h1>
                             </div>
                         </div>
-                        <div class="d-flex orders-main">
+                        <div class="d-flex orders-main order-non-active">
                             <div class="orders d-flex">
                                 <div class=" orders-type">
                                     <div class="orders-title">Active orders</div>
@@ -73,11 +76,13 @@
 
                             </div>
                             @if(!empty($order))
-                                <div class="ordersdetails">
+                                <div class="ordersdetails ordersdetails_sidebar">
                                     <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
                                     <!-- with two button -->
                                     <div class="ordersdetails-header d-flex justify-content-between align-items-center">
-                                        <div class="ordersdetails-title">Order Details</div>
+                                        <button type="button" class="btn-close d-block d-md-none order-detail-close-btn">
+                                        </button>
+                                        <div class="ordersdetails-title me-auto">Order Details</div>
                                         <div class="btn-grp d-flex flex-wrap">
                                             @if($order->order_type == '1')
                                                 <button

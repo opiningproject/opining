@@ -1,4 +1,4 @@
-function orderDetail(id) 
+function orderDetail(id)
 {
     $.ajax({
             url: baseURL+'/user/orders/order-detail/' + id,
@@ -10,6 +10,8 @@ function orderDetail(id)
                 $(".orders-list div").removeClass("active");
                 $('#order-'+id).addClass('active');
                 $('#description').val('');
+                $('.ordersdetails_sidebar').addClass('open')
+                $('body').addClass('sidebar-open')
 
             },
             error: function (response) {
@@ -26,9 +28,14 @@ $(function () {
             sendRefundRequest();
         }
     });
+
+    $(document).on('click','.order-detail-close-btn',function (){
+        $('.ordersdetails_sidebar').removeClass('open')
+        $('body').removeClass('sidebar-open')
+    })
 })
 
-function sendRefundRequest() 
+function sendRefundRequest()
 {
     var order_id = $('#order_id').val();
     var description = $('#description').val();

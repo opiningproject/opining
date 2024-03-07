@@ -82,7 +82,7 @@ Route::get('change-theme/{theme}', function ($currency) {
     return redirect()->back();
 });
 
-Route::middleware(['auth', 'localization'])->group(function () {
+Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     // Restaurant Menu Routes
     Route::group(['prefix' => '/menu'], function () {
@@ -150,6 +150,14 @@ Route::middleware(['auth', 'localization'])->group(function () {
 
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
 
+    // User Routes
+
+
+    Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
+
+});
+
+Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
         Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');
@@ -188,9 +196,4 @@ Route::middleware(['auth', 'localization'])->group(function () {
         Route::patch('/cart/update-del-ins', [\App\Http\Controllers\User\CartController::class, 'updateDeliveryNotes']);
 
     });
-    // User Routes
-
-
-    Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
-
 });

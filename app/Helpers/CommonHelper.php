@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
 use App\Models\RestaurantDetail;
 use App\Models\User;
+use App\Enums\OrderStatus;
+use App\Enums\OrderType;
 
 if (!function_exists('activeMenu')) {
     function activeMenu($path)
@@ -278,5 +280,49 @@ if (!function_exists('logs')) {
         $myfile = fopen('log.txt', "a") or die("Unable to open file!");
         fwrite($myfile, json_encode($data)."\r\n");
         fclose($myfile);
+    }
+}
+
+
+
+if (!function_exists('getOrderStatus')) {
+    function getOrderStatus($order) 
+    {
+        if($order->order_type == OrderType::Delivery)
+        {
+            if($order->order_status == OrderStatus::Accepted)
+            {
+                $order->order_status = OrderStatus::InKitchen;
+            }
+            else if($order->order_status == OrderStatus::InKitchen)
+            {
+                $order->order_status = OrderStatus::Ready;
+            } 
+            else if($order->order_status == OrderStatus::Ready)
+            {
+                $order->order_status = OrderStatus::OutForDelivery;
+            }
+            else
+            {
+                $order->order_status = OrderStatus::Delivered;
+            }
+        }
+        else
+        {
+            if($order->order_status == OrderStatus::Accepted)
+            {
+                $order->order_status = OrderStatus::InKitchen;
+            }
+            else if($order->order_status == OrderStatus::InKitchen)
+            {
+                $order->order_status = OrderStatus::ReadyForPickup;
+            } 
+            else if($order->order_status == OrderStatus::ReadyForPickup)
+            {
+                $order->order_status = OrderStatus::Delivered;
+            }
+        }
+
+        return $order;
     }
 }

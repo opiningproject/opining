@@ -20,11 +20,9 @@ use App\Enums\RefundStatus;
                 Track order
             </button>
         @endif
-            {{--                                            Commenting as this is not of Milestone 2 feature--}}
-        {{--<button onclick="location.href='{{ route('user.chat') }}'">
-            <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg" alt="" width="27" height="25">Need
-            help
-        </button>--}}
+        <button onclick="location.href='{{ route('user.chat') }}'">
+            <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg" alt="" width="27" height="25">Need help
+        </button>
     </div>
 </div>
 
@@ -109,9 +107,9 @@ use App\Enums\RefundStatus;
                     <div class="orderdetails-desc-count">
                         x{{ $dish->qty }}
                     </div>
-                    <div class="orderdetails-desc-card orderdetails-flex-200">
+                    <div class="orderdetails-desc-card orderdetails-flex-400">
                         <img src="{{ $dish->dish->image }}" class="img-fluid" alt="" width="85">
-                        <div class="text-grp">
+                        <div class="text-grp ps-3">
                             <div class="title">{{ $dish->dish->name }}</div>
                             <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
                                 <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
@@ -126,9 +124,10 @@ use App\Enums\RefundStatus;
                         </div>
                     </div>
                 </div>
-                <div class="orderdetails-desc-note">
+                <div class="orderdetails-desc-note ms-auto">
                     <Label>Notes</Label>
-                    <input type="text" placeholder="{{ $dish->notes }}" readonly>
+                    <input type="text" placeholder="{{ $dish->notes }}" readonly data-toggle="tooltip" title="{{ $dish->notes }}">
+
                 </div>
                 <div class="orderdetails-desc-price">
                         <?php

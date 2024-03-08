@@ -4915,6 +4915,7 @@ margin: 0px -10px;
 .offer-card-banner .card-body h2 {
   font-size: 26px;
 }
+<<<<<<< Updated upstream
 .offer-card-banner .card-body p {
   font-size: 18px;
 }
@@ -4931,3 +4932,13 @@ margin: 0px -10px;
 }
 }
 
+=======
+/*Rekha Sharma*/
+.orderdetails-desc-card  .text {
+    word-break: break-word;
+}
+.orderdetails-flex-400 {
+    flex: 0 0 400px;
+    max-width: 400px;
+}
+>>>>>>> Stashed changes

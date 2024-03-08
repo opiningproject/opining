@@ -2,14 +2,14 @@
   <div class="modal-dialog custom-w-441px modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-0 justify-content-center">
-        <h1 class="logo-text text-dark-1">
+        <h1 class="logo-text text-dark-1 mb-0">
           <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
         </h1>
       </div>
       <div class="modal-body signin-form">
         <form id="sign-in-form" method="POST">
           <div class="form-group prev-input-group custom-icon-input-group">
-            <span class="input-group-icon">
+            <span class="input-group-icon pt-1">
               <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12"  class="svg">
             </span>
             <input type="email" class="form-control custom-control-with-icon ps-5" placeholder="Email" name="email" id="email" required>
@@ -36,7 +36,7 @@
           </div>
           <div class="form-group">
             <!-- <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Sign In</a> -->
-            <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="sign-in-btn">Sign In</button>
+            <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-0" id="sign-in-btn">Sign In</button>
           </div>
           <div class="form-group">
             <p class="mb-0 singleline-text text-center text-custom-muted">Don’t you have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" class="text-yellow-2">Sign Up</a>

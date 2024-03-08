@@ -388,7 +388,7 @@ a {
     overflow-y: auto;
 
     .offcanvas-body {
-        padding: 40px 30px;
+        padding: 40px 20px;
         display: block;
 
         .navbar {
@@ -423,7 +423,7 @@ a {
 // start sidebar css
 
 .main-content {
-    padding: 47px 30px 95px;
+    padding: 47px 30px 80px;
     min-width: 1px;
     width: 100%;
 }
@@ -456,7 +456,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     .has-search {
         .form-control {
@@ -530,7 +530,7 @@ a {
     h2 {
         color: $text-white;
         font-family: "Sebino-Bold", sans-serif;
-        font-size: 36px;
+        font-size: 46px;
         font-weight: 400;
         letter-spacing: 0.5px;
         text-transform: capitalize;
@@ -539,9 +539,9 @@ a {
 
     p {
         color: $text-white;
-        font-family: "Sebino-Bold", sans-serif;
-        font-size: 30px;
-        font-weight: 400;
+        // font-family: "Sebino-Bold", sans-serif;
+        font-size: 34px;
+        font-weight: 500;
         letter-spacing: 0.5px;
         text-transform: capitalize;
     }
@@ -720,12 +720,16 @@ a {
 
     .food-image {
         margin: 5px 0 17px 0;
+        max-width: 75%;
+        margin: 10px auto 18px;
 
         img {
             width: 100%;
             max-width: 100px;
             height: 100%;
             min-height: 100px;
+            object-fit: contain;
+            object-position: center;
         }
     }
 
@@ -873,7 +877,7 @@ footer {
 // start sign in page css
 .delivery-card {
     width: 100%;
-    max-width: 44.25vw;
+    max-width: 46.25vw;
     margin: auto;
     box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.06);
     border-color: $text-white;
@@ -2149,6 +2153,7 @@ input[type="number"] {
 .foodqty {
     display: flex;
     align-items: center;
+    margin-top: 20px;
 
     .count {
         color: $dark2;
@@ -2158,7 +2163,7 @@ input[type="number"] {
         font-weight: 400;
         line-height: 30px;
         padding: 0 2px;
-        min-width: 35px;
+        min-width: 32px;
         font-family: "SebinoRegular", sans-serif;
         background-color: transparent;
         text-align: center;
@@ -3606,6 +3611,8 @@ input[type="number"] {
         }
 
         .sidebar-logo {
+            padding: 10px 10px;
+            max-width: 120px;
             p {
                 font-size: 25px;
             }
@@ -4423,13 +4430,18 @@ input[type="number"] {
 
 }
 
+@media screen and (max-width: 1440px) {
+.category-list-item-grid {
+    grid-template-columns: repeat(3, 1fr);
+    }
+}
 @media (min-width: 769px) and (max-width: 1024px) {
     .menu-sidebar {
         // min-width: 281px;
         // max-width: 281px;
 
         .siderbarmenu-brand {
-            margin-top: 10px;
+            margin-top: 0px;
         }
 
         .offcanvas-lg .offcanvas-header {
@@ -4485,7 +4497,7 @@ input[type="number"] {
     }
 
     .category-list-item-grid {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
 
@@ -4521,7 +4533,7 @@ input[type="number"] {
 
 @media (min-width: 992px) and (max-width: 1024px) {
     .main-content {
-        padding: 24px 15px 90px;
+        padding: 24px 15px 70px;
     }
 }
 
@@ -4583,11 +4595,16 @@ input[type="number"] {
                 .plus {
                     height: 21px;
                     min-width: 20px;
+                    border-color: #C1C1C1;
 
                     i {
                         line-height: 18px;
                         font-size: 12px;
                     }
+                }
+
+                .plus {
+                    border-color: #FFC00B !important;
                 }
             }
         }
@@ -4601,7 +4618,7 @@ input[type="number"] {
 .cart-section {
     .cart-items {
         .foodqty, .count {
-            font-size: 18px !important;
+            font-size: 15px !important;
             border: 0px;
             outline: none;
             letter-spacing: -1px;
@@ -4621,7 +4638,8 @@ input[type="number"] {
 @media screen and (min-width: 1900px) {
     .swiper-container {
         overflow: visible;
-        width: 55vw;
+        // width: 55vw;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -4869,3 +4887,8 @@ display: inline-block !important;
 display: none !important;
 }
 }
+@media screen and (max-width: 640px) {
+    .category-list-item-grid {
+        grid-template-columns: repeat(2, 1fr);
+        }
+    }

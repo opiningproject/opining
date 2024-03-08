@@ -124,7 +124,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('user.dashboard') }}"
                                    class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
-                                    <img src="{{ asset('images/dashboard-menu.svg') }}" class="svg" width="40"
+                                    <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg" width="40"
                                          height="40">
                                     <span class="ms-1 d-sm-inline align-middle">Dashboard</span>
                                 </a>
@@ -178,7 +178,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="sidebar-bottom">
+                        <div class="sidebar-bottom mb-5">
                             <div class="card sidebar-offer-card position-relative">
                                 <div class="card-body">
                                     <p class="mb-0">Every 5th order you will get a 20% discount coupon!</p>

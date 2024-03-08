@@ -2,7 +2,7 @@
   <div class="modal-dialog custom-w-441px modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-0 justify-content-center">
-        <h1 class="logo-text text-dark-1">
+        <h1 class="logo-text text-dark-1 mb-0">
           <a href="javascript:void(0);">
               <div class="d-flex">
                   <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">

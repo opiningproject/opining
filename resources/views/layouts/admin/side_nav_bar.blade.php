@@ -67,7 +67,7 @@
 
         </div>
         <div class="offcanvas-footer">
-            <div class="sidebar-bottom">
+            <div class="sidebar-bottom mb-5">
                 <div class="dropdown dropdown-center">
                   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     @if(App::isLocale('en'))

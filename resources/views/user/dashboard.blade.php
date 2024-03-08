@@ -277,7 +277,7 @@
                                                     <div class="form-group">
                                                         <label class="form-label">Restaurants Address</label>
                                                         <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
+                                                            <div class="d-flex align-items-start">
                                                                 <img src="{{ asset('images/rest-address.svg') }}" alt=""
                                                                      class="svg" height="29" width="29">
 
@@ -323,8 +323,10 @@
                                                                             </a>
                                                                         </div>
 
-                                                                        <div
-                                                                            class="col-xx-3 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4 cart-custom-w-col-img">
+                                                                        <div class="col-12">
+                                                                            <div class="d-flex cart-item-row">
+                                                                            <div
+                                                                            class="cart-custom-w-col-img">
                                                                             <img src="{{ $dish->dish->image }}"
                                                                                  alt="burger image" class="img-fluid"
                                                                                  width="86" height="74px"/>
@@ -349,8 +351,10 @@
                                   </span>
                                                                             </div>
                                                                         </div>
-                                                                        <div
-                                                                            class="col-xx-9 col-xl-9 col-lg-9 col-md-8 col-sm-12 col-8 cart-custom-w-col-detail">
+
+
+                                                                            <div
+                                                                            class="cart-custom-w-col-detail">
                                                                             <div class="cart-item-detail">
                                                                                 <div
                                                                                     class="d-flex align-items-center justify-content-between">
@@ -392,6 +396,12 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        
+                                                                      
                                                                     </div>
                                                                 @endforeach
                                                             @endif
@@ -520,9 +530,9 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="empty-card-div w-100"
+                                                    <div class="empty-card-div w-100 mt-lg-5 pt-lg-5"
                                                          id="empty-cart-div" {{ count($cart) > 0 ? 'style=display:none' : "" }}>
-                                                        <p class="empty-card-text text-muted-1"> Your cart is empty </p>
+                                                        <p class="empty-card-text text-muted-1 mb-2"> Your cart is empty </p>
                                                         <span>
                             <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">
 
@@ -531,8 +541,8 @@
                                                     <!-- End cart section -->
                                                 @else
                                                     <!-- start empty cart section -->
-                                                    <div class="empty-card-div w-100">
-                                                        <p class="empty-card-text text-muted-1"> Your cart is empty </p>
+                                                    <div class="empty-card-div w-100 mt-lg-5 pt-lg-5">
+                                                        <p class="empty-card-text text-muted-1 mb-2"> Your cart is empty </p>
                                                         <span>
                             <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">
 

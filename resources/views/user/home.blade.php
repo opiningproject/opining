@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="form-group prev-input-group custom-icon-input-group">
                                                 <span class="input-group-icon">
-                                                    <img src="{{ asset('images/home-icon-svg.svg') }}" alt="home address" class="img-fluid" width="22" height="22" />
+                                                    <img src="{{ asset('images/home-icon-update.svg') }}" alt="home address" class="img-fluid" width="17" height="" />
                                                 </span>
                                                 <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="House Number" name="house_no" id="house_no" required />
                                             </div>

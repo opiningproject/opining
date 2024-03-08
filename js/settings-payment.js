@@ -28,3 +28,30 @@ function changeRefundStatus(order_id,status)
     })
 }
 
+function changeOrderStatus(order_id,order_status) 
+{
+    $('#id').val(order_id);
+    $('#changeStatusModal').modal('show');
+    $('#order_status_name').text("'"+order_status+"'");
+}
+
+
+$(document).on('click', '#change-order-status-btn', function () 
+{
+    var id = $('#id').val();
+
+    $.ajax({
+        url: 'orders/change-status/'+ id,
+        type: 'GET',
+        success: function (response) {
+
+            //alert("fgf")
+            location.reload()
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+})
+

@@ -31,6 +31,11 @@ class Order extends Model
         return $this->belongsTo(Coupon::class, 'coupon_id','id');
     }
 
+    public function getDeliveryTimeAttribute($value)
+    {
+        return $value ? date('g:i A',strtotime($value)) : 'ASAP';
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return date('F d, Y, g:i A',strtotime($value));

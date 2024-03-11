@@ -35,7 +35,7 @@
                                        value="{{ $house_no }}" name="house_no" id="house_no" required/>
                             </div>
                         </div>
-                        <div class="colxx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 form-group">
+                        <div class="colxx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 form-group mb-0">
                             <!-- <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a> -->
                             <button type="submit"
                                     class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save

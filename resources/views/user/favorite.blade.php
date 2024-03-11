@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         <!-- start category list section -->
-                        <section class="custom-section category-list-section">
+                        <section class="custom-section category-list-section pt-3">
                             <div class="favorite-item-grid">
                                 @if(!empty($dishes))
                                     @foreach($dishes as $key => $dish)

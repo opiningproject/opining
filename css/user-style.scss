@@ -267,12 +267,11 @@ a {
                 .nav-link {
                     color: $gray5;
                     font-family: "SebinoRegular", sans-serif;
-                    font-size: 19px;
+                    font-size: 18px;
                     font-weight: 400;
                     letter-spacing: 0.19px;
-                    // padding: 16px;
-                    padding: 11px 16px;
-                    border-radius: 20px;
+                    padding: 10px 12px;
+                    border-radius: 12px;
 
                     &.active,
                     &:hover {
@@ -423,7 +422,7 @@ a {
 // start sidebar css
 
 .main-content {
-    padding: 47px 30px 80px;
+    padding: 47px 40px 80px;
     min-width: 1px;
     width: 100%;
 }
@@ -491,7 +490,7 @@ a {
             pointer-events: none;
             top: 0;
             bottom: 0;
-            left: 27px;
+            left: 15px;
         }
     }
 }
@@ -541,9 +540,8 @@ a {
         color: $text-white;
         // font-family: "Sebino-Bold", sans-serif;
         font-size: 34px;
-        font-weight: 500;
+        font-weight: 400;
         letter-spacing: 0.5px;
-        text-transform: capitalize;
     }
 }
 
@@ -710,12 +708,12 @@ a {
         font-size: 14px;
         font-weight: 400;
         text-transform: capitalize;
-        padding: 5px;
+        padding: 1px 7px;
     }
 
     .food-favorite-icon {
         position: absolute;
-        right: 12px;
+        right: 10px;
     }
 
     .food-image {
@@ -862,7 +860,7 @@ footer {
     }
 
     .modal-header {
-        padding: 40px 40px 0 40px;
+        padding: 30px 30px 0 30px;
 
         .btn-close {
             background-image: url("../images/close_icon.svg");
@@ -1136,6 +1134,7 @@ footer {
     }
 
     .card-body .inner-card {
+        min-height: 270px;
         background-color: $lightyellow;
         padding: 20px;
         color: $darkyellow;
@@ -1143,7 +1142,7 @@ footer {
         position: relative;
         border-radius: 16px;
         box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.15);
-        height: 250px;
+        // height: 250px;
         cursor: pointer;
 
         .inner-card-body {
@@ -1184,6 +1183,8 @@ footer {
                 font-weight: 400;
                 line-height: 25.989px;
                 letter-spacing: 0.182px;
+
+
             }
 
             .valid-date {
@@ -1285,7 +1286,8 @@ footer {
 
     .dotted-divider {
         border-bottom: 1.5px dashed $darkyellow;
-        width: 265px;
+        width: 100%;
+        max-width: 265px;
         margin: 7px auto;
     }
 }
@@ -1688,22 +1690,24 @@ svg > g[class^="raphael-group-"] g.raphael-group-9-plots text {
         .addnote-from-group {
             .form-label {
                 margin-bottom: 0;
-                padding: 5px 10px;
+                padding: 2px 10px;
                 background-color: $yellow2;
                 border-radius: 5px 5px 0px 0px;
                 cursor: pointer;
+                font-size: 12px;
             }
 
             .form-control {
                 border-radius: 0px 5px 5px 5px;
                 border-color: $yellow2;
-                min-height: 40px;
-                max-height: 40px;
+                min-height: 30px;
+                max-height: 30px;
+                font-size: 12px;
 
                 &::placeholder {
                     color: $gray6;
                     font-family: "SebinoRegular", sans-serif;
-                    font-size: 14px;
+                    font-size: 12px;
                     font-weight: 400;
                     letter-spacing: 0.5px;
                 }
@@ -1812,7 +1816,7 @@ svg > g[class^="raphael-group-"] g.raphael-group-9-plots text {
         .icon-form {
             background-color: $yellow2;
             filter: drop-shadow(2px 2px 20px rgba(255, 192, 11, 0.3));
-            border-radius: 22px;
+            border-radius: 12px;
             padding: 17px;
         }
     }
@@ -1870,7 +1874,7 @@ svg > g[class^="raphael-group-"] g.raphael-group-9-plots text {
                 text-transform: capitalize;
                 text-align: left;
                 border-radius: 0;
-                padding: 25px 32px;
+                padding: 20px 30px;
 
                 svg {
                     margin-right: 20px;
@@ -2159,7 +2163,7 @@ input[type="number"] {
         color: $dark2;
         display: inline-block;
         vertical-align: top;
-        font-size: 25px;
+        font-size: 20px;
         font-weight: 400;
         line-height: 30px;
         padding: 0 2px;
@@ -2180,15 +2184,14 @@ input[type="number"] {
         cursor: pointer;
         display: inline-block;
         vertical-align: top;
-        width: 36px;
-        height: 36px;
+        width: 35px;
+        height: 35px;
         text-align: center;
         border-radius: 50%;
         border: 2px solid;
         line-height: 27px;
 
         i {
-            font-size: 18px;
             font-size: 18px;
             text-align: center;
             line-height: 18px;
@@ -2197,12 +2200,12 @@ input[type="number"] {
     }
 
     .plus {
-        border-color: $yellow2;
-        background-color: $yellow2;
+        border-color: var(--theme-yellow2);
+        background-color: var(--theme-yellow2);
     }
 
     .minus {
-        border-color: $gray3;
+        border-color: #c1c1c1;
     }
 }
 
@@ -2475,11 +2478,11 @@ input[type="number"] {
 
 .custom-radio {
     display: flex;
-    gap: 40px;
+    gap: 20px;
 }
 
 .custom-radio {
-    gap: 40px;
+    gap: 20px;
 
     .radio {
         input[type="radio"] {
@@ -2604,7 +2607,7 @@ input[type="number"] {
     flex-direction: column;
 
     .chatbox-header {
-        padding: 40px;
+        padding: 30px;
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
         border-bottom: 1px solid #A3A3A3;
@@ -2662,7 +2665,7 @@ input[type="number"] {
         overflow-y: auto;
 
         .chats-grp {
-            padding: 120px 40px 80px 40px;
+            padding: 80px 30px 40px 30px;
             width: 100%;
             overflow-y: auto;
             height: 100%;
@@ -2692,7 +2695,7 @@ input[type="number"] {
 
                 .chat-item-textgrp {
                     p {
-                        padding: 19px 25px 19px 22px;
+                        padding: 16px 20px 16px 20px;
                         width: fit-content;
                         background-color: $chat-box;
                         border-radius: 10px;
@@ -2713,7 +2716,7 @@ input[type="number"] {
                             position: absolute;
                             left: -11px;
                             bottom: -3.5px;
-                            background-image: url(../images/curve-chaticon.svg);
+                            background-image: url(../images/curve-chaticon-update.svg);
                             background-size: 18px 18px;
                             width: 18px;
                             height: 18px;
@@ -2755,7 +2758,7 @@ input[type="number"] {
     }
 
     .chatbox-footer {
-        padding: 32px 40px 40px;
+        padding: 30px 30px 30px;
         border-top: 1px solid #A3A3A3;
         border-bottom-left-radius: 16px;
         border-bottom-right-radius: 16px;
@@ -3576,7 +3579,7 @@ input[type="number"] {
 
 @media (max-width: 991.98px) {
     .bd-navbar-toggle {
-        display: inline-block;
+        display: inline-flex;
     }
 
     .bd-layout {
@@ -3598,7 +3601,7 @@ input[type="number"] {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 15px 0px 5px;
 
         .offcanvas-lg {
             &.offcanvas-start {
@@ -3615,6 +3618,10 @@ input[type="number"] {
         .sidebar-logo {
             padding: 10px 10px;
             max-width: 120px;
+            padding: 10px 10px;
+            max-width: 120px;
+            display: flex;
+            align-items: center;
             p {
                 font-size: 25px;
             }
@@ -3683,7 +3690,7 @@ input[type="number"] {
     .coupons-card {
         .card-body {
             .inner-card {
-                height: 270px;
+                height: 240px;
             }
         }
 
@@ -3718,7 +3725,7 @@ input[type="number"] {
             border-top-right-radius: 0;
             border-bottom: none;
             background-color: $bg-white;
-            margin: -20px -20px 0;
+            margin: -20px -15px 0;
             max-height: 60px;
 
             .back-btn {
@@ -3894,8 +3901,9 @@ input[type="number"] {
         .orders-type {
 
             .orders-title {
-                font-size: 14px !important;
+                font-size: 16px !important;
                 margin: 0 0 14px;
+             font-weight: 600;
             }
 
             .orders-list {
@@ -4102,7 +4110,7 @@ input[type="number"] {
 
                 .orderdetails-desc-note {
                     max-width: 260px;
-                    margin-left: 84px;
+                    margin-left: 0px;
                 }
 
             }
@@ -4322,13 +4330,14 @@ input[type="number"] {
     .coupons-card {
         .card-body {
             .inner-card {
-                min-height: 300px;
+                min-height: 240px;
                 height: 100%;
             }
         }
 
         .dotted-divider {
-            width: 204px;
+            max-width: 204px;
+            width: 100%;
         }
     }
 
@@ -4523,12 +4532,13 @@ input[type="number"] {
     .coupons-card {
         .card-body {
             .inner-card {
-                height: 270px;
+                height: 240px;
             }
         }
 
         .dotted-divider {
-            width: 223px;
+            width: 100%;
+            max-width: 223px;
         }
     }
 }
@@ -4570,13 +4580,14 @@ input[type="number"] {
     .coupons-card {
         .card-body {
             .inner-card {
-                min-height: 300px;
+                min-height: 270px;
                 height: 100%;
             }
         }
 
         .dotted-divider {
-            width: 223px;
+            width: 100%;
+            max-width: 223px;
         }
     }
 

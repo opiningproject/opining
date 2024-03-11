@@ -4855,6 +4855,8 @@ footer .footer-link li a>img {
    line-height: 34px;
 }
 
+
+
 @media screen and (max-width: 1800px) {
    .offer-card-banner .card-body h2 {
        font-size: 34px;
@@ -4867,7 +4869,17 @@ footer .footer-link li a>img {
        padding: 30px 40px !important;
   }
 }
-
+@media screen and (max-width: 1400px) {
+  .cart-section .stickyOnMobile {
+    position: fixed;
+    right: 25px;
+    bottom: 10px;
+    max-width: 354px;
+    margin: 0px auto;
+    width: 100%;
+    z-index: 9;
+  }
+}
 @media screen and (max-width: 1440px) {
    .delivery-card .signin-card .card-header {
        padding: 25px;
@@ -5168,6 +5180,39 @@ footer .footer-link li a>img {
   width: 105px;
   font-size: 11px !important;
 }
+}
+@media screen and (max-width: 400px) {
+.cart-section .stickyOnMobile {
+  max-width: 375px;
+}
+}
+
+@media screen and (max-width: 320px) {
+  .cart-section .stickyOnMobile {
+    max-width: 265px;
+  }
+  }
+
+  .count_cart {
+    position: relative;
+  }
+  .count_cart .count_num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #ffffff;
+    background: #3BCE62;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 9999px;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: -5px;
+    left: -7px;
+    pointer-events: none;
+    line-height: 10px;
 }
 
 /*Rekha Sharma*/

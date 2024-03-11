@@ -212,17 +212,20 @@
                     </div>
                 </main>
                 <aside class="cart-sidebar sticky-top h-lg-100vh">
+                
                     <div class="offcanvas-xxl offcanvas-end h-100 overflow-auto" tabindex="-1" id="bdSidebarCart"
                          aria-labelledby="bdSidebarCartOffcanvasLabel">
                         <div class="offcanvas-header p-0" style="display: block"></div>
                         <div class="offcanvas-body position-relative space-for-close">
+
+                        <h4 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto">My cart</h4>
 
                             <button type="button"
                                     class="btn-close d-block position-absolute d-xxl-none top-0 mt-2 end-0 me-2"
                                     data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
                             </button>
 
-                            <div class="navbar navbar-expand-lg pt-0 h-lg-100">
+                            <div class="navbar navbar-expand-lg pt-3 pt-xxl-0 h-lg-100">
                                 <div class="cart-sidebar-content position-relative h-100">
                                     <div class="navbar-collapse cartbox-collapse h-100">
                                         <div class="cart-custom-tab cart-tab custom-tabs d-flex flex-column h-100">
@@ -313,7 +316,7 @@
                                                                             $outOfStockDisplay = '';
                                                                         }
                                                                         ?>
-                                                                    <div class="row stock-card {{ $outOfStock }}"
+                                                                    <div class="row stock-card mb-0 {{ $outOfStock }}"
                                                                          id="cart-{{ $dish->dish->id }}">
 
                                                                         <div
@@ -420,7 +423,7 @@
                                                             <div
                                                                 class="form-group prev-input-group custom-icon-input-group">
                             <span class="input-group-icon">
-                              <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg" height="22"
+                              <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg img-fluid" height="22"
                                    width="25">
 
                             </span>
@@ -430,11 +433,11 @@
                                                                        value="{{ $user->cart ? $user->cart->delivery_note : '' }}"
                                                                        placeholder="Add Delivery instruction"/>
                                                             </div>
-                                                            <div class="mb-3">
+                                                            <div class="mb-4 pb-1">
                                                                 <div
                                                                     class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
                                 <span class="input-group-icon">
-                                  <img src="{{ asset('images/coupon-code.svg') }}" alt="" class="svg" height="18"
+                                  <img src="{{ asset('images/coupon-code.svg') }}" alt="" class="svg img-fluid" height="18"
                                        width="29">
 
                                 </span>

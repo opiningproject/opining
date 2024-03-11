@@ -49,6 +49,7 @@ $(window).on("load", function () {
 });
 
 $(document).ready(function () {
+    
     var swiper = new Swiper(".category-swiper-slider", {
         slidesPerView: 1,
         spaceBetween: 6,
@@ -65,7 +66,7 @@ $(document).ready(function () {
         },
         breakpoints: {
             375: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 spaceBetween: 20,
                 autoplay: false,
             },
@@ -146,4 +147,5 @@ $(document).ready(function () {
             },
         },
     });
+    
 });

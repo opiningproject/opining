@@ -79,7 +79,7 @@ use App\Enums\RefundStatus;
             <div class="textgrp">
                 <div class="title">Restaurant Address</div>
                 <div class="text">
-                    <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg" alt="" width="18"
+                    <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg me-2" alt="" width="18"
                          height="18">{{ getRestaurantDetail()->rest_address }}
                 </div>
             </div>

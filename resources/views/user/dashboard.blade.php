@@ -25,13 +25,22 @@
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                                 <h1 class="page-title">Dashboard</h1>
                             </div>
+
+                            
                             <div
-                                class="d-flex align-items-center form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
-              <span class="form-control-feedback">
+                                class="searcheaderBox d-none d-md-flex align-items-center form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
+             
+                                <button type="button"
+                                    class="btn-close d-block position-absolute d-md-none top-0 mt-2 end-0 me-2" id="closeSearch">
+                            </button>
+
+                                <div class="position-relative w-100">
+             <span class="form-control-feedback">
                 <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
               </span>
                                 <input type="text" class="form-control text-transform-none form-control-icon ps-5"
                                        placeholder="What do you want eat today..." id="search-dish"/>
+             </div>
 
                                 <button
                                     class="navbar-toggler bag-count d-flex  dashboard-cart-navbar-toggler cart-navbar-toggler ms-2  p-0 d-none"
@@ -330,7 +339,7 @@
                                                                             <img src="{{ $dish->dish->image }}"
                                                                                  alt="burger image" class="img-fluid"
                                                                                  width="86" height="74px"/>
-                                                                            <div class="foodqty">
+                                                                            <div class="foodqty mt-4">
                                   <span class="minus">
                                     <i class="fas fa-minus align-middle"
                                        onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->dish->id }})"></i>

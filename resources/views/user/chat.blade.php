@@ -6,7 +6,7 @@
     <div class="container-fluid bd-gutter bd-layout">
       @include('layouts.user.side_nav_bar')
       <main class="bd-main order-1 h-92vh-mobile">
-        <div class="main-content h-100">
+        <div class="main-content h-100 chat_main_screen">
           <div class="section-page-title main-page-title row justify-content-between d-none d-md-block">
             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
               <h1 class="page-title">Chat Support</h1>

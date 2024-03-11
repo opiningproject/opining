@@ -24,6 +24,7 @@
 <script type="text/javascript" src="{{ asset('js/user/user-address.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/cart.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/orders.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
 
 <input type="hidden" id="auth-check" value="{{ auth()->check() ? 1 : 0 }}">
 <script>

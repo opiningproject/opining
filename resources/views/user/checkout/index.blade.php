@@ -27,7 +27,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.user.side_nav_bar')
                 <main class="bd-main order-1">
-                    <div class="main-content">
+                    <div class="main-content pb-5">
                         <div class="section-page-title main-page-title mb-0">
                             <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-between">
@@ -42,7 +42,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                 </div>
                             </div>
                         </div>
-                        <section class="custom-section checkout-section">
+                        <section class="custom-section checkout-section pb-0">
                             <form id="final-checkout-form">
                                 <input type="hidden" name="is_address_elected" value="{{ $address ?? 0 }}"
                                        id="address_selected">
@@ -54,7 +54,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                      height="28" width="27">
                                             </div>
                                         </div>
-                                        <div class="cart-form-card-body d-block">
+                                        <div class="cart-form-card-body cursor-initial d-block">
                                             <div class="card custom-card h-100">
                                                 <div class="card-body pb-0 checkout-form">
                                                     @if(session('zipcode'))
@@ -202,15 +202,15 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                      height="28" width="28">
                                             </div>
                                         </div>
-                                        <div class="cart-form-card-body d-block">
+                                        <div class="cart-form-card-body cursor-initial d-block">
                                             <div class="card custom-card h-100">
-                                                <div class="card-body pb-0 checkout-form">
+                                                <div class="card-body pb-4 checkout-form">
                                                     <h4 class="custom-card-title-1 form-group">Delivery time</h4>
                                                     <div class="row">
                                                         <div
                                                             class="col-xxl-6 col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 my-auto">
                                                             <div
-                                                                class="custom-radio custom-checkbox-group mobile-mb-10 flex-wrap"
+                                                                class="custom-radio custom-checkbox-group mb-2 flex-wrap"
                                                                 style="margin-bottom: 30px">
                                                                 <div class="radio">
                                                                     <input id="radio-1" name="del_radio" type="radio"
@@ -258,7 +258,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                      width="26">
                                             </div>
                                         </div>
-                                        <div class="cart-form-card-body cart-form-card-body-last d-block">
+                                        <div class="cart-form-card-body cursor-initial cart-form-card-body-last d-block pb-0">
                                             <div class="card custom-card h-100 mb-4">
                                                 <div class="card-body pb-0 checkout-form">
                                                     <div class=" payment-nav">
@@ -432,22 +432,26 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                 <h6 class="cart-title">Order Details</h6>
                                                 @foreach($user->cart->dishDetails as $dishDetails)
                                                     <?php
-                                                    $cartAmount += ($dishDetails->qty * $dishDetails->dish->price);
-                                                    $cartAmount += isset($dishDetails->orderDishPaidIngredients) ? $dishDetails->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
+    $cartAmount += ($dishDetails->qty * $dishDetails->dish->price);
+    $cartAmount += isset($dishDetails->orderDishPaidIngredients) ? $dishDetails->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
                                                     ?>
                                                     <div class="cart-items">
                                                         <div class="row">
-                                                            <div
-                                                                class="col-xx-3 col-xl-3 col-lg-col-md-12 col-sm-12 col-12 position-relative">
-                                                                <span
+
+
+                                                        <div class="col-12">
+                                                                            <div class="d-flex cart-item-row">
+
+                                                                            <div class="cart-custom-w-col-img">
+                                                                            <span
                                                                     class="order-total-item">x{{ $dishDetails->qty}}</span>
                                                                 <img src="{{ $dishDetails->dish->image}}"
                                                                      alt="{{ $dishDetails->dish->name }}"
-                                                                     class="img-fluid" width="86" height="74px">
-                                                            </div>
-                                                            <div
-                                                                class="col-xx-9 col-xl-9 col-lg-col-md-12 col-sm-12 col-12">
-                                                                <div class="cart-item-detail">
+                                                                     class="img-fluid" width="86" height="74px" />
+                                                                            </div>
+
+                                                                            <div class="cart-custom-w-col-detail">
+                                                                            <div class="cart-item-detail">
                                                                     <div
                                                                         class="d-flex align-items-center justify-content-between">
                                                                         <p class="d-inline-block item-name mb-0"> {{ $dishDetails->dish->name }}</p>
@@ -488,7 +492,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                                            </div>
+                                                                            </div>
+                                                                            </div>
+
+                                                            
                                                         </div>
                                                     </div>
                                             @endforeach

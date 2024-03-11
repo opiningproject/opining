@@ -9,7 +9,7 @@
       <div class="modal-body signin-form">
         <form id="sign-in-form" method="POST">
           <div class="form-group prev-input-group custom-icon-input-group">
-            <span class="input-group-icon pt-1">
+            <span class="input-group-icon pt-2 pt-xxl-1">
               <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12"  class="svg">
             </span>
             <input type="email" class="form-control custom-control-with-icon ps-5" placeholder="Email" name="email" id="email" required>
@@ -27,11 +27,11 @@
           </div>
           <div class="form-group d-flex justify-content-between align-items-center">
             <div class="form-check">
-              <input class="form-check-input check-input-secondary me-3" type="checkbox" id="remembermecheck">
-              <label class="form-check-label text-capitalize align-middle" for="remembermecheck"> Remember Me </label>
+              <input class="form-check-input check-input-secondary me-2" type="checkbox" id="remembermecheck">
+              <label class="form-check-label text-capitalize align-middle pt-1" for="remembermecheck">Remember Me</label>
             </div>
             <div class="text-end">
-              <a href="#" data-bs-toggle="modal" data-bs-target="#resendPasswordModal" class="text-capitalize lead-2 font-regularcustom">forgot password</a>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#resendPasswordModal" class="text-capitalize lead-2 font-regularcustom">forgot password?</a>
             </div>
           </div>
           <div class="form-group">

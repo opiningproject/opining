@@ -13,9 +13,15 @@
         </a>
     </div>
 
-    <div class="bd-navbar-toggle cartsidebar-icon ms-auto">
+    <div class="bd-navbar-toggle cartsidebar-icon ms-auto align-items-center">
         <button class="navbar-toggler p-2 searcheatboxbtn d-none" type="button">
             <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
+        </button>
+
+        
+        <!-- Just show in dahboard - Condition will added by Jamal -->
+        <button class="navbar-toggler p-0 searchMobileIcon d-md-none" id="mobilesearchToggle" type="button">
+        <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
         </button>
 
         @if(Route::currentRouteName() == 'user.dashboard')
@@ -81,7 +87,7 @@
                     </div>
                 @else
                     <div class="d-flex gap-3 align-items-center">
-                        <div class="rounded">
+                        <div class="userPhoto">
                             <img src="{{ Auth::user()->image }}" alt="" class="" width="60" height="60">
                         </div>
                         <div class="text-start">
@@ -90,10 +96,11 @@
                                      style="color: #FFC00A;text-wrap: wrap;">
                                     {{ Auth::user()->full_name }}
                                 </div>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu py-0">
                                     <li>
-                                        <a class="dropdown-item" href="#"
+                                        <a class="dropdown-item log-out-item" href="#"
                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                           <img src="{{ asset('images/log-out.svg') }}" class="svg" width="25" height="26">
                                             {{ __('Logout') }}
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"

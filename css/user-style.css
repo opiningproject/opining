@@ -426,7 +426,7 @@ a {
   background: var(--theme-yellow2);
 }
 
-.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active svg {
   fill: var(--theme-dark2);
 }
 
@@ -3838,6 +3838,10 @@ input[type=number] {
     border-right: 0;
     margin: 20px 0 0;
   }
+  .ordersdetails .orderdetails-main.px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 
   .ordersdetails .orderdetails-main .orderdetails-maintop .textgrp .title {
     font-size: 12px;
@@ -5001,6 +5005,26 @@ footer .footer-link li a>img {
    .coupons-card .card-body .inner-card .promocode-box p {
        font-size: 12px !important;
   }
+  .orders .orders-type .orders-list {
+    gap: 20px !important;
+}
+.orders .orders-type .orders-list .orders-item {
+    padding: 15px 20px !important;
+}
+.ordersdetails .orderdetails-main .orderdetails-maintop button {
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+}
+.ordersdetails .orderdetails-main {
+    padding: 20px 20px 0 !important;
+}
+.ordersdetails .orderdetails-main .orderdetails-total .list .list-item .number {
+    font-size: 20px !important;
+}
+.ordersdetails .orderdetails-main .orderdetails-total {
+    padding: 15px 0 !important;
+}
+
 }
 
 @media screen and (max-width: 1365px) {
@@ -5065,6 +5089,27 @@ footer .footer-link li a>img {
    .category-list-section .favorite-item-grid {
        grid-template-columns: repeat(2, 1fr);
   }
+  .orderdetails-desc .orderdetails-desc-note input {
+    min-height: 35px;
+}
+.ordersdetails_sidebar.mobile_ordersdetails {
+  z-index: 99999;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100% !important;
+  max-width: 100%;
+  margin: 0px auto;
+  height: 100vh !important;
+  border-radius: 0px !important;
+}
+ .ordersdetails.mobile_ordersdetails
+.orderdetails-main
+.orderdetails-desclist {
+  max-height: initial !important;
+  padding: 25px 0px;
+  overflow-x: hidden;
+}
 }
 
 @media screen and (max-width: 640px) {

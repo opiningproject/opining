@@ -76,7 +76,7 @@
 
                             </div>
                             @if(!empty($order))
-                                <div class="ordersdetails ordersdetails_sidebar">
+                                <div class="ordersdetails ordersdetails_sidebar mobile_ordersdetails ordersdetails_sidebar">
                                     <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
                                     <!-- with two button -->
                                     <div class="ordersdetails-header d-flex justify-content-between align-items-center">

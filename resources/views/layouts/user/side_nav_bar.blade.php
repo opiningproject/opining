@@ -131,7 +131,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('user.dashboard') }}"
                                    class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
-                                    <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg" width="40"
+                                    <img src="{{ asset('images/dashboard-menu.svg') }}" class="svg" width="40"
                                          height="40">
                                     <span class="ms-1 d-sm-inline align-middle">Dashboard</span>
                                 </a>

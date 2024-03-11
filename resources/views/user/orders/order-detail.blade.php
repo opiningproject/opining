@@ -7,10 +7,14 @@ use App\Enums\PaymentType;
 use App\Enums\RefundStatus;
 
 ?>
+
+<h3 class="text-center fs-5 mb-4 d-block d-md-none">My Order</h3>
+<button type="button" class="btn-close d-block d-md-none order-detail-close-btn position-absolute top-0 end-0 p-3">
+    </button>
 <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
 <div class="ordersdetails-header d-flex justify-content-between align-items-center">
-    <button type="button" class="btn-close d-block d-md-none order-detail-close-btn">
-    </button>
+
+   
     <div class="ordersdetails-title me-auto">Order Details</div>
     <div class="btn-grp d-flex flex-wrap">
         @if($order->order_type == '1')
@@ -26,7 +30,7 @@ use App\Enums\RefundStatus;
     </div>
 </div>
 
-<div class="orderdetails-main">
+<div class="orderdetails-main px-0 px-md-3">
     <div class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
         <div class="textgrp d-flex flex-column gap-1 gap-sm-3">
             <div class="title">Order #{{ $order->id }}</div>

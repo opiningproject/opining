@@ -5068,18 +5068,15 @@ footer .footer-link li a>img {
 }
 
 @media screen and (max-width: 640px) {
-<<<<<<< Updated upstream
- 
 .offer-card-banner .card-body h2 {
   font-size: 26px;
 }
-<<<<<<< Updated upstream
 .offer-card-banner .card-body p {
   font-size: 18px;
 }
 .offer-card-banner .card-body {
   padding: 20px 20px !important;
-=======
+}
    .sidebar-menu-top-box .userPhoto {
        width: 40px;
        flex: 0 0 40px;
@@ -5110,7 +5107,6 @@ footer .footer-link li a>img {
    .card-body.coupon-card-grid {
        grid-template-columns: repeat(1, 1fr);
   }
->>>>>>> Stashed changes
 }
 
 @media screen and (max-width: 576px) {
@@ -5123,14 +5119,12 @@ footer .footer-link li a>img {
   }
 }
 @media screen and (max-width: 484px) {
-<<<<<<< Updated upstream
 .category-list-item-grid .food-detail-card .btn-custom-yellow {
   width: 115px;
   font-size: 11px;
 }
 }
 
-=======
 /*Rekha Sharma*/
 .orderdetails-desc-card  .text {
     word-break: break-word;
@@ -5139,12 +5133,8 @@ footer .footer-link li a>img {
     flex: 0 0 400px;
     max-width: 400px;
 }
->>>>>>> Stashed changes
-=======
    .category-list-item-grid .food-detail-card .btn-custom-yellow, .category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {
        width: 105px;
        font-size: 11px !important;
   }
-  
-}
->>>>>>> Stashed changes
+ 

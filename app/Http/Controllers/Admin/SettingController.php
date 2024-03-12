@@ -42,7 +42,7 @@ class SettingController extends Controller
         /*echo "<pre>";
         print_r($orders);
         exit;*/
-        
+
         return view('admin.settings.index', [
             'operating_days' => $operating_days,
             'user' => $user,
@@ -194,6 +194,11 @@ class SettingController extends Controller
             $restaurant->permit_doc = $permitDoc;
         }
 
+        if($request->has('footer-img')){
+            $footerLogo = uploadFooterLogoToBucket($request, 'restaurant/', '');
+            $restaurant->footer_logo = $footerLogo;
+        }
+
         $restaurant->online_order_accept = $request->online_order_accept ? '1' : '0';
         $restaurant->restaurant_name = $request->restaurant_name;
         $restaurant->permit_id = $request->permit_id;
@@ -265,5 +270,5 @@ class SettingController extends Controller
         return response::json(['status' => 0, 'message' => 'Something went wrong.']);
     }
 
-    
+
 }

@@ -36,6 +36,10 @@ $(function () {
         addLogoReadURL(this);
     });
 
+    $(document).on('change', '#restaurant-footer-logo-input-file', function () {
+        addFooterLogoReadURL(this);
+    });
+
     $(document).on('change', '#permit-doc-input-file', function () {
         editPermitReadURL(this);
     });
@@ -113,6 +117,18 @@ function editPermitReadURL(input) {
 
         reader.onload = function (e) {
             $('#permit-img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function addFooterLogoReadURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#footer-img').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);

@@ -200,7 +200,7 @@
                                                                     <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>
                                                                     - {{ getOrderDishIngredients($dish) }}
                                                                 </div>
-                                                                <div class="text">
+                                                                <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                                                     <a href="javascript:void(0)"
                                                                        id="read-more-{{ $dish->id}}"
                                                                        onclick="readMore({{ $dish->id}})">Read More</a>

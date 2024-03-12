@@ -14,7 +14,7 @@ use App\Enums\RefundStatus;
 <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
 <div class="ordersdetails-header d-flex justify-content-between align-items-center">
 
-   
+
     <div class="ordersdetails-title me-auto">Order Details</div>
     <div class="btn-grp d-flex flex-wrap">
         @if($order->order_type == '1')
@@ -119,7 +119,7 @@ use App\Enums\RefundStatus;
                                 <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
                                 - {{ getOrderDishIngredients($dish) }}
                             </div>
-                            <div class="text">
+                            <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                 <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
                                    onclick="readMore({{ $dish->id}})">Read More</a>
                                 <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"

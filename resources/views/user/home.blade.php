@@ -61,7 +61,7 @@
                                                 <span class="input-group-icon">
                                                     <img src="{{ asset('images/call-icon.svg') }}" alt="call" class="img-fluid svg" width="22" height="22" />
                                                 </span>
-                                                <input type="number" class="form-control form-control-icon ps-5" placeholder="Phone Number" name="phone_no" maxlength="9" min="1" minlength="9" id="phone_no" required/>
+                                                <input type="number" class="form-control form-control-icon ps-5" placeholder="Phone Number" name="phone_no" maxlength="10" min="1" minlength="9" id="phone_no" required/>
                                             </div>
                                             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">Save</button>
                                         </form>

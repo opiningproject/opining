@@ -18,9 +18,9 @@
             <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
         </button>
 
-        
+
         <!-- Just show in dahboard - Condition will added by Jamal -->
-        <button class="navbar-toggler p-0 searchMobileIcon d-md-none" id="mobilesearchToggle" type="button">
+        <button class="navbar-toggler p-0 searchMobileIcon d-md-none {{ (request()->segment(count(request()->segments())) != 'dashboard' &&  request()->segment(count(request()->segments())-1) != 'dashboard') ? 'd-none' : '' }} " id="mobilesearchToggle" type="button">
         <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
         </button>
 

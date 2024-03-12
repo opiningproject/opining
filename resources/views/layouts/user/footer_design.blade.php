@@ -6,7 +6,7 @@
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-left mb-4 mb-md-0">
             <div class="footer-logo">
                 <a href="javascript:void(0);">
-                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
+                    <img src="{{ getRestaurantDetail()->footer_logo }}" class="web-logo">
                 </a>
             </div>
         </div>

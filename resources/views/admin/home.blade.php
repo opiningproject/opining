@@ -184,7 +184,7 @@
                                             <div class="text-start flex-fill">
                                                 <h4 class="food-name-text text-start text-truncate w-100"
                                                     title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
-                                                <p class="food-price d-inline-block">{{ $popularDish->price }}</p>
+                                                <p class="food-price d-inline-block">€{{ $popularDish->price }}</p>
                                                 <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
                                                     +15%
                                                     <img src="{{ asset('images/up-arrow.svg') }}" alt="" class="svg" height="19" width="19">
@@ -218,7 +218,7 @@
                                             <div class="text-start flex-fill">
                                                 <h4 class="food-name-text text-start text-truncate w-100"
                                                     title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
-                                                <p class="food-price d-inline-block">{{ $bestSellerDish->price }}</p>
+                                                <p class="food-price d-inline-block">€{{ $bestSellerDish->price }}</p>
                                                 <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
                                                     +15%
                                                     <img src="{{ asset('images/up-arrow.svg') }}" alt="" class="svg" height="19" width="19">

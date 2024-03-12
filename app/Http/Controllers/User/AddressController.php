@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\RestaurantDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class AddressController extends Controller
@@ -21,10 +22,8 @@ class AddressController extends Controller
 
     public function validateZipcode(Request $request)
     {
-        $zipcode = Zipcode::select('id')->where([
-            ['zipcode',$request->zipcode],
-            ['status' , '1']
-        ])->first();
+        $zip =substr($request->zipcode, 0, 4);
+        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
 
         if($zipcode)
         {
@@ -50,10 +49,9 @@ class AddressController extends Controller
     public function validateSelectedAddress(string $id){
         try{
             $address = Address::find($id);
-            $zipcode = Zipcode::select('id')->where([
-                ['zipcode',$address->zipcode],
-                ['status' , '1']
-            ])->first();
+
+            $zip =substr($address->zipcode, 0, 4);
+            $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
 
             $response['zipcode'] = $address->zipcode;
             $response['house_no'] = $address->house_no;

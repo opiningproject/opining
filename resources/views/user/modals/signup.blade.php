@@ -12,18 +12,18 @@
             <span class="input-group-icon">
                <img src="{{ asset('images/user-icon.svg') }}" alt="" width="16" height="16" class="svg">
             </span>
-                        <input type="text" class="form-control" placeholder="First Name" maxlength="25" name="first_name"
+                        <input type="text" class="form-control form-control-icon ps-5" placeholder="First Name" maxlength="25" name="first_name"
                                id="first_name" required>
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
              <img src="{{ asset('images/user-icon.svg') }}" alt="" width="16" height="16" class="svg">
             </span>
-                        <input type="text" class="form-control" placeholder="Last Name" name="last_name" id="last_name" maxlength="25"
+                        <input type="text" class="form-control form-control-icon ps-5" placeholder="Last Name" name="last_name" id="last_name" maxlength="25"
                                required>
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group">
-            <span class="input-group-icon pt-2 pt-xxl-1">
+            <span class="input-group-icon">
               <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12" class="svg">
             </span>
                         <input type="email" class="form-control custom-control-with-icon ps-5" placeholder="Email" name="email" id="email" required>

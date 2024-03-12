@@ -1788,8 +1788,8 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
 }
 
 .bill-detail-invoice table td {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .bill-detail-invoice .bill-count-name {
@@ -4854,8 +4854,28 @@ footer .footer-link li a>img {
 #user-profile-form .file-upload-field {
    line-height: 34px;
 }
+.cart-sidebar .stickyOnMobile {
+  max-width: 90%;
+  margin: 0px auto;
+  margin-bottom: 30px;
+}
+.cart-amount-cal-data .prev-input-group .input-group-icon, .tab-pane form .input-group-icon, form .prev-input-group .input-group-icon{
+  /* top: 50%;
+  transform: translateY(-50%); */
+  height: 16px;
+  top: 17px;
+}
 
+.cart-amount-cal-data .prev-input-group .input-group-icon>img, .tab-pane form .input-group-icon>img, .cart-amount-cal-data .prev-input-group .input-group-icon svg, .tab-pane form .input-group-icon svg, form .prev-input-group .input-group-icon img, form .prev-input-group .input-group-icon svg {
+height: 100%;
+object-fit: contain;
+object-position: center;
+}
 
+.modal-dialog.custom-w-441px {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 @media screen and (max-width: 1800px) {
    .offer-card-banner .card-body h2 {
@@ -4870,14 +4890,22 @@ footer .footer-link li a>img {
   }
 }
 @media screen and (max-width: 1400px) {
-  .cart-section .stickyOnMobile {
-    position: fixed;
-    right: 25px;
+  .cart-sidebar .stickyOnMobile {
+    position: absolute;
+    right: 0px;
+    left: 0px;
     bottom: 10px;
-    max-width: 354px;
-    margin: 0px auto;
+    max-width: 90%;
+    margin: 0px auto !important;
     width: 100%;
     z-index: 9;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1366px) {
+  .bd-layout {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
   }
 }
 @media screen and (max-width: 1440px) {
@@ -4908,9 +4936,19 @@ footer .footer-link li a>img {
        line-height: 44px;
        font-size: 14px;
   }
+
+  .prev-input-group .form-control {
+    min-height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+}
+
+  .cart-amount-cal-data .prev-input-group .input-group-icon, .tab-pane form .input-group-icon {
+    top: 14px;
+}
    .delivery-card .prev-input-group .input-group-icon img {
        object-fit: contain;
-       height: 18px;
+       height: 16px;
   }
    .delivery-card .staring-delivery-screen p {
        font-size: 20px;
@@ -4929,8 +4967,7 @@ footer .footer-link li a>img {
        font-size: 14px;
   }
    .prev-input-group .input-group-icon {
-       top: 12px;
-       height: 22px;
+       top: 14px !important;
        display: flex;
        align-items: center;
        justify-content: center;
@@ -5062,6 +5099,10 @@ footer .footer-link li a>img {
    .category-list-section .favorite-item-grid {
        grid-template-columns: repeat(4, 1fr);
   }
+  .menu-sidebar
+.offcanvas-lg.offcanvas-start {
+    max-width: 475px;
+}
 }
 
 @media screen and (max-width: 767px) {
@@ -5174,22 +5215,27 @@ footer .footer-link li a>img {
    .food-detail-card .btn {
        font-size: 12px !important;
   }
+  .custom-modal .modal-body, .custom-modal .modal-footer {
+    padding: 15px;
+}
 }
 @media screen and (max-width: 484px) {
 .category-list-item-grid .food-detail-card .btn-custom-yellow {
   width: 105px;
   font-size: 11px !important;
 }
+
+.modal-dialog.custom-w-441px {
+  max-width: 380px;
+}
 }
 @media screen and (max-width: 400px) {
-.cart-section .stickyOnMobile {
-  max-width: 375px;
-}
+
 }
 
-@media screen and (max-width: 320px) {
-  .cart-section .stickyOnMobile {
-    max-width: 265px;
+@media screen and (max-width: 375px) {
+  .modal-dialog.custom-w-441px {
+    max-width: 310px;
   }
   }
 

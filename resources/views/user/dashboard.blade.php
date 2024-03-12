@@ -216,7 +216,7 @@
                     <div class="offcanvas-xxl offcanvas-end h-100 overflow-auto" tabindex="-1" id="bdSidebarCart"
                          aria-labelledby="bdSidebarCartOffcanvasLabel">
                         <div class="offcanvas-header p-0" style="display: block"></div>
-                        <div class="offcanvas-body position-relative space-for-close">
+                        <div class="offcanvas-body position-relative space-for-close pb-xxl-3">
 
                         <h4 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto">My cart</h4>
 
@@ -464,9 +464,9 @@
                                                                        class="error d-none"></label>
                                                             </div>
                                                             <div class="bill-detail-invoice">
-                                                                <h6 class="cart-title">Bill Details</h6>
+                                                                <h6 class="cart-title mb-1">Bill Details</h6>
                                                                 <div class="table-responsive">
-                                                                    <table class="table table-borderless">
+                                                                    <table class="table table-borderless mb-2">
                                                                         <tbody></tbody>
                                                                         <tbody>
                                                                         <tr>
@@ -532,24 +532,10 @@
                                                                         </tfoot>
                                                                     </table>
                                                                 </div>
-                                                                <a class="btn btn-custom-yellow btn-default d-block stickyOnMobile"
-                                                                   id="checkout-cart"
-                                                                   {{--                                                                   href="{{ route('user.checkout') }}">--}}
-                                                                   href="javascript:void(0)">
-                                                                    <span class="align-middle"><span class="count_cart"><span class="count_num">5</span> <svg width="22px" height="22px" viewBox="-4 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                                        <defs></defs>
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                                            <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-572.000000, -723.000000)"
-                                               fill="#333333">
-                                                <path
-                                                    d="M594,747 L574,747 L574,731 C574,729.896 574.896,729 576,729 L578,729 L578,735 L580,735 L580,729 L588,729 L588,735 L590,735 L590,729 L592,729 C593.104,729 594,729.896 594,731 L594,747 L594,747 Z M594,751 C594,752.104 593.104,753 592,753 L576,753 C574.896,753 574,752.104 574,751 L574,749 L594,749 L594,751 L594,751 Z M584,725 C586.209,725 588,725.619 588,727 L580,727 C580,725.619 581.791,725 584,725 L584,725 Z M592,727 L590,727 C590,724.791 587.313,723 584,723 C580.687,723 578,724.791 578,727 L576,727 C573.791,727 572,728.791 572,731 L572,751 C572,753.209 573.791,755 576,755 L592,755 C594.209,755 596,753.209 596,751 L596,731 C596,728.791 594.209,727 592,727 L592,727 Z"
-                                                    id="bag" sketch:type="MSShapeGroup"></path>
-                                            </g>
-                                        </g>
-                                    </svg></span> Checkout</span>
-                                                                </a>
+                                                                
                                                             </div>
+
+                                                            
                                                         </div>
 
                                                     </div>
@@ -579,7 +565,27 @@
                                 </div>
                             </div>
                         </div>
+
+                        <a class="btn btn-custom-yellow btn-default d-block stickyOnMobile"
+                                                                   id="checkout-cart"
+                                                                   {{--                                                                   href="{{ route('user.checkout') }}">--}}
+                                                                   href="javascript:void(0)">
+                                                                    <span class="align-middle"><span class="count_cart"><span class="count_num">5</span> <svg width="22px" height="22px" viewBox="-4 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                        <defs></defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                            <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-572.000000, -723.000000)"
+                                               fill="#333333">
+                                                <path
+                                                    d="M594,747 L574,747 L574,731 C574,729.896 574.896,729 576,729 L578,729 L578,735 L580,735 L580,729 L588,729 L588,735 L590,735 L590,729 L592,729 C593.104,729 594,729.896 594,731 L594,747 L594,747 Z M594,751 C594,752.104 593.104,753 592,753 L576,753 C574.896,753 574,752.104 574,751 L574,749 L594,749 L594,751 L594,751 Z M584,725 C586.209,725 588,725.619 588,727 L580,727 C580,725.619 581.791,725 584,725 L584,725 Z M592,727 L590,727 C590,724.791 587.313,723 584,723 C580.687,723 578,724.791 578,727 L576,727 C573.791,727 572,728.791 572,731 L572,751 C572,753.209 573.791,755 576,755 L592,755 C594.209,755 596,753.209 596,751 L596,731 C596,728.791 594.209,727 592,727 L592,727 Z"
+                                                    id="bag" sketch:type="MSShapeGroup"></path>
+                                            </g>
+                                        </g>
+                                    </svg></span> Checkout</span>
+                                                                </a>
+
                     </div>
+                    
                 </aside>
             </div>
         </div>

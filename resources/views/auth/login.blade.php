@@ -26,7 +26,7 @@
                                         <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
 
                                     </span>
-                                        <input type="text" class="form-control" autocomplete="off" name="email" placeholder="Email" value="{{ old('email') }}">
+                                        <input type="text" class="form-control ps-5 text-indent-initial" autocomplete="off" name="email" placeholder="Email" value="{{ old('email') }}">
                                     </div>
                                     @error('email')
                                     <div class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                                     </span>
 
                                         <input type="password"
-                                               class="form-control"
+                                               class="form-control ps-5 text-indent-initial"
                                                name="password"
                                                placeholder="Password"
                                                id="password"  value="{{ old('password') }}" autocomplete="off">
@@ -92,7 +92,7 @@
 
                         </span>
                             <input type="text" name="forgot-pwd-email" id="forgot-pwd-email"
-                                   class="form-control" placeholder="Email"
+                                   class="form-control text-indent-initial ps-5" placeholder="Email"
                                    value="" autocomplete="email" autofocus>
                         </div>
 

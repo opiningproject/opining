@@ -14,35 +14,35 @@ var swiper = new Swiper(".category-swiper-slider", {
         },
         768: {
             slidesPerView: 4,
-            spaceBetween: 40,
+            spaceBetween: 20,
         },
         1024: {
             slidesPerView: 8,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
         1024: {
             slidesPerView: 8,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
         1024: {
             slidesPerView: 5,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
         1700: {
             slidesPerView: 7,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
         1800: {
             slidesPerView: 7,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
         1920: {
             slidesPerView: 8,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
         2560: {
             slidesPerView: 11,
-            spaceBetween: 30,
+            spaceBetween: 20,
         },
     },
 });

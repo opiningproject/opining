@@ -4713,555 +4713,170 @@ label.error {
 }
 
 /* Updated CSS from 08/03/2024 */
-
-.sidebar-menu-top-box .dropdown .dropdown-toggle {
-  font-size: 18px;
-}
-.sidebar-menu-top-box .text-truncate {
-  font-size: 16px;
-}
-.delivery-card .prev-input-group .form-control {
-   text-indent: 0;
-}
-.delivery-card .nav .nav-link {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   gap: 5px;
-}
-footer .container {
-   max-width: 1440px;
-   margin: 0px auto;
-}
-footer .footer-logo a .web-logo {
-   max-width: 250px;
-   width: 100%;
-}
-footer .footer-link li a {
-   line-height: 25px;
-   display: inline-block;
-}
-footer .footer-link li a>img {
-   width: 16px;
-   object-fit: contain;
-   object-position: center;
-}
-.section-page-title .form-control {
-   text-indent: initial !important;
-}
-.menu-sidebar .sidebar-logo {
-   display: inline-block;
-}
-.menu-sidebar .sidebar-logo .web-logo {
-   max-width: 120px;
-   width: 100%;
-}
-.language-selector .dropdown-menu {
-   padding: 0px;
-}
-.language-selector .dropdown-menu .dropdown-item {
-  margin-bottom: 0px;
-}
-.category-list-item-grid .food-detail-card .btn-custom-yellow {
-   display: inline-block;
-   width: 140px;
-   min-width: auto;
-   margin: 15px auto 0px;
-}
-
-.category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {
-  display: inline-block;
-  width: 140px;
-  min-width: auto;
-  margin: 15px auto 0px;
-}
-.food-detail-card .food-favorite-icon {
-   top: 10px;
-}
-.cart-item-row {
-   margin: 0px -10px;
-}
-.cart-item-row .cart-custom-w-col-img {
-   flex: 0 0 90px;
-   max-width: 90px;
-   padding: 0px 10px;
-   position: relative;
-}
-.cart-item-row .cart-custom-w-col-detail {
-   flex: 0 0 calc(100% - 90px);
-   max-width: calc(100% - 90px);
-   padding: 0px 10px;
-}
-.section-page-title .searcheaderBox.toggled {
-   position: fixed !important;
-   z-index: 9999;
-   background: #ffffff;
-   padding: 40px 15px 15px;
-   align-items: center !important;
-   top: -200px;
-   box-shadow: 0px 3px 6px 0px #dcdcdc;
-   -webkit-transition: all .3s linear;
-   -moz-transition: all .3s linear;
-   -o-transition: all .3s linear;
-   -ms-transition: all .3s linear;
-   transition: all .3s linear;
-   border-radius: 0px 0px 15px 15px;
-}
-.sidebar-menu-top-box .userPhoto {
-   border-radius: 12px;
-   overflow: hidden;
-   width: 55px;
-   flex: 0 0 55px;
-   max-width: 55px;
-   height: 55px;
-}
-.sidebar-menu-top-box .userPhoto img {
-   width: 100%;
-   height: 100%;
-   object-fit: contain;
-   object-position: center;
-}
-.sidebar-menu-top-box .dropdown-menu {
-   background: transparent;
-   border: 0px;
-   border-radius: 0px;
-}
-.sidebar-menu-top-box .dropdown-menu .log-out-item {
-   display: inline-flex;
-   width: auto;
-   background: #ffffff;
-   border-radius: 4px;
-   overflow: hidden;
-   align-items: center;
-   justify-content: center;
-   border: 1px solid #dcdcdc;
-   padding: 10px 15px;
-   color: #727272 !important;
-   column-gap: 10px;
-}
-.sidebar-menu-top-box .dropdown-menu .log-out-item:hover {
-   background: #f3f3f3;
-}
-.cursor-initial {
-   cursor: initial !important;
-}
-.arrow-with-bg {
-   background: #F5F5F5 !important;
-}
-.orderdetails-desc .orderdetails-desc-note input {
-   min-height: 45px;
-}
-#user-profile-form .file-upload-field {
-   line-height: 34px;
-}
-.cart-sidebar .stickyOnMobile {
-  max-width: 90%;
-  margin: 0px auto;
-  margin-bottom: 30px;
-}
-.cart-amount-cal-data .prev-input-group .input-group-icon, .tab-pane form .input-group-icon, form .prev-input-group .input-group-icon{
-  /* top: 50%;
-  transform: translateY(-50%); */
-  height: 16px;
-  top: 17px;
-}
-
-.cart-amount-cal-data .prev-input-group .input-group-icon>img, .tab-pane form .input-group-icon>img, .cart-amount-cal-data .prev-input-group .input-group-icon svg, .tab-pane form .input-group-icon svg, form .prev-input-group .input-group-icon img, form .prev-input-group .input-group-icon svg {
-height: 100%;
-object-fit: contain;
-object-position: center;
-}
-
-.modal-dialog.custom-w-441px {
-  margin-left: auto;
-  margin-right: auto;
-}
+.sidebar-menu-top-box .dropdown .dropdown-toggle {font-size: 18px;}
+.sidebar-menu-top-box .text-truncate {font-size: 16px;}
+.delivery-card .prev-input-group .form-control {text-indent: 0;}
+.delivery-card .nav .nav-link {display: flex;align-items: center;justify-content: center;gap: 5px;}footer .container {max-width: 1440px;margin: 0px auto;}footer .footer-logo a .web-logo {max-width: 250px;width: 100%;}footer .footer-link li a {line-height: 25px;display: inline-block;}footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: center;}
+.section-page-title .form-control {text-indent: initial !important;}
+.menu-sidebar .sidebar-logo {display: inline-block;}
+.menu-sidebar .sidebar-logo .web-logo {max-width: 120px;width: 100%;}
+.language-selector .dropdown-menu {padding: 0px;}
+.language-selector .dropdown-menu .dropdown-item {margin-bottom: 0px;}
+.category-list-item-grid .food-detail-card .btn-custom-yellow {display: inline-block;width: 140px;min-width: auto;margin: 15px auto 0px;}
+.category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {display: inline-block;width: 140px;min-width: auto;margin: 15px auto 0px;}
+.food-detail-card .food-favorite-icon {top: 10px;}
+.cart-item-row {margin: 0px -10px;}
+.cart-item-row .cart-custom-w-col-img {flex: 0 0 90px;max-width: 90px;padding: 0px 10px;position: relative;}
+.cart-item-row .cart-custom-w-col-detail {flex: 0 0 calc(100% - 90px);max-width: calc(100% - 90px);padding: 0px 10px;}
+.section-page-title .searcheaderBox.toggled {position: fixed !important;z-index: 9999;background: #ffffff;padding: 40px 15px 15px;align-items: center !important;top: -200px;box-shadow: 0px 3px 6px 0px #dcdcdc;-webkit-transition: all .3s linear;-moz-transition: all .3s linear;-o-transition: all .3s linear;-ms-transition: all .3s linear;transition: all .3s linear;border-radius: 0px 0px 15px 15px;}
+.sidebar-menu-top-box .userPhoto {border-radius: 12px;overflow: hidden;width: 55px;flex: 0 0 55px;max-width: 55px;height: 55px;}
+.sidebar-menu-top-box .userPhoto img {width: 100%;height: 100%;object-fit: contain;object-position: center;}
+.sidebar-menu-top-box .dropdown-menu {background: transparent;border: 0px;border-radius: 0px;}
+.sidebar-menu-top-box .dropdown-menu .log-out-item {display: inline-flex;width: auto;background: #ffffff;border-radius: 4px;overflow: hidden;align-items: center;justify-content: center;border: 1px solid #dcdcdc;padding: 10px 15px;color: #727272 !important;column-gap: 10px;}
+.sidebar-menu-top-box .dropdown-menu .log-out-item:hover {background: #f3f3f3;}
+.cursor-initial {cursor: initial !important;}
+.arrow-with-bg {background: #F5F5F5 !important;}
+.orderdetails-desc .orderdetails-desc-note input {min-height: 45px;}#user-profile-form .file-upload-field {line-height: 34px;}
+.cart-sidebar .stickyOnMobile {max-width: 90%;margin: 0px auto;margin-bottom: 30px;}
+.cart-amount-cal-data .prev-input-group .input-group-icon, .tab-pane form .input-group-icon, form .prev-input-group .input-group-icon{height: 16px;top: 17px;}
+.cart-amount-cal-data .prev-input-group .input-group-icon>img, .tab-pane form .input-group-icon>img, .cart-amount-cal-data .prev-input-group .input-group-icon svg, .tab-pane form .input-group-icon svg, form .prev-input-group .input-group-icon img, form .prev-input-group .input-group-icon svg {height: 100%;object-fit: contain;object-position: center;}
+.modal-dialog.custom-w-441px {margin-left: auto;margin-right: auto;}
 
 @media screen and (max-width: 1800px) {
-   .offer-card-banner .card-body h2 {
-       font-size: 34px;
-       margin-bottom: 10px;
-  }
-   .offer-card-banner .card-body p {
-       font-size: 24px;
-  }
-   .offer-card-banner .card-body {
-       padding: 30px 40px !important;
-  }
+  .offer-card-banner .card-body h2 {font-size: 34px;margin-bottom: 10px;}
+.offer-card-banner .card-body p {font-size: 24px;}
+.offer-card-banner .card-body {padding: 30px 40px !important;}
 }
 @media screen and (max-width: 1400px) {
-  .cart-sidebar .stickyOnMobile {
-    position: absolute;
-    right: 0px;
-    left: 0px;
-    bottom: 10px;
-    max-width: 90%;
-    margin: 0px auto !important;
-    width: 100%;
-    z-index: 9;
-  }
+  .cart-sidebar .stickyOnMobile {position: absolute;right: 0px;left: 0px;bottom: 10px;max-width: 90%;margin: 0px auto !important;width: 100%;z-index: 9;}
 }
 
 @media screen and (min-width: 992px) and (max-width: 1366px) {
-  .bd-layout {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-  }
+  .bd-layout {padding-left: 5px !important;padding-right: 5px !important;}
 }
 @media screen and (max-width: 1440px) {
-   .delivery-card .signin-card .card-header {
-       padding: 25px;
-  }
-   .delivery-card .signin-card .card-header .web-logo {
-       max-width: 120px;
-  }
-   .delivery-card .signin-card .card-body {
-       padding: 0px 20px 20px 20px;
-  }
-   .delivery-card .nav {
-       margin-bottom: 20px;
-  }
-   .delivery-card .form-group {
-       margin-bottom: 20px;
-  }
-   .delivery-card .btn.mt-30px {
-       margin-top: 20px;
-  }
-   .delivery-card .btn {
-       font-size: 14px;
-       padding: 10px 12px;
-  }
-   .delivery-card .prev-input-group .form-control {
-       min-height: 44px;
-       line-height: 44px;
-       font-size: 14px;
-  }
-
-  .prev-input-group .form-control {
-    min-height: 44px;
-    line-height: 44px;
-    font-size: 14px;
-}
-
-  .cart-amount-cal-data .prev-input-group .input-group-icon, .tab-pane form .input-group-icon {
-    top: 14px;
-}
-   .delivery-card .prev-input-group .input-group-icon img {
-       object-fit: contain;
-       height: 16px;
-  }
-   .delivery-card .staring-delivery-screen p {
-       font-size: 20px;
-       margin-top: 10px;
-       line-height: 30px;
-  }
-   .delivery-card .nav .nav-link {
-       font-size: 14px;
-  }
-   .form-group {
-       margin-bottom: 15px !important;
-  }
-   .form-control, .form-select {
-       min-height: 40px;
-       max-height: 40px;
-       font-size: 14px;
-  }
-   .prev-input-group .input-group-icon {
-       top: 14px !important;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-  }
-   .menu-sidebar .offcanvas-lg .offcanvas-header {
-       padding: 20px;
-  }
-   .menu-sidebar .menu-sidebar-content .side-bar-menu {
-       padding: 20px 20px 15px 20px;
-  }
-   .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
-       width: 30px;
-       height: 30px;
-  }
-   .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
-       font-size: 16px;
-       padding: 8px 16px;
-       border-radius: 12px;
-  }
-   .menu-sidebar .sidebar-offer-card p {
-       font-size: 16px;
-  }
-   .category-list-item-grid {
-       grid-column-gap: 20px;
-       grid-row-gap: 20px;
-  }
-   .form-group .singleline-text {
-       font-size: 14px;
-  }
-   .category-section .swiper-container {
-       width: 100% !important;
-  }
-   .offer-card-banner .card {
-       height: initial !important;
-  }
-   .section-page-title .searcheatbox {
-       margin-bottom: 0px !important;
-  }
-   .sidebar-menu-top-box .dropdown .dropdown-toggle {
-      font-size: 16px;
-  }
-   .sidebar-menu-top-box .text-truncate {
-      font-size: 14px;
-  }
-   .custom-modal .modal-body, .custom-modal .modal-footer {
-       padding: 25px;
-  }
-   .custom-modal .modal-header {
-       padding: 25px !important;
-  }
-   .main-content .orders-main {
-       gap: 20px;
-  }
-   .orders-main .orders, .orders-main .ordersdetails {
-       padding: 20px;
-  }
-   .foodqty .minus, .plus {
-       width: 30px;
-       height: 30px;
-       line-height: 22px;
-  }
-   .foodqty .minus, .plus i {
-       font-size: 14px;
-  }
-   .cart-sidebar .offcanvas-body {
-       padding: 40px 20px 20px;
-  }
-   .btn {
-       font-size: 14px !important;
-       padding: 8px 12px !important;
-  }
-   .card-body.coupon-card-grid {
-       grid-template-columns: repeat(2, 1fr);
-  }
-   .coupons-card .card-body .inner-card .inner-card-body h3 {
-       font-size: 50px !important;
-  }
-   .coupons-card .card-body .inner-card .inner-card-body h6 {
-       font-size: 15px !important;
-  }
-   .coupons-card .card-body .inner-card .inner-card-body .valid-date {
-       font-size: 12px !important;
-  }
-   .coupons-card .card-body .inner-card .promocode-box p {
-       font-size: 12px !important;
-  }
-  .orders .orders-type .orders-list {
-    gap: 20px !important;
-}
-.orders .orders-type .orders-list .orders-item {
-    padding: 15px 20px !important;
-}
-.ordersdetails .orderdetails-main .orderdetails-maintop button {
-    padding: 10px 16px !important;
-    font-size: 14px !important;
-}
-.ordersdetails .orderdetails-main {
-    padding: 20px 20px 0 !important;
-}
-.ordersdetails .orderdetails-main .orderdetails-total .list .list-item .number {
-    font-size: 20px !important;
-}
-.ordersdetails .orderdetails-main .orderdetails-total {
-    padding: 15px 0 !important;
-}
+  .delivery-card .signin-card .card-header {padding: 25px;}
+.delivery-card .signin-card .card-header .web-logo {max-width: 120px;}
+.delivery-card .signin-card .card-body {padding: 0px 20px 20px 20px;}
+.delivery-card .nav {margin-bottom: 20px;}
+.delivery-card .form-group {margin-bottom: 20px;}
+.delivery-card .btn.mt-30px {margin-top: 20px;}
+.delivery-card .btn {font-size: 14px;padding: 10px 12px;}
+.delivery-card .prev-input-group .form-control {min-height: 44px;line-height: 44px;font-size: 14px;}
+.prev-input-group .form-control {min-height: 44px;line-height: 44px;font-size: 14px;}
+.cart-amount-cal-data .prev-input-group .input-group-icon, .tab-pane form .input-group-icon {top: 14px;}
+.delivery-card .prev-input-group .input-group-icon img {object-fit: contain;height: 16px;}
+.delivery-card .staring-delivery-screen p {font-size: 20px;margin-top: 10px;line-height: 30px;}
+.delivery-card .nav .nav-link {font-size: 14px;}
+.form-group {margin-bottom: 15px !important;}
+.form-control, .form-select {min-height: 40px;max-height: 40px;font-size: 14px;}
+.prev-input-group .input-group-icon {top: 14px !important;display: flex;align-items: center;justify-content: center;}
+.menu-sidebar .offcanvas-lg .offcanvas-header {padding: 20px;}
+.menu-sidebar .menu-sidebar-content .side-bar-menu {padding: 20px 20px 15px 20px;}
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {width: 30px;height: 30px;}
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {font-size: 16px;padding: 8px 16px;border-radius: 12px;}
+.menu-sidebar .sidebar-offer-card p {font-size: 16px;}
+.category-list-item-grid {grid-column-gap: 20px;grid-row-gap: 20px;}
+.form-group .singleline-text {font-size: 14px;}
+.category-section .swiper-container {width: 100% !important;}
+.offer-card-banner .card {height: initial !important;}
+.section-page-title .searcheatbox {margin-bottom: 0px !important;}
+.sidebar-menu-top-box .dropdown .dropdown-toggle {font-size: 16px;}
+.sidebar-menu-top-box .text-truncate {font-size: 14px;}
+.custom-modal .modal-body, .custom-modal .modal-footer {padding: 25px;}
+.custom-modal .modal-header {padding: 25px !important;}
+.main-content .orders-main {gap: 20px;}
+.orders-main .orders, .orders-main .ordersdetails {padding: 20px;}
+.foodqty .minus, .plus {width: 30px;height: 30px;line-height: 22px;}
+.foodqty .minus, .plus i {font-size: 14px;}
+.cart-sidebar .offcanvas-body {padding: 40px 20px 20px;}
+.btn {font-size: 14px !important;padding: 8px 12px !important;}
+.card-body.coupon-card-grid {grid-template-columns: repeat(2, 1fr);}
+.coupons-card .card-body .inner-card .inner-card-body h3 {font-size: 50px !important;}
+.coupons-card .card-body .inner-card .inner-card-body h6 {font-size: 15px !important;}
+.coupons-card .card-body .inner-card .inner-card-body .valid-date {font-size: 12px !important;}
+.coupons-card .card-body .inner-card .promocode-box p {font-size: 12px !important;}
+.orders .orders-type .orders-list {gap: 20px !important;}
+.orders .orders-type .orders-list .orders-item {padding: 15px 20px !important;}
+.ordersdetails .orderdetails-main .orderdetails-maintop button {padding: 10px 16px !important;font-size: 14px !important;}
+.ordersdetails .orderdetails-main {padding: 20px 20px 0 !important;}
+.ordersdetails .orderdetails-main .orderdetails-total .list .list-item .number {font-size: 20px !important;}
+.ordersdetails .orderdetails-main .orderdetails-total {padding: 15px 0 !important;}
 
 }
 
 @media screen and (max-width: 1365px) {
-   .category-list-section .favorite-item-grid {
-       grid-template-columns: repeat(3, 1fr);
-  }
+.category-list-section .favorite-item-grid {grid-template-columns: repeat(3, 1fr);}
 }
 
 @media screen and (max-width: 1200px) {
-   .coupons-card .card-body .inner-card {
-       min-height: 240px !important;
-  }
-   .category-list-section .favorite-item-grid {
-       grid-template-columns: repeat(2, 1fr);
-  }
+.coupons-card .card-body .inner-card {min-height: 240px !important;}
+.category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 }
 
 @media screen and (max-width: 991px) {
-   .menu-sidebar .offcanvas-header .drawer-close {
-       top: 10px;
-       right: 10px;
-  }
-   .category-list-section .favorite-item-grid {
-       grid-template-columns: repeat(4, 1fr);
-  }
-  .menu-sidebar
-.offcanvas-lg.offcanvas-start {
-    max-width: 475px;
-}
+.menu-sidebar .offcanvas-header .drawer-close {top: 10px;right: 10px;}
+.category-list-section .favorite-item-grid {grid-template-columns: repeat(4, 1fr);}
+.menu-sidebar .offcanvas-lg.offcanvas-start {max-width: 475px;}
+.main-content {padding: 15px 15px 30px !important;}
 }
 
 @media screen and (max-width: 767px) {
-   .searcheaderBox .has-search .form-control-feedback {
-       left: 15px !important;
-  }
-   .section-page-title .searcheaderBox.toggled {
-       display: flex !important;
-       top: 0px;
-  }
-   .searcheaderBox.has-search .form-control {
-       font-size: 14px !important;
-  }
-   .menu-sidebar .sidebar-logo .web-logo {
-       height: 45px;
-       object-fit: contain;
-  }
-   .custom-card .card-body.coupon-card-grid {
-       padding-left: 30px !important;
-       padding-right: 30px !important;
-  }
-   .custom-card .card-body {
-       padding: 20px !important;
-  }
-   .custom-card.coupons-card .card-body {
-       padding: 0px !important;
-  }
-   .ordersdetails .orderdetails-main .orderdetails-desc .orderdetails-desc-note {
-       margin-left: 0;
-  }
-   .card-body.coupon-card-grid {
-       grid-template-columns: repeat(2, 1fr);
-  }
-   .chat_main_screen {
-       background: #ffffff;
-  }
-   .category-list-section .favorite-item-grid {
-       grid-template-columns: repeat(2, 1fr);
-  }
-  .orderdetails-desc .orderdetails-desc-note input {
-    min-height: 35px;
-}
-.ordersdetails_sidebar.mobile_ordersdetails {
-  z-index: 99999;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100% !important;
-  max-width: 100%;
-  margin: 0px auto;
-  height: 100vh !important;
-  border-radius: 0px !important;
-}
- .ordersdetails.mobile_ordersdetails
-.orderdetails-main
-.orderdetails-desclist {
-  max-height: initial !important;
-  padding: 25px 0px;
-  overflow-x: hidden;
-}
+  .searcheaderBox .has-search .form-control-feedback {left: 15px !important;}
+.section-page-title .searcheaderBox.toggled {display: flex !important;top: 0px;}
+.searcheaderBox.has-search .form-control {font-size: 14px !important;}
+.menu-sidebar .sidebar-logo .web-logo {height: 45px;object-fit: contain;}
+.custom-card .card-body.coupon-card-grid {padding-left: 30px !important;padding-right: 30px !important;}
+.custom-card .card-body {padding: 20px !important;}
+.custom-card.coupons-card .card-body {padding: 0px !important;}
+.ordersdetails .orderdetails-main .orderdetails-desc .orderdetails-desc-note {margin-left: 0;}
+.card-body.coupon-card-grid {grid-template-columns: repeat(2, 1fr);}
+.chat_main_screen {background: #ffffff;}
+.category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
+.orderdetails-desc .orderdetails-desc-note input {min-height: 35px;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 99999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
+.ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
+.food-detail-card {padding: 12px 15px 18px 15px !important;}
+.collected-points-list ul li {font-size: 14px;margin-bottom: 10px;}
+.custom-card .card-body.px-0 {padding-left: 0px !important;padding-right: 0px !important;}
+
 }
 
 @media screen and (max-width: 640px) {
-.offer-card-banner .card-body h2 {
-  font-size: 26px;
-}
-.offer-card-banner .card-body p {
-  font-size: 18px;
-}
-.offer-card-banner .card-body {
-  padding: 20px 20px !important;
-}
-   .sidebar-menu-top-box .userPhoto {
-       width: 40px;
-       flex: 0 0 40px;
-       max-width: 40px;
-       height: 40px;
-  }
-   .menu-sidebar .offcanvas-lg .offcanvas-header {
-       padding: 20px 10px;
-  }
-   .offer-card-banner .card-body h2 {
-       font-size: 18px;
-  }
-   .offer-card-banner .card-body p {
-       font-size: 14px;
-  }
-   .offer-card-banner .card-body {
-       padding: 20px 20px !important;
-  }
-   .food-detail-card {
-       padding: 12px 10px 18px 10px;
-  }
-   footer .footer-link li a {
-       font-size: 12px;
-  }
-   footer {
-       padding: 30px 10px 15px 10px;
-  }
-   .card-body.coupon-card-grid {
-       grid-template-columns: repeat(1, 1fr);
-  }
+  .offer-card-banner .card-body h2 {font-size: 26px;}
+.offer-card-banner .card-body p {font-size: 18px;}
+.offer-card-banner .card-body {padding: 20px 20px !important;}
+.sidebar-menu-top-box .userPhoto {width: 40px;flex: 0 0 40px;max-width: 40px;height: 40px;}
+.menu-sidebar .offcanvas-lg .offcanvas-header {padding: 20px 10px;}
+.offer-card-banner .card-body h2 {font-size: 18px;}
+.offer-card-banner .card-body p {font-size: 14px;}
+.offer-card-banner .card-body {padding: 20px 20px !important;}
+.food-detail-card {padding: 12px 10px 18px 10px !important;}footer .footer-link li a {font-size: 12px;}footer {padding: 30px 10px 15px 10px;}
+.card-body.coupon-card-grid {grid-template-columns: repeat(1, 1fr);}
 }
 
 @media screen and (max-width: 576px) {
-   #final-checkout-form .checkout-form-steps {
-       padding-left: 0px;
-       margin: 0px auto;
-  }
-   .food-detail-card .btn {
-       font-size: 12px !important;
-  }
-  .custom-modal .modal-body, .custom-modal .modal-footer {
-    padding: 15px;
-}
+  #final-checkout-form .checkout-form-steps {padding-left: 0px;margin: 0px auto;}
+.food-detail-card .btn {font-size: 12px !important;}
+.custom-modal .modal-body, .custom-modal .modal-footer {padding: 15px;}
 }
 @media screen and (max-width: 484px) {
-.category-list-item-grid .food-detail-card .btn-custom-yellow {
-  width: 105px;
-  font-size: 11px !important;
-}
-
-.modal-dialog.custom-w-441px {
-  max-width: 380px;
-}
-}
-@media screen and (max-width: 400px) {
+  .category-list-item-grid .food-detail-card .btn-custom-yellow, .category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {width: 115px;font-size: 13px !important;letter-spacing: initial;}
+.modal-dialog.custom-w-441px {max-width: 380px;}
+.collected-points-charts {height: 320px !important;}
 
 }
-
 @media screen and (max-width: 375px) {
-  .modal-dialog.custom-w-441px {
-    max-width: 310px;
-  }
+  .modal-dialog.custom-w-441px {max-width: 310px;}
   }
 
-  .count_cart {
-    position: relative;
-  }
-  .count_cart .count_num {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    color: #ffffff;
-    background: #3BCE62;
-    text-align: center;
-    overflow: hidden;
-    border-radius: 9999px;
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    top: -5px;
-    left: -7px;
-    pointer-events: none;
-    line-height: 10px;
-}
+  .count_cart {position: relative;}
+.count_cart .count_num {display: flex;align-items: center;justify-content: center;font-size: 10px;color: #ffffff;background: #3BCE62;text-align: center;overflow: hidden;border-radius: 9999px;width: 18px;height: 18px;position: absolute;top: -5px;left: -7px;pointer-events: none;line-height: 10px;}
 
-/*Rekha Sharma*/
+
+
+
+  /*Rekha Sharma*/
 .orderdetails-desc-card  .text {
     word-break: break-word;
 }

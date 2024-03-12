@@ -21,7 +21,7 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <input id="email" type="hidden"
-                                           class="form-control is-invalid"
+                                           class="form-control text-indent-initial ps-5 is-invalid"
                                            name="email" value="{{ $email ?? old('email') }}" required
                                            autocomplete="email" autofocus>
                                     @error('email')
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label for="newpassword" class="form-label">{{ __('New Password') }}</label>
                                         <input id="password" type="password"
-                                               class="form-control @error('password') is-invalid @enderror"
+                                               class="form-control text-indent-initial ps-5 @error('password') is-invalid @enderror"
                                                name="password"
                                                autocomplete="new-password" value="{{ old('password') }}">
                                         @error('password')
@@ -45,7 +45,7 @@
                                     <div class="form-group mb-0">
                                         <label for="newpassword"
                                                class="form-label">{{ __('Confirm New Password') }}</label>
-                                        <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                                        <input id="password-confirm" type="password" class="form-control text-indent-initial ps-5 @error('password_confirmation') is-invalid @enderror"
                                                name="password_confirmation" autocomplete="new-password" value="{{ old('password_confirmation') }}">
                                         @error('password_confirmation')
                                         <span class="invalid-feedback" role="alert">

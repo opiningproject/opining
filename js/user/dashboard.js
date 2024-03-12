@@ -75,8 +75,8 @@ $(document).ready(function () {
                 spaceBetween: 20,
                 autoplay: false,
             },
-            567: {
-                slidesPerView: 2,
+            575: {
+                slidesPerView: 3,
                 spaceBetween: 20,
                 autoplay: false,
             },

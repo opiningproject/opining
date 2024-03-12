@@ -10,11 +10,13 @@
 .category-section .category-slider .category-element .card:hover, .category-section .category-slider .category-element .card.active {background: #ffffff;box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 4px 1px;}
 .swiper-wrapper {padding-top: 10px;padding-bottom: 10px;}
 .category-section .category-slider .category-element .card .categoryfood-detail-card-btn {max-width: 100px;}
-.foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main .footer-box-main-orderlist-main-item .orderRead-more {flex: 0 0 200px;max-width: 200px;}
+.foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main .footer-box-main-orderlist-main-item .orderRead-more {flex: 0 0 280px;max-width: 280px;}
 .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main .footer-box-main-orderlist-main-item .notes {max-width: 350px;}
 .coupons-card .card-body .inner-card .promocode-box .text-bg-white {font-size: 14px;padding: 5px 12px;}
 .coupons-card .card-body .inner-card {height: 262px;}
 .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p::before {background-image: url(../images/curve-chaticon-update.svg);left: -11px;bottom: -2.5px;}
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active svg circle {fill: #000000;}
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active svg path {stroke: #ffffff;}
 
 @media screen and (max-width: 1600px) {
 .btn {font-size: 14px !important;padding: 8px 12px !important;}

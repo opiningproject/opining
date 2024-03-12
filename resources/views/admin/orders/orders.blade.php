@@ -50,7 +50,7 @@ use App\Enums\RefundStatus;
                                         </div>
                                         <div class="time d-flex flex-column align-items-center justify-content-center text-center gap-1">
                                             @if($key == 0)
-                                            <img src="{{ asset('images/clock-black.svg') }}" alt="time" class="img-fluid svg" width="29" height="29">
+                                            <img src="{{ asset('images/clock-yellow.svg') }}" alt="time" class="img-fluid svg" width="29" height="29">
                                             @else
                                             <img src="{{ asset('images/clock-yellow.svg') }}" alt="time" class="img-fluid svg" width="29" height="29">
                                             @endif

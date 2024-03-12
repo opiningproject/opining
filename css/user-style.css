@@ -4576,7 +4576,7 @@ input[type=number] {
   }
 
   .category-section .swiper-container {
-    max-width: 80%;
+    max-width: 86%;
     width: 100% !important;
     position: relative;
   }
@@ -4802,7 +4802,6 @@ label.error {
 .ordersdetails .orderdetails-main {padding: 20px 20px 0 !important;}
 .ordersdetails .orderdetails-main .orderdetails-total .list .list-item .number {font-size: 20px !important;}
 .ordersdetails .orderdetails-main .orderdetails-total {padding: 15px 0 !important;}
-
 }
 
 @media screen and (max-width: 1365px) {
@@ -4871,8 +4870,31 @@ label.error {
   .modal-dialog.custom-w-441px {max-width: 310px;}
   }
 
-  .count_cart {position: relative;}
+
+
+.count_cart {position: relative;}
 .count_cart .count_num {display: flex;align-items: center;justify-content: center;font-size: 10px;color: #ffffff;background: #3BCE62;text-align: center;overflow: hidden;border-radius: 9999px;width: 18px;height: 18px;position: absolute;top: -5px;left: -7px;pointer-events: none;line-height: 10px;}
+
+.swiper-container {
+  position: relative;
+}
+
+.content-main-part {
+  width: 100% !important;
+  max-width: calc(100% - 702px);
+}
+
+@media screen and (max-width: 1400px) {
+.content-main-part {
+  max-width: calc(100% - 345px);
+}
+}
+
+@media screen and (max-width: 991px) {
+  .content-main-part {
+    max-width: 100% !important;
+  }
+  }
 
 
 

@@ -58,7 +58,7 @@ $(document).ready(function () {
             delay: 1000,
             disableOnInteraction: false,
         },
-        autoplay: false,
+        autoplay: true,
         pagination: false,
         navigation: {
             nextEl: ".swiper-button-next",
@@ -92,26 +92,26 @@ $(document).ready(function () {
             },
             758: {
                 slidesPerView: 4,
-                spaceBetween: 40,
+                spaceBetween: 20,
                 autoplay: false,
             },
             768: {
                 slidesPerView: 4,
-                spaceBetween: 40,
+                spaceBetween: 20,
                 autoplay: false,
             },
             800: {
                 slidesPerView: 4,
-                spaceBetween: 40,
+                spaceBetween: 20,
                 autoplay: false,
             },
             988: {
                 slidesPerView: 3,
-                spaceBetween: 10,
+                spaceBetween: 20,
             },
             1024: {
                 slidesPerView: 3,
-                spaceBetween: 10,
+                spaceBetween: 20,
             },
             1100: {
                 slidesPerView: 3,

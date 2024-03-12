@@ -15,8 +15,8 @@
 .coupons-card .card-body .inner-card .promocode-box .text-bg-white {font-size: 14px;padding: 5px 12px;}
 .coupons-card .card-body .inner-card {height: 262px;}
 .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p::before {background-image: url(../images/curve-chaticon-update.svg);left: -11px;bottom: -2.5px;}
-.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active svg circle {fill: #000000;}
-.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active svg path {stroke: #ffffff;}
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .time svg circle {fill: #000000;}
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .time svg path {stroke: #ffffff;}
 
 @media screen and (max-width: 1600px) {
 .btn {font-size: 14px !important;padding: 8px 12px !important;}

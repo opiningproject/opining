@@ -19,7 +19,7 @@
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout"> @include('layouts.user.side_nav_bar')
-                <main class="bd-main">
+                <main class="bd-main content-main-part">
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between">
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">

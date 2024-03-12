@@ -10,7 +10,7 @@
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body pt-0 pt-xxl-3">
                 <form id="address-form">
                     @csrf
                     <div class="row">

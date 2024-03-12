@@ -49,15 +49,15 @@ $(window).on("load", function () {
 });
 
 $(document).ready(function () {
-    
+
     var swiper = new Swiper(".category-swiper-slider", {
         slidesPerView: 1,
         spaceBetween: 6,
         loop: true,
-        autoplay: {
-            delay: 1000,
-            disableOnInteraction: false,
-        },
+        // autoplay: {
+        //     delay: 1000,
+        //     disableOnInteraction: false,
+        // },
         autoplay: true,
         pagination: false,
         navigation: {
@@ -147,5 +147,28 @@ $(document).ready(function () {
             },
         },
     });
-    
+
+    $(document).on('keyup', '#search-dish', function () {
+        var search = $(this).val();
+
+        let searchParams = new URLSearchParams(window.location.search)
+        const cat_id = searchParams.get('cat_id');
+
+        $.ajax({
+            url: baseURL + '/dish/searchDish?cat_id='+cat_id,
+            type: 'POST',
+            data: {
+                search
+            },
+            datatype: 'json',
+            success: function (response) {
+                $('.dish-details-div').html(response)
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+
 });

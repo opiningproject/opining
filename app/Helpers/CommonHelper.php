@@ -78,18 +78,28 @@ if (!function_exists('uploadPermitDocImageToBucket')) {
     }
 }
 
-if (!function_exists('deleteImage')) {
-    function deleteImage($type, $id)
+
+if (!function_exists('uploadFooterLogoToBucket')) {
+    function uploadFooterLogoToBucket($request, $type, $deleteImg = '')
     {
-        $food_image = FoodImages::find($id);
-        $image = $food_image->getRawOriginal('image');
-
-        if (!empty($food_image) && Storage::disk('s3')->exists($type . '/' . $image)) {
-            Storage::disk('s3')->delete($type . '/' . $image);
-            Storage::disk('s3')->delete($type . '/thumb/' . $image);
-
-            $food_image->delete();
+        if (!empty($deleteImg) && Storage::disk('s3')->exists($type . '/' . $deleteImg)) {
+            Storage::disk('s3')->delete($type . '/' . $deleteImg);
+            Storage::disk('s3')->delete($type . '/thumb/' . $deleteImg);
         }
+
+        $file = $request->file('footer-img');
+        $file_name = time() . '_' . $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+
+        if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png') {
+            $image = Image::make($file)->resize(300, 300);
+            Storage::disk('s3')->put('/' . $type . '/thumb/' . $file_name, $image->stream(), 'public');
+        }
+
+        $filePath = $type . '/' . $file_name;
+        Storage::disk('s3')->put($filePath, file_get_contents($file));
+
+        return $file_name;
     }
 }
 
@@ -140,10 +150,8 @@ if (!function_exists('getOrderDishIngredients')) {
 if (!function_exists('getDeliveryCharges')) {
     function getDeliveryCharges($zipcode)
     {
-        $zipcode = Zipcode::where([
-            ['zipcode', $zipcode],
-            ['status', '1']
-        ])->first();
+        $zip =substr($zipcode, 0, 4);
+        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
 
         return $zipcode;
     }
@@ -231,7 +239,7 @@ if (!function_exists('getAddressDetails')) {
 if (!function_exists('getOrderGrossAmount')) {
     function getOrderGrossAmount($order)
     {
-       
+
         return ($order->total_amount - $order->platform_charge - $order->delivery_charge + $order->coupon_discount);
     }
 }
@@ -247,7 +255,7 @@ if (!function_exists('getRestaurantOpenTime')) {
 }
 
 if (!function_exists('isEmpty')) {
-    function isEmpty($data) 
+    function isEmpty($data)
     {
         foreach ($data as $val)
         {
@@ -261,13 +269,13 @@ if (!function_exists('isEmpty')) {
              $is_empty = false;
           }
         }
-        
+
         return $is_empty;
     }
 }
 
 if (!function_exists('getProfile')) {
-    function getProfile($user_id) 
+    function getProfile($user_id)
     {
         $user = User::select('id','user_role','social_id','first_name','last_name','email','image','phone_no','password')->find($user_id);
         $user->country_code = '+'.$user->country_code;
@@ -275,7 +283,7 @@ if (!function_exists('getProfile')) {
     }
 }
 if (!function_exists('logs')) {
-    function logs($data) 
+    function logs($data)
     {
         $myfile = fopen('log.txt', "a") or die("Unable to open file!");
         fwrite($myfile, json_encode($data)."\r\n");
@@ -286,7 +294,7 @@ if (!function_exists('logs')) {
 
 
 if (!function_exists('getOrderStatus')) {
-    function getOrderStatus($order) 
+    function getOrderStatus($order)
     {
         if($order->order_type == OrderType::Delivery)
         {
@@ -297,7 +305,7 @@ if (!function_exists('getOrderStatus')) {
             else if($order->order_status == OrderStatus::InKitchen)
             {
                 $order->order_status = OrderStatus::Ready;
-            } 
+            }
             else if($order->order_status == OrderStatus::Ready)
             {
                 $order->order_status = OrderStatus::OutForDelivery;
@@ -316,7 +324,7 @@ if (!function_exists('getOrderStatus')) {
             else if($order->order_status == OrderStatus::InKitchen)
             {
                 $order->order_status = OrderStatus::ReadyForPickup;
-            } 
+            }
             else if($order->order_status == OrderStatus::ReadyForPickup)
             {
                 $order->order_status = OrderStatus::Delivered;

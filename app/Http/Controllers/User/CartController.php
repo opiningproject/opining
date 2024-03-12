@@ -102,6 +102,8 @@ class CartController extends Controller
         $dish = $cart->dish;
         $dishId = $dish->id;
         $dishPrice = $dish->price;
+        $optionName = $dish->dishOption->name ?? '';
+        $ingredientData = getOrderDishIngredients($dish);
 
         $html = "<div class='row' id=cart-$dishId>
                 <div class='col-xx-3 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4 cart-custom-w-col-img'>
@@ -124,8 +126,8 @@ class CartController extends Controller
                         <span class='cart-item-price'>+€$dish->price</span>
                       </div>
                       <div class='d-flex'>
-                        <p class='mb-0 item-options mb-0'> grilled, </p>
-                        <span class='item-desc'>-$dish->description</span>
+                        <p class='mb-0 item-options mb-0'> $optionName </p>
+                        <span class='item-desc'>-$ingredientData</span>
                         <p class='item-customize mb-0'> customize
                           <a href='javascript:void(0);' data-bs-toggle='modal' data-bs-target='#customisableModal'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='14' height='13' viewBox='0 0 14 13' fill='none'>
@@ -338,10 +340,10 @@ class CartController extends Controller
             if ($user->cart->order_type == OrderType::Delivery) {
                 if (session('zipcode')) {
 
-                    $zipcode = Zipcode::select('id')->where([
-                        ['zipcode', session('zipcode')],
-                        ['status', '1']
-                    ])->first();
+                    $zip =substr(session('zipcode'), 0, 4);
+                    $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
+
+
 
                     if ($zipcode) {
 

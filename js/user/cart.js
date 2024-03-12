@@ -146,10 +146,12 @@ function addToCart(id) {
             $('#cart-amount-cal-data').show()
 
             $('#empty-cart-div').hide()
+            $('#checkout-cart').removeClass('d-none')
             $('#qty-'+id).attr('data-ing',0)
             calculateTotalCartAmount()
 
             $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
+            $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) + 1)
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -186,13 +188,16 @@ function updateDishQty(operator, maxQty, dish_id) {
             if (response.status == 1 && parseInt(current_qty) == 0) {
                 $("#cart-" + dish_id).remove();
                 $('#cart-item-count').text(parseInt($('#cart-item-count').text()) - 1)
+                $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) - 1)
                 $("#dish-cart-lbl-" + dish_id).text('Add +');
                 $("#dish-cart-lbl-" + dish_id).prop('disabled', false);
 
                 if ($('.cart-amt').length > 0) {
                     $('#empty-cart-div').hide()
+                    $('#checkout-cart').removeClass('d-none')
                 } else {
                     $('#empty-cart-div').show()
+                    $('#checkout-cart').addClass('d-none')
                     $('#cart-amount-cal-data').hide()
                 }
 
@@ -374,9 +379,11 @@ function addCustomizedCart(id) {
                     $("#dish-cart-lbl-" + id).prop('disabled', true);
                     $('.cart-items').append(response.message.cartHtml);
                     $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
+                    $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) + 1)
                 }
 
                 $('#empty-cart-div').hide()
+                $('#checkout-cart').addClass('d-none')
                 $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()

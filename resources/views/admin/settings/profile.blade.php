@@ -92,6 +92,15 @@
                     </div>
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">
+                            <label for="servicecharge" class="form-label">Restaurant Footer Logo</label>
+                            <label for="restaurant-footer-logo-input-file" class="logowithtext-box">
+                                <input type="file" class="d-none" id="restaurant-footer-logo-input-file" name="footer-img">
+                                <img src="{{ $user->footer_logo }}" alt="Restaurant Footer Logo" id="footer-img" class="img-fluid" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
                             <label for="servicecharge" class="form-label">Company Permit Document</label>
                             <label for="permit-doc-input-file" class="logowithtext-box">
                                 <input type="file" class="d-none" id="permit-doc-input-file" name="permit-doc">

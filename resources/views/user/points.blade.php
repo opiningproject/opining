@@ -21,14 +21,14 @@
                     <div id="chart-container-one" class="collected-points-charts"></div>
                   </div>
                   <div class="col-md-6 text-center text-md-start">
-                    <h3 class="fs-4">Get 1 point order above €20 plus</h3>
-                    <h3 class="mt-4 mb-0 fs-4">Get 2 points order above €30 plus</h3>
-                    <a class="btn btn-custom-yellow track-order-btn"  href="{{ route('user.dashboard') }}">
+                    <h3 class="fs-6 fs-md-4">Get 1 point order above €20 plus</h3>
+                    <h3 class="mt-4 mb-0 fs-6 fs-md-4">Get 2 points order above €30 plus</h3>
+                    <a class="btn btn-custom-yellow track-order-btn mt-4"  href="{{ route('user.dashboard') }}">
                       <span class="align-middle">Order Now</span>
                     </a>
                   </div>
                </div>
-               <div class="card-body pb-0">
+               <div class="card-body pb-0 px-0 px-md-3">
                  <div class="collected-points-list">
                    <p class="text-capitalize">instruction</p>
                    <ul>

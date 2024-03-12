@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.timepicker.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin-style.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dark-mode.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 

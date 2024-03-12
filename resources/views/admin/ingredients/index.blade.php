@@ -47,7 +47,7 @@
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="imageupload-box inline-imageupload-box">
                                                     <label for="ingredientsnameenglish" class="form-label">Image<span class="invisible">Ingredients Name</span></label>
-                                                    <label for="input-file" class="upload-file justify-content-center">
+                                                    <label for="input-file" class="upload-file justify-content-center gap-2">
                                                         <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" id="img-preview" class="img-fluid svg" height="35" width="27">
                                                         <p class="mb-0" id="img-label">Upload Image of Item</p>
                                                     </label>

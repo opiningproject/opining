@@ -32,7 +32,7 @@
   <input name="image" id="image" type="file" accept="image/png, image/gif, image/jpeg" class="file-upload-field form-control form-control-lg" value="" />
 
 </div>
-                                            
+
                                         </div>
                                         <div class="row">
                                             <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -74,7 +74,7 @@
                                                                readonly value="+31">
                                                         <input type="number" class="form-control"
                                                                value="{{ $user->phone_no }}" name="phone_no"
-                                                               maxlength="10" minlength="9" min="1" required>
+                                                               maxlength="10" minlength="10" min="1" required>
                                                     </div>
                                                 </div>
                                             </div>

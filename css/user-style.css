@@ -687,7 +687,7 @@ a {
   color: #292929 !important;
 }
 .category-slider {
-  padding: 10px 5px;
+  padding: 10px 0px;
 }
 .category-section .category-slider .category-element .card:hover,
 .category-section .category-slider .category-element .card.active {

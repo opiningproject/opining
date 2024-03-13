@@ -11,7 +11,7 @@
 
 @yield('content')
 
-@if($theme == 'dark')
+{{--@if($theme == 'dark')
 <a href="{{ url('/change-theme/light') }}">
     <div class="dark-light-btn p-3 cursor-pointer">
         <img src="{{ asset('images/light-theme.svg') }}" alt="" height="240" width="240" class="svg">
@@ -22,8 +22,8 @@
     <div class="dark-light-btn p-3 cursor-pointer">
         <img src="{{ asset('images/dark-theme.svg') }}" alt="" height="20" width="20" class="svg">
     </div>
-</a>  
-@endif
+</a>
+@endif--}}
 
 
 @include('layouts.admin.footer')

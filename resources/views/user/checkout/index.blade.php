@@ -174,8 +174,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                            readonly
                                                                            value="+31">
                                                                     <input type="number" class="form-control"
-                                                                           minlength="9" maxlength="10" required
-                                                                           name="phone_no" min="10"
+                                                                           minlength="10" maxlength="10" required
+                                                                           name="phone_no" min="0"
                                                                            value="{{ $user->phone_no == '' ? $phone_no : $user->phone_no }}">
                                                                 </div>
                                                             </div>

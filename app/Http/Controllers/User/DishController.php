@@ -210,7 +210,7 @@ class DishController extends Controller
                             <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
                           </h2>
                           <div id='collapse$category->id' class='accordion-collapse collapse $show' data-bs-parent='#accordionExample'>
-                            <div class='accordion-body'>
+                            <div class='accordion-body py-1'>
                               <table>
                                 <tbody>";
 
@@ -274,13 +274,13 @@ class DishController extends Controller
                       <img src='$dish->image' alt='burger' width='100' height='100' id='dish_image'>
                       </div>
                       <h4>$dish->name</h4>
-                      <p> $dish->description</p>
-                      <span class='food-custom-price' id='dish_price'>€$dish->price</span>
+                      <p class='my-0'>$dish->description</p>
+                      <span class='food-custom-price mb-0' id='dish_price'>€$dish->price</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
                       $html_options
                     </div>
                   </div>
-                  <div class='modal-body pt-0'>
+                  <div class='modal-body pt-0 pb-0'>
                     $html_free_ingredients
                     $html_paid_ingredients
                   </div>

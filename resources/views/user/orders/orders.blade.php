@@ -29,7 +29,7 @@
                                 <div class=" orders-type">
                                     <div class="orders-title mb-1">Active orders</div>
                                     @if(count($active_orders))
-                                        <div class="orders-list py-3 px-0">
+                                        <div class="orders-list py-3 px-0 pb-0">
                                             @foreach($active_orders as $key => $a_order)
                                                 <div onclick="orderDetail({{ $a_order->id }})" style="cursor: pointer;"
                                                     class="{{ $a_order->id == $order->id ? 'active':'' }} orders-item d-flex align-items-center justify-content-between gap-2"

@@ -55,10 +55,23 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             </div>
                                         </div>
                                         <div class="cart-form-card-body cursor-initial d-block">
-                                            <div class="card custom-card h-100">
+                                            <div class="card custom-card h-100 custom-card-mobile-toggle">
                                                 <div class="card-body pb-0 checkout-form">
+
+                                                 <div class="mobileStaticToggle">
+                                                    <div class="innerCon">
+                                                        <div class="icon"><img src="{{ asset('images/user-cart.svg') }}" alt="" /></div>
+                                                        <div class="textCon">
+                                                            <h3>Delivery Address</h3>
+                                                            <p class="mb-0">Tochtstraat 40, 3036 SK</p>
+                                                        </div>
+                                                        <span class="toggleIco ms-auto"><i class="fa-solid fa-angle-right"></i><span>
+                                                    </div>
+                                                 </div>
+
                                                     @if(session('zipcode'))
-                                                        <div class="delivery-details">
+                                                    <div class="mobilecheckoutContent">    
+                                                    <div class="delivery-details">
                                                             <h4 class="custom-card-title-1 form-group">delivery
                                                                 address</h4>
                                                             <div class="row">
@@ -131,7 +144,12 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </div>
                                                             </div>
                                                         </div>
+</div>
                                                     @endif
+
+
+
+                                                    <div class="mobilecheckoutContent">
                                                     <h4 class="custom-card-title-1 form-group">Personal Details <span
                                                             class="text-muted-lead-2">(For Contacting About Order Status or Issues)</span>
                                                     </h4>
@@ -190,6 +208,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                             </div>
                                                         </div>
                                                     </div>
+</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -203,8 +222,21 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             </div>
                                         </div>
                                         <div class="cart-form-card-body cursor-initial d-block">
-                                            <div class="card custom-card h-100">
+                                            
+                                            <div class="card custom-card h-100 custom-card-mobile-toggle">
                                                 <div class="card-body pb-4 checkout-form">
+
+                                                <div class="mobileStaticToggle">
+                                                    <div class="innerCon">
+                                                        <div class="icon"><img src="{{ asset('images/checkout-clock.svg') }}" alt="" /></div>
+                                                        <div class="textCon">
+                                                            <h3>Delivery time</h3>
+                                                            <p class="mb-0">As Soon As Possible</p>
+                                                        </div>
+                                                        <span class="toggleIco ms-auto"><i class="fa-solid fa-angle-right"></i><span>
+                                                    </div>
+                                                 </div>
+                                                 <div class="mobilecheckoutContent">
                                                     <h4 class="custom-card-title-1 form-group">Delivery time</h4>
                                                     <div class="row">
                                                         <div
@@ -247,6 +279,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                         </div>
                                                     </div>
                                                 </div>
+</div>
                                             </div>
                                         </div>
                                     </div>
@@ -259,8 +292,22 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             </div>
                                         </div>
                                         <div class="cart-form-card-body cursor-initial cart-form-card-body-last d-block pb-0">
-                                            <div class="card custom-card h-100 mb-4">
+                                            <div class="card custom-card h-100 mb-4 custom-card-mobile-toggle">
+                                            
                                                 <div class="card-body pb-0 checkout-form">
+
+                                                <div class="mobileStaticToggle">
+                                                    <div class="innerCon">
+                                                        <div class="icon"><img src="{{ asset('images/checkout-wlt.svg') }}" alt="" /></div>
+                                                        <div class="textCon">
+                                                            <h3>Payment Method</h3>
+                                                            <p class="mb-0">iDEAL - ING</p>
+                                                        </div>
+                                                        <span class="toggleIco ms-auto"><i class="fa-solid fa-angle-right"></i><span>
+                                                    </div>
+                                                 </div>
+
+                                                 <div class="mobilecheckoutContent">
                                                     <div class=" payment-nav">
                                                         <div class="payment-navigation">
                                                             <h4 class="custom-card-title-1 form-group">Payment</h4>
@@ -386,6 +433,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                name="payment_type">
                                                     </div>
                                                 </div>
+</div>
                                             </div>
                                             <div class="form-check form-group custom-checkbox">
                                                 <input class="form-check-input check-input-secondary" type="checkbox"

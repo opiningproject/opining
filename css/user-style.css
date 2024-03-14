@@ -4737,7 +4737,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cart-amount-cal-data .prev-input-group .input-group-icon>img, .tab-pane form .input-group-icon>img, .cart-amount-cal-data .prev-input-group .input-group-icon svg, .tab-pane form .input-group-icon svg, form .prev-input-group .input-group-icon img, form .prev-input-group .input-group-icon svg {height: 100%;object-fit: contain;object-position: center;}
 .modal-dialog.custom-w-441px {margin-left: auto;margin-right: auto;}
 .dashed-border {border-style: dashed !important;}
-.category-list-section .category-list-item-grid .food-detail-card .btn-custom-yellow {line-height: initial;padding-bottom: 2px;min-width: 115px;width: auto;}
+.category-list-section .category-list-item-grid .food-detail-card .btn-custom-yellow {line-height: initial;padding-bottom: 2px;min-width: 115px;width: auto;display: inline-flex;align-items: center;justify-content: center;column-gap: 3px;}
 .category-list-section .food-detail-card .customize-foodlink {margin-top: 12px;}
 
 @media screen and (max-width: 1800px) {

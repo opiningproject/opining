@@ -276,7 +276,7 @@
                                                                 <img src="{{ asset('images/delivery-address.svg') }}"
                                                                      alt="" class="svg" height="23" width="32">
 
-                                                                <p class="mb-0 d-inline-block ms-1 text-bold-1"> <?= $house_no ? $house_no . ', ' . $zipcode : ''; ?> </p>
+                                                                <p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1"> <?= $house_no ? $house_no . ', ' . $zipcode : ''; ?> </p>
                                                             </div>
                                                             @if($user && $user->id)
                                                                 <a href="javascript:void(0);" data-bs-toggle="modal"
@@ -300,7 +300,7 @@
                                                                 <img src="{{ asset('images/rest-address.svg') }}" alt=""
                                                                      class="svg" height="29" width="29">
 
-                                                                <p class="mb-0 d-inline-block ms-1 text-bold-1">{{ getRestaurantDetail()->rest_address }} </p>
+                                                                <p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1">{{ getRestaurantDetail()->rest_address }} </p>
                                                             </div>
                                                         </div>
                                                     </div>

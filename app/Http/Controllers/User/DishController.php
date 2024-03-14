@@ -233,7 +233,7 @@ class DishController extends Controller
                                     <td class='text-left'>$ingredient_name <span class='food-custom-price'>€ <span id='ing-price-val$ingredient->id'>$ingredient_price</span></span>
                                     </td>
                                     <td width='7%'>
-                                      <div class='foodqty'>
+                                      <div class='foodqty mt-0'>
                                         <span class='minus'>
                                           <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)></i>
                                         </span>
@@ -298,7 +298,7 @@ class DishController extends Controller
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>$totalAmt</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>$totalAmt</span>
                         </a>
                       </div>
                     </div>

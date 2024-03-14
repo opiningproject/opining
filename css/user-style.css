@@ -4135,7 +4135,7 @@ input[type=number] {
   }
 
   .custom-section {
-    padding: 20px 0 0 0;
+    padding: 0px 0 0 0;
   }
 
   .coupon-card-grid {
@@ -4740,6 +4740,27 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .category-list-section .category-list-item-grid .food-detail-card .btn-custom-yellow {line-height: initial;padding-bottom: 2px;min-width: 115px;width: auto;display: inline-flex;align-items: center;justify-content: center;column-gap: 3px;}
 .category-list-section .food-detail-card .customize-foodlink {margin-top: 12px;}
 
+.mobileStaticToggle {
+  position: relative;
+  cursor: pointer;
+  display: none;
+}
+.mobileStaticToggle .innerCon {
+  position: relative;
+}
+.mobileStaticToggle .innerCon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.mobileStaticToggle .innerCon .icon {flex: 0 0 20px;max-width: 30px;text-align: center;margin-right: 15px;}
+.mobileStaticToggle .innerCon .icon img {vertical-align: sub;}
+.mobileStaticToggle .innerCon .textCon {position: relative;}
+.mobileStaticToggle .innerCon .textCon h3{color: #292929;font-size: 14px;margin-bottom: 3px;}
+.mobileStaticToggle .innerCon .textCon p {color: #292929;font-size: 12px;}
+.mobileStaticToggle .toggleIco {font-size: 16px;color: #292929;}
+
+
 @media screen and (max-width: 1800px) {
 .offer-card-banner .card-body h2 {font-size: 34px;margin-bottom: 10px;}
 .offer-card-banner .card-body p {font-size: 24px;}
@@ -4847,6 +4868,25 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .custom-tabs.cart-tab .nav {margin-bottom: 15px;}
 .address-field svg {max-width: 20px !important;}
 .address-field p {font-size: 14px !important;}
+.custom-card-mobile-toggle {
+  padding: 20px !important;
+  background: #ffffff;
+  box-shadow: none !important;
+  border: 1px solid #C1C1C1 !important;
+}
+.custom-card-mobile-toggle .card-body {
+padding: 0px !important;
+}
+.mobileStaticToggle {
+  display: block;
+}
+.mobilecheckoutContent {
+  display: none;
+  padding-top: 20px;
+}
+.checkout-form-item .cart-form-card-body {
+    padding-bottom: 20px !important;
+}
 }
 
 @media screen and (max-width: 640px) {

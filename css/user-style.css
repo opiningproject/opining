@@ -4135,7 +4135,7 @@ input[type=number] {
   }
 
   .custom-section {
-    padding: 0px 0 0 0;
+    padding: 20px 0 0 0;
   }
 
   .coupon-card-grid {
@@ -4770,6 +4770,24 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 @media screen and (max-width: 1400px) {
 .cart-sidebar .stickyOnMobile {position: absolute;right: 0px;left: 0px;bottom: 10px;max-width: 90%;margin: 0px auto !important;width: 100%;z-index: 9;}
 #coupon_code_apply_btn.btn {padding: 4px 12px !important;}
+
+
+.cartSidebarCustom .cartoffCanvas{
+  /* overflow: hidden !important; */
+}
+.cartSidebarCustom .bill-detail-invoice {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: -10px;
+  background: #ffffff;
+  z-index: 2;
+  width: 100%;
+}
+.cartSidebarCustom .cartoffCanvas .offcanvas-body, .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {
+height: 100%;
+}
+
 }
 @media screen and (min-width: 992px) and (max-width: 1366px) {
 .bd-layout {padding-left: 5px !important;padding-right: 5px !important;}

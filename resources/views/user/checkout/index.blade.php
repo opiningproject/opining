@@ -576,7 +576,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                             </div>
                           </div>-->
                                                 <div class="bill-detail-invoice">
-                                                    <h6 class="cart-title">Bill Details</h6>
+                                                    <h6 class="cart-title d-none d-md-block">Bill Details</h6>
                                                     <div class="table-responsive">
                                                         <table class="table table-borderless">
                                                             <tbody>

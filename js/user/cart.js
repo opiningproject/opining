@@ -147,6 +147,7 @@ function addToCart(id) {
 
             $('#empty-cart-div').hide()
             $('#checkout-cart').removeClass('d-none')
+            $('#cart-bill-div').removeClass('d-none')
             $('#qty-'+id).attr('data-ing',0)
             calculateTotalCartAmount()
 
@@ -195,9 +196,11 @@ function updateDishQty(operator, maxQty, dish_id) {
                 if ($('.cart-amt').length > 0) {
                     $('#empty-cart-div').hide()
                     $('#checkout-cart').removeClass('d-none')
+                    $('#cart-bill-div').removeClass('d-none')
                 } else {
                     $('#empty-cart-div').show()
                     $('#checkout-cart').addClass('d-none')
+                    $('#cart-bill-div').addClass('d-none')
                     $('#cart-amount-cal-data').hide()
                 }
 
@@ -384,6 +387,7 @@ function addCustomizedCart(id) {
 
                 $('#empty-cart-div').hide()
                 $('#checkout-cart').addClass('d-none')
+                $('#cart-bill-div').addClass('d-none')
                 $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()

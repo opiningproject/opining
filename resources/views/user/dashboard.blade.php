@@ -510,7 +510,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bill-detail-invoice">
+                        <div class="bill-detail-invoice {{ count($cart) == 0 ? 'd-none' : '' }}" id="cart-bill-div">
                             <h6 class="cart-title mb-1 d-none d-xxl-block">Bill
                                 Details</h6>
                             <div class="table-responsive">

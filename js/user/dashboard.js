@@ -51,7 +51,7 @@ $(window).on("load", function () {
 $(document).ready(function () {
 
     var swiper = new Swiper(".category-swiper-slider", {
-        slidesPerView: 1,
+        slidesPerView: 3,
         spaceBetween: 6,
         loop: true,
         // autoplay: {
@@ -66,18 +66,18 @@ $(document).ready(function () {
         },
         breakpoints: {
             375: {
-                slidesPerView: 1,
-                spaceBetween: 20,
+                slidesPerView: 3,
+                spaceBetween: 10,
                 autoplay: false,
             },
             425: {
-                slidesPerView: 2,
-                spaceBetween: 20,
+                slidesPerView: 4,
+                spaceBetween: 10,
                 autoplay: false,
             },
             575: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             640: {

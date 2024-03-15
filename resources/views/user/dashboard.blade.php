@@ -52,7 +52,7 @@
                                          class="count"
                                          id="cart-item-count">{{ isset(Auth::user()->cart) ? Auth::user()->cart->dishDetails->count() : 0 }}</span>
 
-                                    <svg width="22px" height="22px" viewBox="-4 0 32 32" version="1.1"
+                                    <svg width="26px" height="26px" viewBox="-4 0 32 32" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg"
                                          xmlns:xlink="http://www.w3.org/1999/xlink"
                                          xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
@@ -225,19 +225,21 @@
                         <div class="offcanvas-header p-0" style="display: block"></div>
                         <div class="offcanvas-body position-relative space-for-close pb-xxl-3">
 
-                            <h4 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto">
+                            <h4 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto head-title">
                                 My cart</h4>
 
                             <button type="button"
-                                    class="btn-close d-block position-absolute d-xxl-none top-0 mt-2 end-0 me-2"
+                                    class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 end-0 ms-2 bg-arrow-mobile"
                                     data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
+
+                                    <i class="fa-solid fa-angle-left d-none"></i>
                             </button>
 
                             <div class="navbar navbar-expand-lg pt-3 pt-xxl-0 h-lg-100">
                                 <div class="cart-sidebar-content position-relative h-100">
                                     <div class="navbar-collapse cartbox-collapse h-100">
                                         <div class="cart-custom-tab cart-tab custom-tabs d-flex flex-column h-100">
-                                            <ul class="nav nav-fill" id="pills-tab" role="tablist">
+                                            <ul class="nav nav-fill nav-fillMobile" id="pills-tab" role="tablist">
                                                 <li class="nav-item" role="presentation">
                                                     <button
                                                         class="nav-link {{ $zipcode ? 'active' : ''}} pills-delivery-tab"
@@ -294,7 +296,7 @@
                                                 <div class="tab-pane fade {{ !$zipcode ? 'show active' : ''}}"
                                                      id="pills-profile" role="tabpanel"
                                                      aria-labelledby="pills-profile-tab" tabindex="0">
-                                                    <div class="form-group">
+                                                    <div class="form-group addressMobile">
                                                         <label class="form-label">Restaurants Address</label>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-start address-field">
@@ -309,7 +311,7 @@
                                                 @if($user && $user->id)
                                                     <!-- End address section & start cart section -->
                                                     <div class="cart-section">
-                                                        <h6 class="cart-title">Your Cart</h6>
+                                                        <h6 class="cart-title d-none d-md-block">Your Cart</h6>
                                                         <div class="cart-items">
                                                             @if(count($cart) > 0)
                                                                 @foreach($cart as $key => $dish)
@@ -509,7 +511,7 @@
                             </div>
                         </div>
                         <div class="bill-detail-invoice">
-                            <h6 class="cart-title mb-1 d-none d-md-block">Bill
+                            <h6 class="cart-title mb-1 d-none d-xxl-block">Bill
                                 Details</h6>
                             <div class="table-responsive">
                                 <table class="table table-borderless mb-2">

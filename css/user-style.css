@@ -4892,7 +4892,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .addressMobile .address-field p{font-size: 12px !important;margin-top: 0px !important;line-height: initial;font-weight: 400;}
 .cartSidebarCustom .nav-fillMobile {max-width: 200px;display: flex;flex-wrap: nowrap;margin-left: auto;}
 
-.cart-sidebar .addressMobile .address-field.delivery-address-span {flex: 0 0 135px;max-width: 135px;}
+.cart-sidebar .addressMobile .address-field.delivery-address-span {flex: 0 0 125px;max-width: 125px;}
 .cart-sidebar .addressMobile .address-field.delivery-address-span svg {max-width: 12px !important;}
 .cart-sidebar .addressMobile .address-change-btn {background: transparent;border: 0px;padding: 2px !important;}
 

@@ -5000,3 +5000,11 @@ footer .footer-logo a {font-size: initial !important;}
     flex: 0 0 400px;
     max-width: 400px;
 }
+
+.price-opt {
+    padding-left: 5px;
+    border-left: 1px solid #333333;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 16px;
+}

@@ -34,7 +34,7 @@ class AddressController extends Controller
             return response::json(['status' => 1, 'message' => ""]);
         }
 
-        return response::json(['status' => 2, 'message' => "Currently, we are not delivering food to this location."]);
+        return response::json(['status' => 2, 'message' => "Delivery is not possible for this zipcode"]);
     }
 
     public function deleteAddress(string $id)

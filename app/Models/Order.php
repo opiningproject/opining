@@ -45,4 +45,12 @@ class Order extends Model
     {
         return $this->total_amount - $this->platform_charge - $this->delivery_charge + $this->coupon_discount;
     }
+
+    public function getDeliveryChargeAttribute($value){
+        return number_format((float)$value,2);
+    }
+
+    public function getTotalAmountAttribute($value){
+        return number_format((float)$value,2);
+    }
 }

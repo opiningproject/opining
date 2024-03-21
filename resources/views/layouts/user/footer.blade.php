@@ -36,12 +36,12 @@
         }
     });
 
-    $(document).ajaxStart(function(){
+  /*  $(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');
     })
     $(document).ajaxStop(function(){
         $('#loader').addClass('d-none');
-    })
+    })*/
 
     const svg_options = {
             svgSelector: 'img.svg', // the class attached to all images that should be inlined

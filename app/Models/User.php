@@ -38,7 +38,8 @@ class User extends Authenticatable implements JWTSubject
         'gender',
         'image',
         'collected_points',
-        'email_verified_at'
+        'email_verified_at',
+        'is_online'
     ];
 
     /**
@@ -113,5 +114,13 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function sentMessages(){
+        return $this->hasMany(Chat::class,'sender_id','id');
+    }
+
+    public function receivedMessages(){
+        return $this->hasMany(Chat::class,'receiver_id','id');
     }
 }

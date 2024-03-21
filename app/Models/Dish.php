@@ -111,4 +111,8 @@ class Dish extends Model
     {
         return $this->attributes['desc_' . app()->getlocale()];
     }
+
+    public function getPriceAttribute($value){
+        return number_format((float)$value,2);
+    }
 }

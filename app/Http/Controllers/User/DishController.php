@@ -54,7 +54,7 @@ class DishController extends Controller
 
     public function favorite(Request $request)
     {
-       
+
         if (!Auth::user()) {
             return response::json(['status' => 2, 'message' => '']);
         }
@@ -298,7 +298,7 @@ class DishController extends Controller
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>$totalAmt</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>".number_format((float)$totalAmt,2)."</span>
                         </a>
                       </div>
                     </div>

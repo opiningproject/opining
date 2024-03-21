@@ -229,7 +229,7 @@
                                 My cart</h4>
 
                             <button type="button"
-                                    class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 end-0 ms-2 bg-arrow-mobile"
+                                    class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 me-md-2 mt-md-2 end-0 ms-2 bg-arrow-mobile"
                                     data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
 
                                     <i class="fa-solid fa-angle-left d-none"></i>
@@ -271,11 +271,11 @@
                                                 <div class="tab-pane fade {{ $zipcode ? 'show active' : ''}}"
                                                      id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                                                      tabindex="0">
-                                                    <div class="form-group">
+                                                    <div class="form-group addressMobile">
                                                         <label class="form-label">Delivery Address</label>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div
-                                                                class="d-flex align-items-center delivery-address-span">
+                                                                class="d-flex align-items-center delivery-address-span address-field">
                                                                 <img src="{{ asset('images/delivery-address.svg') }}"
                                                                      alt="" class="svg" height="23" width="32">
 
@@ -284,11 +284,11 @@
                                                             @if($user && $user->id)
                                                                 <a href="javascript:void(0);" data-bs-toggle="modal"
                                                                    data-bs-target="#addressChangeModal"
-                                                                   class="btn btn-xs-sm btn-custom-yellow text-capitalize address-change-btn">Change</a>
+                                                                   class="btn btn-xs-sm btn-custom-yellow text-capitalize address-change-btn"><span class="d-none d-md-block">Change</span><i class="fa-solid fa-angle-down d-block d-md-none"></i></a>
                                                             @else
                                                                 <a href="javascript:void(0);" data-bs-toggle="modal"
                                                                    data-bs-target="#signInModal"
-                                                                   class="btn btn-xs-sm btn-custom-yellow text-capitalize address-change-btn">Change</a>
+                                                                   class="btn btn-xs-sm btn-custom-yellow text-capitalize address-change-btn"><span class="d-none d-md-block">Change</span><i class="fa-solid fa-angle-down d-block d-md-none"></i></a>
                                                             @endif
                                                         </div>
                                                     </div>

@@ -117,7 +117,7 @@ use App\Enums\RefundStatus;
                             <div class="title">{{ $dish->dish->name }}</div>
                             <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
                                 <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
-                                - {{ getOrderDishIngredients($dish) }}
+                                + {{ getOrderDishIngredients($dish) }}
                             </div>
                             <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                 <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"

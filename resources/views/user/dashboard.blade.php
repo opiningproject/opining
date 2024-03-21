@@ -390,7 +390,7 @@
                                                                                             <p class="mb-0 item-options mb-0">
                                                                                                 {{ $dish->dishOption->name ?? '' }}</p>
                                                                                             <span
-                                                                                                class="item-desc">-{{ getOrderDishIngredients($dish) }}</span>
+                                                                                                class="item-desc">+{{ getOrderDishIngredients($dish) }}</span>
                                                                                             <p class="item-customize mb-0 ms-auto justify-content-end">
                                                                                                 <a href="javascript:void(0);"
                                                                                                    onclick="customizeDish({{ $dish->dish->id }});">

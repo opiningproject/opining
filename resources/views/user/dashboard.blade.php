@@ -188,7 +188,7 @@
                                                 <h4 class="food-name-text">{{ $dish->name }}</h4>
                                                 <p class="food-price">€{{ $dish->price }}</p>
                                                 <button type="button" class="btn btn-xs-sm btn-custom-yellow"
-                                                        onclick="addToCart({{ $dish->id }})"
+                                                        onclick="customizeDish({{ $dish->id }})"
                                                         id="dish-cart-lbl-{{ $dish->id }}" {{ $disableBtn }}>
                                                     @if($dish->qty == 0 || $dish->out_of_stock == '1')
                                                         Out of stock
@@ -203,8 +203,8 @@
                                                     @endif
                                                 </button>
                                                 @if(!$customizeBtn)
-                                                    <a href="javascript:void(0);" class="customize-foodlink"
-                                                       onclick="customizeDish({{ $dish->id }});">Customize</a>
+<!--                                                    <a href="javascript:void(0);" class="customize-foodlink"
+                                                       onclick="customizeDish({{ $dish->id }});">Customize</a>-->
                                                 @endif
                                             </div>
                                         @endforeach
@@ -384,15 +384,14 @@
                                                                                             <p class="d-inline-block item-name mb-0"> {{ $dish->dish->name }} </p>
                                                                                             <span
                                                                                                 class="cart-item-price"
-                                                                                                id="cart-item-price{{$dish->dish->id}}">+€{{ $dish->qty * $dish->dish->price }}</span>
+                                                                                                id="cart-item-price{{$dish->dish->id}}">+€{{ number_format((float)($dish->qty * $dish->dish->price),2) }}</span>
                                                                                         </div>
-                                                                                        <div class="d-flex">
+                                                                                        <div class="d-flex align-items-center">
                                                                                             <p class="mb-0 item-options mb-0">
                                                                                                 {{ $dish->dishOption->name ?? '' }}</p>
                                                                                             <span
                                                                                                 class="item-desc">-{{ getOrderDishIngredients($dish) }}</span>
                                                                                             <p class="item-customize mb-0 ms-auto justify-content-end">
-                                                                                                customize
                                                                                                 <a href="javascript:void(0);"
                                                                                                    onclick="customizeDish({{ $dish->dish->id }});">
                                                                                                     <img
@@ -400,10 +399,12 @@
                                                                                                         alt=""
                                                                                                         class="svg"
                                                                                                         height="13"
-                                                                                                        width="14">
-
+                                                                                                        width="14" />
                                                                                                 </a>
+                                                                                                Edit
                                                                                             </p>
+
+                                                                                            <p class="price-opt mb-0 text-nowrap" id="paid-ing-price">+€{{ $dish->paid_ingredient_total }}</p>
                                                                                         </div>
                                                                                         <div
                                                                                             class="from-group addnote-from-group mb-0">
@@ -574,7 +575,7 @@
                                         <td class="text-start">Total</td>
                                         <td class="text-end">
                                                                                 <span class="bill-total-count"
-                                                                                      id="gross-total-bill">€{{ ($cartValue + $serviceCharge) - ($cartValue * $couponDiscountPercent) }}</span>
+                                                                                      id="gross-total-bill">€{{ number_format((float)(($cartValue + $serviceCharge) - ($cartValue * $couponDiscountPercent)),2) }}</span>
                                         </td>
                                     </tr>
                                     </tfoot>

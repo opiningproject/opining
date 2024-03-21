@@ -139,7 +139,7 @@ use App\Enums\RefundStatus;
                         $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total;
                         $itemTotalPrice += $itemPrice;
                         ?>
-                    €{{ $itemPrice }}
+                    €{{ number_format($itemPrice,2) }}
                 </div>
             </div>
         @endforeach
@@ -171,7 +171,7 @@ use App\Enums\RefundStatus;
         <div class="list">
             <div class="list-item">
                 <div class="text">Total</div>
-                <div class="number">€{{ $order->total_amount }}</div>
+                <div class="number">€{{ number_format($order->total_amount,2) }}</div>
             </div>
         </div>
     </div>

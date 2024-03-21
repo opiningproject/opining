@@ -386,8 +386,8 @@ function addCustomizedCart(id) {
                 }
 
                 $('#empty-cart-div').hide()
-                $('#checkout-cart').addClass('d-none')
-                $('#cart-bill-div').addClass('d-none')
+                $('#checkout-cart').removeClass('d-none')
+                $('#cart-bill-div').removeClass('d-none')
                 $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()

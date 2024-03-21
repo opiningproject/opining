@@ -160,7 +160,7 @@ if (!function_exists('getDeliveryCharges')) {
 if (!function_exists('getOrderTotalPrice')) {
     function getOrderTotalPrice($itemPrice, $order)
     {
-        return $itemPrice + ($order->platform_charge + $order->delivery_charge) - $order->coupon_discount;
+        return number_format((float)($itemPrice + ($order->platform_charge + $order->delivery_charge) - $order->coupon_discount),2);
     }
 }
 
@@ -201,7 +201,7 @@ if (!function_exists('getCartTotalAmount')) {
         $user = Auth::user();
         $cartTotal = $user->cart->dishDetails()->get()->sum('dish_price');
         $cartIngredient = $user->cart->dishDetails()->get()->sum('paid_ingredient_total');
-        return ($cartTotal + $cartIngredient);
+        return number_format((float)($cartTotal + $cartIngredient),2);
     }
 
 }
@@ -222,7 +222,7 @@ if (!function_exists('orderTotalPayAmount')) {
         }
         $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartTotal : 0;
 
-        return ($cartTotal + $serviceCharge + $deliveryCharges) - $couponDiscount;
+        return number_format((float)(($cartTotal + $serviceCharge + $deliveryCharges) - $couponDiscount),2);
     }
 }
 
@@ -240,7 +240,7 @@ if (!function_exists('getOrderGrossAmount')) {
     function getOrderGrossAmount($order)
     {
 
-        return ($order->total_amount - $order->platform_charge - $order->delivery_charge + $order->coupon_discount);
+        return number_format((float)($order->total_amount - $order->platform_charge - $order->delivery_charge + $order->coupon_discount),2);
     }
 }
 

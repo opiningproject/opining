@@ -220,7 +220,7 @@
 
                                                             $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total;
                                                             ?>
-                                                        €{{ $itemPrice }}
+                                                        €{{ number_format($itemPrice,2) }}
                                                     </div>
                                                 </div>
                                             @endforeach

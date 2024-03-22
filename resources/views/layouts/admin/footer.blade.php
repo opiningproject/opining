@@ -28,13 +28,13 @@
         }
     });
 
-    jQuery(document).ajaxStart(function(){
+    /*jQuery(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');
 
     })
     jQuery(document).ajaxStop(function(){
         $('#loader').addClass('d-none');
-    })
+    })*/
 
     if(theme == 'dark')
     {

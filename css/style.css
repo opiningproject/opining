@@ -2125,7 +2125,7 @@ table .input-group-text {
   flex-direction: column;
   gap: 20px;
   height: -moz-fit-content;
-  height: fit-content;
+  /* height: fit-content; */
 }
 .ChatDiv .ChatDiv-type .ChatDiv-list {
   gap: 20px;
@@ -2215,6 +2215,17 @@ table .input-group-text {
   border-radius: 4px;
   border: 1px solid white;
 }
+
+.chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {
+  width: 16px;
+  height: 16px;
+  background-color: var(--theme-danger1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid white;
+}
 .chatbox .chatbox-main {
   height: 100%;
   display: flex;
@@ -2282,24 +2293,26 @@ table .input-group-text {
   color: var(--theme-muted);
   margin: -12px 0 -24px 0;
 }
-.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) {
+
+/* Temporary Commented */
+/* .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) {
   margin-left: auto;
   flex-direction: row-reverse;
 }
 .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p {
   background-color: var(--theme-cyan1);
   margin-left: auto;
-}
-.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
+} */
+/* .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
   content: "";
   background-image: url(../images/curve-chaticon-cyan.svg);
   left: unset;
   right: -8px;
   transform: scaleX(-1);
-}
-.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp small {
+} */
+/* .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp small {
   text-align: right;
-}
+} */
 .chatbox .chatbox-footer {
   padding: 32px 40px 40px;
   border-top: 1px solid #A3A3A3;

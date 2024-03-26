@@ -19,4 +19,23 @@ class Chat extends Model
         return $this->belongsTo(User::class,'receiver_id');
     }
 
+
+    public function scopegetChats($query,$search = '')
+    {
+
+        $chats = $this->selectRaw('sender_id, receiver_id, COUNT(*) as total_chats,created_at')
+        ->with('sender')
+        ->groupBy('sender_id', 'receiver_id','created_at')
+        ->having('total_chats', '>', 0);
+
+        if(!empty($search))
+		{
+            $chats->whereHas('sender', function($query) use ($search) {
+                $query->where('first_name', 'like', "%$search%");
+            });
+		}
+
+
+        return $chats;
+    }
 }

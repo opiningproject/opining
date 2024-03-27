@@ -29,22 +29,22 @@ class ChatController extends Controller
      */
     public function index(Request $request)
     {
-        $chats = Chat::getChats()->paginate(10);
-
-        return view('admin.chat', ['chats' => $chats]);
+        return view('admin.chat');
     }
 
     function getMessages($senderId) 
     {
+        $pageNumber = request()->input('page', 1);
+
         $messages = Chat::where('sender_id', auth()->id())
         ->with(['sender','receiver'])
         ->where('receiver_id', $senderId)
         ->orWhere('sender_id', $senderId)
         ->where('receiver_id', auth()->id())
-        ->orderBy('created_at', 'asc')
-        ->get(); // Fetch messages
+        ->orderBy('created_at', 'desc')
+        ->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
 
-        $chats = $messages->map(function ($item) {
+        $messages->getCollection()->transform(function ($item) {
 
             $item->appendStyle = '';
             $item->messageStyle = '';
@@ -56,10 +56,9 @@ class ChatController extends Controller
             return $item;
         });
 
+        $chats = $messages->reverse();
 
         return view('admin.chats.messages', ['messages' => $chats]);
-
-        return response()->json(['status' => Response::HTTP_OK,'data' => $messages], Response::HTTP_OK);
     }
 
     public function searchChat(Request $request)
@@ -69,5 +68,15 @@ class ChatController extends Controller
         $chats = Chat::getChats($search);
     
         return view('admin.chats.chat-list', ['chats' => $chats->get(),'q' => $search]);   
+    }
+
+    function getChatUsersList() 
+    {
+
+        $pageNumber = request()->input('page', 1);
+
+        $chats = Chat::getChats()->paginate(9, ['*'], 'page', $pageNumber);
+
+        return view('admin.chats.chat-list', ['chats' => $chats,'q' => '']);
     }
 }

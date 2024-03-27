@@ -2126,6 +2126,9 @@ table .input-group-text {
   gap: 20px;
   height: -moz-fit-content;
   /* height: fit-content; */
+  max-height: 1050px;
+  min-height: 1050px;
+  overflow-x: auto;
 }
 .ChatDiv .ChatDiv-type .ChatDiv-list {
   gap: 20px;

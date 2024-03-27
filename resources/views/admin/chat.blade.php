@@ -12,9 +12,13 @@
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                                 <h1 class="page-title">Chat</h1>
                             </div>
-                        </div>
+                        </div>                            
                         <div class="d-flex ChatDiv-main">
                             <div class="ChatDiv" id="ChatDiv">
+
+                                <div class="mb-2">
+                                    <input type="search" name="q" id="search-chat" class="search-box form-control" value="" placeholder="Search..." />
+                                </div>
                                 {{-- <div class="ChatDiv-type">
                                     <div class="ChatDiv-list">
                                         <div

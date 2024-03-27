@@ -155,6 +155,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // Restaurant Category Routes
 
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    Route::get('/chat/messages/{senderId}', [ChatController::class, 'getMessages'])->name('get_messages');
+    Route::get('/chat/users', [ChatController::class, 'getChatUsersList'])->name('chat_users');
+    Route::get('/chat/search-chat', [ChatController::class, 'searchChat']);
     Route::get('/orders/{date_filter?}', [OrdersController::class, 'index'])->name('orders');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments');

@@ -14,8 +14,8 @@
                             </div>
                         </div>
                         <div class="d-flex ChatDiv-main">
-                            <div class="ChatDiv">
-                                <div class="ChatDiv-type">
+                            <div class="ChatDiv" id="ChatDiv">
+                                {{-- <div class="ChatDiv-type">
                                     <div class="ChatDiv-list">
                                         <div
                                             class="active ChatDiv-item d-flex align-items-center justify-content-start gap-3">
@@ -27,27 +27,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                @foreach($chats as $chat)
-
+                                </div> --}}
+                                {{-- <div class="row">
+                                    <input type="search" name="q" id="search-chat" class="search-box" value="" placeholder="Search...">
+                                </div> --}}
+                                 
+                              
+                                {{-- @foreach($chats as $chat)
+    
                                     <div class="ChatDiv-type">
                                         <div class="ChatDiv-list">
+                                            <input type="hidden" name="sender_id" value="{{ $chat->sender_id }}" id="sender_id_{{$chat->sender_id}}">
+                                            <input type="hidden" name="receiver_id" value="{{ $chat->receiver_id }}" id="receiver_id_{{$chat->sender_id}}">
+                                            <input type="hidden" name="user_status" value="{{ $chat->sender->is_online }}" id="user_status_{{$chat->sender_id}}">
                                             <div
-                                                class="active ChatDiv-item d-flex align-items-center justify-content-start gap-3">
+                                                class="ChatDiv-item d-flex align-items-center justify-content-start gap-3" id="chat_item_{{ $chat->sender_id }}" data-id="{{ $chat->sender_id }}">
                                                 <img src="images/user-profile.png" alt="Profile-Img" class="img-fluid"
                                                      width="56" height="56">
-                                                <div class="text-grp d-flex flex-column">
+                                                <div class="text-grp d-flex flex-column sender_name">
                                                     <div class="title">{{ $chat->sender->first_name }}</div>
-                                                    <div class="text">10:00 am | 22, Aug2023</div>
+                                                    <div class="text">{{ $chat->created_at->format('h:i a | d, M Y') }}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                @endforeach
+                                @endforeach --}}
+                                {{-- {{ $chats->links() }} --}}
+                                {{-- {{ $chats->withQueryString()->links() }} --}}
                             </div>
 
-                            <div class="chatbox">
+                            {{-- <div class="chatbox">
                                 <div class="chatbox-header d-flex gap-3">
                                     <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
                                         <div class="profile-img">
@@ -93,8 +102,43 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> --}}
+
+                            {{-- Dynamic Message Block --}}
+                            <div class="chatbox">
+                                <div class="chatbox-header d-flex gap-3">
+                                    <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
+                                        <div class="profile-img">
+                                            <img src="{{ asset('images/user-profile.png') }}" class="img-fluid" alt="gomel" width="60" height="60">
+                                        </div>
+                                        <div class="profile-textgrp">
+                                            <div class="profile-title" id="chatbox-username"></div>
+                                            <div class="profile-text d-flex align-items-center gap-1 gap-sm-2" id="chatbox-status"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chatbox-main">
+                                    <div class="chats-grp d-flex flex-column gap-5 overflow-auto" id="chat-messages">
+                                        <!-- Messages will be displayed here -->
+                                    </div>
+                                </div>
+                                <div class="chatbox-footer">
+                                    <div class="form-group mb-0 position-relative d-flex gap-2 bg-gray align-items-center">
+                                        <input type="text" id="message-input" class="form-control w-100 bg-transparent border-0 outline-0" placeholder="Write your message...">
+                                        <div class="d-flex gap-2 gap-sm-3">
+                                            <button class="border-0 outline-0 bg-transparent svg-btn">
+                                                <img src="{{ asset('images/attach.svg') }}" alt="" height="40" width="40" class="svg">
+                                            </button>
+                                            <button class="btn btn-xs-sm btn-custom-yellow" id="send-btn">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            {{-- Dynamic Message Block --}}
+
+                            
                         </div>
+
                     </div>
                 </main>
             </div>

@@ -75,7 +75,8 @@ class ChatController extends Controller
 
         $pageNumber = request()->input('page', 1);
 
-        $chats = Chat::getChats()->paginate(9, ['*'], 'page', $pageNumber);
+        $chats = Chat::with(['sender','receiver'])->distinct()->paginate(9, ['*'], 'page', $pageNumber);
+        $chats = $chats->unique('receiver_id');
 
         return view('admin.chats.chat-list', ['chats' => $chats,'q' => '']);
     }

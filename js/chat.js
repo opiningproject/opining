@@ -65,6 +65,9 @@ $('#chat-messages').on('scroll', function() {
 
 
 $(document).on('click', '.ChatDiv-item', function () {
+
+    $('#chat-messages').html('')
+
     senderId = $(this).data('id');
 
     let parentDiv = $(this).closest('#chat_item_'+senderId);
@@ -87,6 +90,7 @@ $(document).on('click', '.ChatDiv-item', function () {
     var senderName = $(this).find('.title').text(); // Get the sender's name
     $('#chatbox-username').text(senderName); // Update displayed username
  
+    page = 1;
     fetchMessages(senderId, receiverId);
 });
 

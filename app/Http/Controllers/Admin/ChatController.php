@@ -65,9 +65,13 @@ class ChatController extends Controller
     {
         $search = $request->input('q');
 
-        $chats = Chat::getChats($search);
+        $chats = Chat::with(['sender','receiver'])->distinct()->whereHas('receiver', function($query) use ($search) {
+            $query->where('first_name', 'like', "%$search%");
+        })->get();
+        $chats = $chats->unique('receiver_id');
+
     
-        return view('admin.chats.chat-list', ['chats' => $chats->get(),'q' => $search]);   
+        return view('admin.chats.chat-list', ['chats' => $chats,'q' => $search]);   
     }
 
     function getChatUsersList() 

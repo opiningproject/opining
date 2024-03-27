@@ -414,31 +414,31 @@ function updateCartAmount(dishId, amount, type) {
 
 function calculateTotalCartAmount() {
 
-    var totalAmt = 0;
+    var totalAmt = 0.00;
     var serviceCharge = $('#service-charge').val()
     var couponDiscountPercent = $('#coupon-discount-percent').val()
-    var couponDiscount = 0
+    var couponDiscount = 0.00
 
     $('.cart-amt').each(function (index, element) {
         var id = $(element).data('id')
 
         var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
 
-        $('#cart-item-price'+id).text('+€'+itemAmount)
+        $('#cart-item-price'+id).text('+€'+itemAmount.toFixed(2))
         totalAmt += itemAmount + parseFloat($(element).attr('data-ing'))
 
     })
 
-    $('#total-cart-bill').text('€' + totalAmt)
-    $('#total-cart-bill-amount').val(totalAmt)
+    $('#total-cart-bill').text('€' + totalAmt.toFixed(2))
+    $('#total-cart-bill-amount').val(totalAmt.toFixed(2))
 
     couponDiscount = parseFloat(couponDiscountPercent) * totalAmt
     totalAmt += parseFloat(serviceCharge)
     totalAmt -= parseFloat(couponDiscount)
 
-    $('#coupon-discount-text').text('-€' + couponDiscount)
-    $('#coupon-discount').val(couponDiscount)
+    $('#coupon-discount-text').text('-€' + couponDiscount.toFixed(2))
+    $('#coupon-discount').val(couponDiscount.toFixed(2))
 
-    $('#gross-total-bill').text('€' + totalAmt)
+    $('#gross-total-bill').text('€' + totalAmt.toFixed(2))
 }
 

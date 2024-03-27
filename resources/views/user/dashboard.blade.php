@@ -404,7 +404,7 @@
                                                                                                 Edit
                                                                                             </p>
 
-                                                                                            <p class="price-opt mb-0 text-nowrap" id="paid-ing-price">+€{{ $dish->paid_ingredient_total }}</p>
+                                                                                            <p class="price-opt mb-0 text-nowrap" id="paid-ing-price">+€{{ number_format($dish->paid_ingredient_total,2) }}</p>
                                                                                         </div>
                                                                                         <div
                                                                                             class="from-group addnote-from-group mb-0">
@@ -525,7 +525,7 @@
                                         </td>
                                         <td class="text-end">
                                                                                 <span class="bill-count"
-                                                                                      id="total-cart-bill">€{{ $cartValue }}</span>
+                                                                                      id="total-cart-bill">€{{ number_format($cartValue,2) }}</span>
                                             <input type="hidden"
                                                    id="total-cart-bill-amount"
                                                    value="{{ $cartValue }}">
@@ -538,7 +538,7 @@
                                         </td>
                                         <td class="text-end">
                                                                                 <span
-                                                                                    class="bill-count">€{{ $serviceCharge }}</span>
+                                                                                    class="bill-count">€{{ number_format($serviceCharge,2) }}</span>
                                             <input type="hidden" id="service-charge"
                                                    value="{{ $serviceCharge }}">
                                         </td>
@@ -563,7 +563,7 @@
                                         <td class="text-end">
                                                                                 <span
                                                                                     class="text-custom-light-green bill-count"
-                                                                                    id="coupon-discount-text">-€{{ $cartValue * $couponDiscountPercent }}</span>
+                                                                                    id="coupon-discount-text">-€{{ number_format((float)($cartValue * $couponDiscountPercent),2) }}</span>
                                             <input type="hidden"
                                                    id="coupon-discount-percent"
                                                    value="{{ $couponDiscountPercent }}">

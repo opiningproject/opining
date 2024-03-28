@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Chat;
 use App\Models\Dish;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChatController extends Controller
@@ -78,10 +80,23 @@ class ChatController extends Controller
     {
 
         $pageNumber = request()->input('page', 1);
-
-        $chats = Chat::with(['sender','receiver'])->distinct()->paginate(9, ['*'], 'page', $pageNumber);
-        $chats = $chats->unique('receiver_id');
-
+      
+        $chats = Chat::select('sender_id', 'receiver_id')
+                ->distinct()
+                ->paginate(9, ['*'], 'page', $pageNumber)
+                ->flatMap(function ($chat) {
+                    return [$chat->sender_id, $chat->receiver_id];
+                })
+                ->unique()
+                ->map(function ($userId) {
+                    Log::info('UUUU',[$userId]);
+                    $user = User::find($userId);
+                    $user->chats = Chat::where('sender_id', $userId)->with(['sender','receiver'])
+                        ->orWhere('receiver_id', $userId)
+                        ->latest()->first();
+                    return $user;
+                });
+        
         return view('admin.chats.chat-list', ['chats' => $chats,'q' => '']);
     }
 }

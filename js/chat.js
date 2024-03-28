@@ -39,12 +39,6 @@ function fetchMessages(senderId, receiverId) {
             var containerHeight = chatboxMain.innerHeight();
            
             if (contentHeight > containerHeight  && page === 1) {
-                // Scroll to the bottom of the content
-                // $('#chat-messages').scroll();
-                // $("#chat-messages").animate({
-                // scrollTop: contentHeight
-                // }, 2000);
-           
                 $('#chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
               }
         }
@@ -71,6 +65,9 @@ $('#chat-messages').on('scroll', function() {
 
 
 $(document).on('click', '.ChatDiv-item', function () {
+
+    $('#chat-messages').html('')
+
     senderId = $(this).data('id');
 
     let parentDiv = $(this).closest('#chat_item_'+senderId);
@@ -93,6 +90,7 @@ $(document).on('click', '.ChatDiv-item', function () {
     var senderName = $(this).find('.title').text(); // Get the sender's name
     $('#chatbox-username').text(senderName); // Update displayed username
  
+    page = 1;
     fetchMessages(senderId, receiverId);
 });
 
@@ -123,9 +121,8 @@ function fetchChatUsers() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 
-            $('#ChatDiv').prepend(this.responseText)
-           
-            chatListpage++
+            $('#ChatDiv').append(this.responseText)
+    
             // var listBoxMain = $('#ChatDiv');
             // var listBoxContentHeight = listBoxMain[0].scrollHeight;
             // var lostBoxContainerHeight = listBoxMain.innerHeight();
@@ -141,11 +138,12 @@ function fetchChatUsers() {
 
 
 
-// $('#ChatDiv').on('scroll', function() {
-//     if(Math.round($(this).scrollTop() + $(this).innerHeight(), 10) >= Math.round($(this)[0].scrollHeight, 10)) {
-//         fetchChatUsers();
-//     }
-// })
+$('#ChatDiv').on('scroll', function() {
+    if(Math.round($(this).scrollTop() + $(this).innerHeight(), 10) >= Math.round($(this)[0].scrollHeight, 10)) {
+        chatListpage++
+        fetchChatUsers();
+    }
+})
 
 
 

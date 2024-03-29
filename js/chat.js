@@ -25,8 +25,9 @@ let activeDivId = null;
 let senderId = null; 
 let receiverId = null; 
 let fetchingOldMessages = false;
+let userId = null;
 
-function fetchMessages(senderId, receiverId) {
+function fetchMessages(senderId, receiverId,userId) {
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -44,7 +45,7 @@ function fetchMessages(senderId, receiverId) {
         }
     };
 
-    const url = `chat/messages/${senderId}?receiver_id=${receiverId}&page=${page}`; // Base URL
+    const url = `chat/messages/${senderId}?receiver_id=${receiverId}&user_id=${userId}&page=${page}`; // Base URL
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -56,7 +57,7 @@ $('#chat-messages').on('scroll', function() {
         // Perform AJAX call here
         fetchingOldMessages = true
         page++
-        fetchMessages(senderId, receiverId);
+        fetchMessages(senderId, receiverId,userId);
         
         $('#chat-messages').animate({scrollTop:0}, 500);
 
@@ -64,13 +65,16 @@ $('#chat-messages').on('scroll', function() {
 });
 
 
-$(document).on('click', '.ChatDiv-item', function () {
+$(document).on('click', '.ChatDiv-list', function () {
 
     $('#chat-messages').html('')
 
     senderId = $(this).data('id');
+    receiverId = $(this).data('receiver-id');
+    let chatId = $(this).data('chat-id');
+    let userId = $(this).data('user');
+    let parentDiv = $('#chat_item_'+chatId);
 
-    let parentDiv = $(this).closest('#chat_item_'+senderId);
     let clickedDivId = parentDiv.attr('id');
        
     // Deactivate previously active div
@@ -82,16 +86,15 @@ $(document).on('click', '.ChatDiv-item', function () {
     parentDiv.addClass('active');
     activeDivId = clickedDivId; 
 
-    receiverId = $('#receiver_id_'+senderId).val(); 
-    let status = $('#user_status_'+senderId).val(); 
-    let initialSenderName = status == '1' ? $(".profile-text").html('<span class="activicon"></span> Online') :  $(".profile-text").html('<span class="inactivicon"></span> Offline');
+    let status = $(this).data('status');
 
+    let initialSenderName = status == '1' ? $(".profile-text").html('<span class="activicon"></span> Online') :  $(".profile-text").html('<span class="inactivicon"></span> Offline');
 
     var senderName = $(this).find('.title').text(); // Get the sender's name
     $('#chatbox-username').text(senderName); // Update displayed username
  
     page = 1;
-    fetchMessages(senderId, receiverId);
+    fetchMessages(senderId, receiverId,userId);
 });
 
 

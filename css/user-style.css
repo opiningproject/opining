@@ -4767,7 +4767,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
   border-color: #f0eff5 !important;
   width: 30px;
   flex: 0 0 30px !important;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   background: #f0eff5 !important;
@@ -4785,7 +4785,7 @@ line-height: initial !important;
   border-color: #f0eff5 !important;
   width: 35px;
   flex: 0 0 35px !important;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   background: #f0eff5 !important;

@@ -37,14 +37,16 @@ class ChatController extends Controller
     function getMessages($senderId) 
     {
         $pageNumber = request()->input('page', 1);
+        $userId = request()->input('user_id');
+        $adminId = auth()->id();
 
-        $messages = Chat::where('sender_id', auth()->id())
-        ->with(['sender','receiver'])
-        ->where('receiver_id', $senderId)
-        ->orWhere('sender_id', $senderId)
-        ->where('receiver_id', auth()->id())
-        ->orderBy('created_at', 'desc')
-        ->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
+        $messages = Chat::where(function ($query) use ($adminId, $userId) {
+            $query->where('sender_id', $adminId)
+                  ->where('receiver_id', $userId);
+        })->orWhere(function ($query) use ($adminId, $userId) {
+            $query->where('sender_id', $userId)
+                  ->where('receiver_id', $adminId);
+        })->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
 
         $messages->getCollection()->transform(function ($item) {
 

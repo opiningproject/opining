@@ -162,8 +162,6 @@
                                                 if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                                     $disableBtn = 'disabled';
                                                     $customizeBtn = true;
-                                                } else if ($dish->cart) {
-                                                    $disableBtn = 'disabled';
                                                 }
                                                 ?>
                                             <div class="card food-detail-card">
@@ -188,21 +186,23 @@
                                                 <h4 class="food-name-text">{{ $dish->name }}</h4>
                                                 <p class="food-price">€{{ $dish->price }}</p>
                                                 <button type="button" class="btn btn-xs-sm btn-custom-yellow"
-                                                        onclick="customizeDish({{ $dish->id }})"
-                                                        id="dish-cart-lbl-{{ $dish->id }}" {{ $disableBtn }}>
+                                                        onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
+                                                        id="dish-cart-lbl-{{ $dish->id }}">
                                                     @if($dish->qty == 0 || $dish->out_of_stock == '1')
                                                         Out of stock
                                                     @else
-                                                        @if($dish->cart)
+                                                        {{--@if($dish->cart)
                                                             Added to cart
-                                                        @else
+                                                        @else--}}
                                                             Add
                                                             <img src="{{ asset('images/plus.svg') }}" alt="" class="svg"
                                                                  height="9" width="9">
-                                                        @endif
+{{--                                                        @endif--}}
                                                     @endif
                                                 </button>
+
                                                 @if(!$customizeBtn)
+                                                    <label class="customize-foodlink">Customizable</label>
 <!--                                                    <a href="javascript:void(0);" class="customize-foodlink"
                                                        onclick="customizeDish({{ $dish->id }});">Customize</a>-->
                                                 @endif
@@ -317,7 +317,7 @@
                                                                 @foreach($cart as $key => $dish)
                                                                         <?php
                                                                         $cartValue += ($dish->qty * $dish->dish->price);
-                                                                        $paidIngredient = isset($dish->orderDishPaidIngredients) ? $dish->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
+                                                                        $paidIngredient = $dish->paid_ingredient_total;
                                                                         $cartValue += $paidIngredient;
                                                                         $outOfStock = '';
                                                                         $outOfStockDisplay = 'd-none';
@@ -327,7 +327,7 @@
                                                                         }
                                                                         ?>
                                                                     <div class="row stock-card mb-0 {{ $outOfStock }}"
-                                                                         id="cart-{{ $dish->dish->id }}">
+                                                                         id="cart-{{ $dish->id }}">
 
                                                                         <div
                                                                             class="col-12 text-end d-flex align-items-center gap-2 mb-3 justify-content-end outof-stock-text {{ $outOfStockDisplay }}">
@@ -347,44 +347,41 @@
 
                                                                         <div class="col-12">
                                                                             <div class="d-flex cart-item-row">
-                                                                                <div
-                                                                                    class="cart-custom-w-col-img">
+                                                                                <div class="cart-custom-w-col-img">
                                                                                     <img src="{{ $dish->dish->image }}"
-                                                                                         alt="burger image"
+                                                                                         alt="{{ $dish->dish->name }}"
                                                                                          class="img-fluid"
                                                                                          width="86" height="74px"/>
                                                                                     <div class="foodqty mt-4">
                                   <span class="minus">
                                     <i class="fas fa-minus align-middle"
-                                       onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->dish->id }})"></i>
+                                       onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})"></i>
                                   </span>
                                                                                         <input type="number" readonly
                                                                                                class="count cart-amt"
                                                                                                id="qty-{{ $dish->dish->id }}"
-                                                                                               name="qty-{{ $dish->dish->id }}"
+                                                                                               name="qty-{{ $dish->id }}"
                                                                                                value="{{ $dish->qty }}"
                                                                                                data-ing="{{ $paidIngredient }}"
-                                                                                               data-id="{{ $dish->dish->id }}"/>
+                                                                                               data-id="{{ $dish->id }}"/>
                                                                                         <input type="hidden"
-                                                                                               id="dish-price-{{ $dish->dish->id }}"
+                                                                                               id="dish-price-{{ $dish->id }}"
                                                                                                value="{{ $dish->dish->price }}"/>
                                                                                         <span class="plus">
                                     <i class="fas fa-plus align-middle"
-                                       onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->dish->id }})"></i>
+                                       onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})"></i>
                                   </span>
                                                                                     </div>
                                                                                 </div>
 
-
-                                                                                <div
-                                                                                    class="cart-custom-w-col-detail">
+                                                                                <div class="cart-custom-w-col-detail">
                                                                                     <div class="cart-item-detail">
                                                                                         <div
                                                                                             class="d-flex align-items-center justify-content-between">
                                                                                             <p class="d-inline-block item-name mb-0"> {{ $dish->dish->name }} </p>
                                                                                             <span
                                                                                                 class="cart-item-price"
-                                                                                                id="cart-item-price{{$dish->dish->id}}">+€{{ number_format((float)($dish->qty * $dish->dish->price),2) }}</span>
+                                                                                                id="cart-item-price{{$dish->id}}">+€{{ number_format((float)($dish->qty * $dish->dish->price),2) }}</span>
                                                                                         </div>
                                                                                         <div class="d-flex align-items-center">
                                                                                             <p class="mb-0 item-options mb-0">
@@ -393,7 +390,7 @@
                                                                                                 class="item-desc">+{{ getOrderDishIngredients($dish) }}</span>
                                                                                             <p class="item-customize mb-0 ms-auto justify-content-end">
                                                                                                 <a href="javascript:void(0);"
-                                                                                                   onclick="customizeDish({{ $dish->dish->id }});">
+                                                                                                   onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
                                                                                                     <img
                                                                                                         src="{{ asset('images/custom-dish.svg') }}"
                                                                                                         alt=""

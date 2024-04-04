@@ -65,7 +65,7 @@ Route::middleware(['localization'])->group(function () {
         Route::post('/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
         Route::get('/delete-address/{id}', [App\Http\Controllers\User\AddressController::class, 'deleteAddress']);
         Route::get('/add-to-cart/{id}', [App\Http\Controllers\User\CartController::class, 'addToCart']);
-        Route::get('/get-dish-details/{id}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
+        Route::get('/get-dish-details/{id}/{doesExist}', [App\Http\Controllers\User\DishController::class, 'getDishDetails']);
 
         Route::post('/add-cart/{id}', [\App\Http\Controllers\User\CartController::class, 'addCustomizedDish']);
     });

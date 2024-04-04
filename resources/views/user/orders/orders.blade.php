@@ -235,12 +235,12 @@
                                                 </div>
                                                 <div class="list-item">
                                                     <div class="text">Service Charge</div>
-                                                    <div class="number">€{{ $order->platform_charge }}</div>
+                                                    <div class="number">€{{ number_format($order->platform_charge,2) }}</div>
                                                 </div>
                                                 <div class="list-item" {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
                                                     <div
                                                         class="text">{{ $order->delivery_charge ? 'Delivery Charge':'Free Delivery' }}</div>
-                                                    <div class="number">€{{ $order->delivery_charge }}</div>
+                                                    <div class="number">€{{ number_format($order->delivery_charge,2) }}</div>
                                                 </div>
                                                 <div
                                                     class="list-item active" {{ isset($order->coupon) ? '' : 'style=display:none' }}>

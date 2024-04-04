@@ -2,6 +2,14 @@
     <div class="category-list-item-grid">
         @if(count($dishes) > 0)
             @foreach ($dishes as $dish)
+                    <?php
+                    $disableBtn = '';
+                    $customizeBtn = false;
+                    if ($dish->qty == 0 || $dish->out_of_stock == '1') {
+                        $disableBtn = 'disabled';
+                        $customizeBtn = true;
+                    }
+                    ?>
                 <div class="card food-detail-card">
                     <p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>
                     <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}"
@@ -22,20 +30,27 @@
                     </div>
                     <h4 class="food-name-text">{{ $dish->name }}</h4>
                     <p class="food-price">€{{ $dish->price }}</p>
-                    <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="addToCart({{ $dish->id }})"
-                            id="dish-cart-lbl-{{ $dish->id }}" {{ $dish->cart ? 'disabled':''}}>
-                        @if($dish->cart)
-                            Added to cart
+                    <button type="button" class="btn btn-xs-sm btn-custom-yellow"
+                            onclick="customizeDish({{ $dish->id }})"
+                            id="dish-cart-lbl-{{ $dish->id }}" {{ $disableBtn }}>
+                        @if($dish->qty == 0 || $dish->out_of_stock == '1')
+                            Out of stock
                         @else
+                            {{--@if($dish->cart)
+                                Added to cart
+                            @else--}}
                             Add
                             <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">
                         @endif
                     </button>
-                    <a href="javascript:void(0);" class="customize-foodlink" onclick="customizeDish({{ $dish->id }});">Customize</a>
+                    @if(!$customizeBtn)
+                        <label class="customize-foodlink">Customizable</label>
+                        {{--                    <a href="javascript:void(0);" class="customize-foodlink" onclick="customizeDish({{ $dish->id }});">Customize</a>--}}
+                    @endif
                 </div>
             @endforeach
         @else
-          No such dish exist
+            No such dish exist
         @endif
     </div>
 </div>

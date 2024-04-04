@@ -23,8 +23,6 @@
                                             if ($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1') {
                                                 $disableBtn = 'disabled';
                                                 $customizeBtn = true;
-                                            } else if ($dish->dish->cart) {
-                                                $disableBtn = 'disabled';
                                             }
                                             ?>
                                         <div class="card food-detail-card" id="dish-box-{{ $dish->dish->id }}">
@@ -42,25 +40,26 @@
                                             <p class="food-price">€ {{ $dish->dish->price }}</p>
 
                                             <button type="button" class="btn btn-xs-sm btn-custom-yellow"
-                                                    onclick="addToCart({{ $dish->dish->id }})"
+                                                    onclick="customizeDish({{ $dish->dish_id }}, {{ $dish->id }});"
                                                     id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $disableBtn }}>
                                                 @if($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1')
                                                     Out of stock
                                                 @else
-                                                    @if($dish->dish->cart)
+                                                  {{--  @if($dish->dish->cart)
                                                         Added to cart
-                                                    @else
+                                                    @else--}}
                                                         Add
                                                         <img src="{{ asset('images/plus.svg') }}" alt="" class="svg"
                                                              height="9" width="9">
 
-                                                    @endif
+{{--                                                    @endif--}}
                                                 @endif
                                             </button>
 
                                             @if(!$customizeBtn)
-                                            <a href="javascript:void(0);" class="customize-foodlink"
-                                               onclick="customizeDish({{ $dish->dish_id }});">Customisable</a>
+                                                <label class="customize-foodlink">Customizable</label>
+                                           {{-- <a href="javascript:void(0);" class="customize-foodlink"
+                                               onclick="customizeDish({{ $dish->dish_id }});">Customisable</a>--}}
                                             @endif
                                         </div>
                                     @endforeach

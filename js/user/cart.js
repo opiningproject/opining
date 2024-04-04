@@ -335,7 +335,7 @@ function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
     }
 }
 
-function addCustomizedCart(id) {
+function addCustomizedCart(id, doesExist = 0) {
 
     var dishData = new FormData();
 
@@ -358,6 +358,7 @@ function addCustomizedCart(id) {
     }
 
     dishData.append('dishQty', $('#totalDishQty').val())
+    dishData.append('doesExist', doesExist)
 
     $.ajax({
         url: baseURL + '/user/add-cart/' + id,
@@ -378,8 +379,9 @@ function addCustomizedCart(id) {
                 if ($('#qty-' + id).length > 0) {
                     $('#qty-' + id).val($('#totalDishQty').val())
                 } else {
-                    $("#dish-cart-lbl-" + id).text('Added to cart');
-                    $("#dish-cart-lbl-" + id).prop('disabled', true);
+                    /*$("#dish-cart-lbl-" + id).text('Added to cart');
+                    $("#dish-cart-lbl-" + id).prop('disabled',
+                    );*/
                     $('.cart-items').append(response.message.cartHtml);
                     $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
                     $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) + 1)

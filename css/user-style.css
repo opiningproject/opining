@@ -2229,12 +2229,12 @@ input[type=number] {
 }
 
 .foodqty .plus {
-  border-color: var(--theme-yellow2);
-  background-color: var(--theme-yellow2);
+  /* border-color: var(--theme-yellow2);
+  background-color: var(--theme-yellow2); */
 }
 
 .foodqty .minus {
-  border-color: var(--theme-gray3);
+  /* border-color: var(--theme-gray3); */
 }
 
 .custom-card {
@@ -4720,8 +4720,8 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {display: inline-block;width: 140px;min-width: auto;margin: 15px auto 0px;}
 .food-detail-card .food-favorite-icon {top: 10px;}
 .cart-item-row {margin: 0px -10px;}
-.cart-item-row .cart-custom-w-col-img {flex: 0 0 90px;max-width: 90px;padding: 0px 10px;position: relative;}
-.cart-item-row .cart-custom-w-col-detail {flex: 0 0 calc(100% - 90px);max-width: calc(100% - 90px);padding: 0px 10px;}
+.cart-item-row .cart-custom-w-col-img {flex: 0 0 110px;max-width: 110px;padding: 0px 10px;position: relative;}
+.cart-item-row .cart-custom-w-col-detail {flex: 0 0 calc(100% - 110px);max-width: calc(100% - 110px);padding: 0px 10px;}
 .section-page-title .searcheaderBox.toggled {position: fixed !important;z-index: 9999;background: #ffffff;padding: 40px 15px 15px;align-items: center !important;top: -200px;box-shadow: 0px 3px 6px 0px #dcdcdc;-webkit-transition: all .3s linear;-moz-transition: all .3s linear;-o-transition: all .3s linear;-ms-transition: all .3s linear;transition: all .3s linear;border-radius: 0px 0px 15px 15px;}
 .sidebar-menu-top-box .userPhoto {border-radius: 12px;overflow: hidden;width: 55px;flex: 0 0 55px;max-width: 55px;height: 55px;}
 .sidebar-menu-top-box .userPhoto img {width: 100%;height: 100%;object-fit: contain;object-position: center;}
@@ -4760,6 +4760,42 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom {padding-bottom: 260px;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {box-shadow: none;outline: none;}
 
+
+.cart-section .cart-items .foodqty .minus, .cart-section .cart-items .foodqty .plus {
+  height: 30px !important;
+  min-width: 30px !important;
+  border-color: #f0eff5 !important;
+  width: 30px;
+  flex: 0 0 30px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #f0eff5 !important;
+}
+
+.cart-section .cart-items .foodqty .plus i, .cart-section .cart-items .foodqty .minus i {
+margin-left: 0px !important;
+font-size: 15px !important;
+line-height: initial !important;
+}
+
+.foodqty .minus, .foodqty .plus {
+  height: 35px !important;
+  min-width: 35px !important;
+  border-color: #f0eff5 !important;
+  width: 35px;
+  flex: 0 0 35px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #f0eff5 !important;
+}
+
+.foodqty .plus i, .foodqty .minus i {
+margin-left: 0px !important;
+font-size: 15px !important;
+line-height: initial !important;
+}
 
 @media screen and (max-width: 1800px) {
 .offer-card-banner .card-body h2 {font-size: 34px;margin-bottom: 10px;}

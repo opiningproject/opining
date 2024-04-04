@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\IngredientCategory;
 use App\Models\Order;
+use App\Models\OrderDishDetail;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
@@ -75,13 +76,11 @@ class DishController extends Controller
         return view('user.points');
     }
 
-    public function getDishDetails(string $id)
+    public function getDishDetails(string $id, string $doesExist)
     {
         if (!Auth::user()) {
             return response::json(['status' => 2, 'message' => '']);
         }
-
-        $dish = Dish::find($id);
 
         $user = Auth::user();
 
@@ -91,50 +90,60 @@ class DishController extends Controller
             ['is_cart', '1']
         ])->first();
 
-        if (empty($order))
-        {
+        if (empty($order)) {
             $order = new Order();
             $order->user_id = $user_id;
             $order->is_cart = '1';
             $order->save();
         }
 
-        $dishDetail = $user->cart()
-            ->with(['dishDetails' => function ($query) use ($id){
-                $query->whereDishId($id)->whereIsCart('1');
-            }])->first();
-
-        $paidDishDetail = $order->dishDetails()->whereHas('orderDishPaidIngredients', function ($query) use ($id){
-            $query->whereDishId($id)->whereIsCart('1');
-        })->with('orderDishPaidIngredients')->first();
-
-        $freeDishDetail = $order->dishDetails()->whereHas('orderDishFreeIngredients', function ($query) use ($id){
-            $query->whereDishId($id)->whereIsCart('1');
-        })->with('orderDishFreeIngredients')->first();
-
+        $dish = Dish::find($id);
         $options = $dish->option;
         $freeIngredients = $dish->freeIngredients;
-        $paidIngredients = IngredientCategory::withWhereHas('ingredients', function($query) use ($id){
-            $query->withWhereHas('paidDishIngredientWise', function($q)  use ($id) {
+
+        $paidIngredients = IngredientCategory::withWhereHas('ingredients', function ($query) use ($id) {
+            $query->withWhereHas('paidDishIngredientWise', function ($q) use ($id) {
                 $q->whereDishId($id);
             });
         })->get();
 
-        $selectedOption =  $dishDetail->dishDetails[0]->dish_option_id ?? '';
+        $totalAmt = $dish->price;
         $freeSelectedIngredients = [];
         $paidSelectedIngredients = [];
-        $totalAmt = $dish->price;
+        $selectedOption = '';
 
-        if($paidDishDetail){
-            $paidSelectedIngredients = $paidDishDetail->orderDishPaidIngredients->pluck('quantity','dish_ingredient_id')->toArray();
-        }
+        $dishDetail = [];
 
-        if($freeDishDetail){
-            $freeSelectedIngredients = $freeDishDetail->orderDishFreeIngredients->pluck('dish_ingredient_id')->toArray();
+        if ($doesExist) {
+
+            /*$dishDetail = $user->cart()
+                ->with(['dishDetails' => function ($query) use ($doesExist){
+                    $query->whereId($doesExist);
+                }])->first();*/
+            $dishDetail = OrderDetail::find($doesExist);
+
+            $paidDishDetail = $order->dishDetails()->whereHas('orderDishPaidIngredients', function ($query) use ($doesExist) {
+                $query->whereOrderDetailId($doesExist);
+            })->with('orderDishPaidIngredients')->first();
+
+            $freeDishDetail = $order->dishDetails()->whereHas('orderDishFreeIngredients', function ($query) use ($doesExist) {
+                $query->whereOrderDetailId($doesExist);
+            })->with('orderDishFreeIngredients')->first();
+
+
+            $selectedOption = $dishDetail->dish_option_id ?? '';
+
+            if ($paidDishDetail) {
+                $paidSelectedIngredients = $paidDishDetail->orderDishPaidIngredients->pluck('quantity', 'dish_ingredient_id')->toArray();
+            }
+
+            if ($freeDishDetail) {
+                $freeSelectedIngredients = $freeDishDetail->orderDishFreeIngredients->pluck('dish_ingredient_id')->toArray();
+            }
         }
 
         $html_options = '';
-        if(count($options) > 0){
+        if (count($options) > 0) {
 
             $html_options = "<div class='row justify-content-center'>
                         <div class='col-xl-5'>
@@ -144,7 +153,7 @@ class DishController extends Controller
                                 <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100' id='dish-option$dish->id'>
                                 <option value=''>Please select option</option>";
             foreach ($options as $option) {
-                $selected =  $selectedOption == $option->id ? 'selected' : '';
+                $selected = $selectedOption == $option->id ? 'selected' : '';
                 $html_options .= "<option value='$option->id' $selected >$option->name</option>";
             }
             $html_options .= "</select>
@@ -156,7 +165,7 @@ class DishController extends Controller
         }
 
         $html_free_ingredients = '';
-        if(count($freeIngredients) > 0){
+        if (count($freeIngredients) > 0) {
             $html_free_ingredients .= "<div class='customisable-table custom-table'>
                       <table class='w-100'>
                         <thead>
@@ -166,8 +175,8 @@ class DishController extends Controller
                         </thead>
                         <tbody>";
             foreach ($freeIngredients as $ingredient) {
-                $checked = in_array($ingredient->id, $freeSelectedIngredients) ? 'checked' : '' ;
-                $defaultCheck = count($dishDetail->dishDetails) > 0 ? '' : 'checked';
+                $checked = in_array($ingredient->id, $freeSelectedIngredients) ? 'checked' : '';
+                $defaultCheck = $doesExist ? '' : 'checked';
 
                 $ingredient_name = $ingredient->ingredient->name;
                 $ingredient_image = $ingredient->ingredient->image;
@@ -191,7 +200,7 @@ class DishController extends Controller
 
         $html_paid_ingredients = '';
 
-        if(count($paidIngredients) > 0){
+        if (count($paidIngredients) > 0) {
             $html_paid_ingredients .= "<div class='customisable-table custom-table mt-4'>
                       <table class='w-100'>
                         <thead>
@@ -215,13 +224,13 @@ class DishController extends Controller
                                 <tbody>";
 
                 foreach ($category->ingredients as $ingredient) {
-                    $paidQty = 0 ;
+                    $paidQty = 0;
 
                     $ingredient_name = $ingredient->name;
                     $ingredient_image = $ingredient->image;
                     $ingredient_price = $ingredient->paidDishIngredientWise->price;
                     $ingredient_id = $ingredient->paidDishIngredientWise->id;
-                    if(array_key_exists($ingredient_id, $paidSelectedIngredients)){
+                    if (array_key_exists($ingredient_id, $paidSelectedIngredients)) {
                         $paidQty = $paidSelectedIngredients[$ingredient_id];
                         $totalAmt += ($paidQty * $ingredient_price);
                     }
@@ -258,11 +267,9 @@ class DishController extends Controller
         $addUpdateText = 'Add to Cart';
         $orderQty = 1;
 
-        if($dishDetail){
-            if(count($dishDetail->dishDetails) > 0){
-                $addUpdateText = 'Update Cart';
-                $orderQty = $dishDetail->dishDetails[0]->qty;
-            }
+            if ($doesExist) {
+            $addUpdateText = 'Update Cart';
+            $orderQty = $dishDetail->qty;
         }
 
         $totalAmt *= $orderQty;
@@ -298,7 +305,7 @@ class DishController extends Controller
                         </div>
                       </div>
                       <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart(" . $dish->id . ")>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>".number_format((float)$totalAmt,2)."</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart($dish->id,$doesExist)>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>" . number_format((float)$totalAmt, 2) . "</span>
                         </a>
                       </div>
                     </div>

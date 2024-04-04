@@ -12,7 +12,8 @@
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                                 <h1 class="page-title">Chat</h1>
                             </div>
-                        </div>                            
+                        </div>
+                        <input type="hidden" value="{{ Auth::user()->id }}" id="auth-user-id">
                         <div class="d-flex ChatDiv-main">
                             <div class="ChatDiv" id="ChatDiv">
 
@@ -35,10 +36,10 @@
                                 {{-- <div class="row">
                                     <input type="search" name="q" id="search-chat" class="search-box" value="" placeholder="Search...">
                                 </div> --}}
-                                 
-                              
+
+
                                 {{-- @foreach($chats as $chat)
-    
+
                                     <div class="ChatDiv-type">
                                         <div class="ChatDiv-list">
                                             <input type="hidden" name="sender_id" value="{{ $chat->sender_id }}" id="sender_id_{{$chat->sender_id}}">
@@ -140,7 +141,7 @@
                             </div>
                             {{-- Dynamic Message Block --}}
 
-                            
+
                         </div>
 
                     </div>

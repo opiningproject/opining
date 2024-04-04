@@ -1,4 +1,4 @@
-function unFavorite(dish_id) 
+function unFavorite(dish_id)
 {
     $('#dish-box-'+dish_id).hide();
 
@@ -9,8 +9,7 @@ function unFavorite(dish_id)
             dish_id
         },
         success: function (response) {
-            console.log('success')
-            console.log(response)
+
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -19,13 +18,13 @@ function unFavorite(dish_id)
     })
 }
 
-function customizeDish(id) 
+function customizeDish(id, doesExist=0)
 {
     $.ajax({
-            url: baseURL+'/user/get-dish-details/'+id,
+            url: baseURL+'/user/get-dish-details/'+id+'/'+doesExist,
             type: 'GET',
             success: function (response) {
-                
+
                 var data = response.data;
 
                 if(response.status == 2)
@@ -36,7 +35,7 @@ function customizeDish(id)
 
                 $('.customisable-modal-body').html(data);
 
-                $("#customisableModal").modal("show"); 
+                $("#customisableModal").modal("show");
 
             },
             error: function (response) {
@@ -45,5 +44,5 @@ function customizeDish(id)
             }
         })
 
-    
+
 }

@@ -335,7 +335,7 @@ function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
     }
 }
 
-function addCustomizedCart(id) {
+function addCustomizedCart(id, doesExist = 0) {
 
     var dishData = new FormData();
 
@@ -358,6 +358,7 @@ function addCustomizedCart(id) {
     }
 
     dishData.append('dishQty', $('#totalDishQty').val())
+    dishData.append('doesExist', doesExist)
 
     $.ajax({
         url: baseURL + '/user/add-cart/' + id,
@@ -378,8 +379,9 @@ function addCustomizedCart(id) {
                 if ($('#qty-' + id).length > 0) {
                     $('#qty-' + id).val($('#totalDishQty').val())
                 } else {
-                    $("#dish-cart-lbl-" + id).text('Added to cart');
-                    $("#dish-cart-lbl-" + id).prop('disabled', true);
+                    /*$("#dish-cart-lbl-" + id).text('Added to cart');
+                    $("#dish-cart-lbl-" + id).prop('disabled',
+                    );*/
                     $('.cart-items').append(response.message.cartHtml);
                     $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
                     $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) + 1)
@@ -414,31 +416,31 @@ function updateCartAmount(dishId, amount, type) {
 
 function calculateTotalCartAmount() {
 
-    var totalAmt = 0;
+    var totalAmt = 0.00;
     var serviceCharge = $('#service-charge').val()
     var couponDiscountPercent = $('#coupon-discount-percent').val()
-    var couponDiscount = 0
+    var couponDiscount = 0.00
 
     $('.cart-amt').each(function (index, element) {
         var id = $(element).data('id')
 
         var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
 
-        $('#cart-item-price'+id).text('+€'+itemAmount)
+        $('#cart-item-price'+id).text('+€'+itemAmount.toFixed(2))
         totalAmt += itemAmount + parseFloat($(element).attr('data-ing'))
 
     })
 
-    $('#total-cart-bill').text('€' + totalAmt)
-    $('#total-cart-bill-amount').val(totalAmt)
+    $('#total-cart-bill').text('€' + totalAmt.toFixed(2))
+    $('#total-cart-bill-amount').val(totalAmt.toFixed(2))
 
     couponDiscount = parseFloat(couponDiscountPercent) * totalAmt
     totalAmt += parseFloat(serviceCharge)
     totalAmt -= parseFloat(couponDiscount)
 
-    $('#coupon-discount-text').text('-€' + couponDiscount)
-    $('#coupon-discount').val(couponDiscount)
+    $('#coupon-discount-text').text('-€' + couponDiscount.toFixed(2))
+    $('#coupon-discount').val(couponDiscount.toFixed(2))
 
-    $('#gross-total-bill').text('€' + totalAmt)
+    $('#gross-total-bill').text('€' + totalAmt.toFixed(2))
 }
 

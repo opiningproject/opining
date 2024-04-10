@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Dish;
 use Auth;
+use Illuminate\Support\Facades\Log;
 use Session;
 
 class ChatController extends Controller
@@ -28,8 +31,70 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('user.chat');
+        $userData = User::find(auth()->user()->id);
+        return view('user.chat', compact('userData'));
     }
 
-    
+    function getMessages()
+    {
+        $pageNumber = request()->input('page', 1);
+        $userId = auth()->id();
+        $adminId = 1;
+        $messages = Chat::with('sender')
+            ->with('receiver')->where(function ($query) use ($adminId, $userId) {
+            $query->where('sender_id', $adminId)
+                ->where('receiver_id', $userId);
+        })->orWhere(function ($query) use ($adminId, $userId) {
+            $query->where('sender_id', $userId)
+                ->where('receiver_id', $adminId);
+        })->orderBy('created_at', 'asc')->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
+
+        $messages->getCollection()->transform(function ($item) {
+
+            $item->appendStyle = '';
+            $item->messageStyle = '';
+
+            if($item->receiver_id != auth()->id() && $item->sender_id == auth()->id()) {
+                $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
+                $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
+            }/* else {
+                $item->appendStyle = "margin-right:auto";
+                $item->messageStyle = "background-color:var(--theme-white6);margin-right:auto;";
+            }*/
+
+            return $item;
+        });
+//        $chats = $messages->reverse();
+        $chats = $messages;
+        return view('user.chats.messages', ['messages' => $chats]);
+    }
+
+    public function storeMessage(Request $request)
+    {
+        $storeChat = new Chat();
+        $storeChat->sender_id = $request->sender_id;
+        $storeChat->receiver_id = $request->receiver_id;
+        $storeChat->message = $request->message;
+        $storeChat->save();
+        $storeChat->createdAt = $storeChat->created_at->format('h:m a');
+        $storeChat->userImage  = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
+        return \response()->json([
+            "status"=>"200",
+            'data' =>$storeChat
+        ]);
+    }
+
+
+    /*public function chatStatusUpdate(Request $request)
+    {
+        dd($request->all());
+        $updateUserStatus = User::find(2);
+//        dd($updateUserStatus);
+        $updateUserStatus->is_online = '0';
+        $updateUserStatus->save();
+        return \response()->json([
+            "status"=>"200",
+            'data' => $updateUserStatus
+        ]);
+    }*/
 }

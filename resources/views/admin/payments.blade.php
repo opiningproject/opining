@@ -3,6 +3,30 @@
     <div class="container-fluid bd-gutter bd-layout"> 
         @include('layouts.admin.side_nav_bar') 
         <main class="bd-main order-1 w-100 position-relative">
+
+        <!-- My finance password form popup start -->
+        <div class="finance_auth_section">
+   <div class="finance_auth_form">
+      <div class="mb-3">
+         <div class="form-group mb-0 position-relative">
+            <span class="input-group-icon">
+            <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20" />
+            </span>
+            <input type="password"
+               class="form-control ps-5 text-indent-initial"
+               name="password"
+               placeholder="Enter Password"
+               id="password" autocomplete="off" />
+         </div>
+      </div>
+      <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">
+      Go to My Finance
+      </button>
+   </div>
+</div>
+
+<!-- My finance password form popup end -->
+
             <div class="main-content">
               <div class="section-page-title mb-0">
                 <h1 class="page-title">My Finance</h1>

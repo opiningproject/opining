@@ -18,6 +18,19 @@
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .time svg circle {fill: #000000;}
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .time svg path {stroke: #ffffff;}
 
+.finance_auth_section {background: rgb(43 42 42 / 80%);height: 100%;width: calc(100% + 40px);position: absolute;top: 0px;bottom: 0px;z-index: 1;left: -40px;display: flex;align-items: center;justify-content: center;padding: 10px;}
+.finance_auth_section .finance_auth_form {flex: 0 0 360px;max-width: 360px;}
+.finance_auth_section .finance_auth_form .form-group .input-group-icon {position: absolute;position: absolute;top: 50%;transform: translate(-50%, -50%);line-height: 0;height: 20px;left: 25px !important;}
+.finance_auth_section .finance_auth_form .form-group .input-group-icon svg {height: 100%;object-fit: contain;object-position: center;}
+.finance_auth_section .text-indent-initial {text-indent: initial !important;}
+.finance_auth_section .finance_auth_form .form-control {padding-left: 45px !important;font-size: 16px;}
+
+.finance_auth_section .finance_auth_form .form-control::-webkit-input-placeholder {font-size: 16px;}
+.finance_auth_section .finance_auth_form .form-control::-moz-placeholder {font-size: 16px;}
+.finance_auth_section .finance_auth_form .form-control:-ms-input-placeholder {font-size: 16px;}
+.finance_auth_section .finance_auth_form .form-control:-moz-placeholder {font-size: 16px;}
+
+
 @media screen and (max-width: 1600px) {
 .btn {font-size: 14px !important;padding: 8px 12px !important;}
 .prev-input-group .form-control {min-height: 44px !important;line-height: 44px !important;font-size: 14px;}
@@ -75,8 +88,13 @@
 .popular-item-grid {grid-template-columns: repeat(2, 1fr);grid-column-gap: 15px;}
 .bestselling-item-grid {grid-template-columns: repeat(2, 1fr);grid-column-gap: 15px;}
 }
+
+@media screen and (max-width: 991px) {
+.finance_auth_section {left: 0px;width: 100%;}
+}
 @media screen and (max-width: 484px) {
   .signin-card {max-width: 400px;}
+  .finance_auth_section .finance_auth_form {flex: 0 0 100%;max-width: 100%;}
 }
 @media screen and (max-width: 375px) {
   .signin-card {max-width: 310px;}

@@ -31,12 +31,25 @@ io.on("connection", function (socket) {
     io.to(socket.id).emit('socketConnectionSecured', socket.id)
 
     socket.on('sendAdminChatToServer', (messageData) => {
-        console.log(messageData);
+        console.log("messageData",messageData);
             var adminMessage = {
                 sender_id: messageData.sender_id,
+                receiver_id: messageData.receiver_id,
                 message: messageData.message
+                // attachment: messageData.fileAttachment
             }
-        // io.sockets.emit('sendChatToClient', message);
-        io.to(messageData.receiver_id).emit('sendChatToClient', adminMessage);
+            if (messageData.type == "user") {
+                io.sockets.emit('sendChatToUser', adminMessage);
+            }
+            if (messageData.type == "admin") {
+                io.sockets.emit('sendChatToClient', adminMessage);
+            }
+        // io.to(messageData.receiver_id).emit('sendChatToClient', adminMessage);
+    });
+
+    // Listen for disconnection
+    socket.on('disconnect', async () => {
+        console.log('A user disconnected');
+        // Handle user disconnection (e.g., update database)
     });
 });

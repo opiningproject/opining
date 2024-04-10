@@ -2707,7 +2707,34 @@ input[type=number] {
   max-width: 380px;
 }
 
-.chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p::before {
+/* new css */
+.user-chat{
+    margin-top: 50px !important;
+}
+.user-chat small {
+    margin-top: -10px !important
+}
+
+.ChatDiv .chat-item .img-fluid{
+    margin: 0px 0px 40px 0px;
+}
+
+.user-chat p {
+  padding: 19px 25px 19px 22px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  color: var(--theme-dark2);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0;
+  position: relative;
+  max-width: 380px;
+}
+
+.chatbox .ChatDiv .chatbox-main .chats-grp .chat-item .chat-item-textgrp p::before {
   content: "";
   display: flex;
   align-items: center;

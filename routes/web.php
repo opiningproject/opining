@@ -158,6 +158,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/chat/messages/{senderId}', [ChatController::class, 'getMessages'])->name('get_messages');
     Route::get('/chat/users', [ChatController::class, 'getChatUsersList'])->name('chat_users');
     Route::get('/chat/search-chat', [ChatController::class, 'searchChat']);
+    Route::post('/chat/store', [ChatController::class, 'storeMessage']);
     Route::get('/orders/{date_filter?}', [OrdersController::class, 'index'])->name('orders');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments');
@@ -193,6 +194,8 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
         Route::get('/order-location/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
+        Route::post('/chat/store', [App\Http\Controllers\User\ChatController::class, 'storeMessage'])->name('user.store');
+//        Route::get('/chat/status/update', [App\Http\Controllers\User\ChatController::class, 'chatStatusUpdate'])->name('user.chatStatusUpdate');
         Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');
         Route::get('/ideal-payment', [App\Http\Controllers\User\CheckoutController::class, 'idealPayment'])->name('user.ideal');
         Route::get('/card-payment', [App\Http\Controllers\User\CheckoutController::class, 'cardPayment'])->name('user.card');
@@ -210,6 +213,6 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
 
         Route::patch('/cart/update-notes/{dish_id}', [\App\Http\Controllers\User\CartController::class, 'updateDishNotes']);
         Route::patch('/cart/update-del-ins', [\App\Http\Controllers\User\CartController::class, 'updateDeliveryNotes']);
-
+        Route::get('/chat/users', [App\Http\Controllers\User\ChatController::class, 'getMessages'])->name('chat_users');
     });
 });

@@ -34,25 +34,25 @@ class ChatController extends Controller
         return view('admin.chat');
     }
 
-    function getMessages($senderId) 
+    function getMessages($senderId)
     {
         $pageNumber = request()->input('page', 1);
         $userId = request()->input('user_id');
         $adminId = auth()->id();
 
-        $messages = Chat::where(function ($query) use ($adminId, $userId) {
+        $messages = Chat::with('sender')
+            ->with('receiver')->where(function ($query) use ($adminId, $userId) {
             $query->where('sender_id', $adminId)
                   ->where('receiver_id', $userId);
         })->orWhere(function ($query) use ($adminId, $userId) {
             $query->where('sender_id', $userId)
                   ->where('receiver_id', $adminId);
-        })->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
-
+        })->orderBy('created_at', 'asc')->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
         $messages->getCollection()->transform(function ($item) {
 
             $item->appendStyle = '';
             $item->messageStyle = '';
-            if($item->receiver_id != 2 && $item->sender_id == 2) {
+            if($item->receiver_id != 1 && $item->sender_id == 1) {
                 $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
                 $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
             }
@@ -60,7 +60,7 @@ class ChatController extends Controller
             return $item;
         });
 
-        $chats = $messages->reverse();
+        $chats = $messages;
 
         return view('admin.chats.messages', ['messages' => $chats]);
     }
@@ -74,15 +74,15 @@ class ChatController extends Controller
         })->get();
         $chats = $chats->unique('receiver_id');
 
-    
-        return view('admin.chats.chat-list', ['chats' => $chats,'q' => $search]);   
+
+        return view('admin.chats.chat-list', ['chats' => $chats,'q' => $search]);
     }
 
-    function getChatUsersList() 
+    function getChatUsersList()
     {
 
         $pageNumber = request()->input('page', 1);
-      
+
         $chats = Chat::select('sender_id', 'receiver_id')
                 ->distinct()
                 ->paginate(9, ['*'], 'page', $pageNumber)
@@ -98,7 +98,22 @@ class ChatController extends Controller
                         ->latest()->first();
                     return $user;
                 });
-        
+
         return view('admin.chats.chat-list', ['chats' => $chats,'q' => '']);
+    }
+
+    public function storeMessage(Request $request)
+    {
+        $storeChat = new Chat();
+        $storeChat->sender_id = $request->sender_id;
+        $storeChat->receiver_id = $request->receiver_id;
+        $storeChat->message = $request->message;
+        $storeChat->save();
+        $storeChat->createdAt = $storeChat->created_at->format('h:m a');
+        $storeChat->userImage  = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
+        return \response()->json([
+            "status"=>"200",
+            'data' =>$storeChat
+        ]);
     }
 }

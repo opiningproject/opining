@@ -60,7 +60,7 @@ class DishController extends Controller
             $dish->desc_en = $request->desc_en;
             $dish->desc_nl = $request->desc_nl;
             $dish->price = $request->price;
-            $dish->percentage_off = $request->percentage_off;
+            $dish->percentage_off = $request->percentage_off ?? 0;
             $dish->qty = $request->qty;
             $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';
             $dish->save();
@@ -276,7 +276,7 @@ class DishController extends Controller
             }
         }
 
-        if ($request->has('cat_id') && $request->cat_id != 'null') 
+        if ($request->has('cat_id') && $request->cat_id != 'null')
         {
             $dishes->where('category_id',$request->cat_id);
         }
@@ -290,6 +290,6 @@ class DishController extends Controller
             return view('user.dish.dish-list', ['dishes' => $dishes->get()]);
         }
 
-        
+
     }
 }

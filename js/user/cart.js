@@ -65,14 +65,13 @@ $(function () {
 
     $('.remove-cart-dish').click(function (){
         var id = $(this).data('id')
-        var dishId = $(this).data('dish-id')
 
         $.ajax({
             url: baseURL + '/user/cart/remove-dish/'+ id,
             type: 'DELETE',
             success: function (response) {
                 if(response.status == 200){
-                    $('#cart-'+dishId).remove()
+                    $('#cart-'+id).remove()
                     calculateTotalCartAmount()
                 }else{
                     alert(response.message);
@@ -218,6 +217,7 @@ function updateDishQty(operator, maxQty, dish_id) {
 
             }
 
+            $('#paid-ing-price'+dish_id).text('+€'+(parseFloat($('#qty-'+dish_id).val()) * parseFloat($('#qty-'+dish_id).attr('data-ing'))).toFixed(2))
             calculateTotalCartAmount()
         },
         error: function (response) {
@@ -338,6 +338,7 @@ function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
 function addCustomizedCart(id, doesExist = 0) {
 
     var dishData = new FormData();
+    var totalDishQty = $('#totalDishQty').val()
 
     if ($("#dish-option" + id).length) {
         dishData.append('option', $("#dish-option" + id).val())
@@ -357,7 +358,7 @@ function addCustomizedCart(id, doesExist = 0) {
         })
     }
 
-    dishData.append('dishQty', $('#totalDishQty').val())
+    dishData.append('dishQty', totalDishQty)
     dishData.append('doesExist', doesExist)
 
     $.ajax({
@@ -376,8 +377,15 @@ function addCustomizedCart(id, doesExist = 0) {
             if (response.status == 200) {
                 $('#customisableModal').modal('hide');
 
-                if ($('#qty-' + id).length > 0) {
-                    $('#qty-' + id).val($('#totalDishQty').val())
+                if ($('#qty-' + response.message.addedDishId).length > 0) {
+                    var totalAmount
+                    if(doesExist == 0){
+                        var currentVal = $('#qty-' + response.message.addedDishId).val()
+                        totalAmount = parseInt(currentVal) + parseInt(totalDishQty)
+                    }else{
+                        totalAmount = parseInt(totalDishQty)
+                    }
+                    $('#qty-' + response.message.addedDishId).val(totalAmount)
                 } else {
                     /*$("#dish-cart-lbl-" + id).text('Added to cart');
                     $("#dish-cart-lbl-" + id).prop('disabled',
@@ -390,7 +398,6 @@ function addCustomizedCart(id, doesExist = 0) {
                 $('#empty-cart-div').hide()
                 $('#checkout-cart').removeClass('d-none')
                 $('#cart-bill-div').removeClass('d-none')
-                $('#qty-'+id).attr('data-ing',response.message.paidIngAmt)
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()
             }
@@ -404,12 +411,12 @@ function addCustomizedCart(id, doesExist = 0) {
 }
 
 function updateCartAmount(dishId, amount, type) {
-    var currentVal = $('#total-amt' + dishId).text()
+    var currentVal = $('#total-amt' + dishId).text().replace(/,/g, '')
 
     if (type == 'add') {
-        $('#total-amt' + dishId).text(parseFloat(currentVal) + parseFloat(amount))
+        $('#total-amt' + dishId).text((parseFloat(currentVal) + parseFloat(amount)).toFixed(2))
     } else if (type == 'sub') {
-        $('#total-amt' + dishId).text(parseFloat(currentVal) - parseFloat(amount))
+        $('#total-amt' + dishId).text((parseFloat(currentVal) - parseFloat(amount)).toFixed(2))
     }
 
 }
@@ -427,7 +434,8 @@ function calculateTotalCartAmount() {
         var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
 
         $('#cart-item-price'+id).text('+€'+itemAmount.toFixed(2))
-        totalAmt += itemAmount + parseFloat($(element).attr('data-ing'))
+        $('#paid-ing-price'+id).text('+€'+(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing'))).toFixed(2))
+        totalAmt += itemAmount + parseFloat(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing')))
 
     })
 

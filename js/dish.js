@@ -16,9 +16,6 @@ $(function () {
             category_id: {
                 required: true
             },
-            percentage_off: {
-                required: true
-            },
             qty: {
                 required: true
             },
@@ -46,9 +43,6 @@ $(function () {
                 required: true
             },
             category_id: {
-                required: true
-            },
-            percentage_off: {
                 required: true
             },
             qty: {

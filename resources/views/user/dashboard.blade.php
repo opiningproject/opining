@@ -318,7 +318,7 @@
                                                                         <?php
                                                                         $cartValue += ($dish->qty * $dish->dish->price);
                                                                         $paidIngredient = $dish->paid_ingredient_total;
-                                                                        $cartValue += $paidIngredient;
+                                                                        $cartValue += ($dish->qty * $paidIngredient);
                                                                         $outOfStock = '';
                                                                         $outOfStockDisplay = 'd-none';
                                                                         if ($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1') {
@@ -359,7 +359,7 @@
                                   </span>
                                                                                         <input type="number" readonly
                                                                                                class="count cart-amt"
-                                                                                               id="qty-{{ $dish->dish->id }}"
+                                                                                               id="qty-{{ $dish->id }}"
                                                                                                name="qty-{{ $dish->id }}"
                                                                                                value="{{ $dish->qty }}"
                                                                                                data-ing="{{ $paidIngredient }}"
@@ -401,7 +401,7 @@
                                                                                                 Edit
                                                                                             </p>
 
-                                                                                            <p class="price-opt mb-0 text-nowrap" id="paid-ing-price">+€{{ number_format($dish->paid_ingredient_total,2) }}</p>
+                                                                                            <p class="price-opt mb-0 text-nowrap" id="paid-ing-price{{ $dish->id }}">+€{{ number_format($paidIngredient * $dish->qty,2) }}</p>
                                                                                         </div>
                                                                                         <div
                                                                                             class="from-group addnote-from-group mb-0">

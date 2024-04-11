@@ -240,7 +240,7 @@ if (!function_exists('getOrderGrossAmount')) {
     function getOrderGrossAmount($order)
     {
 
-        return number_format((float)($order->total_amount - $order->platform_charge - $order->delivery_charge + $order->coupon_discount),2);
+        return number_format(((float)$order->total_amount - (float)$order->platform_charge - (float)$order->delivery_charge + (float)$order->coupon_discount),2);
     }
 }
 

@@ -70,7 +70,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                  </div>
 
                                                     @if(session('zipcode'))
-                                                    <div class="mobilecheckoutContent">    
+                                                    <div class="mobilecheckoutContent">
                                                     <div class="delivery-details">
                                                             <h4 class="custom-card-title-1 form-group">delivery
                                                                 address</h4>
@@ -222,7 +222,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             </div>
                                         </div>
                                         <div class="cart-form-card-body cursor-initial d-block">
-                                            
+
                                             <div class="card custom-card h-100 custom-card-mobile-toggle">
                                                 <div class="card-body pb-4 checkout-form">
 
@@ -293,7 +293,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                         </div>
                                         <div class="cart-form-card-body cursor-initial cart-form-card-body-last d-block pb-0">
                                             <div class="card custom-card h-100 mb-4 custom-card-mobile-toggle">
-                                            
+
                                                 <div class="card-body pb-0 checkout-form">
 
                                                 <div class="mobileStaticToggle">
@@ -479,10 +479,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                             <div class="cart-section cart-checkout-section">
                                                 <h6 class="cart-title">Order Details</h6>
                                                 @foreach($user->cart->dishDetails as $dishDetails)
-                                                    <?php
-    $cartAmount += ($dishDetails->qty * $dishDetails->dish->price);
-    $cartAmount += isset($dishDetails->orderDishPaidIngredients) ? $dishDetails->orderDishPaidIngredients()->select(\Illuminate\Support\Facades\DB::raw('sum(quantity * price) as total'))->get()->sum('total') : 0;
-                                                    ?>
+
                                                     <div class="cart-items">
                                                         <div class="row">
 

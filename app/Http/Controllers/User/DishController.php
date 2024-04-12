@@ -246,7 +246,7 @@ class DishController extends Controller
                                         <span class='minus'>
                                           <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)></i>
                                         </span>
-                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient_id' readonly id='dishIng$ingredient->id' value='$paidQty'>
+                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient_id' readonly id='dishIng$ingredient->id' data-price='$ingredient_price' value='$paidQty'>
                                         <span class='plus'>
                                           <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+',$dish->id)></i>
                                         </span>

@@ -40,7 +40,7 @@
                                             <p class="food-price">€ {{ $dish->dish->price }}</p>
 
                                             <button type="button" class="btn btn-xs-sm btn-custom-yellow"
-                                                    onclick="customizeDish({{ $dish->dish_id }}, {{ $dish->id }});"
+                                                    onclick="customizeDish({{ $dish->dish->id }});"
                                                     id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $disableBtn }}>
                                                 @if($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1')
                                                     Out of stock

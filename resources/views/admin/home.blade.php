@@ -48,7 +48,7 @@
                                                 <div class="dropdown userlogin-dropdown custom-default-dropdown">
                                                     <button class="btn btn-light dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <img src="images/user-img.png" alt="user image" class="img-fluid">
+                                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid">
                                                         <div class="d-inline-block text-start userdp-text">
                                                             <a href="javascript:void(0);"
                                                                 class="text-yellow-2 d-block">{{ Auth::user()->name }}</a>

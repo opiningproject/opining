@@ -47,7 +47,8 @@ class ChatController extends Controller
         })->orWhere(function ($query) use ($adminId, $userId) {
             $query->where('sender_id', $userId)
                   ->where('receiver_id', $adminId);
-        })->orderBy('created_at', 'asc')->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
+        })->orderBy('created_at', 'asc')
+            ->paginate(50, ['*'], 'page', $pageNumber); // Fetch messages
         $messages->getCollection()->transform(function ($item) {
 
             $item->appendStyle = '';
@@ -83,8 +84,9 @@ class ChatController extends Controller
 
         $pageNumber = request()->input('page', 1);
 
-        $chats = Chat::select('sender_id', 'receiver_id')
-                ->distinct()
+        $chats = Chat::select('sender_id', 'receiver_id','created_at')
+            ->orderBy('created_at', 'desc')
+            ->distinct()
                 ->paginate(9, ['*'], 'page', $pageNumber)
                 ->flatMap(function ($chat) {
                     return [$chat->sender_id, $chat->receiver_id];
@@ -93,6 +95,14 @@ class ChatController extends Controller
                 ->map(function ($userId) {
                     Log::info('UUUU',[$userId]);
                     $user = User::find($userId);
+                    $unreadCount = Chat::where(function ($query) use ($userId) {
+                        $query->where('sender_id', $userId)
+                            ->where('is_read', "0");
+                    })->count();
+
+                    // Add unreadCount attribute to the user
+                    $user->unreadCount = $unreadCount;
+
                     $user->chats = Chat::where('sender_id', $userId)->with(['sender','receiver'])
                         ->orWhere('receiver_id', $userId)
                         ->latest()->first();
@@ -108,12 +118,27 @@ class ChatController extends Controller
         $storeChat->sender_id = $request->sender_id;
         $storeChat->receiver_id = $request->receiver_id;
         $storeChat->message = $request->message;
+        $storeChat->attachment = $request->fileName;
         $storeChat->save();
         $storeChat->createdAt = $storeChat->created_at->format('h:m a');
         $storeChat->userImage  = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
         return \response()->json([
             "status"=>"200",
             'data' =>$storeChat
+        ]);
+    }
+
+
+    public function storeAttachment(Request $request)
+    {
+        $attachmentName = "";
+        if ($request->has('file')) {
+            $imageName = uploadAttachmentToBucket($request, '/chat');
+            $attachmentName = $imageName;
+        }
+        return \response()->json([
+            "status" => "200",
+            'imageName' => $attachmentName
         ]);
     }
 }

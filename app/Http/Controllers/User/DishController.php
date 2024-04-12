@@ -277,7 +277,7 @@ class DishController extends Controller
                   <div class='modal-header border-0 d-block'>
                     <button type='button' class='btn-close float-end' data-bs-dismiss='modal' aria-label='Close'></button>
                     <div class='customisable-item-detail mt-3 text-center'>
-                      <div class='mb-3 text-center'>
+                      <div class='mb-3 text-center pro-image'>
                       <img src='$dish->image' alt='burger' width='100' height='100' id='dish_image'>
                       </div>
                       <h4>$dish->name</h4>
@@ -292,9 +292,9 @@ class DishController extends Controller
                     $html_paid_ingredients
                   </div>
                   <div class='modal-footer border-top-0 d-block px-2 px-xxl-3'>
-                    <div class='row align-items-center'>
-                      <div class='col'>
-                        <div class='foodqty mt-0'>
+                    <div class='row align-items-center modal-footer-sticky'>
+                      <div class='col qty-col'>
+                        <div class='foodqty mt-0 mb-0'>
                           <span class='minus'>
                             <i class='fas fa-minus align-middle' onclick=addSubDishQuantities($dish->id,'-',$dish->qty)></i>
                           </span>
@@ -304,7 +304,7 @@ class DishController extends Controller
                           </span>
                         </div>
                       </div>
-                      <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
+                      <div class='col col-xx-6 col-xl-7 col-lg-6 col-md-6 text-end float-end ms-auto'>
                         <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart($dish->id,$doesExist)>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>" . number_format((float)$totalAmt, 2) . "</span>
                         </a>
                       </div>

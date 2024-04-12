@@ -303,7 +303,7 @@ function addSubDishQuantities(dishId, operator, maxQty) {
     if (operator == '-') {
         if (currentQty != 1) {
             $('input[name=qty-' + dishId + ']').val(currentQty - 1);
-            updateCartAmount(dishId, dishAmt, 'sub')
+            updateCartAmount(dishId, dishAmt, 'sub', 1)
         }
     }
 
@@ -313,7 +313,7 @@ function addSubDishQuantities(dishId, operator, maxQty) {
         }
 
         $('input[name=qty-' + dishId + ']').val(currentQty + 1);
-        updateCartAmount(dishId, dishAmt, 'add')
+        updateCartAmount(dishId, dishAmt, 'add',1)
     }
 }
 
@@ -321,17 +321,18 @@ function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
 
     var currentQty = parseInt($('#dishIng' + IngDishId).val());
     var amount = parseFloat($('#ing-price-val' + IngDishId).text())
+    var totalDishQty = parseInt($('#totalDishQty').val())
 
     if (operator == '-') {
         if (currentQty != 0) {
             $('#dishIng' + IngDishId).val(currentQty - 1);
-            updateCartAmount(dishId, amount, 'sub')
+            updateCartAmount(dishId, (amount * totalDishQty), 'sub')
         }
     }
 
     if (operator == '+') {
         $('#dishIng' + IngDishId).val(currentQty + 1);
-        updateCartAmount(dishId, amount, 'add')
+        updateCartAmount(dishId, (amount * totalDishQty), 'add')
     }
 }
 
@@ -384,6 +385,7 @@ function addCustomizedCart(id, doesExist = 0) {
                         totalAmount = parseInt(currentVal) + parseInt(totalDishQty)
                     }else{
                         totalAmount = parseInt(totalDishQty)
+                        $('#qty-'+doesExist).attr('data-ing', response.message.paidIngAmt)
                     }
                     $('#qty-' + response.message.addedDishId).val(totalAmount)
                 } else {
@@ -410,13 +412,24 @@ function addCustomizedCart(id, doesExist = 0) {
     })
 }
 
-function updateCartAmount(dishId, amount, type) {
+function updateCartAmount(dishId, amount, type, dish = 0) {
     var currentVal = $('#total-amt' + dishId).text().replace(/,/g, '')
+    var ingAmount = 0.00
+
+    if(dish == 1){
+        if ($('.dishPaidIngQty').length) {
+            $('.dishPaidIngQty').each(function (index, element) {
+                if ($(element).val() > 0) {
+                    ingAmount += parseFloat($(element).data('price')) * parseInt($(element).val())
+                }
+            })
+        }
+    }
 
     if (type == 'add') {
-        $('#total-amt' + dishId).text((parseFloat(currentVal) + parseFloat(amount)).toFixed(2))
+        $('#total-amt' + dishId).text((parseFloat(currentVal) + (parseFloat(amount) + parseFloat(ingAmount))).toFixed(2))
     } else if (type == 'sub') {
-        $('#total-amt' + dishId).text((parseFloat(currentVal) - parseFloat(amount)).toFixed(2))
+        $('#total-amt' + dishId).text((parseFloat(currentVal) - (parseFloat(amount) + parseFloat(ingAmount))).toFixed(2))
     }
 
 }

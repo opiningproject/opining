@@ -330,7 +330,7 @@ class CartController extends Controller
                         ]);
                     }
                 }
-                $paidIngAmt *= $request->dishQty;
+//                $paidIngAmt *= $request->dishQty;
 
             }
 

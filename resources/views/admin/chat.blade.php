@@ -25,7 +25,7 @@
                                 <div class="chatbox-header d-flex gap-3">
                                     <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
                                         <div class="profile-img">
-                                            <img src="{{ asset('images/user-profile-img.svg') }}" class="img-fluid" alt="gomel" width="60" height="60">
+                                            <img src="{{ asset('images/user-profile-img.svg') }}" class="img-fluid chat-profile" alt="gomel" width="60" height="60">
                                         </div>
                                         <div class="profile-textgrp">
                                             <div class="profile-title" id="chatbox-username"></div>
@@ -42,19 +42,17 @@
                                     <div class="form-group mb-0 position-relative d-flex gap-2 bg-gray align-items-center">
                                         <input type="text" id="message-input" class="form-control w-100 bg-transparent border-0 outline-0 message-input" placeholder="Write your message...">
                                         <div class="d-flex gap-2 gap-sm-3">
-                                            <button class="border-0 outline-0 bg-transparent svg-btn">
-                                                <img src="{{ asset('images/attach.svg') }}" alt="" height="40" width="40" class="svg">
-                                            </button>
+                                            <label for="admin_chat_attachment" class="custom-file-upload">
+                                                <img src={{ asset('images/attach.svg') }}>
+                                            </label>
+                                            <input id="admin_chat_attachment" class="admin_chat_attachment" name="admin_chat_attachment" type="file" style="display: none"/>
                                             <button class="btn btn-xs-sm btn-custom-yellow" id="send-btn">Send</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {{-- Dynamic Message Block --}}
-
-
                         </div>
-
                     </div>
                 </main>
             </div>

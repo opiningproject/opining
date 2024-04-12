@@ -3134,7 +3134,7 @@ max-width: 80px;
 }
 
 nav .pagination {
-margin-bottom: 0px; 
+margin-bottom: 0px;
 }
 
 
@@ -3169,7 +3169,7 @@ margin-bottom: 0px;
 .btn-auto {
 max-width: initial !important;
 width: auto !important;
-} 
+}
 
 .custom-pagination select.form-control {
 background-position:  calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em !important;
@@ -3184,4 +3184,27 @@ background-position:  calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(
     font-weight: 400;
     letter-spacing: 0.19px;
     border-radius: 20px;
+}
+/*new css*/
+.ChatDiv-main .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .activicon {
+    width: 16px;
+    height: 16px;
+    background-color: var(--theme-success4);
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid white;
+}
+.ChatDiv-main .ChatDiv .ChatDiv-type .badge {
+    height: 35px;
+    position: relative;
+    width: 37px;
+    top: 10%;
+    left: 90.5%;
+    padding: 12px 12px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    z-index:1
 }

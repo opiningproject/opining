@@ -38,17 +38,21 @@
                                         <!-- Messages will be displayed here -->
                                     </div>
                                 </div>
-                                <div class="chatbox-footer">
+                                <div class="chatbox-footer" style="display: none">
                                     <div class="form-group mb-0 position-relative d-flex gap-2 bg-gray align-items-center">
-                                        <input type="text" id="message-input" class="form-control w-100 bg-transparent border-0 outline-0 message-input" placeholder="Write your message...">
+                                        <input type="text" id="message-input" class="form-control w-100 bg-transparent border-0 outline-0 message-input" placeholder="Write your message..." required>
                                         <div class="d-flex gap-2 gap-sm-3">
                                             <label for="admin_chat_attachment" class="custom-file-upload">
                                                 <img src={{ asset('images/attach.svg') }}>
                                             </label>
                                             <input id="admin_chat_attachment" class="admin_chat_attachment" name="admin_chat_attachment" type="file" style="display: none"/>
-                                            <button class="btn btn-xs-sm btn-custom-yellow" id="send-btn">Send</button>
+                                            <button class="btn btn-xs-sm btn-custom-yellow send-btn" id="send-btn" disabled>Send</button>
+
                                         </div>
+
                                     </div>
+                                    <br>
+                                    <div id="image-holder" class="image-holder"> </div>
                                 </div>
                             </div>
                             {{-- Dynamic Message Block --}}
@@ -67,4 +71,40 @@
             integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
+    <script>
+
+        // on keyup show hide send button
+        $(document).on('keyup', '.message-input', function () {
+            $(".send-btn").removeAttr('disabled');
+            if ($(".message-input").val() == '') {
+                $(".send-btn").prop('disabled', true);
+            }
+        })
+
+        // on change show image.
+        $(document).on('change', '.admin_chat_attachment', function () {
+            readURL(this);
+            $(".send-btn").removeAttr('disabled');
+            if ($(".chat_attachment").val()) {
+                $(".send-btn").prop('disabled', true);
+                    readURL(this);
+            }
+        })
+        // click on cross icon remove image.
+        $(document).on('click', '.remove-image', function () {
+            $('.attachImage').closest('img').remove();
+            $('.remove-image').closest('i').remove();
+            $(".admin_chat_attachment").val('');
+        })
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px; border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

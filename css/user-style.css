@@ -2708,6 +2708,20 @@ input[type=number] {
 }
 
 /* new css */
+
+.remove-image {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: var(--theme-yellow5);
+    color: white;
+    font-size: 16px;
+    padding: 3px 6px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
 .user-chat{
     margin-top: 50px !important;
 }

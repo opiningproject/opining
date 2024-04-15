@@ -5,13 +5,14 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "inx@!123",
     database: "go_meal"
 });
 connection.connect(function (err) {
     if (err) throw err;
     console.log("SQl Connected!");
 });
+
 
 // creating http instance
 var http = require("http").createServer(app);

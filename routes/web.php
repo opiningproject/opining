@@ -173,6 +173,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
 
+    Route::get('/validate-myfinance', [PaymentsController::class, 'validateMyFinance']);
+    Route::post('/check-myfinance-password', [PaymentsController::class, 'checkMyFinancePassword'])->name('checkMyFinancePassword');
+
 });
 
 Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {

@@ -60,7 +60,8 @@ class ChatController extends Controller
 
             return $item;
         });
-
+        //message read logic
+         Chat::where('sender_id', $userId)->orWhere('receiver_id', $userId)->update(['is_read' => "1"]);
         $chats = $messages;
 
         return view('admin.chats.messages', ['messages' => $chats]);

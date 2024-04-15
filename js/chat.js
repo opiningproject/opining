@@ -160,7 +160,7 @@ $(document).on('click', '.ChatDiv-list', function () {
     var image = $(this).find('.userimage').attr('src'); // Get the sender's name
     $('#chatbox-username').text(senderName); // Update displayed username
     $('.chat-profile').attr("src",image); // Update displayed username
-
+    $('.chatbox-footer').show()
     page = 1;
     fetchMessages(senderId, receiverId,userId);
 });

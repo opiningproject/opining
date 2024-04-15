@@ -54,17 +54,19 @@
                                                class="form-control w-100 bg-transparent border-0 outline-0 message-input"
                                                placeholder="Write your message...">
                                         <div class="d-flex gap-2 gap-sm-3">
-                                            <label for="chat_attachment">
+                                            <label for="chat_attachment" class="custom-file-upload">
                                                 <img src={{ asset('images/attach.svg') }}/>
                                                 <input id="chat_attachment" type="file" name="chat_attachment"
                                                        class="chat_attachment" style="display: none"/>
                                             </label>
                                             <button
-                                                class="btn btn-xs-sm btn-custom-yellow send-btn-user_{{ \Auth::user()->id }}">
+                                                class="btn btn-xs-sm btn-custom-yellow send-user-btn send-btn-user_{{ \Auth::user()->id }}" disabled>
                                                 Send
                                             </button>
                                         </div>
                                     </div>
+                                    <br>
+                                    <div id="image-holder" class="image-holder"> </div>
                                 </div>
                             </div>
                             {{-- Dynamic Message Block --}}
@@ -89,4 +91,34 @@
             integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/user-chat.js') }}"></script>
+    <script>
+        // on keyup show hide send button
+        $(document).on('keyup', '.message-input', function () {
+            $(".send-user-btn").removeAttr('disabled');
+            if ($(".message-input").val() == '') {
+                $(".send-user-btn").prop('disabled', true);
+            }
+        })
+        // on change show image.
+        $(document).on('change', '.chat_attachment', function () {
+            readURL(this);
+            $(".send-user-btn").removeAttr('disabled');
+        })
+        // click on cross icon remove image.
+        $(document).on('click', '.remove-image', function () {
+            $('.attachImage').closest('img').remove();
+            $('.remove-image').closest('i').remove();
+            $(".chat_attachment").val('');
+        })
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

@@ -12,7 +12,10 @@
             <img src="{{ $chat->image ? $chat->image : asset('images/user-profile-img.svg') }}" alt="Profile-Img" class="img-fluid userimage"
                  width="56" height="56">
             <div class="text-grp d-flex flex-column sender_name">
-                <div class="title">{{ ucfirst($chat->first_name) }}</div>
+                <div class="title" @if($chat->unreadCount && $chat->unreadCount > 0) style="font-weight:bold" @endif>
+                    {{ ucfirst($chat->first_name) }}
+
+                </div>
                 <div class="text">{{ $chat->chats->created_at->format('h:i a | d, M Y') }}</div>
                 @if($chat->is_online == 1)
                     <p>

@@ -130,7 +130,7 @@ class CartController extends Controller
                       </div>
                       <div class='d-flex align-items-center'>
                         <p class='mb-0 item-options mb-0'> $optionName </p>
-                        <span class='item-desc'>$ingredientData</span>
+                        <span class='item-desc' id='item-ing-desc$cart->id'>$ingredientData</span>
 <p class='item-customize mb-0 ms-auto justify-content-end'>
                                                                                                 <a href='javascript:void(0);'
                                                                                                    onclick='customizeDish($dish->id,$cart->id);'>
@@ -218,6 +218,7 @@ class CartController extends Controller
             $sameDish = 0;
             $addedDishId = 0;
             $paidIngAmt = 0.00;
+            $IngListData = '';
             $selectedFreeIng = $request->freeIng ?? [];
             $selectedPaidIng = $request->paidIng ?? [];
             ksort($selectedPaidIng);
@@ -339,6 +340,7 @@ class CartController extends Controller
                         ]);
                     }
                 }
+                $IngListData = getOrderDishIngredients($orderDetails);
 //                $paidIngAmt *= $request->dishQty;
 
             }
@@ -371,6 +373,7 @@ class CartController extends Controller
             }*/
             $response['msg'] = 'Cart Added Successfully';
             $response['paidIngAmt'] = $paidIngAmt;
+            $response['ingListData'] = $IngListData;
             $response['addedDishId'] = $sameDish;
             return response::json(['status' => 200, 'message' => $response]);
 

@@ -12,7 +12,9 @@
         {{ $message->first_name }}
         <img src="{{ $image }}" alt="Profile-Img" class="img-fluid" width="56" height="56">
         <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">
-            <p style={{$message->messageStyle}}>{{$message->message}}</p>
+            @if($message->message!= null)
+                <p style={{$message->messageStyle}}>{{ $message->message }}</p>
+            @endif
             @if($message->attachment)
                 <a href="{{ $message->attachment }}" target="_blank">
                     <img src="{{$message->attachment}}" style="height: 100px;width: 100px;">

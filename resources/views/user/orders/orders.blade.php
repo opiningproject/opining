@@ -198,7 +198,7 @@
                                                                 <div class="text line-clamp-2"
                                                                      id="order-ingredient-{{ $dish->id}}">
                                                                     <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>
-                                                                    + {{ getOrderDishIngredients($dish) }}
+                                                                    {{ getOrderDishIngredients($dish) }}
                                                                 </div>
                                                                 <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                                                     <a href="javascript:void(0)"
@@ -231,7 +231,7 @@
                                             <div class="list">
                                                 <div class="list-item">
                                                     <div class="text">Item Total</div>
-                                                    <div class="number">€{{ getOrderGrossAmount($order) }}</div>
+                                                    <div class="number">€{{ number_format(getOrderGrossAmount($order),2) }}</div>
                                                 </div>
                                                 <div class="list-item">
                                                     <div class="text">Service Charge</div>
@@ -245,7 +245,7 @@
                                                 <div
                                                     class="list-item active" {{ isset($order->coupon) ? '' : 'style=display:none' }}>
                                                     <div class="text">Item Discount</div>
-                                                    <div class="number">-€{{ $order->coupon_discount }}</div>
+                                                    <div class="number">-€{{ number_format($order->coupon_discount,2) }}</div>
                                                 </div>
                                             </div>
                                         </div>

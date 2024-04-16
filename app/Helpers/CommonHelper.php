@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Dish;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\RestaurantOperatingHour;
@@ -133,11 +134,20 @@ if (!function_exists('getOrderDishIngredients')) {
 
         $ingredients = '';
 
-        if (!empty($dish->orderDishIngredients)) {
-            foreach ($dish->orderDishIngredients as $key => $ingredient) {
+        $dishData = Dish::find($dish->dish_id);
+        if($dish->orderDishFreeIngredients->count() != $dishData->freeIngredients->count()){
+            $ingredients .= '-';
+            foreach ($dishData->freeIngredients as $freeIngredient) {
+                $ingredients .= $freeIngredient->ingredient->name.', ';
+            }
+        }
+
+        if (count($dish->orderDishPaidIngredients)>0) {
+            $ingredients .= '+';
+            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
                 $ingredients .= $ingredient->dishIngredient->ingredient->name;
 
-                $ingredients .= $ingredient->is_free ? ', ' : "($ingredient->quantity" . "x), ";
+                $ingredients .= "($ingredient->quantity" . "x), ";
 
             }
         }
@@ -201,7 +211,7 @@ if (!function_exists('getCartTotalAmount')) {
         $user = Auth::user();
         $cartTotal = $user->cart->dishDetails()->get()->sum('dish_price');
         $cartIngredient = $user->cart->dishDetails()->get()->sum('paid_ingredient_total');
-        return number_format((float)($cartTotal + $cartIngredient),2);
+        return (float)($cartTotal + $cartIngredient);
     }
 
 }
@@ -239,8 +249,7 @@ if (!function_exists('getAddressDetails')) {
 if (!function_exists('getOrderGrossAmount')) {
     function getOrderGrossAmount($order)
     {
-
-        return number_format(((float)$order->total_amount - (float)$order->platform_charge - (float)$order->delivery_charge + (float)$order->coupon_discount),2);
+        return (float)$order->total_amount - (float)$order->platform_charge - (float)$order->delivery_charge + (float)$order->coupon_discount;
     }
 }
 

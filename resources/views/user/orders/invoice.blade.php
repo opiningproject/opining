@@ -93,7 +93,7 @@
 
         @foreach($order->dishDetails as $key => $dish)
         <tr>
-            <td colspan="4">{{ $dish->dish->name }}<br><b>{{ $dish->dishOption->name ?? '' }}</b>-{{ getOrderDishIngredients($dish) }}</td>
+            <td colspan="4">{{ $dish->dish->name }}<br><b>{{ $dish->dishOption->name ?? '' }}</b>{{ getOrderDishIngredients($dish) }}</td>
             <td>€{{ $dish->price }}</td>
             <td>{{ $dish->dish->percentage_off }}%</td>
             <td>{{ $dish->qty }}</td>

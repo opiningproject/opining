@@ -17,7 +17,7 @@ use App\Enums\RefundStatus;
                     <div class="section-page-title mb-0 d-flex align-items-center justify-content-between gap-2 foodorder-page-title">
                         <h1 class="page-title">Food Order</h1>
                         <div class="btn-grp d-flex align-items-center flex-wrap">
-                            <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown" aria-expanded="false"> 
+                            <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ asset('images/filter-icon.svg') }}" alt="img" class="img-fluid svg" width="22" height="20">
                                 <div class="text">Filter Orders</div>
                             </button>
@@ -96,15 +96,15 @@ use App\Enums\RefundStatus;
                                             <div class="title mb-2">
                                                 <?php
                                                     echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
-                                                ?>               
+                                                ?>
                                             </div>
                                             @else
                                                 <div class="title mb-2">
-                                                {{ getRestaurantDetail()->rest_address }}    
+                                                {{ getRestaurantDetail()->rest_address }}
                                                 </div>
                                             @endif
                                             <div class="text">
-                                                <span>Delivery Instruction:</span> {{ $order->delivery_note }} 
+                                                <span>Delivery Instruction:</span> {{ $order->delivery_note }}
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@ use App\Enums\RefundStatus;
                                                 <span>Payment Method: </span>{{ $order->payment_type == PaymentType::Card ? 'Card': ($order->payment_type == PaymentType::Cash ? 'Cash On Delivery':'Ideal') }}
                                             </div>
                                             <div class="text">
-                                                <span>Order Type: </span>{{ $ord->order_type == OrderType::Delivery ? 'Delivery':'Pickup' }} 
+                                                <span>Order Type: </span>{{ $ord->order_type == OrderType::Delivery ? 'Delivery':'Pickup' }}
                                             </div>
                                         </div>
                                     </div>
@@ -134,14 +134,14 @@ use App\Enums\RefundStatus;
                                     @if($order->order_status >= OrderStatus::InKitchen)
                                     <div class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                                         <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                            <img src="{{ asset('images/orderinkitchen-black.svg') }}" class="img-fluid svg" width="25" height="19"> 
+                                            <img src="{{ asset('images/orderinkitchen-black.svg') }}" class="img-fluid svg" width="25" height="19">
                                         </div>
                                         <div class="text">{{ $order_status }}</div>
                                     </div>
                                     @else
                                     <div class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                                         <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                            <img src="{{ asset('images/orderinkitchen-white.svg') }}" class="img-fluid svg" width="25" height="19"> 
+                                            <img src="{{ asset('images/orderinkitchen-white.svg') }}" class="img-fluid svg" width="25" height="19">
                                         </div>
                                         <div class="text">{{ $order_status }}</div>
                                     </div>
@@ -169,7 +169,7 @@ use App\Enums\RefundStatus;
                                         @if($order->order_status >= OrderStatus::OutForDelivery)
                                         <div class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                                             <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                <img src="{{ asset('images/out-for-delivery-black.svg') }}" class="img-fluid svg" width="27" height="20">  
+                                                <img src="{{ asset('images/out-for-delivery-black.svg') }}" class="img-fluid svg" width="27" height="20">
                                             </div>
                                             <div class="text">{{ $order_status }}</div>
                                         </div>
@@ -249,7 +249,7 @@ use App\Enums\RefundStatus;
                                                 <div class="title">{{ $dish->dish->name }}</div>
                                                 <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
                                                     <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
-                                                    - {{ getOrderDishIngredients($dish) }}
+                                                    {{ getOrderDishIngredients($dish) }}
                                                 </div>
                                                 <div class="text">
                                                     <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
@@ -268,7 +268,7 @@ use App\Enums\RefundStatus;
                                                 <div class="text">x{{ $dish->qty }}</div>
                                             </div>
                                         </div>
-                                        @endforeach 
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="footer-main-total">

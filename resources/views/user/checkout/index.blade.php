@@ -507,7 +507,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         <div class="text line-clamp-2"
                                                                              id="order-ingredient-{{ $dishDetails->id}}">
                                                                             <p class="mb-0 item-options mb-0"> {{ $dishDetails->dishOption->name ?? ''}} </p>
-                                                                            -{{ getOrderDishIngredients($dishDetails) }}
+                                                                            {{ getOrderDishIngredients($dishDetails) }}
                                                                         </div>
                                                                         {{--<a class="item-customize"
                                                                            href="javascript:void(0);">read more</a>--}}
@@ -583,7 +583,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="bill-count">€{{ getCartTotalAmount() }}</span>
+                                                                        class="bill-count">€{{ number_format(getCartTotalAmount(),2) }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -593,7 +593,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="bill-count">€{{ $serviceCharge }}</span>
+                                                                        class="bill-count">€{{ number_format($serviceCharge,2) }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -602,7 +602,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="bill-count">€{{ $deliveryCharges }}</span>
+                                                                        class="bill-count">€{{ number_format($deliveryCharges,2) }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr {{ isset($user->cart->coupon) ? '' : 'style=display:none' }}>
@@ -613,7 +613,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </td>
                                                                 <td class="text-end">
                                                                     <span
-                                                                        class="text-custom-light-green bill-count">-€{{ $couponDiscount }}</span>
+                                                                        class="text-custom-light-green bill-count">-€{{ number_format($couponDiscount,2) }}</span>
                                                                 </td>
                                                             </tr>
                                                             </tbody>

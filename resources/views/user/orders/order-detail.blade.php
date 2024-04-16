@@ -117,7 +117,7 @@ use App\Enums\RefundStatus;
                             <div class="title">{{ $dish->dish->name }}</div>
                             <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
                                 <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
-                                + {{ getOrderDishIngredients($dish) }}
+                                {{ getOrderDishIngredients($dish) }}
                             </div>
                             <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                 <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
@@ -151,19 +151,19 @@ use App\Enums\RefundStatus;
         <div class="list">
             <div class="list-item">
                 <div class="text">Item Total</div>
-                <div class="number">€{{ getOrderGrossAmount($order) }}</div>
+                <div class="number">€{{ number_format(getOrderGrossAmount($order),2) }}</div>
             </div>
             <div class="list-item">
                 <div class="text">Service Charge</div>
-                <div class="number">€{{ $order->platform_charge }}</div>
+                <div class="number">€{{ number_format($order->platform_charge,2) }}</div>
             </div>
-            <div class="list-item">
+            <div class="list-item" {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
                 <div class="text">{{ $order->delivery_charge ? 'Delivery Charge':'Free Delivery' }}</div>
-                <div class="number">€{{ $order->delivery_charge }}</div>
+                <div class="number">€{{ number_format($order->delivery_charge,2) }}</div>
             </div>
-            <div class="list-item active">
+            <div class="list-item active" {{ isset($order->coupon) ? '' : 'style=display:none' }}>
                 <div class="text">Item Discount</div>
-                <div class="number">-€{{ $order->coupon_discount }}</div>
+                <div class="number">-€{{ number_format($order->coupon_discount,2) }}</div>
             </div>
         </div>
     </div>
@@ -171,7 +171,7 @@ use App\Enums\RefundStatus;
         <div class="list">
             <div class="list-item">
                 <div class="text">Total</div>
-                <div class="number">€{{ number_format($order->total_amount,2) }}</div>
+                <div class="number">€{{ number_format((float)$order->total_amount,2) }}</div>
             </div>
         </div>
     </div>

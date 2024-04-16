@@ -5160,6 +5160,10 @@ footer .footer-logo a {font-size: initial !important;}
     min-height: auto !important;
     height: auto !important;
 }
+
+.foodqty .count {
+    width: 30px !important;
+}
 /* */
 
 

@@ -5002,7 +5002,7 @@ line-height: initial !important;
 .customisable-modal-body .modal-footer-sticky .qty-col {
 flex: 0 0 115px;
 max-width: 115px;
-} 
+}
 
 .customisable-modal-body .modal-footer-sticky .btn-mobile {
   padding: 12px 10px 8px !important;
@@ -5147,3 +5147,19 @@ footer .footer-logo a {font-size: initial !important;}
     font-size: 14px;
     line-height: 16px;
 }
+ /* Rekha Sharma */
+.paid-ing-text{
+    font-size: small !important;
+}
+
+.paid-ing-text .food-custom-price{
+    font-size: small !important;
+}
+
+.edit-icon {
+    min-height: auto !important;
+    height: auto !important;
+}
+/* */
+
+

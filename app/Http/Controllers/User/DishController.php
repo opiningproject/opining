@@ -239,7 +239,7 @@ class DishController extends Controller
                                     <td width='10%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
-                                    <td class='text-left'>$ingredient_name <span class='food-custom-price'>€ <span id='ing-price-val$ingredient->id'>$ingredient_price</span></span>
+                                    <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>$ingredient_price</span></span>
                                     </td>
                                     <td width='7%'>
                                       <div class='foodqty mt-0'>
@@ -264,11 +264,11 @@ class DishController extends Controller
                     </div>";
         }
 
-        $addUpdateText = 'Add to Cart';
+        $addUpdateText = 'Add Item';
         $orderQty = 1;
 
             if ($doesExist) {
-            $addUpdateText = 'Update Cart';
+            $addUpdateText = 'Update Item';
             $orderQty = $dishDetail->qty;
         }
 

@@ -109,7 +109,7 @@ class CheckoutController extends Controller
                 $pointsRedeemed = $user->cart->coupon->points;
             }
 
-            $totalAmtPaid = ((float)$cartTotal + $serviceCharges + $deliveryCharges) - $couponDiscount;
+            $totalAmtPaid = ($cartTotal + $serviceCharges + $deliveryCharges) - $couponDiscount;
 
             if ($pointClaimed > 0) {
                 $user->increment('collected_points', $pointClaimed);

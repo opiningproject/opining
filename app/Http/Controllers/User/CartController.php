@@ -130,10 +130,19 @@ class CartController extends Controller
                       </div>
                       <div class='d-flex align-items-center'>
                         <p class='mb-0 item-options mb-0'> $optionName </p>
-                        <span class='item-desc'>+$ingredientData</span>
-
-
-
+                        <span class='item-desc'>$ingredientData</span>
+<p class='item-customize mb-0 ms-auto justify-content-end'>
+                                                                                                <a href='javascript:void(0);'
+                                                                                                   onclick='customizeDish($dish->id,$cart->id);'>
+                                                                                                    <img
+                                                                                                        src='".asset('images/custom-dish.svg')."'
+                                                                                                        alt=''
+                                                                                                        class='svg edit-icon'
+                                                                                                        height='13'
+                                                                                                        width='14'/>
+                                                                                                </a>
+                                                                                                Edit
+                                                                                            </p>
                         <p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total),2) . " </p>
                       </div>
                       <div class='from-group addnote-from-group mb-0'>

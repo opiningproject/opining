@@ -320,7 +320,7 @@ function addSubDishQuantities(dishId, operator, maxQty) {
 function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
 
     var currentQty = parseInt($('#dishIng' + IngDishId).val());
-    var amount = parseFloat($('#ing-price-val' + IngDishId).text())
+    var amount = parseFloat($('#ing-price-val' + IngDishId).text().replace(/,/g, ''))
     var totalDishQty = parseInt($('#totalDishQty').val())
 
     if (operator == '-') {

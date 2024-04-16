@@ -250,7 +250,6 @@ class CartController extends Controller
                     }
                 }
                 if ($sameDish == 0) {
-
                     /*$orderDetails = OrderDetail::find($request->doesExist);
 
                     $orderDetails->orderDishDetails()->delete();
@@ -294,7 +293,7 @@ class CartController extends Controller
                         foreach ($request->paidIng as $key => $paidIng) {
 
                             $ing = DishIngredient::find($key);
-                            $paidIngAmt += ($paidIng * $ing->price);
+                            $paidIngAmt += ((int)$paidIng * $ing->price);
                             $orderDetails->orderDishDetails()->create([
                                 'dish_id' => $id,
                                 'dish_ingredient_id' => $key,
@@ -304,6 +303,7 @@ class CartController extends Controller
                             ]);
                         }
                     }
+
                     $response['cartHtml'] = $this->cartHtml($orderDetails);
                 }
             }else{

@@ -184,7 +184,7 @@
                                                          width="100" height="100"/>
                                                 </div>
                                                 <h4 class="food-name-text">{{ $dish->name }}</h4>
-                                                <p class="food-price">€{{ $dish->price }}</p>
+                                                <p class="food-price">€{{ number_format($dish->price,2) }}</p>
                                                 <button type="button" class="btn btn-xs-sm btn-custom-yellow"
                                                         onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
                                                         id="dish-cart-lbl-{{ $dish->id }}">

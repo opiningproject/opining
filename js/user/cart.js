@@ -385,6 +385,8 @@ function addCustomizedCart(id, doesExist = 0) {
                         totalAmount = parseInt(currentVal) + parseInt(totalDishQty)
                     }else{
                         totalAmount = parseInt(totalDishQty)
+                        console.log('#item-ing-desc'+doesExist)
+                        $('#item-ing-desc'+doesExist).html(response.message.IngListData)
                         $('#qty-'+doesExist).attr('data-ing', response.message.paidIngAmt)
                     }
                     $('#qty-' + response.message.addedDishId).val(totalAmount)

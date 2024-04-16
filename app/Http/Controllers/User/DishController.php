@@ -239,7 +239,7 @@ class DishController extends Controller
                                     <td width='10%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
-                                    <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>$ingredient_price</span></span>
+                                    <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>".number_format($ingredient_price,2)."</span></span>
                                     </td>
                                     <td width='7%'>
                                       <div class='foodqty mt-0'>
@@ -282,7 +282,7 @@ class DishController extends Controller
                       </div>
                       <h4>$dish->name</h4>
                       <p class='my-0'>$dish->description</p>
-                      <span class='food-custom-price mb-0' id='dish_price'>€$dish->price</span>
+                      <span class='food-custom-price mb-0' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
                       $html_options
                     </div>

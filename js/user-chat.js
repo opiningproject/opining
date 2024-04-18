@@ -97,7 +97,11 @@ $(function () {
         socket.emit('sendAdminChatToServer', messageData);
     })
 })
-
+$(document).keypress(function() {
+    if (event.which == 13) {
+        $('.send-btn-user_' + sender_id).click();
+    };
+});
 
 $('.chat-messages-user_' + sender_id).on('scroll', function () {
     if ($(this).scrollTop() === 0 && !fetchingOldMessages) {

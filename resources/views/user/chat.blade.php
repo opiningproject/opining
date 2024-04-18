@@ -101,6 +101,14 @@
         })
         // on change show image.
         $(document).on('change', '.chat_attachment', function () {
+            var ext = $('.chat_attachment').val().split('.').pop().toLowerCase();
+            if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+                alert('invalid extension!');
+                $(".chat_attachment").val('');
+                $(".image-holder").val('');
+                $(".send-user-btn").prop('disabled', true);
+                return false;
+            }
             readURL(this);
             $(".send-user-btn").removeAttr('disabled');
         })

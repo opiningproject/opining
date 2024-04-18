@@ -34,7 +34,7 @@
 
                     <!-- My finance password form popup end -->
 
-                    <div class="main-content">
+                    <div class="main-content" style="filter: blur(8px);">
                         <div class="section-page-title mb-0">
                             <h1 class="page-title">My Finance</h1>
                         </div>
@@ -68,34 +68,6 @@
                                 </div>
                                 <div class="income-diagrams-item-img h-100">
                                     <img src="images/take-graph-1-min.png" alt="img" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="income-diagrams-item d-flex flex-column gap-3">
-                                <div
-                                    class="income-diagrams-item-header d-flex align-items-center justify-content-between">
-                                    <div class="title">Income</div>
-                                    <div class="btn-grp d-flex flex-wrap align-items-center">
-                                        <button class="btn active">Monthly</button>
-                                        <button class="btn">Weekly</button>
-                                        <button class="btn">Year</button>
-                                    </div>
-                                </div>
-                                <div class="income-diagrams-item-img h-100">
-                                    <img src="images/take-graph-2-min.png" alt="img" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="income-diagrams-item d-flex flex-column gap-3">
-                                <div
-                                    class="income-diagrams-item-header d-flex align-items-center justify-content-between">
-                                    <div class="title">Income</div>
-                                    <div class="btn-grp d-flex flex-wrap align-items-center">
-                                        <button class="btn active">Monthly</button>
-                                        <button class="btn">Weekly</button>
-                                        <button class="btn">Year</button>
-                                    </div>
-                                </div>
-                                <div class="income-diagrams-item-img h-100">
-                                    <img src="images/take-graph-3-min.png" alt="img" class="img-fluid">
                                 </div>
                             </div>
                         </div>

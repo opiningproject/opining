@@ -71,18 +71,24 @@ $(function (){
             });
         }
         var fileName = attachment ? attachment.name : null;
-        // console.log("receiver_id",receiver_id, "sender_id",sender_id)
         var messageData = {
-            'sender_id': sender_id,
-            'receiver_id': receiver_id,
+            'sender_id': receiverId,
+            'receiver_id': senderId,
             'receiver_socket': 'PfiZgCle4_nMzNgvAAAF',
             'message': message,
             "fileName": fileName,
             'type':"admin"
         }
         socket.emit('sendAdminChatToServer', messageData);
+        $(".send-btn").prop('disabled', true);
     })
 })
+
+$(document).keypress(function() {
+    if (event.which == 13) {
+        $('#send-btn').click();
+    };
+});
 
 let page = 1;
 let activeDivId = null;
@@ -140,7 +146,7 @@ $(document).on('click', '.ChatDiv-list', function () {
     let chatId = $(this).data('chat-id');
     userId = $(this).data('user');
     let parentDiv = $('#chat_item_'+chatId);
-
+    $('.badge_'+senderId).text('')  // remove badge count
     let clickedDivId = parentDiv.attr('id');
 
     // Deactivate previously active div

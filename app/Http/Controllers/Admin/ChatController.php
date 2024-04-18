@@ -119,6 +119,7 @@ class ChatController extends Controller
         $storeChat->sender_id = $request->sender_id;
         $storeChat->receiver_id = $request->receiver_id;
         $storeChat->message = $request->message;
+        $storeChat->is_read = "1";
         $storeChat->attachment = $request->fileName;
         $storeChat->save();
         $storeChat->createdAt = $storeChat->created_at->format('h:m a');

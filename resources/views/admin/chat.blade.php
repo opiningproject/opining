@@ -83,10 +83,18 @@
 
         // on change show image.
         $(document).on('change', '.admin_chat_attachment', function () {
-            readURL(this);
-            $(".send-btn").removeAttr('disabled');
-            if ($(".chat_attachment").val()) {
+            var ext = $('.admin_chat_attachment').val().split('.').pop().toLowerCase();
+            if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+                alert('invalid extension!');
+                $(".admin_chat_attachment").val('');
+                $(".image-holder").val('');
                 $(".send-btn").prop('disabled', true);
+                return false;
+            }
+            // readURL(this);
+
+            if ($(".admin_chat_attachment").val()) {
+                $(".send-btn").removeAttr('disabled');
                     readURL(this);
             }
         })
@@ -95,6 +103,7 @@
             $('.attachImage').closest('img').remove();
             $('.remove-image').closest('i').remove();
             $(".admin_chat_attachment").val('');
+            $(".send-btn").prop('disabled', true);
         })
 
         function readURL(input) {

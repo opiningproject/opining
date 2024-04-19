@@ -45,11 +45,7 @@ $userDetails = $order->orderUserDetails;
                     </div>
                 @endif
                 <div class="text">
-<<<<<<< Updated upstream
-                    <span>Delivery Instruction:</span> {{ $order->delivery_note }}
-=======
-                    <span>{{ trans('rest.food_order.instruction') }}:</span> {{ $order->delivery_note }} 
->>>>>>> Stashed changes
+                    <span>{{ trans('rest.food_order.instruction') }}:</span> {{ $order->delivery_note }}
                 </div>
             </div>
         </div>
@@ -62,11 +58,7 @@ $userDetails = $order->orderUserDetails;
                     <span>{{ trans('rest.food_order.payment_method') }}: </span>{{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card'): ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod'):'Ideal') }}
                 </div>
                 <div class="text">
-<<<<<<< Updated upstream
-                    <span>Order Type: </span>{{ $order->order_type == OrderType::Delivery ? 'Delivery':'Pickup' }}
-=======
-                    <span>Order Type: </span>{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }} 
->>>>>>> Stashed changes
+                    <span>Order Type: </span>{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}
                 </div>
             </div>
         </div>

@@ -184,12 +184,15 @@ $(document).on('click', '.ChatDiv-list', function () {
 
 $(document).on('keyup', '#search-chat', function () {
     let search = $(this).val();
-
     $.ajax({
         url: baseURL + '/chat/search-chat?q='+search,
         type: 'GET',
         success: function (response) {
-            $('#ChatDiv').html(response)
+            let searchbox = '<div class="mb-2">\n' +
+            '    <input type="search" name="q" id="search-chat" class="search-box form-control" value="'+search+'" placeholder="Search...">\n' +
+            '    </div>'
+            let newData = [searchbox, response]
+            $('#ChatDiv').html(newData)
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

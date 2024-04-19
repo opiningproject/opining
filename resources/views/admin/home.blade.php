@@ -9,7 +9,7 @@
                             <div class="row">
                                 <div class="col-auto">
                                     <div class="pt-2">
-                                        <h1 class="page-title">Menu</h1>
+                                        <h1 class="page-title">{{ trans('rest.menu.title') }}</h1>
                                     </div>
                                 </div>
                                 <div class="col text-end">
@@ -20,28 +20,26 @@
                                                     <div class="image">
                                                         <img src="{{ asset('images/search.svg') }}" alt="" class="svg" height="32" width="32">
                                                     </div>
-                                                    <input type="text" id="search-dish"
-                                                        class="form-control border-0 outline-0 text-truncate bg-transparent"
-                                                        placeholder="What do you want to eat today..." />
+                                                    <input type="text" id="search-dish" class="form-control border-0 outline-0 text-truncate bg-transparent"
+                                                        placeholder="{{ trans('rest.menu.search') }}" />
                                                 </div>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <a class="btn btn-custom-yellow" data-bs-toggle="modal"
-                                                    data-bs-target="#addCategoryModal">
+                                                <a class="btn btn-custom-yellow" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                                                     <img src="{{ asset('images/add.svg') }}" alt="" class="svg" height="20" width="20">
-                                                    <span class="align-middle ms-3">Add New Category</span>
+                                                    <span class="align-middle ms-3">{{ trans('rest.menu.add_category') }}</span>
                                                 </a>
                                             </div>
                                             <div class="flex-shrink-0">
                                                 <a class="btn btn-custom-yellow" href="{{ route('ingredients.index') }}">
                                                     <img src="{{ asset('images/add.svg') }}" alt="" class="svg" height="20" width="20">
-                                                    <span class="align-middle ms-3">Add New ingredients</span>
+                                                    <span class="align-middle ms-3">{{ trans('rest.menu.add_ingred') }}</span>
                                                 </a>
                                             </div>
                                             <div class="flex-shrink-0">
                                                 <a class="btn btn-custom-yellow" href="{{ route('addDish') }}">
                                                     <img src="{{ asset('images/add.svg') }}" alt="" class="svg" height="20" width="20">
-                                                    <span class="align-middle ms-3">Add New Dish</span>
+                                                    <span class="align-middle ms-3">{{ trans('rest.menu.add_dish') }}</span>
                                                 </a>
                                             </div>
                                             <div class="flex-shrink-0">
@@ -59,10 +57,9 @@
                                                         <li>
                                                             <a class="dropdown-item" href="#"
                                                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                                                {{ __('Logout') }}
+                                                                {{ trans('rest.settings.profile.logout') }}
                                                             </a>
-                                                            <form id="logout-form" action="{{ route('logout') }}"
-                                                                method="POST" class="d-none"> @csrf </form>
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -75,7 +72,7 @@
                         <!-- start category section -->
                         <section class=" custom-section category-section">
                             <div class="section-page-title">
-                                <h1 class="section-title">Categories</h1>
+                                <h1 class="section-title">{{ trans('rest.menu.categories') }}</h1>
                             </div>
                             <div class="swiper-container">
                                 <div class="swiper category-swiper-slider">
@@ -105,7 +102,7 @@
                                                 </div>
                                             @endforeach
                                         @else
-                                            No Category exist
+                                            {{ trans('rest.menu.no_category') }}
                                         @endif
                                     </div>
                                 </div>
@@ -115,8 +112,8 @@
                         <!-- start dishes list section -->
                         <section class="custom-section">
                             <div class="section-page-title">
-                                <h1 class="section-title">Dishes</h1>
-                                <a href="{{ route('dish.index') }}" type="button" class="viewall-btn">View all
+                                <h1 class="section-title">{{ trans('rest.menu.dishes') }}</h1>
+                                <a href="{{ route('dish.index') }}" type="button" class="viewall-btn">{{ trans('rest.button.view_all') }}
                                     <span class="ms-2">
                                         <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
                                     </span>
@@ -128,12 +125,12 @@
                                         @foreach ($dishes as $dish)
                                             <div class="card food-detail-card">
                                                 @if ($dish->out_of_stock == '1')
-                                                    <p class="mb-0 inoutstock-badge text-bg-danger-1">Out of stock</p>
+                                                    <p class="mb-0 inoutstock-badge text-bg-danger-1">{{ trans('rest.menu.dish.out_of_stock') }}</p>
                                                 @else
-                                                    <p class="mb-0 inoutstock-badge text-bg-success-1">In stock</p>
+                                                    <p class="mb-0 inoutstock-badge text-bg-success-1">{{ trans('rest.menu.dish.in_stock') }}</p>
                                                 @endif
                                                 <div class="card-body p-0">
-                                                    <p class="quantity-text badge">Qty:{{ $dish->qty }}</p>
+                                                    <p class="quantity-text badge">{{ trans('rest.menu.dish.qty') }}:{{ $dish->qty }}</p>
                                                     <div class="food-image">
                                                         <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid"
                                                         />
@@ -142,14 +139,11 @@
                                                         title="{{ $dish->name }}">{{ $dish->name }}</h4>
                                                     <p class="food-price">€{{ $dish->price }}</p>
                                                     <div class="food-detail-card-btn">
-                                                        <a href="{{ route('editDish', $dish->id) }}"
-                                                            class="btn btn-custom-yellow btn-icon"
-                                                            data-id="{{ $dish->id }}">
+                                                        <a href="{{ route('editDish', $dish->id) }}" class="btn btn-custom-yellow btn-icon" data-id="{{ $dish->id }}">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
                                                         <a class="btn btn-custom-yellow btn-icon del-dish-btn"
-                                                            data-bs-toggle="modal" data-bs-target="#deleteDishAlertModal"
-                                                            data-id="{{ $dish->id }}">
+                                                            data-bs-toggle="modal" data-bs-target="#deleteDishAlertModal" data-id="{{ $dish->id }}">
                                                             <i class="fa-regular fa-trash-can"></i>
                                                         </a>
                                                     </div>
@@ -157,7 +151,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        <div> No Dish Found </div>
+                                        <div> {{ trans('rest.menu.no_dish') }} </div>
                                     @endif
                                 </div>
                             </div>
@@ -166,30 +160,36 @@
                         <!-- start Popluar item list section -->
                         <section class="custom-section ">
                             <div class="section-page-title">
-                                <h1 class="section-title">Popular This Week</h1>
-                                <a href="javascript:void(0);" type="button" class="viewall-btn">View all
+                                <h1 class="section-title">{{ trans('rest.menu.popular_week') }}</h1>
+                                <a href="javascript:void(0);" type="button" class="viewall-btn">{{ trans('rest.button.view_all') }}
                                     <span class="ms-2">
                                         <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
                                     </span>
                                 </a>
                             </div>
                             <div class="bestselling-item-grid">
-                                @foreach ($popularDishes as $popularDish)
+                                @foreach ($popularDishes as $dish_id => $order)
+                                    @php
+                                        $dish = App\Models\Dish::find($dish_id);
+                                    @endphp
                                     <div class="card bestselling-detail-card">
                                         <div class="card-body p-0">
                                             <div class="food-image">
-                                                <img src="{{ $popularDish->image }}"
-                                                    alt="burger imag" class="img-fluid" />
+                                                <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" />
                                             </div>
                                             <div class="text-start flex-fill">
-                                                <h4 class="food-name-text text-start text-truncate w-100"
-                                                    title="{{ $popularDish->name }}">{{ $popularDish->name }}</h4>
-                                                <p class="food-price d-inline-block">€{{ $popularDish->price }}</p>
+                                                <h4 class="food-name-text text-start text-truncate w-100">{{ $dish->name }}</h4>
+                                                <p class="food-price d-inline-block">€{{ $dish->price }}</p>
                                                 <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                    +15%
-                                                    <img src="{{ asset('images/up-arrow.svg') }}" alt="" class="svg" height="19" width="19">
+                                                    @if($order['percentage'] < 0)
+                                                        {{ $order['percentage'] }}%
+                                                        <img src="{{ asset('images/down-arrow.svg') }}" alt="" class="svg" height="19" width="19">
+                                                    @else
+                                                        +{{ $order['percentage'] }}%
+                                                        <img src="{{ asset('images/up-arrow.svg') }}" alt="" class="svg" height="19" width="19">
+                                                    @endif
                                                 </p>
-                                                <p class="lead-1 mb-0">Sold 1k</p>
+                                                <p class="lead-1 mb-0">{{ trans('rest.menu.sold_dishes',['sold_qty' => $order['total_orders']]) }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -200,33 +200,29 @@
                         <!-- start Best selling list section -->
                         <section class="custom-section">
                             <div class="section-page-title">
-                                <h1 class="section-title">Best Seller</h1>
-                                <a href="javascript:void(0);" type="button" class="viewall-btn">View all <span
-                                        class="ms-2">
+                                <h1 class="section-title">{{ trans('rest.menu.best_seller') }}</h1>
+                                <a href="javascript:void(0);" type="button" class="viewall-btn">{{ trans('rest.button.view_all') }}
+                                    <span class="ms-2">
                                         <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
                                     </span>
                                 </a>
                             </div>
                             <div class="bestselling-item-grid">
                                 @foreach ($bestSellerDishes as $bestSellerDish)
-                                    <div class="card bestselling-detail-card">
-                                        <div class="card-body p-0">
-                                            <div class="food-image">
-                                                <img src="{{ $bestSellerDish->image }}"
-                                                    alt="burger imag" class="img-fluid" />
-                                            </div>
-                                            <div class="text-start flex-fill">
-                                                <h4 class="food-name-text text-start text-truncate w-100"
-                                                    title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->name }}</h4>
-                                                <p class="food-price d-inline-block">€{{ $bestSellerDish->price }}</p>
-                                                <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
-                                                    +15%
-                                                    <img src="{{ asset('images/up-arrow.svg') }}" alt="" class="svg" height="19" width="19">
-                                                </p>
-                                                <p class="lead-1 mb-0">Sold 1k</p>
-                                            </div>
+                                <div class="card bestselling-detail-card">
+                                    <div class="card-body p-0">
+                                        <div class="food-image">
+                                            <img src="{{ $bestSellerDish->dish->image }}"
+                                                alt="burger imag" class="img-fluid" />
+                                        </div>
+                                        <div class="text-start flex-fill">
+                                            <h4 class="food-name-text text-start text-truncate w-100"
+                                                title="{{ $bestSellerDish->name }}">{{ $bestSellerDish->dish->name }}</h4>
+                                            <p class="food-price d-inline-block">€{{ $bestSellerDish->dish->price }}</p>
+                                            <p class="lead-1 mb-0">{{ trans('rest.menu.sold_dishes',['sold_qty' => $bestSellerDish->total_orders]) }}</p>
                                         </div>
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </section>
@@ -244,7 +240,7 @@
         <div class="modal-dialog custom-w-441px modal-dialog-centered">
             <div class="modal-content border-radius">
                 <div class="modal-header border-0">
-                    <h1 class="modal-title mb-0">Add Category</h1>
+                    <h1 class="modal-title mb-0">{{ trans('rest.modal.category.add') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
@@ -252,24 +248,23 @@
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
                                 <img src="{{ asset('images/blank-img.svg') }}" alt="blank image" id="img-preview" class="img-fluid mb-2 svg" width="35" height="27">
-                                <p class="mb-0" id="img-label">Please upload image of Category</p>
+                                <p class="mb-0" id="img-label">{{ trans('rest.modal.category.image') }}</p>
                             </label>
                             <input type="file" id="input-file" class="d-none" name="image">
                         </div>
                         <div class="form-group">
-                            <label for="dishnameenglish" class="form-label">Dish Category <span
-                                    class="text-custom-muted">(English)</span>
+                            <label for="dishnameenglish" class="form-label">{{ trans('rest.modal.category.category') }} 
+                                <span class="text-custom-muted">(English)</span>
                             </label>
                             <input type="text" name="name_en" id="name_en" class="form-control" maxlength="250">
                         </div>
                         <div class="form-group mb-0">
-                            <label for="dishnameenglish" class="form-label">Dish Category <span
-                                    class="text-custom-muted">(Dutch)</span>
+                            <label for="dishnameenglish" class="form-label">{{ trans('rest.modal.category.category') }} 
+                                <span class="text-custom-muted">(Dutch)</span>
                             </label>
                             <input type="text" name="name_nl" id="name_nl" class="form-control" maxlength="250">
                         </div>
-                        <button type="submit"
-                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18"> Save
+                        <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">{{ trans('rest.button.save') }}
                         </button>
                     </form>
                 </div>
@@ -283,7 +278,7 @@
         <div class="modal-dialog custom-w-441px modal-dialog-centered">
             <div class="modal-content border-radius">
                 <div class="modal-header border-0">
-                    <h1 class="modal-title mb-0">Edit Category</h1>
+                    <h1 class="modal-title mb-0">{{ trans('rest.modal.category.edit') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
@@ -296,21 +291,21 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <label for="dishnameenglish" class="form-label">Dish Category <span
-                                    class="text-custom-muted">(English)</span>
+                            <label for="dishnameenglish" class="form-label">{{ trans('rest.modal.category.category') }} 
+                                <span class="text-custom-muted">(English)</span>
                             </label>
                             <input type="text" name="name_en" id="edit_name_en" class="form-control"
                                 maxlength="250">
                         </div>
                         <div class="form-group mb-0">
-                            <label for="dishnameenglish" class="form-label">Dish Category <span
-                                    class="text-custom-muted">(Dutch)</span>
+                            <label for="dishnameenglish" class="form-label">{{ trans('rest.modal.category.category') }}
+                             <span class="text-custom-muted">(Dutch)</span>
                             </label>
                             <input type="text" name="name_nl" id="edit_name_nl" class="form-control"
                                 maxlength="250">
                         </div>
                         <button type="submit"
-                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18"> Update
+                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">{{ trans('rest.button.update') }}
                         </button>
                     </form>
                 </div>
@@ -327,15 +322,15 @@
                     <input type="hidden" value="" id="catId">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">Are you sure you want to delete this Category?</h4>
+                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.category.delete_message') }}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="button"
                             class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
-                            data-bs-dismiss="modal">Cancel </button>
+                            data-bs-dismiss="modal">{{ trans('rest.button.cancel') }}</button>
                         <button type="button" id="delete-category-btn"
-                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">Delete </button>
+                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}</button>
                     </div>
                 </div>
             </div>
@@ -351,15 +346,15 @@
                     <input type="hidden" value="" id="dishId">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">Are you sure you want to delete this Dish?</h4>
+                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.dish.delete_message') }}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="button"
                             class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
-                            data-bs-dismiss="modal">Cancel </button>
+                            data-bs-dismiss="modal">{{ trans('rest.button.cancel') }}</button>
                         <button type="button" id="delete-dish-btn"
-                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">Delete </button>
+                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}</button>
                     </div>
                 </div>
             </div>
@@ -374,13 +369,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">There are dishes added to this category. Please remove them to
-                                delete.</h4>
+                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.dish.alert_message') }}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
-                            data-bs-dismiss="modal">Okay </button>
+                            data-bs-dismiss="modal">{{ trans('rest.button.ok') }}</button>
                     </div>
                 </div>
             </div>

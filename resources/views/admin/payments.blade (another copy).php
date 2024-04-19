@@ -11,8 +11,8 @@
 
 <div class="main">
   <div class="main-view">
-    <div class="container-fluid bd-gutter bd-layout">
-        @include('layouts.admin.side_nav_bar')
+    <div class="container-fluid bd-gutter bd-layout"> 
+        @include('layouts.admin.side_nav_bar') 
         <main class="bd-main order-1 w-100 position-relative">
             <div class="main-content">
               <div class="section-page-title mb-0">
@@ -85,9 +85,9 @@
                     <div class="income-diagrams-item-header d-flex align-items-center justify-content-between">
                       <div class="title">Income</div>
                       <div class="btn-grp d-flex flex-wrap align-items-center">
-                        <button class="btn active doughnutChartBtn" value="monthlyDoughnutChart">Monthly</button>
-                        <button class="btn doughnutChartBtn" value="weeklyDoughnutChart">Weekly</button>
-                        <button class="btn doughnutChartBtn" value="yearlyDoughnutChart">Year</button>
+                        <button class="btn active doughnutChart" value="monthlyDoughnutChart">Monthly</button>
+                        <button class="btn doughnutChart" value="weeklyDoughnutChart">Weekly</button>
+                        <button class="btn doughnutChart" value="yearlyDoughnutChart">Year</button>
                       </div>
                     </div>
 
@@ -102,14 +102,14 @@
                       </div>
                       <div class="row">
                          <div class="col-md-6 mb-2">
-                           <div class="float-child monthlyDoughnutChart" id="monthly-online-delivery-container">FusionCharts XT will load here!</div>
-                           <div class="float-child weeklyDoughnutChart" id="weekly-online-delivery-container">FusionCharts XT will load here!</div>
-                           <div class="float-child yearlyDoughnutChart" id="yearly-online-delivery-container">FusionCharts XT will load here!</div>
+                           <div class="float-child monthlyDoughnutChart" id="online-delivery-container">FusionCharts XT will load here!</div>
+                           <div class="float-child weeklyDoughnutChart" id="online-delivery-container">FusionCharts XT will load here!</div>
+                           <div class="float-child yearlyDoughnutChart" id="online-delivery-container">FusionCharts XT will load here!</div>
                          </div>
                          <div class="col-md-6 mb-2">
-                            <div class="float-child monthlyDoughnutChart" id="monthly-take-away-container">FusionCharts XT will load here!</div>
-                            <div class="float-child weeklyDoughnutChart" id="weekly-take-away-container">FusionCharts XT will load here!</div>
-                            <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container">FusionCharts XT will load here!</div>  
+                            <div class="float-child monthlyDoughnutChart" id="take-away-container">FusionCharts XT will load here!</div>
+                            <div class="float-child weeklyDoughnutChart" id="take-away-container">FusionCharts XT will load here!</div>
+                            <div class="float-child yearlyDoughnutChart" id="take-away-container">FusionCharts XT will load here!</div>  
                          </div>
                       </div>
                     </div>  
@@ -117,6 +117,7 @@
                     <?php
                       $chartConfig = array(
                           "chart" => array(
+                              "caption"=> "Online Delivery Income",
                               "startingAngle"=> "210",
                               "decimals"=> "0",
                               "theme"=> "fusion",
@@ -125,46 +126,26 @@
                           )
                       );
                       
-                      // monthly
-                      $chartConfig["data"] = $monthlyDeliveryOnlineChartData;
+                      $arrChartData = array(["75"],[ "25"]);
+                      $arrLabelValueData = array();
+
+                      for($i = 0; $i < count($arrChartData); $i++) 
+                      {
+                          array_push($arrLabelValueData, array(
+                              "value" => $arrChartData[$i][0]
+                          ));
+                      }
+
+                      $chartConfig["data"] = $arrLabelValueData;
                       $jsonEncodedData = json_encode($chartConfig);
 
-                      //$chartConfig['chart']['caption'] = "Take Away Income";
+                      $chartConfig['chart']['caption'] = "Take Away Income";
                       $jsonEncodedData1 = json_encode($chartConfig);
 
-                      $chart = new FusionCharts("doughnut2d", "monthly-delivery-chart" , "350", "350", "monthly-online-delivery-container", "json", $jsonEncodedData);
+                      $chart = new FusionCharts("doughnut2d", "delivery-chart" , "350", "350", "online-delivery-container", "json", $jsonEncodedData);
                       $chart->render();
 
-                      $chartConfig["data"] = $monthlyTAOnlineChartData;
-                      $jsonEncodedData = json_encode($chartConfig);
-
-                      $chart = new FusionCharts("doughnut2d", "monthly-take-away-chart" , "350", "350", "monthly-take-away-container", "json", $jsonEncodedData);
-                      $chart->render();
-
-                      // weekly
-                      $chartConfig["data"] = $weeklyDeliveryOnlineChartData;
-                      $jsonEncodedData = json_encode($chartConfig);
-
-                      $chart = new FusionCharts("doughnut2d", "weekly-delivery-chart" , "350", "350", "weekly-online-delivery-container", "json", $jsonEncodedData);
-                      $chart->render();
-
-                      $chartConfig["data"] = $weeklyTAOnlineChartData;
-                      $jsonEncodedData = json_encode($chartConfig);
-
-                      $chart = new FusionCharts("doughnut2d", "weekly-take-away-chart" , "350", "350", "weekly-take-away-container", "json", $jsonEncodedData);
-                      $chart->render();
-
-                      // yearly
-                      $chartConfig["data"] = $yearlyDeliveryOnlineChartData;
-                      $jsonEncodedData = json_encode($chartConfig);
-
-                      $chart = new FusionCharts("doughnut2d", "yearly-delivery-chart" , "350", "350", "yearly-online-delivery-container", "json", $jsonEncodedData);
-                      $chart->render();
-
-                      $chartConfig["data"] = $yearlyTAOnlineChartData;
-                      $jsonEncodedData = json_encode($chartConfig);
-
-                      $chart = new FusionCharts("doughnut2d", "yearly-take-away-chart" , "350", "350", "yearly-take-away-container", "json", $jsonEncodedData);
+                      $chart = new FusionCharts("doughnut2d", "take-away-chart" , "350", "350", "take-away-container", "json", $jsonEncodedData1);
                       $chart->render();
                     ?>
                   </div>
@@ -173,9 +154,9 @@
                     <div class="income-diagrams-item-header d-flex align-items-center justify-content-between">
                       <div class="title">Total Revenue</div>
                       <div class="btn-grp d-flex flex-wrap align-items-center">
-                        <button class="btn active lineChartBtn" value="monthlyLineChart">Monthly</button>
-                        <button class="btn lineChartBtn" value="weeklyLineChart">Weekly</button>
-                        <button class="btn lineChartBtn" value="yearlyLineChart">Year</button>
+                        <button class="btn active">Monthly</button>
+                        <button class="btn">Weekly</button>
+                        <button class="btn">Year</button>
                       </div>
                     </div>
 
@@ -189,34 +170,79 @@
                     </div>
 
                     <div class="income-diagrams-item-img h-100">
-                      <div id="monthly" class="monthlyLineChart">FusionCharts XT will load here!</div>
-                      <div id="weekly" class="weeklyLineChart">FusionCharts XT will load here!</div>
-                      <div id="yearly" class="yearlyLineChart">FusionCharts XT will load here!</div>
+                      <div id="yearly">FusionCharts XT will load here!</div>
                     </div>
 
                     <?php
 
-                      //$chartDataArr['categories'] = [['category' => [['label' => '2021'],['label' => '2022'],['label' => '2023']]]];
-                      //$chartDataArr['dataset'] = [['data' => [['value' => '30k'],['value' => '20k'],['value' => '40k']]]];
+                    $columnChart2 = new FusionCharts("msspline", "ex3", "750", "300", "yearly", "json", '{
+                    "chart": {
+                        "numdivlines": "3",
+                        "numberSuffix" : "K",
+                        "theme":"fusion",
+                        "palettecolors": "#FFC00B,#FFE9A8",
+                        "legendPosition":"top-left",
+                        "legendIconSides":"4",
+                        "showplotBorder": "1",
+                        "legendIconBgColor":"#FF8300",
+                        "drawAnchors":"0",
+                        "legendBorderColor":"#FBC490",
+                    },
+                    "categories": [
+                        {
+                        "category": [
+                            {
+                                "label": "2021"
+                            },
+                            {
+                                "label": "2022"
+                            },
+                            {
+                                "label": "2023"
+                            },
+                            {
+                                "label": "2024"
+                            }
+                        ]
+                        }
+                      ],
+                      "dataset": [
+                        {
+                            "data": [
+                            {
+                                "value": "20k"
+                            },
+                            {
+                                "value": "42k"
+                            },
+                            {
+                                "value": "40k"
+                            },
+                            {
+                                "value": "55k"
+                            }
+                          ]
+                        },
+                        {
+                            "data": [
+                            {
+                                "value": "40k"
+                            },
+                            {
+                                "value": "40k"
+                            },
+                            {
+                                "value": "15k"
+                            },
+                            {
+                                "value": "80k"
+                            }
+                          ]
+                        }
+                      ]
+                    }');
 
-                      $chartConfig = array(
-                            "chart" => array(
-                                  "numdivlines" => "3",
-                                  "numberSuffix" => "K",
-                                  "theme"=>"fusion",
-                                  "palettecolors"=> "#FFC00B,#FFE9A8",
-                                  "legendPosition"=>"top-left",
-                                  "legendIconSides"=>"4",
-                                  "showplotBorder"=> "1",
-                                  "legendIconBgColor"=>"#FF8300",
-                                  "drawAnchors"=>"0",
-                                  "legendBorderColor"=>"#FBC490",
-                            ),
-                        );
-
-                      $lineChartData = json_encode($chartConfig+$weeklyLineChartData);
-                      $lineChart = new FusionCharts("msspline", "ex3", "750", "300", "weekly", "json",$lineChartData);
-                      $lineChart->render();
+                    $columnChart2->render();
                     ?>
                 </div>
               </div>
@@ -224,12 +250,10 @@
         </main>
     </div>
   </div>
-  <!-- start footer -->
+  <!-- start footer --> 
   @include('layouts.admin.footer_design')
   <!-- end footer -->
 </div>
-<<<<<<< Updated upstream
-=======
 
 @section('script')
 <script>
@@ -249,41 +273,19 @@
         $("."+k).show();
     });
 
-    // 2nd Doughnut chart
-    $(".weeklyDoughnutChart").hide();
-    $(".yearlyDoughnutChart").hide();
+    // 1st income chart
+    $(".weeklyIncomeChart").hide();
+    $(".yearlyIncomeChart").hide();
     
-    $(".doughnutChartBtn").click(function(){
-        $(".monthlyDoughnutChart").hide();
-        $(".weeklyDoughnutChart").hide();
-        $(".yearlyDoughnutChart").hide();
-
-        $(".doughnutChartBtn").removeClass('active');
+    $(".incomeChartBtn").click(function(){
+        $(".monthlyIncomeChart").hide();
+        $(".weeklyIncomeChart").hide();
+        $(".yearlyIncomeChart").hide();
+        $(".incomeChartBtn").removeClass('active');
         
         $(this).addClass('active');
         var k= $(this).val();
-
-        //alert(k);
-
-        $("."+k).show();
-    });
-
-    // 3rd Line chart
-    $(".weeklyLineChart").hide();
-    $(".yearlyLineChart").hide();
-    
-    $(".lineChartBtn").click(function(){
-        $(".monthlyLineChart").hide();
-        $(".weeklyLineChart").hide();
-        $(".yearlyLineChart").hide();
-
-        $(".lineChartBtn").removeClass('active');
-        
-        $(this).addClass('active');
-        var k= $(this).val();
-
         $("."+k).show();
     });
 </script>
 @endsection
->>>>>>> Stashed changes

@@ -44,6 +44,10 @@ socket.on('sendChatToUser', (message) => {
                 $('.chat-messages-user_' + data.data.sender_id).append(html)
                 $('.message-input').val('')
                 // $('.chat-messages-user').animate({scrollTop: 0}, 500);
+                var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
+                var contentHeight = chatboxMain[0].scrollHeight;
+
+                $('.chat-messages-user_' + data.data.sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
             }
         },
         error: function (data) {
@@ -59,7 +63,7 @@ let connectionData = {
 // socket.emit('connectionEstablished, ')
 var sender_id = $('.sender_id').val();
 $(function () {
-    $('.send-btn-user_' + sender_id).click(function () {
+    $('.send-user-btn').click(function () {
         var message = $('.message-input').val();
         var socketId = $('#socket-id').val();
         // console.log("socketId", socketId)
@@ -95,6 +99,11 @@ $(function () {
             'type': "user"
         }
         socket.emit('sendAdminChatToServer', messageData);
+        $(".send-user-btn").prop('disabled', true);
+        $(".image-holder").hide();
+        $(".chat_attachment").val('');
+        $('.attachImage').remove();
+        $('.remove-image').remove();
     })
 })
 $(document).keypress(function() {
@@ -139,3 +148,44 @@ function fetchChatUsers() {
     xhttp.send();
 }
 fetchChatUsers();
+
+
+// new js
+
+// on keyup show hide send button
+$(document).on('keyup', '.message-input', function () {
+    $(".send-user-btn").removeAttr('disabled');
+    if ($(".message-input").val() == '') {
+        $(".send-user-btn").prop('disabled', true);
+    }
+})
+// on change show image.
+$(document).on('change', '.chat_attachment', function () {
+    $(".image-holder").show();
+    var ext = $('.chat_attachment').val().split('.').pop().toLowerCase();
+    if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+        alert('invalid extension!');
+        $(".chat_attachment").val('');
+        $(".image-holder").val('');
+        $(".send-user-btn").prop('disabled', true);
+        return false;
+    }
+    readURL(this);
+    $(".send-user-btn").removeAttr('disabled');
+})
+// click on cross icon remove image.
+$(document).on('click', '.remove-image', function () {
+    $('.attachImage').closest('img').remove();
+    $('.remove-image').closest('i').remove();
+    $(".chat_attachment").val('');
+})
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}

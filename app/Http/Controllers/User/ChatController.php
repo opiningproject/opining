@@ -48,7 +48,7 @@ class ChatController extends Controller
                 $query->where('sender_id', $userId)
                     ->where('receiver_id', $adminId);
             })->orderBy('created_at', 'asc')
-            ->paginate(50, ['*'], 'page', $pageNumber); // Fetch messages
+            ->paginate(10, ['*'], 'page', $pageNumber); // Fetch messages
 
         $messages->getCollection()->transform(function ($item) {
 

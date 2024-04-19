@@ -82,26 +82,5 @@
     </div>
 
 @section('script')
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>--}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />--}}
-    <script>
-        $(document).ready(function () {
-            $('.validate-admin').validate({
-                rules: {
-                    password: {
-                        required: true
-                    },
-                },
-                messages: {
-                    password: {
-                        required: 'Please enter Password.',
-                    },
-                },
-                submitHandler: function (form) {
-                    form.submit();
-                }
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('js/my-finance.js') }}"></script>
 @endsection

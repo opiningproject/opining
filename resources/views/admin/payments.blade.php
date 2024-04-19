@@ -1,5 +1,5 @@
-@extends('layouts.app') 
-@section('content') 
+@extends('layouts.app')
+@section('content')
 
 <style>
     [pointer-events="bounding-box"] {
@@ -109,10 +109,10 @@
                          <div class="col-md-6 mb-2">
                             <div class="float-child monthlyDoughnutChart" id="monthly-take-away-container">FusionCharts XT will load here!</div>
                             <div class="float-child weeklyDoughnutChart" id="weekly-take-away-container">FusionCharts XT will load here!</div>
-                            <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container">FusionCharts XT will load here!</div>  
+                            <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container">FusionCharts XT will load here!</div>
                          </div>
                       </div>
-                    </div>  
+                    </div>
 
                     <?php
                       $chartConfig = array(
@@ -124,7 +124,7 @@
                               "palettecolors"=> "#FFC00B,#FFE9A8"
                           )
                       );
-                      
+
                       // monthly
                       $chartConfig["data"] = $monthlyDeliveryOnlineChartData;
                       $jsonEncodedData = json_encode($chartConfig);
@@ -228,8 +228,6 @@
   @include('layouts.admin.footer_design')
   <!-- end footer -->
 </div>
-<<<<<<< Updated upstream
-=======
 
 @section('script')
 <script>
@@ -237,13 +235,13 @@
     // 1st income chart
     $(".weeklyIncomeChart").hide();
     $(".yearlyIncomeChart").hide();
-    
+
     $(".incomeChartBtn").click(function(){
         $(".monthlyIncomeChart").hide();
         $(".weeklyIncomeChart").hide();
         $(".yearlyIncomeChart").hide();
         $(".incomeChartBtn").removeClass('active');
-        
+
         $(this).addClass('active');
         var k= $(this).val();
         $("."+k).show();
@@ -252,14 +250,14 @@
     // 2nd Doughnut chart
     $(".weeklyDoughnutChart").hide();
     $(".yearlyDoughnutChart").hide();
-    
+
     $(".doughnutChartBtn").click(function(){
         $(".monthlyDoughnutChart").hide();
         $(".weeklyDoughnutChart").hide();
         $(".yearlyDoughnutChart").hide();
 
         $(".doughnutChartBtn").removeClass('active');
-        
+
         $(this).addClass('active');
         var k= $(this).val();
 
@@ -271,14 +269,14 @@
     // 3rd Line chart
     $(".weeklyLineChart").hide();
     $(".yearlyLineChart").hide();
-    
+
     $(".lineChartBtn").click(function(){
         $(".monthlyLineChart").hide();
         $(".weeklyLineChart").hide();
         $(".yearlyLineChart").hide();
 
         $(".lineChartBtn").removeClass('active');
-        
+
         $(this).addClass('active');
         var k= $(this).val();
 
@@ -286,4 +284,3 @@
     });
 </script>
 @endsection
->>>>>>> Stashed changes

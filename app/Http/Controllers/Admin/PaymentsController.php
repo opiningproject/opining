@@ -7,16 +7,13 @@ use App\Models\Category;
 use App\Models\Dish;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-<<<<<<< Updated upstream
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
-=======
 use Auth;
 use App\Models\Order;
 use DB;
 use Carbon\Carbon;
->>>>>>> Stashed changes
 
 class PaymentsController extends Controller
 {
@@ -44,7 +41,7 @@ class PaymentsController extends Controller
         $month_order_merge_array = $defaultMonths->merge($orderMonths);
 
         $m = 0;
-        foreach ($month_order_merge_array as $key => $month_order) 
+        foreach ($month_order_merge_array as $key => $month_order)
         {
             $totalMonthOrders[$m]['label'] = ''.$key.'';
             $totalMonthOrders[$m]['value'] = $month_order;
@@ -62,7 +59,7 @@ class PaymentsController extends Controller
         $week_order_merge_array = $defaultWeeks->merge($orderWeeks);
 
         $w = 0;
-        foreach ($week_order_merge_array as $key => $week_order) 
+        foreach ($week_order_merge_array as $key => $week_order)
         {
             $totalWeekOrders[$w]['label'] = ''.$key.'';
             $totalWeekOrders[$w]['value'] = $week_order;
@@ -74,10 +71,10 @@ class PaymentsController extends Controller
                                 ->groupBy('year')
                                 ->pluck('totalAmount','year')
                                 ->toArray();
-        
+
         $currentYear = date('Y') + 1;
 
-        for ($i = 1; $i <= 2; $i++) 
+        for ($i = 1; $i <= 2; $i++)
         {
             $previousYear[$currentYear - $i] = 0;
         }
@@ -85,7 +82,7 @@ class PaymentsController extends Controller
         $year_order_merge_array = $orderYear + $previousYear;
 
         $y = 0;
-        foreach ($year_order_merge_array as $key => $year_order) 
+        foreach ($year_order_merge_array as $key => $year_order)
         {
             $totalYearOrders[$y]['label'] = ''.$key.'';
             $totalYearOrders[$y]['value'] = $year_order;
@@ -101,27 +98,27 @@ class PaymentsController extends Controller
         //$chartDataArr['categories'] = [['category' => [['label' => '2021'],['label' => '2022'],['label' => '2023']]]];
         //$chartDataArr['dataset'] = [['data' => [['value' => '30k'],['value' => '20k'],['value' => '40k']]],['data' => [['value' => '10k'],['value' => '5k'],['value' => '55k']]]];
 
-       
-        
-        
+
+
+
         /*echo "<pre>";
         print_r($yearlyOnlineChartData);
         print_r($monthlyOnlineChartData);
         print_r($weeklyOnlineChartData);
         exit();*/
 
-        return view('admin.payments', 
-            [ 'totalMonthOrders' => $totalMonthOrders, 
-              'totalWeekOrders' => $totalWeekOrders, 
-              'totalYearOrders' => $totalYearOrders, 
-              'totalIncome' => $totalIncome, 
-              'yearlyDeliveryOnlineChartData' => $yearlyOnlineChartData['deliveryOnlineChartData'], 
+        return view('admin.payments',
+            [ 'totalMonthOrders' => $totalMonthOrders,
+              'totalWeekOrders' => $totalWeekOrders,
+              'totalYearOrders' => $totalYearOrders,
+              'totalIncome' => $totalIncome,
+              'yearlyDeliveryOnlineChartData' => $yearlyOnlineChartData['deliveryOnlineChartData'],
               'yearlyTAOnlineChartData' => $yearlyOnlineChartData['TAOnlineChartData'],
 
-              'monthlyDeliveryOnlineChartData' => $monthlyOnlineChartData['deliveryOnlineChartData'], 
+              'monthlyDeliveryOnlineChartData' => $monthlyOnlineChartData['deliveryOnlineChartData'],
               'monthlyTAOnlineChartData' => $monthlyOnlineChartData['TAOnlineChartData'],
 
-              'weeklyDeliveryOnlineChartData' => $weeklyOnlineChartData['deliveryOnlineChartData'], 
+              'weeklyDeliveryOnlineChartData' => $weeklyOnlineChartData['deliveryOnlineChartData'],
               'weeklyTAOnlineChartData' => $weeklyOnlineChartData['TAOnlineChartData'],
 
               'weeklyLineChartData' => $weeklyLineChartData
@@ -145,19 +142,19 @@ class PaymentsController extends Controller
 
         $ordersQuery = clone $orderWeeks;
         $TAOrders = $ordersQuery->where('order_type',2)->groupBy('week')->pluck('totalAmount','week')->toArray();
-                                
+
         $week_delivery_order_merge_array = $defaultWeeks->merge($deliveryOrders);
         $week_TA_order_merge_array = $defaultWeeks->merge($TAOrders);
 
         $w = 0;
-        foreach ($week_delivery_order_merge_array as $key => $week_order) 
+        foreach ($week_delivery_order_merge_array as $key => $week_order)
         {
             $chartDataArr['dataset'][0]['data'][$w]['value'] = $week_order;
             $w++;
         }
 
         $w = 0;
-        foreach ($week_TA_order_merge_array as $key => $week_order) 
+        foreach ($week_TA_order_merge_array as $key => $week_order)
         {
             $chartDataArr['dataset'][1]['data'][$w]['value'] = $week_order;
             $w++;
@@ -186,9 +183,9 @@ class PaymentsController extends Controller
         {
             $deliveryCODOrders = $deliveryOrders - $deliveryOnlineOrders;
             $deliveryCODPer = ($deliveryCODOrders / $deliveryOrders)*100;
-            $deliveryOnlinePer = 100 - $deliveryCODPer;   
+            $deliveryOnlinePer = 100 - $deliveryCODPer;
         }
-        
+
         $deliveryOnlineChartData = [0 => ["value" => $deliveryOnlinePer], 1 => ["value" => $deliveryCODPer]];
 
         // Yearly Take Away Orders

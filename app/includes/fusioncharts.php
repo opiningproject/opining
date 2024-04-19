@@ -1,7 +1,7 @@
 <?php
 
     class FusionCharts {
-        
+
         private $eventOptions = array();
         private $constructorOptions = array();
 
@@ -26,7 +26,7 @@
             isset($renderAt) ? $this->constructorOptions['renderAt'] = $renderAt : '';
             isset($dataFormat) ? $this->constructorOptions['dataFormat'] = $dataFormat : '';
             isset($dataSource) ? $this->constructorOptions['dataSource'] = $dataSource : '';
-        }
+    }
 
         //Add event
         function addEvent($eventName, $funcName){
@@ -55,7 +55,7 @@
             $jsonEncodedOptions = json_encode($tempArray);
 
             if (is_object($this->constructorOptions['dataSource']))
-            {                
+            {
                 if (get_class($this->constructorOptions['dataSource']) === 'TimeSeries'){
                     $timeSeries = $this->constructorOptions['dataSource'];
                 }
@@ -65,29 +65,29 @@
 
                 if ($dataFormat === 'json') {
                     $jsonEncodedOptions = preg_replace('/\"__dataSource__\"/', $this->constructorOptions['dataSource'], $jsonEncodedOptions);
-                } elseif ($dataFormat === 'xml') { 
+                } elseif ($dataFormat === 'xml') {
                     $jsonEncodedOptions = preg_replace('/\"__dataSource__\"/', '\'__dataSource__\'', $jsonEncodedOptions);
                     $jsonEncodedOptions = preg_replace('/__dataSource__/', $this->constructorOptions['dataSource'], $jsonEncodedOptions);
                 } elseif ($dataFormat === 'xmlurl') {
                     $jsonEncodedOptions = preg_replace('/__dataSource__/', $this->constructorOptions['dataSource'], $jsonEncodedOptions);
                 } elseif ($dataFormat === 'jsonurl') {
                     $jsonEncodedOptions = preg_replace('/__dataSource__/', $this->constructorOptions['dataSource'], $jsonEncodedOptions);
-                }            
+                }
             }
 
             $tempData = preg_replace('/__constructorOptions__/', $jsonEncodedOptions, $this->constructorTemplate);
             foreach($this->eventOptions as $key => $value) {
                 $tempEvtTmp = preg_replace('/__chartId__/', $this->constructorOptions['id'], $this->eventTemplate);
                 $tempEvtTmp = preg_replace('/_fceventname_/', $key, $tempEvtTmp);
-                $tempEvtTmp = preg_replace('/_fceventbody_/', $value, $tempEvtTmp);       
+                $tempEvtTmp = preg_replace('/_fceventbody_/', $value, $tempEvtTmp);
                 $tempData .= $tempEvtTmp;
             }
             $tempData .= preg_replace('/__chartId__/', $this->constructorOptions['id'], $this->renderTemplate);
-            $renderHTML = preg_replace('/__FC__/', $tempData, $this->baseTemplate);            
+            $renderHTML = preg_replace('/__FC__/', $tempData, $this->baseTemplate);
 
             if ($timeSeries){
                 $renderHTML = preg_replace('/__FT__/', $timeSeries->GetDataStore(), $renderHTML);
-                $renderHTML = preg_replace('/\"__dataSource__\"/', $timeSeries->GetDataSource(), $renderHTML); 
+                $renderHTML = preg_replace('/\"__dataSource__\"/', $timeSeries->GetDataSource(), $renderHTML);
             }else{
                 $renderHTML = preg_replace('/__FT__/', '', $renderHTML);
             }
@@ -98,7 +98,7 @@
     }
 
     class TimeSeries {
-        
+
         private $fusionTableObject = null;
         private $attributesList = array();
 
@@ -116,11 +116,11 @@
             $stringData = '';
             $format = '%s:%s,';
             foreach ($this->attributesList as $attribute) {
-                $attribKey = key($attribute);                                
+                $attribKey = key($attribute);
                 $stringData .= sprintf($format, $attribKey, $attribute[$attribKey]) . "\r\n";
-            }            
+            }
             $stringData .= sprintf('%s:%s', 'data', 'fusionTable');
-            
+
             return "{" . "\r\n" . $stringData . "\r\n" . "}";
         }
 
@@ -160,13 +160,13 @@
             }
         }
 
-        function Sort($columnName, $columnOrderBy) {   
+        function Sort($columnName, $columnOrderBy) {
             $sortData = sprintf("sort([{column: '%s', order: '%s'}])", $columnName, (OrderBy::ASC === $columnOrderBy) ? "asc" : "desc");
             $this->stringData .= "fusionTable = fusionTable.query(" . $sortData . ");". "\r\n";
         }
 
         function CreateFilter($filterType, $columnName, ...$values) {
-            $filterData = '';            
+            $filterData = '';
             if (count($values) > 0 ) {
                 $refl = new ReflectionClass('FilterType');
                 $constants = $refl->getConstants();
@@ -194,8 +194,8 @@
                         $filterData = sprintf("FusionCharts.DataStore.Operators.%s('%s',%s)", $constName, $columnName, $values[0]);
                     }
                 }
-            }   
-            return $filterData;       
+            }
+            return $filterData;
         }
 
         function ApplyFilter($filter) {

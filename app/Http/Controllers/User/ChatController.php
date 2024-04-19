@@ -75,7 +75,7 @@ class ChatController extends Controller
         $storeChat->sender_id = $request->sender_id;
         $storeChat->receiver_id = $request->receiver_id;
         $storeChat->message = $request->message;
-        $storeChat->attachment = $request->fileName;
+        $storeChat->attachment = $request->fileName ? $request->fileName :null;
         $storeChat->save();
         $storeChat->createdAt = $storeChat->created_at->format('h:m a');
         $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');

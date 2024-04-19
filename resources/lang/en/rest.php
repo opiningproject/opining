@@ -8,5 +8,263 @@ return [
 		'out_for_delivery' => 'Out For Delivery',
 		'delivered' => 'Delivered',
 	],
+
+	'sidebar' => [
+		'menu' => 'Menu',
+		'food_order' => 'Food Order',
+		'settings' => 'Settings',
+		'my_finance' => 'My Finance',
+		'coupons' => 'Coupons',
+		'user_chat' => 'User Chat',
+	],
+
+	'menu' => [
+		'title' => 'Menu',
+		'search' => 'Search dishes...',
+		'add_category' => 'Add New Category',
+		'add_ingred' => 'Add New Ingredient',
+		'add_dish' => 'Add New Dish',
+		'categories' => 'Categories',
+		'no_category' => 'No Category exist',
+		'dishes' => 'Dishes',
+		'no_dish' => 'No Dish Found',
+		'popular_week' => 'Popular This Week',
+		'best_seller' => 'Best Seller',
+		'sold_dishes' => 'Sold :sold_qty dishes',
+		'category' => [
+			'add' => 'Add Category',
+			'edit' => 'Edit Category',
+			'dish_category' => 'Dish Category'
+		],
+
+		'dish' => [
+			'out_of_stock' => 'Out of stock',
+			'in_stock' => 'In stock',
+			'qty' => 'Qty',
+			'edit' => 'Edit Dish',
+			'add' => 'Add Dish',
+			'dish_image' => 'Dish Image',
+			'item_image' => 'Upload Image of Item',
+			'dish_name' => 'Dish Name',
+			'category' => 'Dish Category',
+			'select_category' => 'Select Category',
+			'discount_per' => 'Discount Percentage',
+			'quantity' => 'Quantity',
+			'dish_price' => 'Dish Price',
+			'description' => 'Dish Description',
+			'option' => 'Dish Option',
+
+			'free_ingred' => 'Raw Ingredients(Free)',
+			'ingred_categories' => 'Ingredients Categories',
+			'ingred_list' => 'Ingredients List',
+			'no_ingred' => 'No Ingredient Attached',
+			'extra_ingred' => 'extra toppings Ingredients',
+
+			'select_ingred_category' => 'Select Ingredient Category',
+			'select_ingred' => 'Select Ingredient',
+			'image' => 'Image',
+			'name' => 'Name',
+			'price' => 'Price'
+		],
+
+		'ingredients' => [
+			'title' => 'Ingredients',
+			'add_category' => 'Add New Ingredient Categories',
+			'name' => 'Name',
+			'image' => 'Image',
+			'ingred_name' => 'Ingredient Name',
+			'ingred_category' => 'Ingredient Categories',
+			'individual_dish' => 'Add For Individual dish',
+			'ingred_categories' => 'Ingredient Categories',
+			'item_image' => 'Upload Image of Item',
+			'select_category' => 'Select Category',
+			'click_to_update' => 'Click to update',
+			'free' => '(Free)',
+			'more' => '(More)'
+		]
+	],
+
+	'food_order' => [
+		'title' => 'Food Order',
+		'filter' => 'Filter Orders',
+		'today' => 'Today',
+		'week' => 'This week',
+		'month' => 'This month',
+		'order' => 'Order',
+		'no_order' => 'No orders',
+		'order_list' => 'Order List',
+		'notes' => 'Notes',
+		'items' => 'Items',
+		'ASAP' => 'ASAP',
+		'pickup' => 'Pickup',
+		'delivery' => 'Delivery',
+		'cod' => 'Cash On Delivery',
+		'delivery_mode' => 'Delivery Mode',
+		'payment_method' => 'Payment Method',
+		'type' => 'Order Type',
+		'instruction' => 'Delivery Instruction',
+		'card' => 'Card',
+
+		'total' => 'Total',
+		'bill_details' => 'Bill Details',
+		'item_total' => 'Item Total',
+		'service_charge' => 'Service charge',
+		'delivery_charge' => 'Delivery charge',
+		'free_delivery' => 'Free Delivery',
+		'discount' => 'Item Discount',
+		'print' => 'Print Label',
+
+		'read_more' => 'Read More',
+		'close' => 'Close',
+		'move_to' => 'Move to',
+	],
+
+	'settings' => [
+		'title' => 'Settings',
+		'profile' => [
+			'title' => 'Restaurant Profile',
+			'name' => 'Restaurant Name',
+			'permit_id' => 'Restaurant Permit ID',
+			'phone' => 'Phone',
+			'owner_name' => 'Owner Name',
+			'email' => 'Email',
+			'password' => 'Password',
+			'logo' => 'Restaurant Logo',
+			'footer_logo' => 'Restaurant Footer Logo',
+			'order_acceptance' => 'Online Order Acceptance',
+			'address_details' => 'Address Details',
+			'permit_doc' => 'Company Permit Document',
+			'service_charge' => 'Service Charge',
+			'opening_hours' => 'Restaurant Opening Hours',
+			'logout' => 'Logout'
+		],
+		'payment' => [
+			'history' => 'Payment History',
+			'refund_payment' => 'Refund Payment',
+			'order_id' => 'Order ID',
+			'type' => 'Payment Type',
+			'trans_id' => 'Transaction ID',
+			'delivery_add' => 'Delivery Address',
+			'date_and_time' => 'Date and Time',
+			'price' => 'Price',
+			'reason' => 'Reason',
+			'username' => 'Username',
+			'total' => 'Total',
+			'card' => 'Card',
+			'cash' => 'Cash',
+
+			'accepted' => 'Accepted',
+			'rejected' => 'Rejected',
+			'accept' => 'Accept',
+			'reject' => 'Reject',
+		],
+		'zipcode' => [
+			'title' => 'Zip Code',
+			'min_order_price' => 'Minimum Order Price',
+			'delivery_charges' => 'Delivery Charges',
+			'status' => 'Status',
+		],
+		'cms' => [
+			'title' => 'CMS Pages',
+			'privacy' => 'Privacy Policy',
+			'terms' => 'Terms & Conditions',
+		]
+	],
+
+	'my_finance' => [
+		'title' => 'My Finance',
+		'total_income' => 'Total Income',
+		'income' => 'Income',
+		'total_revenue' => 'Total Revenue',
+		'monthly' => 'Monthly',
+		'weekly' => 'Weekly',
+		'yearly' => 'Yearly',
+		'online' => 'Online',
+		'cod' => 'COD',
+		'delivery' => 'Delivery',
+		'take_away' => 'Take Away'
+	],
+
+	'coupons' => [
+		'title' => 'Coupons',
+		'promo_code' => 'Promo code',
+		'per_off' => 'Percentage Off',
+		'valid_until' => 'Valid Until',
+		'edit' => 'Edit Coupon',
+		'add' => 'Add Coupon',
+		'off' => 'Off',
+		'points' => 'Points',
+		'min_order_price' => 'Minimum Order Price',
+		'validity_date' => 'Validity Date',
+		'description' => 'Description',
+		'claim_history' => 'Claim History',
+		'order_id' => 'Order ID',
+		'username' => 'Username',
+		'date_time' => 'Date & Time',
+		'order_price' => 'Order Price',
+		'coupon' => 'Coupon',
+	],
+
+	'user_chat' => [
+		'title' => 'User Chat',
+		'search' => 'Search',
+		'send' => 'Send',
+		'write_msg' => 'Write your message'
+	],
+
+	'modal' => [
+		'category' => [
+			'add' => 'Add Category',
+			'edit' => 'Edit Category',
+			'category' => 'Dish Category',
+			'image' => 'Please upload image of Category',
+			'delete_message' => 'Are you sure you want to delete this Category?'
+		],
+		'dish' => [
+			'delete_message' => 'Are you sure you want to delete this Dish?',
+			'alert_message' => 'There are dishes added to this category. Please remove them to delete.',
+		],
+		'ingred' => [
+			'delete_message' => 'Are you sure you want to delete this Ingredient?',
+			'alert_message' => 'There are dishes added to this ingredients. Please remove them to delete this ingredient.',
+		],
+
+		'ingred_category' => [
+			'delete_message' => 'Are you sure you want to delete this Ingredient?',
+			'alert_message' => 'There are dishes/Ingredient added to this Category. Please remove them to delete.',
+		],
+
+		'zipcode' => [
+			'delete_message' => 'Are you sure you want to delete this zipcode?',
+		],
+
+		'coupon' => [
+			'delete_message' => 'Are you sure you want to delete this coupon?',
+		],
+
+		'cms' => [
+			'alert_message' => 'Your content has been successfully saved !!',
+		],
+
+		'change_password' => [
+			'title' => 'Change Password',
+			'old_password' => 'Old Password',
+			'new_password' => 'New Password',
+			'c_password' => 'Confirm New Password'
+		]
+	],
+
+	'button'=> [
+		'rows_per_page' => 'Rows per Page',
+		'save' => 'Save',
+		'ok' => 'Ok',
+		'cancel' => 'Cancel',
+		'submit' => 'Submit',
+		'update' => 'Update',
+		'delete' => 'Delete',
+		'view_all' => 'View all',
+		'action' => 'Action',
+		'add' => 'Add',
+	]
 	
 ];

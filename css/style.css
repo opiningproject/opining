@@ -3185,6 +3185,7 @@ background-position:  calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(
     letter-spacing: 0.19px;
     border-radius: 20px;
 }
+<<<<<<< Updated upstream
 /*new css*/
 .ChatDiv-main .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .activicon {
     width: 16px;
@@ -3222,3 +3223,29 @@ background-position:  calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(
     border-radius: 5px;
     text-align: center;
 }
+=======
+
+.chart-indicates {
+display: flex;
+align-items: center;
+gap: 35px;
+}
+.chart-indicates .indicate {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+color: #292929
+}
+.chart-indicates .indicate label {
+width: 20px;
+height: 20px;
+border-radius: 4px;
+overflow: hidden;
+background: #FFC00B;
+display: inline-block;
+}
+.chart-indicates .indicate.low label {
+background: #FFE9A8;
+}
+>>>>>>> Stashed changes

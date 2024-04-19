@@ -5,79 +5,121 @@ let senderId = null;
 var sender = $('#auth-user-id').val();
 let page = 1;
 let fetchingOldMessages = false;
-let userId = $('#auth-user-id').val();
+let userId = $('.auth-user-id').val();
 let chatListpage = 1;
+let socketId = null;
+
+socket.on('socketConnectionSecured', (message) => {
+    // console.log('socketId-----', message)
+    socketId = message;
+    $('#socket-id').val(message)
+});
+
+var userIdData = localStorage.getItem("user_id")
+/*console.log("userIdData", socket.id)
+
+console.log("userLogin", userLogin.id, "socketId",socketId)*/
+socket.emit('updateSocketId', userLogin.id)
 
 socket.on('sendChatToUser', (message) => {
-    message.file = $('.chat_attachment').prop('files')[0]
-    console.log("message", message)
+    // console.log("message", message)
     $.ajax({
-        type:"POST",
-        url:baseURL+'/user/chat/store',
-        data:message,
-        success: function(data){
-            if (data.status =="200") {
-                var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3" style="margin-left:auto;flex-direction:row-reverse">\n' +
+        type: "POST",
+        url: baseURL + '/user/chat/store',
+        data: message,
+        success: function (data) {
+            if (data.status == "200") {
+                var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_' + data.data.sender_id + '"  style="margin-left:auto;flex-direction:row-reverse">\n' +
                     '        \n' +
                     '        <img src=' + data.data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
                     '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
-                    '            <p style="background-color:var(--theme-cyan1);margin-left:auto;">'+ data.data.message +'</p>\n' +
-                    '            <small>'+ data.data.createdAt +'</small>\n' +
+                    '            <p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n' +
+                    (data.data.attachment ?
+                        '                <a href="' + data.data.attachment + '" target="_blank">\n' +
+                        '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
+                        '                </a>\n': '') +
+                    '            <small>' + data.data.createdAt + '</small>\n' +
                     '        </div>\n' +
                     '    </div>'
-                $('.chat-messages-user').append(html)
+                $('.chat-messages-user_' + data.data.sender_id).append(html)
                 $('.message-input').val('')
-                $('.chat-messages-user').animate({scrollTop:0}, 500);
+                // $('.chat-messages-user').animate({scrollTop: 0}, 500);
+                var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
+                var contentHeight = chatboxMain[0].scrollHeight;
+
+                $('.chat-messages-user_' + data.data.sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
             }
         },
-        error: function(data){
+        error: function (data) {
             alert("Error")
         }
     });
 });
 
-console.log('socket',socket)
-socket.on('socketConnectionSecured', (message) => {
-    console.log('socketId----', message)
-    $('#socket-id').val(message)
-});
 
 let connectionData = {
     userId: senderId,
 }
-socket.emit('connectionEstablished, ')
-
-$(function (){
-    $('.send-btn-user').click(function (){
+// socket.emit('connectionEstablished, ')
+var sender_id = $('.sender_id').val();
+$(function () {
+    $('.send-user-btn').click(function () {
         var message = $('.message-input').val();
         var socketId = $('#socket-id').val();
-        console.log("socketId",socketId)
+        // console.log("socketId", socketId)
         var receiver_id = $('.receiver_id').val();
-        var sender_id = $('.sender_id').val();
         var attachment = $('.chat_attachment').prop('files')[0];
-        console.log("attachment", attachment)
-        console.log("receiver_id",receiver_id, "sender_id",sender_id)
+        var form_data = new FormData();
+        form_data.append("file", attachment);
+        if (attachment) {
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: baseURL + '/user/chat/store/attachment',
+                data: form_data,
+                success: function (data) {
+                    if (data.status == "200") {
+                        // addCategoryReadURL(this);
+                    }
+                },
+                error: function (data) {
+                    alert("Error")
+                }
+            });
+        }
+        var fileName = attachment ? attachment.name : null;
         var messageData = {
             'sender_id': sender_id,
             'receiver_id': receiver_id,
             'receiver_socket': 'PfiZgCle4_nMzNgvAAAF',
             'message': message,
-            // 'fileAttachment': attachment,
-            'type':"user"
+            'fileAttachment': attachment,
+            "fileName": fileName,
+            'type': "user"
         }
         socket.emit('sendAdminChatToServer', messageData);
+        $(".send-user-btn").prop('disabled', true);
+        $(".image-holder").hide();
+        $(".chat_attachment").val('');
+        $('.attachImage').remove();
+        $('.remove-image').remove();
     })
 })
+$(document).keypress(function() {
+    if (event.which == 13) {
+        $('.send-btn-user_' + sender_id).click();
+    };
+});
 
-
-$('.chat-messages-user').on('scroll', function() {
-    if($(this).scrollTop() === 0 && !fetchingOldMessages) {
+$('.chat-messages-user_' + sender_id).on('scroll', function () {
+    if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
         // User has scrolled to the top
         // Perform AJAX call here
         fetchingOldMessages = true
         chatListpage++
         fetchChatUsers();
-        $('.chat-messages-user').animate({scrollTop:0}, 500);
+        $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
 
     }
 });
@@ -86,16 +128,16 @@ $('.chat-messages-user').on('scroll', function() {
 function fetchChatUsers() {
 
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            $('.chat-messages-user').append(this.responseText)
-            var chatboxMain = $('.chat-messages-user');
+            $('.chat-messages-user_' + sender_id).append(this.responseText)
+            var chatboxMain = $('.chat-messages-user_' + sender_id);
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
-            if (contentHeight > containerHeight  && page === 1) {
-                $('.chat-messages-user').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
+            if (contentHeight > containerHeight && page === 1) {
+                $('.chat-messages-user_' + sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
             }
 
         }
@@ -106,3 +148,44 @@ function fetchChatUsers() {
     xhttp.send();
 }
 fetchChatUsers();
+
+
+// new js
+
+// on keyup show hide send button
+$(document).on('keyup', '.message-input', function () {
+    $(".send-user-btn").removeAttr('disabled');
+    if ($(".message-input").val() == '') {
+        $(".send-user-btn").prop('disabled', true);
+    }
+})
+// on change show image.
+$(document).on('change', '.chat_attachment', function () {
+    $(".image-holder").show();
+    var ext = $('.chat_attachment').val().split('.').pop().toLowerCase();
+    if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+        alert('invalid extension!');
+        $(".chat_attachment").val('');
+        $(".image-holder").val('');
+        $(".send-user-btn").prop('disabled', true);
+        return false;
+    }
+    readURL(this);
+    $(".send-user-btn").removeAttr('disabled');
+})
+// click on cross icon remove image.
+$(document).on('click', '.remove-image', function () {
+    $('.attachImage').closest('img').remove();
+    $('.remove-image').closest('i').remove();
+    $(".chat_attachment").val('');
+})
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}

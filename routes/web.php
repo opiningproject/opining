@@ -157,6 +157,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
     Route::get('/chat/messages/{senderId}', [ChatController::class, 'getMessages'])->name('get_messages');
     Route::get('/chat/users', [ChatController::class, 'getChatUsersList'])->name('chat_users');
+    Route::post('/chat/attachment/store', [ChatController::class, 'storeAttachment'])->name('storeAttachment');
     Route::get('/chat/search-chat', [ChatController::class, 'searchChat']);
     Route::post('/chat/store', [ChatController::class, 'storeMessage']);
     Route::get('/orders/{date_filter?}', [OrdersController::class, 'index'])->name('orders');
@@ -171,6 +172,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
 
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
+
+    Route::get('/validate-myfinance', [PaymentsController::class, 'validateMyFinance']);
+    Route::post('/check-myfinance-password', [PaymentsController::class, 'checkMyFinancePassword'])->name('checkMyFinancePassword');
 
 });
 
@@ -195,7 +199,7 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
         Route::post('/chat/store', [App\Http\Controllers\User\ChatController::class, 'storeMessage'])->name('user.store');
-//        Route::get('/chat/status/update', [App\Http\Controllers\User\ChatController::class, 'chatStatusUpdate'])->name('user.chatStatusUpdate');
+        Route::post('/chat/store/attachment', [App\Http\Controllers\User\ChatController::class, 'storeAttachment'])->name('user.storeAttachment');
         Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'index'])->name('user.checkout');
         Route::get('/ideal-payment', [App\Http\Controllers\User\CheckoutController::class, 'idealPayment'])->name('user.ideal');
         Route::get('/card-payment', [App\Http\Controllers\User\CheckoutController::class, 'cardPayment'])->name('user.card');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -51,6 +52,9 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $user = Auth::user();
+        if ($user) {
+            User::where('id',$user->id)->update(['is_online'=>'0']);
+        }
         $this->guard()->logout();
 
         $request->session()->invalidate();

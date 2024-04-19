@@ -42,26 +42,26 @@ class ChatController extends Controller
         $adminId = 1;
         $messages = Chat::with('sender')
             ->with('receiver')->where(function ($query) use ($adminId, $userId) {
-            $query->where('sender_id', $adminId)
-                ->where('receiver_id', $userId);
-        })->orWhere(function ($query) use ($adminId, $userId) {
-            $query->where('sender_id', $userId)
-                ->where('receiver_id', $adminId);
-        })->orderBy('created_at', 'asc')->paginate(8, ['*'], 'page', $pageNumber); // Fetch messages
+                $query->where('sender_id', $adminId)
+                    ->where('receiver_id', $userId);
+            })->orWhere(function ($query) use ($adminId, $userId) {
+                $query->where('sender_id', $userId)
+                    ->where('receiver_id', $adminId);
+            })->orderBy('created_at', 'asc')
+            ->paginate(10, ['*'], 'page', $pageNumber); // Fetch messages
 
         $messages->getCollection()->transform(function ($item) {
 
             $item->appendStyle = '';
             $item->messageStyle = '';
 
-            if($item->receiver_id != auth()->id() && $item->sender_id == auth()->id()) {
+            if ($item->receiver_id != auth()->id() && $item->sender_id == auth()->id()) {
                 $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
                 $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
-            }/* else {
-                $item->appendStyle = "margin-right:auto";
-                $item->messageStyle = "background-color:var(--theme-white6);margin-right:auto;";
-            }*/
-
+            } else {
+                $item->appendStyle = "margin-left:inherit;flex-direction:row";
+                $item->messageStyle = "background-color:var(--theme-chat-box);margin-left:inherit;";
+            }
             return $item;
         });
 //        $chats = $messages->reverse();
@@ -75,26 +75,26 @@ class ChatController extends Controller
         $storeChat->sender_id = $request->sender_id;
         $storeChat->receiver_id = $request->receiver_id;
         $storeChat->message = $request->message;
+        $storeChat->attachment = $request->fileName;
         $storeChat->save();
         $storeChat->createdAt = $storeChat->created_at->format('h:m a');
-        $storeChat->userImage  = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
+        $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
         return \response()->json([
-            "status"=>"200",
-            'data' =>$storeChat
+            "status" => "200",
+            'data' => $storeChat
         ]);
     }
 
-
-    /*public function chatStatusUpdate(Request $request)
+    public function storeAttachment(Request $request)
     {
-        dd($request->all());
-        $updateUserStatus = User::find(2);
-//        dd($updateUserStatus);
-        $updateUserStatus->is_online = '0';
-        $updateUserStatus->save();
+        $attachmentName = "";
+        if ($request->has('file')) {
+            $imageName = uploadAttachmentToBucket($request, '/chat');
+            $attachmentName = $imageName;
+        }
         return \response()->json([
-            "status"=>"200",
-            'data' => $updateUserStatus
+            "status" => "200",
+            'imageName' => $attachmentName
         ]);
-    }*/
+    }
 }

@@ -91,42 +91,4 @@
             integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/user-chat.js') }}"></script>
-    <script>
-        // on keyup show hide send button
-        $(document).on('keyup', '.message-input', function () {
-            $(".send-user-btn").removeAttr('disabled');
-            if ($(".message-input").val() == '') {
-                $(".send-user-btn").prop('disabled', true);
-            }
-        })
-        // on change show image.
-        $(document).on('change', '.chat_attachment', function () {
-            var ext = $('.chat_attachment').val().split('.').pop().toLowerCase();
-            if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
-                alert('invalid extension!');
-                $(".chat_attachment").val('');
-                $(".image-holder").val('');
-                $(".send-user-btn").prop('disabled', true);
-                return false;
-            }
-            readURL(this);
-            $(".send-user-btn").removeAttr('disabled');
-        })
-        // click on cross icon remove image.
-        $(document).on('click', '.remove-image', function () {
-            $('.attachImage').closest('img').remove();
-            $('.remove-image').closest('i').remove();
-            $(".chat_attachment").val('');
-        })
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @endsection

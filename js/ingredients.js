@@ -53,7 +53,7 @@ $(function () {
                 if (response.status == 200) {
                     $('#ingredient-tr' + id).remove()
                     $('#deleteAlertModal').modal('hide')
-                    toastr.success('Ingredient Deleted Successfully')
+                    toastr.success(response.message)
                 } else {
                     toastr.error(response.message)
                 }
@@ -98,12 +98,12 @@ $(function () {
         ingredientData.append('name_nl', name_nl)
 
         if(name_en == ''){
-            alert('Please enter Name(English)')
+            $('#name_en' + id).focus();
             return false
         }
 
         if(name_nl == ''){
-            alert('Please enter Name(Dutch)')
+            $('#name_nl' + id).focus();
             return false
         }
 
@@ -120,8 +120,8 @@ $(function () {
             data: ingredientData,
             success: function (response) {
                 if (response.status == 200) {
-                    toastr.success('Ingredient Updated successfully')
-                    location.reload()
+                    toastr.success(response.message)
+                    setTimeout(function(){ location.reload() }, 500);
                 }else{
                     toastr.error(response.message)
                 }
@@ -155,7 +155,7 @@ $(function () {
                 status
             },
             success: function (response) {
-                toastr.success("Ingredient Status Updated")
+                toastr.success(response.message)
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -168,7 +168,7 @@ $(function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-            alert('You must select an image file only');
+            alert($('#image_type_error').text());
             return false
         }
 
@@ -182,14 +182,14 @@ $(function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-            alert('You must select an image file only');
+            alert($('#image_type_error').text());
             return false
         }
 
         var imgWidth = $(this).width();
         var imgHeight =$(this).height();
         if(imgWidth > 1080 || imgHeight > 1080){
-            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            alert($('#image_size_error').text());
             return false
         }
 

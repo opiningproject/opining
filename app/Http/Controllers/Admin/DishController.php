@@ -95,17 +95,23 @@ class DishController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
+        try 
+        {
             $dish = Dish::find($id);
-            if ($dish) {
+
+            if ($dish) 
+            {
                 $dish->price = $request->price;
                 $dish->save();
                 return response::json(['status' => 200, 'data' => $dish]);
-            } else {
-                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+            } 
+            else 
+            {
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) 
+        {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
@@ -115,17 +121,24 @@ class DishController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
+        try 
+        {
             $dish = Dish::find($id);
-            if ($dish) {
+
+            if ($dish) 
+            {
                 $dish->option()->delete();
                 $dish->ingredients()->delete();
                 $dish->delete();
-                return response::json(['status' => 200, 'message' => 'Deleted Successfully.']);
-            } else {
-                return response::json(['status' => 400, 'message' => 'No such dish exist.']);
+                return response::json(['status' => 200, 'message' =>  trans('rest.message.dish_delete_success')]);
+            } 
+            else 
+            {
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) 
+        {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
@@ -179,7 +192,7 @@ class DishController extends Controller
                 $dishIngredient->save();
                 return response::json(['status' => 200, 'data' => $dishIngredient]);
             } else {
-                return response::json(['status' => 400, 'message' => 'No such Ingredient exist.']);
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
 
         } catch (Exception $e) {
@@ -192,13 +205,18 @@ class DishController extends Controller
         try {
             $dishIngredient = DishIngredient::find($id);
 
-            if ($dishIngredient) {
+            if ($dishIngredient) 
+            {
                 $dishIngredient->delete();
-                return response::json(['status' => 200, 'message' => 'Dish Ingredient Deleted successfully']);
-            } else {
-                return response::json(['status' => 400, 'message' => 'No such Ingredient Attached']);
+                return response::json(['status' => 200, 'message' => trans('rest.message.dish_ingre_delete_success')]);
+            } 
+            else 
+            {
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) 
+        {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
@@ -207,7 +225,9 @@ class DishController extends Controller
     {
         try {
             $dish = Dish::find($id);
-            if ($dish) {
+
+            if ($dish) 
+            {
                 $dish->name_en = $request->name_en;
                 $dish->name_nl = $request->name_nl;
                 $dish->desc_en = $request->desc_en;
@@ -251,12 +271,14 @@ class DishController extends Controller
                         }
                     }
 
-                    return response::json(['status' => 200, 'message' => 'Successfully Updated']);
+                    return response::json(['status' => 200, 'message' => trans('rest.message.dish_update_success')]);
                 } else {
-                    return response::json(['status' => 400, 'message' => 'Something went wrong. Please try again.']);
+                    return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
                 }
-            } else {
-                return response::json(['status' => 400, 'message' => 'No such Dish Exist']);
+            } 
+            else 
+            {
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);

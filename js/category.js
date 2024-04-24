@@ -40,8 +40,10 @@ $(function () {
             url: 'category/' + id,
             type: 'DELETE',
             success: function (response) {
-                toastr.success('Category Deleted Successfully')
-                window.location.reload();
+                toastr.success(response.message)
+
+                setTimeout(function(){ window.location.reload(); }, 500);
+               
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -112,14 +114,14 @@ $(function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-            alert('You must select an image file only');
+            alert($('#image_type_error').text());
             return false
         }
 
         var imgWidth = $(this).width();
         var imgHeight =$(this).height();
         if(imgWidth > 1080 || imgHeight > 1080){
-            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            alert($('#image_size_error').text());
             return false
         }
 
@@ -132,14 +134,14 @@ $(function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-            alert('You must select an image file only');
+            alert($('#image_type_error').text());
             return false
         }
 
         var imgWidth = $(this).width();
         var imgHeight =$(this).height();
         if(imgWidth > 1080 || imgHeight > 1080){
-            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            alert($('#image_size_error').text());
             return false
         }
 
@@ -186,13 +188,11 @@ function saveCategory(type) {
         processData: false,
         contentType: false,
         data: catData,
-        success: function (response) {
-            if (type == 'add'){
-                toastr.success('Category Added Successfully')
-            }else{
-                toastr.success('Category Updated Successfully')
-            }
-            location.reload()
+        success: function (response) 
+        {
+            toastr.success(response.message)
+            setTimeout(function(){ window.location.reload(); }, 500);
+
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

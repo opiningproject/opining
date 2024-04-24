@@ -49,32 +49,6 @@ class CheckoutController extends Controller
         return view('user.checkout.ideal-payment', ['paymentIntent' => $paymentIntent]);
     }
 
-    public function cardPayment(Request $request)
-    {
-        $user = Auth::user();
-
-        $paymentIntent = createPaymentIntent($user->stripe_cust_id, 400);
-        $stripe = new \Stripe\StripeClient(config('params.stripe.sandbox.secret_key'));
-
-        try {
-            $source = $stripe->customers->createSource($user->stripe_cust_id, [
-                'source' => 'tok_visa'
-            ]);
-
-            $stripe->paymentIntents->confirm(
-                $paymentIntent->id,
-                ['payment_method' => $source->id],
-                ['return_url' => '']
-
-            );
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-            return response::json(['status' => 0, 'message' => $e->getError()->message]);
-        }
-
-//        print_r($chargeResult);
-//        exit;
-    }
-
     public function placeOrderData(Request $request)
     {
         try {
@@ -268,7 +242,7 @@ class CheckoutController extends Controller
                 }
             }
 
-            $response['data'] = 'Order Placed successfully';
+            $response['data'] = trans('user.message.order_success');
 
             return response::json(['status' => 200, 'message' => $response]);
         } catch (Exception $e) {

@@ -42,10 +42,11 @@
                                 <div>
                                     <label>{{ trans('rest.button.rows_per_page') }}</label>
                                     <select id="per_page_dropdown" onchange="">
-                                        <option {{ $perPage == 5 ? 'selected' : '' }} value="{{ Request::url().'?per_page=5' }}">5</option>
-                                        <option {{ $perPage == 10 ? 'selected' : '' }} value="{{ Request::url().'?per_page=10' }}">10</option>
-                                        <option {{ $perPage == 15 ? 'selected' : '' }} value="{{ Request::url().'?per_page=15' }}">15</option>
-                                        <option {{ $perPage == 20 ? 'selected' : '' }} value="{{ Request::url().'?per_page=20' }}">20</option>
+                                        @for($i=5; $i<=20; $i+=5)
+                                        <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                                            {{ $i }}
+                                        </option>
+                                        @endfor
                                     </select>
                                 </div>
                             </div>

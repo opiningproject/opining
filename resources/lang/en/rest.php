@@ -9,6 +9,11 @@ return [
 		'delivered' => 'Delivered',
 	],
 
+	'refund_status' => [
+		'accepted' => 'Accepted',
+		'rejected' => 'Rejected',
+	],
+
 	'sidebar' => [
 		'menu' => 'Menu',
 		'food_order' => 'Food Order',
@@ -152,7 +157,6 @@ return [
 			'total' => 'Total',
 			'card' => 'Card',
 			'cash' => 'Cash',
-
 			'accepted' => 'Accepted',
 			'rejected' => 'Rejected',
 			'accept' => 'Accept',
@@ -246,11 +250,16 @@ return [
 			'alert_message' => 'Your content has been successfully saved !!',
 		],
 
+		'order_status' => [
+			'alert_message' => 'Do you want to change the status to',
+		],
+
 		'change_password' => [
 			'title' => 'Change Password',
 			'old_password' => 'Old Password',
 			'new_password' => 'New Password',
-			'c_password' => 'Confirm New Password'
+			'c_password' => 'Confirm New Password',
+			'incorrect_password' => 'Old Password is not correct',
 		]
 	],
 
@@ -258,6 +267,8 @@ return [
 		'rows_per_page' => 'Rows per Page',
 		'save' => 'Save',
 		'ok' => 'Ok',
+		'yes' => 'Yes',
+		'no' => 'No',
 		'cancel' => 'Cancel',
 		'submit' => 'Submit',
 		'update' => 'Update',
@@ -265,6 +276,49 @@ return [
 		'view_all' => 'View all',
 		'action' => 'Action',
 		'add' => 'Add',
-	]
+		'login' => 'Login',
+		'send_password_link' => 'Send Password Reset Link',
+	],
+
+	'auth' => [
+		'email' => 'Email',
+		'new_password' => 'New Password',
+		'c_new_password' => 'Confirm New Password',
+		'forgot_password' => 'Forgot Password',
+		'reset_password' => 'Reset Password',
+	],
+
+	'message' => [
+		'password_success' => 'Password updated successfully',
+		'went_wrong' => 'Something went wrong. Please try again later.',
+		'category_delete_success' => 'Category Deleted Successfully',
+		'category_add_success' => 'Category Added Successfully',
+		'category_update_success' => 'Category Updated Successfully',
+
+		'coupon_delete_success' => 'Coupon Deleted Successfully',
+		'coupon_add_success' => 'Coupon Added Successfully',
+		'coupon_update_success' => 'Coupon Updated Successfully',
+		'coupon_status_success' => 'Coupon status updated successfully',
+
+		'dish_update_success' => 'Dish Updated Successfully',
+		'dish_delete_success' => 'Dish Deleted Successfully',
+
+		'dish_ingre_delete_success' => 'Dish Ingredient Deleted successfully',
+
+		'ingredient_delete_success' => 'Ingredient Deleted successfully',
+		'ingredient_updated_success' => 'Ingredient Updated successfully',
+		'ingredient_status_success' => 'Ingredient status updated successfully',
+
+		'image_type_error' => 'You must select an image file only',
+		'image_size_error' => 'Your image is too big, it must be within 1080 X 1080 pixels',
+
+		'zipcode_delete_success' => 'Zipcode Deleted Successfully',
+		'zipcode_add_success' => 'Zipcode Added Successfully',
+		'zipcode_update_success' => 'Zipcode Updated Successfully',
+		'zipcode_status_success' => 'Zipcode status updated successfully',
+
+		'time_error' => 'Start Time should be less than End Time',
+		'password_error' => 'Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol'
+	],
 	
 ];

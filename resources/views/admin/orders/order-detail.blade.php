@@ -58,7 +58,7 @@ $userDetails = $order->orderUserDetails;
                     <span>{{ trans('rest.food_order.payment_method') }}: </span>{{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card'): ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod'):'Ideal') }}
                 </div>
                 <div class="text">
-                    <span>Order Type: </span>{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}
+                    <span>{{ trans('rest.food_order.type') }}: </span>{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}
                 </div>
             </div>
         </div>
@@ -179,7 +179,7 @@ $userDetails = $order->orderUserDetails;
         <div class="footer-box-main-orderlist-header d-flex align-items-center justify-content-between">
             <div class="text-grp d-flex align-items-center gap-1">
                 <div class="title">{{ trans('rest.food_order.order_list') }} :</div>
-                <div class="number">({{ count($order->dishDetails) }} x items)</div>
+                <div class="number">({{ count($order->dishDetails) }} x {{ trans('rest.food_order.items') }})</div>
             </div>
         </div>
         <div class="footer-box-main-orderlist-main d-flex flex-column">
@@ -193,10 +193,8 @@ $userDetails = $order->orderUserDetails;
                         {{ getOrderDishIngredients($dish) }}
                     </div>
                     <div class="text">
-                        <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
-                           onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }}</a>
-                        <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"
-                           onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
+                        <a href="javascript:void(0)" id="read-more-{{ $dish->id}}" onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }}</a>
+                        <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}" onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
                     </div>
                 </div>
                 <div class="notes">

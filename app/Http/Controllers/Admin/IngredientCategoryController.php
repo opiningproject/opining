@@ -18,6 +18,7 @@ class IngredientCategoryController extends Controller
     {
         $perPage = isset($request->per_page) ? $request->per_page : 10;
         $ingredientCategory = IngredientCategory::orderBy('id','DESC')->paginate($perPage);
+        
         return view('admin.ingredients.ingredient-category', [
             'ingredientCategory' => $ingredientCategory,
             'perPage' => $perPage
@@ -41,7 +42,7 @@ class IngredientCategoryController extends Controller
             $category = IngredientCategory::create(
                 $request->all()
             );
-            return response::json(['status' => 200, 'data' => $category]);
+            return response::json(['status' => 200, 'data' => $category, 'message' => trans('rest.message.category_add_success')]);
 
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
@@ -58,7 +59,7 @@ class IngredientCategoryController extends Controller
 
             return response::json(['status' => 200, 'data' => $category]);
         } catch (Exception $e) {
-            return response::json(['status' => 400, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -78,17 +79,24 @@ class IngredientCategoryController extends Controller
         try {
             $category = IngredientCategory::find($id);
 
-            if($category){
+            if($category)
+            {
                 $category->name_en = $request->name_en;
                 $category->name_nl = $request->name_nl;
                 $category->save();
-            }else{
-                return response::json(['status' => 404, 'message' => 'No such category exist.']);
+
+                return response::json(['status' => 200, 'message' => trans('rest.message.category_update_success')]);
+            }
+            else
+            {
+                return response::json(['status' => 404, 'message' => trans('rest.message.went_wrong')]);
             }
 
             return response::json(['status' => 200, 'data' => $category]);
-        } catch (Exception $e) {
-            return response::json(['status' => 400, 'message' => 'Something went wrong.']);
+        } 
+        catch (Exception $e) 
+        {
+            return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -99,9 +107,9 @@ class IngredientCategoryController extends Controller
     {
         try {
             IngredientCategory::where('id', $id)->delete();
-            return response::json(['status' => 1, 'message' => 'Category Deleted successfully']);
+            return response::json(['status' => 1, 'message' => trans('rest.message.category_delete_success')]);
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 

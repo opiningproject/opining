@@ -181,7 +181,7 @@ $(function () {
                 $('#deleteAlertModal').modal('hide')
                 if (response.status == 200) {
                     $('#dishIngredient' + id).remove()
-                    toastr.success('Ingredient Removed Successfully')
+                    toastr.success(response.message)
                 } else {
                     alert(response.message);
                 }
@@ -256,14 +256,14 @@ $(function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-            alert('You must select an image file only');
+            alert($('#image_type_error').text());
             return false
         }
 
         var imgWidth = $(this).width();
         var imgHeight =$(this).height();
         if(imgWidth > 1080 || imgHeight > 1080){
-            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            alert($('#image_size_error').text());
             return false
         }
 
@@ -443,8 +443,9 @@ function updateDishData() {
         data: dishData,
         success: function (response) {
             if (response.status == 200) {
-                toastr.success('Dish Updated Successfully')
-                location.reload()
+                toastr.success(response.message)
+                
+                setTimeout(function(){ window.location.reload(); }, 500);
             }else{
                 alert(response.message)
             }

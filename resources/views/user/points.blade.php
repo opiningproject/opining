@@ -10,7 +10,7 @@
          <div class="main-content">
            <div class="section-page-title main-page-title mb-0">
              <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
-               <h1 class="page-title">Collected Points</h1>
+               <h1 class="page-title">{{ trans('user.collected_points.title') }}</h1>
              </div>
            </div>
            <!-- start category list section -->
@@ -21,20 +21,19 @@
                     <div id="chart-container-one" class="collected-points-charts"></div>
                   </div>
                   <div class="col-md-6 text-center text-md-start">
-                    <h3 class="fs-6 fs-md-4">Get 1 point order above €20 plus</h3>
-                    <h3 class="mt-4 mb-0 fs-6 fs-md-4">Get 2 points order above €30 plus</h3>
+                    <h3 class="fs-6 fs-md-4">{{ trans('user.collected_points.content_1') }}</h3>
+                    <h3 class="mt-4 mb-0 fs-6 fs-md-4">{{ trans('user.collected_points.content_2') }}</h3>
                     <a class="btn btn-custom-yellow track-order-btn mt-4"  href="{{ route('user.dashboard') }}">
-                      <span class="align-middle">Order Now</span>
+                      <span class="align-middle">{{ trans('user.collected_points.order_now') }} </span>
                     </a>
                   </div>
                </div>
                <div class="card-body pb-0 px-0 px-md-3">
                  <div class="collected-points-list">
-                   <p class="text-capitalize">instruction</p>
+                   <p class="text-capitalize">{{ trans('user.collected_points.instruction') }}</p>
                    <ul>
-                     <li>Get 1 point order above €20 plus</li>
-                     <li>Get 2 points order above €30 plus
-                     </li>
+                     <li>{{ trans('user.collected_points.content_1') }}</li>
+                     <li>{{ trans('user.collected_points.content_2') }}</li>
                    </ul>
                  </div>
                </div>
@@ -84,7 +83,7 @@
                         baseFontSize: "18",
                         subcaption: false,
                         showpercentvalues: "1",
-                        defaultcenterlabel: collected_points+" Points Collected",
+                        defaultcenterlabel: collected_points,
                         captionFontSize: "3rem",
                         decimals: "1",
                         doughnutRadius: "60",

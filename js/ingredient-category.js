@@ -24,7 +24,7 @@ $(function () {
             success: function (response) {
                 $('#ing-tr'+id).remove();
                 $('#deleteAlertModal').modal('hide')
-                toastr.success('Category Deleted successfully')
+                toastr.success(response.message)
 
             },
             error: function (response) {
@@ -81,12 +81,12 @@ $(function () {
         var name_nl = $('#name_nl' + id).val()
 
         if(name_en == ''){
-            alert('Please enter Name(English)')
+            $('#name_en' + id).focus();
             return false
         }
 
         if(name_nl == ''){
-            alert('Please enter Name(Dutch)')
+           $('#name_nl' + id).focus();
             return false
         }
 
@@ -105,7 +105,7 @@ $(function () {
                     $('#edit-btn'+id).show()
                     $('#del-btn'+id).show()
                     $('#save-edit-btn'+id).attr('style','display:none !important')
-                    toastr.success('Category Updated Successfully')
+                    toastr.success(response.message)
                 } else {
                     toastr.error(response.message)
                 }

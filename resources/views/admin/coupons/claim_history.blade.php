@@ -49,38 +49,21 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <div>
-                                            <nav class="table-pagination" aria-label="Page navigation example">
-                                                <ul class="pagination mb-0">
-                                                    <li class="page-item me-2">
-                                                        <a class="page-link" href="javascript:void(0);" aria-label="Previous">
-                                                            <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item labelactive">01</a></li>
-                                                    <li class="page-item">of</a></li>
-                                                    <li class="page-item">05</a></li>
-                                                    <li class="page-item ms-2">
-                                                        <a class="page-link" href="javascript:void(0);" aria-label="Next">
-                                                            <span aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="pagenumberdp d-flex align-items-center">
-                                                    <p class="mb-0">{{ trans('rest.button.rows_per_page') }}</p>
-                                                    <div class="dropdown couponperpage-dropdown">
-                                                        <button class="btn dropdown-toggle pagination-dropdown-value" value="15" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            15
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><button class="dropdown-item" type="button">30</button></li>
-                                                            <li><button class="dropdown-item" type="button">50</button></li>
-                                                            <li><button class="dropdown-item" type="button">100</button></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </nav>
+
+                                        <div class="d-flex justify-content-between align-items-center pt-3" style="padding: 0 20px 0 20px;">
+                                            {{ $orders->links() }}
+                                            <div class="ms-auto d-flex align-items-center custom-pagination justify-content-end w-100">
+                                                <label class="text-nowrap">{{ trans('rest.button.rows_per_page') }}</label>
+                                                <select id="per_page_dropdown" onchange="" class="form-control bg-white ms-2">
+                                                    @for($i=5; $i<=20; $i+=5)
+                                                    <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                                                        {{ $i }}
+                                                    </option>
+                                                    @endfor
+                                                </select>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

@@ -85,7 +85,7 @@
                             <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.logo') }}</label>
                             <label for="restaurant-logo-input-file" class="logowithtext-box">
                                 <input type="file" class="d-none" id="restaurant-logo-input-file" name="image">
-                                <img src="{{ $user->restaurant_logo }}" alt="Restaurant Logo" id="profile-img" class="img-fluid" />
+                                <img src="{{ $user->restaurant_logo }}" alt="" id="profile-img" class="img-fluid" />
                             </label>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                             <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.footer_logo') }}</label>
                             <label for="restaurant-footer-logo-input-file" class="logowithtext-box">
                                 <input type="file" class="d-none" id="restaurant-footer-logo-input-file" name="footer-img">
-                                <img src="{{ $user->footer_logo }}" alt="Restaurant Footer Logo" id="footer-img" class="img-fluid" />
+                                <img src="{{ $user->footer_logo }}" alt="" id="footer-img" class="img-fluid" />
                             </label>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                             <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.permit_doc') }}</label>
                             <label for="permit-doc-input-file" class="logowithtext-box">
                                 <input type="file" class="d-none" id="permit-doc-input-file" name="permit-doc">
-                                <img src="{{ $user->permit_doc }}" alt="Permit Doc" id="permit-img" class="img-fluid" />
+                                <img src="{{ $user->permit_doc }}" alt="" id="permit-img" class="img-fluid" />
                             </label>
                         </div>
                     </div>
@@ -172,12 +172,11 @@
                     <div class="form-group">
                         <label for="oldpassword" class="form-label">{{ trans('rest.modal.change_password.old_password') }}</label>
                         <input type="password" class="form-control" name="old_password" id="old_password">
-                        <span class="help-block d-none" id="old_password-error-msg">Old password is not correct</span>
+                        <span class="help-block d-none" id="old_password-error" style="color: red">{{ trans('rest.modal.change_password.incorrect_password') }}</span>
                     </div>
                     <div class="form-group">
                         <label for="newpassword" class="form-label">{{ trans('rest.modal.change_password.new_password') }}</label>
                         <input type="password" class="form-control" name="new_password" id="new_password">
-                        <span class="help-block d-none" id="c_password-error">Confirm password does not match with password</span>
                     </div>
                     <div class="form-group mb-0">
                         <label for="cnewpassword" class="form-label">{{ trans('rest.modal.change_password.c_password') }}</label>

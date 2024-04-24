@@ -93,7 +93,7 @@ class CartController extends Controller
             }
 
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -106,9 +106,9 @@ class CartController extends Controller
         $ingredientData = getOrderDishIngredients($cart);
 
         $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
- <div class='col-12'>
-                                                                            <div class='d-flex cart-item-row'>
-                                                                                <div class='cart-custom-w-col-img'>
+                    <div class='col-12'>
+                        <div class='d-flex cart-item-row'>
+                            <div class='cart-custom-w-col-img'>
 
                     <img src=" . $dish->image . " alt='$dish->name' class='img-fluid' width='86' height='74px' />
                     <div class='foodqty'>
@@ -131,24 +131,19 @@ class CartController extends Controller
                       <div class='d-flex align-items-center'>
                         <p class='mb-0 item-options mb-0'> $optionName </p>
                         <span class='item-desc' id='item-ing-desc$cart->id'>$ingredientData</span>
-<p class='item-customize mb-0 ms-auto justify-content-end'>
-                                                                                                <a href='javascript:void(0);'
-                                                                                                   onclick='customizeDish($dish->id,$cart->id);'>
-                                                                                                    <img
-                                                                                                        src='".asset('images/custom-dish.svg')."'
-                                                                                                        alt=''
-                                                                                                        class='svg edit-icon'
-                                                                                                        height='13'
-                                                                                                        width='14'/>
-                                                                                                </a>
-                                                                                                Edit
-                                                                                            </p>
+                        <p class='item-customize mb-0 ms-auto justify-content-end'>
+                            <a href='javascript:void(0);'
+                               onclick='customizeDish($dish->id,$cart->id);'>
+                                <img src='".asset('images/custom-dish.svg')."' alt='' class='svg edit-icon' height='13' width='14'/>
+                            </a>
+                            Edit
+                        </p>
                         <p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total),2) . " </p>
                       </div>
                       <div class='from-group addnote-from-group mb-0'>
                         <div class='form-group'>
-                          <label for='dishnameenglish' class='form-label'>Add notes</label>
-                          <input type='text' class='form-control dish-notes' maxlength='50' placeholder='Type here...'/>
+                          <label for='dishnameenglish' class='form-label'>".trans('user.cart.add_notes')."</label>
+                          <input type='text' class='form-control dish-notes' maxlength='50' placeholder='".trans('user.cart.type_here')."'/>
                         </div>
                       </div>
                     </div>
@@ -371,7 +366,7 @@ class CartController extends Controller
             if ($cartData) {
                 $response['cartHtml'] = $this->cartHtml($orderDetails);
             }*/
-            $response['msg'] = 'Cart Added Successfully';
+            $response['msg'] = '';
             $response['paidIngAmt'] = $paidIngAmt;
             $response['ingListData'] = $IngListData;
             $response['addedDishId'] = $sameDish;
@@ -396,7 +391,7 @@ class CartController extends Controller
             }
 
             if (!Auth::user()) {
-                return response::json(['status' => 401, 'message' => 'Unauthorized']);
+                return response::json(['status' => 401, 'message' => '']);
             }
 
             $user = Auth::user();
@@ -408,7 +403,7 @@ class CartController extends Controller
 
             }
 
-            return response::json(['status' => 200, 'message' => 'Delivery type updated successfully']);
+            return response::json(['status' => 200, 'message' => '']);
 
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
@@ -425,7 +420,7 @@ class CartController extends Controller
 
             if ($user->cart->coupon) {
                 if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
-                    return response::json(['status' => 406, 'message' => "Coupon is expired."]);
+                    return response::json(['status' => 406, 'message' => trans('user.message.coupon_expired')]);
                 }
             }
 
@@ -451,11 +446,11 @@ class CartController extends Controller
             }
 
             if ($outOfStock) {
-                return response::json(['status' => 412, 'message' => "Few items are out of stock. Please remove them to continue."]);
+                return response::json(['status' => 412, 'message' => trans('user.message.cart_item_out_of_stock')]);
             }
 
             if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
-                return response::json(['status' => 412, 'message' => "The restaurant doesn't deliver at this time. Please try again after sometime."]);
+                return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
             }
 
             if ($user->cart->order_type == OrderType::Delivery) {
@@ -464,25 +459,24 @@ class CartController extends Controller
                     $zip = substr(session('zipcode'), 0, 4);
                     $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
 
-
                     if ($zipcode) {
 
                         $deliveryCharges = getDeliveryCharges(session('zipcode'));
                         if ($deliveryCharges) {
                             if ($request->totalAmt >= $deliveryCharges->min_order_price) {
-                                return response::json(['status' => 200, 'message' => 'Delivery']);
+                                return response::json(['status' => 200, 'message' => '']);
                             } else {
-                                return response::json(['status' => 412, 'message' => "The minimum order should be $deliveryCharges->min_order_price"]);
+                                return response::json(['status' => 412, 'message' => trans('user.message.min_order_price',['min_order_price' => $deliveryCharges->min_order_price])]);
                             }
                         }
                     } else {
-                        return response::json(['status' => 406, 'message' => 'Currently, we are not delivering food to this location.']);
+                        return response::json(['status' => 406, 'message' => trans('user.message.invalid_zipcode')]);
                     }
                 } else {
-                    return response::json(['status' => 200, 'message' => 'Takeaway']);
+                    return response::json(['status' => 200, 'message' => '']);
                 }
             } else {
-                return response::json(['status' => 200, 'message' => 'Takeaway']);
+                return response::json(['status' => 200, 'message' => '']);
             }
 
         } catch (Exception $e) {
@@ -496,7 +490,7 @@ class CartController extends Controller
             $orderDish = OrderDetail::find($id);
             $orderDish->orderDishDetails()->forceDelete();
             $orderDish->forceDelete();
-            return response::json(['status' => 200, 'message' => 'Dish Deleted']);
+            return response::json(['status' => 200, 'message' => '']);
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
@@ -510,9 +504,9 @@ class CartController extends Controller
             $orderDish->notes = $request->notes;
 
             if ($orderDish->save()) {
-                return response::json(['status' => 200, 'message' => 'Notes Added']);
+                return response::json(['status' => 200, 'message' => '']);
             } else {
-                return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
+                return response::json(['status' => 500, 'message' => trans('user.message.went_wrong')]);
             }
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
@@ -527,9 +521,9 @@ class CartController extends Controller
             $order->delivery_note = $request->delivery_notes;
 
             if ($order->save()) {
-                return response::json(['status' => 200, 'message' => 'Notes Added']);
+                return response::json(['status' => 200, 'message' => '']);
             } else {
-                return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
+                return response::json(['status' => 500, 'message' => trans('user.message.went_wrong')]);
             }
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);

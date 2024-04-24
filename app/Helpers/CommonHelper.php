@@ -358,3 +358,7 @@ if (!function_exists('getOrderStatus')) {
         return $order;
     }
 }
+
+function getAdminUser () {
+    return User::where('user_role', '1')->first();
+}

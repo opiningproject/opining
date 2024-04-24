@@ -37,7 +37,7 @@ socket.on('sendChatToUser', (message) => {
                     (data.data.attachment ?
                         '                <a href="' + data.data.attachment + '" target="_blank">\n' +
                         '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
-                        '                </a>\n': '') +
+                        '                </a>\n' : '') +
                     '            <small>' + data.data.createdAt + '</small>\n' +
                     '        </div>\n' +
                     '    </div>'
@@ -62,12 +62,13 @@ let connectionData = {
 }
 // socket.emit('connectionEstablished, ')
 var sender_id = $('.sender_id').val();
+var receiver_id = $('.receiver_id').val();
 $(function () {
     $('.send-user-btn').click(function () {
         var message = $('.message-input').val();
         var socketId = $('#socket-id').val();
         // console.log("socketId", socketId)
-        var receiver_id = $('.receiver_id').val();
+        receiver_id = $('.receiver_id').val();
         var attachment = $('.chat_attachment').prop('files')[0];
         var form_data = new FormData();
         form_data.append("file", attachment);
@@ -106,10 +107,11 @@ $(function () {
         $('.remove-image').remove();
     })
 })
-$(document).keypress(function() {
+$(document).keypress(function () {
     if (event.which == 13) {
         $('.send-btn-user_' + sender_id).click();
-    };
+    }
+    ;
 });
 
 $('.chat-messages-user_' + sender_id).on('scroll', function () {
@@ -147,6 +149,7 @@ function fetchChatUsers() {
     xhttp.open("GET", url, true);
     xhttp.send();
 }
+
 fetchChatUsers();
 
 
@@ -163,7 +166,7 @@ $(document).on('keyup', '.message-input', function () {
 $(document).on('change', '.chat_attachment', function () {
     $(".image-holder").show();
     var ext = $('.chat_attachment').val().split('.').pop().toLowerCase();
-    if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+    if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
         alert('invalid extension!');
         $(".chat_attachment").val('');
         $(".image-holder").val('');
@@ -183,9 +186,30 @@ $(document).on('click', '.remove-image', function () {
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    Echo.private('brodcast-message')
+        .listen('.getChatMessage', (data) => {
+            if (sender_id == data.chat.receiver_id && receiver_id == data.chat.sender_id) {
+                var htmlData = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
+                    '        \n' +
+                    '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+                    '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
+                    '            <p style="background-color:var(--theme-chat-box);margin-left:inherit;">' + data.chat.message + '</p>\n' +
+                    (data.chat.attachment ?
+                        '                <a href="' + data.chat.attachment + '" target="_blank">\n' +
+                        '                       <img src="' + data.chat.attachment + '" style="height: 100px;width: 100px;">\n' +
+                        '                </a>\n' : '') +
+                    '            <small>' + data.createdAt + '</small>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+                $('#chat-messages-user').append(htmlData);
+            }
+        })
+})

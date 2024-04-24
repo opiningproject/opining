@@ -29,5 +29,6 @@
     <span id="add_coupon" class="d-none">{{ trans('rest.coupons.add') }}</span>
     <span id="time_error" class="d-none">{{ trans('rest.message.time_error') }}</span>
     <span id="password_error" class="d-none">{{ trans('rest.message.password_error') }}</span>
+    <span id="settings_update_success" class="d-none">{{ trans('rest.message.settings_update_success') }}</span>
     
 </head>

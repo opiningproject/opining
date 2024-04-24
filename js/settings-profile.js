@@ -7,7 +7,7 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            toastr.success('Settings updated successfully')
+            toastr.success($('#settings_update_success').text())
             return true;
         }
     });

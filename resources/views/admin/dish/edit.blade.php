@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content') 
+@extends('layouts.app') 
+@section('content') 
 <div class="main">
     <div class="main-view">
         <div class="container-fluid bd-gutter bd-layout"> @include('layouts.admin.side_nav_bar') 
@@ -32,9 +33,7 @@
                                                     class="form-check form-switch custom-switch d-flex align-items-center justify-content-end ps-0">
                                                     <label class="form-check-label form-label mb-0 me-2"
                                                         for="outofstock">{{ trans('rest.menu.dish.out_of_stock') }}</label>
-                                                    <input class="form-check-input" type="checkbox" role="switch"
-                                                        name="out_of_stock" value="1"
-                                                        {{ $dish->out_of_stock == 1 ? 'checked' : '' }} id="outofstock">
+                                                    <input class="form-check-input" type="checkbox" role="switch" name="out_of_stock" value="1" {{ $dish->out_of_stock == 1 ? 'checked' : '' }} id="outofstock">
                                                 </div>
                                             </div>
                                         </div>
@@ -48,8 +47,7 @@
                                                 <label for="dishimage" class="form-label">{{ trans('rest.menu.dish.dish_image') }}</label>
                                                 <label for="input-file" class="upload-file justify-content-center">
                                                     <input type="file" id="input-file" name="image">
-                                                    <img src="{{ $dish->image }}" style="height: 40px"
-                                                        alt="blank image" id="img-preview" class="img-fluid">
+                                                    <img src="{{ $dish->image }}" style="height: 40px" alt="blank image" id="img-preview" class="img-fluid">
                                                 </label>
                                             </div>
                                         </div>
@@ -66,20 +64,16 @@
                                                 <label for="dishnamedutch" class="form-label">{{ trans('rest.menu.dish.dish_name') }} 
                                                     <span class="text-custom-muted">(Dutch)</span>
                                                 </label>
-                                                <input type="text" class="form-control" name="name_nl"
-                                                    value="{{ $dish->name_nl }}" />
+                                                <input type="text" class="form-control" name="name_nl" value="{{ $dish->name_nl }}" />
                                             </div>
                                         </div>
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                             <div class="form-group ">
                                                 <label for="dishcategory" class="form-label">{{ trans('rest.menu.dish.category') }}</label>
-                                                <select class="form-control dropdown-toggle w-100" type="button"
-                                                    data-bs-toggle="dropdown" name="category_id" aria-expanded="false">
+                                                <select class="form-control dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" name="category_id" aria-expanded="false">
                                                     <option value="">{{ trans('rest.menu.dish.select_category') }}</option>
                                                     @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}"
-                                                            {{ $category->id == $dish->category_id ? 'selected' : '' }}>
-                                                            {{ $category->name }}</option>
+                                                        <option value="{{ $category->id }}" {{ $category->id == $dish->category_id ? 'selected' : '' }}> {{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -95,8 +89,7 @@
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
                                                 <label for="quantity" class="form-label">{{ trans('rest.menu.dish.quantity') }}</label>
-                                                <input type="number" class="form-control" value="{{ $dish->qty }}"
-                                                    name="qty" id="qty" />
+                                                <input type="number" class="form-control" value="{{ $dish->qty }}" name="qty" id="qty" />
                                             </div>
                                         </div>
                                         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -115,8 +108,7 @@
                                                 <label for="discountpercentage" class="form-label">{{ trans('rest.menu.dish.description') }}
                                                     <span class="text-custom-muted">(English)</span>
                                                 </label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ $dish->desc_en }}" id="desc_en" name="desc_en" />
+                                                <input type="text" class="form-control" value="{{ $dish->desc_en }}" id="desc_en" name="desc_en" />
                                             </div>
                                         </div>
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -124,8 +116,7 @@
                                                 <label for="discountpercentage" class="form-label">{{ trans('rest.menu.dish.description') }}
                                                     <span class="text-custom-muted">(Dutch)</span>
                                                 </label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ $dish->desc_nl }}" id="desc_nl" name="desc_nl" />
+                                                <input type="text" class="form-control" value="{{ $dish->desc_nl }}" id="desc_nl" name="desc_nl" />
                                             </div>
                                         </div>
                                     </div>
@@ -156,21 +147,16 @@
                                     </div>
                                     <div id="dish-option-div">
                                         @foreach ($dish->option as $option)
-                                            <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 addedOptionDiv"
-                                                style="float:left;margin-right: 10px;">
+                                            <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 addedOptionDiv" style="float:left;margin-right: 10px;">
                                                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                     <div class="form-group">
-                                                        <input type="hidden" value="{{ $option->id }}"
-                                                            class="id">
+                                                        <input type="hidden" value="{{ $option->id }}" class="id">
                                                         <label for="password" class="form-label">{{ trans('rest.menu.dish.option') }}  
                                                             <span class="text-custom-muted">(English)</span>
                                                         </label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control name_en"
-                                                                value="{{ $option->option_en }}">
-                                                            <button
-                                                                class="input-group-btn btn btn-custom-gray btn-icon h-50px del-added-option-btn"
-                                                                type="button" id="{{ $option->id }}">
+                                                            <input type="text" class="form-control name_en" value="{{ $option->option_en }}">
+                                                            <button class="input-group-btn btn btn-custom-gray btn-icon h-50px del-added-option-btn" type="button" id="{{ $option->id }}">
                                                                 <i class="fa-solid fa-xmark"></i>
                                                             </button>
                                                         </div>
@@ -182,8 +168,7 @@
                                                             <span class="text-custom-muted">(Dutch)</span>
                                                         </label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control name_nl"
-                                                                value="{{ $option->option_nl }}">
+                                                            <input type="text" class="form-control name_nl" value="{{ $option->option_nl }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,8 +177,7 @@
                                     </div>
                                     <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="form-group">
-                                            <button type="submit"
-                                                class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                            <button type="submit" class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
                                                 <span class="align-middle">{{ trans('rest.button.update') }}</span>
                                             </button>
                                         </div>
@@ -251,10 +235,8 @@
                                                     </div>
                                                     <div class="col-auto">
                                                         <div class="form-group">
-                                                            <label for="discountpercentage"
-                                                                class="form-label"></label>
-                                                            <button type="submit"
-                                                                class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                            <label for="discountpercentage" class="form-label"></label>
+                                                            <button type="submit" class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
                                                                 <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                             </button>
                                                         </div>
@@ -281,11 +263,9 @@
                                                                 <img src="{{ $freeIngredient->ingredient->image }}" class="img-fluid me-15px" style="height: 50px" />
                                                             </td>
                                                             <td class="text-center">
-                                                                <input type="text" class="form-control text-center w-10r m-auto"
-                                                                    value="{{ $freeIngredient->ingredient->name }}" readonly />
+                                                                <input type="text" class="form-control text-center w-10r m-auto" value="{{ $freeIngredient->ingredient->name }}" readonly />
                                                             <td class="text-center">
-                                                                <input type="text" class="form-control text-center w-10r m-auto"
-                                                                    value="{{ $freeIngredient->ingredient->category->name }}" readonly />
+                                                                <input type="text" class="form-control text-center w-10r m-auto" value="{{ $freeIngredient->ingredient->category->name }}" readonly />
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="">
@@ -320,12 +300,9 @@
                                                                 <strong>{{ trans('rest.menu.dish.ingred_categories') }}</strong>
                                                             </label>
                                                             <div class="input-group w-100">
-                                                                <div
-                                                                    class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <select
-                                                                        class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                        type="button" name="paidIngredientCategory"
-                                                                        id="paidIngredientCategory">
+                                                                <div class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
+                                                                    <select class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
+                                                                        type="button" name="paidIngredientCategory" id="paidIngredientCategory">
                                                                         <option value="">{{ trans('rest.menu.dish.select_ingred_category') }}</option>
                                                                         @foreach ($ingredientCategories as $ingredientCategory)
                                                                             <option value="{{ $ingredientCategory->id }}">
@@ -343,12 +320,9 @@
                                                                 <strong>{{ trans('rest.menu.dish.ingred_list') }}</strong>
                                                             </label>
                                                             <div class="input-group w-100">
-                                                                <div
-                                                                    class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
-                                                                    <select
-                                                                        class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
-                                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false" id="paidIngredient"
-                                                                        name="ingredient_id">
+                                                                <div class="dropdown w-100 ingredientslist-dp custom-default-dropdown">
+                                                                    <select class="form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100"
+                                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false" id="paidIngredient" name="ingredient_id">
                                                                         <option value="">{{ trans('rest.menu.dish.select_ingred') }}</option>
                                                                     </select>
                                                                 </div>
@@ -394,38 +368,28 @@
                                                     @foreach ($dish->paidIngredients as $paidIngredient)
                                                         <tr id="dishIngredient{{ $paidIngredient->id }}">
                                                             <td class="text-center">
-                                                                <img src="{{ $paidIngredient->ingredient->image }}" class="img-fluid me-15px" alt="ingredient img 1"
-                                                                    style="height: 50px" />
+                                                                <img src="{{ $paidIngredient->ingredient->image }}" class="img-fluid me-15px" alt="ingredient img 1" style="height: 50px" />
                                                             </td>
                                                             <td class="text-center">
-                                                                <input type="text" class="form-control text-center w-10r m-auto" value="{{ $paidIngredient->ingredient->name }}"
-                                                                    readonly />
+                                                                <input type="text" class="form-control text-center w-10r m-auto" value="{{ $paidIngredient->ingredient->name }}" readonly />
                                                             <td class="text-center">
                                                                 <input type="text" class="form-control text-center w-10r m-auto" value="{{ $paidIngredient->ingredient->category->name }}" readonly>
                                                             </td>
                                                             <td class="text-custom-muted-1 text-center">
                                                                 <div class="input-group w-5r m-auto">
                                                                     <span class="input-group-text" id="basic-addon1">€</span>
-                                                                    <input type="number" class="form-control m-auto" id="price{{ $paidIngredient->id }}"
-                                                                        value="{{ $paidIngredient->price }}" readonly>
+                                                                    <input type="number" class="form-control m-auto" id="price{{ $paidIngredient->id }}" value="{{ $paidIngredient->price }}" readonly>
                                                                 </div>
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="d-flex align-items-center justify-content-center">
-                                                                    <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"
-                                                                        id="paid-ingredient-edit{{ $paidIngredient->id }}" data-id="{{ $paidIngredient->id }}"
-                                                                        tabindex="0" href="javascript:void(0);">
+                                                                    <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn" id="paid-ingredient-edit{{ $paidIngredient->id }}" data-id="{{ $paidIngredient->id }}" tabindex="0" href="javascript:void(0);">
                                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                                     </a>
-                                                                    <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient"
-                                                                        id="paid-ingredient-delete{{ $paidIngredient->id }}"
-                                                                        data-bs-toggle="modal" data-id="{{ $paidIngredient->id }}"
-                                                                        data-bs-target="#deleteAlertModal">
+                                                                    <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient" id="paid-ingredient-delete{{ $paidIngredient->id }}" data-bs-toggle="modal" data-id="{{ $paidIngredient->id }}" data-bs-target="#deleteAlertModal">
                                                                         <i class="fa-regular fa-trash-can"></i>
                                                                     </a>
-                                                                    <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn"
-                                                                        style="display: none !important;" id="paid-ingredient-save{{ $paidIngredient->id }}"
-                                                                        data-id="{{ $paidIngredient->id }}">
+                                                                    <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn" style="display: none !important;" id="paid-ingredient-save{{ $paidIngredient->id }}" data-id="{{ $paidIngredient->id }}">
                                                                         <span class="align-middle">{{ trans('rest.button.save') }}</span>
                                                                     </a>
                                                                 </div>
@@ -465,16 +429,15 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button"
-                        class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
-                        data-bs-dismiss="modal">{{ trans('rest.button.cancel') }} </button>
-                    <button type="button" id="delete-dish-ingredient-btn"
-                        class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }} </button>
+                    <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">{{ trans('rest.button.cancel') }} </button>
+                    <button type="button" id="delete-dish-ingredient-btn" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }} </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- end delete Ingredients Modal --> @endsection @section('script')
+<!-- end delete Ingredients Modal --> 
+@endsection 
+@section('script')
 <script type="text/javascript" src="{{ asset('js/dish.js') }}"></script>
 @endsection

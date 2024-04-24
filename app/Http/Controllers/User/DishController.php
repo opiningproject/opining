@@ -49,7 +49,7 @@ class DishController extends Controller
         try {
             DishFavorites::where('dish_id', $request->dish_id)->delete();
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -67,7 +67,7 @@ class DishController extends Controller
                 $request->all()
             );
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -151,7 +151,7 @@ class DishController extends Controller
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
                                 <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100' id='dish-option$dish->id'>
-                                <option value=''>Please select option</option>";
+                                <option value=''>".trans('modal.dish.select_option')."</option>";
             foreach ($options as $option) {
                 $selected = $selectedOption == $option->id ? 'selected' : '';
                 $html_options .= "<option value='$option->id' $selected >$option->name</option>";
@@ -170,7 +170,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>Existing Ingredients</th>
+                            <th colspan='3'>".trans('modal.dish.existing_ingredients')."</th>
                           </tr>
                         </thead>
                         <tbody>";
@@ -205,7 +205,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>Add Extra Ingredients</th>
+                            <th colspan='3'>".trans('modal.dish.extra_ingredients')."</th>
                           </tr>
                         </thead>
                       </table>

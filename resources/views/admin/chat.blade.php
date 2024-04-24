@@ -47,9 +47,7 @@
                                             </label>
                                             <input id="admin_chat_attachment" class="admin_chat_attachment" name="admin_chat_attachment" type="file" style="display: none"/>
                                             <button class="btn btn-xs-sm btn-custom-yellow send-btn" id="send-btn" disabled>Send</button>
-
                                         </div>
-
                                     </div>
                                     <br>
                                     <div id="image-holder" class="image-holder"> </div>

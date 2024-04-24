@@ -34,7 +34,7 @@ class AddressController extends Controller
             return response::json(['status' => 1, 'message' => ""]);
         }
 
-        return response::json(['status' => 2, 'message' => "Delivery is not possible for this zipcode"]);
+        return response::json(['status' => 2, 'message' => trans('user.message.invalid_zipcode')]);
     }
 
     public function deleteAddress(string $id)
@@ -42,7 +42,7 @@ class AddressController extends Controller
         try {
             Address::where('id', $id)->delete();
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -61,11 +61,11 @@ class AddressController extends Controller
                 session(['zipcode'=> $address->zipcode]);
                 session(['house_no'=> $address->house_no]);
                 session(['address' => $id]);
-                $response['message'] = 'Successfully validated';
+                $response['message'] = '';
 
                 return response::json(['status' => 200, 'data' => $response]);
             }else{
-                $response['message'] = 'Currently, we are not delivering food to this location.';
+                $response['message'] = trans('user.message.invalid_zipcode');
                 return response::json(['status' => 406, 'data' => $response]);
             }
 
@@ -77,7 +77,7 @@ class AddressController extends Controller
     public function takeawayPhone(Request $request){
         try {
             session(['phone_no'=> $request->phone_no]);
-            return response::json(['status' => 200, 'data' => 'Phone number stored']);
+            return response::json(['status' => 200, 'data' => '']);
         }catch (Exception $e){
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }

@@ -15,18 +15,18 @@
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4 mb-md-0">
                     <div class="footer-link">
                         <ul>
-                            <li class="mb-2"><a href="{{ route('user.dashboard') }}" class="nav-link auth-link-check">Dashboard</a></li>
-                            <li class="mb-2"><a href="{{ route('user.settings') }}" class="nav-link auth-link-check">Profile</a></li>
-                            <li class="mb-2"><a href="{{ route('user.coupons') }}" class="nav-link auth-link-check">My Coupon</a></li>
+                            <li class="mb-2"><a href="{{ route('user.dashboard') }}" class="nav-link auth-link-check">{{ trans('user.footer.dashboard') }}</a></li>
+                            <li class="mb-2"><a href="{{ route('user.settings') }}" class="nav-link auth-link-check">{{ trans('user.footer.profile') }}</a></li>
+                            <li class="mb-2"><a href="{{ route('user.coupons') }}" class="nav-link auth-link-check">{{ trans('user.footer.my_coupons') }}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mb-4 mb-md-0">
                     <div class="footer-link">
                         <ul>
-                            <li class="mb-2"><a href="{{ route('user.chat') }}" class="nav-link auth-link-check">Chat Support</a></li>
-                            <li class="mb-2"><a href="{{ route('terms') }}">Terms & Condition</a></li>
-                            <li class="mb-2"><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
+                            <li class="mb-2"><a href="{{ route('user.chat') }}" class="nav-link auth-link-check">{{ trans('user.footer.chat') }}</a></li>
+                            <li class="mb-2"><a href="{{ route('terms') }}">{{ trans('user.footer.terms') }}</a></li>
+                            <li class="mb-2"><a href="{{ route('privacy-policy') }}">{{ trans('user.footer.privacy') }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
                     <div class="footer-link">
                         <ul>
-                            <li class="mb-2"><a>Opening Hours</a></li>
+                            <li class="mb-2"><a>{{ trans('user.footer.opening_hours') }}</a></li>
                             <?php
 
                             $days = App\Models\OperatingHour::all();
@@ -103,6 +103,6 @@
     </div>
     </div>
     <div class="footer-bottom text-center">
-        <p class="mb-0 footer-copyright-text">Gomeal &copy; 2024 Gomeal - ALL Rights Reserved</p>
+        <p class="mb-0 footer-copyright-text">{{ trans('user.footer.rights_reserved',['app_name' => env('APP_NAME')]) }}</p>
     </div>
 </footer>

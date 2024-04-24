@@ -41,7 +41,7 @@
 
                     if($order->order_type == OrderType::Delivery)
                     {
-                        echo "<b>Address</b><br>";
+                        echo "<b>".trans('user.invoice.address')."</b><br>";
 
                         $address = $order->orderUserDetails;
 
@@ -49,7 +49,7 @@
                     }
                     else
                     {
-                        echo "<b>Restaurant Address</b><br>";
+                        echo "<b>".trans('user.invoice.restaurant_address')."</b><br>";
 
                         echo str_replace(',', '<br>', getRestaurantDetail()->rest_address);
                     }
@@ -65,14 +65,14 @@
 
                     <tr>
                         <td width="150">
-                            <b>Invoice #<br>
-                            Invoice Date<br>
-                            Payment Mode</b>
+                            <b>{{ trans('user.invoice.title') }} #<br>
+                            {{ trans('user.invoice.date') }}<br>
+                            {{ trans('user.invoice.mode') }}</b>
                         </td>
                         <td>
                             {{ $order->id }}<br>
                             {{ $order->created_at }}<br>
-                            {{ $order->payment_type == PaymentType::Card ? 'Card': ($order->payment_type == PaymentType::Cash ? 'Cash':'Ideal') }}
+                            {{ $order->payment_type == PaymentType::Card ? trans('user.invoice.card'): ($order->payment_type == PaymentType::Cash ? trans('user.invoice.cash'):'Ideal') }}
                         </td>
                     </tr>
                 </table>
@@ -82,11 +82,11 @@
     <br>
     <table class="tblClass">
         <tr style="background-color:#D7DBDD;">
-            <th colspan="4">Item</th>
-            <th>Price</th>
-            <th>Discount</th>
-            <th>Quantity</th>
-            <th>Amount</th>
+            <th colspan="4">{{ trans('user.invoice.item') }}</th>
+            <th>{{ trans('user.invoice.price') }}</th>
+            <th>{{ trans('user.invoice.discount') }}</th>
+            <th>{{ trans('user.invoice.qty') }}</th>
+            <th>{{ trans('user.invoice.amount') }}</th>
         </tr>
 
         <?php $itemTotalPrice = 0; ?>
@@ -113,27 +113,27 @@
         </tr>
         <tr>
             <td colspan="4"></td>
-            <td colspan="3">Subtotal</td>
+            <td colspan="3">{{ trans('user.invoice.subtotal') }}</td>
             <td>€{{ $itemTotalPrice }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
-            <td colspan="3">Service Charge</td>
+            <td colspan="3">{{ trans('user.invoice.service_charge') }}</td>
             <td>€{{ $order->platform_charge }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
-            <td colspan="3">Delivery Charge</td>
+            <td colspan="3">{{ trans('user.invoice.delivery_charge') }}</td>
             <td>€{{ $order->delivery_charge }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
-            <td colspan="3">Coupon Discount</td>
+            <td colspan="3">{{ trans('user.invoice.coupon_discount') }}</td>
             <td>€{{ $order->coupon_discount }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
-            <td colspan="3">Amount Paid</td>
+            <td colspan="3">{{ trans('user.invoice.amount_paid') }}</td>
             <td>€{{ $order->total_amount }}</td>
         </tr>
     </table>

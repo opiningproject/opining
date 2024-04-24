@@ -42,7 +42,7 @@ class AuthController extends Controller
             [
               'status' => 0,
               'field' => 'email',
-              'message' => 'Email not registered with us'
+              'message' => trans('user.message.email_not_exist')
             ]
           );
         }
@@ -53,7 +53,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'Please verify your email first to login'
+                  'message' => trans('user.message.verify_email')
                 ]
             );
         }
@@ -64,7 +64,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'This email is registered with gmail login'
+                  'message' => trans('user.message.email_exist_with_gmail')
                 ]
             );
         }
@@ -75,7 +75,7 @@ class AuthController extends Controller
             [
               'status' => 0,
               'field' => 'password',
-              'message' => 'Incorrect password'
+              'message' => trans('user.message.incorrect_password')
             ]
           );
         }
@@ -86,7 +86,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'Incorrect rights'
+                  'message' => trans('user.message.incorrect_rights')
                 ]
           );
         }
@@ -107,7 +107,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'Entered email id is already registered with us'
+                  'message' => trans('user.message.email_already_exist')
                 ]
             );
         }
@@ -190,7 +190,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'Entered email id is not registered with us'
+                  'message' => trans('user.message.email_not_exist')
                 ]
             );
         }
@@ -201,7 +201,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'Entered email id is registered with gmail login'
+                  'message' => trans('user.message.email_exist_with_gmail')
                 ]
             );
         }
@@ -215,7 +215,7 @@ class AuthController extends Controller
                 [
                   'status' => 0,
                   'field' => 'email',
-                  'message' => 'Something went wrong. Please try again later.'
+                  'message' => trans('user.message.went_wrong'),
                 ]
             );
         }
@@ -223,7 +223,7 @@ class AuthController extends Controller
         return response::json(
                 [
                   'status' => 1,
-                  'message' => 'We have sent reset password link to your email'
+                  'message' => trans('user.message.reset_password')
                 ]
             );
     }

@@ -211,8 +211,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex align-items-center justify-content-between gap-1">
-                                                        <a class="btn btn-custom-yellow btn-icon edit-ing-btn" tabindex="0" data-id="{{ $ingredient->id }}"
-                                                           id="edit-btn{{ $ingredient->id }}">
+                                                        <a class="btn btn-custom-yellow btn-icon edit-ing-btn" tabindex="0" data-id="{{ $ingredient->id }}" id="edit-btn{{ $ingredient->id }}">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
                                                         <a class="btn btn-custom-yellow btn-icon del-ing-btn" data-id="{{ $ingredient->id }}" id="del-btn{{ $ingredient->id }}">
@@ -220,8 +219,7 @@
                                                         </a>
                                                         <input type="hidden" id="deleted-dish{{ $ingredient->id }}">
                                                         <input type="hidden" id="is_edited{{ $ingredient->id }}" value="0">
-                                                        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block" id="save-btn{{ $ingredient->id }}"
-                                                           style="display:none !important;" data-id="{{ $ingredient->id }}">
+                                                        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block" id="save-btn{{ $ingredient->id }}" style="display:none !important;" data-id="{{ $ingredient->id }}">
                                                             <span class="align-middle">{{ trans('rest.button.save') }}</span>
                                                         </a>
                                                     </div>
@@ -236,22 +234,11 @@
                                     <div>
                                         <label>{{ trans('rest.button.rows_per_page') }}</label>
                                         <select id="per_page_dropdown" onchange="">
-                                            <option
-                                                {{ $perPage == 5 ? 'selected' : '' }} value="{{ Request::url().'?per_page=5' }}">
-                                                5
+                                            @for($i=5; $i<=20; $i+=5)
+                                            <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                                                {{ $i }}
                                             </option>
-                                            <option
-                                                {{ $perPage == 10 ? 'selected' : '' }} value="{{ Request::url().'?per_page=10' }}">
-                                                10
-                                            </option>
-                                            <option
-                                                {{ $perPage == 15 ? 'selected' : '' }} value="{{ Request::url().'?per_page=15' }}">
-                                                15
-                                            </option>
-                                            <option
-                                                {{ $perPage == 20 ? 'selected' : '' }} value="{{ Request::url().'?per_page=20' }}">
-                                                20
-                                            </option>
+                                            @endfor
                                         </select>
                                     </div>
                                 </div>

@@ -178,7 +178,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
+Route::middleware(['auth', 'auth.user', 'localization'])->group(function () 
+{
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
         Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');

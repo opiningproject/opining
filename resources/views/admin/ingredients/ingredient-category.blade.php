@@ -80,39 +80,24 @@
                                             <tbody id="ingredientCategoryTbody">
                                             @foreach ($ingredientCategory as $category)
                                             <tr id="ing-tr{{ $category->id }}">
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               data-id="{{ $category->id }}"
-                                                                               value="{{ $category->name_en }}"
-                                                                               id="name_en{{ $category->id }}"
-                                                                               readonly/>
-                                                </td>
-                                                <td class="text-center"><input type="text"
-                                                                               class="form-control text-center w-10r m-auto"
-                                                                               value="{{ $category->name_nl }}"
-                                                                               id="name_nl{{ $category->id }}"
-                                                                               readonly/>
+                                                <td class="text-center">
+                                                  <input type="text" class="form-control text-center w-10r m-auto" data-id="{{ $category->id }}" value="{{ $category->name_en }}" id="name_en{{ $category->id }}" readonly />
                                                 </td>
                                                 <td class="text-center">
-                                                    <div class="">
-                                                        <a class="btn btn-custom-yellow btn-icon edit-cat-icon"
-                                                           id="edit-btn{{ $category->id }}"
-                                                           data-id="{{ $category->id }}" tabindex="0">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-icon del-cat-icon"
-                                                           id="del-btn{{ $category->id }}"
-                                                           data-id="{{ $category->id }}"
-                                                           >
-                                                            <i class="fa-regular fa-trash-can"></i>
-                                                        </a>
-                                                        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
-                                                           id="save-edit-btn{{ $category->id }}"
-                                                           style="width: 50%;margin-left: 25%; display: none!important;"
-                                                           data-id="{{ $category->id }}">
-                                                            <span class="align-middle">{{ trans('rest.button.save') }}</span>
-                                                        </a>
-                                                    </div>
+                                                  <input type="text" class="form-control text-center w-10r m-auto" value="{{ $category->name_nl }}" id="name_nl{{ $category->id }}" readonly />
+                                                </td>
+                                                <td class="text-center">
+                                                  <div class="">
+                                                    <a class="btn btn-custom-yellow btn-icon edit-cat-icon" id="edit-btn{{ $category->id }}" data-id="{{ $category->id }}" tabindex="0">
+                                                      <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <a class="btn btn-custom-yellow btn-icon del-cat-icon" id="del-btn{{ $category->id }}" data-id="{{ $category->id }}">
+                                                      <i class="fa-regular fa-trash-can"></i>
+                                                    </a>
+                                                    <a class="btn btn-custom-yellow btn-default save-edit-btn d-block" id="save-edit-btn{{ $category->id }}" style="width: 50%;margin-left: 25%; display: none!important;" data-id="{{ $category->id }}">
+                                                      <span class="align-middle">{{ trans('rest.button.save') }}</span>
+                                                    </a>
+                                                  </div>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -124,22 +109,11 @@
                                         <div>
                                             <label>{{ trans('rest.button.rows_per_page') }}</label>
                                             <select id="per_page_dropdown" onchange="">
-                                                <option
-                                                    {{ $perPage == 5 ? 'selected' : '' }} value="{{ Request::url().'?per_page=5' }}">
-                                                    5
+                                                @for($i=5; $i<=20; $i+=5)
+                                                <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                                                    {{ $i }}
                                                 </option>
-                                                <option
-                                                    {{ $perPage == 10 ? 'selected' : '' }} value="{{ Request::url().'?per_page=10' }}">
-                                                    10
-                                                </option>
-                                                <option
-                                                    {{ $perPage == 15 ? 'selected' : '' }} value="{{ Request::url().'?per_page=15' }}">
-                                                    15
-                                                </option>
-                                                <option
-                                                    {{ $perPage == 20 ? 'selected' : '' }} value="{{ Request::url().'?per_page=20' }}">
-                                                    20
-                                                </option>
+                                                @endfor
                                             </select>
                                         </div>
                                     </div>

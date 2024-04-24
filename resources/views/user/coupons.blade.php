@@ -9,7 +9,7 @@
          <div class="main-content">
            <div class="section-page-title main-page-title mb-0">
              <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
-               <h1 class="page-title">My Coupons</h1>
+               <h1 class="page-title">{{ trans('user.coupons.title') }}</h1>
              </div>
            </div>
            <!-- start coupons card section -->
@@ -22,29 +22,28 @@
                      <div class="inner-card">
                        <div class="inner-card-body">
                          <h3>{{ $coupon->percentage_off }}<sup>%</sup>
-                           <sub>off</sub>
+                           <sub>{{ trans('user.coupons.off') }}</sub>
                          </h3>
-                         <h6>On min. order value of €{{ $coupon->price }}</h6>
+                         <h6>{{ trans('user.coupons.min_order') }} €{{ $coupon->price }}</h6>
                          <div class="dotted-divider"></div>
-                         <p class="valid-date mb-0">Valid till {{ $coupon->expiry_date }}</p>
+                         <p class="valid-date mb-0">{{ trans('user.coupons.valid_till') }} {{ $coupon->expiry_date }}</p>
                        </div>
                        <div class="promocode-box">
                          @if($coupon->couponTransaction)
-                            <p class="mb-0 d-inline-block">Promo code</p>
+                            <p class="mb-0 d-inline-block">{{ trans('user.coupons.promo_code') }}</p>
                             <a href="javascript:void(0);" class="badge text-bg-white d-inline-block">{{ $coupon->promo_code }}</a>
                          @elseif($user->collected_points >= $coupon->points)
-                           <p class="mb-0 d-inline-block">Promo code</p>
+                           <p class="mb-0 d-inline-block">{{ trans('user.coupons.promo_code') }}</p>
                            <a href="javascript:void(0);" class="badge text-bg-white d-inline-block" id="coupon-code-{{ $coupon->id }}" data-code="{{ $coupon->promo_code }}" onclick='showCouponPopup({{ $coupon->id }})'>
-                           Get Code</a>
+                           {{ trans('user.coupons.get_code') }}</a>
                          @else
-                           <p class="mb-0 d-inline-block">Earn {{ $coupon->points }} points to unlock coupon</p>
+                           <p class="mb-0 d-inline-block">{{ trans('user.coupons.earn_points',['points' => $coupon->points]) }}</p>
                          @endif
                        </div>
                        <div class="circle1"></div>
                        <div class="circle2"></div>
                        <div class="checkcircle d-block">
                          <i class="fas fa-check text-light align-middle"></i>
-                         <!-- <i class="fas fa-xmark text-light align-middle"></i> -->
                        </div>
                      </div>
                    </div>

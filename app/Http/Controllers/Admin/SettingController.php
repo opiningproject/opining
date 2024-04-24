@@ -244,6 +244,8 @@ class SettingController extends Controller
             $day->save();
         }
 
+        sleep(1);
+
         return redirect("/settings");
     }
 

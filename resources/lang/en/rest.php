@@ -316,6 +316,7 @@ return [
 		'zipcode_add_success' => 'Zipcode Added Successfully',
 		'zipcode_update_success' => 'Zipcode Updated Successfully',
 		'zipcode_status_success' => 'Zipcode status updated successfully',
+		'settings_update_success' => 'Settings updated successfully',
 
 		'time_error' => 'Start Time should be less than End Time',
 		'password_error' => 'Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol'

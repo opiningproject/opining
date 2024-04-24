@@ -37,6 +37,8 @@ class SettingController extends Controller
                 $reqParamsArr
             );
 
+        sleep(1);
+
         return redirect("user/settings");
     }
 }

@@ -162,7 +162,7 @@ class ChatController extends Controller
         if ($storeChat->save()) {
             $storeChat->createdAt = $storeChat->created_at->format('h:m a');
             $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
-            MessageEvent::dispatch($storeChat, $storeChat->userImage, $storeChat->createdAt);
+            MessageEvent::dispatch($storeChat, $storeChat->userImage, $storeChat->createdAt, 0);
         }
         return \response()->json([
             "status" => "200",

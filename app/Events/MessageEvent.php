@@ -18,14 +18,16 @@ class MessageEvent implements ShouldBroadcast
     private $chatData;
     private $userImage;
     private $createdAt;
+    private $unreadCount;
     /**
      * Create a new event instance.
      */
-    public function __construct($chatData, $userImage, $createdAt)
+    public function __construct($chatData, $userImage, $createdAt, $unreadCount)
     {
         $this->chatData = $chatData;
         $this->userImage = $userImage;
         $this->createdAt = $createdAt;
+        $this->unreadCount = $unreadCount;
     }
 
     public function broadcastWith()
@@ -34,6 +36,7 @@ class MessageEvent implements ShouldBroadcast
             'chat' => $this->chatData,
             'userImage' => $this->userImage,
             'createdAt' => $this->createdAt,
+            'unreadCount' => $this->unreadCount,
         ];
     }
 

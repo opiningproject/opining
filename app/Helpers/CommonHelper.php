@@ -152,17 +152,17 @@ if (!function_exists('getRestaurantDetail')) {
 if (!function_exists('getOrderDishIngredients')) {
     function getOrderDishIngredients($dish)
     {
-        /*echo "<pre>";
-        print_r($dish->orderDishPaidIngredients->sum('total'));
-        exit;*/
-
         $ingredients = '';
 
         $dishData = Dish::find($dish->dish_id);
         if($dish->orderDishFreeIngredients->count() != $dishData->freeIngredients->count()){
             $ingredients .= '-';
+            $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
+
             foreach ($dishData->freeIngredients as $freeIngredient) {
-                $ingredients .= $freeIngredient->ingredient->name.', ';
+                if(!in_array($freeIngredient->id, $ingArray)){
+                    $ingredients .= $freeIngredient->ingredient->name.', ';
+                }
             }
         }
 
@@ -365,5 +365,12 @@ if (!function_exists('getOrderStatus')) {
         }
 
         return $order;
+    }
+}
+
+if (!function_exists('restaurantDeliveringOption')) {
+    function restaurantDeliveringOption()
+    {
+        return RestaurantDetail::find(1)->online_order_accept;
     }
 }

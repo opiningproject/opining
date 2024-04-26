@@ -180,5 +180,10 @@
     <!-- end delete Ingredients Modal -->
 @endsection
 @section('script')
+    <script>
+        var dishValidation = {
+            save_btn: '{{ trans('rest.button.save') }}',
+        }
+    </script>
     <script type="text/javascript" src="{{ asset('js/ingredient-category.js')}}"></script>
 @endsection

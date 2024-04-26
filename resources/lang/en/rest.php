@@ -69,7 +69,9 @@ return [
 			'select_ingred' => 'Select Ingredient',
 			'image' => 'Image',
 			'name' => 'Name',
-			'price' => 'Price'
+			'price' => 'Price',
+            'select_option' => 'Please fill option value to add data',
+            'save_ingredient' => 'Ingredient Added Successfully',
 		],
 
 		'ingredients' => [
@@ -321,5 +323,5 @@ return [
 		'time_error' => 'Start Time should be less than End Time',
 		'password_error' => 'Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol'
 	],
-	
+
 ];

@@ -25,7 +25,7 @@ return [
 	'forgot_pass_msg' => 'I forgot my password',
 	'reset_pass_msg' => 'Reset Password',
 	'reset_pass_success' => 'Password has been reset successfully.',
-	'success' => 'Success',	
+	'success' => 'Success',
 	'version_add_success' => 'Version added successfully.',
     'version_must_greater' => 'New Version must greater then existing version',
 	'contact_us_add_success' => 'Your request has been sent to the admin successfully.',
@@ -33,8 +33,8 @@ return [
     'close_inquiry_success' => 'Inquiry has been closed successfully.',
     'settings_update_success'=>'Settings has been updated successfully.',
     'work_package_delete_success'=>'Work Packages has been deleted successfully.',
-	'contractor_add_success'=>'Contractor has been created sucessfully',
-    'contractor_update_success'=>'Contractor has been updated sucessfully',
-    
+	'contractor_add_success'=>'Contractor has been created successfully',
+    'contractor_update_success'=>'Contractor has been updated successfully',
+
 ];
 

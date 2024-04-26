@@ -3,14 +3,22 @@ $(function () {
     $('.radio-del-time').click(function () {
 
         if ($(this).val() == 'asap') {
+            $('#del-type-mobile-text').text(validationMsg.asap)
             $('.customize-time-div').hide()
         } else {
+            $('#del-type-mobile-text').text(validationMsg.customize_time)
             $('.customize-time-div').show()
         }
     })
 
     $("#final-checkout-form").validate({
+        ignore: '[readonly]',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element)
+            $('#all-validation-error').show()
+        },
         submitHandler: function (form) {
+            $('#all-validation-error').hide()
             addOrder()
         }
     });
@@ -21,14 +29,18 @@ $(function () {
 
         // 1-Card, 2-Cash, 3-Idle
         if(paymentType == '1'){
-            paymentBtnText = 'Card'
+            $('.card-validate').attr('readonly', false)
+            paymentBtnText = validationMsg.card
         }else if(paymentType == '2'){
-            paymentBtnText = 'Cash'
+            $('.card-validate').attr('readonly', true)
+            paymentBtnText = validationMsg.cash
         }else{
-            paymentBtnText = 'iDEAL'
+            $('.card-validate').attr('readonly', true)
+            paymentBtnText = validationMsg.ideal
         }
         $('#payment_type').val(paymentType)
         $('#total-amt-pay-btn').text(paymentBtnText)
+        $('#mobile-payment-type-text').text(paymentBtnText)
     })
 
     $('.cardNumber').keypress(function (e) {
@@ -62,5 +74,18 @@ $(function () {
             return false
         }
 
+    })
+
+    $('#delivery-info-tab').click(function (){
+        $('#delivery-mobile-content').toggle()
+        $('#delivery-user-mobile-content').toggle()
+    })
+
+    $('#delivery-time-tab').click(function (){
+        $('#delivery-type-mobile-content').toggle()
+    })
+
+    $('#payment-type-mobile-tab').click(function (){
+        $('#payment-type-mobile-content').toggle()
     })
 });

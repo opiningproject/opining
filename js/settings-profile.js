@@ -55,7 +55,7 @@ $(function () {
 
 });
 
-function changePassword() 
+function changePassword()
 {
     //$('#change-password-btn').prop('disabled',true);
     var old_password = $('#old_password').val();
@@ -73,15 +73,15 @@ function changePassword()
         data: {
             old_password, new_password
         },
-        success: function (response) 
+        success: function (response)
         {
             console.log(response)
 
-            if (response == '2') 
+            if (response == '2')
             {
                 $("#old_password-error").removeClass('d-none');
-            } 
-            else 
+            }
+            else
             {
                 $("#changePasswordModal").modal('hide');
                 toastr.success(response.message)

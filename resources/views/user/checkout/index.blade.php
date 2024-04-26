@@ -1,4 +1,4 @@
-@extends('layouts.user-app') 
+@extends('layouts.user-app')
 
 <?php
 $zipcode = session('zipcode');
@@ -21,12 +21,12 @@ $restaurantOpen = getRestaurantOpenTime();
 
 $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * getCartTotalAmount() : 0;
 
-?> 
-@section('content') 
+?>
+@section('content')
 <div class="main">
   <div class="main-view">
-    <div class="container-fluid bd-gutter bd-layout"> 
-      @include('layouts.user.side_nav_bar') 
+    <div class="container-fluid bd-gutter bd-layout">
+      @include('layouts.user.side_nav_bar')
       <main class="bd-main order-1">
         <div class="main-content pb-5">
           <div class="section-page-title main-page-title mb-0">
@@ -39,7 +39,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
               </div>
             </div>
           </div>
-          <section class="custom-section checkout-section pb-0">
+
+          <section class="custom-section checkout-section pt-0 pt-md-5 pb-0">
+              <h5 class="mobile-title mb-4 d-md-none all-validation-error" style="display: none" id="all-validation-error">Please fill all details to continue with your order.</h5>
+
             <form id="final-checkout-form">
               <input type="hidden" name="is_address_elected" value="{{ $address ?? 0 }}" id="address_selected">
               <div class="row checkout-form-steps">
@@ -52,24 +55,25 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                   <div class="cart-form-card-body cursor-initial d-block">
                     <div class="card custom-card h-100 custom-card-mobile-toggle">
                       <div class="card-body pb-0 checkout-form">
-                        <div class="mobileStaticToggle">
+                        <div class="mobileStaticToggle" id="delivery-info-tab">
                           <div class="innerCon">
                             <div class="icon">
                               <img src="{{ asset('images/user-cart.svg') }}" alt="" />
                             </div>
                             <div class="textCon">
                               <h3>{{ trans('user.checkout.delivery_address') }}</h3>
-                              <p class="mb-0">Tochtstraat 40, 3036 SK</p>
+                              <p class="mb-0">@if(session('zipcode')) {{ $house_no ? $house_no . ', ' . $zipcode : '' }} @else {{ getRestaurantDetail()->rest_address }} @endif</p>
                             </div>
                             <span class="toggleIco ms-auto">
                               <i class="fa-solid fa-angle-right"></i>
                               <span>
+
                           </div>
-                        </div> 
-                        @if(session('zipcode')) 
-                        <div class="mobilecheckoutContent">
+                        </div>
+                        @if(session('zipcode'))
+                        <div class="mobilecheckoutContent" id="delivery-mobile-content">
                           <div class="delivery-details">
-                            <h4 class="custom-card-title-1 form-group">{{ trans('user.checkout.delivery_address') }}</h4>
+                            <h4 class="custom-card-title-1 form-group mobile-hide">{{ trans('user.checkout.delivery_address') }}</h4>
                             <div class="row">
                               <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12">
                                 <div class="form-group">
@@ -109,10 +113,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                               </div>
                             </div>
                           </div>
-                        </div> 
-                        @endif 
-                        <div class="mobilecheckoutContent">
-                          <h4 class="custom-card-title-1 form-group">{{ trans('user.checkout.personal_detail') }} 
+                        </div>
+                        @endif
+                        <div class="mobilecheckoutContent" id="delivery-user-mobile-content">
+                          <h4 class="custom-card-title-1 form-group">{{ trans('user.checkout.personal_detail') }}
                             <span class="text-muted-lead-2">{{ trans('user.checkout.personal_detail_note') }} </span>
                           </h4>
                           <div class="row">
@@ -161,22 +165,22 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                   <div class="cart-form-card-body cursor-initial d-block">
                     <div class="card custom-card h-100 custom-card-mobile-toggle">
                       <div class="card-body pb-4 checkout-form">
-                        <div class="mobileStaticToggle">
+                        <div class="mobileStaticToggle" id="delivery-time-tab">
                           <div class="innerCon">
                             <div class="icon">
                               <img src="{{ asset('images/checkout-clock.svg') }}" alt="" />
                             </div>
                             <div class="textCon">
                               <h3>{{ trans('user.checkout.delivery_time') }}</h3>
-                              <p class="mb-0">{{ trans('user.checkout.asap') }}</p>
+                              <p class="mb-0" id="del-type-mobile-text">{{ trans('user.checkout.asap') }}</p>
                             </div>
                             <span class="toggleIco ms-auto">
                               <i class="fa-solid fa-angle-right"></i>
                               <span>
                           </div>
                         </div>
-                        <div class="mobilecheckoutContent">
-                          <h4 class="custom-card-title-1 form-group">{{ trans('user.checkout.delivery_time') }}</h4>
+                        <div class="mobilecheckoutContent" id="delivery-type-mobile-content">
+                          <h4 class="custom-card-title-1 form-group mobile-hide">{{ trans('user.checkout.delivery_time') }}</h4>
                           <div class="row">
                             <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 my-auto">
                               <div class="custom-radio custom-checkbox-group mb-2 flex-wrap" style="margin-bottom: 30px">
@@ -211,24 +215,24 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                   <div class="cart-form-card-body cursor-initial cart-form-card-body-last d-block pb-0">
                     <div class="card custom-card h-100 mb-4 custom-card-mobile-toggle">
                       <div class="card-body pb-0 checkout-form">
-                        <div class="mobileStaticToggle">
+                        <div class="mobileStaticToggle" id="payment-type-mobile-tab">
                           <div class="innerCon">
                             <div class="icon">
                               <img src="{{ asset('images/checkout-wlt.svg') }}" alt="" />
                             </div>
                             <div class="textCon">
                               <h3>{{ trans('user.checkout.payment') }}</h3>
-                              <p class="mb-0">iDEAL</p>
+                              <p class="mb-0" id="mobile-payment-type-text">iDEAL</p>
                             </div>
                             <span class="toggleIco ms-auto">
                               <i class="fa-solid fa-angle-right"></i>
                               <span>
                           </div>
                         </div>
-                        <div class="mobilecheckoutContent">
+                        <div class="mobilecheckoutContent" id="payment-type-mobile-content">
                           <div class=" payment-nav">
                             <div class="payment-navigation">
-                              <h4 class="custom-card-title-1 form-group">{{ trans('user.checkout.payment') }}</h4>
+                              <h4 class="custom-card-title-1 form-group mobile-hide">{{ trans('user.checkout.payment') }}</h4>
                               <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <button class="nav-link active payment-type-tab" id="v-pills-ideal-tab" data-type="3" data-bs-toggle="pill" data-bs-target="#v-pills-ideal" type="button" role="tab" aria-controls="v-pills-ideal" aria-selected="true">
                                   <img src="{{ asset('images/ideal.svg') }}" alt="" height="22" width="25" class="svg"> iDEAL </button>
@@ -264,18 +268,18 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                   </main>
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-creditanddebitcard" role="tabpanel" aria-labelledby="v-pills-creditanddebitcard-tab" tabindex="0">
-                                  <h4 class="custom-card-title-1 form-group">{{ trans('user.checkout.add_card') }}</h4>
+                                  <h4 class="custom-card-title-1 form-group mobile-hide">{{ trans('user.checkout.add_card') }}</h4>
                                   <div class="payment-form-card">
-                                    <input type="text" class="form-control cardNumber" name="card_number" required placeholder="{{ trans('user.checkout.card_no') }}">
+                                    <input type="text" class="form-control cardNumber card-validate" name="card_number" readonly required placeholder="{{ trans('user.checkout.card_no') }}">
                                     <div class="row g-0">
                                       <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <input type="text" name="exp_date" required class="form-control expireYear" placeholder="{{ trans('user.checkout.valid_till') }} (MM/YY)">
+                                        <input type="text" name="exp_date" required class="form-control expireYear card-validate" readonly placeholder="{{ trans('user.checkout.valid_till') }} (MM/YY)">
                                       </div>
                                       <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <input type="number" name="cvv" required class="form-control form-control-br-left" placeholder="CVV" minlength="3" maxlength="3">
+                                        <input type="number" name="cvv" required class="form-control form-control-br-left card-validate" readonly placeholder="CVV" minlength="3" maxlength="3">
                                       </div>
                                     </div>
-                                    <input type="text" class="form-control border-0" name="card_name" required placeholder="{{ trans('user.checkout.card_name') }}">
+                                    <input type="text" class="form-control border-0 card-validate" name="card_name" required readonly placeholder="{{ trans('user.checkout.card_name') }}">
                                   </div>
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-cashondelivery" role="tabpanel" aria-labelledby="v-pills-cashondelivery-tab" tabindex="0"></div>
@@ -315,7 +319,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 <div class="cart-sidebar-content position-relative h-100">
                   <div class="navbar-collapse cartbox-collapse">
                     <div class="cart-section cart-checkout-section">
-                      <h6 class="cart-title">{{ trans('user.my_orders.order_details') }}</h6> 
+                      <h6 class="cart-title">{{ trans('user.my_orders.order_details') }}</h6>
                       @foreach($user->cart->dishDetails as $dishDetails) <div class="cart-items">
                         <div class="row">
                           <div class="col-12">
@@ -335,7 +339,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                       <p class="mb-0 item-options mb-0"> {{ $dishDetails->dishOption->name ?? ''}} </p>
                                       {{ getOrderDishIngredients($dishDetails) }}
                                     </div>
-                                    
+
                                     <div class="text">
                                       <a class="item-customize" href="javascript:void(0)" id="read-more-{{ $dishDetails->id}}" onclick="readMore({{ $dishDetails->id}})">
                                       {{ trans('user.my_orders.read_more') }}</a>
@@ -354,7 +358,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                             </div>
                           </div>
                         </div>
-                      </div> 
+                      </div>
                       @endforeach
                       <div class="bill-detail-invoice">
                         <h6 class="cart-title d-none d-md-block">{{ trans('user.my_orders.bill_details') }}</h6>
@@ -415,17 +419,27 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
       </main>
     </div>
   </div>
-  <!-- start footer --> 
+  <!-- start footer -->
   @include('layouts.user.footer_design')
   <!-- end footer -->
-</div> 
-@endsection 
+</div>
+@endsection
 
 @section('script')
+    <script>
+        var validationMsg = {
+            asap: '{{ trans('user.checkout.asap') }}',
+            customize_time: '{{ trans('user.checkout.customize_time') }}',
+            card: '{{ trans('user.my_orders.card') }}',
+            cash: '{{ trans('user.my_orders.cash') }}',
+            ideal: '{{ trans('user.checkout.ideal') }}',
+        }
+    </script>
     <script type="text/javascript" async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&loading=async"></script>
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
     <script>
+
         var public_key = '{{ config('params.stripe.sandbox.public_key') }}';
         const stripe = Stripe(public_key, {
             apiVersion: '2020-08-27'

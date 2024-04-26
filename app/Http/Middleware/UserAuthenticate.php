@@ -18,11 +18,14 @@ class UserAuthenticate
     {
         $guards = empty($guards) ? [null] : $guards;
 
+//        dd($request->getRequestUri());
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if($request->user()->user_role != '0'){
-                    return redirect(url()->previous());
-                }
+//                if(!){
+                    if($request->user()->user_role != '0'){
+                        return redirect(url()->previous());
+                    }
+//                }
             }
         }
 

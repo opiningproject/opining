@@ -415,68 +415,73 @@ class CartController extends Controller
         try {
             $user = Auth::user();
             $restaurantHours = getRestaurantOpenTime();
+            $restaurantDeliveringOption = restaurantDeliveringOption();
             $now = date('H:i');
             $outOfStock = false;
 
-            if ($user->cart->coupon) {
-                if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
-                    return response::json(['status' => 406, 'message' => trans('user.message.coupon_expired')]);
+            if($restaurantDeliveringOption == '1'){
+                if ($user->cart->coupon) {
+                    if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
+                        return response::json(['status' => 406, 'message' => trans('user.message.coupon_expired')]);
+                    }
                 }
-            }
 
-            /*$outOfStockDishes = OrderDetail::with('dish')->where([
-                ['order_id', $user->cart->id],
-                ['is_cart', '1']
-            ])->groupBy('dish_id')->get();
+                /*$outOfStockDishes = OrderDetail::with('dish')->where([
+                    ['order_id', $user->cart->id],
+                    ['is_cart', '1']
+                ])->groupBy('dish_id')->get();
 
-             dd($user->cart->dishDetails()->with('dish')->whereHas('dish', function ($query) {
-                $query->where('qty', 0)->orWhere('out_of_stock', '1');
-            })->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get()->toArray());
+                 dd($user->cart->dishDetails()->with('dish')->whereHas('dish', function ($query) {
+                    $query->where('qty', 0)->orWhere('out_of_stock', '1');
+                })->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get()->toArray());
 
-//            dd($outOfStockDishes->toArray());*/
+    //            dd($outOfStockDishes->toArray());*/
 //            dd($user->cart->dishDetails()->with('dish')->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get()->toArray());
 
-            $cartDishes = $user->cart->dishDetails()->with('dish')->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get();
+                $cartDishes = $user->cart->dishDetails()->with('dish')->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get();
 
-            foreach ($cartDishes as $outOfStockDish) {
-                if($outOfStockDish->dish->qty == 0 || $outOfStockDish->dish->out_of_stock == '1' || $outOfStockDish->dish->qty < $outOfStockDish->total){
-                    $outOfStock = true;
-                    break;
+                foreach ($cartDishes as $outOfStockDish) {
+                    if($outOfStockDish->dish->qty == 0 || $outOfStockDish->dish->out_of_stock == '1' || $outOfStockDish->dish->qty < $outOfStockDish->total){
+                        $outOfStock = true;
+                        break;
+                    }
                 }
-            }
 
-            if ($outOfStock) {
-                return response::json(['status' => 412, 'message' => trans('user.message.cart_item_out_of_stock')]);
-            }
+                if ($outOfStock) {
+                    return response::json(['status' => 412, 'message' => trans('user.message.cart_item_out_of_stock')]);
+                }
 
-            if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
-                return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
-            }
+                if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
+                    return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
+                }
 
-            if ($user->cart->order_type == OrderType::Delivery) {
-                if (session('zipcode')) {
+                if ($user->cart->order_type == OrderType::Delivery) {
+                    if (session('zipcode')) {
 
-                    $zip = substr(session('zipcode'), 0, 4);
-                    $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
+                        $zip = substr(session('zipcode'), 0, 4);
+                        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
 
-                    if ($zipcode) {
+                        if ($zipcode) {
 
-                        $deliveryCharges = getDeliveryCharges(session('zipcode'));
-                        if ($deliveryCharges) {
-                            if ($request->totalAmt >= $deliveryCharges->min_order_price) {
-                                return response::json(['status' => 200, 'message' => '']);
-                            } else {
-                                return response::json(['status' => 412, 'message' => trans('user.message.min_order_price',['min_order_price' => $deliveryCharges->min_order_price])]);
+                            $deliveryCharges = getDeliveryCharges(session('zipcode'));
+                            if ($deliveryCharges) {
+                                if ($request->totalAmt >= $deliveryCharges->min_order_price) {
+                                    return response::json(['status' => 200, 'message' => '']);
+                                } else {
+                                    return response::json(['status' => 412, 'message' => trans('user.message.min_order_price',['min_order_price' => $deliveryCharges->min_order_price])]);
+                                }
                             }
+                        } else {
+                            return response::json(['status' => 406, 'message' => trans('user.message.invalid_zipcode')]);
                         }
                     } else {
-                        return response::json(['status' => 406, 'message' => trans('user.message.invalid_zipcode')]);
+                        return response::json(['status' => 200, 'message' => '']);
                     }
                 } else {
                     return response::json(['status' => 200, 'message' => '']);
                 }
-            } else {
-                return response::json(['status' => 200, 'message' => '']);
+            }else{
+                return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
             }
 
         } catch (Exception $e) {

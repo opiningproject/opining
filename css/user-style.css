@@ -4980,6 +4980,11 @@ line-height: initial !important;
 .mobilecheckoutContent {display: none;padding-top: 20px;}
 .checkout-form-item .cart-form-card-body {padding-bottom: 20px !important;}
 
+    .mobilecheckoutContent .mobile-hide {display: none;}
+    .mobilecheckoutContent .custom-card-title-1 {font-size: 16px !important;}
+
+    .mobilecheckoutContent .payment-nav {margin-bottom: 15px !important;}
+
 .cartSidebarCustom .addressMobile {position: absolute;top: -31px;max-width: 140px;font-size: 12px;left: 0px;}
 .cartSidebarCustom .addressMobile .address-field {align-items: center !important;}
 .cartSidebarCustom .addressMobile .address-field svg {max-width: 16px !important;width: 16px;flex: 0 0 16px;}
@@ -5181,3 +5186,7 @@ footer .footer-logo a {font-size: initial !important;}
 /* */
 
 
+.all-validation-error{
+    font-size: 1rem !important;
+    color: red;
+}

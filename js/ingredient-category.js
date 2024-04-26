@@ -29,7 +29,8 @@ $(function () {
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -69,7 +70,8 @@ $(function () {
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -112,7 +114,8 @@ $(function () {
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
 
@@ -163,7 +166,7 @@ function saveIngredientCategory() {
                     '           id="save-edit-btn' + id + '"' +
                     '           style="width: 50%;margin-left: 25%; display: none!important;"' +
                     '           data-id="' + id + '">' +
-                    '            <span class="align-middle">Save</span>' +
+                    '            <span class="align-middle">'+ dishValidation.save_btn +'</span>' +
                     '        </a>' +
                     '    </div>' +
                     '</td>' +
@@ -171,7 +174,7 @@ function saveIngredientCategory() {
                 $('#ingredientCategoryTbody').prepend(html)
                 $('#ingCategoryForm').trigger('reset')
 
-                toastr.success('Category Added Successfully')
+                toastr.success(response.message)
 
             }else{
                 toastr.error(response.message)
@@ -180,7 +183,8 @@ function saveIngredientCategory() {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);
         }
     })
 }

@@ -1,5 +1,9 @@
 $(function () {
 
+    toastr.options = {
+        "backgroundColor": "#ff0000" // Set your desired background color here
+    }
+
     $('.pills-delivery-tab').click(function () {
 
         var type = $(this).data('type')
@@ -21,7 +25,8 @@ $(function () {
                         $('#addressChangeModal').modal('show')
                     }
                 } else {
-                    alert(response.message);
+                    // alert(response.message);
+                    toastr.error(response.message);
                 }
             },
             error: function (response) {
@@ -30,7 +35,8 @@ $(function () {
                     $('#signInModal').modal('show');
                 } else {
                     var errorMessage = JSON.parse(response.responseText).message
-                    alert(errorMessage);
+                    toastr.error(errorMessage)
+                    // alert(errorMessage);
                 }
             }
         })
@@ -53,60 +59,65 @@ $(function () {
                 } else if (response.status == 200) {
                     window.location.replace(baseURL + '/user/checkout')
                 } else {
-                    alert(response.message)
+                    // alert(response.message);
+                    toastr.error(response.message);
                 }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
 
-    $('.remove-cart-dish').click(function (){
+    $('.remove-cart-dish').click(function () {
         var id = $(this).data('id')
 
         $.ajax({
-            url: baseURL + '/user/cart/remove-dish/'+ id,
+            url: baseURL + '/user/cart/remove-dish/' + id,
             type: 'DELETE',
             success: function (response) {
-                if(response.status == 200){
-                    $('#cart-'+id).remove()
+                if (response.status == 200) {
+                    $('#cart-' + id).remove()
                     calculateTotalCartAmount()
-                }else{
+                } else {
                     alert(response.message);
                 }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage)
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
 
-    $('.dish-notes').focusout(function (){
+    $('.dish-notes').focusout(function () {
         var notes = $(this).val()
         var id = $(this).data('id')
 
         $.ajax({
-            url: baseURL + '/user/cart/update-notes/'+ id,
+            url: baseURL + '/user/cart/update-notes/' + id,
             type: 'PATCH',
             data: {
                 notes
             },
             success: function (response) {
-                if(response.status != 200){
-                    alert(response.message);
+                if (response.status != 200) {
+                    // alert(response.message);
+                    toastr.warning(response.message);
                 }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage)
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
 
-    $('#delivery_instruction').focusout(function (){
+    $('#delivery_instruction').focusout(function () {
         var delivery_notes = $(this).val()
 
         $.ajax({
@@ -116,13 +127,15 @@ $(function () {
                 delivery_notes
             },
             success: function (response) {
-                if(response.status != 200){
-                    alert(response.message);
+                if (response.status != 200) {
+                    toastr.warning(response.message);
+                    // alert(response.message);
                 }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage)
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -147,7 +160,7 @@ function addToCart(id) {
             $('#empty-cart-div').hide()
             $('#checkout-cart').removeClass('d-none')
             $('#cart-bill-div').removeClass('d-none')
-            $('#qty-'+id).attr('data-ing',0)
+            $('#qty-' + id).attr('data-ing', 0)
             calculateTotalCartAmount()
 
             $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
@@ -155,7 +168,8 @@ function addToCart(id) {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
         }
     })
 }
@@ -203,7 +217,7 @@ function updateDishQty(operator, maxQty, dish_id) {
                     $('#cart-amount-cal-data').hide()
                 }
 
-                if(response.message){
+                if (response.message) {
                     $("#coupon_code_apply_btn").show();
                     $("#coupon_code_remove_btn").hide();
                     $('#coupon_code').val('');
@@ -217,12 +231,13 @@ function updateDishQty(operator, maxQty, dish_id) {
 
             }
 
-            $('#paid-ing-price'+dish_id).text('+€'+(parseFloat($('#qty-'+dish_id).val()) * parseFloat($('#qty-'+dish_id).attr('data-ing'))).toFixed(2))
+            $('#paid-ing-price' + dish_id).text('+€' + (parseFloat($('#qty-' + dish_id).val()) * parseFloat($('#qty-' + dish_id).attr('data-ing'))).toFixed(2))
             calculateTotalCartAmount()
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
         }
     })
 }
@@ -266,7 +281,8 @@ function applyCoupon() {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
         }
     })
 }
@@ -291,7 +307,8 @@ function removeCoupon() {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
         }
     })
 }
@@ -313,7 +330,7 @@ function addSubDishQuantities(dishId, operator, maxQty) {
         }
 
         $('input[name=qty-' + dishId + ']').val(currentQty + 1);
-        updateCartAmount(dishId, dishAmt, 'add',1)
+        updateCartAmount(dishId, dishAmt, 'add', 1)
     }
 }
 
@@ -380,13 +397,13 @@ function addCustomizedCart(id, doesExist = 0) {
 
                 if ($('#qty-' + response.message.addedDishId).length > 0) {
                     var totalAmount
-                    if(doesExist == 0){
+                    if (doesExist == 0) {
                         var currentVal = $('#qty-' + response.message.addedDishId).val()
                         totalAmount = parseInt(currentVal) + parseInt(totalDishQty)
-                    }else{
+                    } else {
                         totalAmount = parseInt(totalDishQty)
-                        $('#item-ing-desc'+doesExist).html(response.message.ingListData)
-                        $('#qty-'+doesExist).attr('data-ing', response.message.paidIngAmt)
+                        $('#item-ing-desc' + doesExist).html(response.message.ingListData)
+                        $('#qty-' + doesExist).attr('data-ing', response.message.paidIngAmt)
                     }
                     $('#qty-' + response.message.addedDishId).val(totalAmount)
                 } else {
@@ -408,7 +425,8 @@ function addCustomizedCart(id, doesExist = 0) {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
         }
     })
 }
@@ -417,7 +435,7 @@ function updateCartAmount(dishId, amount, type, dish = 0) {
     var currentVal = $('#total-amt' + dishId).text().replace(/,/g, '')
     var ingAmount = 0.00
 
-    if(dish == 1){
+    if (dish == 1) {
         if ($('.dishPaidIngQty').length) {
             $('.dishPaidIngQty').each(function (index, element) {
                 if ($(element).val() > 0) {
@@ -447,8 +465,8 @@ function calculateTotalCartAmount() {
 
         var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
 
-        $('#cart-item-price'+id).text('+€'+itemAmount.toFixed(2))
-        $('#paid-ing-price'+id).text('+€'+(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing'))).toFixed(2))
+        $('#cart-item-price' + id).text('+€' + itemAmount.toFixed(2))
+        $('#paid-ing-price' + id).text('+€' + (parseFloat($(element).val()) * parseFloat($(element).attr('data-ing'))).toFixed(2))
         totalAmt += itemAmount + parseFloat(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing')))
 
     })

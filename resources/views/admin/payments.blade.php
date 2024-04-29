@@ -16,13 +16,13 @@
         <main class="bd-main order-1 w-100 position-relative">
             <div class="main-content">
               <div class="section-page-title mb-0">
-                <h1 class="page-title">My Finance</h1>
+                <h1 class="page-title">{{ trans('rest.my_finance.title') }}</h1>
               </div>
               <div class="hero-incomebox bg-white">
                 <div class="hero-incomebox-item d-flex align-items-center">
                   <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
                   <div class="text-grp d-flex flex-column gap-2">
-                    <div class="title">Total Income</div>
+                    <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                     <div class="number">
                       <span class="fw-600">€</span>{{ $totalIncome }}
                     </div>
@@ -33,25 +33,25 @@
                   <div class="income-diagrams-item d-flex flex-column gap-5">
                       <div class="income-diagrams-item-header d-flex align-items-center justify-content-between">
                           <div class="text-grp d-flex flex-column gap-1">
-                              <div class="title">Total Income</div>
+                              <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                               <div class="number">
                                   <span class="fw-600">€</span>{{$totalIncome}}
                               </div>
                           </div>
                           <div class="btn-grp d-flex flex-wrap align-items-center">
-                              <button class="btn active incomeChartBtn" value="monthlyIncomeChart">Monthly</button>
-                              <button class="btn incomeChartBtn" value="weeklyIncomeChart">Weekly</button>
-                              <button class="btn incomeChartBtn" value="yearlyIncomeChart">Year</button>
+                              <button class="btn active incomeChartBtn" value="monthlyIncomeChart">{{ trans('rest.my_finance.monthly') }}</button>
+                              <button class="btn incomeChartBtn" value="weeklyIncomeChart">{{ trans('rest.my_finance.weekly') }}</button>
+                              <button class="btn incomeChartBtn" value="yearlyIncomeChart">{{ trans('rest.my_finance.yearly') }}</button>
                           </div>
                       </div>
-                      <div id="monthly-chart-container" class="monthlyIncomeChart">Chart will render here!</div>
-                      <div id="weekly-chart-container" class="weeklyIncomeChart">Chart will render here!</div>
-                      <div id="yearly-chart-container" class="yearlyIncomeChart">Chart will render here!</div>
+                      <div id="monthly-chart-container" class="monthlyIncomeChart">{{ trans('rest.my_finance.chart_loading') }}</div>
+                      <div id="weekly-chart-container" class="weeklyIncomeChart"></div>
+                      <div id="yearly-chart-container" class="yearlyIncomeChart"></div>
                   </div>
                   <?php
                       $arrChartConfig = array(
                           "chart" => array(
-                              "numberSuffix" => "K",
+                              "numberPrefix"=> "€",
                               "theme" => "fusion",
                               "yAxisMaxValue" => "100",
                               'paletteColors' => '#FFC00B',
@@ -83,11 +83,11 @@
 
                   <div class="income-diagrams-item d-flex flex-column gap-3">
                     <div class="income-diagrams-item-header d-flex align-items-center justify-content-between">
-                      <div class="title">Income</div>
+                      <div class="title">{{ trans('rest.my_finance.income') }}</div>
                       <div class="btn-grp d-flex flex-wrap align-items-center">
-                        <button class="btn active doughnutChartBtn" value="monthlyDoughnutChart">Monthly</button>
-                        <button class="btn doughnutChartBtn" value="weeklyDoughnutChart">Weekly</button>
-                        <button class="btn doughnutChartBtn" value="yearlyDoughnutChart">Year</button>
+                        <button class="btn active doughnutChartBtn" value="monthlyDoughnutChart">{{ trans('rest.my_finance.monthly') }}</button>
+                        <button class="btn doughnutChartBtn" value="weeklyDoughnutChart">{{ trans('rest.my_finance.weekly') }}</button>
+                        <button class="btn doughnutChartBtn" value="yearlyDoughnutChart">{{ trans('rest.my_finance.yearly') }}</button>
                       </div>
                     </div>
 
@@ -95,21 +95,21 @@
                       <div class="row">
                          <div class="col-12 mb-2">
                              <div class="d-flex chart-indicates">
-                               <div class="indicate"><label></label> Online</div>
-                               <div class="indicate low"><label></label> COD</div>
+                               <div class="indicate"><label></label> {{ trans('rest.my_finance.online') }}</div>
+                               <div class="indicate low"><label></label> {{ trans('rest.my_finance.cod') }}</div>
                              </div>
                          </div>
                       </div>
                       <div class="row">
                          <div class="col-md-6 mb-2">
-                           <div class="float-child monthlyDoughnutChart" id="monthly-online-delivery-container">FusionCharts XT will load here!</div>
-                           <div class="float-child weeklyDoughnutChart" id="weekly-online-delivery-container">FusionCharts XT will load here!</div>
-                           <div class="float-child yearlyDoughnutChart" id="yearly-online-delivery-container">FusionCharts XT will load here!</div>
+                           <div class="float-child monthlyDoughnutChart" id="monthly-online-delivery-container">{{ trans('rest.my_finance.chart_loading') }}</div>
+                           <div class="float-child weeklyDoughnutChart" id="weekly-online-delivery-container"></div>
+                           <div class="float-child yearlyDoughnutChart" id="yearly-online-delivery-container"></div>
                          </div>
                          <div class="col-md-6 mb-2">
-                            <div class="float-child monthlyDoughnutChart" id="monthly-take-away-container">FusionCharts XT will load here!</div>
-                            <div class="float-child weeklyDoughnutChart" id="weekly-take-away-container">FusionCharts XT will load here!</div>
-                            <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container">FusionCharts XT will load here!</div>
+                            <div class="float-child monthlyDoughnutChart" id="monthly-take-away-container">{{ trans('rest.my_finance.chart_loading') }}</div>
+                            <div class="float-child weeklyDoughnutChart" id="weekly-take-away-container"></div>
+                            <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container"></div>
                          </div>
                       </div>
                     </div>
@@ -121,7 +121,8 @@
                               "decimals"=> "0",
                               "theme"=> "fusion",
                               "valuePosition"=> "inside",
-                              "palettecolors"=> "#FFC00B,#FFE9A8"
+                              "palettecolors"=> "#FFC00B,#FFE9A8",
+                              "numberPrefix"=> "€",
                           )
                       );
 
@@ -171,38 +172,34 @@
 
                   <div class="income-diagrams-item d-flex flex-column gap-3">
                     <div class="income-diagrams-item-header d-flex align-items-center justify-content-between">
-                      <div class="title">Total Revenue</div>
+                      <div class="title"> {{ trans('rest.my_finance.total_revenue') }}</div>
                       <div class="btn-grp d-flex flex-wrap align-items-center">
-                        <button class="btn active lineChartBtn" value="monthlyLineChart">Monthly</button>
-                        <button class="btn lineChartBtn" value="weeklyLineChart">Weekly</button>
-                        <button class="btn lineChartBtn" value="yearlyLineChart">Year</button>
+                        <button class="btn active lineChartBtn" value="monthlyLineChart">{{ trans('rest.my_finance.monthly') }}</button>
+                        <button class="btn lineChartBtn" value="weeklyLineChart">{{ trans('rest.my_finance.weekly') }}</button>
+                        <button class="btn lineChartBtn" value="yearlyLineChart">{{ trans('rest.my_finance.yearly') }}</button>
                       </div>
                     </div>
 
                     <div class="row">
                       <div class="col-12 mb-2">
                            <div class="d-flex chart-indicates">
-                                 <div class="indicate"><label></label> Delivery</div>
-                                 <div class="indicate low"><label></label> Take Away</div>
+                                 <div class="indicate"><label></label> {{ trans('rest.my_finance.delivery') }}</div>
+                                 <div class="indicate low"><label></label> {{ trans('rest.my_finance.take_away') }}</div>
                            </div>
                       </div>
                     </div>
 
                     <div class="income-diagrams-item-img h-100">
-                      <div id="monthly" class="monthlyLineChart">FusionCharts XT will load here!</div>
-                      <div id="weekly" class="weeklyLineChart">FusionCharts XT will load here!</div>
-                      <div id="yearly" class="yearlyLineChart">FusionCharts XT will load here!</div>
+                      <div id="monthly" class="monthlyLineChart">{{ trans('rest.my_finance.chart_loading') }}</div>
+                      <div id="weekly" class="weeklyLineChart"></div>
+                      <div id="yearly" class="yearlyLineChart"></div>
                     </div>
 
                     <?php
-
-                      //$chartDataArr['categories'] = [['category' => [['label' => '2021'],['label' => '2022'],['label' => '2023']]]];
-                      //$chartDataArr['dataset'] = [['data' => [['value' => '30k'],['value' => '20k'],['value' => '40k']]]];
-
                       $chartConfig = array(
                             "chart" => array(
                                   "numdivlines" => "3",
-                                  "numberSuffix" => "K",
+                                  "numberPrefix"=> "€",
                                   "theme"=>"fusion",
                                   "palettecolors"=> "#FFC00B,#FFE9A8",
                                   "legendPosition"=>"top-left",
@@ -214,8 +211,17 @@
                             ),
                         );
 
+                      $lineChartData = json_encode($chartConfig+$monthlyLineChartData);
+                      $lineChart = new FusionCharts("msline", "ex2", "750", "300", "monthly", "json",$lineChartData);
+                      $lineChart->render();
+
                       $lineChartData = json_encode($chartConfig+$weeklyLineChartData);
-                      $lineChart = new FusionCharts("msspline", "ex3", "750", "300", "weekly", "json",$lineChartData);
+                      $lineChart = new FusionCharts("msline", "ex1", "750", "300", "weekly", "json",$lineChartData);
+                      $lineChart->render();
+
+
+                      $lineChartData = json_encode($chartConfig+$yearlyLineChartData);
+                      $lineChart = new FusionCharts("msline", "ex3", "750", "300", "yearly", "json",$lineChartData);
                       $lineChart->render();
                     ?>
                 </div>
@@ -270,7 +276,8 @@
     $(".weeklyLineChart").hide();
     $(".yearlyLineChart").hide();
 
-    $(".lineChartBtn").click(function(){
+    $(".lineChartBtn").click(function()
+    {
         $(".monthlyLineChart").hide();
         $(".weeklyLineChart").hide();
         $(".yearlyLineChart").hide();

@@ -93,19 +93,13 @@ class PaymentsController extends Controller
         $monthlyOnlineChartData = $this->getIncomeChartData(Carbon::now()->startOfMonth(),Carbon::now()->endOfMonth());
         $weeklyOnlineChartData = $this->getIncomeChartData(Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek());
 
-        $weeklyLineChartData = $this->getLineChartData(1,1);
-
-        //$chartDataArr['categories'] = [['category' => [['label' => '2021'],['label' => '2022'],['label' => '2023']]]];
-        //$chartDataArr['dataset'] = [['data' => [['value' => '30k'],['value' => '20k'],['value' => '40k']]],['data' => [['value' => '10k'],['value' => '5k'],['value' => '55k']]]];
-
-
-
+        $weeklyLineChartData = $this->getLineChartData(1);
+        $monthlyLineChartData = $this->getLineChartData(2);
+        $yearlyLineChartData = $this->getLineChartData(3);
 
         /*echo "<pre>";
-        print_r($yearlyOnlineChartData);
-        print_r($monthlyOnlineChartData);
-        print_r($weeklyOnlineChartData);
-        exit();*/
+        print_r($monthlyLineChartData);
+        exit;*/
 
         return view('admin.payments',
             [ 'totalMonthOrders' => $totalMonthOrders,
@@ -121,43 +115,120 @@ class PaymentsController extends Controller
               'weeklyDeliveryOnlineChartData' => $weeklyOnlineChartData['deliveryOnlineChartData'],
               'weeklyTAOnlineChartData' => $weeklyOnlineChartData['TAOnlineChartData'],
 
-              'weeklyLineChartData' => $weeklyLineChartData
+              'weeklyLineChartData' => $weeklyLineChartData,
+              'monthlyLineChartData' => $monthlyLineChartData,
+              'yearlyLineChartData' => $yearlyLineChartData
             ]);
     }
 
-    function getLineChartData($time_frame,$order_type)
+    function getLineChartData($time_frame)
     {
-        //$defaultMonths = collect(["Jan" => 0, "Feb" => 0, "Mar" => 0, "Apr" => 0, "May" => 0, "Jun" => 0, "Jul" => 0, "Aug" => 0, "Sep" => 0, "Oct" => 0, "Nov" => 0, "Dec" => 0]);
-        $defaultWeeks = collect(["Sun" => 0, "Mon" => 0, "Tue" => 0, "Wed" => 0, "Thu" => 0, "Fri" => 0, "Sat" => 0]);
-        $chartDataArr['categories'] = [['category' => [['label' => 'Sun'],['label' => 'Mon'],['label' => 'Tue'],['label' => 'Wed'],['label' => 'Thu'],['label' => 'Fri'],['label' => 'Sat']]]];
-
-        // Online delivery and take away income logic
-       $orderWeeks = Order::select("*", DB::raw("DATE_FORMAT(created_at,'%a') as week"), DB::raw("sum(total_amount) as totalAmount"))
-                                ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-                                ->where('is_cart', '0')
-                                ->where('order_status', '6');
-
-        $ordersQuery = clone $orderWeeks;
-        $deliveryOrders = $ordersQuery->where('order_type',1)->groupBy('week')->pluck('totalAmount','week')->toArray();
-
-        $ordersQuery = clone $orderWeeks;
-        $TAOrders = $ordersQuery->where('order_type',2)->groupBy('week')->pluck('totalAmount','week')->toArray();
-
-        $week_delivery_order_merge_array = $defaultWeeks->merge($deliveryOrders);
-        $week_TA_order_merge_array = $defaultWeeks->merge($TAOrders);
-
-        $w = 0;
-        foreach ($week_delivery_order_merge_array as $key => $week_order)
+        if($time_frame == 1)
         {
-            $chartDataArr['dataset'][0]['data'][$w]['value'] = $week_order;
-            $w++;
+             // For a week logic
+            $defaultWeeks = collect(["Mon" => 0, "Tue" => 0, "Wed" => 0, "Thu" => 0, "Fri" => 0, "Sat" => 0, "Sun" => 0]);
+            $chartDataArr['categories'] = [['category' => [['label' => 'Mon'],['label' => 'Tue'],['label' => 'Wed'],['label' => 'Thu'],['label' => 'Fri'],['label' => 'Sat'],['label' => 'Sun']]]];
+
+            // Online delivery and take away income logic
+            $orderWeeks = Order::select("*", DB::raw("DATE_FORMAT(created_at,'%a') as week"), DB::raw("sum(total_amount) as totalAmount"))
+                                    ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                                    ->where('is_cart', '0')
+                                    ->where('order_status', '6');
+
+            $ordersQuery = clone $orderWeeks;
+            $deliveryOrders = $ordersQuery->where('order_type','1')->groupBy('week')->pluck('totalAmount','week')->toArray();
+
+            $ordersQuery = clone $orderWeeks;
+            $TAOrders = $ordersQuery->where('order_type','2')->groupBy('week')->pluck('totalAmount','week')->toArray();
+
+            $week_delivery_order_merge_array = $defaultWeeks->merge($deliveryOrders);
+            $week_TA_order_merge_array = $defaultWeeks->merge($TAOrders);
+
+            $w = 0;
+            foreach ($week_delivery_order_merge_array as $key => $week_order)
+            {
+                $chartDataArr['dataset'][0]['data'][$w]['value'] = $week_order;
+                $w++;
+            }
+
+            $w = 0;
+            foreach ($week_TA_order_merge_array as $key => $week_order)
+            {
+                $chartDataArr['dataset'][1]['data'][$w]['value'] = $week_order;
+                $w++;
+            }
+        }
+       
+        if($time_frame == 2)
+        {
+            // For a month logic
+            $defaultMonths = collect(["Jan" => 0, "Feb" => 0, "Mar" => 0, "Apr" => 0, "May" => 0, "Jun" => 0, "Jul" => 0, "Aug" => 0, "Sep" => 0, "Oct" => 0, "Nov" => 0, "Dec" => 0]);
+            $chartDataArr['categories'] = [['category' => [['label' => 'Jan'],['label' => 'Feb'],['label' => 'Mar'],['label' => 'Apr'],['label' => 'May'],['label' => 'Jun'],['label' => 'Jul'],['label' => 'Aug'],['label' => 'Sep'],['label' => 'Oct'],['label' => 'Nov'],['label' => 'Dec']]]];
+
+            // Online delivery and take away income logic
+           $orderMonths = Order::select("*", DB::raw("DATE_FORMAT(created_at,'%b') as month"), DB::raw("sum(total_amount) as totalAmount"))
+                                    ->where('is_cart', '0')
+                                    ->where('order_status', '6');
+
+            $ordersQuery = clone $orderMonths;
+            $deliveryOrders = $ordersQuery->where('order_type','1')->groupBy('month')->pluck('totalAmount','month')->toArray();
+
+            $ordersQuery = clone $orderMonths;
+            $TAOrders = $ordersQuery->where('order_type','2')->groupBy('month')->pluck('totalAmount','month')->toArray();
+
+            $month_delivery_order_merge_array = $defaultMonths->merge($deliveryOrders);
+            $month_TA_order_merge_array = $defaultMonths->merge($TAOrders);
+
+            $w = 0;
+            foreach ($month_delivery_order_merge_array as $key => $month_order)
+            {
+                $chartDataArr['dataset'][0]['data'][$w]['value'] = $month_order;
+                $w++;
+            }
+
+            $w = 0;
+            foreach ($month_TA_order_merge_array as $key => $month_order)
+            {
+                $chartDataArr['dataset'][1]['data'][$w]['value'] = $month_order;
+                $w++;
+            }
         }
 
-        $w = 0;
-        foreach ($week_TA_order_merge_array as $key => $week_order)
+        if($time_frame == 3)
         {
-            $chartDataArr['dataset'][1]['data'][$w]['value'] = $week_order;
-            $w++;
+            // For a year logic
+
+            $defaultYears = collect(['2024' => 0, '2025' => 0])->toArray();
+            $chartDataArr['categories'] = [['category' => [['label' => '2024'],['label' => '2025']]]];
+            
+            // Online delivery and take away income logic
+           $orderYears = Order::select("*", DB::raw("DATE_FORMAT(created_at,'%Y') as year"), DB::raw("sum(total_amount) as totalAmount"))
+                                    ->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])
+                                    ->where('is_cart', '0')
+                                    ->where('order_status', '6');
+
+            $ordersQuery = clone $orderYears;
+            $deliveryOrders = $ordersQuery->where('order_type','1')->groupBy('year')->pluck('totalAmount','year')->toArray();
+
+            $ordersQuery = clone $orderYears;
+            $TAOrders = $ordersQuery->where('order_type','2')->groupBy('year')->pluck('totalAmount','year')->toArray();
+
+            $year_delivery_order_merge_array = array_replace($defaultYears,$deliveryOrders);
+            $year_TA_order_merge_array = array_replace($defaultYears,$TAOrders);
+
+            $w = 0;
+            foreach ($year_delivery_order_merge_array as $key => $year_order)
+            {
+                $chartDataArr['dataset'][0]['data'][$w]['value'] = $year_order;
+                $w++;
+            }
+
+            $w = 0;
+            foreach ($year_TA_order_merge_array as $key => $year_order)
+            {
+                $chartDataArr['dataset'][1]['data'][$w]['value'] = $year_order;
+                $w++;
+            }
         }
 
         return $chartDataArr;

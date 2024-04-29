@@ -188,7 +188,8 @@ return [
 		'online' => 'Online',
 		'cod' => 'COD',
 		'delivery' => 'Delivery',
-		'take_away' => 'Take Away'
+		'take_away' => 'Take Away',
+		'chart_loading' => 'Chart is loading!'
 	],
 
 	'coupons' => [

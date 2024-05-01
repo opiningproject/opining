@@ -73,27 +73,35 @@
                                 <h1 class="section-title">{{ trans('rest.menu.categories') }}</h1>
                             </div>
                             <div class="swiper-container">
-                                <div class="swiper category-swiper-slider">
+                                <div class="swiper category-swiper-slider categoryslide-setion">
                                     <div class="category-slider swiper-wrapper">
                                         @if (count($categories) > 0)
-                                            @foreach ($categories as $category)
-                                            <div class="category-element swiper-slide">
-                                              <div class="card">
+                                        @foreach ($categories as $category)
+                                        <div class="category-element swiper-slide" data-id="{{ $category->id }}" data-sort-order="{{ $category->sort_order }}">
+                                            <div class="card">
+                                                <div class="category-slide-btns">
+                                                    <a class="btn btn-custom-yellow btn-icon" id="prev-cat">
+                                                        <i class="fa fa-arrow-left"></i>
+                                                    </a>
+                                                    <a class="btn btn-custom-yellow btn-icon" id="next-cat">
+                                                        <i class="fa fa-arrow-right"></i>
+                                                    </a>
+                                                </div>
                                                 <span class="dish-item-icon">
-                                                  <img src="{{ $category->image }}" class="img-fluid" alt="bakery" style="height: 60px !important;">
+                                                    <img src="{{ $category->image }}" class="img-fluid" alt="bakery" style="height: 80px !important;">
                                                 </span>
                                                 <p class="mb-0 category-item-name text-truncate w-100" title="{{ $category->name }}">{{ $category->name }}</p>
                                                 <div class="categoryfood-detail-card-btn">
-                                                  <a class="btn btn-custom-yellow btn-icon category-edit-btn" data-id="{{ $category->id }}" data-bs-toggle="modal" data-bs-target="#editCategoryModel">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                  </a>
-                                                  <a class="btn btn-custom-yellow btn-icon del-cat-icon" data-id="{{ $category->id }}">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                  </a>
+                                                    <a class="btn btn-custom-yellow btn-icon category-edit-btn" data-id="{{ $category->id }}" data-bs-toggle="modal" data-bs-target="#editCategoryModel">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <a class="btn btn-custom-yellow btn-icon del-cat-icon" data-id="{{ $category->id }}">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </a>
                                                 </div>
-                                              </div>
                                             </div>
-                                            @endforeach
+                                        </div>
+                                    @endforeach
                                         @else
                                             {{ trans('rest.menu.no_category') }}
                                         @endif

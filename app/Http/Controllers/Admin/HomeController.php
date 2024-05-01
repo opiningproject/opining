@@ -61,7 +61,7 @@ class HomeController extends Controller
             }
         }
         
-        $categories = Category::orderBy('id', 'desc')->get();
+        $categories = Category::orderBy('sort_order', 'asc')->get();
         $dishes = Dish::orderBy('id', 'desc')->limit(5)->get();
 
         $orderDetailsQuery = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('COUNT(*) as total_orders'))

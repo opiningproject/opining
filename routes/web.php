@@ -152,6 +152,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // Restaurant Category Routes
     Route::get('/category/checkDishes/{category}', [CategoryController::class, 'checkDishCategory']);
     Route::resource('/category', CategoryController::class);
+    Route::post('/category/update/sort-order', [CategoryController::class, 'updateCategorySortOrder']);
     // Restaurant Category Routes
 
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');

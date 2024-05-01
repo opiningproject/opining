@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use PHPUnit\Exception;
 use Response;
+use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class CategoryController extends Controller
 {
@@ -48,6 +50,12 @@ class CategoryController extends Controller
                 }
                 $category->image = $imageName;
             }
+
+            if(empty($category->sort_order)) {
+                $storedcategory = Category::orderBy('sort_order', 'desc')->first();
+                $category->sort_order = $storedcategory->sort_order + 1;
+            }
+
             $category->name_en = $request->name_en;
             $category->name_nl = $request->name_nl;
             $category->save();
@@ -120,5 +128,18 @@ class CategoryController extends Controller
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
+    }
+
+    function updateCategorySortOrder(Request $request) 
+    {
+        try {
+            Category::whereId(request('movedId'))->update(['sort_order' => request('replacedSortOrder')]);
+            Category::whereId(request('replacedId'))->update(['sort_order' => request('movedSortOrder')]);
+    
+            return response()->json(['status' => HttpFoundationResponse::HTTP_OK, 'message' => 'Category sort order has been changed.']);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 0, 'message' => 'Something went wrong.']);
+        }
+       
     }
 }

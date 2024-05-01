@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['name_en','name_nl','image'];
+    protected $fillable = ['name_en','name_nl','image','sort_order'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

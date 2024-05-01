@@ -70,3 +70,49 @@ $(document).on('keyup', '#search-dish', function () {
     })
 })
 
+$(document).on("click", "#prev-cat, #next-cat", function () {
+
+    var direction = $(this).attr("id") === "prev-cat" ? "prev" : "next";
+    var categoryElement = $(this).closest(".category-element");
+   
+    if(direction === "prev") {
+        var prevElement = categoryElement.prev(".category-element");
+        if(prevElement.length > 0) {
+            categoryElement.insertBefore(prevElement);
+
+            updateOrderInDatabase(categoryElement, prevElement.data("id"), prevElement.data("sort-order"),prevElement);
+        }
+    } else {
+        var nextElement = categoryElement.next(".category-element");
+        if(nextElement.length > 0) {
+            categoryElement.insertAfter(nextElement);
+
+            updateOrderInDatabase(categoryElement, nextElement.data("id"), nextElement.data("sort-order"),nextElement);
+        }
+    }
+});
+
+
+function updateOrderInDatabase(movedElement, replacedId, replacedSortOrder,replacedElement) {
+    var movedId = movedElement.data("id"); // Assuming you have a data-id attribute to store the category ID
+    var movedSortOrder =  movedElement.attr("data-sort-order")
+    var replacedSortOrder = replacedElement.attr("data-sort-order");
+    // Send AJAX request to update order in database for the moved and replaced elements
+    
+    $.ajax({
+        url: baseURL + '/category/update/sort-order',
+        method: "POST",
+        data: { movedId: movedId, replacedId: replacedId, replacedSortOrder: replacedSortOrder, movedSortOrder: movedSortOrder },
+        success: function(response) {
+
+            toastr.success(response.message)
+            // Update data sort order in slider
+            replacedElement.attr('data-sort-order', movedSortOrder);
+            movedElement.attr('data-sort-order', replacedSortOrder);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating order in database: " + error);
+        }
+    });
+
+}

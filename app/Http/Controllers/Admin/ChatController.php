@@ -119,7 +119,7 @@ class ChatController extends Controller
         $chats = Chat::select('sender_id', 'receiver_id', 'created_at')
             ->orderBy('created_at', 'desc')
             ->distinct()
-            ->paginate(9, ['*'], 'page', $pageNumber)
+            ->paginate(16, ['*'], 'page', $pageNumber)
             ->flatMap(function ($chat) {
                 return [$chat->sender_id, $chat->receiver_id];
             })

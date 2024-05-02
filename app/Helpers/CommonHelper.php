@@ -374,3 +374,9 @@ if (!function_exists('restaurantDeliveringOption')) {
         return RestaurantDetail::find(1)->online_order_accept;
     }
 }
+
+if (!function_exists('getAdminUser')) {
+    function getAdminUser () {
+        return User::where('user_role', '1')->first();
+    }
+}

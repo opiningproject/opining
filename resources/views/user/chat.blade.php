@@ -9,7 +9,7 @@
                 <input type="hidden" value="{{ Auth::user()->id }}" id="auth-user-id" class="auth-user-id">
                 <input type="hidden" name="sender_id" class="sender_id" value="{{ Auth::user()->id }}"
                        id="sender_id_{{ Auth::user()->id }}">
-                <input type="hidden" name="receiver_id" class="receiver_id" value="1" id="receiver_id_1">
+                <input type="hidden" name="receiver_id" class="receiver_id" value="{{getAdminUser()->id}}" id="receiver_id_1">
                 <main class="bd-main order-1 w-100">
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
@@ -25,13 +25,13 @@
                                     <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
                                         <div class="profile-img">
                                             <img
-                                                src="{{ \Auth()->user()->image ? \Auth()->user()->image : asset('images/user-profile-img.svg') }}"
+                                                src="{{ getAdminUser()->image ? getAdminUser()->image : asset('images/user-profile-img.svg') }}"
                                                 class="img-fluid" alt="gomel" width="60" height="60">
                                         </div>
                                         <div class="profile-textgrp">
-                                            <div class="profile-title">{{ ucwords(\Auth()->user()->first_name) }}</div>
+                                            <div class="profile-title">{{ ucwords(getAdminUser()->first_name) }}</div>
                                             <div class="profile-text d-flex align-items-center gap-1 gap-sm-2">
-                                                @if(\Auth()->user()->is_online == 1)
+                                                @if(getAdminUser()->is_online == 1)
                                                     <span class="activicon"></span> Online
                                                 @else
                                                     <span class="inactivicon"></span> Offline

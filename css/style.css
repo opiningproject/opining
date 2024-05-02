@@ -2162,7 +2162,9 @@ table .input-group-text {
   flex-direction: column;
   gap: 20px;
   height: -moz-fit-content;
-  height: fit-content;
+  max-height: 1050px;
+  min-height: 1050px;
+  overflow-x: auto;
 }
 .ChatDiv .ChatDiv-type .ChatDiv-list {
   gap: 20px;
@@ -3033,3 +3035,77 @@ table .input-group-text {
   display: flex;
   align-items: center;
 }/*# sourceMappingURL=style.css.map */
+
+/*new css*/
+
+.chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {
+  width: 16px;
+  height: 16px;
+  background-color: var(--theme-danger1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid white;
+}
+
+.ChatDiv-main .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .activicon {
+  width: 16px;
+  height: 16px;
+  background-color: var(--theme-success4);
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid white;
+}
+.ChatDiv-main .ChatDiv .ChatDiv-type .badge {
+  height: 35px;
+  position: relative;
+  width: 37px;
+  top: 10%;
+  left: 90.5%;
+  padding: 12px 12px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  z-index:1
+}
+
+.remove-image {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: var(--theme-yellow5);
+  color: white;
+  font-size: 16px;
+  padding: 3px 6px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.chart-indicates {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+.chart-indicates .indicate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #292929;
+}
+.chart-indicates .indicate label {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #FFC00B;
+  display: inline-block;
+}
+.chart-indicates .indicate.low label {
+  background: #FFE9A8;
+}

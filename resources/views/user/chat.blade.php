@@ -25,13 +25,13 @@
                                     <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
                                         <div class="profile-img">
                                             <img
-                                                src="{{ \Auth()->user()->image ? \Auth()->user()->image : asset('images/user-profile-img.svg') }}"
+                                                src="{{ getAdminUser()->image ? getAdminUser()->image : asset('images/user-profile-img.svg') }}"
                                                 class="img-fluid" alt="gomel" width="60" height="60">
                                         </div>
                                         <div class="profile-textgrp">
-                                            <div class="profile-title">{{ ucwords(\Auth()->user()->first_name) }}</div>
+                                            <div class="profile-title">{{ ucwords(getAdminUser()->first_name) }}</div>
                                             <div class="profile-text d-flex align-items-center gap-1 gap-sm-2">
-                                                @if(\Auth()->user()->is_online == 1)
+                                                @if(getAdminUser()->is_online == 1)
                                                     <span class="activicon"></span> Online
                                                 @else
                                                     <span class="inactivicon"></span> Offline

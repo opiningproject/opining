@@ -375,6 +375,8 @@ if (!function_exists('restaurantDeliveringOption')) {
     }
 }
 
-function getAdminUser () {
-    return User::where('user_role', '1')->first();
+if (!function_exists('getAdminUser')) {
+    function getAdminUser () {
+        return User::where('user_role', '1')->first();
+    }
 }

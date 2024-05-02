@@ -2,8 +2,8 @@
 @if($chat->id !== auth()->id())
 <div class="ChatDiv-type">
 
-    <div class="ChatDiv-list" data-id="1" data-receiver-id="{{ $chat->id }}" data-chat-id="{{$chat->chats->id}}" data-status="{{$chat->is_online}}" data-user="{{$chat->id}}">
-        <input type="hidden" name="sender_id" class="sender_id" value="1" id="sender_id_1">
+    <div class="ChatDiv-list" data-id="{{getAdminUser()->id}}" data-receiver-id="{{ $chat->id }}" data-chat-id="{{$chat->chats->id}}" data-status="{{$chat->is_online}}" data-user="{{$chat->id}}">
+        <input type="hidden" name="sender_id" class="sender_id" value="{{getAdminUser()->id}}" id="sender_id_1">
         <input type="hidden" name="receiver_id" class="receiver_id" value="{{ $chat->chats->sender_id }}" id="receiver_id_{{$chat->chats->sender_id}}">
         <div
             class="ChatDiv-item d-flex align-items-center justify-content-start gap-3" id="chat_item_{{ $chat->chats->id }}">

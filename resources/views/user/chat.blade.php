@@ -9,7 +9,7 @@
                 <input type="hidden" value="{{ Auth::user()->id }}" id="auth-user-id" class="auth-user-id">
                 <input type="hidden" name="sender_id" class="sender_id" value="{{ Auth::user()->id }}"
                        id="sender_id_{{ Auth::user()->id }}">
-                <input type="hidden" name="receiver_id" class="receiver_id" value="1" id="receiver_id_1">
+                <input type="hidden" name="receiver_id" class="receiver_id" value="{{getAdminUser()->id}}" id="receiver_id_1">
                 <main class="bd-main order-1 w-100">
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">

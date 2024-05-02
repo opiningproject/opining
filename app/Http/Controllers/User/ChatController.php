@@ -39,7 +39,7 @@ class ChatController extends Controller
     {
         $pageNumber = request()->input('page', 1);
         $userId = auth()->id();
-        $adminId = 1;
+        $adminId = getAdminUser()->id;
         $messages = Chat::with('sender')
             ->with('receiver')->where(function ($query) use ($adminId, $userId) {
                 $query->where('sender_id', $adminId)

@@ -58,7 +58,7 @@ class ChatController extends Controller
 
             $item->appendStyle = '';
             $item->messageStyle = '';
-            if ($item->receiver_id != 1 && $item->sender_id == 1) {
+            if ($item->receiver_id != getAdminUser()->id && $item->sender_id == getAdminUser()->id) {
                 $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
                 $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
             }

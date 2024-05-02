@@ -179,6 +179,15 @@ $(document).on('click', '.ChatDiv-list', function () {
     let initialSenderName = status == '1' ? $(".profile-text").html('<span class="activicon"></span> Online') : $(".profile-text").html('<span class="inactivicon"></span> Offline');
 
     var senderName = $(this).find('.title').text(); // Get the sender's name
+
+    // Remove style if exists
+    if ($(this).find('.title').attr('style')) {
+        // If it exists, remove it
+        $(this).find('.title').removeAttr('style');
+    }
+    // Remove style if exists
+
+
     var image = $(this).find('.userimage').attr('src'); // Get the sender's name
     $('#chatbox-username').text(senderName); // Update displayed username
     $('.chat-profile').attr("src", image); // Update displayed username
@@ -188,7 +197,7 @@ $(document).on('click', '.ChatDiv-list', function () {
 });
 
 
-$(document).on('keyup', '#search-chat', function () {
+$(document).on('keyup', '#search-chat', debounce(function () {
     let search = $(this).val();
     $.ajax({
         url: baseURL + '/chat/search-chat?q=' + search,
@@ -198,17 +207,31 @@ $(document).on('keyup', '#search-chat', function () {
                 '    <input type="search" name="q" id="search-chat" class="search-box form-control" value="' + search + '" placeholder="Search...">\n' +
                 '    </div>'
             let newData = [searchbox, response]
+
             $('#ChatDiv').html(newData)
+            var strLength = $('.search-box').val().length;
+            $('.search-box').focus();
+            $('.search-box')[0].setSelectionRange(strLength, strLength);
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
             alert(errorMessage);
         }
     })
-})
+}, 500))
 
 
 let fetchingOldUsers = false;
+
+
+// User list pagination
+$('#ChatDiv').on('scroll', function () {
+    if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+        chatListpage++
+        fetchChatUsers()
+    }
+});
+
 
 function fetchChatUsers() {
 
@@ -293,7 +316,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (data.unreadCount > 0) {
                 $('.ChatDiv-type').remove('')
+                chatListpage = 1
                 fetchChatUsers();
             }
         })
 })
+
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this, args = arguments;
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};

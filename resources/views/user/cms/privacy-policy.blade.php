@@ -4,7 +4,7 @@
         <div class="main-content">
           <div class="section-page-title main-page-title mb-0">
             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
-              <h1 class="page-title">Privacy Policy</h1>
+              <h1 class="page-title">{{ trans('user.footer.privacy') }}</h1>
             </div>
           </div>
           <section class="custom-section informativeterms-section h-100">

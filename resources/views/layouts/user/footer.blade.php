@@ -19,6 +19,11 @@
 <script type="text/javascript" src="{{ asset('js/inline-svg.js')}}"></script>
 
 <script type="text/javascript" src="{{ asset('js/user/user-auth.js')}}"></script>
+<script>
+    var validationMsg = {
+        asap: '{{ trans('user.checkout.asap') }}',
+    }
+</script>
 <script type="text/javascript" src="{{ asset('js/user/user-settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-dishes.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-address.js')}}"></script>

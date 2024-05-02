@@ -49,7 +49,7 @@ class DishController extends Controller
         try {
             DishFavorites::where('dish_id', $request->dish_id)->delete();
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -67,7 +67,7 @@ class DishController extends Controller
                 $request->all()
             );
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -151,7 +151,7 @@ class DishController extends Controller
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
                                 <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100' id='dish-option$dish->id'>
-                                <option value=''>Please select option</option>";
+                                <option value=''>".trans('modal.dish.select_option')."</option>";
             foreach ($options as $option) {
                 $selected = $selectedOption == $option->id ? 'selected' : '';
                 $html_options .= "<option value='$option->id' $selected >$option->name</option>";
@@ -170,7 +170,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>Existing Ingredients</th>
+                            <th colspan='3'>".trans('modal.dish.existing_ingredients')."</th>
                           </tr>
                         </thead>
                         <tbody>";
@@ -205,7 +205,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>Add Extra Ingredients</th>
+                            <th colspan='3'>".trans('modal.dish.extra_ingredients')."</th>
                           </tr>
                         </thead>
                       </table>
@@ -239,14 +239,14 @@ class DishController extends Controller
                                     <td width='10%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
-                                    <td class='text-left'>$ingredient_name <span class='food-custom-price'>€ <span id='ing-price-val$ingredient->id'>$ingredient_price</span></span>
+                                    <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>".number_format($ingredient_price,2)."</span></span>
                                     </td>
                                     <td width='7%'>
                                       <div class='foodqty mt-0'>
                                         <span class='minus'>
                                           <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)></i>
                                         </span>
-                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient_id' readonly id='dishIng$ingredient->id' value='$paidQty'>
+                                        <input type='number' class='count dishPaidIngQty' data-id='$ingredient_id' readonly id='dishIng$ingredient->id' data-price='$ingredient_price' value='$paidQty'>
                                         <span class='plus'>
                                           <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+',$dish->id)></i>
                                         </span>
@@ -264,11 +264,11 @@ class DishController extends Controller
                     </div>";
         }
 
-        $addUpdateText = 'Add to Cart';
+        $addUpdateText = 'Add Item';
         $orderQty = 1;
 
             if ($doesExist) {
-            $addUpdateText = 'Update Cart';
+            $addUpdateText = 'Update Item';
             $orderQty = $dishDetail->qty;
         }
 
@@ -277,12 +277,12 @@ class DishController extends Controller
                   <div class='modal-header border-0 d-block'>
                     <button type='button' class='btn-close float-end' data-bs-dismiss='modal' aria-label='Close'></button>
                     <div class='customisable-item-detail mt-3 text-center'>
-                      <div class='mb-3 text-center'>
+                      <div class='mb-3 text-center pro-image'>
                       <img src='$dish->image' alt='burger' width='100' height='100' id='dish_image'>
                       </div>
                       <h4>$dish->name</h4>
                       <p class='my-0'>$dish->description</p>
-                      <span class='food-custom-price mb-0' id='dish_price'>€$dish->price</span>
+                      <span class='food-custom-price mb-0' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
                       $html_options
                     </div>
@@ -292,9 +292,9 @@ class DishController extends Controller
                     $html_paid_ingredients
                   </div>
                   <div class='modal-footer border-top-0 d-block px-2 px-xxl-3'>
-                    <div class='row align-items-center'>
-                      <div class='col'>
-                        <div class='foodqty mt-0'>
+                    <div class='row align-items-center modal-footer-sticky'>
+                      <div class='col qty-col'>
+                        <div class='foodqty mt-0 mb-0'>
                           <span class='minus'>
                             <i class='fas fa-minus align-middle' onclick=addSubDishQuantities($dish->id,'-',$dish->qty)></i>
                           </span>
@@ -304,7 +304,7 @@ class DishController extends Controller
                           </span>
                         </div>
                       </div>
-                      <div class='col-xx-6 col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 text-end float-end ms-auto'>
+                      <div class='col col-xx-6 col-xl-7 col-lg-6 col-md-6 text-end float-end ms-auto'>
                         <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart($dish->id,$doesExist)>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>" . number_format((float)$totalAmt, 2) . "</span>
                         </a>
                       </div>

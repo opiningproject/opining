@@ -24,12 +24,13 @@ $(function () {
             success: function (response) {
                 $('#ing-tr'+id).remove();
                 $('#deleteAlertModal').modal('hide')
-                toastr.success('Category Deleted successfully')
+                toastr.success(response.message)
 
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -69,7 +70,8 @@ $(function () {
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -81,12 +83,12 @@ $(function () {
         var name_nl = $('#name_nl' + id).val()
 
         if(name_en == ''){
-            alert('Please enter Name(English)')
+            $('#name_en' + id).focus();
             return false
         }
 
         if(name_nl == ''){
-            alert('Please enter Name(Dutch)')
+           $('#name_nl' + id).focus();
             return false
         }
 
@@ -105,14 +107,15 @@ $(function () {
                     $('#edit-btn'+id).show()
                     $('#del-btn'+id).show()
                     $('#save-edit-btn'+id).attr('style','display:none !important')
-                    toastr.success('Category Updated Successfully')
+                    toastr.success(response.message)
                 } else {
                     toastr.error(response.message)
                 }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
 
@@ -163,7 +166,7 @@ function saveIngredientCategory() {
                     '           id="save-edit-btn' + id + '"' +
                     '           style="width: 50%;margin-left: 25%; display: none!important;"' +
                     '           data-id="' + id + '">' +
-                    '            <span class="align-middle">Save</span>' +
+                    '            <span class="align-middle">'+ dishValidation.save_btn +'</span>' +
                     '        </a>' +
                     '    </div>' +
                     '</td>' +
@@ -171,7 +174,7 @@ function saveIngredientCategory() {
                 $('#ingredientCategoryTbody').prepend(html)
                 $('#ingCategoryForm').trigger('reset')
 
-                toastr.success('Category Added Successfully')
+                toastr.success(response.message)
 
             }else{
                 toastr.error(response.message)
@@ -180,7 +183,8 @@ function saveIngredientCategory() {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);
         }
     })
 }

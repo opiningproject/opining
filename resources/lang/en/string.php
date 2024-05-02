@@ -77,7 +77,6 @@ return [
 	'version_number' => 'Version Number',
 	'enter_version_name' => 'Enter Version Name',
 	'enter_version_number' => 'Enter Version Number',
-	'version' => 'Version',
 	'ios' => 'iOS',
 	'android_version' => 'Android Latest Version',
 	'ios_version' => 'iOS Latest Version',

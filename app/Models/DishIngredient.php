@@ -32,6 +32,6 @@ class DishIngredient extends Model
     }
 
     public function getPriceAttribute($value){
-        return number_format((float)$value,2);
+        return $value;
     }
 }

@@ -11,21 +11,16 @@
                             <div class="finance_auth_form">
                                 <div class="mb-3">
                                     <div class="form-group mb-0 position-relative">
-                                            <span class="input-group-icon">
+                                        <span class="input-group-icon">
                                             <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20"/>
-                                            </span>
-                                        <input type="password"
-                                               class="form-control ps-5 text-indent-initial"
-                                               name="password"
-                                               placeholder="Enter Password"
-                                               id="password" autocomplete="off"/>
+                                        </span>
+                                        <input type="password" class="form-control ps-5 text-indent-initial" name="password" placeholder="Enter Password" id="password" autocomplete="off"/>
                                     </div>
                                     @if($errors->any())
                                         <h4 style="color: #ff0000">{{$errors->first()}}</h4>
                                     @endif
                                 </div>
-                                <button type="submit"
-                                        class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">
+                                <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">
                                     Go to My Finance
                                 </button>
                             </div>
@@ -40,8 +35,7 @@
                         </div>
                         <div class="hero-incomebox bg-white">
                             <div class="hero-incomebox-item d-flex align-items-center">
-                                <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg"
-                                     width="90" height="90">
+                                <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
                                 <div class="text-grp d-flex flex-column gap-2">
                                     <div class="title">Total Income</div>
                                     <div class="number">

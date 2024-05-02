@@ -21,7 +21,7 @@ return [
 		'order_id' => 'Order ID',
 		'regards' => 'Regards',
 		'coupon_discount' => 'Coupon Discount',
-		'all_rights_reserved' => 'All rights reserved.',
+		'all_rights_reserved' => 'Copyright 2024 © :app_name All Rights Reserved',
 	],
 ];
 

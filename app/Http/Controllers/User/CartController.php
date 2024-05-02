@@ -93,7 +93,7 @@ class CartController extends Controller
             }
 
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }
     }
 
@@ -106,16 +106,16 @@ class CartController extends Controller
         $ingredientData = getOrderDishIngredients($cart);
 
         $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
- <div class='col-12'>
-                                                                            <div class='d-flex cart-item-row'>
-                                                                                <div class='cart-custom-w-col-img'>
+                    <div class='col-12'>
+                        <div class='d-flex cart-item-row'>
+                            <div class='cart-custom-w-col-img'>
 
                     <img src=" . $dish->image . " alt='$dish->name' class='img-fluid' width='86' height='74px' />
                     <div class='foodqty'>
                       <span class='minus'>
                         <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $cart->id . ")></i>
                       </span>
-                      <input type='number' readonly class='count cart-amt' id='qty-$dishId' name='qty-$cart->id' value=" . $cart->qty . "  data-id='$cart->id'>
+                      <input type='number' readonly class='count cart-amt' id='qty-$cart->id' name='qty-$cart->id' value=" . $cart->qty . " data-ing='$cart->paid_ingredient_total' data-id='$cart->id'>
                       <input type='hidden' id='dish-price-$cart->id' value='$dishPrice'/>
                       <span class='plus'>
                         <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $cart->id . ")></i>
@@ -130,21 +130,20 @@ class CartController extends Controller
                       </div>
                       <div class='d-flex align-items-center'>
                         <p class='mb-0 item-options mb-0'> $optionName </p>
-                        <span class='item-desc'>+$ingredientData</span>
+                        <span class='item-desc' id='item-ing-desc$cart->id'>$ingredientData</span>
                         <p class='item-customize mb-0 ms-auto justify-content-end'>
-                          <a href='javascript:void(0);' data-bs-toggle='modal' data-bs-target='#customisableModal'>
-                            <svg xmlns='http://www.w3.org/2000/svg' width='14' height='13' viewBox='0 0 14 13' fill='none'>
-                              <path d='M13.1001 3.52033L13.0949 3.53595C13.0859 3.5631 13.0792 3.58773 13.0718 3.61482C13.0667 3.63337 13.0614 3.65307 13.0547 3.67552L13.1001 3.52033ZM13.1001 3.52033L13.1 3.50387M13.1001 3.52033L13.1 3.50387M13.1 3.50387L13.0976 3.13698L13.0976 3.12826L13.096 3.11968C13.0163 2.68245 12.7333 2.38042 12.4418 2.11018C12.273 1.95355 12.1112 1.79323 11.9479 1.63143C11.8512 1.53562 11.754 1.43929 11.6544 1.34289C11.3536 1.04992 10.9956 0.899416 10.633 0.900002C10.2703 0.900587 9.91242 1.05226 9.61165 1.34627L9.61163 1.3463L8.21902 2.7087M13.1 3.50387L8.21902 2.7087M1.54192 9.49893C1.56189 9.39894 1.63588 9.29781 1.71193 9.22196L1.54192 9.49893ZM1.54192 9.49893C1.36537 10.389 1.19914 11.281 1.0329 12.1731L1.01987 12.243C0.968197 12.5283 1.00754 12.6056 1.25477 12.7493H1.46588L1.54192 9.49893ZM8.21902 2.7087C6.02469 4.85398 3.83231 7.00128 1.64189 9.15058L1.64131 9.15116C1.56032 9.23194 1.46962 9.35035 1.44386 9.47934L1.44383 9.47947C1.26717 10.3701 1.10085 11.2626 0.934644 12.1545L0.921564 12.2247L0.921474 12.2252C0.895629 12.3679 0.885663 12.4874 0.934728 12.5918C0.983606 12.6958 1.08157 12.7643 1.20453 12.8357L1.22782 12.8493H1.25477H1.46588H1.48903L1.50983 12.8391C1.52312 12.8326 1.53695 12.8271 1.55118 12.8229C1.79784 12.7779 2.04464 12.7331 2.29149 12.6884C2.96624 12.5661 3.64137 12.4437 4.31525 12.316L4.31525 12.316L4.31697 12.3156C4.44072 12.2899 4.55483 12.2306 4.64611 12.1441L4.64612 12.1441L4.64716 12.1431C7.32462 9.53059 9.99797 6.91428 12.6672 4.29415L12.6674 4.29393C12.791 4.17188 12.8817 4.01739 12.9626 3.87953C12.9719 3.86379 12.981 3.84826 12.99 3.83303L8.21902 2.7087ZM11.716 4.12079C11.755 4.08158 11.7938 4.04245 11.8325 4.0034C11.9193 3.91599 12.0056 3.82899 12.0924 3.7424L12.0203 2.95526C12.1437 3.07758 12.1962 3.2003 12.1962 3.31381C12.1963 3.42737 12.144 3.54981 12.0218 3.67157L12.0218 3.67158C11.9348 3.75837 11.8481 3.8457 11.7613 3.93322C11.7459 3.94876 11.7305 3.96431 11.715 3.97987M11.716 4.12079L11.786 4.04934L11.715 3.97987M11.716 4.12079L11.6451 4.05028C11.6684 4.02681 11.6917 4.00333 11.715 3.97987M11.716 4.12079L11.715 3.97987M11.715 3.97987L9.97698 2.27809C10.002 2.25142 10.0266 2.22484 10.0511 2.19844C10.1511 2.0904 10.2483 1.98545 10.3585 1.88975C10.5116 1.75709 10.7537 1.75855 10.9206 1.89231L10.9206 1.89233C11.0021 1.95756 11.0759 2.03034 11.1538 2.10722C11.1748 2.12791 11.1961 2.14889 11.2179 2.1701L11.2626 2.21359C11.5161 2.4603 11.7694 2.70676 12.0203 2.95524L11.715 3.97987ZM9.31214 2.92619L11.0378 4.61662L4.29695 11.2073L2.5731 9.52075L9.31214 2.92619ZM2.0037 11.3828C2.06179 11.0758 2.11937 10.7716 2.17678 10.4686L3.32474 11.5919L1.91565 11.848C1.94517 11.6921 1.9745 11.5371 2.0037 11.3828Z' fill='#FFC00B' stroke='#FFC00B' stroke-width='0.2' />
-                            </svg>
-                          </a>
-                          Edit
+                            <a href='javascript:void(0);'
+                               onclick='customizeDish($dish->id,$cart->id);'>
+                                <img src='".asset('images/custom-dish.svg')."' alt='' class='svg edit-icon' height='13' width='14'/>
+                            </a>
+                            Edit
                         </p>
-                        <p class='price-opt mb-0 text-nowrap' id='paid-ing-price'>+€" . number_format($cart->paid_ingredient_total, 2) . " </p>
+                        <p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total),2) . " </p>
                       </div>
                       <div class='from-group addnote-from-group mb-0'>
                         <div class='form-group'>
-                          <label for='dishnameenglish' class='form-label'>Add notes</label>
-                          <input type='text' class='form-control dish-notes' maxlength='50' placeholder='Type here...'/>
+                          <label for='dishnameenglish' class='form-label'>".trans('user.cart.add_notes')."</label>
+                          <input type='text' class='form-control dish-notes' maxlength='50' placeholder='".trans('user.cart.type_here')."'/>
                         </div>
                       </div>
                     </div>
@@ -163,16 +162,13 @@ class CartController extends Controller
             if ($request->current_qty >= 1) {
 
                 $user->cart->dishDetails()->find($request->dish_id)->update([
-                        'qty' => DB::raw('qty ' . $request->operator . '1')
+                        'qty' => DB::raw('qty ' . $request->operator . '1'),
+                        'total_price' => DB::raw('qty * price'),
                     ]
                 );
-                /*OrderDetail::where('dish_id', $request->dish_id)->update(array(
-                    'qty' => DB::raw('qty ' . $request->operator . '1')
-                ));*/
             } else {
                 OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
                 $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
-//                OrderDetail::where('dish_id', $request->dish_id)->forceDelete();
             }
 
             if (count($user->cart->dishDetails) == 0) {
@@ -188,7 +184,7 @@ class CartController extends Controller
             return response::json(['status' => 1, 'message' => $coupon]);
 
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => $e->getMessage()]);
         }
     }
 
@@ -210,73 +206,112 @@ class CartController extends Controller
                     'order_type' => session('zipcode') ? '1' : '2'
                 ]);
             }
-
+//            dd($request->all());
             $order->fresh();
             $dish = Dish::find($id);
 
             $sameDish = 0;
+            $addedDishId = 0;
             $paidIngAmt = 0.00;
+            $IngListData = '';
             $selectedFreeIng = $request->freeIng ?? [];
             $selectedPaidIng = $request->paidIng ?? [];
             ksort($selectedPaidIng);
             sort($selectedFreeIng);
 
-            $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->whereDishOptionId($request->option)->get();
+            if($request->doesExist == 0){
 
-            if ($dishExist) {
+                $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->whereDishOptionId($request->option)->get();
 
-                foreach ($dishExist as $item) {
+                if ($dishExist) {
 
-                    $freeIngredientsExist = $item->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
-                    $paidIngredientsExist = $item->orderDishPaidIngredients->pluck('quantity', 'dish_ingredient_id')->all();
-                    ksort($paidIngredientsExist);
-                    sort($freeIngredientsExist);
-                    if ($selectedFreeIng == $freeIngredientsExist) {
-                        if (count($paidIngredientsExist) == count($selectedPaidIng)) {
-                            if (count(array_diff_assoc($paidIngredientsExist, $selectedPaidIng)) == 0) {
-                                $sameDish = $item->id;
-                                $item->qty += $request->dishQty;
-                                $item->total_price = $item->qty * $dish->price;
-                                $item->price = $dish->price;
-                                $item->save();
-                                break;
+                    foreach ($dishExist as $item) {
+
+                        $freeIngredientsExist = $item->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
+                        $paidIngredientsExist = $item->orderDishPaidIngredients->pluck('quantity', 'dish_ingredient_id')->all();
+                        ksort($paidIngredientsExist);
+                        sort($freeIngredientsExist);
+                        if ($selectedFreeIng == $freeIngredientsExist) {
+                            if (count($paidIngredientsExist) == count($selectedPaidIng)) {
+                                if (count(array_diff_assoc($paidIngredientsExist, $selectedPaidIng)) == 0) {
+                                    $sameDish = $item->id;
+                                    $item->qty += $request->dishQty;
+                                    $item->total_price = $item->qty * $dish->price;
+                                    $item->price = $dish->price;
+                                    $item->save();
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-            }
-            if ($sameDish == 0) {
+                if ($sameDish == 0) {
+                    /*$orderDetails = OrderDetail::find($request->doesExist);
 
-                /*$orderDetails = OrderDetail::find($request->doesExist);
+                    $orderDetails->orderDishDetails()->delete();
 
+                    $cartArr = [
+                        "price" => $dish->price,
+                        "qty" => $request->dishQty,
+                        "dish_option_id" => $request->option ?? null,
+                        "total_price" => $dish->price * $request->dishQty,
+                    ];
+
+                    $orderDetails->update(
+                        $cartArr
+                    );*/
+
+                    $cartArr = [
+                        "user_id" => $user_id,
+                        "dish_id" => $id,
+                        "price" => $dish->price,
+                        "qty" => $request->dishQty,
+                        "dish_option_id" => $request->option ?? null,
+                        "total_price" => $dish->price * $request->dishQty,
+                        "notes" => '',
+                    ];
+
+                    $orderDetails = $order->dishDetails()->create(
+                        $cartArr
+                    );
+                    $orderDetails->fresh();
+
+                    if (isset($request->freeIng)) {
+                        foreach ($request->freeIng as $freeIng) {
+                            $orderDetails->orderDishDetails()->create([
+                                'dish_id' => $id,
+                                'dish_ingredient_id' => $freeIng
+                            ]);
+                        }
+                    }
+
+                    if (isset($request->paidIng)) {
+                        foreach ($request->paidIng as $key => $paidIng) {
+
+                            $ing = DishIngredient::find($key);
+                            $paidIngAmt += ((int)$paidIng * $ing->price);
+                            $orderDetails->orderDishDetails()->create([
+                                'dish_id' => $id,
+                                'dish_ingredient_id' => $key,
+                                'is_free' => '0',
+                                'quantity' => $paidIng,
+                                'price' => $ing->price
+                            ]);
+                        }
+                    }
+
+                    $response['cartHtml'] = $this->cartHtml($orderDetails);
+                }
+            }else{
+                $sameDish = $request->doesExist;
+                $orderDetails = $order->dishDetails()->find($request->doesExist);
+//                ->update([
+                    $orderDetails->qty = $request->dishQty;
+                    $orderDetails->price = $dish->price;
+                    $orderDetails->total_price = $orderDetails->qty * $dish->price;
+                    $orderDetails->save();
+//                ]);
                 $orderDetails->orderDishDetails()->delete();
-
-                $cartArr = [
-                    "price" => $dish->price,
-                    "qty" => $request->dishQty,
-                    "dish_option_id" => $request->option ?? null,
-                    "total_price" => $dish->price * $request->dishQty,
-                ];
-
-                $orderDetails->update(
-                    $cartArr
-                );*/
-
-                $cartArr = [
-                    "user_id" => $user_id,
-                    "dish_id" => $id,
-                    "price" => $dish->price,
-                    "qty" => $request->dishQty,
-                    "dish_option_id" => $request->option ?? null,
-                    "total_price" => $dish->price * $request->dishQty,
-                    "notes" => '',
-                ];
-
-                $orderDetails = $order->dishDetails()->create(
-                    $cartArr
-                );
-                $orderDetails->fresh();
-
                 if (isset($request->freeIng)) {
                     foreach ($request->freeIng as $freeIng) {
                         $orderDetails->orderDishDetails()->create([
@@ -300,7 +335,9 @@ class CartController extends Controller
                         ]);
                     }
                 }
-                $response['cartHtml'] = $this->cartHtml($orderDetails);
+                $IngListData = getOrderDishIngredients($orderDetails);
+//                $paidIngAmt *= $request->dishQty;
+
             }
 
             /*if (isset($request->freeIng)) {
@@ -329,8 +366,10 @@ class CartController extends Controller
             if ($cartData) {
                 $response['cartHtml'] = $this->cartHtml($orderDetails);
             }*/
-            $response['msg'] = 'Cart Added Successfully';
+            $response['msg'] = '';
             $response['paidIngAmt'] = $paidIngAmt;
+            $response['ingListData'] = $IngListData;
+            $response['addedDishId'] = $sameDish;
             return response::json(['status' => 200, 'message' => $response]);
 
 
@@ -352,7 +391,7 @@ class CartController extends Controller
             }
 
             if (!Auth::user()) {
-                return response::json(['status' => 401, 'message' => 'Unauthorized']);
+                return response::json(['status' => 401, 'message' => '']);
             }
 
             $user = Auth::user();
@@ -364,7 +403,7 @@ class CartController extends Controller
 
             }
 
-            return response::json(['status' => 200, 'message' => 'Delivery type updated successfully']);
+            return response::json(['status' => 200, 'message' => '']);
 
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
@@ -376,54 +415,73 @@ class CartController extends Controller
         try {
             $user = Auth::user();
             $restaurantHours = getRestaurantOpenTime();
+            $restaurantDeliveringOption = restaurantDeliveringOption();
             $now = date('H:i');
+            $outOfStock = false;
 
-            if ($user->cart->coupon) {
-                if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
-                    return response::json(['status' => 406, 'message' => "Coupon is expired."]);
+            if($restaurantDeliveringOption == '1'){
+                if ($user->cart->coupon) {
+                    if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
+                        return response::json(['status' => 406, 'message' => trans('user.message.coupon_expired')]);
+                    }
                 }
-            }
 
-            $outOfStockDishes = OrderDetail::with('dish')->whereHas('dish', function ($query) {
-                $query->where('qty', 0)->orWhere('out_of_stock', '1');
-            })->where([
-                ['order_id', $user->cart->id],
-                ['is_cart', '1']
-            ])->get();
+                /*$outOfStockDishes = OrderDetail::with('dish')->where([
+                    ['order_id', $user->cart->id],
+                    ['is_cart', '1']
+                ])->groupBy('dish_id')->get();
 
-            if (count($outOfStockDishes) > 0) {
-                return response::json(['status' => 412, 'message' => "Few items are out of stock. Please remove them to continue."]);
-            }
+                 dd($user->cart->dishDetails()->with('dish')->whereHas('dish', function ($query) {
+                    $query->where('qty', 0)->orWhere('out_of_stock', '1');
+                })->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get()->toArray());
 
-            if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
-                return response::json(['status' => 412, 'message' => "The restaurant doesn't deliver at this time. Please try again after sometime."]);
-            }
+    //            dd($outOfStockDishes->toArray());*/
+//            dd($user->cart->dishDetails()->with('dish')->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get()->toArray());
 
-            if ($user->cart->order_type == OrderType::Delivery) {
-                if (session('zipcode')) {
+                $cartDishes = $user->cart->dishDetails()->with('dish')->groupBy('dish_id')->select('*', DB::raw('sum(qty) as total'))->get();
 
-                    $zip = substr(session('zipcode'), 0, 4);
-                    $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
+                foreach ($cartDishes as $outOfStockDish) {
+                    if($outOfStockDish->dish->qty == 0 || $outOfStockDish->dish->out_of_stock == '1' || $outOfStockDish->dish->qty < $outOfStockDish->total){
+                        $outOfStock = true;
+                        break;
+                    }
+                }
 
+                if ($outOfStock) {
+                    return response::json(['status' => 412, 'message' => trans('user.message.cart_item_out_of_stock')]);
+                }
 
-                    if ($zipcode) {
+                if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
+                    return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
+                }
 
-                        $deliveryCharges = getDeliveryCharges(session('zipcode'));
-                        if ($deliveryCharges) {
-                            if ($request->totalAmt >= $deliveryCharges->min_order_price) {
-                                return response::json(['status' => 200, 'message' => 'Delivery']);
-                            } else {
-                                return response::json(['status' => 412, 'message' => "The minimum order should be $deliveryCharges->min_order_price"]);
+                if ($user->cart->order_type == OrderType::Delivery) {
+                    if (session('zipcode')) {
+
+                        $zip = substr(session('zipcode'), 0, 4);
+                        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
+
+                        if ($zipcode) {
+
+                            $deliveryCharges = getDeliveryCharges(session('zipcode'));
+                            if ($deliveryCharges) {
+                                if ($request->totalAmt >= $deliveryCharges->min_order_price) {
+                                    return response::json(['status' => 200, 'message' => '']);
+                                } else {
+                                    return response::json(['status' => 412, 'message' => trans('user.message.min_order_price',['min_order_price' => $deliveryCharges->min_order_price])]);
+                                }
                             }
+                        } else {
+                            return response::json(['status' => 406, 'message' => trans('user.message.invalid_zipcode')]);
                         }
                     } else {
-                        return response::json(['status' => 406, 'message' => 'Currently, we are not delivering food to this location.']);
+                        return response::json(['status' => 200, 'message' => '']);
                     }
                 } else {
-                    return response::json(['status' => 200, 'message' => 'Takeaway']);
+                    return response::json(['status' => 200, 'message' => '']);
                 }
-            } else {
-                return response::json(['status' => 200, 'message' => 'Takeaway']);
+            }else{
+                return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
             }
 
         } catch (Exception $e) {
@@ -437,7 +495,7 @@ class CartController extends Controller
             $orderDish = OrderDetail::find($id);
             $orderDish->orderDishDetails()->forceDelete();
             $orderDish->forceDelete();
-            return response::json(['status' => 200, 'message' => 'Dish Deleted']);
+            return response::json(['status' => 200, 'message' => '']);
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
@@ -451,9 +509,9 @@ class CartController extends Controller
             $orderDish->notes = $request->notes;
 
             if ($orderDish->save()) {
-                return response::json(['status' => 200, 'message' => 'Notes Added']);
+                return response::json(['status' => 200, 'message' => '']);
             } else {
-                return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
+                return response::json(['status' => 500, 'message' => trans('user.message.went_wrong')]);
             }
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
@@ -468,9 +526,9 @@ class CartController extends Controller
             $order->delivery_note = $request->delivery_notes;
 
             if ($order->save()) {
-                return response::json(['status' => 200, 'message' => 'Notes Added']);
+                return response::json(['status' => 200, 'message' => '']);
             } else {
-                return response::json(['status' => 500, 'message' => 'There was some error while updating. Please try again!']);
+                return response::json(['status' => 500, 'message' => trans('user.message.went_wrong')]);
             }
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);

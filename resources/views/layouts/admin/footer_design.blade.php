@@ -6,6 +6,5 @@
             </div>
         </a>
     </div>
-    <p class="mb-0 footer-copyright-text">Gomeal &copy; 2024 Gomeal - ALL
-        Rights Reserved</p>
+    <p class="mb-0 footer-copyright-text">{{ trans('user.footer.rights_reserved',['app_name' => env('APP_NAME')]) }}</p>
 </footer>

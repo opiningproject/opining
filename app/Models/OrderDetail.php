@@ -47,7 +47,7 @@ class OrderDetail extends Model
 
     public function getPaidIngredientTotalAttribute()
     {
-        return $this->orderDishPaidIngredients()->select(DB::raw('sum(quantity * price) as total'))->get()->sum('total');
+        return $this->qty * $this->orderDishPaidIngredients()->select(DB::raw('sum(quantity * price) as total'))->get()->sum('total');
     }
 
     public function getDishPriceAttribute(){

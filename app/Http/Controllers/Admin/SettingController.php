@@ -67,10 +67,15 @@ class SettingController extends Controller
 
     public function deleteZipcode(Request $request)
     {
-        try {
+        try 
+        {
             Zipcode::where('id', $request->id)->delete();
-        } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+
+            return response::json(['status' => 1, 'message' => trans('rest.message.zipcode_delete_success')]);
+        } 
+        catch (Exception $e) 
+        {
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -80,8 +85,11 @@ class SettingController extends Controller
             $zipcode = Zipcode::find($request->id);
             $zipcode->status = $request->status;
             $zipcode->save();
+
+            return response::json(['status' => 1, 'message' => trans('rest.message.zipcode_status_success')]);
+            
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -90,15 +98,15 @@ class SettingController extends Controller
         /*print_r ($request->all());
         exit();*/
 
-        try {
-
+        try 
+        {
             $result = Zipcode::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()
             );
 
-            if ($request->id == 0) {
-
+            if ($request->id == 0) 
+            {
                 $id = $result->id;
                 $zipcode = "zipcode_" . $id;
                 $min_order_price = "min_order_price_" . $id;
@@ -106,7 +114,7 @@ class SettingController extends Controller
                 $status = "status_" . $id;
                 $is_active = $request->status ? 'checked' : '';
 
-                echo "<tr class=zipcode-row-$id>
+                $data = "<tr class=zipcode-row-$id>
                     <td>
                       <input type='text' class='form-control text-center w-10r m-auto' value=" . $request->zipcode . " id=" . $zipcode . " readonly />
                     </td>
@@ -135,14 +143,23 @@ class SettingController extends Controller
                         <i class='fa-regular fa-trash-can'></i>
                       </a>
 
-                      <button type='button' class='btn btn-custom-yellow text-uppercase font-sebibold w-100' id='zipcode-save-btn-$id' style='display: none;' onclick='saveZipcode($id)'>Save</button>
+                      <button type='button' class='btn btn-custom-yellow text-uppercase font-sebibold w-100' id='zipcode-save-btn-$id' style='display: none;' onclick='saveZipcode($id)'>
+                      ".trans('rest.button.save')."</button>
                     </td>
                   </tr>";
 
-                exit;
+                return response::json(['status' => 1,'data' => $data, 'message' => trans('rest.message.zipcode_add_success')]);
+
+        
             }
-        } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            else
+            {
+                return response::json(['status' => 1, 'message' => trans('rest.message.zipcode_update_success')]);
+            }
+        } 
+        catch (Exception $e) 
+        {
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -165,14 +182,21 @@ class SettingController extends Controller
 
         $user->password = Hash::make($request->new_password);
 
-        if ($user->save()) {
-            echo 1;
-            exit;
-        } else {
+        if ($user->save()) 
+        {
+            return response::json(
+                [
+                    'status' => 1,
+                    'message' => trans('rest.message.password_success')
+                ]
+            );
+        } 
+        else 
+        {
             return response::json(
                 [
                     'status' => 0,
-                    'message' => 'Something went wrong.'
+                    'message' => trans('rest.message.went_wrong')
                 ]
             );
         }
@@ -220,6 +244,8 @@ class SettingController extends Controller
             $day->save();
         }
 
+        sleep(1);
+
         return redirect("/settings");
     }
 
@@ -242,7 +268,7 @@ class SettingController extends Controller
         $order = Order::find($request->order_id);
         $order->refund_status = $request->status;
 
-        $status_text = $request->status == RefundStatus::Rejected ? 'Rejected' : 'Accepted';
+        $status_text = $request->status == RefundStatus::Rejected ? trans('rest.refund_status.rejected') : trans('rest.refund_status.accepted');
 
         if($request->status == RefundStatus::Accepted && $order->transaction_id)
         {
@@ -267,7 +293,7 @@ class SettingController extends Controller
             return response::json(['status' => 1, 'message' => '','data' => ['status_text' => $status_text]]);
         }
 
-        return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+        return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
     }
 
 

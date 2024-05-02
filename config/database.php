@@ -37,18 +37,18 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'database' => 'go_meal_rekha',
+            'database' => 'go_meal',
 //            'url' => ' localhost',
-            'host' => 'localhost',
+            'host' => '127.0.0.1',
             'port' => '3306',
             'username' => 'root',
-            'password' => 'inx@!123',
+            'password' => 'Inx@!123',
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
+            'strict' => false,
             'engine' => 'InnoDB',
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),

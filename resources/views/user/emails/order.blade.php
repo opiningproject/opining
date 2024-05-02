@@ -128,12 +128,12 @@
 
               <tr>
                 <td style="box-sizing:border-box;">
-                  <table align="center" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing:border-box; margin:0 auto; padding:0; text-align:center; max-width:570px;width: 100%;">
+                  <table align="center" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing:border-box; margin:0 auto;padding:0; text-align:center; max-width:570px;width: 100%;">
                     <tbody>
                       <tr>
                         <td align="center" style="box-sizing:border-box; max-width:100vw; padding:32px">
                           <p style="box-sizing:border-box; line-height:1.5em; margin-top:0; color:#b0adc5; font-size:12px; text-align:center;">
-                            © 2024 {{ env('APP_NAME') }}. {{ trans('email.common.all_rights_reserved') }}.
+                            {{ trans('email.email.all_rights_reserved',['app_name' => env('APP_NAME')]) }}
                           </p>
                         </td>
                       </tr>

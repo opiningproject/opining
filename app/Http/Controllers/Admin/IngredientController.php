@@ -68,7 +68,7 @@ class IngredientController extends Controller
         try {
             $ingredients = Ingredient::where('id', $id)->has('dishIngredient')->get();
 
-            return response::json(['status' => 1, 'data' => 'Ingredient deleted successfully']);
+            return response::json(['status' => 1, 'data' => '']);
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => $e->getMessage()]);
         }
@@ -87,39 +87,7 @@ class IngredientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
-            $ingredient = Ingredient::find($id);
-            if($ingredient){
-
-                if ($request->has('image')) {
-                    $imageName = uploadImageToBucket($request, 'ingredients/', '');
-                    $ingredient->image = $imageName;
-                }
-
-                $ingredient->name_en = $request->name_en;
-                $ingredient->name_nl = $request->name_nl;
-                $ingredient->category_id = $request->category_id;
-                $ingredient->save();
-
-                if(!empty($request->deletedDish)){
-                    $dishList = explode(',', $request->deletedDish);
-                    DishIngredient::whereIn('id',$dishList)->delete();
-                }
-
-                if($request->has('addedDish')){
-                    foreach ($request->addedDish as $addedDish) {
-                        $ingredient->dishIngredient()->create([
-                            'dish_id' => $addedDish
-                        ]);
-                    }
-                }
-            }else{
-                return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
-            }
-            return response::json(['status' => 200, 'data' => $ingredient]);
-        } catch (Exception $e) {
-            return response::json(['status' => 400, 'message' => $e->getMessage()]);
-        }
+        
     }
 
     /**
@@ -129,7 +97,7 @@ class IngredientController extends Controller
     {
         try {
             Ingredient::find($id)->delete();
-            return response::json(['status' => 200, 'message' => 'Deleted Successfully.']);
+            return response::json(['status' => 200, 'message' => trans('rest.message.ingredient_delete_success')]);
 
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
@@ -143,9 +111,12 @@ class IngredientController extends Controller
             if ($ingredient) {
                 $ingredient->status = $request->status;
                 $ingredient->save();
-                return response::json(['status' => 200, 'data' => $ingredient]);
-            } else {
-                return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
+
+                return response::json(['status' => 200, 'data' => $ingredient, 'message' => trans('rest.message.ingredient_status_success')]);
+            } 
+            else 
+            {
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
 
         } catch (Exception $e) {
@@ -205,8 +176,11 @@ class IngredientController extends Controller
                         ]);
                     }
                 }
+
+                return response::json(['status' => 200, 'message' => trans('rest.message.ingredient_updated_success')]);
+                
             }else{
-                return response::json(['status' => 400, 'message' => 'No such ingredient exist']);
+                return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
             return response::json(['status' => 200, 'data' => $ingredient]);
         } catch (Exception $e) {

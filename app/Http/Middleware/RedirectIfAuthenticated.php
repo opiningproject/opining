@@ -17,15 +17,15 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
-        $guards = empty($guards) ? [null] : $guards;
-
+    /*    $guards = empty($guards) ? [null] : $guards;
+//        dd($request);
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 if ($request->user()->user_role != '1') {
                     return redirect(url()->previous());
                 }
             }
-        }
+        }*/
 
         return $next($request);
     }

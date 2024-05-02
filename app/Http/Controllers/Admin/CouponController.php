@@ -39,14 +39,20 @@ class CouponController extends Controller
         $date = date('Y-m-d', strtotime($request->expiry_date. ' 00:00:00'));
         $request->merge(['expiry_date' => $date]);
 
-        try {
-
+        try 
+        {
             Coupon::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()
             );
-        } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+
+            $message = $request->id ? trans('rest.message.coupon_update_success') : trans('rest.message.coupon_add_success');
+
+            return response::json(['status' => 1, 'message' => $message]);
+        } 
+        catch (Exception $e) 
+        {
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -68,7 +74,7 @@ class CouponController extends Controller
 
             return response::json(['status' => 1, 'data' => $coupon]);
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -85,10 +91,16 @@ class CouponController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
+        try 
+        {
             Coupon::where('id', $id)->delete();
-        } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+
+            return response::json(['status' => 1, 'message' => trans('rest.message.coupon_delete_success')]);
+
+        } 
+        catch (Exception $e) 
+        {
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
@@ -98,15 +110,20 @@ class CouponController extends Controller
             $coupon = Coupon::find($request->id);
             $coupon->status = $request->status;
             $coupon->save();
+
+            return response::json(['status' => 1, 'message' => trans('rest.message.coupon_status_success')]);
+            
         } catch (Exception $e) {
-            return response::json(['status' => 0, 'message' => 'Something went wrong.']);
+            return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
 
     public function claimHistoryLog()
     {
-        $orders = Order::where('payment_status', PaymentStatus::Success)->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+        $perPage = isset($request->per_page) ? $request->per_page : 5;
 
-        return view('admin.coupons.claim_history', ['orders' => $orders]);
+        $orders = Order::where('payment_status', PaymentStatus::Success)->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->paginate($perPage);
+
+        return view('admin.coupons.claim_history', ['orders' => $orders,'perPage' => $perPage]);
     }
 }

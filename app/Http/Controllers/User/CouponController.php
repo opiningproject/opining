@@ -47,7 +47,8 @@ class CouponController extends Controller
             ['promo_code', $request->couponCode]
         ])->first();
 
-        if (!empty($coupon)) {
+        if (!empty($coupon)) 
+        {
             $user = Auth::user();
 
             $userCoupon = $user->coupons()->where([
@@ -55,19 +56,19 @@ class CouponController extends Controller
                 ['is_redeemed', '0'],
             ])->first();
 
-            if($userCoupon){
+            if($userCoupon)
+            {
                 if (strtotime(now()) > strtotime($coupon->expiry_date . ' 23:59:59')) {
                     return Response::json([
                         'status' => 401,
-                        'message' => trans('Coupon Expired'),
-
+                        'message' => trans('user.message.coupon_expired'),
                     ]);
                 }
 
                 if ($request->orderAmount < $coupon->price) {
                     return response()->json([
                         'status' => 401,
-                        'message' => trans("Minimum Order for this coupon is $coupon->price", ['min_order_amount' => $coupon->price]),
+                        'message' => trans("user.message.coupon_min_order_price",['min_order_amount' => $coupon->price]),
                     ], 200);
                 }
 
@@ -80,23 +81,27 @@ class CouponController extends Controller
 
                 return Response::json([
                     'status' => 200,
-                    'message' => trans('Coupon Applied'),
+                    'message' => trans('user.message.coupon_applied'),
                     'data' => [
                         'coupon_id' => $coupon->id,
                         'discount_amount' => $discount_amount,
                         'coupon_percent' => ($coupon->percentage_off / 100)
                     ]
                 ]);
-            }else{
+            }
+            else
+            {
                 return response()->json([
-                    'status' => 500                                ,
-                    'message' => trans('Invalid Coupon'),
+                    'status' => 500,
+                    'message' => trans('user.message.invalid_coupon'),
                 ], 200);
             }
-        } else {
+        } 
+        else 
+        {
             return response()->json([
-                'status' => 500                                ,
-                'message' => trans('Invalid Coupon'),
+                'status' => 500,
+                'message' => trans('user.message.invalid_coupon'),
             ], 200);
         }
     }
@@ -126,7 +131,7 @@ class CouponController extends Controller
             ]);
             return Response::json([
                 'status' => 200,
-                'message' => trans('message.coupon.removed'),
+                'message' => '',
             ]);
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);

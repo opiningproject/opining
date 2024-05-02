@@ -47,10 +47,10 @@ class Order extends Model
     }
 
     public function getDeliveryChargeAttribute($value){
-        return number_format((float)$value,2);
+        return $value;
     }
 
     public function getTotalAmountAttribute($value){
-        return number_format((float)$value,2);
+        return $value;
     }
 }

@@ -22,8 +22,9 @@ $(function () {
             url: 'coupons/' + id,
             type: 'DELETE',
             success: function (response) {
-                toastr.success('Coupon deleted successfully')
-                window.location.reload();
+                toastr.success(response.message)
+
+                setTimeout(function(){ window.location.reload(); }, 500);
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -44,7 +45,7 @@ $(function () {
                 id, status
             },
             success: function (response) {
-                toastr.success('Coupon status updated successfully')
+                toastr.success(response.message)
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -57,7 +58,7 @@ $(function () {
         var alertas = $('#coupon-form');
         alertas.trigger("reset");
         alertas.validate().resetForm();
-        $(".modal-title").text("Add Coupon")
+        $(".modal-title").text($('#add_coupon').text())
     });
 
 });
@@ -81,11 +82,12 @@ function saveCoupon() {
         },
         success: function (response) {
             if(id > 0){
-                toastr.success('Coupon updated successfully')
+                toastr.success(response.message)
             }else{
-                toastr.success('Coupon added Successfully')
+                toastr.success(response.message)
             }
-            window.location.reload();
+            
+            setTimeout(function(){ window.location.reload(); }, 500);
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -100,7 +102,7 @@ function deleteCoupon(id) {
 }
 
 function editCoupon(id) {
-    $(".modal-title").text("Edit Coupon")
+    $(".modal-title").text($('#edit_coupon').text())
 
     $.ajax({
         url: 'coupons/' + id + '/edit',

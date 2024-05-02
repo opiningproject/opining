@@ -152,6 +152,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // Restaurant Category Routes
     Route::get('/category/checkDishes/{category}', [CategoryController::class, 'checkDishCategory']);
     Route::resource('/category', CategoryController::class);
+    Route::post('/category/update/sort-order', [CategoryController::class, 'updateCategorySortOrder']);
     // Restaurant Category Routes
 
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
@@ -178,7 +179,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
+Route::middleware(['auth', 'auth.user', 'localization'])->group(function () 
+{
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
         Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');

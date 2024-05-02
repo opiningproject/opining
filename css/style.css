@@ -478,7 +478,6 @@ a {
 .menu-sidebar .offcanvas-lg {
   display: flex;
   flex-direction: column;
-  /*height: 100%;*/
   max-height: calc(100vh - 15.4%);
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu {
@@ -735,7 +734,7 @@ a {
 }
 
 .category-section .category-slider .category-element .card {
-  padding: 15px 32px;
+  padding: 15px 10px;
   text-align: center;
   border-color: transparent;
   border-radius: 16px;
@@ -774,6 +773,44 @@ a {
 }
 .category-section .category-slider .category-element .card.active .dish-item-icon img {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(102%) contrast(102%);
+}
+
+.category-slide-btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.category-slide-btns .btn {
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 5px !important;
+  background: var(--theme-yellow2) !important;
+  flex: 0 0 30px;
+  max-width: 30px;
+  height: 30px;
+  font-size: 14px;
+}
+.category-slide-btns .btn i {
+  color: var(--bs-body-color) !important;
+}
+.category-slide-btns .btn:hover {
+  background: #ffffff !important;
+}
+.category-slide-btns .btn:hover i {
+  color: var(--theme-yellow2) !important;
+}
+
+.categoryslide-setion .category-element .card .dish-item-icon img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+}
+.categoryslide-setion .category-element .card:hover .dish-item-icon img {
+  filter: none !important;
 }
 
 .viewall-btn {
@@ -2125,10 +2162,7 @@ table .input-group-text {
   flex-direction: column;
   gap: 20px;
   height: -moz-fit-content;
-  /* height: fit-content; */
-  max-height: 1050px;
-  min-height: 1050px;
-  overflow-x: auto;
+  height: fit-content;
 }
 .ChatDiv .ChatDiv-type .ChatDiv-list {
   gap: 20px;
@@ -2218,17 +2252,6 @@ table .input-group-text {
   border-radius: 4px;
   border: 1px solid white;
 }
-
-.chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {
-  width: 16px;
-  height: 16px;
-  background-color: var(--theme-danger1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  border: 1px solid white;
-}
 .chatbox .chatbox-main {
   height: 100%;
   display: flex;
@@ -2296,26 +2319,24 @@ table .input-group-text {
   color: var(--theme-muted);
   margin: -12px 0 -24px 0;
 }
-
-/* Temporary Commented */
-/* .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) {
+.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) {
   margin-left: auto;
   flex-direction: row-reverse;
 }
 .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p {
   background-color: var(--theme-cyan1);
   margin-left: auto;
-} */
-/* .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
+}
+.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
   content: "";
   background-image: url(../images/curve-chaticon-cyan.svg);
   left: unset;
   right: -8px;
   transform: scaleX(-1);
-} */
-/* .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp small {
+}
+.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp small {
   text-align: right;
-} */
+}
 .chatbox .chatbox-footer {
   padding: 32px 40px 40px;
   border-top: 1px solid #A3A3A3;
@@ -2958,7 +2979,6 @@ table .input-group-text {
   .menu-sidebar .offcanvas-body {
     padding: 59px 39px 40px 39px;
     display: block;
-    /*height: 100%;*/
   }
 }
 @media (max-width: 991.98px) {
@@ -3009,216 +3029,7 @@ table .input-group-text {
   bottom: 20px;
   right: 30px;
   z-index: 50;
-  justify-content : center;
-  display : flex;
+  justify-content: center;
+  display: flex;
   align-items: center;
 }/*# sourceMappingURL=style.css.map */
-
-/* Rekha Sharma */
-select.form-control.read-only {
-    background: #FAFAFA;
-}
-
-select.form-control:not(.read-only){
-    background: transparent;
-}
-
-select.form-control{
-    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc) !important;
-    background-position: calc(100% - 20px) calc(1em + 6px), calc(100% - 15px) calc(1em + 6px), calc(100% - 2.5em) 0.5em !important;
-    background-size: 10px 7px, 5px 8px, 0px 1.5em !important;
-    background-repeat: no-repeat !important;
-}
-
-select.form-control.sm{
-    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc) !important;
-    background-position: calc(100% - 20px) 1em, calc(100% - 15px) 1em, calc(100% - 2.5em) 0.5em !important;
-    background-size: 10px 7px, 5px 8px, 0px 1.5em !important;
-    background-repeat: no-repeat !important;
-}
-
-.pagination {
-    --bs-pagination-color:#000;
-    --bs-pagination-active-bg: #FFC00B;
-    --bs-pagination-active-border-color:#FFC00B;
-}
-
-label.error{
-    color: red;
-}
-
-.page-link:focus {
-    box-shadow: none;
-    color: #FFC00B;
-}
-
-.form-group.is-invalid .form-control{
-    border-color: var(--bs-form-invalid-border-color);
-    padding-right: calc(1.5em + 0.75rem);
-    /*background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");*/
-    background-repeat: no-repeat;
-    background-position: right calc(0.375em + 0.1875rem) center;
-    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-}
-
-.inline-imageupload-box .upload-file img {
-    margin-right: 7px;
-}
-
-.inline-imageupload-box .upload-file p {
-    overflow: visible;
-}
-
-#old_password-error-msg{
-    color: red;
-}
-
-.new-searchbar {
-    height: 60px;
-    min-height: 60px;
-    max-height: 60px;
-    border-radius: 15px;
-}
-
-.new-searchbar .form-control {
-    font-family: "Sebino-Medium", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    text-transform: capitalize;
-    height: 100%;
-    padding-left: 4px;
-}
-
-#expiry_date-error{
-    width: 100%;
-}
-
-#price-error {
-    width: 100%;
-}
-.countrycode-phone-control:has(.form-control.error) img{
-    margin-top: -12px;
-}
-
-.category-section .category-slider .category-element .card:hover .dish-item-icon img, .category-section .category-slider .category-element .card.active .dish-item-icon img {
-    filter: none;
-}
-
-.inset-0{
-    inset: 0;
-}
-.bg-transparent-layer{
-    background-color: rgba(0,0,0,0.6);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.web-logo
-{
-  max-width: 100%;
-  width: 250px;
-  height: auto;
-  max-height: 100px;
-  object-fit: contain;
-}
-/* Rekha Sharma */
-
-
-  .custom-table ul.pagination {margin-bottom: 0px}
-.custom-pagination select.form-control {
-flex: 0 0 80px;
-max-width: 80px;
-}
-
-nav .pagination {
-margin-bottom: 0px;
-}
-
-
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.orderRead-more .title {
-      font-family: "SebinoRegular", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: capitalize;
-}
-.orderRead-more .text {
-      font-family: "SebinoRegular", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 15px;
-    letter-spacing: 0.815px;
-    text-transform: capitalize;
-}
-.orderRead-more .text  a {
-  color: #ffc00b;
-}
-
-.btn-auto {
-max-width: initial !important;
-width: auto !important;
-}
-
-.custom-pagination select.form-control {
-background-position:  calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em !important;
-}
-
-
-
-.foodorder-box-list-wrp .foodorder-box-list .no-data{
-    color: var(--theme-gray5);
-    font-family: "SebinoRegular", sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 0.19px;
-    border-radius: 20px;
-}
-/*new css*/
-.ChatDiv-main .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .activicon {
-    width: 16px;
-    height: 16px;
-    background-color: var(--theme-success4);
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    border: 1px solid white;
-}
-.ChatDiv-main .ChatDiv .ChatDiv-type .badge {
-    height: 35px;
-    position: relative;
-    width: 37px;
-    top: 10%;
-    left: 90.5%;
-    padding: 12px 12px;
-    border-radius: 50%;
-    background: red;
-    color: white;
-    z-index:1
-}
-
-.remove-image {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: var(--theme-yellow5);
-    color: white;
-    font-size: 16px;
-    padding: 3px 6px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}

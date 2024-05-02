@@ -39,7 +39,8 @@ class HomeController extends Controller
         $couponDiscount = 0;
         $couponPercent = 0;
 
-        $categories = Category::all();
+        $categories = Category::orderBy('sort_order', 'asc')->get();
+        
         $user = (Auth::user()) ? Auth::user() : '';
         $user_id = $user ? $user->id : 0;
         $addresses = Address::select('*')->orderBy('company_name', 'asc')->where('user_id', $user_id)->get();

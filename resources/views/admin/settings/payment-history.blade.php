@@ -15,12 +15,12 @@ use App\Enums\RefundStatus;
         <table class="table mb-3">
           <thead>
             <tr>
-              <th scope="col" class="text-center">Order Id</th>
-              <th scope="col" class="text-center">Payment Type</th>
-              <th scope="col" class="text-center">Transaction ID </th>
-              <th scope="col" class="text-center">Delivery Address </th>
-              <th scope="col" class="text-center">Date and Time </th>
-              <th scope="col" class="text-center">Total </th>
+              <th scope="col" class="text-center">{{ trans('rest.settings.payment.order_id') }}</th>
+              <th scope="col" class="text-center">{{ trans('rest.settings.payment.type') }}</th>
+              <th scope="col" class="text-center">{{ trans('rest.settings.payment.trans_id') }}</th>
+              <th scope="col" class="text-center">{{ trans('rest.settings.payment.delivery_add') }} </th>
+              <th scope="col" class="text-center">{{ trans('rest.settings.payment.date_and_time') }} </th>
+              <th scope="col" class="text-center">{{ trans('rest.settings.payment.total') }} </th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +30,7 @@ use App\Enums\RefundStatus;
                 <div>{{ $order->id }}</div>
               </td>
               <td class="text-center">
-                <div>{{ $order->payment_type == PaymentType::Card ? 'Card': ($order->payment_type == PaymentType::Cash ? 'Cash':'Ideal') }}</div>
+                <div>{{ $order->payment_type == PaymentType::Card ? trans('rest.settings.payment.card'):($order->payment_type == PaymentType::Cash ? trans('rest.settings.payment.cash'):'Ideal') }}</div>
               </td>
               <td class="text-center">
                 <div>{{ $order->transaction_id ? $order->transaction_id : '-' }}</div>
@@ -70,7 +70,7 @@ use App\Enums\RefundStatus;
         <div class="d-flex justify-content-between align-items-center" style="padding: 0 20px 0 20px;">
             {{ $orders->links() }}
              <div class="ms-auto d-flex align-items-center custom-pagination justify-content-end w-100">
-                <label class="text-nowrap">Rows per Page</label>
+                <label class="text-nowrap">{{ trans('rest.button.rows_per_page') }}</label>
                 <select id="per_page_dropdown" class="form-control bg-white ms-2">
                     @for($i=5; $i<=20; $i+=5)
                     <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">

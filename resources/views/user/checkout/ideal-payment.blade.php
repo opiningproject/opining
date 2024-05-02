@@ -61,6 +61,7 @@
         idealBank.mount('#ideal-bank-element');
 
         const paymentForm = document.querySelector('#payment-form');
+
         paymentForm.addEventListener('submit', async (e) => {
           // Avoid a full page POST request.
           e.preventDefault();
@@ -77,13 +78,16 @@
               return_url: 'http://localhost/',
             },
           );
-          if(error) {
+
+          if(error) 
+          {
             alert(error.message);
             return;
           }
           addMessage('Payment (${paymentIntent.id}): ${paymentIntent.status}');
         });
       });
+      
     </script>
 
 @endsection

@@ -26,7 +26,7 @@
                                         <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
 
                                     </span>
-                                        <input type="text" class="form-control ps-5 text-indent-initial" autocomplete="off" name="email" placeholder="Email" value="{{ old('email') }}">
+                                        <input type="text" class="form-control ps-5 text-indent-initial" autocomplete="off" name="email" placeholder="{{ trans('rest.auth.email') }}" value="{{ old('email') }}">
                                     </div>
                                     @error('email')
                                     <div class="invalid-feedback" role="alert">
@@ -36,19 +36,15 @@
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-group mb-0 prev-input-group @error('password') is-invalid @enderror">
-                                    <span class="input-group-icon">
-                                        <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20">
-                                    </span>
+                                        <span class="input-group-icon">
+                                            <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20">
+                                        </span>
 
-                                        <input type="password"
-                                               class="form-control ps-5 text-indent-initial"
-                                               name="password"
-                                               placeholder="Password"
-                                               id="password"  value="{{ old('password') }}" autocomplete="off">
+                                        <input type="password" class="form-control ps-5 text-indent-initial" name="password" placeholder="{{ trans('rest.auth.password') }}" id="password"  value="{{ old('password') }}" autocomplete="off">
+
                                         <span class="input-group-icon passwordeye-icon view-pwd-icon">
                                             <img src="{{ asset('images/passwordeye-icon.svg') }}" class="svg" width="21" height="19">
                                         </span>
-
                                     </div>
                                     @error('password')
                                     <div class="invalid-feedback" role="alert">
@@ -58,15 +54,15 @@
                                 </div>
                                 <div class="input-group justify-content-end text-end">
                                     @if (Route::has('password.request'))
-                                        <a href="#" data-bs-toggle="modal"
-                                           data-bs-target="#resendPasswordModal"
-                                           class="text-capitalize lead-2 font-regularcustom">{{ __('Forgot Your Password?') }}</a>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#resendPasswordModal" class="text-capitalize lead-2 font-regularcustom">
+                                            {{ trans('rest.auth.forgot_password') }}
+                                        </a>
                                     @endif
                                 </div>
 
                                 <button type="submit"
                                         class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 signin-btn">
-                                    {{ __('Login') }}
+                                    {{ trans('rest.button.login') }}
                                 </button>
                             </form>
                         </div>
@@ -85,15 +81,12 @@
                 <div class="modal-body signin-form">
                     <form method="POST" id="reset-pwd-form" action="javascript:void(0)">
                         @csrf
-                        <h3 class="authenticationform-title">{{ __('Reset Password') }}</h3>
+                        <h3 class="authenticationform-title">{{ trans('rest.auth.reset_password') }}</h3>
                         <div class="form-group prev-input-group mb-0">
                         <span class="input-group-icon">
                             <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
-
                         </span>
-                            <input type="text" name="forgot-pwd-email" id="forgot-pwd-email"
-                                   class="form-control text-indent-initial ps-5" placeholder="Email"
-                                   value="" autocomplete="email" autofocus>
+                            <input type="text" name="forgot-pwd-email" id="forgot-pwd-email" class="form-control text-indent-initial ps-5" placeholder="{{ trans('modal.auth.email') }}" value="" autocomplete="email" autofocus>
                         </div>
 
                         <span class="invalid-feedback" role="alert" style="display:block">
@@ -104,8 +97,9 @@
                             <strong id="forgot-pwd-success-msg"></strong>
                         </span>
 
-                        <button type="submit" id="forgot-pwd--submit-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">{{ __('Send Password Reset Link') }}</button>
+                        <button type="submit" id="forgot-pwd--submit-btn" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">
+                            {{ trans('rest.button.send_password_link') }}
+                        </button>
                     </form>
                 </div>
             </div>

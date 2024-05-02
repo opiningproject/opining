@@ -16,9 +16,6 @@ $(function () {
             category_id: {
                 required: true
             },
-            percentage_off: {
-                required: true
-            },
             qty: {
                 required: true
             },
@@ -46,9 +43,6 @@ $(function () {
                 required: true
             },
             category_id: {
-                required: true
-            },
-            percentage_off: {
                 required: true
             },
             qty: {
@@ -108,12 +102,13 @@ $(function () {
             url: baseURL + '/menu/ingredients/' + id,
             type: 'GET',
             success: function (response) {
-                console.log(response)
+                // console.log(response)
                 // window.location.reload();
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -150,7 +145,8 @@ $(function () {
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -160,7 +156,7 @@ $(function () {
         if (catId != '') {
             getIngredientsList(catId, 'free')
         } else {
-            $('#freeIngredient').html('<option value="">Select Ingredient</option>')
+            $('#freeIngredient').html('<option value="">'+ dishValidation.select_ingred +'</option>')
         }
     })
 
@@ -169,7 +165,7 @@ $(function () {
         if (catId != '') {
             getIngredientsList(catId, 'paid')
         } else {
-            $('#paidIngredient').html('<option value="">Select Ingredient</option>')
+            $('#paidIngredient').html('<option value="">'+ dishValidation.select_ingred +'</option>')
         }
     })
 
@@ -187,14 +183,15 @@ $(function () {
                 $('#deleteAlertModal').modal('hide')
                 if (response.status == 200) {
                     $('#dishIngredient' + id).remove()
-                    toastr.success('Ingredient Removed Successfully')
+                    toastr.success(response.message)
                 } else {
                     alert(response.message);
                 }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
+                toastr.error(errorMessage)
+                // alert(errorMessage);
             }
         })
     })
@@ -210,7 +207,7 @@ $(function () {
         var name_nl = $('#option_name_nl').val()
 
         if(name_en == '' || name_nl == ''){
-            alert('Please fill option value to add data')
+            alert(dishValidation.select_option)
             return false
         }
 
@@ -222,7 +219,7 @@ $(function () {
             '<div' +
             '    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">' +
             '    <div class="form-group">' +
-            '        <label for="password" class="form-label">Dish Option <span' +
+            '        <label for="password" class="form-label">'+ dishValidation.option +' <span' +
             '                class="text-custom-muted">(English)</span></label>' +
             '        <div class="input-group">' +
             '            <input type="text" class="form-control name_en"' +
@@ -237,7 +234,7 @@ $(function () {
             '<div' +
             '    class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">' +
             '    <div class="form-group">' +
-            '        <label for="password" class="form-label">Dish Option <span' +
+            '        <label for="password" class="form-label">'+ dishValidation.option +' <span' +
             '                class="text-custom-muted">(Dutch)</span></label>' +
             '        <div class="input-group">' +
             '            <input type="text" class="form-control name_nl"' +
@@ -262,14 +259,14 @@ $(function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-            alert('You must select an image file only');
+            alert($('#image_type_error').text());
             return false
         }
 
         var imgWidth = $(this).width();
         var imgHeight =$(this).height();
         if(imgWidth > 1080 || imgHeight > 1080){
-            alert('Your image is too big, it must be within 1080 X 1080 pixels');
+            alert($('#image_size_error').text());
             return false
         }
 
@@ -291,7 +288,7 @@ function getIngredientsList(categoryId, type) {
         success: function (response) {
             if (response.status == 200) {
                 var ingredients = response.data
-                var html = '<option value="">Select Ingredient</option>'
+                var html = '<option value="">'+ dishValidation.select_ingred +'</option>'
                 if (type == 'paid') {
                     $.each(ingredients, function (index, item) {
                         html += '<option value="' + item.id + '"> ' + item.name_en + '</option>'
@@ -307,7 +304,8 @@ function getIngredientsList(categoryId, type) {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);
         }
     })
 }
@@ -370,7 +368,7 @@ function addIngredient(type) {
                         '        </a>' +
                         '        <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn" style="display: none !important;"' +
                         '           id="paid-ingredient-save' + id + '" data-id="' + id + '">' +
-                        '            <span class="align-middle">Save</span>' +
+                        '            <span class="align-middle">'+ dishValidation.save_btn +'</span>' +
                         '        </a>' +
                         '    </div>' +
                         '</td>' +
@@ -378,7 +376,7 @@ function addIngredient(type) {
                     $('#paidIngredientTbody').append(html)
                     $('#paidIngredientCategory').val('')
                     $('#paid-price').val('')
-                    $('#paidIngredient').html('<option value="">Select Ingredient</option>')
+                    $('#paidIngredient').html('<option value="">'+ dishValidation.select_ingred+'</option>')
                 } else {
                     $('#free-paid-ing-tr').remove()
                     var html = "<tr id='dishIngredient"+ id +"'>" +
@@ -405,15 +403,16 @@ function addIngredient(type) {
                         "</tr>";
                     $('#freeIngredientTbody').append(html)
                     $('#freeIngredientCategory').val('')
-                    $('#freeIngredient').html('<option value="">Select Ingredient</option>')
+                    $('#freeIngredient').html('<option value="">'+ dishValidation.select_ingred+'</option>')
                 }
-                toastr.success('Ingredient Added Successfully')
+                toastr.success(dishValidation.save_ingredient)
             }
 
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);
         }
     })
 }
@@ -449,8 +448,9 @@ function updateDishData() {
         data: dishData,
         success: function (response) {
             if (response.status == 200) {
-                toastr.success('Dish Updated Successfully')
-                location.reload()
+                toastr.success(response.message)
+
+                setTimeout(function(){ window.location.reload(); }, 500);
             }else{
                 alert(response.message)
             }
@@ -458,7 +458,8 @@ function updateDishData() {
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
+            toastr.error(errorMessage)
+            // alert(errorMessage);
         }
     })
 }

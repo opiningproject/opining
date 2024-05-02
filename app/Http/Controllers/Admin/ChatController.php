@@ -81,24 +81,18 @@ class ChatController extends Controller
         $search = $request->input('q');
         $chats = Chat::select('sender_id', 'receiver_id', 'created_at')
             ->distinct()
-            ->whereHas('receiver', function ($query) use ($search) {
+            ->whereHas('sender', function ($query) use ($search) {
                 $query->where('first_name', 'like', "%$search%");
+                $query->orWhere('last_name', 'like', "%$search%");
             })
             ->get()
             ->flatMap(function ($chat) {
-                return [$chat->receiver_id];
+                return [$chat->sender_id];
             })
             ->unique()
             ->map(function ($userId) {
                 Log::info('UUUU', [$userId]);
                 $user = User::find($userId);
-                $unreadCount = Chat::where(function ($query) use ($userId) {
-                    $query->where('sender_id', $userId)
-                        ->where('is_read', "0");
-                })->count();
-
-                // Add unreadCount attribute to the user
-                $user->unreadCount = $unreadCount;
 
                 $user->chats = Chat::where('sender_id', $userId)->with(['sender', 'receiver'])
                     ->orWhere('receiver_id', $userId)

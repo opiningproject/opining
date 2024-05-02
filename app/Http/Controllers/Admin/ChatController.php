@@ -70,32 +70,26 @@ class ChatController extends Controller
     public function searchChat(Request $request)
     {
         $search = $request->input('q');
-        $chats = Chat::select('sender_id', 'receiver_id','created_at')
+        $chats = Chat::select('sender_id', 'receiver_id', 'created_at')
             ->distinct()
-            ->whereHas('receiver', function($query) use ($search) {
+            ->whereHas('sender', function ($query) use ($search) {
                 $query->where('first_name', 'like', "%$search%");
+                $query->orWhere('last_name', 'like', "%$search%");
             })
             ->get()
             ->flatMap(function ($chat) {
-                return [$chat->receiver_id];
+                return [$chat->sender_id];
             })
             ->unique()
             ->map(function ($userId) {
                 Log::info('UUUU',[$userId]);
                 $user = User::find($userId);
-                $unreadCount = Chat::where(function ($query) use ($userId) {
-                    $query->where('sender_id', $userId)
-                        ->where('is_read', "0");
-                })->count();
-
-                // Add unreadCount attribute to the user
-                $user->unreadCount = $unreadCount;
 
                 $user->chats = Chat::where('sender_id', $userId)->with(['sender','receiver'])
                     ->orWhere('receiver_id', $userId)
                     ->latest()->first();
                 return $user;
-            });
+            });            
         return view('admin.chats.chat-list', ['chats' => $chats,'q' => $search]);
     }
 
@@ -107,7 +101,7 @@ class ChatController extends Controller
         $chats = Chat::select('sender_id', 'receiver_id','created_at')
             ->orderBy('created_at', 'desc')
             ->distinct()
-                ->paginate(9, ['*'], 'page', $pageNumber)
+                ->paginate(12, ['*'], 'page', $pageNumber)
                 ->flatMap(function ($chat) {
                     return [$chat->sender_id, $chat->receiver_id];
                 })

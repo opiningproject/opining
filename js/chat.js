@@ -173,6 +173,15 @@ $(document).on('click', '.ChatDiv-list', function () {
     let initialSenderName = status == '1' ? $(".profile-text").html('<span class="activicon"></span> Online') :  $(".profile-text").html('<span class="inactivicon"></span> Offline');
 
     var senderName = $(this).find('.title').text(); // Get the sender's name
+
+    // Remove style if exists
+    if ($(this).find('.title').attr('style')) {
+        // If it exists, remove it
+        $(this).find('.title').removeAttr('style');
+    }
+    // Remove style if exists
+
+
     var image = $(this).find('.userimage').attr('src'); // Get the sender's name
     $('#chatbox-username').text(senderName); // Update displayed username
     $('.chat-profile').attr("src",image); // Update displayed username
@@ -204,6 +213,16 @@ $(document).on('keyup', '#search-chat', function () {
 
 
 let fetchingOldUsers = false;
+
+
+// User list pagination
+$('#ChatDiv').on('scroll', function() {
+    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+        chatListpage++
+        fetchChatUsers()
+    }
+});
+
 
 function fetchChatUsers() {
 

@@ -58,7 +58,7 @@ class ChatController extends Controller
 
             $item->appendStyle = '';
             $item->messageStyle = '';
-            if ($item->receiver_id != 1 && $item->sender_id == 1) {
+            if ($item->receiver_id != getAdminUser()->id && $item->sender_id == getAdminUser()->id) {
                 $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
                 $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
             }
@@ -99,7 +99,7 @@ class ChatController extends Controller
                     ->latest()->first();
                 return $user;
             });
-        return view('admin.chats.chat-list', ['chats' => $chats,'q' => $search]);
+        return view('admin.chats.chat-list', ['chats' => $chats, 'q' => $search]);
     }
 
     /**
@@ -113,24 +113,24 @@ class ChatController extends Controller
         $chats = Chat::select('sender_id', 'receiver_id', 'created_at')
             ->orderBy('created_at', 'desc')
             ->distinct()
-                ->paginate(12, ['*'], 'page', $pageNumber)
-                ->flatMap(function ($chat) {
-                    return [$chat->sender_id, $chat->receiver_id];
-                })
-                ->unique()
-                ->map(function ($userId) {
-                    Log::info('UUUU',[$userId]);
-                    $user = User::find($userId);
-                    if ($user != null) {
-                        $unreadCount = Chat::where(function ($query) use ($userId) {
-                            $query->where('sender_id', $userId)
-                                ->where('is_read', "0");
-                        })->count();
-                        if ($unreadCount > 0) {
-                            $user->unreadCount = $unreadCount;
-                        }
-                        // Add unreadCount attribute to the user
+            ->paginate(16, ['*'], 'page', $pageNumber)
+            ->flatMap(function ($chat) {
+                return [$chat->sender_id, $chat->receiver_id];
+            })
+            ->unique()
+            ->map(function ($userId) {
+                Log::info('UUUU', [$userId]);
+                $user = User::find($userId);
+                if ($user != null) {
+                    $unreadCount = Chat::where(function ($query) use ($userId) {
+                        $query->where('sender_id', $userId)
+                            ->where('is_read', "0");
+                    })->count();
+                    if ($unreadCount > 0) {
                         $user->unreadCount = $unreadCount;
+                    }
+                    // Add unreadCount attribute to the user
+                    $user->unreadCount = $unreadCount;
 
                         $user->chats = Chat::where('sender_id', $userId)->with(['sender', 'receiver'])
                             ->orWhere('receiver_id', $userId)

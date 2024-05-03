@@ -30,6 +30,37 @@
 .finance_auth_section .finance_auth_form .form-control:-ms-input-placeholder {font-size: 16px;}
 .finance_auth_section .finance_auth_form .form-control:-moz-placeholder {font-size: 16px;}
 
+.category-section .category-slider .category-element .card {
+    padding: 15px !important;
+}
+.category-slide-btns .btn {
+    background: #ffffff !important;;
+    border-color: #212529 !important;
+    color:  #212529 !important;
+}
+.category-slide-btns .btn i {
+color:  #212529 !important;
+}
+
+.category-slide-btns .btn:hover i {
+    color:  #212529 !important;
+}
+
+
+.chartBox {
+    position: relative;
+}
+.chartBox .chartLabel {
+    font-size: 14px;
+    color: #292929;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 40px;
+    pointer-events: none;
+}
+
+
 
 @media screen and (max-width: 1600px) {
 .btn {font-size: 14px !important;padding: 8px 12px !important;}

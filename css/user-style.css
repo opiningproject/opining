@@ -5088,7 +5088,7 @@ footer .footer-logo a {font-size: initial !important;}
   font-size: 12px !important;
 }
 .customisable-modal-body .pro-image img {
-  max-width: 75px;
+  /*max-width: 75px;*/
   height: auto;
 }
 

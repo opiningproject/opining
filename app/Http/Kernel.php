@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'localization' => \App\Http\Middleware\WebLocalization::class,
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
+        'CheckMyFinanceValidate' => \App\Http\Middleware\CheckMyFinanceValidate::class,
     ];
 }

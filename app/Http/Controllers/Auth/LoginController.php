@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Enums\UserType;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -56,7 +57,7 @@ class LoginController extends Controller
             User::where('id',$user->id)->update(['is_online'=>'0']);
         }
         $this->guard()->logout();
-
+        Session::forget('myFinanceIsValidate');
         $request->session()->invalidate();
 
         if($user->user_role == UserType::Admin)

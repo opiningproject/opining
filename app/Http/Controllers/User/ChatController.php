@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\MessageEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\User;
@@ -10,7 +11,6 @@ use App\Models\Category;
 use App\Models\Dish;
 use Auth;
 use Illuminate\Support\Facades\Log;
-use Session;
 
 class ChatController extends Controller
 {
@@ -35,6 +35,9 @@ class ChatController extends Controller
         return view('user.chat', compact('userData'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     function getMessages()
     {
         $pageNumber = request()->input('page', 1);
@@ -69,22 +72,37 @@ class ChatController extends Controller
         return view('user.chats.messages', ['messages' => $chats]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storeMessage(Request $request)
     {
         $storeChat = new Chat();
         $storeChat->sender_id = $request->sender_id;
         $storeChat->receiver_id = $request->receiver_id;
         $storeChat->message = $request->message;
-        $storeChat->attachment = $request->fileName ? $request->fileName :null;
-        $storeChat->save();
-        $storeChat->createdAt = $storeChat->created_at->format('h:m a');
-        $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
+        $storeChat->attachment = $request->fileName;
+        if($storeChat->save()) {
+            $storeChat->createdAt = $storeChat->created_at->format('h:m a');
+            $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
+            $unreadCount = Chat::where(function ($query) use ($storeChat) {
+                $query->where('sender_id', $storeChat->sender_id)
+                    ->where('is_read', "0");
+            })->count();
+            MessageEvent::dispatch($storeChat, $storeChat->userImage, $storeChat->createdAt, $unreadCount);
+//            MessageEvent::dispatch($storeChat, $storeChat->userImage, $storeChat->createdAt);
+        }
         return \response()->json([
             "status" => "200",
             'data' => $storeChat
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storeAttachment(Request $request)
     {
         $attachmentName = "";

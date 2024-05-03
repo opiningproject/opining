@@ -164,11 +164,12 @@ class AuthController extends Controller
     {
         $google_user = Socialite::driver('google')->user();
         $user = User::where('email', $google_user->email)->first();
+        $newUser = false;
 
         if(empty($user))
         {
             $stripeCustomer = createStripeCustomer($google_user->user['given_name'].' '.$google_user->user['family_name'],$google_user->email);
-            $user->notify(new AccountCreate());
+            $newUser = true;
         }
 
         $user = User::updateOrCreate([
@@ -181,6 +182,10 @@ class AuthController extends Controller
             'stripe_cust_id' => $user ? $user->stripe_cust_id : $stripeCustomer->id,
             'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
+
+        if($newUser){
+            $user->notify(new AccountCreate());
+        }
 
         Auth::login($user);
 

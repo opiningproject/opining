@@ -102,14 +102,20 @@
                       </div>
                       <div class="row">
                          <div class="col-md-6 mb-2">
+                             <div class="chartBox">
                            <div class="float-child monthlyDoughnutChart" id="monthly-online-delivery-container">{{ trans('rest.my_finance.chart_loading') }}</div>
                            <div class="float-child weeklyDoughnutChart" id="weekly-online-delivery-container"></div>
                            <div class="float-child yearlyDoughnutChart" id="yearly-online-delivery-container"></div>
+                             <h3 class="text-center chartLabel">Online Delivery Income</h3>
+                             </div>
                          </div>
                          <div class="col-md-6 mb-2">
+                             <div class="chartBox">
                             <div class="float-child monthlyDoughnutChart" id="monthly-take-away-container">{{ trans('rest.my_finance.chart_loading') }}</div>
                             <div class="float-child weeklyDoughnutChart" id="weekly-take-away-container"></div>
                             <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container"></div>
+                                 <h3 class="text-center chartLabel">Take Away income</h3>
+                         </div>
                          </div>
                       </div>
                     </div>

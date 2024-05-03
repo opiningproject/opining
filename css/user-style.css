@@ -627,6 +627,15 @@ a {
   overflow: hidden;
 }
 
+.category-section .category-slider .category-element .card {
+
+}
+.category-swiper-slider .swiper-slide.swiper-slide-active .card {
+border: 1px solid #FFC00B;
+}
+.swiper-slide-active .card {
+    border: 1px solid #FFC00B !important;
+}
 .offer-card-banner .card .bg-offercard-circle-1 {
   position: absolute;
   bottom: 0;
@@ -4673,7 +4682,7 @@ input[type=number] {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1040;
+    z-index: 1000;
     width: 100vw;
     height: 100vh;
     background-color: #000;
@@ -4964,7 +4973,7 @@ line-height: initial !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 99999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 1000;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
 .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
 .collected-points-list ul li {font-size: 14px;margin-bottom: 10px;}
@@ -5189,4 +5198,11 @@ footer .footer-logo a {font-size: initial !important;}
 .all-validation-error{
     font-size: 1rem !important;
     color: red;
+}
+
+@media screen and (max-width: 640px) {
+.chatDivMobile .chatbox-main {
+    min-height: calc(100vh - 200px);
+    min-height: 400px;
+}
 }

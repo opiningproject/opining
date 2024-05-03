@@ -168,7 +168,6 @@ class AuthController extends Controller
         if(empty($user))
         {
             $stripeCustomer = createStripeCustomer($google_user->user['given_name'].' '.$google_user->user['family_name'],$google_user->email);
-        }else{
             $user->notify(new AccountCreate());
         }
 

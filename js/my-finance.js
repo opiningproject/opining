@@ -7,7 +7,7 @@ $(document).ready(function () {
         },
         messages: {
             password: {
-                required: 'Please enter Password.',
+                required: financeValidationMsg.financePassword,
             },
         },
         submitHandler: function (form) {

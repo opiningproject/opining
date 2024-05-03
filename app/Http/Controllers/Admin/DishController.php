@@ -9,6 +9,8 @@ use App\Models\DishIngredient;
 use App\Models\DishOption;
 use App\Models\Ingredient;
 use App\Models\IngredientCategory;
+use App\Models\User;
+use App\Notifications\Admin\NewDish;
 use Exception;
 use http\Encoding\Stream;
 use Response;
@@ -65,6 +67,15 @@ class DishController extends Controller
             $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';
             $dish->save();
 
+            $users = User::where([
+                ['user_role', '0'],
+                ['enable_email_notification', '1']
+            ])->get();
+
+            foreach ($users as $user){
+                $user->notify(new NewDish($dish));
+            }
+
             return redirect()->route('editDish', ['dish' => $dish->id]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
@@ -95,22 +106,22 @@ class DishController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try 
+        try
         {
             $dish = Dish::find($id);
 
-            if ($dish) 
+            if ($dish)
             {
                 $dish->price = $request->price;
                 $dish->save();
                 return response::json(['status' => 200, 'data' => $dish]);
-            } 
-            else 
+            }
+            else
             {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
@@ -121,23 +132,23 @@ class DishController extends Controller
      */
     public function destroy(string $id)
     {
-        try 
+        try
         {
             $dish = Dish::find($id);
 
-            if ($dish) 
+            if ($dish)
             {
                 $dish->option()->delete();
                 $dish->ingredients()->delete();
                 $dish->delete();
                 return response::json(['status' => 200, 'message' =>  trans('rest.message.dish_delete_success')]);
-            } 
-            else 
+            }
+            else
             {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
@@ -205,17 +216,17 @@ class DishController extends Controller
         try {
             $dishIngredient = DishIngredient::find($id);
 
-            if ($dishIngredient) 
+            if ($dishIngredient)
             {
                 $dishIngredient->delete();
                 return response::json(['status' => 200, 'message' => trans('rest.message.dish_ingre_delete_success')]);
-            } 
-            else 
+            }
+            else
             {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
@@ -226,7 +237,7 @@ class DishController extends Controller
         try {
             $dish = Dish::find($id);
 
-            if ($dish) 
+            if ($dish)
             {
                 $dish->name_en = $request->name_en;
                 $dish->name_nl = $request->name_nl;
@@ -275,8 +286,8 @@ class DishController extends Controller
                 } else {
                     return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
                 }
-            } 
-            else 
+            }
+            else
             {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }

@@ -76,7 +76,7 @@ $(function () {
             var re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         },
-        "Only Alphabet and numeric values are allowed"
+        validationMsg.alpha_numeric
     );
 });
 

@@ -22,6 +22,11 @@
 <script>
     var validationMsg = {
         asap: '{{ trans('user.checkout.asap') }}',
+        enter_coupon: '{{ trans('rest.coupons.enter_coupon') }}',
+        alpha_numeric: '{{ trans('validation.custom.alphaNumeric') }}',
+        alpha_regex: '{{ trans('validation.custom.alphaRegex') }}',
+        settings_update_success: '{{ trans('rest.message.settings_update_success') }}',
+        password_error: '{{ trans('rest.message.password_error') }}',
     }
 </script>
 <script type="text/javascript" src="{{ asset('js/user/user-settings.js')}}"></script>

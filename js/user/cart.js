@@ -248,7 +248,7 @@ function applyCoupon() {
 
     if (couponCode == '') {
         $("#coupon-code-error").removeClass('d-none');
-        $('#coupon-code-error').text('Please Enter coupon');
+        $('#coupon-code-error').text(validationMsg.enter_coupon);
         return;
     }
 

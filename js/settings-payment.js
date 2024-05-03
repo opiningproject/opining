@@ -1,4 +1,4 @@
-function changeRefundStatus(order_id,status) 
+function changeRefundStatus(order_id,status)
 {
     //alert(order_id);
 
@@ -19,7 +19,7 @@ function changeRefundStatus(order_id,status)
             {
                 alert(response.message)
             }
-           
+
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -28,7 +28,7 @@ function changeRefundStatus(order_id,status)
     })
 }
 
-function changeOrderStatus(order_id,order_status) 
+function changeOrderStatus(order_id,order_status)
 {
     $('#id').val(order_id);
     $('#changeStatusModal').modal('show');
@@ -36,17 +36,16 @@ function changeOrderStatus(order_id,order_status)
 }
 
 
-$(document).on('click', '#change-order-status-btn', function () 
+$(document).on('click', '#change-order-status-btn', function ()
 {
     var id = $('#id').val();
 
     $.ajax({
-        url: 'orders/change-status/'+ id,
+        url: baseURL+'/orders/change-status/'+ id,
         type: 'GET',
         success: function (response) {
 
-            //alert("fgf")
-            location.reload()
+            window.location.replace(baseURL + '/orders/'+id)
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

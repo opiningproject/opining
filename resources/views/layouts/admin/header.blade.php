@@ -22,6 +22,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    @vite(['resources/js/app.js'])
 
     <span id="image_type_error" class="d-none">{{ trans('rest.message.image_type_error') }}</span>
     <span id="image_size_error" class="d-none">{{ trans('rest.message.image_size_error') }}</span>
@@ -30,5 +32,5 @@
     <span id="time_error" class="d-none">{{ trans('rest.message.time_error') }}</span>
     <span id="password_error" class="d-none">{{ trans('rest.message.password_error') }}</span>
     <span id="settings_update_success" class="d-none">{{ trans('rest.message.settings_update_success') }}</span>
-    
+
 </head>

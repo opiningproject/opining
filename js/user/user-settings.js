@@ -10,7 +10,7 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            toastr.success('Settings updated')
+            toastr.success(validationMsg.settings_update_success)
             return true;
         }
     });
@@ -20,7 +20,7 @@ $(function () {
             var re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         },
-        "Only Alphabet"
+        validationMsg.alpha_regex
     );
     $('#image').change(function (e) {
 

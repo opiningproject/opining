@@ -92,13 +92,13 @@ function saveZipcode(id) {
         return false;
     }
 
-    if (min_order_price == '' || min_order_price < 0) 
+    if (min_order_price == '' || min_order_price < 0)
     {
         $('#min_order_price_' + id).focus();
         return false;
     }
 
-    if (delivery_charge == '' || delivery_charge < 0) 
+    if (delivery_charge == '' || delivery_charge < 0)
     {
         $('#delivery_charge_' + id).focus();
         return false;
@@ -252,9 +252,10 @@ $(document).ready(function() {
 
     // Here, save the index to which the tab corresponds. You can see it in the chrome dev tool.
     var activeTab = localStorage.getItem('activeTab');
-
     if (activeTab) {
        $('button[data-bs-target="' + activeTab + '"]').tab('show');
+    }else{
+        $('button[data-bs-target="#restaurantProfile-tab-pane"]').tab('show');
     }
 });
 

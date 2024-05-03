@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Admin\RefundRequestStatus;
 use Illuminate\Http\Request;
 use App\Models\Zipcode;
 use App\Models\CMS;
@@ -18,9 +19,20 @@ use App\Enums\OrderType;
 use Auth;
 use Hash;
 use Response;
+use Twilio\Rest\Client;
 
 class SettingController extends Controller
 {
+    protected $twilioClient, $twilioNumber;
+    public function __construct()
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $this->twilioNumber = getenv("TWILIO_NUMBER");
+        $this->twilioClient = new Client($account_sid, $auth_token);
+
+    }
+
     public function index(Request $request)
     {
         $perPage = isset($request->per_page) ? $request->per_page : 10;
@@ -52,7 +64,6 @@ class SettingController extends Controller
             'privacy_policy_nl' => $privacy_policy_nl,
             'terms_nl' => $terms_nl,
             'perPage' => $perPage,
-
             'orders' => $orders,
             'refundRequests' => $refundRequests
         ]);
@@ -67,13 +78,13 @@ class SettingController extends Controller
 
     public function deleteZipcode(Request $request)
     {
-        try 
+        try
         {
             Zipcode::where('id', $request->id)->delete();
 
             return response::json(['status' => 1, 'message' => trans('rest.message.zipcode_delete_success')]);
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
@@ -87,7 +98,7 @@ class SettingController extends Controller
             $zipcode->save();
 
             return response::json(['status' => 1, 'message' => trans('rest.message.zipcode_status_success')]);
-            
+
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
@@ -98,14 +109,14 @@ class SettingController extends Controller
         /*print_r ($request->all());
         exit();*/
 
-        try 
+        try
         {
             $result = Zipcode::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()
             );
 
-            if ($request->id == 0) 
+            if ($request->id == 0)
             {
                 $id = $result->id;
                 $zipcode = "zipcode_" . $id;
@@ -150,14 +161,14 @@ class SettingController extends Controller
 
                 return response::json(['status' => 1,'data' => $data, 'message' => trans('rest.message.zipcode_add_success')]);
 
-        
+
             }
             else
             {
                 return response::json(['status' => 1, 'message' => trans('rest.message.zipcode_update_success')]);
             }
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
@@ -182,7 +193,7 @@ class SettingController extends Controller
 
         $user->password = Hash::make($request->new_password);
 
-        if ($user->save()) 
+        if ($user->save())
         {
             return response::json(
                 [
@@ -190,8 +201,8 @@ class SettingController extends Controller
                     'message' => trans('rest.message.password_success')
                 ]
             );
-        } 
-        else 
+        }
+        else
         {
             return response::json(
                 [
@@ -277,6 +288,11 @@ class SettingController extends Controller
 
             if(!empty($result) && isset($result->status) && $result->status == 'succeeded')
             {
+                $this->twilioClient->messages->create('+918866405292',
+                    ['from' => $this->twilioNumber, 'body' => 'test msg'] );
+
+                $order->user->notify(new RefundRequestStatus($order->user));
+
                 if($order->save())
                 {
                     return response::json(['status' => 1, 'message' => '','data' => ['status_text' => $status_text]]);
@@ -287,6 +303,8 @@ class SettingController extends Controller
                 return $result;
             }
         }
+
+        $order->user->notify(new RefundRequestStatus($order->user));
 
         if($order->save())
         {

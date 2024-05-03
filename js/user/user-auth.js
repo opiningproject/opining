@@ -6,7 +6,6 @@ $(function () {
     });
 
     $("#sign-up-form").validate({
-        //debug:true,
         rules: {
             first_name:{
                 alphaRegex: "^[a-zA-Z]+$"
@@ -83,7 +82,16 @@ $(function () {
             var re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         },
-        "Only Alphabet values are allowed"
+        validationMsg.alpha_regex
+    );
+
+    $.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        validationMsg.password_error
     );
 });
 

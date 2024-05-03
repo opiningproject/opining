@@ -291,7 +291,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                       </div>
                     </div>
                     <div class="form-check form-group custom-checkbox">
-                      <input class="form-check-input check-input-secondary" type="checkbox" name="receive_mail" id="receiveemail" value="1">
+                      <input class="form-check-input check-input-secondary" type="checkbox" name="receive_mail" id="receiveemail" value="1" {{ $user->enable_email_notification == '1' ? 'checked' : '' }}>
                       <label class="form-check-label text-capitalize align-middle" for="receiveemail"> {{ trans('user.checkout.receive_update_emails') }} </label>
                     </div>
                     <div class="row">

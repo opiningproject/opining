@@ -1,5 +1,5 @@
-@extends('layouts.user-app') 
-@section('content') 
+@extends('layouts.user-app')
+@section('content')
 
 <?php
 $zipcode = session('zipcode');
@@ -138,20 +138,20 @@ $cartValue = 0;
                                                 @if ($dish->qty == 0 || $dish->out_of_stock == '1')
                                                     {{ trans('user.dashboard.out_of_stock') }}
                                                 @else
-                                                    {{ trans('user.dashboard.add') }} 
+                                                    {{ trans('user.dashboard.add') }}
                                                     <img src="{{ asset('images/plus.svg') }}" class="svg" height="9" width="9">
                                                 @endif
                                             </button>
 
                                             @if (!$customizeBtn)
                                                 <label class="customize-foodlink">
-                                                    {{ trans('user.dashboard.customizable') }} 
+                                                    {{ trans('user.dashboard.customizable') }}
                                                 </label>
                                             @endif
                                         </div>
                                     @endforeach
                                 @else
-                                    {{ trans('user.dashboard.no_dish_found') }} 
+                                    {{ trans('user.dashboard.no_dish_found') }}
                                 @endif
                             </div>
                         </div>
@@ -229,7 +229,7 @@ $cartValue = 0;
                                                             @foreach ($cart as $key => $dish)
                                                                 <?php
                                                                 $cartValue += $dish->qty * $dish->dish->price;
-                                                                $paidIngredient = $dish->paid_ingredient_total;
+                                                                $paidIngredient = $dish->orderDishPaidIngredients()->select(DB::raw('sum(quantity * price) as total'))->get()->sum('total');
                                                                 $cartValue += $dish->qty * $paidIngredient;
                                                                 $outOfStock = '';
                                                                 $outOfStockDisplay = 'd-none';
@@ -237,7 +237,7 @@ $cartValue = 0;
                                                                     $outOfStock = 'nostock-card';
                                                                     $outOfStockDisplay = '';
                                                                 }
-                                                                ?> 
+                                                                ?>
                                                                 <div class="row stock-card mb-0 {{ $outOfStock }}" id="cart-{{ $dish->id }}">
                                                                     <div class="col-12 text-end d-flex align-items-center gap-2 mb-3 justify-content-end outof-stock-text {{ $outOfStockDisplay }}">
                                                                         <strong>{{ trans('user.cart.out_of_stock') }}</strong>
@@ -280,7 +280,7 @@ $cartValue = 0;
                                                                                   <img src="{{ asset('images/custom-dish.svg') }}" alt="" class="svg" height="13" width="14" />
                                                                                 </a> {{ trans('user.cart.edit') }}
                                                                               </p>
-                                                                              <p class="price-opt mb-0 text-nowrap" id="paid-ing-price{{ $dish->id }}"> 
+                                                                              <p class="price-opt mb-0 text-nowrap" id="paid-ing-price{{ $dish->id }}">
                                                                                 +€{{ number_format($paidIngredient * $dish->qty, 2) }}
                                                                               </p>
                                                                             </div>
@@ -407,8 +407,8 @@ $cartValue = 0;
                                             </g>
                                         </g>
                                     </svg>
-                                </span> 
-                                {{ trans('user.cart.checkout') }} 
+                                </span>
+                                {{ trans('user.cart.checkout') }}
                             </span>
                         </a>
                     </div>

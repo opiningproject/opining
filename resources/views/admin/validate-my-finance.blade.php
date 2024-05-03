@@ -76,5 +76,10 @@
     </div>
 
 @section('script')
+    <script>
+        var financeValidationMsg = {
+            validatePassword: '{{ trans('validation.custom.financePassword') }}',
+        }
+    </script>
     <script type="text/javascript" src="{{ asset('js/my-finance.js') }}"></script>
 @endsection

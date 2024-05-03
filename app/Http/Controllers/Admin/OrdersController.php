@@ -37,30 +37,41 @@ class OrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
 
         $today_date = date('Y-m-d');
+        $dateFilterArray = [1,2,3];
 
         if($request->date_filter)
         {
-            if($request->date_filter == 1)  // Today
-            {
-                $orders->whereBetween('created_at', [$today_date.' 00:00:00', $today_date.' 23:59:59']);
-               
-            }
-            else if($request->date_filter == 2) // This week
-            {
-                $orders->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
-            }
-            else // This month
-            {
-                $orders->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()]);
+            if(in_array($request->date_filter, $dateFilterArray)){
+                if($request->date_filter == 1)  // Today
+                {
+                    $orders->whereBetween('created_at', [$today_date.' 00:00:00', $today_date.' 23:59:59']);
+
+                }
+                else if($request->date_filter == 2) // This week
+                {
+                    $orders->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                }
+                else // This month
+                {
+                    $orders->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()]);
+                }
             }
         }
 
         $order = '';
         $orders = $orders->get();
 
-        if (count($orders) > 0) 
+        if (count($orders) > 0)
         {
-            $order = $orders[0];
+            if($request->date_filter){
+                if(in_array($request->date_filter, $dateFilterArray)){
+                    $order = $orders[0];
+                }else{
+                    $order = Order::find($request->date_filter);
+                }
+            }else{
+                $order = $orders[0];
+            }
         }
 
         return view('admin.orders.orders', ['orders' => $orders, 'order' => $order]);
@@ -81,11 +92,11 @@ class OrdersController extends Controller
 
         if($order->save())
         {
-            //$this->sendMail($order);
+            $this->sendMail($order);
         }
 
         return response::json(['status' => 1, 'message' => '']);
-        
+
     }
 
     public function sendMail($order)
@@ -108,7 +119,7 @@ class OrdersController extends Controller
 
         $data['mail_body'] = trans('email.order_status.content',['order_id' => $order->id, 'order_status' => $order_status]);
 
-        Mail::send('user.emails.order', $data, function($message) use($user,$subject)  
+        Mail::send('user.emails.order', $data, function($message) use($user,$subject)
         {
             $message->to($user->email, $user->full_name)->subject($subject);
             $message->from(config('mail.from.address'),config('mail.from.name'));

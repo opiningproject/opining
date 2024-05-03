@@ -212,16 +212,16 @@
                         );
 
                       $lineChartData = json_encode($chartConfig+$monthlyLineChartData);
-                      $lineChart = new FusionCharts("msline", "ex2", "750", "300", "monthly", "json",$lineChartData);
+                      $lineChart = new FusionCharts("msline", "ex2", "700", "300", "monthly", "json",$lineChartData);
                       $lineChart->render();
 
                       $lineChartData = json_encode($chartConfig+$weeklyLineChartData);
-                      $lineChart = new FusionCharts("msline", "ex1", "750", "300", "weekly", "json",$lineChartData);
+                      $lineChart = new FusionCharts("msline", "ex1", "700", "300", "weekly", "json",$lineChartData);
                       $lineChart->render();
 
 
                       $lineChartData = json_encode($chartConfig+$yearlyLineChartData);
-                      $lineChart = new FusionCharts("msline", "ex3", "750", "300", "yearly", "json",$lineChartData);
+                      $lineChart = new FusionCharts("msline", "ex3", "700", "300", "yearly", "json",$lineChartData);
                       $lineChart->render();
                     ?>
                 </div>

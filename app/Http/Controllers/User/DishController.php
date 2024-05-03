@@ -47,7 +47,12 @@ class DishController extends Controller
     public function unFavorite(Request $request)
     {
         try {
-            DishFavorites::where('dish_id', $request->dish_id)->delete();
+            $user_id = Auth::user()->id;
+            DishFavorites::where([
+                ['dish_id', $request->dish_id],
+                ['user_id', $user_id]
+            ])->delete();
+
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => trans('user.message.went_wrong')]);
         }

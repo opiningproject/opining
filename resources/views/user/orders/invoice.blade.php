@@ -99,9 +99,9 @@
             <td>{{ $dish->qty }}</td>
             <td>
             <?php
-                    $itemPrice = ($dish->price * $dish->qty) + $dish->orderDishPaidIngredients->sum('total');
+                    $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total;
                     $itemTotalPrice += $itemPrice;
-                    echo '€'.$itemPrice;
+                    echo '€'.number_format($itemPrice,2);
             ?>
             </td>
         </tr>
@@ -114,27 +114,27 @@
         <tr>
             <td colspan="4"></td>
             <td colspan="3">{{ trans('user.invoice.subtotal') }}</td>
-            <td>€{{ $itemTotalPrice }}</td>
+            <td>€{{ number_format($itemTotalPrice, 2) }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
             <td colspan="3">{{ trans('user.invoice.service_charge') }}</td>
-            <td>€{{ $order->platform_charge }}</td>
+            <td>€{{ number_format($order->platform_charge, 2) }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
             <td colspan="3">{{ trans('user.invoice.delivery_charge') }}</td>
-            <td>€{{ $order->delivery_charge }}</td>
+            <td>€{{ number_format($order->delivery_charge, 2) }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
             <td colspan="3">{{ trans('user.invoice.coupon_discount') }}</td>
-            <td>€{{ $order->coupon_discount }}</td>
+            <td>€{{ number_format($order->coupon_discount, 2) }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>
             <td colspan="3">{{ trans('user.invoice.amount_paid') }}</td>
-            <td>€{{ $order->total_amount }}</td>
+            <td>€{{ number_format($order->total_amount, 2) }}</td>
         </tr>
     </table>
 </div>

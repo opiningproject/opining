@@ -1,0 +1,63 @@
+@import "./dark-mode";
+@import "./light-mode";
+
+$dark1: var(--theme-dark1);
+$dark2: var(--theme-dark2);
+
+$gray1: var(--theme-gray1);
+$gray2: var(--theme-gray2);
+$gray3: var(--theme-gray3);
+$gray4: var(--theme-gray4);
+$gray5: var(--theme-gray5);
+$gray6: var(--theme-gray6);
+$gray7: var(--theme-gray7);
+$gray8: var(--theme-gray8);
+$gray9: var(--theme-gray9);
+$gray10: var(--theme-gray10);
+$gray11: var(--theme-gray11);
+$gray12: var(--theme-gray12);
+
+$text-white: var(--theme-text-white);
+$bg-white: var(--theme-bg-white);
+
+$white1: var(--theme-white1);
+$white2: var(--theme-white2);
+$white3: var(--theme-white3);
+$white4: var(--theme-white4);
+$white5: var(--theme-white5);
+
+$yellow1: var(--theme-yellow1);
+$yellow2: var(--theme-yellow2);
+$yellow3: var(--theme-yellow3);
+$yellow4: var(--theme-yellow4);
+$yellow5: var(--theme-yellow5);
+
+$lightyellow: var(--theme-lightyellow);
+$lightyellow2: var(--theme-lightyellow2);
+$darkyellow: var(--theme-darkyellow);
+
+$muted: var(--theme-muted);
+
+$success1: var(--theme-success1);
+$success2: var(--theme-success2);
+$success3: var(--theme-success3);
+$success4: var(--theme-success4);
+
+$text-black: var(--theme-text-black);
+$bg-black: var(--theme-bg-black);
+
+$lightgray: var(--theme-lightgray);
+$lightgray1: var(--theme-lightgray1);
+$lightgray2: var(--theme-lightgray2);
+
+$cyan1: var(--theme-cyan1);
+
+$shadow: var(--theme-shadow);
+
+$button-bg: var(--theme-button-bg);
+
+$chat-box: var(--theme-chat-box);
+
+$input-textcolor: var(--theme-input-textcolor);
+
+$input-bgcolor: var(--theme-input-bgcolor);

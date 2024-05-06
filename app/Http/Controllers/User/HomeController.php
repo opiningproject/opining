@@ -84,6 +84,7 @@ class HomeController extends Controller
             'couponCode' => $couponCode,
             'couponDiscount' => $couponDiscount,
             'couponDiscountPercent' => $couponPercent,
+            'cat_id' => $request->cat_id ?? ''
         ]);
     }
 }

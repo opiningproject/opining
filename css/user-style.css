@@ -630,10 +630,10 @@ a {
 .category-section .category-slider .category-element .card {
 
 }
-.category-swiper-slider .swiper-slide.swiper-slide-active .card {
+.category-swiper-slider .swiper-slide.selected-cart-active .card {
 border: 1px solid #FFC00B;
 }
-.swiper-slide-active .card {
+.selected-cart-active .card {
     border: 1px solid #FFC00B !important;
 }
 .offer-card-banner .card .bg-offercard-circle-1 {

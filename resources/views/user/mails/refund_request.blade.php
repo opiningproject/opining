@@ -38,6 +38,7 @@
                             <tr>
                                 <td
                                     style="box-sizing:border-box;max-width:100vw;padding:32px">
+
                                     <h1
                                         style="box-sizing:border-box;color:#3d4852;font-size:18px;font-weight:bold;margin-top:0;text-align:left">
                                         {{ trans('email.common.hello') }}
@@ -48,7 +49,7 @@
                                     </p>
 
                                     <p style="font-family: 'Roboto', sans-serif; font-weight: 700;">
-                                        {{ $order->refund_description }}:
+                                        {{ trans('user.refund_req.refund_desc') }}: {{ $order->refund_description }}
                                     </p>
                                     <p
                                         style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">

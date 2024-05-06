@@ -76,8 +76,20 @@ $cartValue = 0;
                             <div class="swiper category-swiper-slider">
                                 <div class="category-slider swiper-wrapper">
                                     @foreach ($categories as $cat)
-                                        <div class="category-element swiper-slide">
-                                          <div class="card {{ isset($_GET['cat_id']) && $_GET['cat_id'] == $cat->id ? 'active' : '' }}">
+                                        <?php
+                                            $selected = '';
+
+                                        if(!isset($_GET['all']) && $cat_id == ''){
+                                            if($cat->sort_order == '1')
+                                                $selected = 'selected-cart-active';
+                                        }
+                                        else{
+                                            if($cat_id == $cat->id)
+                                                $selected = 'selected-cart-active';
+                                        }
+                                            ?>
+                                        <div class="category-element swiper-slide {{ $selected }}">
+                                          <div class="card">
                                             <span class="dish-item-icon">
                                               <img src="{{ $cat->image }}" class="img-fluid" alt="bakery" width="56" height="56" />
                                             </span>

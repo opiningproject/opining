@@ -95,10 +95,10 @@
                                         <thead>
                                         <tr>
                                             <th scope="col" width="12%" class="text-center">{{ trans('rest.menu.ingredients.image') }}</th>
-                                            <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.name') }} 
+                                            <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.name') }}
                                                 <span class="text-custom-muted font-regularcustom">(English)</span>
                                             </th>
-                                            <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.name') }}  
+                                            <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.name') }}
                                                 <span class="text-custom-muted font-regularcustom">(Dutch)</span>
                                             </th>
                                             <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.ingred_category') }}
@@ -306,5 +306,11 @@
 
 @endsection
 @section('script')
+    <script>
+        var ingValidationMsg = {
+            less: '{{ trans('rest.food_order.less') }}',
+            more: '{{ trans('user.food_order.more') }}',
+        }
+    </script>
     <script type="text/javascript" src="{{ asset('js/ingredients.js')}}"></script>
 @endsection

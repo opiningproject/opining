@@ -12,20 +12,17 @@ class UserAuthenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
         $guards = empty($guards) ? [null] : $guards;
 
-//        dd($request->getRequestUri());
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-//                if(!){
-                    if($request->user()->user_role != '0'){
-                        return redirect(url()->previous());
-                    }
-//                }
+                if ($request->user()->user_role != '0') {
+                    return redirect(url()->previous());
+                }
             }
         }
 

@@ -176,6 +176,9 @@ return [
 			'required' => 'The message field is required.',
 			'max' => 'The message may not be greater than :max.',
 		],
+        'alphaNumeric' => 'Only Alphabet and numeric values are allowed',
+        'alphaRegex' => 'Only Alphabet values are allowed',
+        'financePassword' => 'Please enter Password'
     ],
 
     /*

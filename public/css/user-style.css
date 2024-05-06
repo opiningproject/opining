@@ -627,6 +627,15 @@ a {
   overflow: hidden;
 }
 
+.category-section .category-slider .category-element .card {
+
+}
+.category-swiper-slider .swiper-slide.selected-cart-active .card {
+border: 1px solid #FFC00B;
+}
+.selected-cart-active .card {
+    border: 1px solid #FFC00B !important;
+}
 .offer-card-banner .card .bg-offercard-circle-1 {
   position: absolute;
   bottom: 0;
@@ -4673,7 +4682,7 @@ input[type=number] {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1040;
+    z-index: 1000;
     width: 100vw;
     height: 100vh;
     background-color: #000;
@@ -4837,6 +4846,23 @@ margin-left: 0px !important;
 font-size: 15px !important;
 line-height: initial !important;
 }
+.customisable-modal-body .modal-body {
+  max-height: 30vh;
+  padding-bottom: 20px !important;
+}
+.customisable-modal-body .customisable-table table td {
+  padding: 20px 5px 0px 0px;
+  }
+.customisable-modal-body .modal-header {
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+.customisable-modal-body .modal-header .btn-close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 2;
+}
 
 @media screen and (max-width: 1800px) {
 .offer-card-banner .card-body h2 {font-size: 34px;margin-bottom: 10px;}
@@ -4947,7 +4973,7 @@ line-height: initial !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 99999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 1000;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
 .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
 .collected-points-list ul li {font-size: 14px;margin-bottom: 10px;}
@@ -4962,6 +4988,11 @@ line-height: initial !important;
 .mobileStaticToggle {display: block;}
 .mobilecheckoutContent {display: none;padding-top: 20px;}
 .checkout-form-item .cart-form-card-body {padding-bottom: 20px !important;}
+
+    .mobilecheckoutContent .mobile-hide {display: none;}
+    .mobilecheckoutContent .custom-card-title-1 {font-size: 16px !important;}
+
+    .mobilecheckoutContent .payment-nav {margin-bottom: 15px !important;}
 
 .cartSidebarCustom .addressMobile {position: absolute;top: -31px;max-width: 140px;font-size: 12px;left: 0px;}
 .cartSidebarCustom .addressMobile .address-field {align-items: center !important;}
@@ -4995,6 +5026,31 @@ line-height: initial !important;
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {padding-top: 50px !important;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .head-title {position: fixed !important;left: initial !important;right: 0px !important;text-align: center !important;max-width: 400px;width: 100%;z-index: 2;background: #ffffff;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 0px !important;right: 370px !important;left: initial;}
+
+.customisable-modal-body .modal-footer-sticky .qty-col {
+flex: 0 0 115px;
+max-width: 115px;
+}
+
+.customisable-modal-body .modal-footer-sticky .btn-mobile {
+  padding: 12px 10px 8px !important;
+  font-size: 12px !important;
+}
+
+
+
+.customisable-modal-body .modal-footer-sticky .foodqty .minus, .customisable-modal-body .modal-footer-sticky .foodqty .plus {
+  height: 30px !important;
+  min-width: 30px !important;
+  width: 30px;
+  flex: 0 0 30px !important;
+  }
+  .customisable-modal-body .modal-footer-sticky .foodqty .count {
+    min-width: 40px;
+    width: 40px;
+    font-size: 16px;
+  }
+
 }
 
 @media screen and (max-width: 640px) {
@@ -5027,6 +5083,31 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-sidebar .offcanvas-body {padding-bottom: 60px !important;}
 .cartSidebarCustom .cartoffCanvas {padding-bottom: 180px;}
 .bill-detail-invoice table {margin: 0px 0px;}
+.customisable-modal-body .modal-footer-sticky .btn-mobile {
+  padding: 12px 8px 8px !important;
+  font-size: 12px !important;
+}
+.customisable-modal-body .pro-image img {
+  /*max-width: 75px;*/
+  height: auto;
+}
+
+.customisable-modal-body .modal-header .food-custom-price {
+  font-size: 20px !important;
+}
+.custom-modal .customisable-modal-body.custom-modal .modal-header {
+  padding-bottom: 10px !important;
+}
+
+.customisable-modal-body .accordion .food-custom-price{
+  margin: 0px;
+}
+
+.customisable-modal-body .customisable-table table td {
+  padding: 5px 5px 0px 0px;
+}
+
+
 }
 
 @media screen and (max-width: 576px) {
@@ -5049,6 +5130,15 @@ footer .footer-logo a {font-size: initial !important;}
 }
 @media screen and (max-width: 375px) {
   .modal-dialog.custom-w-441px {max-width: 310px;}
+  .customisable-modal-body .modal-footer-sticky {
+    margin: 0px -5px;
+  }
+  .customisable-modal-body .modal-footer-sticky .col {
+    padding: 0px 5px;
+  }
+  .customisable-modal-body .modal-footer-sticky .btn-mobile {
+    font-size: 10px !important;
+  }
 }
 
 @media screen and (max-width: 374px) {
@@ -5084,4 +5174,35 @@ footer .footer-logo a {font-size: initial !important;}
     margin-left: 10px;
     font-size: 14px;
     line-height: 16px;
+}
+ /* Rekha Sharma */
+.paid-ing-text{
+    font-size: small !important;
+}
+
+.paid-ing-text .food-custom-price{
+    font-size: small !important;
+}
+
+.edit-icon {
+    min-height: auto !important;
+    height: auto !important;
+}
+
+.foodqty .count {
+    width: 30px !important;
+}
+/* */
+
+
+.all-validation-error{
+    font-size: 1rem !important;
+    color: red;
+}
+
+@media screen and (max-width: 640px) {
+.chatDivMobile .chatbox-main {
+    min-height: calc(100vh - 200px);
+    min-height: 400px;
+}
 }

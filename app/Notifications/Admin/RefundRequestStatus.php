@@ -37,7 +37,7 @@ class RefundRequestStatus extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject(trans('email.admin.refund.subject', ['order_no' => $this->order->id]))
-            ->markdown('admin.mails.refund_request_update', ['user' => $notifiable]);
+            ->markdown('admin.mails.refund_request_update', ['order' => $this->order]);
     }
 
     /**

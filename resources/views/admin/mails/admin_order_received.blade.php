@@ -96,7 +96,7 @@
                                                     @endif
                                                     <tr>
                                                         <td style="box-sizing:border-box;font-weight: bold; width: 80%;">
-                                                            {{ trans('email.common.order_items:') }}
+                                                            {{ trans('email.common.order_items') }}:
                                                         </td>
                                                     </tr>
                                                     @foreach($order->dishDetails as $key => $dish)

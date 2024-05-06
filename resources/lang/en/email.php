@@ -30,7 +30,7 @@ return [
             'content2' => "Visit us soon to savor this delectable addition to our menu and indulge in a culinary journey like no other.",
         ],
         'refund' => [
-            'subject' => 'Refund Issued for Your Order :order_no',
+            'subject' => 'Refund Requested for Your Order :order_no',
             'content1' => 'We hope this email finds you well.',
             'content2' => 'We regret to inform you that there has been an issue with your recent order (:order_no).Due to unforeseen circumstances, we were unable to fulfill your order as expected. As a result, we have processed a refund for the total amount of your order.',
             'content3' => "Please allow 4-5 business days for the refund to reflect in your account, depending on your bank's processing time. If you have any questions or need further assistance, feel free to reach out.",

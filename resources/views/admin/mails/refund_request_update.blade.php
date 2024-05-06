@@ -10,7 +10,7 @@
             style="box-sizing:border-box;max-width:100vw;padding:32px">
             <h1
                 style="box-sizing:border-box;color:#3d4852;font-size:18px;font-weight:bold;margin-top:0;text-align:left">
-                {{ trans('email.common.dear') }} {{ $user->full_name }},
+                {{ trans('email.common.dear') }} {{ $order->user->full_name }},
             </h1>
             <p
                 style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">

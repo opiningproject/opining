@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Dish;
 use App\Models\Order;
 use App\Models\User;
+use App\Notifications\Admin\DeliveryTypeUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\OrderStatus;
@@ -92,7 +93,8 @@ class OrdersController extends Controller
 
         if($order->save())
         {
-            $this->sendMail($order);
+            $order->user->notify(new DeliveryTypeUpdate($order));
+//            $this->sendMail($order);
         }
 
         return response::json(['status' => 1, 'message' => '']);

@@ -76,14 +76,6 @@
                                                             {{ date('d-m-y H:i',strtotime($order->created_at)) }}
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td style="box-sizing:border-box; width: 80%;">
-                                                            {{ trans('email.common.cust_name') }}
-                                                        </td>
-                                                        <td style="box-sizing:border-box; padding:3px 10px;">
-                                                            {{ $order->user->full_name }}
-                                                        </td>
-                                                    </tr>
                                                     @if($order->order_type == '1')
                                                         <tr>
                                                             <td style="box-sizing:border-box; width: 80%;">

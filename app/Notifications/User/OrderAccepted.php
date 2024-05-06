@@ -36,7 +36,7 @@ class OrderAccepted extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject(trans('email.order.subject', ['order_no' => $this->order->id]))
+            ->subject(trans('email.user.order.subject', ['order_no' => $this->order->id]))
             ->markdown('user.mails.order_accepted',['order' => $this->order]);
     }
 

@@ -14,7 +14,7 @@
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
-                                <h1 class="page-title">Chat</h1>
+                                <h1 class="page-title"> {{ trans('user.chat.chat_text') }}</h1>
                             </div>
                         </div>
                         <input type="hidden" value="{{ Auth::user()->id }}" id="auth-user-id">
@@ -32,9 +32,9 @@
                                             <div class="profile-title">{{ ucwords(getAdminUser()->first_name) }}</div>
                                             <div class="profile-text d-flex align-items-center gap-1 gap-sm-2">
                                                 @if(getAdminUser()->is_online == 1)
-                                                    <span class="activicon"></span> Online
+                                                    <span class="activicon"></span> {{ trans('user.chat.online') }}
                                                 @else
-                                                    <span class="inactivicon"></span> Offline
+                                                    <span class="inactivicon"></span> {{ trans('user.chat.offline') }}
                                                 @endif
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                             </label>
                                             <button
                                                 class="btn btn-xs-sm btn-custom-yellow send-user-btn send-btn-user_{{ \Auth::user()->id }}" disabled>
-                                                Send
+                                                {{ trans('user.chat.send') }}
                                             </button>
                                         </div>
                                     </div>

@@ -212,7 +212,9 @@ return [
 		'date_time' => 'Date & Time',
 		'order_price' => 'Order Price',
 		'coupon' => 'Coupon',
-        'enter_coupon' => 'Please Enter coupon'
+        'enter_coupon' => 'Please Enter coupon',
+        'delivery_income' => 'Online Delivery Income',
+        'take_away_income' => 'Take Away Income',
 	],
 
 	'user_chat' => [

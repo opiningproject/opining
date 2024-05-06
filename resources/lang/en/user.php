@@ -14,6 +14,7 @@ return [
 		'accepted' => 'Refund request accepted',
 		'rejected' => 'Refund request rejected',
 		'submitted' => 'Refund request submitted',
+        'refund_desc' => 'Refund Description',
 	],
 
 	'home' => [
@@ -156,7 +157,8 @@ return [
 		'online' => 'Online',
 		'offline' => 'Offline',
 		'write_msg' => 'Write your message',
-		'send' => 'Send'
+		'send' => 'Send',
+        'chat_text' => 'Chat'
 	],
 
 	'profile' => [

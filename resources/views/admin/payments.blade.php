@@ -35,7 +35,7 @@
                           <div class="text-grp d-flex flex-column gap-1">
                               <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                               <div class="number">
-                                  <span class="fw-600">€</span>{{$totalIncome}}
+                                  <span class="fw-600">€</span>{{ $totalIncome }}
                               </div>
                           </div>
                           <div class="btn-grp d-flex flex-wrap align-items-center">
@@ -106,7 +106,7 @@
                            <div class="float-child monthlyDoughnutChart" id="monthly-online-delivery-container">{{ trans('rest.my_finance.chart_loading') }}</div>
                            <div class="float-child weeklyDoughnutChart" id="weekly-online-delivery-container"></div>
                            <div class="float-child yearlyDoughnutChart" id="yearly-online-delivery-container"></div>
-                             <h3 class="text-center chartLabel">Online Delivery Income</h3>
+                             <h3 class="text-center chartLabel">{{ trans('rest.my_finance.delivery_income') }}</h3>
                              </div>
                          </div>
                          <div class="col-md-6 mb-2">
@@ -114,7 +114,7 @@
                             <div class="float-child monthlyDoughnutChart" id="monthly-take-away-container">{{ trans('rest.my_finance.chart_loading') }}</div>
                             <div class="float-child weeklyDoughnutChart" id="weekly-take-away-container"></div>
                             <div class="float-child yearlyDoughnutChart" id="yearly-take-away-container"></div>
-                                 <h3 class="text-center chartLabel">Take Away income</h3>
+                                 <h3 class="text-center chartLabel">{{ trans('rest.my_finance.take_away_income') }}</h3>
                          </div>
                          </div>
                       </div>

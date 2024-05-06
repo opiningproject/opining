@@ -64,6 +64,7 @@ class CheckoutController extends Controller
             $user = Auth::user();
             $admin = User::whereUserRole('1')->first();
             $orderId = $user->cart->id;
+            $textBody = trans('email.text.order_placed', ['order_no' => $orderId]);;
 
             $serviceCharges = getRestaurantDetail()->service_charge;
             $cartTotal = getCartTotalAmount();
@@ -234,8 +235,8 @@ class CheckoutController extends Controller
                     //Notification New Order
                     $order = Order::find($orderId);
 
-                    $this->twilioClient->messages->create('+918866405292',
-                        ['from' => $this->twilioNumber, 'body' => 'test msg'] );
+                    $this->twilioClient->messages->create('+91'.$request->phone_no,
+                        ['from' => $this->twilioNumber, 'body' => $textBody] );
 
                     $user->notify(new OrderAccepted($order));
                     $admin->notify(new AdminOrderReceived($order));
@@ -285,6 +286,7 @@ class CheckoutController extends Controller
             $user = Auth::user();
             $admin = User::whereUserRole('1')->first();
             $orderId = $user->cart->id;
+            $textBody = trans('email.text.order_placed', ['order_no' => $orderId]);;
 
             if ($request->redirect_status == 'succeeded') {
 
@@ -309,8 +311,8 @@ class CheckoutController extends Controller
 
                 $order = Order::find($orderId);
 
-                $this->twilioClient->messages->create('+918866405292',
-                    ['from' => $this->twilioNumber, 'body' => 'test msg'] );
+                $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                    ['from' => $this->twilioNumber, 'body' => $textBody] );
 
                 $user->notify(new OrderAccepted($order));
                 $admin->notify(new AdminOrderReceived($order));
@@ -390,8 +392,8 @@ class CheckoutController extends Controller
 
                         $order = Order::find($orderId);
 
-                        $this->twilioClient->messages->create('+918866405292',
-                            ['from' => $this->twilioNumber, 'body' => 'test msg']);
+                        $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                            ['from' => $this->twilioNumber, 'body' => $textBody]);
 
                         $user->notify(new OrderAccepted($order));
                         $admin->notify(new AdminOrderReceived($order));

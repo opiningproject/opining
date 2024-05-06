@@ -288,10 +288,11 @@ class SettingController extends Controller
 
             if(!empty($result) && isset($result->status) && $result->status == 'succeeded')
             {
-                $this->twilioClient->messages->create('+918866405292',
-                    ['from' => $this->twilioNumber, 'body' => 'test msg'] );
+                $textBody = trans('email.text.refund_success', ['order_no' => $order->id]);
+                $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                    ['from' => $this->twilioNumber, 'body' => $textBody] );
 
-                $order->user->notify(new RefundRequestStatus($order->user));
+                $order->user->notify(new RefundRequestStatus($order));
 
                 if($order->save())
                 {
@@ -300,11 +301,14 @@ class SettingController extends Controller
             }
             else
             {
+                $textBody = trans('email.text.refund_cancel', ['order_no' => $order->id]);
+                $this->twilioClient->messages->create('+91' . $order->orderUserDetails->order_contact_number,
+                    ['from' => $this->twilioNumber, 'body' => $textBody]);
                 return $result;
             }
         }
 
-        $order->user->notify(new RefundRequestStatus($order->user));
+        $order->user->notify(new RefundRequestStatus($order));
 
         if($order->save())
         {

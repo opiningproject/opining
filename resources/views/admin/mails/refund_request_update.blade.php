@@ -22,7 +22,7 @@
             </p>
             <p
                 style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
-                {{ trans('email.admin.common.refund_details') }}<br>
+                {{ trans('email.common.refund_details') }}<br>
             </p>
             <table align="left" width="100%" cellpadding="0" cellspacing="0"
                    role="presentation"

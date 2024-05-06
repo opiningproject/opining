@@ -30,9 +30,9 @@ return [
             'content2' => "Visit us soon to savor this delectable addition to our menu and indulge in a culinary journey like no other.",
         ],
         'refund' => [
-            'subject' => 'Refund Requested for Your Order :order_no',
+            'subject' => 'Refund Issued for Your Order :order_no',
             'content1' => 'We hope this email finds you well.',
-            'content2' => 'We regret to inform you that there has been an issue with your recent order (:order_no).Due to unforeseen circumstances, we were unable to fulfill your order as expected. As a result, we have processed a refund for the total amount of your order.',
+            'content2' => 'We regret to inform you that there has been an issue with your recent order (:order_no). Due to unforeseen circumstances, we were unable to fulfill your order as expected. As a result, we have processed a refund for the total amount of your order.',
             'content3' => "Please allow 4-5 business days for the refund to reflect in your account, depending on your bank's processing time. If you have any questions or need further assistance, feel free to reach out.",
             'content4' => "Thank you for your understanding.",
         ]
@@ -40,7 +40,7 @@ return [
 
     'user' => [
         'refund' => [
-            'subject' => 'Refund Issued for Your Order :order_no',
+            'subject' => 'Refund Requested for Your Order :order_no',
             'content1' => "I hope this message finds you well. I am writing to request a refund for my recent order #:order_no from :rest_name",
             'content2' => 'I kindly ask for your prompt attention to this matter. Thank you for your understanding and assistance.',
         ],
@@ -83,5 +83,11 @@ return [
         'coupon_discount' => 'Coupon Discount',
         'all_rights_reserved' => 'Copyright 2024 © :app_name All Rights Reserved',
     ],
+
+    'text' => [
+        'refund_success' => 'Your refund has been processed successfully for :order_no. Please allow a few days for it to reflect in your account',
+        'refund_cancel' => 'Your refund request has been cancelled for :order_no.',
+        'order_placed' => "Your order has been placed! We'll notify you once it's on its way. Thank you for ordering with us!",
+    ]
 ];
 

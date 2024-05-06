@@ -91,11 +91,15 @@ function saveZipcode(id) {
         $('#zipcode_' + id).focus();
         return false;
     }
-    if (min_order_price == '') {
+
+    if (min_order_price == '' || min_order_price < 0)
+    {
         $('#min_order_price_' + id).focus();
         return false;
     }
-    if (delivery_charge == '') {
+
+    if (delivery_charge == '' || delivery_charge < 0)
+    {
         $('#delivery_charge_' + id).focus();
         return false;
     }
@@ -122,15 +126,15 @@ function saveZipcode(id) {
                 $("#zipcode-remove-btn-" + id).show();
                 $("#zipcode-edit-btn-" + id).show();
                 $("#zipcode-save-btn-" + id).css("display", "none");
-                toastr.success('Zipcode updated successfully')
+                toastr.success(response.message)
             } else {
                 $('#min_order_price_0').val('');
                 $('#zipcode_0').val('');
                 $('#delivery_charge_0').val('');
 
-                $('.zipcode-row-0').after(response);
+                $('.zipcode-row-0').after(response.data);
 
-                toastr.success('Zipcode added successfully')
+                toastr.success(response.message)
             }
         },
         error: function (response) {
@@ -164,7 +168,7 @@ function changeStatus(id) {
             id, status
         },
         success: function (response) {
-            toastr.success('Status updated successfully')
+            toastr.success(response.message)
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -217,7 +221,6 @@ function saveContent(lang) {
         },
         success: function (response) {
             $('#CMSCouponModal').modal('show');
-            toastr.success('Content updated successfully')
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -244,7 +247,7 @@ function changeTime() {
     var endTime = $('#end_time' + id).val()
 
     if (startTime > endTime) {
-        alert('Start Time should be less than End Time')
+        alert($('#time_error').text())
         $(this).val(selectedTime)
         selectedTime = ''
         return false
@@ -262,6 +265,8 @@ $(document).ready(function() {
 
     if (activeTab) {
        $('button[data-bs-target="' + activeTab + '"]').tab('show');
+    }else{
+        $('button[data-bs-target="#restaurantProfile-tab-pane"]').tab('show');
     }
 });
 
@@ -279,3 +284,4 @@ function hideReadMore(id) {
 
     $("#order-ingredient-" + id).addClass('line-clamp-2');
 }
+

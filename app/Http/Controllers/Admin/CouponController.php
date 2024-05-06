@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\Admin\NewCoupon;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Models\Order;
@@ -36,22 +38,30 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        $date = date('Y-m-d', strtotime($request->expiry_date. ' 00:00:00'));
+        $date = date('Y-m-d', strtotime($request->expiry_date . ' 00:00:00'));
         $request->merge(['expiry_date' => $date]);
 
-        try 
-        {
-            Coupon::updateOrCreate(
+        try {
+            $coupon = Coupon::updateOrCreate(
                 ['id' => $request->id],
                 $request->all()
             );
 
+            $users = User::where([
+                ['user_role', '0'],
+                ['enable_email_notification', '1']
+            ])->get();
+
+            if($request->id == ''){
+                foreach ($users as $user){
+                    $user->notify(new NewCoupon($coupon));
+                }
+            }
+
             $message = $request->id ? trans('rest.message.coupon_update_success') : trans('rest.message.coupon_add_success');
 
             return response::json(['status' => 1, 'message' => $message]);
-        } 
-        catch (Exception $e) 
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
@@ -91,15 +101,12 @@ class CouponController extends Controller
      */
     public function destroy(string $id)
     {
-        try 
-        {
+        try {
             Coupon::where('id', $id)->delete();
 
             return response::json(['status' => 1, 'message' => trans('rest.message.coupon_delete_success')]);
 
-        } 
-        catch (Exception $e) 
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
     }
@@ -112,7 +119,7 @@ class CouponController extends Controller
             $coupon->save();
 
             return response::json(['status' => 1, 'message' => trans('rest.message.coupon_status_success')]);
-            
+
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
         }
@@ -124,6 +131,6 @@ class CouponController extends Controller
 
         $orders = Order::where('payment_status', PaymentStatus::Success)->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->paginate($perPage);
 
-        return view('admin.coupons.claim_history', ['orders' => $orders,'perPage' => $perPage]);
+        return view('admin.coupons.claim_history', ['orders' => $orders, 'perPage' => $perPage]);
     }
 }

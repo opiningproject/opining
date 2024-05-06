@@ -5,6 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Order;
+use App\Models\User;
+use App\Notifications\Admin\AdminOrderReceived;
+use App\Notifications\User\OrderAccepted;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -12,9 +16,12 @@ use App\Models\Dish;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session, Response;
+use Twilio\Rest\Client;
 
 class CheckoutController extends Controller
 {
+    protected $twilioClient, $twilioNumber;
+
     /**
      * Create a new controller instance.
      *
@@ -22,8 +29,10 @@ class CheckoutController extends Controller
      */
     public function __construct()
     {
-
-//        $this->middleware('auth');
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $this->twilioNumber = getenv("TWILIO_NUMBER");
+        $this->twilioClient = new Client($account_sid, $auth_token);
     }
 
     /**
@@ -53,6 +62,9 @@ class CheckoutController extends Controller
     {
         try {
             $user = Auth::user();
+            $admin = User::whereUserRole('1')->first();
+            $orderId = $user->cart->id;
+            $textBody = trans('email.text.order_placed', ['order_no' => $orderId]);;
 
             $serviceCharges = getRestaurantDetail()->service_charge;
             $cartTotal = getCartTotalAmount();
@@ -144,6 +156,10 @@ class CheckoutController extends Controller
                 'payment_status' => '0',
             ]);
 
+            $user->update([
+                'enable_email_notification' => isset($request->receive_mail) ? '1' : '0',
+            ]);
+
             if ($request->payment_type == '2') {
 
                 foreach ($user->cart->dishDetails() as $dish) {
@@ -163,6 +179,11 @@ class CheckoutController extends Controller
                 $user->cart()->update([
                     'is_cart' => '0'
                 ]);
+
+                //Notification New Order
+                $order = Order::find($orderId);
+                $user->notify(new OrderAccepted($order));
+                $admin->notify(new AdminOrderReceived($order));
 
             } elseif ($request->payment_type == '1') {
                 $expiryDate = explode('/', $request->exp_date);
@@ -211,6 +232,15 @@ class CheckoutController extends Controller
                     ]);
                     $response['cardPayment'] = 200;
 
+                    //Notification New Order
+                    $order = Order::find($orderId);
+
+                    $this->twilioClient->messages->create('+91'.$request->phone_no,
+                        ['from' => $this->twilioNumber, 'body' => $textBody] );
+
+                    $user->notify(new OrderAccepted($order));
+                    $admin->notify(new AdminOrderReceived($order));
+
                 } else if ($cardPaymentResponse->status == 'requires_action'){
                     $response['cardPayment'] = 402;
                     $response['redirectionUrl'] = $cardPaymentResponse->next_action->redirect_to_url->url;
@@ -254,8 +284,12 @@ class CheckoutController extends Controller
     {
         try {
             $user = Auth::user();
+            $admin = User::whereUserRole('1')->first();
+            $orderId = $user->cart->id;
+            $textBody = trans('email.text.order_placed', ['order_no' => $orderId]);;
 
             if ($request->redirect_status == 'succeeded') {
+
                 foreach ($user->cart->dishDetails() as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                 }
@@ -274,6 +308,14 @@ class CheckoutController extends Controller
                     'is_cart' => '0',
                     'payment_status' => '1',
                 ]);
+
+                $order = Order::find($orderId);
+
+                $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                    ['from' => $this->twilioNumber, 'body' => $textBody] );
+
+                $user->notify(new OrderAccepted($order));
+                $admin->notify(new AdminOrderReceived($order));
 
                 return redirect()->route('user.orders');
 
@@ -347,6 +389,14 @@ class CheckoutController extends Controller
                             'is_cart' => '0',
                             'payment_status' => '1',
                         ]);
+
+                        $order = Order::find($orderId);
+
+                        $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                            ['from' => $this->twilioNumber, 'body' => $textBody]);
+
+                        $user->notify(new OrderAccepted($order));
+                        $admin->notify(new AdminOrderReceived($order));
 
                         return redirect()->route('user.orders');
                     }

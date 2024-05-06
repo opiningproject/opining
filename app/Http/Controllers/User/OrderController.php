@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\User\RefundRequest;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
 use Illuminate\Support\Facades\Auth;
@@ -101,10 +102,15 @@ class OrderController extends Controller
     public function sendRefundRequest(Request $request)
     {
         try {
+
+            $admin = User::whereUserRole('1')->first();
+
             $order = Order::find($request->order_id);
             $order->refund_status = RefundStatus::Pending;
             $order->refund_description = $request->description;
             $order->save();
+
+            $admin->notify(new RefundRequest($order));
 
             return response::json(['status' => 1, 'message' => '']);
         } catch (Exception $e) {

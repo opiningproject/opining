@@ -14,6 +14,7 @@ use Auth;
 use App\Models\Order;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class PaymentsController extends Controller
 {
@@ -158,7 +159,7 @@ class PaymentsController extends Controller
                 $w++;
             }
         }
-       
+
         if($time_frame == 2)
         {
             // For a month logic
@@ -200,7 +201,7 @@ class PaymentsController extends Controller
 
             $defaultYears = collect(['2024' => 0, '2025' => 0])->toArray();
             $chartDataArr['categories'] = [['category' => [['label' => '2024'],['label' => '2025']]]];
-            
+
             // Online delivery and take away income logic
            $orderYears = Order::select("*", DB::raw("DATE_FORMAT(created_at,'%Y') as year"), DB::raw("sum(total_amount) as totalAmount"))
                                     ->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])
@@ -287,6 +288,9 @@ class PaymentsController extends Controller
      */
     public function validateMyFinance(Request $request)
     {
+        if (Session::get('myFinanceIsValidate') == 1) {
+            return redirect('payments');
+        }
         return view('admin.validate-my-finance');
     }
 
@@ -297,6 +301,7 @@ class PaymentsController extends Controller
     public function checkMyFinancePassword(Request $request)
     {
         if (Hash::check($request->password, auth()->user()->password)) {
+            Session::put(['myFinanceIsValidate'=>"1"]);
             return redirect('payments');
         }
         return Redirect::back()->withErrors(['msg' => 'Please enter valid password.']);

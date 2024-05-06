@@ -40,7 +40,7 @@ class HomeController extends Controller
         $couponPercent = 0;
 
         $categories = Category::orderBy('sort_order', 'asc')->get();
-        
+
         $user = (Auth::user()) ? Auth::user() : '';
         $user_id = $user ? $user->id : 0;
         $addresses = Address::select('*')->orderBy('company_name', 'asc')->where('user_id', $user_id)->get();
@@ -53,7 +53,10 @@ class HomeController extends Controller
         if ($request->cat_id) {
             $dishes = Dish::with('favorite')->where('category_id', $request->cat_id);
             $category = Category::find($request->cat_id);
-        } else {
+        } else if(!$request->all) {
+            $category = Category::orderBy('sort_order', 'asc')->first();
+            $dishes = Dish::with('favorite')->where('category_id', $category->id);
+        }else{
             $dishes = Dish::with('favorite');
         }
 
@@ -81,6 +84,7 @@ class HomeController extends Controller
             'couponCode' => $couponCode,
             'couponDiscount' => $couponDiscount,
             'couponDiscountPercent' => $couponPercent,
+            'cat_id' => $request->cat_id ?? ''
         ]);
     }
 }

@@ -124,6 +124,8 @@ return [
 		'read_more' => 'Read More',
 		'close' => 'Close',
 		'move_to' => 'Move to',
+        'more' => 'More',
+        'less' => 'Less',
 	],
 
 	'settings' => [
@@ -210,13 +212,19 @@ return [
 		'date_time' => 'Date & Time',
 		'order_price' => 'Order Price',
 		'coupon' => 'Coupon',
+        'enter_coupon' => 'Please Enter coupon',
+        'delivery_income' => 'Online Delivery Income',
+        'take_away_income' => 'Take Away Income',
 	],
 
 	'user_chat' => [
 		'title' => 'User Chat',
+        'chat' => 'Chat',
 		'search' => 'Search',
 		'send' => 'Send',
-		'write_msg' => 'Write your message'
+		'write_msg' => 'Write your message',
+        'online' => 'Online',
+        'offline' => 'Offline',
 	],
 
 	'modal' => [
@@ -285,6 +293,7 @@ return [
 
 	'auth' => [
 		'email' => 'Email',
+            'password' => 'Password',
 		'new_password' => 'New Password',
 		'c_new_password' => 'Confirm New Password',
 		'forgot_password' => 'Forgot Password',

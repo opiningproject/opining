@@ -198,9 +198,9 @@ $(function () {
 
     $(document).on('click', '.more-less-text', function (){
         if($(this).text() == '+ More'){
-            $(this).text('- Less')
+            $(this).text('- '.ingValidationMsg.less)
         }else{
-            $(this).text('+ More')
+            $(this).text('+ '.ingValidationMsg.more)
         }
     })
 

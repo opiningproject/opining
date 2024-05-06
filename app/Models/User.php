@@ -39,7 +39,8 @@ class User extends Authenticatable implements JWTSubject
         'image',
         'collected_points',
         'email_verified_at',
-        'is_online'
+        'is_online',
+        'enable_email_notification'
     ];
 
     /**

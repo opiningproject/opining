@@ -163,7 +163,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::post('/chat/store', [ChatController::class, 'storeMessage']);
     Route::get('/orders/{date_filter?}', [OrdersController::class, 'index'])->name('orders');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
-    Route::get('/payments', [PaymentsController::class, 'index'])->name('payments');
+    Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
 
      Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
 
@@ -174,12 +174,12 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
 
-    Route::get('/validate-myfinance', [PaymentsController::class, 'validateMyFinance']);
+    Route::get('/validate-myfinance', [PaymentsController::class, 'validateMyFinance'])->name('validateMyFinance');
     Route::post('/check-myfinance-password', [PaymentsController::class, 'checkMyFinancePassword'])->name('checkMyFinancePassword');
 
 });
 
-Route::middleware(['auth', 'auth.user', 'localization'])->group(function () 
+Route::middleware(['auth', 'auth.user', 'localization'])->group(function ()
 {
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');

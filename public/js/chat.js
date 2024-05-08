@@ -56,7 +56,7 @@ var receiver_id = $('.receiver_id').val();
 $(function () {
     $('#send-btn').click(function () {
         var message = $('#message-input').val();
-        var socketId = $('#socket-id').val();
+        var socket_ids = $('.socketId').val();
         receiver_id = $('.receiver_id').val();
         sender_id = $('.sender_id').val();
 
@@ -84,7 +84,7 @@ $(function () {
         var messageData = {
             'sender_id': senderId,
             'receiver_id': receiverId,
-            'receiver_socket': 'PfiZgCle4_nMzNgvAAAF',
+            'receiver_socket': socket_ids,
             'message': message,
             "fileName": fileName,
             'type': "admin"

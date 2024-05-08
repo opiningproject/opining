@@ -29,6 +29,7 @@ http.listen(3000, function () {
 
 io.on("connection", function (socket) {
     console.log("User connected", socket.id);
+    io.sockets.emit('socketConnectionSecured', socket.id);
     socket.on('updateSocketId', (userId) => {
         // console.log("in", userId, "soketId", socket.id)
         connection.query("UPDATE users SET `socket_id` = " + "'" + socket.id + "'" + ", `is_online` = '1' WHERE `id` = " + userId)
@@ -40,15 +41,25 @@ io.on("connection", function (socket) {
             sender_id: messageData.sender_id,
             receiver_id: messageData.receiver_id,
             message: messageData.message,
-            socketId: socket.id,
+            socketId: messageData.receiver_socket,
             fileName: messageData.fileName,
         }
+
         if (messageData.type == "user") {
-            io.sockets.emit('sendChatToUser', adminMessage);
+            io.to(socket.id).emit('sendChatToUser', adminMessage);
         }
         if (messageData.type == "admin") {
-            io.sockets.emit('sendChatToClient', adminMessage);
+            console.log("adminMessage", adminMessage.socketId)
+            console.log("adminMessage", adminMessage)
+            console.log("==========",socket.id)
+            // io.to(adminMessage.socketId).emit('sendChatToClient', adminMessage);
+            io.to(adminMessage.socketId).emit('sendChatToClient', adminMessage);
+            // io.to(adminMessage.socketId).emit('sendChatToClient', adminMessage);
+            // io.sockets.emit('sendChatToClient', adminMessage);
         }
+
+
+        // realtime message send
         socket.on('getMessage', (userMessageData) => {
             if (messageData.type == "user") {
                 // console.log("messageData",userMessageData)

@@ -106,15 +106,16 @@ $(function () {
             });
         }
         var fileName = attachment ? attachment.name : null;
-        var messageData = {
-            'sender_id': sender_id,
-            'receiver_id': receiver_id,
-            'receiver_socket': 'PfiZgCle4_nMzNgvAAAF',
-            'message': message,
-            'fileAttachment': attachment,
-            "fileName": fileName,
-            'type': "user"
-        }
+
+            var messageData = {
+                'sender_id': sender_id,
+                'receiver_id': receiver_id,
+                'receiver_socket': socketId,
+                'message': message,
+                'fileAttachment': attachment,
+                "fileName": fileName,
+                'type': "user"
+            }
         socket.emit('sendAdminChatToServer', messageData);
         $(".send-user-btn").prop('disabled', true);
         $(".image-holder").hide();
@@ -126,8 +127,7 @@ $(function () {
 $(document).keypress(function () {
     if (event.which == 13) {
         $('.send-btn-user_' + sender_id).click();
-    }
-    ;
+    };
 });
 
 $('.chat-messages-user_' + sender_id).on('scroll', function () {

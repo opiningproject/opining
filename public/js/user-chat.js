@@ -8,6 +8,8 @@ let fetchingOldMessages = false;
 let userId = $('.auth-user-id').val();
 let chatListpage = 1;
 let socketId = null;
+var sender_id = $('.sender_id').val();
+var receiver_id = $('.receiver_id').val();
 
 socket.on('socketConnectionSecured', (message) => {
     // console.log('socketId-----', message)
@@ -20,6 +22,21 @@ var userIdData = localStorage.getItem("user_id")
 
 console.log("userLogin", userLogin.id, "socketId",socketId)*/
 socket.emit('updateSocketId', userLogin.id)
+
+socket.on('getMessageAdmin', (data) => {
+    var htmlData = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
+        '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+        '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3">\n' +
+        '            <p style="background-color:var(--theme-chat-box);margin-left:inherit;">' + data.message + '</p>\n' +
+        (data.attachment ?
+            '                <a href="' + data.attachment + '" target="_blank">\n' +
+            '                       <img src="' + data.attachment + '" style="height: 100px;width: 100px;">\n' +
+            '                </a>\n' : '') +
+        '            <small>' + data.createdAt + '</small>\n' +
+        '        </div>\n' +
+        '    </div>';
+    $('.chat-messages-user_' + sender).append(htmlData)
+})
 
 socket.on('sendChatToUser', (message) => {
     // console.log("message", message)
@@ -43,6 +60,7 @@ socket.on('sendChatToUser', (message) => {
                     '    </div>'
                 $('.chat-messages-user_' + data.data.sender_id).append(html)
                 $('.message-input').val('')
+                socket.emit('getMessage', data.data);
                 // $('.chat-messages-user').animate({scrollTop: 0}, 500);
                 var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
                 var contentHeight = chatboxMain[0].scrollHeight;
@@ -61,8 +79,6 @@ let connectionData = {
     userId: senderId,
 }
 // socket.emit('connectionEstablished, ')
-var sender_id = $('.sender_id').val();
-var receiver_id = $('.receiver_id').val();
 $(function () {
     $('.send-user-btn').click(function () {
         var message = $('.message-input').val();
@@ -193,7 +209,7 @@ function readURL(input) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
     Echo.private('brodcast-message')
         .listen('.getChatMessage', (data) => {
             if (sender_id == data.chat.receiver_id && receiver_id == data.chat.sender_id) {
@@ -212,4 +228,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#chat-messages-user').append(htmlData);
             }
         })
-})
+})*/

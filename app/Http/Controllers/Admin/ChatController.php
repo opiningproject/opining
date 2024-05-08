@@ -155,7 +155,7 @@ class ChatController extends Controller
         $storeChat->is_read = "1";
         $storeChat->attachment = $request->fileName;
         if ($storeChat->save()) {
-            $storeChat->createdAt = $storeChat->created_at->format('h:m a');
+            $storeChat->createdAt = date('h:i A', strtotime($storeChat->created_at));
             $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
             MessageEvent::dispatch($storeChat, $storeChat->userImage, $storeChat->createdAt, 0);
         }

@@ -47,15 +47,7 @@
                                     {{ trans('email.common.refund_amount') }}
                                 </td>
                                 <td style="box-sizing:border-box; padding:3px 10px;">
-                                    € {{ date('d-m-Y H:i:s',$order->total_amount) }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="box-sizing:border-box; width: 80%;">
-                                    {{ trans('email.common.refund_method') }}
-                                </td>
-                                <td style="box-sizing:border-box; padding:3px 10px;">
-                                    € {{ $order->payment_method }}
+                                    € {{ $order->total_amount }}
                                 </td>
                             </tr>
                             </tbody>

@@ -127,4 +127,10 @@ class OrdersController extends Controller
             $message->from(config('mail.from.address'),config('mail.from.name'));
         });
     }
+
+    public function orderPrintLabel(string $id){
+        $order = Order::find($id);
+
+        return view('admin.orders.orders-print-label', ['order' => $order]);
+    }
 }

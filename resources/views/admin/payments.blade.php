@@ -1,6 +1,20 @@
 @extends('layouts.app')
 @section('content')
 
+    <?php
+    $monthlyAmount = array_sum(array_map(function($item) {
+        return $item['value'];
+    }, $totalMonthOrders));
+
+    $weeklyAmount = array_sum(array_map(function($item) {
+        return $item['value'];
+    }, $totalWeekOrders));
+
+    $yearlyAmount = array_sum(array_map(function($item) {
+        return $item['value'];
+    }, $totalYearOrders));
+        ?>
+
 <style>
     [pointer-events="bounding-box"] {
     display: none
@@ -18,6 +32,9 @@
               <div class="section-page-title mb-0">
                 <h1 class="page-title">{{ trans('rest.my_finance.title') }}</h1>
               </div>
+                <input type="hidden" id="weeklyIncomeChart" value="{{ $weeklyAmount }}">
+                <input type="hidden" id="monthlyIncomeChart" value="{{ $monthlyAmount }}">
+                <input type="hidden" id="yearlyIncomeChart" value="{{ $yearlyAmount }}">
               <div class="hero-incomebox bg-white">
                 <div class="hero-incomebox-item d-flex align-items-center">
                   <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
@@ -35,7 +52,7 @@
                           <div class="text-grp d-flex flex-column gap-1">
                               <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                               <div class="number">
-                                  <span class="fw-600">€</span>{{ $totalIncome }}
+                                  <span class="fw-600">€</span><span id="chart-fluctuate-amount">{{ $monthlyAmount }}</span>
                               </div>
                           </div>
                           <div class="btn-grp d-flex flex-wrap align-items-center">
@@ -257,6 +274,7 @@
         $(this).addClass('active');
         var k= $(this).val();
         $("."+k).show();
+        $('#chart-fluctuate-amount').text($("#"+k).val());
     });
 
     // 2nd Doughnut chart

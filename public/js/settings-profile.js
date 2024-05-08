@@ -7,7 +7,7 @@ $(function () {
             }
         },
         submitHandler: function (form) {
-            toastr.success('Settings updated successfully')
+            toastr.success($('#settings_update_success').text())
             return true;
         }
     });
@@ -50,14 +50,14 @@ $(function () {
             var re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         },
-        "Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol"
+        $('#password_error').text(),
     );
 
 });
 
-function changePassword() {
+function changePassword()
+{
     //$('#change-password-btn').prop('disabled',true);
-
     var old_password = $('#old_password').val();
     var new_password = $('#new_password').val();
     var c_password = $('#c_password').val();
@@ -73,13 +73,18 @@ function changePassword() {
         data: {
             old_password, new_password
         },
-        success: function (response) {
+        success: function (response)
+        {
+            console.log(response)
 
-            if (response == '2') {
+            if (response == '2')
+            {
                 $("#old_password-error").removeClass('d-none');
-            } else {
+            }
+            else
+            {
                 $("#changePasswordModal").modal('hide');
-                toastr.success('Password updated successfully')
+                toastr.success(response.message)
             }
         },
         error: function (response) {

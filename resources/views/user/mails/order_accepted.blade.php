@@ -107,7 +107,7 @@
                                                             {{ trans('email.common.special_ins') }}
                                                         </td>
                                                         <td style="box-sizing:border-box; padding:3px 10px;">
-                                                            {{ $order->delivery_note }}
+                                                            {{ $order->delivery_note ?? '-' }}
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -115,7 +115,7 @@
                                                             {{ trans('email.common.total_amount') }}
                                                         </td>
                                                         <td style="box-sizing:border-box; padding:3px 10px;">
-                                                            {{ $order->total_amount }}
+                                                            €{{ $order->total_amount }}
                                                         </td>
                                                     </tr>
                                                     </tbody>

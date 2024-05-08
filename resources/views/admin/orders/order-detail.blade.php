@@ -250,7 +250,8 @@ $userDetails = $order->orderUserDetails;
     </div>
 </div>
 <div class="foodorder-box-details-footer d-flex align-items-center justify-content-between gap-2">
-    <button class="btn btn-auto" onclick="window.print()">{{ trans('rest.food_order.print') }}</button>
+    <a class="btn btn-auto"
+       target="_blank" href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">{{ trans('rest.food_order.print') }}</a>
 
     <?php
         $order_status_cur_val = $order->order_status;

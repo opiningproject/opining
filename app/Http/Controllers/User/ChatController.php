@@ -61,9 +61,12 @@ class ChatController extends Controller
             if ($item->receiver_id != auth()->id() && $item->sender_id == auth()->id()) {
                 $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
                 $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
+                $item->messageClass = "rightChat";
             } else {
                 $item->appendStyle = "margin-left:inherit;flex-direction:row";
-                $item->messageStyle = "background-color:var(--theme-chat-box);margin-left:inherit;";
+                $item->messageStyle = "background-color:#DBDBDB;margin-left:inherit;";
+                $item->messageClass = "leftChat";
+//                $item->messageStyle = "background-color:var(--theme-chat-box);margin-left:inherit;";
             }
             return $item;
         });

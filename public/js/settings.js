@@ -6,7 +6,7 @@ $(function () {
         dynamic: true,
         dropdown: true,
         scrollbar: true,
-        change: changeTime
+        // change: changeTime
     });
 
     var editor_config = {

@@ -191,7 +191,9 @@ return [
 		'cod' => 'COD',
 		'delivery' => 'Delivery',
 		'take_away' => 'Take Away',
-		'chart_loading' => 'Chart is loading!'
+		'chart_loading' => 'Chart is loading!',
+        'delivery_income' => 'Online Delivery Income',
+        'take_away_income' => 'Take Away Income',
 	],
 
 	'coupons' => [
@@ -213,8 +215,6 @@ return [
 		'order_price' => 'Order Price',
 		'coupon' => 'Coupon',
         'enter_coupon' => 'Please Enter coupon',
-        'delivery_income' => 'Online Delivery Income',
-        'take_away_income' => 'Take Away Income',
 	],
 
 	'user_chat' => [

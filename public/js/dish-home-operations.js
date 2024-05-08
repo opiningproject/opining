@@ -7,8 +7,9 @@ $(document).on('click', '#delete-dish-btn', function (){
         success: function (response) {
             $('#deleteDishAlertModal').modal('hide')
             if (response.status == 200) {
-                toastr.success('Dish Deleted Successfully')
-                location.reload()
+                toastr.success(response.message)
+                setTimeout(function(){ location.reload() }, 500);
+
             } else {
                 toastr.error(response.message);
             }

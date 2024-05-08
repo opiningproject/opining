@@ -14,11 +14,7 @@
             </h1>
             <p
                 style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
-                {{ trans('email.admin.refund.content1') }}<br>
-            </p>
-            <p
-                style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
-                {{ trans('email.admin.refund.content2', ['order_no' => $order->id]) }}<br>
+                {{ trans('email.admin.refund_reject.content1', ['order_no' => $order->id]) }}<br>
             </p>
             <p
                 style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
@@ -47,7 +43,15 @@
                                     {{ trans('email.common.refund_amount') }}
                                 </td>
                                 <td style="box-sizing:border-box; padding:3px 10px;">
-                                    € {{ $order->total_amount }}
+                                    € {{ date('d-m-Y H:i:s',$order->total_amount) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="box-sizing:border-box; width: 80%;">
+                                    {{ trans('email.common.refund_method') }}
+                                </td>
+                                <td style="box-sizing:border-box; padding:3px 10px;">
+                                    € {{ $order->payment_method }}
                                 </td>
                             </tr>
                             </tbody>
@@ -58,11 +62,11 @@
             </table>
             <p
                 style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
-                {{ trans('email.admin.refund.content3') }}<br>
+                {{ trans('email.admin.refund.content2') }}<br>
             </p>
             <p
                 style="box-sizing:border-box;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
-                {{ trans('email.admin.refund.content4') }}<br>
+                {{ trans('email.admin.refund.content3') }}<br>
             </p>
         </td>
     </tr>

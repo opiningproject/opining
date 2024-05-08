@@ -122,10 +122,15 @@ $cartValue = 0;
                                         <?php
                                         $disableBtn = '';
                                         $customizeBtn = false;
+
                                         if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                             $disableBtn = 'disabled';
                                             $customizeBtn = true;
                                         }
+                                        if(count($dish->ingredients) == 0){
+                                            $customizeBtn = true;
+                                        }
+
                                         ?>
                                         <div class="card food-detail-card">
                                             @if ($dish->percentage_off > 0)

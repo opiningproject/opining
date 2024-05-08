@@ -35,6 +35,12 @@ return [
             'content2' => 'We regret to inform you that there has been an issue with your recent order (:order_no). Due to unforeseen circumstances, we were unable to fulfill your order as expected. As a result, we have processed a refund for the total amount of your order.',
             'content3' => "Please allow 4-5 business days for the refund to reflect in your account, depending on your bank's processing time. If you have any questions or need further assistance, feel free to reach out.",
             'content4' => "Thank you for your understanding.",
+        ],
+        'refund_reject' => [
+            'subject' => 'Refund Rejected for Your Order :order_no',
+            'content1' => 'We hope this email finds you well. We regret to inform you that the refund request for your order (:order_no) is been rejected.',
+            'content2' => 'If you have any questions or need further assistance, feel free to reach out.',
+            'content3' => 'Thank you for your understanding.',
         ]
     ],
 

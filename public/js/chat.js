@@ -25,6 +25,7 @@ socket.on('sendChatToClient', (message) => {
                     '    </div>'
                 $('.chat-messages').append(html)
                 $('.message-input').val('')
+                socket.emit('getMessage', data.data);
                 // $('.chat-messages').animate({scrollTop:0}, 500);
 
                 var chatboxMain = $('.chat-messages');
@@ -284,6 +285,31 @@ function readURL(input) {
     }
 }
 
+
+//get realtime message
+socket.on('getMessageUser', (data) => {
+    if (senderId == data.receiver_id && receiverId == data.sender_id) {
+        console.log("ifin")
+        var htmlData = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
+            '        \n' +
+            '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+            '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
+            '            <p style="">' + data.message + '</p>\n' +
+            (data.attachment ?
+                '                <a href="' + data.attachment + '" target="_blank">\n' +
+                '                       <img src="' + data.attachment + '" style="height: 100px;width: 100px;">\n' +
+                '                </a>\n' : '') +
+            '            <small>' + data.createdAt + '</small>\n' +
+            '        </div>\n' +
+            '    </div>';
+        $('.chat-messages').append(htmlData);
+    } else {
+        $('.ChatDiv-list').html('')
+        fetchChatUsers();
+    }
+})
+
+/*
 document.addEventListener('DOMContentLoaded', function () {
     Echo.private('brodcast-message')
         .listen('.getChatMessage', (data) => {
@@ -310,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
 })
+*/
 
 $('.ChatDiv').on('scroll', function () {
     if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {

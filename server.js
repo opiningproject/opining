@@ -49,6 +49,17 @@ io.on("connection", function (socket) {
         if (messageData.type == "admin") {
             io.sockets.emit('sendChatToClient', adminMessage);
         }
+        socket.on('getMessage', (userMessageData) => {
+            if (messageData.type == "user") {
+                // console.log("messageData",userMessageData)
+                io.sockets.emit('getMessageUser', userMessageData);
+            }
+            if (messageData.type == "admin") {
+                // console.log("messageData",userMessageData)
+                io.sockets.emit('getMessageAdmin', userMessageData);
+            }
+
+        })
         // io.to(messageData.receiver_id).emit('sendChatToClient', adminMessage);
     });
     // Listen for disconnection

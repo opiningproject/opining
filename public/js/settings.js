@@ -55,7 +55,7 @@ $(function () {
             success: function (response) {
                 $('#deleteZipcodeModal').modal('toggle');
                 $('.zipcode-row-' + id).remove();
-                toastr.success('Zipcode deleted successfully')
+                toastr.success(response.message)
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message
@@ -102,16 +102,6 @@ function saveZipcode(id) {
     {
         $('#delivery_charge_' + id).focus();
         return false;
-    }
-
-    if (min_order_price < 0) {
-        alert('Minimum Order Price should be grater than 0')
-        return false
-    }
-
-    if (delivery_charge < 0) {
-        alert('Deliver Charges should be grater than 0')
-        return false
     }
 
     $.ajax({
@@ -262,9 +252,8 @@ $(document).ready(function() {
 
     // Here, save the index to which the tab corresponds. You can see it in the chrome dev tool.
     var activeTab = localStorage.getItem('activeTab');
-
     if (activeTab) {
-       $('button[data-bs-target="' + activeTab + '"]').tab('show');
+        $('button[data-bs-target="' + activeTab + '"]').tab('show');
     }else{
         $('button[data-bs-target="#restaurantProfile-tab-pane"]').tab('show');
     }
@@ -284,4 +273,3 @@ function hideReadMore(id) {
 
     $("#order-ingredient-" + id).addClass('line-clamp-2');
 }
-

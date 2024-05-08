@@ -11,6 +11,8 @@
                 <div class="ChatDiv-list" data-id="{{ getAdminUser()->id }}" data-receiver-id="{{ $chat->id }}"
                      data-chat-id="{{ $chat->chats->id }}" data-status="{{ $chat->is_online }}"
                      data-user="{{ $chat->id }}">
+                    <input type="hidden" name="socketId" class="socketId" value="{{ $chat->socket_id }}"
+                           id="socketId">
                     <input type="hidden" name="sender_id" class="sender_id" value="{{ getAdminUser()->id }}"
                            id="sender_id_1">
                     <input type="hidden" name="receiver_id" class="receiver_id" value="{{ $chat->chats->sender_id }}"

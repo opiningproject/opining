@@ -4448,10 +4448,10 @@ input[type=number] {
     margin-right: auto;
   }
 
-  .cart-sidebar {
+  /*.cart-sidebar {
     min-width: 454px;
     max-width: 454px;
-  }
+  }*/
 
   .category-list-item-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -4462,6 +4462,7 @@ input[type=number] {
   .favorite-item-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+
     grid-template-rows: 1fr;
     grid-column-gap: 40px;
     grid-row-gap: 40px;
@@ -5205,4 +5206,69 @@ footer .footer-logo a {font-size: initial !important;}
     min-height: calc(100vh - 200px);
     min-height: 400px;
 }
+}
+
+
+.chatbox-main .user-chat-row {
+    margin-top: 20px !important;
+}
+.chatbox-main .user-chat-row {
+    position: relative;
+    top: -5px;
+}
+
+
+.chatbox .chatbox-main .chats-grp  .chat-item.chat-box-md .user-chat-row .leftChat:before {
+    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: -6px;
+    bottom: 0px;
+    background-image: url(../images/left-chat-icon.svg) !important;
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    transform: initial;
+}
+
+.chatbox .chatbox-main .chats-grp  .chat-item.chat-box-md .user-chat-row .rightChat:before {
+    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -6px;
+    left: initial;
+    bottom: 0px;
+    background-image: url(../images/right-chat-icon.svg) !important;
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    transform: initial;
+}
+
+@media screen and (max-width: 767px) {
+    .chatbox .chatbox-main .chats-grp .chat-box-md > img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+
+    .chatbox .chatbox-main .chats-grp  .chat-item.chat-box-md .user-chat-row .leftChat:before {
+        bottom: -1px;
+    }
+
+    .chatbox .chatbox-main .chats-grp  .chat-item.chat-box-md .user-chat-row .rightChat:before {
+        bottom: -1px;
+    }
+
+
+    /*.chatbox .chatbox-main .chats-grp .chat-item.chat-box-md .chat-item-textgrp p::before {*/
+    /*    background-image: url(../images/curve-chaticon-update.svg) !important;*/
+    /*}*/
 }

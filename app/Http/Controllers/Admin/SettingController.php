@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Admin\RefundReject;
 use App\Notifications\Admin\RefundRequestStatus;
 use Illuminate\Http\Request;
 use App\Models\Zipcode;
@@ -301,14 +302,15 @@ class SettingController extends Controller
             }
             else
             {
-                $textBody = trans('email.text.refund_cancel', ['order_no' => $order->id]);
-                $this->twilioClient->messages->create('+91' . $order->orderUserDetails->order_contact_number,
-                    ['from' => $this->twilioNumber, 'body' => $textBody]);
                 return $result;
             }
-        }
+        }else{
+            $textBody = trans('email.text.refund_success', ['order_no' => $order->id]);
+            $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                ['from' => $this->twilioNumber, 'body' => $textBody] );
 
-        $order->user->notify(new RefundRequestStatus($order));
+            $order->user->notify(new RefundReject($order));
+        }
 
         if($order->save())
         {

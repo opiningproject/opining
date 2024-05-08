@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="chatbox-main">
                                     <div
-                                        class="chats-grp d-flex flex-column gap-5 overflow-auto chat-messages-user_{{ \Auth::user()->id }}"
+                                        class="chats-grp d-flex flex-column gap-3 gap-lg-4 overflow-auto chat-messages-user_{{ \Auth::user()->id }}"
                                         id="chat-messages-user">
                                         <!-- Messages will be displayed here -->
                                     </div>

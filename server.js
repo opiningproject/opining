@@ -49,32 +49,27 @@ io.on("connection", function (socket) {
             io.to(socket.id).emit('sendChatToUser', adminMessage);
         }
         if (messageData.type == "admin") {
-            console.log("adminMessage", adminMessage.socketId)
-            console.log("adminMessage", adminMessage)
-            console.log("==========",socket.id)
-            // io.to(adminMessage.socketId).emit('sendChatToClient', adminMessage);
-            io.to(adminMessage.socketId).emit('sendChatToClient', adminMessage);
-            // io.to(adminMessage.socketId).emit('sendChatToClient', adminMessage);
-            // io.sockets.emit('sendChatToClient', adminMessage);
+            io.sockets.emit('sendChatToClient', adminMessage);
+
         }
 
 
         // realtime message send
         socket.on('getMessage', (userMessageData) => {
             if (messageData.type == "user") {
-                // console.log("messageData",userMessageData)
                 io.sockets.emit('getMessageUser', userMessageData);
             }
             if (messageData.type == "admin") {
-                // console.log("messageData",userMessageData)
+                // io.to(adminMessage.socketId).emit('getMessageAdmin', userMessageData);
                 io.sockets.emit('getMessageAdmin', userMessageData);
             }
-
         })
         // io.to(messageData.receiver_id).emit('sendChatToClient', adminMessage);
     });
+
     // Listen for disconnection
     socket.on("disconnect", () => {
+        // console.log("disconnect")
         connection.query("UPDATE users SET `is_online` = '0' WHERE `socket_id` =" + "'" + socket.id + "'")
     });
 });

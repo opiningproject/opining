@@ -45,7 +45,7 @@
                                             <label for="admin_chat_attachment" class="custom-file-upload">
                                                 <img src={{ asset('images/attach.svg') }}>
                                             </label>
-                                            <input id="admin_chat_attachment" class="admin_chat_attachment" name="admin_chat_attachment" type="file" style="display: none"/>
+                                            <input id="admin_chat_attachment" class="admin_chat_attachment" accept="image/*" name="admin_chat_attachment" type="file" style="display: none"/>
                                             <button class="btn btn-xs-sm btn-custom-yellow send-btn" id="send-btn" disabled>
                                                 {{ trans('rest.user_chat.send') }}</button>
                                         </div>

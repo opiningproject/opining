@@ -1,5 +1,5 @@
 // creating io instance
-var socket = io("http://localhost:3000/");
+var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
 
 var receiver = "";
 let senderId = null;

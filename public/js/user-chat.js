@@ -1,5 +1,5 @@
 // creating io instance
-var socket = io("http://localhost:3000/");
+var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
 
 let senderId = null;
 var sender = $('#auth-user-id').val();
@@ -50,7 +50,7 @@ socket.on('sendChatToUser', (message) => {
                 var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_' + data.data.sender_id + '"  style="margin-left:auto;flex-direction:row-reverse">\n' +
                     '        \n' +
                     '        <img src=' + data.data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
-                    '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
+                    '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat user-chat-row">\n' +
                     (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
                     (data.data.attachment ?
                         '                <a href="' + data.data.attachment + '" target="_blank">\n' +

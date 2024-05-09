@@ -29,7 +29,7 @@ http.listen(3000, function () {
 
 io.on("connection", function (socket) {
     console.log("User connected", socket.id);
-    io.sockets.emit('socketConnectionSecured', socket.id);
+    // io.sockets.emit('socketConnectionSecured', socket.id);
     socket.on('updateSocketId', (userId) => {
         // console.log("in", userId, "soketId", socket.id)
         connection.query("UPDATE users SET `socket_id` = " + "'" + socket.id + "'" + ", `is_online` = '1' WHERE `id` = " + userId)

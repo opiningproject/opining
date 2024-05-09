@@ -70,8 +70,11 @@ class PaymentsController extends Controller
         $orderYear = Order::select(DB::raw("sum(total_amount) as totalAmount"), DB::raw("DATE_FORMAT(created_at,'%Y') as year"))
                                 ->where('is_cart', '0')
                                 ->groupBy('year')
+                                ->orderBy('year', 'asc')
                                 ->pluck('totalAmount','year')
                                 ->toArray();
+
+        ksort($orderYear);
 
         $currentYear = date('Y') + 1;
 
@@ -199,8 +202,8 @@ class PaymentsController extends Controller
         {
             // For a year logic
 
-            $defaultYears = collect(['2024' => 0, '2025' => 0])->toArray();
-            $chartDataArr['categories'] = [['category' => [['label' => '2024'],['label' => '2025']]]];
+            $defaultYears = collect(['2023' => 0, '2024' => 0])->toArray();
+            $chartDataArr['categories'] = [['category' => [['label' => '2023'],['label' => '2024']]]];
 
             // Online delivery and take away income logic
            $orderYears = Order::select("*", DB::raw("DATE_FORMAT(created_at,'%Y') as year"), DB::raw("sum(total_amount) as totalAmount"))

@@ -70,7 +70,7 @@ class PaymentsController extends Controller
         $orderYear = Order::select(DB::raw("sum(total_amount) as totalAmount"), DB::raw("DATE_FORMAT(created_at,'%Y') as year"))
                                 ->where('is_cart', '0')
                                 ->groupBy('year')
-                                ->orderBy('year')
+                                ->orderBy('year', 'asc')
                                 ->pluck('totalAmount','year')
                                 ->toArray();
 

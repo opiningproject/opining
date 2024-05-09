@@ -361,7 +361,7 @@
                                                 <form id="paidIngredientForm" name="paidIngredientForm" method="post">
                                                     <div class="row justify-content-end">
                                                         <div
-                                                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12" style="width: 26% !important;">
                                                             <div class="form-group">
                                                                 <label class="form-label">
                                                                     <strong>{{ trans('rest.menu.dish.ingred_categories') }}</strong>

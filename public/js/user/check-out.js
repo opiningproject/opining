@@ -43,7 +43,7 @@ $(function () {
         $('#mobile-payment-type-text').text(paymentBtnText)
     })
 
-    $(document).on('keypress change','.cardNumber', function (e){
+    $(document).on('keypress keydown','.cardNumber', function (e){
     /*
     })
     $('.cardNumber').keypress(function (e) {*/
@@ -63,7 +63,7 @@ $(function () {
 
     })
 
-    $(document).on('keypress change', '.expireYear', function (e){
+    $(document).on('keypress keydown', '.expireYear', function (e){
     /*})
     $('.expireYear').keypress(function (e) {*/
         var charCode = (e.which) ? e.which : event.keyCode

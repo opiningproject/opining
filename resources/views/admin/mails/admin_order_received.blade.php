@@ -123,7 +123,7 @@
                                                             {{ trans('email.common.total_amount') }}
                                                         </td>
                                                         <td style="box-sizing:border-box; padding:3px 10px;">
-                                                            € {{ $order->total_amount }}
+                                                            €{{ $order->total_amount }}
                                                         </td>
                                                     </tr>
                                                     </tbody>

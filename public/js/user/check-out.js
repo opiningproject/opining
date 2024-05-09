@@ -43,7 +43,10 @@ $(function () {
         $('#mobile-payment-type-text').text(paymentBtnText)
     })
 
-    $('.cardNumber').keypress(function (e) {
+    $(document).on('keypress change','.cardNumber', function (e){
+    /*
+    })
+    $('.cardNumber').keypress(function (e) {*/
         var charCode = (e.which) ? e.which : event.keyCode
 
         if (String.fromCharCode(charCode).match(/[^0-9]/g)) {
@@ -60,7 +63,9 @@ $(function () {
 
     })
 
-    $('.expireYear').keypress(function (e) {
+    $(document).on('keypress change', '.expireYear', function (e){
+    /*})
+    $('.expireYear').keypress(function (e) {*/
         var charCode = (e.which) ? e.which : event.keyCode
 
         if (String.fromCharCode(charCode).match(/[^0-9]/g)) {

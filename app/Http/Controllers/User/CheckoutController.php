@@ -162,7 +162,7 @@ class CheckoutController extends Controller
 
             if ($request->payment_type == '2') {
 
-                foreach ($user->cart->dishDetails() as $dish) {
+                foreach ($user->cart->dishDetails as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                 }
 
@@ -213,7 +213,7 @@ class CheckoutController extends Controller
                 );
 
                 if ($cardPaymentResponse->status == 'succeeded') {
-                    foreach ($user->cart->dishDetails() as $dish) {
+                    foreach ($user->cart->dishDetails as $dish) {
                         Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                     }
                     $user->cart->dishDetails()->update([
@@ -227,6 +227,7 @@ class CheckoutController extends Controller
                     }
 
                     $user->cart->update([
+                        'transaction_id' => $cardPaymentResponse->id,
                         'is_cart' => '0',
                         'payment_status' => '1',
                     ]);
@@ -290,7 +291,7 @@ class CheckoutController extends Controller
 
             if ($request->redirect_status == 'succeeded') {
 
-                foreach ($user->cart->dishDetails() as $dish) {
+                foreach ($user->cart->dishDetails as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                 }
                 $user->cart->dishDetails()->update([
@@ -370,7 +371,7 @@ class CheckoutController extends Controller
 
                         return redirect()->route('user.checkout');
                     }else{
-                        foreach ($user->cart->dishDetails() as $dish) {
+                        foreach ($user->cart->dishDetails as $dish) {
                             Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
                         }
 

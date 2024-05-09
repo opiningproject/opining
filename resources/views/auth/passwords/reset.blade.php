@@ -10,7 +10,7 @@
             <main class="w-100">
                 <div class="main-content">
                     <div class="card signin-card">
-                        <div class="card-header pb-0">
+                        <div class="card-header text-center pb-0">
                             <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
                         </div>
                         <div class="card-body signin-form">

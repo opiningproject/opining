@@ -3,8 +3,8 @@ var app = express();
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
+    host: "164.90.253.87",
+    user: "go-meal",
     password: "GgiJ-9j$ceDn6oF",
     database: "go-meal"
 });
@@ -13,19 +13,24 @@ connection.connect(function (err) {
     console.log("SQl Connected!");
 });
 
-
 // creating http instance
 var http = require("http").createServer(app);
 
 // creating socket io instance
-const io = require('socket.io')(http, {
-    cors: {origin: "*"}
+var io = require('socket.io')(http, {
+    cors: {
+        origin: "*",
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
 });
 
 // start the server
 http.listen(3000, function () {
     console.log("Server started");
 });
+
+io = io.of('/web-socket');
 
 io.on("connection", function (socket) {
     console.log("User connected", socket.id);

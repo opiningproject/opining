@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="chatbox-main">
                                     <div
-                                        class="chats-grp d-flex flex-column gap-3 gap-lg-4 overflow-auto chat-messages-user_{{ \Auth::user()->id }}"
+                                        class="chats-grp d-flex flex-column gap-3 gap-lg-4 overflow-auto chat-messages-users chat-messages-user_{{ \Auth::user()->id }}"
                                         id="chat-messages-user">
                                         <!-- Messages will be displayed here -->
                                     </div>
@@ -56,7 +56,7 @@
                                         <div class="d-flex gap-2 gap-sm-3 align-items-center">
                                             <label for="chat_attachment" class="custom-file-upload">
                                                 <img src={{ asset('images/attach.svg') }}/>
-                                                <input id="chat_attachment" type="file" name="chat_attachment"
+                                                <input id="chat_attachment" accept="image/*" type="file" name="chat_attachment"
                                                        class="chat_attachment" style="display: none"/>
                                             </label>
                                             <button

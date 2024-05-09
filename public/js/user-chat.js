@@ -24,10 +24,10 @@ console.log("userLogin", userLogin.id, "socketId",socketId)*/
 socket.emit('updateSocketId', userLogin.id)
 
 socket.on('getMessageAdmin', (data) => {
-    var htmlData = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
+    var htmlData = '<div class="chat-item chat-box-md d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
         '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
-        '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3">\n' +
-        '            <p style="background-color:var(--theme-chat-box);margin-left:inherit;">' + data.message + '</p>\n' +
+        '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat user-chat-row">\n' +
+        (data.message != null ? '<p class="leftChat" style="background-color:#DBDBDB;margin-left:inherit;">' + data.message + '</p>\n':'') +
         (data.attachment ?
             '                <a href="' + data.attachment + '" target="_blank">\n' +
             '                       <img src="' + data.attachment + '" style="height: 100px;width: 100px;">\n' +
@@ -36,10 +36,11 @@ socket.on('getMessageAdmin', (data) => {
         '        </div>\n' +
         '    </div>';
     $('.chat-messages-user_' + sender).append(htmlData)
+       $('.chat-messages-users').html('')
+        fetchChatUsers()
 })
 
 socket.on('sendChatToUser', (message) => {
-    // console.log("message", message)
     $.ajax({
         type: "POST",
         url: baseURL + '/user/chat/store',
@@ -50,7 +51,7 @@ socket.on('sendChatToUser', (message) => {
                     '        \n' +
                     '        <img src=' + data.data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
                     '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
-                    '            <p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n' +
+                    (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
                     (data.data.attachment ?
                         '                <a href="' + data.data.attachment + '" target="_blank">\n' +
                         '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
@@ -83,7 +84,6 @@ $(function () {
     $('.send-user-btn').click(function () {
         var message = $('.message-input').val();
         var socketId = $('#socket-id').val();
-        // console.log("socketId", socketId)
         receiver_id = $('.receiver_id').val();
         var attachment = $('.chat_attachment').prop('files')[0];
         var form_data = new FormData();

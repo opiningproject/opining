@@ -65,7 +65,12 @@ class HomeController extends Controller
             $dishes = Dish::with('favorite');
         }
 
-        $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
+        if(count($dishes->get()) > 0){
+            $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
+        }else{
+            $dishes = [];
+
+        }
 
         $serviceCharge = getRestaurantDetail()->service_charge;
 

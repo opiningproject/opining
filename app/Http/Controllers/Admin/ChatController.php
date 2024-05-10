@@ -58,9 +58,14 @@ class ChatController extends Controller
 
             $item->appendStyle = '';
             $item->messageStyle = '';
+            $item->messageClass = "leftChat";
+            $backgroundColor = "#DBDBDB";
             if ($item->receiver_id != getAdminUser()->id && $item->sender_id == getAdminUser()->id) {
                 $item->appendStyle = "margin-left:auto;flex-direction:row-reverse";
                 $item->messageStyle = "background-color:var(--theme-cyan1);margin-left:auto;";
+                $item->messageClass = "rightChat";
+            } else {
+                $item->messageStyle = "background-color:".$backgroundColor;
             }
 
             return $item;

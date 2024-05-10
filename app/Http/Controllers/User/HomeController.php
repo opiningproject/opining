@@ -58,14 +58,14 @@ class HomeController extends Controller
             if(!empty($category)){
                 $dishes = Dish::with('favorite')->where('category_id', $category->id);
             }else{
-                $dishes = Dish::with('favorite')->get();
+                $dishes = Dish::with('favorite');
             }
 
         }else{
             $dishes = Dish::with('favorite');
         }
 
-        if(!empty($dishes)){
+        if(count($dishes->get()) > 0){
             $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
         }else{
             $dishes = [];

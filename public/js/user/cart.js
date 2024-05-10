@@ -93,7 +93,7 @@ $(function () {
         })
     })
 
-    $('.dish-notes').focusout(function () {
+    $(document).on('focusout','.dish-notes',function () {
         var notes = $(this).val()
         var id = $(this).data('id')
 

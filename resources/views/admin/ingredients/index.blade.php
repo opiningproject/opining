@@ -149,7 +149,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="table-add-dish-bar align-items-start">
+                                                    <div class="table-add-dish-bar align-items-center">
                                                         <select class="btn btn-light dropdown-toggle dish-dropdown" data-id="{{ $ingredient->id }}" type="button"
                                                                 id="dish-list{{ $ingredient->id }}" disabled>
                                                                 <?php
@@ -163,7 +163,7 @@
                                                             @endforeach
                                                         </select>
 
-                                                        <div class="table-dish-name align-items-start dish-tray{{ $ingredient->id }}">
+                                                        <div class="table-dish-name table-dish-badge-wrap align-items-start dish-tray{{ $ingredient->id }}">
                                                             <div class="table-dish-name-wrp">
                                                                 <div class="table-dish-name-inner">
                                                             <?php

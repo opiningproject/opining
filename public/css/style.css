@@ -3573,3 +3573,19 @@ nav .pagination {
 .chart-indicates .indicate.low label {
     background: #FFE9A8;
 }
+.table-add-dish-bar .table-dish-badge-wrap {
+    flex-wrap: wrap !important;
+    justify-content: flex-start;
+    column-gap: 0;
+    width: 220px;
+    margin: 0px;
+}
+.table-add-dish-bar .table-dish-badge-wrap .badge{
+    margin: 0px 2px;
+}
+
+.table-add-dish-bar select {
+    box-shadow: none !important;
+    outline: none !important;
+    padding-left: 4px !important;
+}

@@ -143,7 +143,7 @@ class CartController extends Controller
                       <div class='from-group addnote-from-group mb-0'>
                         <div class='form-group'>
                           <label for='dishnameenglish' class='form-label'>".trans('user.cart.add_notes')."</label>
-                          <input type='text' class='form-control dish-notes' maxlength='50' placeholder='".trans('user.cart.type_here')."'/>
+                          <input type='text' class='form-control dish-notes' data-id='$cart->id' maxlength='50' placeholder='".trans('user.cart.type_here')."'/>
                         </div>
                       </div>
                     </div>
@@ -169,7 +169,7 @@ class CartController extends Controller
             } else {
 
                 $dish = OrderDetail::find($request->dish_id);
-                
+
                 if($dish){
                     OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
                     $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
@@ -464,7 +464,7 @@ class CartController extends Controller
                     if (session('zipcode')) {
 
                         $zip = substr(session('zipcode'), 0, 4);
-                        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
+                        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status', '1')->first();
 
                         if ($zipcode) {
 

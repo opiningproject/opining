@@ -74,16 +74,14 @@ class PaymentsController extends Controller
                                 ->pluck('totalAmount','year')
                                 ->toArray();
 
-        ksort($orderYear);
-
         $currentYear = date('Y') + 1;
 
         for ($i = 1; $i <= 2; $i++)
         {
             $previousYear[$currentYear - $i] = 0;
         }
-
         $year_order_merge_array = $orderYear + $previousYear;
+        ksort($year_order_merge_array);
 
         $y = 0;
         foreach ($year_order_merge_array as $key => $year_order)

@@ -294,7 +294,7 @@ $cartValue = 0;
                                                                               <span class="item-desc" id="item-ing-desc{{ $dish->id }}">{{ getOrderDishIngredients($dish) }}</span>
                                                                               <p class="item-customize mb-0 ms-auto justify-content-end">
                                                                                 <a href="javascript:void(0);" onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
-                                                                                  <img src="{{ asset('images/custom-dish.svg') }}" alt="" class="svg" height="13" width="14" />
+                                                                                  <img src="{{ asset('images/custom-dish.svg') }}" alt="" class="svg"  style="height: 13px;width: 14px;" />
                                                                                 </a> {{ trans('user.cart.edit') }}
                                                                               </p>
                                                                               <p class="price-opt mb-0 text-nowrap" id="paid-ing-price{{ $dish->id }}">

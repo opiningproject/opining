@@ -29,8 +29,6 @@ function unFavorite(dish_id) {
             dish_id
         },
         success: function (response) {
-            console.log('unFavorite')
-            console.log(response)
             $("#unfavorite-icon-" + dish_id).removeClass('d-none');
             $("#favorite-icon-" + dish_id).addClass('d-none');
         },

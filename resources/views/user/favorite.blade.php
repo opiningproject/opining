@@ -15,7 +15,7 @@
                     <!-- start category list section -->
                     <section class="custom-section category-list-section pt-3">
                         <div class="favorite-item-grid">
-                            @if(!empty($dishes))
+                            @if(count($dishes) > 0)
                                 @foreach($dishes as $key => $dish)
                                         <?php
                                         $disableBtn = '';
@@ -50,6 +50,8 @@
                                         @endif
                                     </div>
                                 @endforeach
+                            @else
+                                {{ trans('user.dashboard.no_favorite') }}
                             @endif
                         </div>
                     </section>

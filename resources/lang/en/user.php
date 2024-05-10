@@ -50,6 +50,7 @@ return [
 		'no_dish_found' => 'No Dish Found',
 		'search' => 'What do you want to eat today...',
 		'favorite' => 'Favorite',
+		'no_favorite' => 'No Favorite Dish Found',
 		'banner_content_1' => 'Get Discount Voucher Up To 20%',
 		'banner_content_2' => 'Every 5th order you will get a 20% Discount Coupon!',
 	],

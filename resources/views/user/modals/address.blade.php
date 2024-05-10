@@ -10,7 +10,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body pt-0 pt-xxl-3">
-        <form id="address-form"> @csrf 
+        <form id="address-form"> @csrf
             <div class="row">
                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12">
                   <div class="form-group prev-input-group custom-icon-input-group">
@@ -33,13 +33,13 @@
                   <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">{{ trans('modal.button.save') }}</button>
                 </div>
             </div>
-        </form> 
-        @if(count($addresses)) 
+        </form>
+        @if(count($addresses))
         <div class="address-box">
-          <h1 class="modal-title mb-0 font-sebinomedium">{{ trans('modal.address.my_address') }}</h1>
+          <h1 class="modal-title mb-0 font-sebinomedium" style="margin-top: 20px !important;">{{ trans('modal.address.my_address') }}</h1>
             <hr />
-            <div class="row"> 
-              @foreach($addresses as $key => $add) 
+            <div class="row">
+              @foreach($addresses as $key => $add)
                 <?php
                 $addressText = trans('modal.address.deliver_here');
                 $style = '';
@@ -47,7 +47,7 @@
                     $addressText = 'Selected';
                     $style = 'style=pointer-events:none;cursor:default';
                 }
-                ?> 
+                ?>
                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10" style="padding: 5px !important;" id="address-{{ $add->id }}">
                   <div class="card card-body h-100 address-card active">
                     <p>{{ $add->company_name }} {{ $add->house_no }}, {{ $add->street_name }} , {{ $add->city }} {{ $add->zipcode }}</p>
@@ -58,10 +58,10 @@
                       </a>
                     </div>
                   </div>
-                </div> 
-              @endforeach 
+                </div>
+              @endforeach
             </div>
-        </div> 
+        </div>
         @endif
       </div>
     </div>

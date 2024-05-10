@@ -53,7 +53,7 @@ class CategoryController extends Controller
 
             if(empty($category->sort_order)) {
                 $storedcategory = Category::orderBy('sort_order', 'desc')->first();
-                if(count($storedcategory) > 0){
+                if(!empty($storedcategory)){
                     $category->sort_order = $storedcategory->sort_order + 1;
                 }else{
                     $category->sort_order = 1;

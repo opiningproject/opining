@@ -65,7 +65,7 @@ class HomeController extends Controller
             $dishes = Dish::with('favorite');
         }
 
-        if(count($dishes->get()) > 0){
+        if(!empty($dishes)){
             $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
         }else{
             $dishes = [];

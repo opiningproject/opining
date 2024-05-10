@@ -23,7 +23,7 @@ class AddressController extends Controller
     public function validateZipcode(Request $request)
     {
         $zip =substr($request->zipcode, 0, 4);
-        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
+        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status','1')->first();
 
         if($zipcode)
         {
@@ -51,7 +51,7 @@ class AddressController extends Controller
             $address = Address::find($id);
 
             $zip =substr($address->zipcode, 0, 4);
-            $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
+            $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status','1')->first();
 
             $response['zipcode'] = $address->zipcode;
             $response['house_no'] = $address->house_no;

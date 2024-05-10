@@ -89,7 +89,7 @@
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="quantity" class="form-label">{{ trans('rest.menu.dish.quantity') }}</label>
-                                                    <input type="number" class="form-control" name="qty"  min="0"/>
+                                                    <input type="number" class="form-control" name="qty" min="0" max="10000"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
@@ -97,7 +97,7 @@
                                                     <label for="dishprice" class="form-label">{{ trans('rest.menu.dish.price') }}</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">€</span>
-                                                        <input type="number" class="form-control" name="price" min="0"/>
+                                                        <input type="number" class="form-control" name="price" min="0" max="10000"/>
                                                     </div>
                                                 </div>
                                             </div>

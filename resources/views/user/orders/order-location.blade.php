@@ -62,7 +62,7 @@
       </main>
    </div>
 </div>
-   
+
  <!-- start footer -->
  @include('layouts.user.footer_design')
  <!-- end footer -->
@@ -74,12 +74,12 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw"></script>
 <script>
-      var order_type = "<?php echo $order->order->order_type; ?>";
-      var latitude = "<?php echo $order->latitude; ?>";
-      var logitude = "<?php echo $order->longitude; ?>";
+      var order_type = "<?= $order->order->order_type ?>";
+      var latitude = "<?= ($order->latitude == null) ? getRestaurantDetail()->latitude : $order->latitude ?>";
+      var logitude = "<?= ($order->longitude == null) ? getRestaurantDetail()->longitude : $order->longitude  ?>";
 
-      var rest_latitude = "<?php echo getRestaurantDetail()->latitude; ?>";
-      var rest_logitude = "<?php echo getRestaurantDetail()->longitude; ?>";
+      var rest_latitude = "<?= getRestaurantDetail()->latitude ?>";
+      var rest_logitude = "<?= getRestaurantDetail()->longitude ?>";
 
       if(order_type == 1)
       {
@@ -89,25 +89,25 @@
       {
         var MapPoints = '[{"lat":'+rest_latitude+',"lng":'+rest_logitude+'}]';
       }
-       
+
       var MY_MAPTYPE_ID = 'custom_style';
-       
-      function initialize() 
+
+      function initialize()
       {
-          if (jQuery('#map').length > 0) 
+          if (jQuery('#map').length > 0)
           {
               var locations = jQuery.parseJSON(MapPoints);
-           
+
               window.map = new google.maps.Map(document.getElementById('map'), {
                    mapTypeId: google.maps.MapTypeId.ROADMAP,
                    scrollwheel: false
                });
-           
+
                var infowindow = new google.maps.InfoWindow();
                var flightPlanCoordinates = [];
                var bounds = new google.maps.LatLngBounds();
-               
-               for (i = 0; i < locations.length; i++) 
+
+               for (i = 0; i < locations.length; i++)
                {
                    marker = new google.maps.Marker({
                    position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
@@ -115,7 +115,7 @@
                    });
                    flightPlanCoordinates.push(marker.getPosition());
                    bounds.extend(marker.position);
-                   
+
                    /*display marker tag name
                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
                    return function() {
@@ -124,9 +124,9 @@
                    }
                    })(marker, i));*/
                }
-           
+
                map.fitBounds(bounds);
-               
+
                var flightPath = new google.maps.Polyline({
                    map: map,
                    path: flightPlanCoordinates,
@@ -134,7 +134,7 @@
                    strokeOpacity: 1.0,
                    strokeWeight: 2
                });
-       
+
           }
        }
 

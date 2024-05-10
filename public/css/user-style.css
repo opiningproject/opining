@@ -5282,3 +5282,8 @@ footer .footer-logo a {font-size: initial !important;}
     /*    background-image: url(../images/curve-chaticon-update.svg) !important;*/
     /*}*/
 }
+
+
+.item-customize a .edit-icon {
+    max-width: 14px;
+}

@@ -336,7 +336,9 @@ return [
 		'settings_update_success' => 'Settings updated successfully',
 
 		'time_error' => 'Start Time should be less than End Time',
-		'password_error' => 'Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol'
+		'password_error' => 'Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol',
+
+        'quantity_max' => 'You can not add more quantity.',
 	],
 
 ];

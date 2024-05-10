@@ -183,6 +183,7 @@ function updateDishQty(operator, maxQty, dish_id) {
 
     if (operator == '+' && !isNaN(current_qty)) {
         if (current_qty >= maxQty) {
+            toastr.error(validationMsg.quantity_error)
             return false;
         }
 
@@ -326,6 +327,7 @@ function addSubDishQuantities(dishId, operator, maxQty) {
 
     if (operator == '+') {
         if (currentQty >= maxQty) {
+            toastr.error(validationMsg.quantity_error)
             return false;
         }
 

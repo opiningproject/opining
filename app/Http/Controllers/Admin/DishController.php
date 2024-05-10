@@ -9,10 +9,13 @@ use App\Models\DishIngredient;
 use App\Models\DishOption;
 use App\Models\Ingredient;
 use App\Models\IngredientCategory;
+use App\Models\OrderDetail;
 use App\Models\User;
 use App\Notifications\Admin\NewDish;
+use Carbon\Carbon;
 use Exception;
 use http\Encoding\Stream;
+use Illuminate\Support\Facades\DB;
 use Response;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
@@ -324,5 +327,59 @@ class DishController extends Controller
         }
 
 
+    }
+
+    public function popularDish(){
+
+        $currentWeekStartDate = Carbon::now()->startOfWeek();
+        $currentWeekEndDate = Carbon::now()->endOfWeek();
+        $previousWeekStartDate = Carbon::now()->subWeek()->startOfWeek();
+        $previousWeekEndDate = Carbon::now()->subWeek()->endOfWeek();
+
+        $currentWeekCounts = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('count(*) as total'))
+            ->whereBetween('created_at', [$currentWeekStartDate, $currentWeekEndDate])
+            ->groupBy('dish_id')
+            ->orderByDesc('total')
+            ->get()
+            ->pluck('total', 'dish_id');
+
+        // Query to get the counts of orders for each dish for the previous week
+        $previousWeekCounts = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('count(*) as total'))
+            ->whereBetween('created_at', [$previousWeekStartDate, $previousWeekEndDate])
+            ->groupBy('dish_id')
+            ->orderByDesc('total')
+            ->get()
+            ->pluck('total', 'dish_id');
+
+
+        // Calculate percentage increase for each dish
+        $popularDishes = [];
+
+        if(!empty($currentWeekCounts))
+        {
+            foreach ($currentWeekCounts as $dishId => $currentWeekCount)
+            {
+                $previousWeekCount = $previousWeekCounts->get($dishId, 0);
+                $percentageCalculation = ($currentWeekCount - $previousWeekCount) / ($previousWeekCount ?: 1) * 100;
+                $popularDishes[$dishId] = ['percentage' => round($percentageCalculation, 2), 'total_orders' => $currentWeekCount];
+            }
+        }
+
+        return view('admin.dish.popular-list', [
+            'popularDishes' => $popularDishes
+        ]);
+    }
+
+    public function bestSellerDish(){
+
+        $orderDetailsQuery = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('COUNT(*) as total_orders'))
+            ->groupBy('dish_id')
+            ->orderByDesc('total_orders');
+
+        $bestSellerDishes = $orderDetailsQuery->get();
+
+        return view('admin.dish.bestseller-list', [
+            'bestSellerDishes' => $bestSellerDishes,
+        ]);
     }
 }

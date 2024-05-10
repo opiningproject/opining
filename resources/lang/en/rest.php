@@ -72,6 +72,11 @@ return [
 			'price' => 'Price',
             'select_option' => 'Please fill option value to add data',
             'save_ingredient' => 'Ingredient Added Successfully',
+
+            'popular_dishes' => 'Popular Dishes',
+            'no_popular' => 'No Popular Dish Found',
+            'bestseller_dishes' => 'Best Seller Dishes',
+            'no_bestseller' => 'No Bestseller Dish Found',
 		],
 
 		'ingredients' => [
@@ -192,8 +197,8 @@ return [
 		'delivery' => 'Delivery',
 		'take_away' => 'Take Away',
 		'chart_loading' => 'Chart is loading!',
-        'delivery_income' => 'Online Delivery Income',
-        'take_away_income' => 'Take Away Income',
+        'delivery_income' => 'Online Delivery',
+        'take_away_income' => 'Take Away',
 	],
 
 	'coupons' => [

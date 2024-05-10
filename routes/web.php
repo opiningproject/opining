@@ -74,6 +74,7 @@ Route::middleware(['localization'])->group(function () {
 
     Route::get('email/verify/{id}', [App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
+    Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
     Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
     Route::post('/takeawayPhone', [App\Http\Controllers\User\AddressController::class, 'takeawayPhone']);
     Route::post('/dish/searchDish', [DishController::class, 'searchDish']);
@@ -109,6 +110,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
             Route::post('/updateDish/{dish}', [DishController::class, 'updateDishData']);
         });
 
+        Route::get('/dish/popular', [DishController::class, 'popularDish'])->name('dish.popular');
+        Route::get('/dish/best-seller', [DishController::class, 'bestSellerDish'])->name('dish.bestseller');
         Route::resource('/dish', DishController::class);
 
         Route::group(['prefix' => '/ingredients'], function () {
@@ -171,10 +174,6 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
 
     // User Routes
-
-
-    Route::post('/unFavorite', [App\Http\Controllers\User\DishController::class, 'unFavorite']);
-
     Route::get('/validate-myfinance', [PaymentsController::class, 'validateMyFinance'])->name('validateMyFinance');
     Route::post('/check-myfinance-password', [PaymentsController::class, 'checkMyFinancePassword'])->name('checkMyFinancePassword');
 

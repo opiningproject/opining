@@ -54,7 +54,7 @@ io.on("connection", function (socket) {
             io.to(socket.id).emit('sendChatToUser', adminMessage);
         }
         if (messageData.type == "admin") {
-            io.sockets.emit('sendChatToClient', adminMessage);
+            io.emit('sendChatToClient', adminMessage);
 
         }
 
@@ -62,11 +62,11 @@ io.on("connection", function (socket) {
         // realtime message send
         socket.on('getMessage', (userMessageData) => {
             if (messageData.type == "user") {
-                io.sockets.emit('getMessageUser', userMessageData);
+                io.emit('getMessageUser', userMessageData);
             }
             if (messageData.type == "admin") {
                 // io.to(adminMessage.socketId).emit('getMessageAdmin', userMessageData);
-                io.sockets.emit('getMessageAdmin', userMessageData);
+                io.emit('getMessageAdmin', userMessageData);
             }
         })
         // io.to(messageData.receiver_id).emit('sendChatToClient', adminMessage);

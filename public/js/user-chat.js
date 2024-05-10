@@ -35,7 +35,8 @@ socket.on('getMessageAdmin', (data) => {
         '            <small>' + data.createdAt + '</small>\n' +
         '        </div>\n' +
         '    </div>';
-    $('.chat-messages-user_' + sender).append(htmlData)
+        $('.chat-messages-user_' + sender).append(htmlData)
+        htmlData = '';
        $('.chat-messages-users').html('')
         fetchChatUsers()
 })
@@ -47,21 +48,24 @@ socket.on('sendChatToUser', (message) => {
         data: message,
         success: function (data) {
             if (data.status == "200") {
-                var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_' + data.data.sender_id + '"  style="margin-left:auto;flex-direction:row-reverse">\n' +
-                    '        \n' +
-                    '        <img src=' + data.data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
-                    '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat user-chat-row">\n' +
-                    (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
-                    (data.data.attachment ?
-                        '                <a href="' + data.data.attachment + '" target="_blank">\n' +
-                        '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
-                        '                </a>\n' : '') +
-                    '            <small>' + data.data.createdAt + '</small>\n' +
-                    '        </div>\n' +
-                    '    </div>'
-                $('.chat-messages-user_' + data.data.sender_id).append(html)
-                $('.message-input').val('')
-                socket.emit('getMessage', data.data);
+                if (data.data.attachment) {
+                    var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_' + data.data.sender_id + '"  style="margin-left:auto;flex-direction:row-reverse">\n' +
+                        '        \n' +
+                        '        <img src=' + data.data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+                        '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat user-chat-row">\n' +
+                        (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n' : '') +
+                        (data.data.attachment ?
+                            '                <a href="' + data.data.attachment + '" target="_blank">\n' +
+                            '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
+                            '                </a>\n' : '') +
+                        '            <small>' + data.data.createdAt + '</small>\n' +
+                        '        </div>\n' +
+                        '    </div>'
+                    $('.chat-messages-user_' + data.data.sender_id).append(html)
+                    html = ''
+                    $('.message-input').val('')
+                    socket.emit('getMessage', data.data);
+                }
                 // $('.chat-messages-user').animate({scrollTop: 0}, 500);
                 var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
                 var contentHeight = chatboxMain[0].scrollHeight;
@@ -116,6 +120,23 @@ $(function () {
                 "fileName": fileName,
                 'type': "user"
             }
+        if (fileName == null ) {
+            var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3" style="margin-left:auto;flex-direction:row-reverse">\n' +
+                '        \n' +
+                '        <img src="' + userData.image + '" alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+                '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
+                (messageData.message ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + messageData.message + '</p>\n':'') +
+                (messageData.fileName ?
+                    '                <a href="' + messageData.fileName + '" target="_blank">\n' +
+                    '                       <img src="' + messageData.fileName + '" style="height: 100px;width: 100px;">\n' +
+                    '                </a>\n' : '') +
+                '            <small>' + new Date().toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Europe/London' }) + '</small>\n' +
+                '        </div>\n' +
+                '    </div>'
+            $('.chat-messages-user_' + sender_id).append(html)
+            html = ''
+            $('.message-input').val('')
+        }
         socket.emit('sendAdminChatToServer', messageData);
         $(".send-user-btn").prop('disabled', true);
         $(".image-holder").hide();
@@ -131,7 +152,17 @@ $(document).keypress(function () {
 });
 
 $('.chat-messages-user_' + sender_id).on('scroll', function () {
-    if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
+    var chatboxMain = $('.chat-messages');
+    var contentHeight = chatboxMain[0].scrollHeight;
+    var containerHeight = chatboxMain.innerHeight();
+
+    if (contentHeight > containerHeight && page === 1) {
+        fetchingOldMessages = true
+        chatListpage++
+        fetchChatUsers();
+        $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
+    }
+    /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
         // User has scrolled to the top
         // Perform AJAX call here
         fetchingOldMessages = true
@@ -139,7 +170,7 @@ $('.chat-messages-user_' + sender_id).on('scroll', function () {
         fetchChatUsers();
         $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
 
-    }
+    }*/
 });
 
 
@@ -155,7 +186,7 @@ function fetchChatUsers() {
             var containerHeight = chatboxMain.innerHeight();
 
             if (contentHeight > containerHeight && page === 1) {
-                $('.chat-messages-user_' + sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
+                $('.chat-messages-user_' + sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);
             }
 
         }

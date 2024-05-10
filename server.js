@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
     password: "GgiJ-9j$ceDn6oF",
     database: "go-meal"
 });
+
 connection.connect(function (err) {
     if (err) throw err;
     console.log("SQl Connected!");
@@ -54,17 +55,23 @@ io.on("connection", function (socket) {
             io.to(socket.id).emit('sendChatToUser', adminMessage);
             socket.on('getMessage', (userMessageData) => {
                 console.log("getMessageUser")
-                io.emit('getMessageUser', userMessageData);
+                // io.emit('getMessageUser', userMessageData);
+                io.to(messageData.socketId).emit('getMessageUser', userMessageData);
             })
         }
         if (messageData.type == "admin") {
             io.emit('sendChatToClient', adminMessage);
-            socket.on('getMessage', (userMessageData) => {
-                console.log("getMessageAdmin")
-                io.emit('getMessageAdmin', userMessageData);
-            })
+            // socket.on('getMessage', (userMessageData) => {
+            //     console.log("getMessageAdmin")
+            //     io.emit('getMessageAdmin', userMessageData);
+            // })
         }
-
+        socket.on('getMessage', (userMessageData) => {
+            if (messageData.type == "admin") {
+                io.to(adminMessage.socketId).emit('getMessageAdmin', userMessageData);
+                // io.emit('getMessageAdmin', userMessageData);
+            }
+        })
         // realtime message send
         /*socket.on('getMessage', (userMessageData) => {
             console.log("userMessageData", userMessageData)

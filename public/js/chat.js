@@ -41,7 +41,7 @@ socket.on('sendChatToClient', (message) => {
         }
     });
 });
-// socket.emit('updateSocketId', sender_id)
+socket.emit('updateSocketId', sender_id)
 socket.on('fetchMessage', (message) => {
     // console.log('socketId', message)
     fetchChatUsers()

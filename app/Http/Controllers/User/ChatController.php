@@ -90,6 +90,7 @@ class ChatController extends Controller
             $storeChat->createdAt = date('h:i A', strtotime($storeChat->created_at));
             $storeChat->timestamp = strtotime($storeChat->created_at) * 1000;
             $storeChat->userImage = auth()->user()->image ? auth()->user()->image : asset('images/user-profile.png');
+            $storeChat->socketId = $storeChat->receiver ? $storeChat->receiver->socket_id : null;
             $unreadCount = Chat::where(function ($query) use ($storeChat) {
                 $query->where('sender_id', $storeChat->sender_id)
                     ->where('is_read', "0");

@@ -55,7 +55,12 @@ class HomeController extends Controller
             $category = Category::find($request->cat_id);
         } else if(!$request->all) {
             $category = Category::orderBy('sort_order', 'asc')->first();
-            $dishes = Dish::with('favorite')->where('category_id', $category->id);
+            if(count($category) > 0){
+                $dishes = Dish::with('favorite')->where('category_id', $category->id);
+            }else{
+                $dishes = Dish::with('favorite')->get();
+            }
+
         }else{
             $dishes = Dish::with('favorite');
         }

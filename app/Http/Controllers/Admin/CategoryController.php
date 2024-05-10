@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -53,7 +53,12 @@ class CategoryController extends Controller
 
             if(empty($category->sort_order)) {
                 $storedcategory = Category::orderBy('sort_order', 'desc')->first();
-                $category->sort_order = $storedcategory->sort_order + 1;
+                if(count($storedcategory) > 0){
+                    $category->sort_order = $storedcategory->sort_order + 1;
+                }else{
+                    $category->sort_order = 1;
+                }
+
             }
 
             $category->name_en = $request->name_en;
@@ -130,16 +135,16 @@ class CategoryController extends Controller
         }
     }
 
-    function updateCategorySortOrder(Request $request) 
+    function updateCategorySortOrder(Request $request)
     {
         try {
             Category::whereId(request('movedId'))->update(['sort_order' => request('replacedSortOrder')]);
             Category::whereId(request('replacedId'))->update(['sort_order' => request('movedSortOrder')]);
-    
+
             return response()->json(['status' => HttpFoundationResponse::HTTP_OK, 'message' => 'Category sort order has been changed.']);
         } catch (\Throwable $th) {
             return response()->json(['status' => 0, 'message' => 'Something went wrong.']);
         }
-       
+
     }
 }

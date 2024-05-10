@@ -112,7 +112,7 @@
                             <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.service_charge') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">€</span>
-                                <input type="number" class="form-control" value="{{ $user->service_charge }}" min="0" name="service_charge" required />
+                                <input type="number" class="form-control" maxlength="4" value="{{ $user->service_charge }}" min="0" name="service_charge" required />
                             </div>
                         </div>
                     </div>

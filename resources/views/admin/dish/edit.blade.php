@@ -105,7 +105,7 @@
                                                 <div class="form-group">
                                                     <label for="quantity"
                                                            class="form-label">{{ trans('rest.menu.dish.quantity') }}</label>
-                                                    <input type="number" class="form-control" value="{{ $dish->qty }}"
+                                                    <input type="number" class="form-control" value="{{ $dish->qty }}" max="10000"
                                                            name="qty" id="qty"/>
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">€</span>
                                                         <input type="text" class="form-control"
-                                                               value="{{ $dish->price }}" id="price" name="price"/>
+                                                               value="{{ $dish->price }}" id="price" name="price" max="10000"/>
                                                     </div>
                                                 </div>
                                             </div>

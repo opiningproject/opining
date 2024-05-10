@@ -167,8 +167,13 @@ class CartController extends Controller
                     ]
                 );
             } else {
-                OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
-                $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
+
+                $dish = OrderDetail::find($request->dish_id);
+                
+                if($dish){
+                    OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
+                    $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
+                }
             }
 
             if (count($user->cart->dishDetails) == 0) {

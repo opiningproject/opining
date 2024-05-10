@@ -125,7 +125,7 @@ class CouponController extends Controller
         }
     }
 
-    public function claimHistoryLog()
+    public function claimHistoryLog(Request $request)
     {
         $perPage = isset($request->per_page) ? $request->per_page : 5;
 

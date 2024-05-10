@@ -23,25 +23,29 @@ var userIdData = localStorage.getItem("user_id")
 console.log("userLogin", userLogin.id, "socketId",socketId)*/
 socket.emit('updateSocketId', userLogin.id)
 
+let lastReceivedMessageTimestamp = 0;
 socket.on('getMessageAdmin', (data) => {
     console.log("getMessageAdmin")
-    var getAdminMessageData = "";
-    getAdminMessageData = '<div class="chat-item chat-box-md d-flex align-items-end justify-content-start gap-3"  style="margin-left:inherit;flex-direction:row">\n' +
-        '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
-        '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat user-chat-row">\n' +
-        (data.message != null ? '<p class="leftChat" style="background-color:#DBDBDB;margin-left:inherit;">' + data.message + '</p>\n':'') +
-        (data.attachment ?
-            '                <a href="' + data.attachment + '" target="_blank">\n' +
-            '                       <img src="' + data.attachment + '" style="height: 100px;width: 100px;">\n' +
-            '                </a>\n' : '') +
-        '            <small>' + data.createdAt + '</small>\n' +
-        '        </div>\n' +
-        '    </div>';
+    if (data.timestamp > lastReceivedMessageTimestamp) {
+        lastReceivedMessageTimestamp = data.timestamp;
+        var getAdminMessageData = "";
+        getAdminMessageData = '<div class="chat-item chat-box-md d-flex align-items-end justify-content-start gap-3"  style="margin-left:inherit;flex-direction:row">\n' +
+            '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+            '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat user-chat-row">\n' +
+            (data.message != null ? '<p class="leftChat" style="background-color:#DBDBDB;margin-left:inherit;">' + data.message + '</p>\n' : '') +
+            (data.attachment ?
+                '                <a href="' + data.attachment + '" target="_blank">\n' +
+                '                       <img src="' + data.attachment + '" style="height: 100px;width: 100px;">\n' +
+                '                </a>\n' : '') +
+            '            <small>' + data.createdAt + '</small>\n' +
+            '        </div>\n' +
+            '    </div>';
         $('.chat-messages-user_' + sender).append(getAdminMessageData)
         getAdminMessageData = '';
        $('.chat-messages-users').html('')
         chatListpage = 1
         fetchChatUsers()
+    }
 })
 
 socket.on('sendChatToUser', (message) => {
@@ -189,7 +193,7 @@ function fetchChatUsers() {
             var containerHeight = chatboxMain.innerHeight();
 
             if (contentHeight > containerHeight && page === 1) {
-                $(".chat-messages-users").stop().animate({ scrollTop: $(".chat-messages-users")[0].scrollHeight}, 1000);
+                $('.chat-messages-user_' + sender_id).stop().animate({ scrollTop: $(".chat-messages-users")[0].scrollHeight}, 1000);
             }
 
         }

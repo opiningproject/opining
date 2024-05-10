@@ -64,8 +64,8 @@ socket.on('sendChatToUser', (message) => {
                     $('.chat-messages-user_' + data.data.sender_id).append(html)
                     html = ''
                     $('.message-input').val('')
-                    socket.emit('getMessage', data.data);
                 }
+                socket.emit('getMessage', data.data);
                 // $('.chat-messages-user').animate({scrollTop: 0}, 500);
                 var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
                 var contentHeight = chatboxMain[0].scrollHeight;
@@ -152,17 +152,7 @@ $(document).keypress(function () {
 });
 
 $('.chat-messages-user_' + sender_id).on('scroll', function () {
-    var chatboxMain = $('.chat-messages');
-    var contentHeight = chatboxMain[0].scrollHeight;
-    var containerHeight = chatboxMain.innerHeight();
-
-    if (contentHeight > containerHeight && page === 1) {
-        fetchingOldMessages = true
-        chatListpage++
-        fetchChatUsers();
-        $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
-    }
-    /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
+    if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
         // User has scrolled to the top
         // Perform AJAX call here
         fetchingOldMessages = true
@@ -170,7 +160,7 @@ $('.chat-messages-user_' + sender_id).on('scroll', function () {
         fetchChatUsers();
         $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
 
-    }*/
+    }
 });
 
 

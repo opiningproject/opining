@@ -26,8 +26,8 @@ socket.on('sendChatToClient', (message) => {
                         '    </div>'
                     $('.chat-messages').append(html)
                     $('.message-input').val('')
-                    socket.emit('getMessage', data.data);
                 }
+                socket.emit('getMessage', data.data);
                 // $('.chat-messages').animate({scrollTop:0}, 500);
                 var chatboxMain = $('.chat-messages');
                 var contentHeight = chatboxMain[0].scrollHeight;

@@ -291,12 +291,12 @@ function getIngredientsList(categoryId, type) {
                 var html = '<option value="">'+ dishValidation.select_ingred +'</option>'
                 if (type == 'paid') {
                     $.each(ingredients, function (index, item) {
-                        html += '<option value="' + item.id + '"> ' + item.name_en + '</option>'
+                        html += '<option value="' + item.id + '"> ' + item.name + '</option>'
                     });
                     $('#paidIngredient').html(html)
                 } else {
                     $.each(ingredients, function (index, item) {
-                        html += '<option value="' + item.id + '"> ' + item.name_en + '</option>'
+                        html += '<option value="' + item.id + '"> ' + item.name + '</option>'
                     });
                     $('#freeIngredient').html(html)
                 }

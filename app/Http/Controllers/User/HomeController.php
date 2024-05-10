@@ -55,12 +55,22 @@ class HomeController extends Controller
             $category = Category::find($request->cat_id);
         } else if(!$request->all) {
             $category = Category::orderBy('sort_order', 'asc')->first();
-            $dishes = Dish::with('favorite')->where('category_id', $category->id);
+            if(!empty($category)){
+                $dishes = Dish::with('favorite')->where('category_id', $category->id);
+            }else{
+                $dishes = Dish::with('favorite');
+            }
+
         }else{
             $dishes = Dish::with('favorite');
         }
 
-        $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
+        if(count($dishes->get()) > 0){
+            $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
+        }else{
+            $dishes = [];
+
+        }
 
         $serviceCharge = getRestaurantDetail()->service_charge;
 

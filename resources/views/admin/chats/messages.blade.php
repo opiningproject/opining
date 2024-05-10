@@ -18,7 +18,7 @@
                 <img src="{{$message->attachment}}" style="height: 100px;width: 100px;">
             </a>
         @endif
-        <small>{{ date('h:i A', strtotime($message->created_at) }}</small>
+        <small>{{ date('h:i A', strtotime($message->created_at)) }}</small>
     </div>
 </div>
 @endforeach

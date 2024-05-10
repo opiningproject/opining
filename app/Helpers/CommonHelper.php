@@ -185,7 +185,7 @@ if (!function_exists('getDeliveryCharges')) {
     function getDeliveryCharges($zipcode)
     {
         $zip =substr($zipcode, 0, 4);
-        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status','1')->first();
+        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status','1')->first();
 
         return $zipcode;
     }

@@ -169,7 +169,7 @@ class CartController extends Controller
             } else {
 
                 $dish = OrderDetail::find($request->dish_id);
-                
+
                 if($dish){
                     OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
                     $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
@@ -464,7 +464,7 @@ class CartController extends Controller
                     if (session('zipcode')) {
 
                         $zip = substr(session('zipcode'), 0, 4);
-                        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = $zip")->where('status', '1')->first();
+                        $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status', '1')->first();
 
                         if ($zipcode) {
 

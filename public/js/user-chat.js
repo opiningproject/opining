@@ -27,6 +27,7 @@ let lastReceivedMessageTimestamp = 0;
 socket.on('getMessageAdmin', (data) => {
     console.log("getMessageAdmin")
     if (data.timestamp > lastReceivedMessageTimestamp) {
+        console.log("in");
         lastReceivedMessageTimestamp = data.timestamp;
         var getAdminMessageData = "";
         getAdminMessageData = '<div class="chat-item chat-box-md d-flex align-items-end justify-content-start gap-3"  style="margin-left:inherit;flex-direction:row">\n' +

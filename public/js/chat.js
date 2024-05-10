@@ -11,26 +11,27 @@ socket.on('sendChatToClient', (message) => {
         data: message,
         success: function (data) {
             if (data.status == "200") {
-                var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3" style="margin-left:auto;flex-direction:row-reverse">\n' +
-                    '        \n' +
-                    '        <img src="' + data.data.userImage + '" alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
-                    '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
-                    (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
-                    (data.data.attachment ?
-                        '                <a href="' + data.data.attachment + '" target="_blank">\n' +
-                        '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
-                        '                </a>\n' : '') +
-                    '            <small>' + data.data.createdAt + '</small>\n' +
-                    '        </div>\n' +
-                    '    </div>'
-                $('.chat-messages').append(html)
-                $('.message-input').val('')
-                socket.emit('getMessage', data.data);
+                if (data.data.attachment) {
+                    var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3" style="margin-left:auto;flex-direction:row-reverse">\n' +
+                        '        \n' +
+                        '        <img src="' + data.data.userImage + '" alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+                        '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
+                        (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
+                        (data.data.attachment ?
+                            '                <a href="' + data.data.attachment + '" target="_blank">\n' +
+                            '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
+                            '                </a>\n' : '') +
+                        '            <small>' + data.data.createdAt + '</small>\n' +
+                        '        </div>\n' +
+                        '    </div>'
+                    $('.chat-messages').append(html)
+                    $('.message-input').val('')
+                    socket.emit('getMessage', data.data);
+                }
                 // $('.chat-messages').animate({scrollTop:0}, 500);
-
                 var chatboxMain = $('.chat-messages');
                 var contentHeight = chatboxMain[0].scrollHeight;
-                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
+                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);
                 // $( ".chat-messages" ).html(data.data);
                 // socket.emit('updateSocketId', data.data.sender_id, data.data.receiver_id, html)
             }
@@ -55,7 +56,7 @@ socket.emit('connectionEstablished, ')
 var sender_id = $('.sender_id').val();
 var receiver_id = $('.receiver_id').val();
 $(function () {
-    $('#send-btn').click(function () {
+    $('.send-btn').click(function () {
         var message = $('#message-input').val();
         var socket_ids = $('.socketId').val();
         receiver_id = $('.receiver_id').val();
@@ -82,7 +83,7 @@ $(function () {
             });
         }
         var fileName = attachment ? attachment.name : null;
-        var messageData = {
+        var messageDataAdmin = {
             'sender_id': senderId,
             'receiver_id': receiverId,
             'receiver_socket': socket_ids,
@@ -90,8 +91,24 @@ $(function () {
             "fileName": fileName,
             'type': "admin"
         }
-        // console.log(messageData)
-        socket.emit('sendAdminChatToServer', messageData);
+        if (fileName == null ) {
+            var html = '<div class="chat-item d-flex align-items-end justify-content-start gap-3" style="margin-left:auto;flex-direction:row-reverse">\n' +
+                '        \n' +
+                '        <img src="' + userData.image + '" alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
+                '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
+                (messageDataAdmin.message ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + messageDataAdmin.message + '</p>\n':'') +
+                (messageDataAdmin.fileName ?
+                    '                <a href="' + messageDataAdmin.fileName + '" target="_blank">\n' +
+                    '                       <img src="' + messageDataAdmin.fileName + '" style="height: 100px;width: 100px;">\n' +
+                    '                </a>\n' : '') +
+                '            <small>' + new Date().toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Europe/London' }) + '</small>\n' +
+                '        </div>\n' +
+                '    </div>'
+            $('.chat-messages').append(html)
+            html = ''
+            $('.message-input').val('')
+        }
+        socket.emit('sendAdminChatToServer', messageDataAdmin);
         $(".send-btn").prop('disabled', true);
         $(".image-holder").hide();
         $(".admin_chat_attachment").val('');
@@ -129,7 +146,7 @@ function fetchMessages(senderId, receiverId, userId) {
             var containerHeight = chatboxMain.innerHeight();
 
             if (contentHeight > containerHeight && page === 1) {
-                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
+                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);
             }
         }
     };
@@ -141,18 +158,25 @@ function fetchMessages(senderId, receiverId, userId) {
 
 let chatListpage = 1;
 $('.chat-messages').on('scroll', function () {
-    if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
+    var chatboxMain = $('.chat-messages');
+    var contentHeight = chatboxMain[0].scrollHeight;
+    var containerHeight = chatboxMain.innerHeight();
+
+    if (contentHeight > containerHeight && page === 1) {
+        fetchingOldMessages = true
+        page++
+        fetchMessages(senderId, receiverId, userId);
+        $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 0}, 500);
+    }
+    /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
 
         // User has scrolled to the top
         // Perform AJAX call here
         fetchingOldMessages = true
         page++
         fetchMessages(senderId, receiverId, userId);
-        // chatListpage++
-        // fetchChatUsers();
         $('.chat-messages').animate({scrollTop: 0}, 500);
-
-    }
+    }*/
 });
 
 
@@ -303,6 +327,7 @@ socket.on('getMessageUser', (data) => {
             '        </div>\n' +
             '    </div>';
         $('.chat-messages').append(htmlData);
+        htmlData = '';
     } else {
         $('.ChatDiv-list').html('')
         fetchChatUsers();

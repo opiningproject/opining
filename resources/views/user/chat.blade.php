@@ -86,6 +86,7 @@
             id: {{ auth()->user()->id }},
             socketId: $('#socket-id').val()
         }
+        var userData = {!! auth()->user() !!}
     </script>
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
             integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"

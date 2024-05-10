@@ -74,6 +74,7 @@
             online: '{{ trans('rest.user_chat.online') }}',
             offline: '{{ trans('rest.user_chat.offline') }}',
         }
+        var userData = {!! auth()->user() !!}
     </script>
     <script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
 @endsection

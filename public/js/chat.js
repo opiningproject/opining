@@ -16,7 +16,7 @@ socket.on('sendChatToClient', (message) => {
                         '        \n' +
                         '        <img src="' + data.data.userImage + '" alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
                         '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
-                        (data.data.message != null ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
+                        (data.data.message != null ? '<p class="rightChat" style="background-color:var(--theme-cyan1);margin-left:auto;">' + data.data.message + '</p>\n':'') +
                         (data.data.attachment ?
                             '                <a href="' + data.data.attachment + '" target="_blank">\n' +
                             '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
@@ -96,7 +96,7 @@ $(function () {
                 '        \n' +
                 '        <img src="' + userData.image + '" alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
                 '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
-                (messageDataAdmin.message ? '<p style="background-color:var(--theme-cyan1);margin-left:auto;">' + messageDataAdmin.message + '</p>\n':'') +
+                (messageDataAdmin.message ? '<p class="rightChat" style="background-color:var(--theme-cyan1);margin-left:auto;">' + messageDataAdmin.message + '</p>\n':'') +
                 (messageDataAdmin.fileName ?
                     '                <a href="' + messageDataAdmin.fileName + '" target="_blank">\n' +
                     '                       <img src="' + messageDataAdmin.fileName + '" style="height: 100px;width: 100px;">\n' +
@@ -313,12 +313,14 @@ function readURL(input) {
 
 //get realtime message
 socket.on('getMessageUser', (data) => {
+    console.log("getMessageUser")
     if (senderId == data.receiver_id && receiverId == data.sender_id) {
-        var htmlData = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
+        var getUserMessageData = "" ;
+        getUserMessageData = '<div class="chat-item d-flex align-items-end justify-content-start gap-3 user_"  style="margin-left:inherit;flex-direction:row">\n' +
             '        \n' +
             '        <img src=' + data.userImage + ' alt="Profile-Img" class="img-fluid" width="56" height="56">\n' +
             '        <div class="chat-item-textgrp d-flex flex-column gap-2 gap-sm-3 user-chat">\n' +
-            (data.message != null ? '<p style="">' + data.message + '</p>\n':'') +
+            (data.message != null ? '<p class="leftChat" style="background-color:#DBDBDB;margin-left:inherit;">' + data.message + '</p>\n':'') +
             (data.attachment ?
                 '                <a href="' + data.attachment + '" target="_blank">\n' +
                 '                       <img src="' + data.attachment + '" style="height: 100px;width: 100px;">\n' +
@@ -326,10 +328,11 @@ socket.on('getMessageUser', (data) => {
             '            <small>' + data.createdAt + '</small>\n' +
             '        </div>\n' +
             '    </div>';
-        $('.chat-messages').append(htmlData);
-        htmlData = '';
+        $('.chat-messages').append(getUserMessageData);
+        getUserMessageData = '';
     } else {
         $('.ChatDiv-list').html('')
+        chatListpage = 1
         fetchChatUsers();
     }
 })

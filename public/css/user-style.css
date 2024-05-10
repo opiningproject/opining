@@ -2787,12 +2787,22 @@ input[type=number] {
   margin-left: auto;
 }
 
-.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
+/*.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
   content: "";
   background-image: url(../images/curve-chaticon-cyan.svg);
   left: unset;
   right: -11px;
   transform: scaleX(-1);
+}*/
+.chat-messages-users {
+    overflow-x:hidden;
+}
+.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
+    content: "";
+    background-image: url(../images/curve-chaticon-cyan.svg);
+    left: unset;
+    right: -6px;
+    transform: scaleX(-1);
 }
 
 .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp small {
@@ -3755,13 +3765,13 @@ input[type=number] {
     margin-left: auto;
   }
 
-  .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {
-    content: "";
-    background-image: url(../images/curve-chaticon-cyan.svg);
-    left: unset;
-    right: -6px;
-    transform: scaleX(-1);
-  }
+  /*.chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp p::before {*/
+  /*  content: "";*/
+  /*  background-image: url(../images/curve-chaticon-cyan.svg);*/
+  /*  left: unset;*/
+  /*  right: -6px;*/
+  /*  transform: scaleX(-1);*/
+  /*}*/
 
   .chatbox .chatbox-main .chats-grp .chat-item:nth-of-type(even) .chat-item-textgrp small {
     text-align: right;

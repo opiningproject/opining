@@ -53,25 +53,25 @@ io.on("connection", function (socket) {
 
         if (messageData.type == "user") {
             io.to(socket.id).emit('sendChatToUser', adminMessage);
-            socket.on('getMessage', (userMessageData) => {
-                console.log("getMessageUser")
-                // io.emit('getMessageUser', userMessageData);
-                io.to(messageData.socketId).emit('getMessageUser', userMessageData);
+            socket.on('sendMessageUser', (userMessageData) => {
+                io.emit('getMessageUser', userMessageData);
+                // socket.to(adminMessage.socketId).emit('getMessageUser', userMessageData);
             })
         }
         if (messageData.type == "admin") {
             io.emit('sendChatToClient', adminMessage);
-            // socket.on('getMessage', (userMessageData) => {
-            //     console.log("getMessageAdmin")
-            //     io.emit('getMessageAdmin', userMessageData);
-            // })
+            socket.on('sendMessageAdmin', (userMessageData) => {
+               console.log("getMessageAdmin")
+                io.emit('getMessageAdmin', userMessageData);
+                // io.to(adminMessage.socketId).emit('getMessageAdmin', userMessageData);
+            })
         }
-        socket.on('getMessage', (userMessageData) => {
+        /*socket.on('sendMessageAdmin', (userMessageData) => {
             if (messageData.type == "admin") {
                 io.to(adminMessage.socketId).emit('getMessageAdmin', userMessageData);
                 // io.emit('getMessageAdmin', userMessageData);
             }
-        })
+        })*/
         // realtime message send
         /*socket.on('getMessage', (userMessageData) => {
             console.log("userMessageData", userMessageData)

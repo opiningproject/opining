@@ -73,7 +73,7 @@ socket.on('sendChatToUser', (message) => {
                     html = ''
                     $('.message-input').val('')
                 }
-                socket.emit('getMessage', data.data);
+                socket.emit('sendMessageUser', data.data);
                 // $('.chat-messages-user').animate({scrollTop: 0}, 500);
                 var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
                 var contentHeight = chatboxMain[0].scrollHeight;

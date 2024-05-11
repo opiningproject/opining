@@ -27,7 +27,7 @@ socket.on('sendChatToClient', (message) => {
                     $('.chat-messages').append(html)
                     $('.message-input').val('')
                 }
-                socket.emit('getMessage', data.data);
+                socket.emit('sendMessageAdmin', data.data);
                 // $('.chat-messages').animate({scrollTop:0}, 500);
                 var chatboxMain = $('.chat-messages');
                 var contentHeight = chatboxMain[0].scrollHeight;
@@ -41,7 +41,7 @@ socket.on('sendChatToClient', (message) => {
         }
     });
 });
-socket.emit('updateSocketId', sender_id)
+socket.emit('updateSocketId', sender)
 socket.on('fetchMessage', (message) => {
     // console.log('socketId', message)
     fetchChatUsers()

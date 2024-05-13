@@ -20,11 +20,11 @@ class Order extends Model
     }
 
     public function dishDetails(){
-        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
+        return $this->hasMany(OrderDetail::class, 'order_id', 'id')->withTrashed();
     }
 
     public function orderUserDetails(){
-        return $this->hasOne(OrderUserDetail::class, 'order_id' ,'id');
+        return $this->hasOne(OrderUserDetail::class, 'order_id' ,'id')->withTrashed();
     }
 
     public function coupon(){

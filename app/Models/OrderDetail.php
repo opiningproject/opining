@@ -22,27 +22,31 @@ class OrderDetail extends Model
     }
 
     public function dish(){
+        return $this->belongsTo(Dish::class, 'dish_id', 'id')->withTrashed();
+    }
+
+    public function dishWithoutTrash(){
         return $this->belongsTo(Dish::class, 'dish_id', 'id');
     }
 
     public function dishOption(){
-        return $this->belongsTo(DishOption::class, 'dish_option_id', 'id');
+        return $this->belongsTo(DishOption::class, 'dish_option_id', 'id')->withTrashed();
     }
 
     public function orderDishDetails(){
-        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->withTrashed();
     }
 
     public function orderDishFreeIngredients(){
-        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','1');
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','1')->withTrashed();
     }
 
     public function orderDishPaidIngredients(){
-        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','0');
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->where('is_free','0')->withTrashed();
     }
 
     public function orderDishIngredients(){
-        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id');
+        return $this->hasMany(OrderDishDetail::class, 'order_detail_id', 'id')->withTrashed();
     }
 
     public function getPaidIngredientSumAttribute()

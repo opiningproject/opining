@@ -60,7 +60,7 @@ class DishController extends Controller
             }
 
             $dish->name_en = $request->name_en;
-            $dish->category_id  = $request->category_id ;
+            $dish->category_id = $request->category_id;
             $dish->name_nl = $request->name_nl;
             $dish->desc_en = $request->desc_en;
             $dish->desc_nl = $request->desc_nl;
@@ -75,7 +75,7 @@ class DishController extends Controller
                 ['enable_email_notification', '1']
             ])->get();
 
-            foreach ($users as $user){
+            foreach ($users as $user) {
                 $user->notify(new NewDish($dish));
             }
 
@@ -109,23 +109,17 @@ class DishController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try
-        {
+        try {
             $dish = Dish::find($id);
 
-            if ($dish)
-            {
+            if ($dish) {
                 $dish->price = $request->price;
                 $dish->save();
                 return response::json(['status' => 200, 'data' => $dish]);
-            }
-            else
-            {
+            } else {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
@@ -135,24 +129,24 @@ class DishController extends Controller
      */
     public function destroy(string $id)
     {
-        try
-        {
+        try {
             $dish = Dish::find($id);
 
-            if ($dish)
-            {
+            if ($dish) {
+                foreach ($dish->cartOrderDetails  as $orderDetail){
+                    $orderDetail->orderDishIngredients()->forceDelete();
+                }
+                $dish->cartOrderDetails()->forceDelete();
+                $dish->adminFavourite()->forceDelete();
+
                 $dish->option()->delete();
                 $dish->ingredients()->delete();
                 $dish->delete();
-                return response::json(['status' => 200, 'message' =>  trans('rest.message.dish_delete_success')]);
-            }
-            else
-            {
+                return response::json(['status' => 200, 'message' => trans('rest.message.dish_delete_success')]);
+            } else {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
@@ -219,18 +213,13 @@ class DishController extends Controller
         try {
             $dishIngredient = DishIngredient::find($id);
 
-            if ($dishIngredient)
-            {
+            if ($dishIngredient) {
                 $dishIngredient->delete();
                 return response::json(['status' => 200, 'message' => trans('rest.message.dish_ingre_delete_success')]);
-            }
-            else
-            {
+            } else {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
     }
@@ -240,8 +229,7 @@ class DishController extends Controller
         try {
             $dish = Dish::find($id);
 
-            if ($dish)
-            {
+            if ($dish) {
                 $dish->name_en = $request->name_en;
                 $dish->name_nl = $request->name_nl;
                 $dish->desc_en = $request->desc_en;
@@ -289,9 +277,7 @@ class DishController extends Controller
                 } else {
                     return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
                 }
-            }
-            else
-            {
+            } else {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
         } catch (Exception $e) {
@@ -312,24 +298,21 @@ class DishController extends Controller
             }
         }
 
-        if ($request->has('cat_id') && $request->cat_id != 'null')
-        {
-            $dishes->where('category_id',$request->cat_id);
+        if ($request->has('cat_id') && $request->cat_id != 'null') {
+            $dishes->where('category_id', $request->cat_id);
         }
 
-        if($user && $user->user_role == UserType::Admin)
-        {
+        if ($user && $user->user_role == UserType::Admin) {
             return view('admin.dish.dish-list', ['dishes' => $dishes->get()]);
-        }
-        else
-        {
+        } else {
             return view('user.dish.dish-list', ['dishes' => $dishes->get()]);
         }
 
 
     }
 
-    public function popularDish(){
+    public function popularDish()
+    {
 
         $currentWeekStartDate = Carbon::now()->startOfWeek();
         $currentWeekEndDate = Carbon::now()->endOfWeek();
@@ -355,10 +338,8 @@ class DishController extends Controller
         // Calculate percentage increase for each dish
         $popularDishes = [];
 
-        if(!empty($currentWeekCounts))
-        {
-            foreach ($currentWeekCounts as $dishId => $currentWeekCount)
-            {
+        if (!empty($currentWeekCounts)) {
+            foreach ($currentWeekCounts as $dishId => $currentWeekCount) {
                 $previousWeekCount = $previousWeekCounts->get($dishId, 0);
                 $percentageCalculation = ($currentWeekCount - $previousWeekCount) / ($previousWeekCount ?: 1) * 100;
                 $popularDishes[$dishId] = ['percentage' => round($percentageCalculation, 2), 'total_orders' => $currentWeekCount];
@@ -370,7 +351,8 @@ class DishController extends Controller
         ]);
     }
 
-    public function bestSellerDish(){
+    public function bestSellerDish()
+    {
 
         $orderDetailsQuery = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('COUNT(*) as total_orders'))
             ->groupBy('dish_id')

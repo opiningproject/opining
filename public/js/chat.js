@@ -29,9 +29,13 @@ socket.on('sendChatToClient', (message) => {
                 }
                 socket.emit('sendMessageAdmin', data.data);
                 // $('.chat-messages').animate({scrollTop:0}, 500);
-                var chatboxMain = $('.chat-messages');
+                var chatBoxMain = $('.chat-messages');
+                var contentHeight = chatBoxMain[0].scrollHeight;
+
+                $('.chat-messages').animate({scrollTop: chatBoxMain.offset().top + contentHeight - 726}, 500);
+                /*var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
                 var contentHeight = chatboxMain[0].scrollHeight;
-                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);
+                $('.chat-messages-user_' + data.data.sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);*/
                 // $( ".chat-messages" ).html(data.data);
                 // socket.emit('updateSocketId', data.data.sender_id, data.data.receiver_id, html)
             }
@@ -166,7 +170,6 @@ $('.chat-messages').on('scroll', function () {
         fetchingOldMessages = true
         page++
         fetchMessages(senderId, receiverId, userId);
-        $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 0}, 500);
     }
     /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
 

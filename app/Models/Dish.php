@@ -60,21 +60,21 @@ class Dish extends Model
 
     public function option()
     {
-        return $this->hasMany(DishOption::class, 'dish_id', 'id');
+        return $this->hasMany(DishOption::class, 'dish_id', 'id')->withTrashed();
     }
 
     public function freeIngredients()
     {
-        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', 1);
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', 1)->withTrashed();
     }
 
     public function paidIngredients()
     {
-        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', '0');
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', '0')->withTrashed();
     }
 
     public function ingredients(){
-        return $this->hasMany(DishIngredient::class, 'dish_id', 'id');
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->withTrashed();
     }
 
     protected function getImageAttribute($value)
@@ -114,5 +114,13 @@ class Dish extends Model
 
     public function getPriceAttribute($value){
         return $value;
+    }
+
+    public function cartOrderDetails(){
+        return $this->hasMany(OrderDetail::class, 'dish_id', 'id')->where('is_cart', '1');
+    }
+
+    public function adminFavourite(){
+        return $this->hasMany(DishFavorites::class, 'dish_id', 'id');
     }
 }

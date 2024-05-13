@@ -23,7 +23,7 @@ class OrderDishDetail extends Model
     }
 
     public function dishIngredient(){
-        return $this->belongsTo(DishIngredient::class, 'dish_ingredient_id', 'id');
+        return $this->belongsTo(DishIngredient::class, 'dish_ingredient_id', 'id')->withTrashed();
     }
 
     public function scopeFreeIngredient($query){

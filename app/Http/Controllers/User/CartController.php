@@ -316,7 +316,7 @@ class CartController extends Controller
                     $orderDetails->total_price = $orderDetails->qty * $dish->price;
                     $orderDetails->save();
 //                ]);
-                $orderDetails->orderDishDetails()->delete();
+                $orderDetails->orderDishDetails()->forceDelete();
                 if (isset($request->freeIng)) {
                     foreach ($request->freeIng as $freeIng) {
                         $orderDetails->orderDishDetails()->create([
@@ -456,7 +456,7 @@ class CartController extends Controller
                     return response::json(['status' => 412, 'message' => trans('user.message.cart_item_out_of_stock')]);
                 }
 
-                if ($now < $restaurantHours->start_time || $now > $restaurantHours->end_time) {
+                if ($now < $restaurantHours->start_time && $now > $restaurantHours->end_time) {
                     return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
                 }
 

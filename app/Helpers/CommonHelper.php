@@ -154,7 +154,8 @@ if (!function_exists('getOrderDishIngredients')) {
     {
         $ingredients = '';
 
-        $dishData = Dish::find($dish->dish_id);
+        $dishData = Dish::withTrashed()->find($dish->dish_id);
+
         if($dish->orderDishFreeIngredients->count() != $dishData->freeIngredients->count()){
             $ingredients .= '-';
             $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();

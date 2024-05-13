@@ -69,7 +69,7 @@
                 <input type="hidden" value="" id="dishId">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.category.delete_message') }}</h4>
+                        <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.dish.delete_message') }}</h4>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">

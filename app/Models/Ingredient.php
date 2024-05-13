@@ -22,7 +22,7 @@ class Ingredient extends Model
     }
 
     public function dishIngredient(){
-        return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id');
+        return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id')->withTrashed();
     }
 
     public function freeDishIngredient(){

@@ -25,6 +25,10 @@ class OrderDetail extends Model
         return $this->belongsTo(Dish::class, 'dish_id', 'id')->withTrashed();
     }
 
+    public function dishWithoutTrash(){
+        return $this->belongsTo(Dish::class, 'dish_id', 'id');
+    }
+
     public function dishOption(){
         return $this->belongsTo(DishOption::class, 'dish_option_id', 'id')->withTrashed();
     }

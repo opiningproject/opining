@@ -33,7 +33,7 @@ class HomeController extends Controller
         $previousWeekStartDate = Carbon::now()->subWeek()->startOfWeek();
         $previousWeekEndDate = Carbon::now()->subWeek()->endOfWeek();
 
-        $currentWeekCounts = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('count(*) as total'))
+        $currentWeekCounts = OrderDetail::whereHas('dishWithoutTrash')->select('dish_id', DB::raw('count(*) as total'))
             ->whereBetween('created_at', [$currentWeekStartDate, $currentWeekEndDate])
             ->groupBy('dish_id')
             ->orderByDesc('total')
@@ -41,7 +41,7 @@ class HomeController extends Controller
             ->pluck('total', 'dish_id');
 
         // Query to get the counts of orders for each dish for the previous week
-        $previousWeekCounts = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('count(*) as total'))
+        $previousWeekCounts = OrderDetail::whereHas('dishWithoutTrash')->select('dish_id', DB::raw('count(*) as total'))
             ->whereBetween('created_at', [$previousWeekStartDate, $previousWeekEndDate])
             ->groupBy('dish_id')
             ->orderByDesc('total')
@@ -53,18 +53,18 @@ class HomeController extends Controller
 
         if(!empty($currentWeekCounts))
         {
-            foreach ($currentWeekCounts as $dishId => $currentWeekCount) 
+            foreach ($currentWeekCounts as $dishId => $currentWeekCount)
             {
                 $previousWeekCount = $previousWeekCounts->get($dishId, 0);
                 $percentageCalculation = ($currentWeekCount - $previousWeekCount) / ($previousWeekCount ?: 1) * 100;
                 $popularDishes[$dishId] = ['percentage' => round($percentageCalculation, 2), 'total_orders' => $currentWeekCount];
             }
         }
-        
+
         $categories = Category::orderBy('sort_order', 'asc')->get();
         $dishes = Dish::orderBy('id', 'desc')->limit(5)->get();
 
-        $orderDetailsQuery = OrderDetail::whereHas('dish')->select('dish_id', DB::raw('COUNT(*) as total_orders'))
+        $orderDetailsQuery = OrderDetail::whereHas('dishWithoutTrash')->select('dish_id', DB::raw('COUNT(*) as total_orders'))
                 ->groupBy('dish_id')
                 ->orderByDesc('total_orders');
 

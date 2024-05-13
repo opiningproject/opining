@@ -16,7 +16,7 @@ class DishIngredient extends Model
     public $timestamps = true;
 
     public function ingredient(){
-        return $this->belongsTo(Ingredient::class, 'ingredient_id', 'id');
+        return $this->belongsTo(Ingredient::class, 'ingredient_id', 'id')->withTrashed();
     }
 
     public function dish(){

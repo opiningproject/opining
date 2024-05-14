@@ -267,13 +267,15 @@
                                                                    onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
                                                             </div>
                                                         </div>
-                                                        <div class="notes">
-                                                            <div
-                                                                class="text d-flex align-items-center justify-content-center">{{ trans('rest.food_order.notes') }}</div>
-                                                            <input type="text" placeholder="{{ $dish->notes }}"
-                                                                   class="input" data-toggle="tooltip"
-                                                                   title="{{ $dish->notes }}" readonly>
-                                                        </div>
+                                                        @if(!empty($dish->notes))
+                                                            <div class="notes">
+                                                                <div
+                                                                    class="text d-flex align-items-center justify-content-center">{{ trans('rest.food_order.notes') }}</div>
+                                                                <input type="text" placeholder="{{ $dish->notes }}"
+                                                                       class="input" data-toggle="tooltip"
+                                                                       title="{{ $dish->notes }}" readonly>
+                                                            </div>
+                                                        @endif
                                                         <div class="price d-flex flex-column">
                                                                 <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
                                                             <div class="title">€{{ $itemPrice }}</div>
@@ -346,10 +348,10 @@
 @endsection
 @section('script')
     <script>
-        $(function (){
+        $(function () {
             var interval = setInterval(makePrintLabel, 500);
 
-            function makePrintLabel(){
+            function makePrintLabel() {
                 window.print()
                 clearInterval(interval)
             }

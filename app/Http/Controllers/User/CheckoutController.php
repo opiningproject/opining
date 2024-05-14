@@ -148,7 +148,7 @@ class CheckoutController extends Controller
                 'order_time' => $orderTime,
                 'order_type' => session('zipcode') ? OrderType::Delivery : OrderType::TakeAway,
                 'delivery_date' => date('Y/m/d'),
-                'delivery_note' => $request->instructions,
+                'delivery_note' => $request->instructions ?? null,
                 'receive_update_emails' => isset($request->receive_mail) ? '1' : '0',
                 'points_redeemed' => $pointsRedeemed,
                 'coupon_discount' => $couponDiscount,

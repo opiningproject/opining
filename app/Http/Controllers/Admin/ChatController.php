@@ -72,7 +72,9 @@ class ChatController extends Controller
         });
         //message read logic
         Chat::where('sender_id', $userId)->orWhere('receiver_id', $userId)->update(['is_read' => "1"]);
-        $chats = $messages->reverse();
+        $chats = $messages->reverse()->groupBy(function($date) {
+            return \Carbon\Carbon::parse($date->created_at)->format('d-M-Y');
+        });
 
         return view('admin.chats.messages', ['messages' => $chats]);
     }
@@ -118,7 +120,7 @@ class ChatController extends Controller
         $chats = Chat::select('sender_id', 'receiver_id', 'created_at')
             ->orderBy('created_at', 'desc')
             ->distinct()
-            ->paginate(16, ['*'], 'page', $pageNumber)
+            ->get()
             ->flatMap(function ($chat) {
                 return [$chat->sender_id, $chat->receiver_id];
             })

@@ -131,6 +131,10 @@ color:  #212529 !important;
   .signin-card {max-width: 310px;}
 }
 
-
-
+.message-date span {
+    background-color: #f1efef;
+    border-radius: 30px;
+    padding: 5px 16px;
+    font-size: 12px;
+}
 

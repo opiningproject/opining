@@ -5287,3 +5287,10 @@ footer .footer-logo a {font-size: initial !important;}
 .item-customize a .edit-icon {
     max-width: 14px;
 }
+
+.message-date span {
+    background-color: #f1efef;
+    border-radius: 30px;
+    padding: 5px 16px;
+    font-size: 12px;
+}

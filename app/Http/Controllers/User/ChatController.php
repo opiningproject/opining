@@ -50,7 +50,7 @@ class ChatController extends Controller
             })->orWhere(function ($query) use ($adminId, $userId) {
                 $query->where('sender_id', $userId)
                     ->where('receiver_id', $adminId);
-            })->orderBy('created_at', 'asc')
+            })->orderBy('created_at', 'desc')
             ->paginate(10, ['*'], 'page', $pageNumber); // Fetch messages
 
         $messages->getCollection()->transform(function ($item) {
@@ -70,8 +70,8 @@ class ChatController extends Controller
             }
             return $item;
         });
-//        $chats = $messages->reverse();
-        $chats = $messages;
+        $chats = $messages->reverse();
+//        $chats = $messages;
         return view('user.chats.messages', ['messages' => $chats]);
     }
 

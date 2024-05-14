@@ -10,6 +10,7 @@ let chatListpage = 1;
 let socketId = null;
 var sender_id = $('.sender_id').val();
 var receiver_id = $('.receiver_id').val();
+var lastScrollTop = 0;
 
 socket.on('socketConnectionSecured', (message) => {
     // console.log('socketId-----', message)
@@ -159,26 +160,32 @@ $(document).keypress(function () {
     };
 });
 
-$('.chat-messages-user_' + sender_id).on('scroll', function () {
-    var chatboxMain = $('.chat-messages-user_' + sender_id);
-    var contentHeight = chatboxMain[0].scrollHeight;
-    var containerHeight = chatboxMain.innerHeight();
-    if (contentHeight > containerHeight && chatListpage === 1) {
-        fetchingOldMessages = true
-        chatListpage++
-        fetchChatUsers();
-        $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
+$('.chat-messages-user_' + sender_id).on('wheel', function () {
+    var st = $(this).scrollTop();
+    if (st < lastScrollTop){
+        var chatboxMain = $('.chat-messages-user_' + sender_id);
+        var contentHeight = chatboxMain[0].scrollHeight;
+        var containerHeight = chatboxMain.innerHeight();
+        // if (contentHeight > containerHeight && chatListpage === 1) {
+        if (contentHeight > containerHeight) {
+            fetchingOldMessages = true
+            chatListpage++
+            fetchChatUsers();
+            // $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
+        }
+
+        /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
+            // User has scrolled to the top
+            // Perform AJAX call here
+            fetchingOldMessages = true
+            chatListpage++
+            fetchChatUsers();
+            $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
+
+        }*/
     }
+    lastScrollTop = st;
 
-    /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
-        // User has scrolled to the top
-        // Perform AJAX call here
-        fetchingOldMessages = true
-        chatListpage++
-        fetchChatUsers();
-        $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
-
-    }*/
 });
 
 
@@ -188,15 +195,15 @@ function fetchChatUsers() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            $('.chat-messages-user_' + sender_id).append(this.responseText)
+            $('.chat-messages-user_' + sender_id).prepend(this.responseText)
             var chatboxMain = $('.chat-messages-user_' + sender_id);
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
-            if (contentHeight > containerHeight && page === 1) {
-                $('.chat-messages-user_' + sender_id).stop().animate({ scrollTop: $(".chat-messages-users")[0].scrollHeight}, 1000);
+                if (contentHeight > containerHeight && page === 1) {
+                $('.chat-messages-user_' + sender_id).stop().animate({ scrollTop: $(".chat-messages-users")[0].scrollHeight}, 100);
             }
-
+            page++;
         }
     };
 

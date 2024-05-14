@@ -143,14 +143,14 @@ function fetchMessages(senderId, receiverId, userId) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            $('.chat-messages').append(this.responseText)
+            $('.chat-messages').prepend(this.responseText)
 
             var chatboxMain = $('.chat-messages');
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
             if (contentHeight > containerHeight && page === 1) {
-                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);
+                $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 100);
             }
         }
     };
@@ -161,25 +161,33 @@ function fetchMessages(senderId, receiverId, userId) {
 }
 
 let chatListpage = 1;
-$('.chat-messages').on('scroll', function () {
-    var chatboxMain = $('.chat-messages');
-    var contentHeight = chatboxMain[0].scrollHeight;
-    var containerHeight = chatboxMain.innerHeight();
+var lastScrollTop = 0;
 
-    if (contentHeight > containerHeight && page === 1) {
-        fetchingOldMessages = true
-        page++
-        fetchMessages(senderId, receiverId, userId);
+$('.chat-messages').on('wheel', function () {
+
+    var st = $(this).scrollTop();
+    if (st < lastScrollTop){
+        var chatboxMain = $('.chat-messages');
+        var contentHeight = chatboxMain[0].scrollHeight;
+        var containerHeight = chatboxMain.innerHeight();
+
+        // if (contentHeight > containerHeight && page === 1) {
+        if (contentHeight > containerHeight) {
+            fetchingOldMessages = true
+            page++
+            fetchMessages(senderId, receiverId, userId);
+        }
+        /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
+
+            // User has scrolled to the top
+            // Perform AJAX call here
+            fetchingOldMessages = true
+            page++
+            fetchMessages(senderId, receiverId, userId);
+            $('.chat-messages').animate({scrollTop: 0}, 500);
+        }*/
     }
-    /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
-
-        // User has scrolled to the top
-        // Perform AJAX call here
-        fetchingOldMessages = true
-        page++
-        fetchMessages(senderId, receiverId, userId);
-        $('.chat-messages').animate({scrollTop: 0}, 500);
-    }*/
+    lastScrollTop = st;
 });
 
 

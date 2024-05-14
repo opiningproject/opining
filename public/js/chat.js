@@ -21,7 +21,7 @@ socket.on('sendChatToClient', (message) => {
                             '                <a href="' + data.data.attachment + '" target="_blank">\n' +
                             '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
                             '                </a>\n' : '') +
-                        '            <small>' + data.data.createdAt + '</small>\n' +
+                        '            <small style="text-align:right">' + data.data.createdAt + '</small>\n' +
                         '        </div>\n' +
                         '    </div>'
                     $('.chat-messages').append(html)
@@ -105,7 +105,7 @@ $(function () {
                     '                <a href="' + messageDataAdmin.fileName + '" target="_blank">\n' +
                     '                       <img src="' + messageDataAdmin.fileName + '" style="height: 100px;width: 100px;">\n' +
                     '                </a>\n' : '') +
-                '            <small>' + new Date().toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Europe/London' }) + '</small>\n' +
+                '            <small style="text-align:right">' + new Date().toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Europe/London' }) + '</small>\n' +
                 '        </div>\n' +
                 '    </div>'
             $('.chat-messages').append(html)

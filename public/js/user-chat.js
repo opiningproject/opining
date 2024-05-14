@@ -1,5 +1,6 @@
 // creating io instance
-var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+// var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+var socket = io("http://gomeal-qa.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
 
 let senderId = null;
 var sender = $('#auth-user-id').val();
@@ -67,7 +68,7 @@ socket.on('sendChatToUser', (message) => {
                             '                <a href="' + data.data.attachment + '" target="_blank">\n' +
                             '                       <img src="' + data.data.attachment + '" style="height: 100px;width: 100px;">\n' +
                             '                </a>\n' : '') +
-                        '            <small>' + data.data.createdAt + '</small>\n' +
+                        '            <small style="text-align:right">' + data.data.createdAt + '</small>\n' +
                         '        </div>\n' +
                         '    </div>'
                     $('.chat-messages-user_' + data.data.sender_id).append(html)
@@ -139,7 +140,7 @@ $(function () {
                     '                <a href="' + messageData.fileName + '" target="_blank">\n' +
                     '                       <img src="' + messageData.fileName + '" style="height: 100px;width: 100px;">\n' +
                     '                </a>\n' : '') +
-                '            <small>' + new Date().toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Europe/London' }) + '</small>\n' +
+                '            <small style="text-align:right">' + new Date().toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Europe/London' }) + '</small>\n' +
                 '        </div>\n' +
                 '    </div>'
             $('.chat-messages-user_' + sender_id).append(appendMessageHtml)

@@ -1,6 +1,5 @@
 // creating io instance
-// var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
-var socket = io("http://gomeal-qa.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
 
 let senderId = null;
 var sender = $('#auth-user-id').val();

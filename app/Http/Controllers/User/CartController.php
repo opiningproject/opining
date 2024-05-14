@@ -79,8 +79,8 @@ class CartController extends Controller
                     $cartArr
                 );
 
-                if (count($dish->freeIngredients) > 0) {
-                    foreach ($dish->freeIngredients as $ingredient) {
+                if (count($dish->freeWithoutTrashIngredients) > 0) {
+                    foreach ($dish->freeWithoutTrashIngredients as $ingredient) {
                         $cartDetail->orderDishDetails()->create([
                             'dish_id' => $dish->id,
                             'dish_ingredient_id' => $ingredient->id

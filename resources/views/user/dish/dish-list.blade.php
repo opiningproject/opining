@@ -9,6 +9,10 @@
                         $disableBtn = 'disabled';
                         $customizeBtn = true;
                     }
+
+                    if(count($dish->ingredientsWithoutTrash) == 0){
+                        $customizeBtn = true;
+                    }
                     ?>
                 <div class="card food-detail-card">
                     @if($dish->percentage_off > 0)<p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>@endif
@@ -39,7 +43,7 @@
                 </div>
             @endforeach
         @else
-            {{ trans('user.dashboard.no_dish_found') }} 
+            {{ trans('user.dashboard.no_dish_found') }}
         @endif
     </div>
 </div>

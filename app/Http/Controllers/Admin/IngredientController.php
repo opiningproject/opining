@@ -87,7 +87,7 @@ class IngredientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
     }
 
     /**
@@ -113,8 +113,8 @@ class IngredientController extends Controller
                 $ingredient->save();
 
                 return response::json(['status' => 200, 'data' => $ingredient, 'message' => trans('rest.message.ingredient_status_success')]);
-            } 
-            else 
+            }
+            else
             {
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }
@@ -137,7 +137,8 @@ class IngredientController extends Controller
     public function checkAttachedDish(string $id)
     {
         try {
-            $ingredients = Ingredient::has('dishIngredient')->find($id);
+            $ingredients = Ingredient::has('dishIngredientWithoutTrash')->find($id);
+
             if($ingredients){
                 return response::json(['status' => 400, 'data' => $ingredients]);
             }else{
@@ -178,7 +179,7 @@ class IngredientController extends Controller
                 }
 
                 return response::json(['status' => 200, 'message' => trans('rest.message.ingredient_updated_success')]);
-                
+
             }else{
                 return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
             }

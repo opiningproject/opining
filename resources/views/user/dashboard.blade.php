@@ -75,12 +75,12 @@ $cartValue = 0;
                             </div>
                             <div class="swiper category-swiper-slider">
                                 <div class="category-slider swiper-wrapper">
-                                    @foreach ($categories as $cat)
+                                    @foreach ($categories as $key => $cat)
                                         <?php
                                             $selected = '';
 
                                         if(!isset($_GET['all']) && $cat_id == ''){
-                                            if($cat->sort_order == '1')
+                                            if($key == 0)
                                                 $selected = 'selected-cart-active';
                                         }
                                         else{
@@ -109,11 +109,11 @@ $cartValue = 0;
                     <section class="custom-section category-list-section pb-0">
                         <div class="section-page-title">
                             <h1 class="section-title">{{ $category ? $category->name : '' }}</h1>
-                            <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">{{ trans('user.button.view_all') }}
+<!--                            <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">{{ trans('user.button.view_all') }}
                                 <span>
                                     <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
                                 </span>
-                            </a>
+                            </a>-->
                         </div>
                         <div class="dish-details-div">
                             <div class="category-list-item-grid">
@@ -127,7 +127,8 @@ $cartValue = 0;
                                             $disableBtn = 'disabled';
                                             $customizeBtn = true;
                                         }
-                                        if(count($dish->ingredients) == 0){
+
+                                        if(count($dish->ingredientsWithoutTrash) == 0){
                                             $customizeBtn = true;
                                         }
 
@@ -316,12 +317,12 @@ $cartValue = 0;
                                                         @endif
                                                     </div>
                                                     <div class="cart-amount-cal-data" id="cart-amount-cal-data" {{ count($cart) > 0 ? '' : 'style=display:none' }}>
-                                                      <div class="form-group prev-input-group custom-icon-input-group">
+<!--                                                      <div class="form-group prev-input-group custom-icon-input-group">
                                                         <span class="input-group-icon">
                                                           <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg img-fluid" height="22" width="25">
                                                         </span>
                                                         <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}" placeholder="{{ trans('user.cart.instruction') }}" />
-                                                      </div>
+                                                      </div>-->
                                                       <div class="mb-4 pb-1">
                                                         <div class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
                                                           <span class="input-group-icon">

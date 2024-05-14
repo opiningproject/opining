@@ -82,6 +82,7 @@ return [
 	'checkout' => [
 		'title' => 'Checkout',
 		'delivery_address' => 'Delivery Address',
+		'takeaway_address' => 'Takeaway Address',
 		'personal_detail' => 'Personal Details',
 		'personal_detail_note' => '(For Contacting About Order Status Or Issues)',
 		'street_name' => 'Street Name',
@@ -231,6 +232,8 @@ return [
 		'mode' => 'Payment Mode',
 		'item' => 'Item',
 		'price' => 'Price',
+        'tax' => 'Tax',
+        'total' => 'Total',
 		'discount' => 'Discount',
 		'qty' => 'Quantity',
 		'amount' => 'Amount',

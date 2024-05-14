@@ -106,6 +106,10 @@
             </td>
         </tr>
         @endforeach
+        <?php
+            $taxedValue = 0.9 * $itemTotalPrice;
+            $differenceValue = $itemTotalPrice - $taxedValue;
+            ?>
 
         <tr>
             <td colspan="8" rowspan="1"></td>
@@ -113,7 +117,17 @@
         </tr>
         <tr>
             <td colspan="4"></td>
+            <td colspan="3">{{ trans('user.invoice.tax') }}</td>
+            <td>€{{ $differenceValue }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
             <td colspan="3">{{ trans('user.invoice.subtotal') }}</td>
+            <td>€{{ $taxedValue }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="3">{{ trans('user.invoice.total') }}</td>
             <td>€{{ number_format($itemTotalPrice, 2) }}</td>
         </tr>
         <tr>

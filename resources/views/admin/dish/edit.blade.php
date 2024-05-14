@@ -313,8 +313,8 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="freeIngredientTbody">
-                                                @if (count($dish->freeIngredients) > 0)
-                                                    @foreach ($dish->freeIngredients as $freeIngredient)
+                                                @if (count($dish->freeWithoutTrashIngredients) > 0)
+                                                    @foreach ($dish->freeWithoutTrashIngredients as $freeIngredient)
                                                         <tr id="dishIngredient{{ $freeIngredient->id }}">
                                                             <td class="text-center">
                                                                 <img src="{{ $freeIngredient->ingredient->image }}"
@@ -453,8 +453,8 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="paidIngredientTbody">
-                                                @if (count($dish->paidIngredients) > 0)
-                                                    @foreach ($dish->paidIngredients as $paidIngredient)
+                                                @if (count($dish->paidWithoutTrashIngredients) > 0)
+                                                    @foreach ($dish->paidWithoutTrashIngredients as $paidIngredient)
                                                         <tr id="dishIngredient{{ $paidIngredient->id }}">
                                                             <td class="text-center">
                                                                 <img src="{{ $paidIngredient->ingredient->image }}"

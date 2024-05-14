@@ -51,10 +51,8 @@ class HomeController extends Controller
         // Calculate percentage increase for each dish
         $popularDishes = [];
 
-        if(!empty($currentWeekCounts))
-        {
-            foreach ($currentWeekCounts as $dishId => $currentWeekCount)
-            {
+        if (!empty($currentWeekCounts)) {
+            foreach ($currentWeekCounts as $dishId => $currentWeekCount) {
                 $previousWeekCount = $previousWeekCounts->get($dishId, 0);
                 $percentageCalculation = ($currentWeekCount - $previousWeekCount) / ($previousWeekCount ?: 1) * 100;
                 $popularDishes[$dishId] = ['percentage' => round($percentageCalculation, 2), 'total_orders' => $currentWeekCount];
@@ -62,11 +60,17 @@ class HomeController extends Controller
         }
 
         $categories = Category::orderBy('sort_order', 'asc')->get();
-        $dishes = Dish::orderBy('id', 'desc')->limit(5)->get();
+        $dishes = Dish::orderBy('id', 'desc');
+
+        if (isset($request->cat_id)) {
+            $dishes = $dishes->whereCategoryId($request->cat_id)->limit(5)->get();
+        } else {
+            $dishes = $dishes->limit(5)->get();
+        }
 
         $orderDetailsQuery = OrderDetail::whereHas('dishWithoutTrash')->select('dish_id', DB::raw('COUNT(*) as total_orders'))
-                ->groupBy('dish_id')
-                ->orderByDesc('total_orders');
+            ->groupBy('dish_id')
+            ->orderByDesc('total_orders');
 
         $bestSellerDishes = $orderDetailsQuery->get();
         //$popularDishes = clone $orderDetailsQuery->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();

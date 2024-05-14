@@ -9,19 +9,22 @@ use App\Enums\RefundStatus;
 ?>
 
 <h3 class="text-center fs-5 mb-4 d-block d-md-none">{{ trans('user.my_orders.my_order') }}</h3>
-<button type="button" class="btn-close d-block d-md-none order-detail-close-btn position-absolute top-0 end-0 p-3"></button>
+<button type="button"
+        class="btn-close d-block d-md-none order-detail-close-btn position-absolute top-0 end-0 p-3"></button>
 <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
 <div class="ordersdetails-header d-flex justify-content-between align-items-center">
     <div class="ordersdetails-title me-auto">{{ trans('user.my_orders.order_details') }}</div>
     <div class="btn-grp d-flex flex-wrap">
         @if($order->order_type == '1')
             <button onclick="location.href='{{ route('user.order-location',['order_id' => $order->id]) }}'">
-                <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt="" width="35" height="32">
+                <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt="" width="35"
+                     height="32">
                 {{ trans('user.my_orders.track_order') }}
             </button>
         @endif
         <button onclick="location.href='{{ route('user.chat') }}'">
-            <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg" alt="" width="27" height="25">{{ trans('user.my_orders.need_help') }}
+            <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg" alt="" width="27"
+                 height="25">{{ trans('user.my_orders.need_help') }}
         </button>
     </div>
 </div>
@@ -37,16 +40,20 @@ use App\Enums\RefundStatus;
                 <img src="{{ asset('images/order-accepted.svg') }}" class="img-fluid svg" alt="" width="20" height="20">
                 {{ trans('user.order_status.accepted') }}
             @elseif($order->order_status == OrderStatus::InKitchen)
-                <img src="{{ asset('images/orderinkitchen-icon.svg') }}" class="img-fluid svg" alt="" width="26" height="20">
+                <img src="{{ asset('images/orderinkitchen-icon.svg') }}" class="img-fluid svg" alt="" width="26"
+                     height="20">
                 {{ trans('user.order_status.in_kitchen') }}
             @elseif($order->order_status == OrderStatus::Ready)
-                <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt="" width="16" height="20">
+                <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt="" width="16"
+                     height="20">
                 {{ trans('user.order_status.ready') }}
             @elseif($order->order_status == OrderStatus::ReadyForPickup)
-                <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt="" width="16" height="20">
+                <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt="" width="16"
+                     height="20">
                 {{ trans('user.order_status.ready_for_pickup') }}
             @elseif($order->order_status == OrderStatus::OutForDelivery)
-                <img src="{{ asset('images/outfordelivery-icon.svg') }}" class="img-fluid svg" alt="" width="31" height="20">
+                <img src="{{ asset('images/outfordelivery-icon.svg') }}" class="img-fluid svg" alt="" width="31"
+                     height="20">
                 {{ trans('user.order_status.out_for_delivery') }}
             @else
                 <img src="{{ asset('images/delivered-icon.svg') }}" class="img-fluid svg" alt="" width="21" height="20">
@@ -79,7 +86,8 @@ use App\Enums\RefundStatus;
             <div class="textgrp">
                 <div class="title">{{ trans('user.my_orders.restaurant_address') }}</div>
                 <div class="text">
-                    <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg me-2" alt="" width="18" height="18">{{ getRestaurantDetail()->rest_address }}
+                    <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg me-2" alt="" width="18"
+                         height="18">{{ getRestaurantDetail()->rest_address }}
                 </div>
             </div>
         @endif
@@ -115,16 +123,21 @@ use App\Enums\RefundStatus;
                                 {{ getOrderDishIngredients($dish) }}
                             </div>
                             <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
-                                <a href="javascript:void(0)" id="read-more-{{ $dish->id}}" onclick="readMore({{ $dish->id}})">{{ trans('user.my_orders.read_more') }}</a>
-                                <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}" onclick="hideReadMore({{ $dish->id}})">{{ trans('user.my_orders.close') }}</a>
+                                <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
+                                   onclick="readMore({{ $dish->id}})">{{ trans('user.my_orders.read_more') }}</a>
+                                <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"
+                                   onclick="hideReadMore({{ $dish->id}})">{{ trans('user.my_orders.close') }}</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="orderdetails-desc-note ms-auto">
-                    <Label>{{ trans('user.my_orders.notes') }}</Label>
-                    <input type="text" placeholder="{{ $dish->notes }}" readonly data-toggle="tooltip" title="{{ $dish->notes }}">
-                </div>
+                @if(!empty($dish->notes))
+                    <div class="orderdetails-desc-note ms-auto">
+                        <Label>{{ trans('user.my_orders.notes') }}</Label>
+                        <input type="text" placeholder="{{ $dish->notes }}" readonly data-toggle="tooltip"
+                               title="{{ $dish->notes }}">
+                    </div>
+                @endif
                 <div class="orderdetails-desc-price">
                         <?php
 
@@ -170,7 +183,8 @@ use App\Enums\RefundStatus;
 </div>
 <div class="orderdetails-footer">
     <div class="btn-grp d-flex flex-wrap">
-        <a href="{{ route('user.download-invoice',['order_id' => $order->id]) }}" class="customize-foodlink button active">
+        <a href="{{ route('user.download-invoice',['order_id' => $order->id]) }}"
+           class="customize-foodlink button active">
             <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg" alt="" width="14" height="14">
             <div class="text-truncate">
                 {{ trans('user.my_orders.download_invoice') }}
@@ -178,15 +192,18 @@ use App\Enums\RefundStatus;
         </a>
         @if($order->payment_status == PaymentStatus::Success  && $order->order_status == OrderStatus::Delivered)
             @if($order->refund_status == null)
-                <a href="javascript:void(0);" class="customize-foodlink button active" data-bs-toggle="modal" data-bs-target="#refundModal" id="refund-req-btn">
-                    <img src="{{ asset('images/refund-icon.svg') }}" class="img-fluid svg" alt="" width="18" height="18">
+                <a href="javascript:void(0);" class="customize-foodlink button active" data-bs-toggle="modal"
+                   data-bs-target="#refundModal" id="refund-req-btn">
+                    <img src="{{ asset('images/refund-icon.svg') }}" class="img-fluid svg" alt="" width="18"
+                         height="18">
                     <div class="text-truncate" id="refund-status-lable">
                         {{ trans('user.refund_req.request') }}
                     </div>
                 </a>
             @else
                 <a href="javascript:void(0);" class="customize-foodlink button" style="pointer-events: none">
-                    <img src="{{ asset('images/refund-icon.svg') }}" class="img-fluid svg" alt="" width="18" height="18">
+                    <img src="{{ asset('images/refund-icon.svg') }}" class="img-fluid svg" alt="" width="18"
+                         height="18">
                     <div class="text-truncate" id="refund-status-lable">
                         @if($order->refund_status == RefundStatus::Accepted)
                             {{ trans('user.refund_req.accepted') }}

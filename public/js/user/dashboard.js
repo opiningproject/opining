@@ -51,7 +51,7 @@ $(document).ready(function () {
     var swiper = new Swiper(".category-swiper-slider", {
         slidesPerView: 3,
         spaceBetween: 6,
-        loop: true,
+        // loop: true,
         // autoplay: {
         //     delay: 1000,
         //     disableOnInteraction: false,

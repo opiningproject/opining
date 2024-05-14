@@ -61,7 +61,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                               <img src="{{ asset('images/user-cart.svg') }}" alt="" />
                             </div>
                             <div class="textCon">
-                              <h3>{{ trans('user.checkout.delivery_address') }}</h3>
+                              <h3>{{ session('zipcode') ? trans('user.checkout.delivery_address') : trans('user.checkout.takeaway_address') }}</h3>
                               <p class="mb-0">@if(session('zipcode')) {{ $house_no ? $house_no . ', ' . $zipcode : '' }} @else {{ getRestaurantDetail()->rest_address }} @endif</p>
                             </div>
                             <span class="toggleIco ms-auto">

@@ -103,8 +103,8 @@ class DishController extends Controller
         }
 
         $dish = Dish::find($id);
-        $options = $dish->option;
-        $freeIngredients = $dish->freeIngredients;
+        $options = $dish->optionWithoutTrashed;
+        $freeIngredients = $dish->freeWithoutTrashIngredients;
 
         $paidIngredients = IngredientCategory::withWhereHas('ingredients', function ($query) use ($id) {
             $query->withWhereHas('paidDishIngredientWise', function ($q) use ($id) {

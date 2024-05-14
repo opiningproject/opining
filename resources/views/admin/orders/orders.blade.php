@@ -1,6 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.user-app')
 @section('content')
-
     <?php
 
     use App\Enums\OrderStatus;
@@ -10,409 +9,312 @@
     use App\Enums\RefundStatus;
 
     ?>
+
+    <div class="overlay-custom"></div>
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
-                @include('layouts.admin.side_nav_bar')
-                <main class="bd-main order-1 w-100 position-relative">
-                    <div class="main-content d-flex flex-column h-100">
-                        <div
-                            class="section-page-title mb-0 d-flex align-items-center justify-content-between gap-2 foodorder-page-title">
-                            <h1 class="page-title">{{ trans('rest.food_order.title') }}</h1>
-                            <div class="btn-grp d-flex align-items-center flex-wrap">
-                                <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                    <img src="{{ asset('images/filter-icon.svg') }}" alt="img" class="img-fluid svg"
-                                         width="22" height="20">
-                                    <div class="text">{{ trans('rest.food_order.filter') }}</div>
-                                </button>
-
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('orders',['date_filter'=>1]) }}">{{ trans('rest.food_order.today') }}</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('orders',['date_filter'=>2]) }}">{{ trans('rest.food_order.week') }}</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('orders',['date_filter'=>3]) }}">{{ trans('rest.food_order.month') }}</a>
-                                    </li>
-                                </ul>
+                @include('layouts.user.side_nav_bar')
+                <main class="bd-main order-1">
+                    <div class="main-content">
+                        <div class="section-page-title main-page-title row justify-content-between d-sm-block">
+                            <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
+                                <h1 class="page-title">{{ trans('user.my_orders.title') }}</h1>
                             </div>
                         </div>
-                        <div class="foodorder-box d-flex">
-                            <div class="foodorder-box-list-wrp bg-white">
-                                <div class="foodorder-box-list d-flex flex-column">
-                                    @if(count($orders))
-                                        @foreach($orders as $key => $ord)
-                                            <div
-                                                class="{{ $order->id == $ord->id ? 'active':'' }} foodorder-box-list-item d-flex"
-                                                onclick="orderDetail({{ $ord->id }})" id="order-{{ $ord->id }}">
-                                                <div class="details w-100 d-flex flex-column gap-3">
-                                                    <div class="title">{{ trans('rest.food_order.order') }}
-                                                        #{{$ord->id}} | {{ $ord->created_at }}</div>
-                                                    <div
-                                                        class="icontext-grp d-flex align-items-center justify-content-between">
-                                                        <div class="icontext-item d-flex align-items-center gap-1">
-                                                            <img src="{{ asset('images/fork-knife-icon.svg') }}"
-                                                                 class="img-fluid svg" alt="" height="22" width="22">
-                                                            <div
-                                                                class="text">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }} </div>
-                                                        </div>
-                                                        <div class="icontext-item d-flex align-items-center gap-1">
-                                                            <img src="{{ asset('images/hand-money-icon.svg') }}" alt=""
-                                                                 class="img-fluid svg" width="30" height="29">
-                                                            <div class="text">€{{ $ord->total_amount}}</div>
-                                                        </div>
+                        <div class="d-flex orders-main order-non-active">
+                            <div class="orders d-flex">
+                                <div class=" orders-type">
+                                    <div class="orders-title mb-1">{{ trans('user.my_orders.active_orders') }}</div>
+                                    @if(count($active_orders))
+                                        <div class="orders-list py-3 px-0 pb-0">
+                                            @foreach($active_orders as $key => $a_order)
+                                                <div onclick="orderDetail({{ $a_order->id }})" style="cursor: pointer;"
+                                                     class="{{ $a_order->id == $order->id ? 'active':'' }} orders-item d-flex align-items-center justify-content-between gap-2"
+                                                     id="order-{{ $a_order->id }}">
+                                                    <div class="text-grp">
+                                                        <div class="title">{{ trans('user.my_orders.order') }}
+                                                            #{{ $a_order->id }}</div>
+                                                        <div class="text">{{ $a_order->created_at }}</div>
                                                     </div>
+                                                    <div class="price"><span>€</span>{{ $a_order->total_amount}}</div>
+                                                    <button class="border-none outline-none arrow-with-bg">
+                                                        <img src="{{ asset('images/chevron-down.svg') }}"
+                                                             class="img-fluid svg" alt="" width="32" height="32">
+                                                    </button>
                                                 </div>
-                                                <div
-                                                    class="time d-flex flex-column align-items-center justify-content-center text-center gap-1">
-                                                    <img src="{{ asset('images/clock-yellow.svg') }}" alt="time"
-                                                         class="img-fluid svg" width="29" height="29">
-                                                    <div class="text">{{ $ord->delivery_time }}</div>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     @else
-                                        <span class="no-data">{{ trans('rest.food_order.no_order') }}</span>
+                                        <span class="no-data">{{ trans('user.my_orders.no_orders') }}</span>
                                     @endif
                                 </div>
-                            </div>
 
-                            @if(!empty($order))
-                                    <?php $userDetails = $order->orderUserDetails; ?>
-                                <div class="foodorder-box-details bg-white w-100 d-flex flex-column">
-                                    <div
-                                        class="footer-box-details-header d-flex align-items-center justify-content-between gap-lg-3 flex-wrap">
-                                        <ul class="list-inline text-grp mb-0 p-0 d-flex align-items-center flex-fill">
-                                            <li class="list-inline-item d-flex align-items-center">{{ trans('rest.food_order.order') }}
-                                                #{{$order->id }}</li>
-                                            <li class="list-inline-item d-flex align-items-center">{{ $order->created_at }}</li>
-                                        </ul>
-                                        <ul class="d-inline-flex flex-wrap gap-3 contact-list mb-0 p-0 justify-content-end">
-                                            <li class="list-inline-item">
-                                                <a href="#" class="d-flex align-items-center gap-2">
-                                                    <img src="{{ asset('images/user-yellow.svg') }}" alt="user"
-                                                         class="img-fluid svg" width="17" height="18">
-                                                    {{ $userDetails->order_name }}
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="#" class="d-flex align-items-center gap-2">
-                                                    <img src="{{ asset('images/call-yellow.svg') }}" alt="call"
-                                                         class="img-fluid svg" width="19" height="19">
-                                                    +31 {{ $userDetails->order_contact_number }}
-                                                </a>
-                                            </li>
-                                        </ul>
+                                @if(count($orders))
+                                    <div class="orders-type">
+                                        <div class="orders-title mb-1">{{ trans('user.my_orders.overview') }}</div>
+                                        <div class="orders-list py-3 px-1">
+                                            @foreach($orders as $key => $ord)
+                                                <div onclick="orderDetail({{ $ord->id }})" style="cursor: pointer;"
+                                                     class="{{ $ord->id == $order->id ? 'active':'' }} orders-item d-flex align-items-center justify-content-between gap-2"
+                                                     id="order-{{ $ord->id }}">
+                                                    <div class="text-grp">
+                                                        <div class="title">{{ trans('user.my_orders.order') }}
+                                                            #{{ $ord->id }}</div>
+                                                        <div class="text">{{ $ord->created_at }}</div>
+                                                    </div>
+                                                    <div class="price"><span>€</span>{{ $ord->total_amount}}</div>
+                                                    <button class="border-none outline-none arrow-with-bg">
+                                                        <img src="{{ asset('images/chevron-down.svg') }}"
+                                                             class="img-fluid svg" alt="" width="32" height="32">
+                                                    </button>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    <div class="footer-box-main">
-                                        <div class="footer-box-main-orderdetails d-flex justify-content-between   ">
-                                            <div
-                                                class="footer-box-main-orderdetails-item d-flex align-items-start gap-2">
-                                                <img src="{{ asset('images/location-icon.svg') }}" alt=""
-                                                     class="img-fluid svg" width="13" height="18"
-                                                     style="margin-top: 1px;">
-                                                <div class="text-grp ms-0">
-                                                    @if($order->order_type == OrderType::Delivery)
-                                                        <div class="title mb-2">
-                                                                <?php
-                                                                echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
-                                                                ?>
-                                                        </div>
-                                                    @else
-                                                        <div class="title mb-2">
-                                                            {{ getRestaurantDetail()->rest_address }}
-                                                        </div>
-                                                    @endif
-                                                    <div class="text">
-                                                        <span>{{ trans('rest.food_order.instruction') }}:</span> {{ $order->delivery_note }}
-                                                    </div>
-                                                </div>
+                                @endif
+
+                            </div>
+                            @if(!empty($order))
+                                <div
+                                    class="ordersdetails ordersdetails_sidebar mobile_ordersdetails ordersdetails_sidebar">
+                                    <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
+                                    <!-- with two button -->
+                                    <div class="ordersdetails-header d-flex justify-content-between align-items-center">
+                                        <button type="button"
+                                                class="btn-close d-block d-md-none order-detail-close-btn">
+                                        </button>
+                                        <div
+                                            class="ordersdetails-title me-auto">{{ trans('user.my_orders.order_details') }}</div>
+                                        <div class="btn-grp d-flex flex-wrap">
+                                            @if($order->order_type == '1')
+                                                <button
+                                                    onclick="location.href='{{ route('user.order-location',['order_id' => $order->id]) }}'">
+                                                    <img src="{{ asset('images/trackorder-icon.svg') }}"
+                                                         class="img-fluid svg" alt="" width="35" height="32">
+                                                    {{ trans('user.my_orders.track_order') }}
+                                                </button>
+                                            @endif
+                                            <button onclick="location.href='{{ route('user.chat') }}'">
+                                                <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg"
+                                                     alt="" width="27" height="25">
+                                                {{ trans('user.my_orders.need_help') }}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="orderdetails-main">
+                                        <div
+                                            class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
+                                            <div class="textgrp d-flex flex-column gap-1 gap-sm-3">
+                                                <div class="title">{{ trans('user.my_orders.order') }}
+                                                    #{{ $order->id }}</div>
+                                                <div class="text">{{ $order->created_at }}</div>
                                             </div>
-                                            <div
-                                                class="footer-box-main-orderdetails-item d-flex align-items-start gap-2">
-                                                <div class="text-grp">
-                                                    <div class="text">
-                                                        <span>{{ trans('rest.food_order.delivery_mode') }}: </span>{{ $order->delivery_time }}
-                                                    </div>
-                                                    <div class="text">
-                                                        <span>{{ trans('rest.food_order.payment_method') }}: </span>{{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card'): ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod'):'Ideal') }}
-                                                    </div>
-                                                    <div class="text">
-                                                        <span>{{ trans('rest.food_order.type') }}: </span>{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <button class="border-none outline-none">
+                                                @if($order->order_status == OrderStatus::Accepted)
+                                                    <img src="{{ asset('images/order-accepted.svg') }}"
+                                                         class="img-fluid svg" alt="" width="20" height="20">
+                                                    {{ trans('user.order_status.accepted') }}
+                                                @elseif($order->order_status == OrderStatus::InKitchen)
+                                                    <img src="{{ asset('images/orderinkitchen-icon.svg') }}"
+                                                         class="img-fluid svg" alt="" width="26" height="20">
+                                                    {{ trans('user.order_status.in_kitchen') }}
+                                                @elseif($order->order_status == OrderStatus::Ready)
+                                                    <img src="{{ asset('images/readytopickup-icon.svg') }}"
+                                                         class="img-fluid svg" alt="" width="16" height="20">
+                                                    {{ trans('user.order_status.ready') }}
+                                                @elseif($order->order_status == OrderStatus::ReadyForPickup)
+                                                    <img src="{{ asset('images/readytopickup-icon.svg') }}"
+                                                         class="img-fluid svg" alt="" width="16" height="20">
+                                                    {{ trans('user.order_status.ready_for_pickup') }}
+                                                @elseif($order->order_status == OrderStatus::OutForDelivery)
+                                                    <img src="{{ asset('images/outfordelivery-icon.svg') }}"
+                                                         class="img-fluid svg" alt="" width="31" height="20">
+                                                    {{ trans('user.order_status.out_for_delivery') }}
+                                                @else
+                                                    <img src="{{ asset('images/delivered-icon.svg') }}"
+                                                         class="img-fluid svg" alt="" width="21" height="20">
+                                                    {{ trans('user.order_status.delivered') }}
+                                                @endif
+                                            </button>
                                         </div>
                                         <div
-                                            class="footer-box-main-progressbar position-relative d-flex align-items-center justify-content-between gap-1">
-                                            <div
-                                                class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                <div
-                                                    class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                    <img src="{{ asset('images/order-accept.svg') }}"
-                                                         class="img-fluid svg" width="18" height="18">
+                                            class="orderdetails-address d-flex justify-content-between flex-wrap gap-3">
+                                            <div class="textgrp">
+                                                <div class="title">{{ trans('user.my_orders.order_for') }}</div>
+                                                <div class="text">
+                                                    {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery'):trans('user.my_orders.pickup') }}
                                                 </div>
-                                                <div class="text">{{ trans('rest.order_status.accepted') }}</div>
                                             </div>
 
-                                                <?php $order_status = trans('rest.order_status.in_kitchen'); ?>
-                                            @if($order->order_status >= OrderStatus::InKitchen)
-                                                <div
-                                                    class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
+                                            @if($order->order_type == OrderType::Delivery)
+                                                <div class="textgrp">
                                                     <div
-                                                        class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                        <img src="{{ asset('images/orderinkitchen-black.svg') }}"
-                                                             class="img-fluid svg" width="25" height="19">
+                                                        class="title">{{ trans('user.my_orders.delivery_address') }}</div>
+                                                    <div class="text">
+                                                        <img src="{{ asset('images/location-yellowicon.svg') }}"
+                                                             class="img-fluid svg me-2" alt="" width="12" height="16">
+                                                            <?php
+                                                            $address = $order->orderUserDetails;
+
+                                                            echo $address->house_no . ', ' . $address->street_name . ', ' . $address->city . ', ' . $address->zipcode;
+                                                            ?>
                                                     </div>
-                                                    <div class="text">{{ $order_status }}</div>
                                                 </div>
                                             @else
-                                                <div
-                                                    class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
+                                                <div class="textgrp">
                                                     <div
-                                                        class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                        <img src="{{ asset('images/orderinkitchen-white.svg') }}"
-                                                             class="img-fluid svg" width="25" height="19">
+                                                        class="title">{{ trans('user.my_orders.restaurant_address') }}</div>
+                                                    <div class="text">
+                                                        <img src="{{ asset('images/house-icon.svg') }}"
+                                                             class="img-fluid svg me-2" alt="" width="18" height="18">
+                                                        {{ getRestaurantDetail()->rest_address }}
                                                     </div>
-                                                    <div class="text">{{ $order_status }}</div>
                                                 </div>
                                             @endif
 
-                                            @if($ord->order_type == OrderType::Delivery)
-                                                    <?php $order_status = trans('rest.order_status.ready'); ?>
-                                                @if($order->order_status >= OrderStatus::Ready)
-                                                    <div
-                                                        class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/pickup-black.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @else
-                                                    <div
-                                                        class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/pickup-white.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @endif
-
-                                                    <?php $order_status = trans('rest.order_status.out_for_delivery'); ?>
-                                                @if($order->order_status >= OrderStatus::OutForDelivery)
-                                                    <div
-                                                        class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/out-for-delivery-black.svg') }}"
-                                                                 class="img-fluid svg" width="27" height="20">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @else
-                                                    <div
-                                                        class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/out-for-delivery.svg') }}"
-                                                                 class="img-fluid svg" width="27" height="20">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @endif
-
-                                                    <?php $order_status = trans('rest.order_status.delivered'); ?>
-                                                @if($order->order_status >= OrderStatus::Delivered)
-                                                    <div
-                                                        class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/order-accept.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @else
-                                                    <div
-                                                        class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/delivered.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @endif
-                                            @else
-                                                    <?php $order_status = trans('rest.order_status.ready_for_pickup'); ?>
-                                                @if($order->order_status >= OrderStatus::ReadyForPickup)
-                                                    <div
-                                                        class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/pickup-black.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @else
-                                                    <div
-                                                        class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/pickup-white.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @endif
-
-                                                    <?php $order_status = trans('rest.order_status.delivered'); ?>
-                                                @if($order->order_status >= OrderStatus::Delivered)
-                                                    <div
-                                                        class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/order-accept.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @else
-                                                    <div
-                                                        class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                                                        <div
-                                                            class="img d-flex align-items-center justify-content-center cursor-pointer">
-                                                            <img src="{{ asset('images/delivered.svg') }}"
-                                                                 class="img-fluid svg" width="19" height="19">
-                                                        </div>
-                                                        <div class="text">{{ $order_status }}</div>
-                                                    </div>
-                                                @endif
-                                            @endif
+                                            <div class="textgrp">
+                                                <div class="title">{{ trans('user.my_orders.payment') }}</div>
+                                                <div class="text">
+                                                    {{ $order->payment_type == PaymentType::Card ? trans('user.my_orders.card'): ($order->payment_type == PaymentType::Cash ? trans('user.my_orders.cash'):'Ideal') }}
+                                                </div>
+                                            </div>
+                                            <div class="textgrp">
+                                                <div class="title">{{ trans('user.my_orders.payment_status') }}</div>
+                                                <div class="text">
+                                                    {{ $order->payment_status == PaymentStatus::Pending ? trans('user.my_orders.pending'): ($order->payment_status == PaymentStatus::Success ? trans('user.my_orders.success'):trans('user.my_orders.fail')) }}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="footer-box-main-orderlist">
-                                            <div
-                                                class="footer-box-main-orderlist-header d-flex align-items-center justify-content-between">
-                                                <div class="text-grp d-flex align-items-center gap-1">
-                                                    <div class="title">{{ trans('rest.food_order.order_list') }} :</div>
-                                                    <div class="number">({{ count($order->dishDetails) }}
-                                                        x {{ trans('rest.food_order.items') }})
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="footer-box-main-orderlist-main d-flex flex-column">
-                                                    <?php $itemTotalPrice = 0; ?>
-                                                @foreach($order->dishDetails as $key => $dish)
-                                                    <div class="footer-box-main-orderlist-main-item d-flex">
-                                                        <div class="text-grp orderRead-more">
-                                                            <div class="title">{{ $dish->dish->name }}</div>
-                                                            <div class="text line-clamp-2"
-                                                                 id="order-ingredient-{{ $dish->id}}">
-                                                                <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
-                                                                {{ getOrderDishIngredients($dish) }}
-                                                            </div>
-                                                            <div class="text">
-                                                                <a href="javascript:void(0)"
-                                                                   id="read-more-{{ $dish->id}}"
-                                                                   onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }} </a>
-                                                                <a href="javascript:void(0)" style="display:none;"
-                                                                   id="close-{{ $dish->id}}"
-                                                                   onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
+
+                                        <div class="orderdetails-desclist">
+                                                <?php $itemTotalPrice = 0; ?>
+                                            @foreach($order->dishDetails as $key => $dish)
+                                                <div class="orderdetails-desc custom-orderdetails-desc">
+                                                    <div class="orderdetails-desc-main orderdetails-desc-320">
+                                                        <div class="orderdetails-desc-count">
+                                                            x{{ $dish->qty }}
+                                                        </div>
+                                                        <div class="orderdetails-desc-card orderdetails-flex-200">
+                                                            <img src="{{ $dish->dish->image }}" class="img-fluid" alt=""
+                                                                 width="85">
+                                                            <div class="text-grp">
+                                                                <div class="title">{{ $dish->dish->name }}</div>
+                                                                <div class="text line-clamp-2"
+                                                                     id="order-ingredient-{{ $dish->id}}">
+                                                                    <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>
+                                                                    {{ getOrderDishIngredients($dish) }}
+                                                                </div>
+                                                                <div
+                                                                    class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
+                                                                    <a href="javascript:void(0)"
+                                                                       id="read-more-{{ $dish->id}}"
+                                                                       onclick="readMore({{ $dish->id}})">
+                                                                        {{ trans('user.my_orders.read_more') }}
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" style="display:none;"
+                                                                       id="close-{{ $dish->id}}"
+                                                                       onclick="hideReadMore({{ $dish->id}})">
+                                                                        {{ trans('user.my_orders.close') }}
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="notes">
-                                                            <div
-                                                                class="text d-flex align-items-center justify-content-center">{{ trans('rest.food_order.notes') }}</div>
+                                                    </div>
+                                                    @if(!empty($dish->notes))
+                                                        <div class="orderdetails-desc-note">
+                                                            <Label>{{ trans('user.my_orders.notes') }}</Label>
                                                             <input type="text" placeholder="{{ $dish->notes }}"
-                                                                   class="input" data-toggle="tooltip"
-                                                                   title="{{ $dish->notes }}" readonly>
+                                                                   readonly>
                                                         </div>
-                                                        <div class="price d-flex flex-column">
-                                                                <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
-                                                            <div class="title">€{{ $itemPrice }}</div>
-                                                            <div class="text">x{{ $dish->qty }}</div>
-                                                        </div>
+                                                    @endif
+                                                    <div class="orderdetails-desc-price">
+                                                            <?php
+                                                            $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total;
+                                                            ?>
+                                                        €{{ number_format($itemPrice,2) }}
                                                     </div>
-                                                @endforeach
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <div class="orderdetails-bill">
+                                            <div class="title">{{ trans('user.my_orders.bill_details') }}</div>
+                                            <div class="list">
+                                                <div class="list-item">
+                                                    <div class="text">{{ trans('user.my_orders.item_total') }}</div>
+                                                    <div class="number">
+                                                        €{{ number_format(getOrderGrossAmount($order),2) }}</div>
+                                                </div>
+                                                <div class="list-item">
+                                                    <div class="text">{{ trans('user.my_orders.service_charge') }}</div>
+                                                    <div class="number">
+                                                        €{{ number_format($order->platform_charge,2) }}</div>
+                                                </div>
+                                                <div
+                                                    class="list-item" {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
+                                                    <div
+                                                        class="text">{{ $order->delivery_charge ? 'Delivery Charge':'Free Delivery' }}</div>
+                                                    <div class="number">
+                                                        €{{ number_format($order->delivery_charge,2) }}</div>
+                                                </div>
+                                                <div
+                                                    class="list-item active" {{ isset($order->coupon) ? '' : 'style=display:none' }}>
+                                                    <div class="text">{{ trans('user.my_orders.item_discount') }}</div>
+                                                    <div class="number">
+                                                        -€{{ number_format($order->coupon_discount,2) }}</div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="footer-main-total">
-                                            <div
-                                                class="footer-main-total-header d-flex align-items-center justify-content-between">
-                                                <div class="text-grp d-flex align-items-center gap-2">
-                                                    <div class="title">{{ trans('rest.food_order.total') }} :</div>
-                                                    <div class="number">€{{ getOrderGrossAmount($order) }}</div>
-                                                </div>
-                                                <button
-                                                    class="bg-transparent border-0 d-flex align-items-center justify-content-center">
-                                                    <img src="{{ asset('images/upward-arrow.svg') }}" alt="call"
-                                                         class="img-fluid svg" width="17" height="10">
-                                                </button>
-                                            </div>
-                                            <div class="footer-main-total-main">
-                                                <div class="title">{{ trans('rest.food_order.bill_details') }}</div>
-                                                <div class="text-grp d-flex flex-column gap-3">
-                                                    <div
-                                                        class="text d-flex align-items-center justify-content-between gap-2">
-                                                        <div class="key">{{ trans('rest.food_order.item_total') }}</div>
-                                                        <div class="value">€{{ getOrderGrossAmount($order) }}</div>
-                                                    </div>
-                                                    <div
-                                                        class="text d-flex align-items-center justify-content-between gap-2">
-                                                        <div
-                                                            class="key">{{ trans('rest.food_order.service_charge') }}</div>
-                                                        <div class="value">€{{ $order->platform_charge }}</div>
-                                                    </div>
-                                                    <div
-                                                        class="text d-flex align-items-center justify-content-between gap-2">
-                                                        <div
-                                                            class="key">{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</div>
-                                                        <div class="value">€{{ $order->delivery_charge }}</div>
-                                                    </div>
-                                                    <div
-                                                        class="active text d-flex align-items-center justify-content-between gap-2">
-                                                        <div class="key">{{ trans('rest.food_order.discount') }}</div>
-                                                        <div class="value">-€{{ $order->coupon_discount }}</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="footer-main-total-footer">
-                                                <div
-                                                    class="text-grp d-flex align-items-center gap-2 justify-content-between">
-                                                    <div class="key">{{ trans('rest.food_order.total') }}</div>
-                                                    <div class="value">€{{ $order->total_amount }}</div>
+                                        <div class="orderdetails-total">
+                                            <div class="list">
+                                                <div class="list-item">
+                                                    <div class="text">{{ trans('user.my_orders.total') }}</div>
+                                                    <div class="number">€{{ $order->total_amount }}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="foodorder-box-details-footer d-flex align-items-center justify-content-between gap-2">
-                                        <a class="btn btn-auto"
-                                              target="_blank" href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">{{ trans('rest.food_order.print') }}</a>
-
-                                            <?php
-                                            $order_status_cur_val = $order->order_status;
-
-                                            $order = getOrderStatus($order);
-                                            $order_status_key = OrderStatus::getKey($order->order_status);
-                                            $order_status = preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $order_status_key);
-                                            ?>
-
-                                        @if($order_status_cur_val != OrderStatus::Delivered)
-                                            <button class="btn active btn-auto" class="customize-foodlink button"
-                                                    onclick="changeOrderStatus({{ $order->id }},'{{ $order_status }}')">
-                                                {{ trans('rest.food_order.move_to') }} '{{ $order_status }}'
-                                            </button>
-                                        @endif
-                                        <input type="hidden" id="id" value="">
+                                    <div class="orderdetails-footer">
+                                        <div class="btn-grp d-flex flex-wrap">
+                                            <a href="{{ route('user.download-invoice',['order_id' => $order->id]) }}"
+                                               class="customize-foodlink button active">
+                                                <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg"
+                                                     alt="" width="14" height="14">
+                                                <div class="text-truncate">
+                                                    {{ trans('user.my_orders.download_invoice') }}
+                                                </div>
+                                            </a>
+                                            @if($order->payment_status == PaymentStatus::Success && $order->order_status == OrderStatus::Delivered)
+                                                @if($order->refund_status == null)
+                                                    <a href="javascript:void(0);"
+                                                       class="customize-foodlink button active" data-bs-toggle="modal"
+                                                       data-bs-target="#refundModal" id="refund-req-btn">
+                                                        <img src="{{ asset('images/refund-icon.svg') }}"
+                                                             class="img-fluid svg" alt="" width="18" height="18">
+                                                        <div class="text-truncate" id="refund-status-lable">
+                                                            {{ trans('user.refund_req.request') }}
+                                                        </div>
+                                                    </a>
+                                                @else
+                                                    <a href="javascript:void(0);" class="customize-foodlink button"
+                                                       style="pointer-events: none">
+                                                        <img src="{{ asset('images/refund-icon.svg') }}"
+                                                             class="img-fluid svg" alt="" width="18" height="18">
+                                                        <div class="text-truncate" id="refund-status-lable">
+                                                            @if($order->refund_status == RefundStatus::Accepted)
+                                                                {{ trans('user.refund_req.accepted') }}
+                                                            @elseif($order->refund_status == RefundStatus::Rejected)
+                                                                {{ trans('user.refund_req.rejected') }}
+                                                            @else
+                                                                {{ trans('user.refund_req.submitted') }}
+                                                            @endif
+                                                        </div>
+                                                    </a>
+                                                @endif
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endif
@@ -421,8 +323,11 @@
                 </main>
             </div>
         </div>
+
         <!-- start footer -->
-        @include('layouts.admin.footer_design')
-        @include('admin.modals.change-order-status')
+        @include('layouts.user.footer_design')
         <!-- end footer -->
     </div>
+    @include('user.modals.refund')
+@endsection
+

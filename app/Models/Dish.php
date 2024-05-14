@@ -63,6 +63,11 @@ class Dish extends Model
         return $this->hasMany(DishOption::class, 'dish_id', 'id')->withTrashed();
     }
 
+    public function optionWithoutTrashed()
+    {
+        return $this->hasMany(DishOption::class, 'dish_id', 'id')->withTrashed();
+    }
+
     public function freeIngredients()
     {
         return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', 1)->withTrashed();
@@ -73,8 +78,22 @@ class Dish extends Model
         return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', '0')->withTrashed();
     }
 
+    public function freeWithoutTrashIngredients()
+    {
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', 1);
+    }
+
+    public function paidWithoutTrashIngredients()
+    {
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->where('is_free', '0');
+    }
+
     public function ingredients(){
         return $this->hasMany(DishIngredient::class, 'dish_id', 'id')->withTrashed();
+    }
+
+    public function ingredientsWithoutTrash(){
+        return $this->hasMany(DishIngredient::class, 'dish_id', 'id');
     }
 
     protected function getImageAttribute($value)

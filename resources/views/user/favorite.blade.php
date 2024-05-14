@@ -24,6 +24,10 @@
                                             $disableBtn = 'disabled';
                                             $customizeBtn = true;
                                         }
+
+                                        if(count($dish->dish->ingredientsWithoutTrash) == 0){
+                                            $customizeBtn = true;
+                                        }
                                         ?>
                                     <div class="card food-detail-card" id="dish-box-{{ $dish->dish->id }}">
                                         <a href="#" class="mb-0 food-favorite-icon" onclick="unFavorite({{ $dish->dish->id }})">

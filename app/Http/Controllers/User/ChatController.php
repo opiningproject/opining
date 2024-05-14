@@ -70,8 +70,9 @@ class ChatController extends Controller
             }
             return $item;
         });
-        $chats = $messages->reverse();
-//        $chats = $messages;
+        $chats = $messages->reverse()->groupBy(function($date) {
+            return \Carbon\Carbon::parse($date->created_at)->format('d-M-Y');
+        });
         return view('user.chats.messages', ['messages' => $chats]);
     }
 

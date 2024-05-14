@@ -1,4 +1,19 @@
-@foreach($messages as $message)
+@php
+    $previousKey = null;
+    $oldKey = [];
+@endphp
+@foreach($messages as $key => $msg)
+    @if(!in_array($key, $oldKey))
+        @php array_push($oldKey, $key) @endphp
+    @endif
+
+    @if (!in_array($previousKey, $oldKey))
+        <p class="message-date text-center">
+            <span class="d-inline-block date_show"> {{ $key }} </span>
+        </p>
+        @php $previousKey = $key @endphp
+    @endif
+    @foreach($msg as $message)
     @if($message->receiver_id)
         @php
             $image = asset('images/user-profile-img.svg');
@@ -21,6 +36,7 @@
         <small>{{ date('h:i A', strtotime($message->created_at)) }}</small>
     </div>
 </div>
+@endforeach
 @endforeach
 
 

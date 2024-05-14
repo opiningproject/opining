@@ -25,6 +25,10 @@ class Ingredient extends Model
         return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id')->withTrashed();
     }
 
+    public function dishIngredientWithoutTrash(){
+        return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id');
+    }
+
     public function freeDishIngredient(){
         return $this->hasMany(DishIngredient::class, 'ingredient_id', 'id')->where('is_free','1');
     }

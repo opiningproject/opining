@@ -5315,3 +5315,32 @@ footer .footer-logo a {font-size: initial !important;}
     bottom: -10px;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.08);
 }
+
+
+@media screen and (max-width: 575px) {
+    .payment-nav-mobile .payment-navigation{
+        width: 100%;
+    }
+    .payment-nav-mobile .payment-navigation .nav {
+        border: 0px;
+        border: 0px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .payment-nav-mobile .payment-navigation .nav .nav-link {
+        border: 1px solid #dcdcdc;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 15px 16px;
+        font-size: 14px;
+    }
+
+    .payment-nav-mobile .nav-link svg {
+        margin-right: 10px;
+    }
+
+    .main-content.p-0 {
+        padding: 0px !important;
+    }
+}

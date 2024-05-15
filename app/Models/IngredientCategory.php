@@ -10,7 +10,7 @@ class IngredientCategory extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['name_en','name_nl'];
+    protected $fillable = ['name_en','name_nl', 'sort_order'];
     protected $dates = ['created_at', 'updated_at'];
     protected $appends = ['name'];
     public $timestamps = true;

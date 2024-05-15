@@ -45,7 +45,7 @@
                                                 <div class="form-group imageupload-box inline-imageupload-box">
                                                     <label for="dishimage" class="form-label">{{ trans('rest.menu.dish.dish_image') }}</label>
                                                     <label for="input-file" class="upload-file justify-content-center">
-                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" class="img-fluid svg" id="img-preview" height="27" width="35">
+                                                        <img src="{{ asset('images/blank-img.svg')}}" alt="blank image" class="img-fluid" id="img-preview" height="27" width="35">
                                                         <p class="mb-0" id="img-label">{{ trans('rest.menu.dish.item_image') }}</p>
                                                     </label>
                                                     <input type="file" id="input-file" name="image" class="d-none">

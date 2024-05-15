@@ -305,7 +305,7 @@
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
                                 <img src="{{ asset('images/blank-img.svg') }}" alt="blank image" id="img-preview"
-                                     class="img-fluid mb-2 svg" width="35" height="27">
+                                     class="img-fluid mb-2" width="35" height="27">
                                 <p class="mb-0" id="img-label">{{ trans('rest.modal.category.image') }}</p>
                             </label>
                             <input type="file" id="input-file" class="d-none" name="image">
@@ -347,7 +347,7 @@
                             <label for="edit-input-file" class="upload-file">
                                 <input type="file" id="edit-input-file" name="image">
                                 <img src="{{ asset('images/blank-img.svg') }}" alt="blank image" id="edit-img-preview"
-                                     width="35" height="27" class="img-fluid mb-2 svg">
+                                     width="35" height="27" class="img-fluid mb-2">
                             </label>
                         </div>
                         <div class="form-group">

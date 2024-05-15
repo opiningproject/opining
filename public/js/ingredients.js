@@ -22,6 +22,45 @@ $(function () {
         }
     });
 
+    $("#ingredientTbody").sortable({
+        update: function() {
+            updateRowOrder();
+        }
+    });
+
+    function updateRowOrder(){
+
+        var order = [];
+
+        $('tr.ingredientRow').each(function(index,element) {
+            order.push({
+                id: $(this).attr('data-id'),
+                position: index+1
+            });
+        });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+
+            type: "POST",
+            url: "ingredients/updateingredientRowOrder",
+            cursor: 'move',
+            data: {
+
+                order:order,
+
+            },
+            success: function(response) {
+
+            }
+        });
+    }
+
     $(document).on('click', '.del-ing-btn', function () {
 
         var id = $(this).attr('data-id');

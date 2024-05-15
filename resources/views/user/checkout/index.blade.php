@@ -446,7 +446,22 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
         });
 
         const elements = stripe.elements();
-        const idealBank = elements.create('idealBank');
+        const options = {
+            // Custom styling can be passed to options when creating an Element
+            style: {
+                base: {
+                    padding: '10px 12px',
+                    color: '#32325d',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    },
+                },
+            },
+        };
+
+        const idealBank = elements.create('idealBank',options);
+
         idealBank.mount('#ideal-bank-element');
         var selectedBank = false
 

@@ -20,7 +20,7 @@ class IngredientController extends Controller
         $perPage = isset($request->per_page) ? $request->per_page : 10;
         $ingredientCategory = IngredientCategory::all();
 
-        $ingredients = Ingredient::with('freeDishIngredient.dish')->orderBy('id', 'desc')->paginate($perPage);
+        $ingredients = Ingredient::with('freeDishIngredient.dish')->orderBy('sort_order', 'asc')->paginate($perPage);
 
         return view('admin.ingredients.index', [
             'ingredientCategory' => $ingredientCategory,
@@ -47,11 +47,20 @@ class IngredientController extends Controller
                 $imageName = uploadImageToBucket($request, 'ingredients/');
             }
 
+            $storedIngredient = Ingredient::orderBy('sort_order', 'desc')->first();
+
             $ingredient = new Ingredient();
             $ingredient->image = $imageName;
             $ingredient->name_en = $request->name_en;
             $ingredient->name_nl = $request->name_nl;
             $ingredient->category_id = $request->category_id;
+
+            if(empty($storedIngredient->sort_order)) {
+                $ingredient->sort_order = 1;
+            }else{
+                $ingredient->sort_order = $storedIngredient->sort_order + 1;
+            }
+
             $ingredient->save();
 
             return redirect()->back();
@@ -186,6 +195,17 @@ class IngredientController extends Controller
             return response::json(['status' => 200, 'data' => $ingredient]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateingredientRowOrder(Request $request){
+
+        foreach ($request->order as $key => $order) {
+
+            $data=Ingredient::find($order['id']);
+            $data->sort_order=$order['position'];
+            $data->save();
+
         }
     }
 }

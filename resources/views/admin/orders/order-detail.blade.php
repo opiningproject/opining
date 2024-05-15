@@ -49,7 +49,7 @@ $userDetails = $order->orderUserDetails;
                     </div>
                 @endif
                 <div class="text">
-                    <span>{{ trans('rest.food_order.instruction') }}:</span> {{ $order->delivery_note }}
+                    <span>{{ trans('rest.food_order.instruction') }}:</span> {{ $order->delivery_note ?? '-' }}
                 </div>
             </div>
         </div>

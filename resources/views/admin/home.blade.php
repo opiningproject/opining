@@ -92,7 +92,7 @@
                                     <div class="category-slider swiper-wrapper">
                                         @if (count($categories) > 0)
                                             @foreach ($categories as $category)
-                                                <div class="category-element swiper-slide" data-id="{{ $category->id }}"
+                                                <div class="category-element swiper-slide {{ (isset($_GET['cat_id']) && $_GET['cat_id'] == $category->id) ? 'swiper-slide-admin-cart-active' : '' }} " data-id="{{ $category->id }}"
                                                      data-sort-order="{{ $category->sort_order }}">
                                                     <div class="card">
                                                         <div class="category-slide-btns">
@@ -120,6 +120,7 @@
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
                                                         </div>
+                                                        <a href="{{ route('home',['cat_id' => $category->id]) }}" class="link-abs"></a>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -154,8 +155,8 @@
                                                     <p class="mb-0 inoutstock-badge text-bg-success-1">{{ trans('rest.menu.dish.in_stock') }}</p>
                                                 @endif
                                                 <div class="card-body p-0">
-                                                    <p class="quantity-text badge">{{ trans('rest.menu.dish.qty') }}
-                                                        :{{ $dish->qty }}</p>
+<!--                                                    <p class="quantity-text badge">{{ trans('rest.menu.dish.qty') }}
+                                                        :{{ $dish->qty }}</p>-->
                                                     <div class="food-image">
                                                         <img src="{{ $dish->image }}" alt="burger imag"
                                                              class="img-fluid"/>

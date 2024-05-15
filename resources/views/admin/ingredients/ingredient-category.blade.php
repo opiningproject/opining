@@ -24,9 +24,14 @@
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                             <nav class="page-breadcrumb" aria-label="breadcrumb">
                                                 <ol class="breadcrumb">
-                                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ trans('rest.menu.title') }}</a></li>
-                                                    <li class="breadcrumb-item"><a href="{{ route('ingredients.index')}}">{{ trans('rest.menu.ingredients.title') }}</a></li>
-                                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('rest.menu.ingredients.ingred_category') }}</li>
+                                                    <li class="breadcrumb-item"><a
+                                                            href="{{ route('home') }}">{{ trans('rest.menu.title') }}</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a
+                                                            href="{{ route('ingredients.index')}}">{{ trans('rest.menu.ingredients.title') }}</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item active"
+                                                        aria-current="page">{{ trans('rest.menu.ingredients.ingred_category') }}</li>
                                                 </ol>
                                             </nav>
                                         </div>
@@ -38,23 +43,28 @@
                                         <div class="row">
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="ingredientsnameenglish" class="form-label">{{ trans('rest.menu.ingredients.ingred_category') }}
+                                                    <label for="ingredientsnameenglish"
+                                                           class="form-label">{{ trans('rest.menu.ingredients.ingred_category') }}
                                                         <span class="text-custom-muted">(English)</span></label>
-                                                    <input type="text" class="form-control" name="name_en" maxlength="250" id="name_en"/>
+                                                    <input type="text" class="form-control" name="name_en"
+                                                           maxlength="250" id="name_en"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="ingredientsnamedutch" class="form-label">{{ trans('rest.menu.ingredients.ingred_category') }}
+                                                    <label for="ingredientsnamedutch"
+                                                           class="form-label">{{ trans('rest.menu.ingredients.ingred_category') }}
                                                         <span class="text-custom-muted">(Dutch)</span>
                                                     </label>
-                                                    <input type="text" class="form-control" name="name_nl" maxlength="250" id="name_nl"/>
+                                                    <input type="text" class="form-control" name="name_nl"
+                                                           maxlength="250" id="name_nl"/>
                                                 </div>
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="form-group">
                                                     <label for="discountpercentage" class="form-label"></label>
-                                                    <button type="submit" class="btn btn-custom-yellow btn-default d-block w-130px mt-3 save-ing-cat-div">
+                                                    <button type="submit"
+                                                            class="btn btn-custom-yellow btn-default d-block w-130px mt-3 save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                     </button>
                                                 </div>
@@ -68,38 +78,56 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.ingred_category') }}
-                                                 <span class="text-custom-muted font-regularcustom">(English)</span>
+                                                <th scope="col"
+                                                    class="text-center">{{ trans('rest.menu.ingredients.ingred_category') }}
+                                                    <span class="text-custom-muted font-regularcustom">(English)</span>
                                                 </th>
-                                                <th scope="col" class="text-center">{{ trans('rest.menu.ingredients.ingred_category') }}
-                                                 <span class="text-custom-muted font-regularcustom">(Dutch)</span>
+                                                <th scope="col"
+                                                    class="text-center">{{ trans('rest.menu.ingredients.ingred_category') }}
+                                                    <span class="text-custom-muted font-regularcustom">(Dutch)</span>
                                                 </th>
-                                                <th scope="col" class="text-center">{{ trans('rest.button.action') }}</th>
+                                                <th scope="col"
+                                                    class="text-center">{{ trans('rest.button.action') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody id="ingredientCategoryTbody">
                                             @foreach ($ingredientCategory as $category)
-                                            <tr id="ing-tr{{ $category->id }}">
-                                                <td class="text-center">
-                                                  <input type="text" class="form-control text-center w-10r m-auto" data-id="{{ $category->id }}" value="{{ $category->name_en }}" id="name_en{{ $category->id }}" readonly />
-                                                </td>
-                                                <td class="text-center">
-                                                  <input type="text" class="form-control text-center w-10r m-auto" value="{{ $category->name_nl }}" id="name_nl{{ $category->id }}" readonly />
-                                                </td>
-                                                <td class="text-center">
-                                                  <div class="">
-                                                    <a class="btn btn-custom-yellow btn-icon edit-cat-icon" id="edit-btn{{ $category->id }}" data-id="{{ $category->id }}" tabindex="0">
-                                                      <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-icon del-cat-icon" id="del-btn{{ $category->id }}" data-id="{{ $category->id }}">
-                                                      <i class="fa-regular fa-trash-can"></i>
-                                                    </a>
-                                                    <a class="btn btn-custom-yellow btn-default save-edit-btn d-block" id="save-edit-btn{{ $category->id }}" style="width: 50%;margin-left: 25%; display: none!important;" data-id="{{ $category->id }}">
-                                                      <span class="align-middle">{{ trans('rest.button.save') }}</span>
-                                                    </a>
-                                                  </div>
-                                                </td>
-                                            </tr>
+                                                {{--                                            <tr id="ing-tr{{ $category->id }}">--}}
+                                                <tr id="ing-tr{{ $category->id }}" draggable="true"
+                                                    class="ingredientCategoryRow" data-id="{{ $category->id }}">
+                                                    <td class="text-center">
+                                                        <input type="text" class="form-control text-center w-10r m-auto"
+                                                               data-id="{{ $category->id }}"
+                                                               value="{{ $category->name_en }}"
+                                                               id="name_en{{ $category->id }}" readonly/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" class="form-control text-center w-10r m-auto"
+                                                               value="{{ $category->name_nl }}"
+                                                               id="name_nl{{ $category->id }}" readonly/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="">
+                                                            <a class="btn btn-custom-yellow btn-icon edit-cat-icon"
+                                                               id="edit-btn{{ $category->id }}"
+                                                               data-id="{{ $category->id }}" tabindex="0">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </a>
+                                                            <a class="btn btn-custom-yellow btn-icon del-cat-icon"
+                                                               id="del-btn{{ $category->id }}"
+                                                               data-id="{{ $category->id }}">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </a>
+                                                            <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
+                                                               id="save-edit-btn{{ $category->id }}"
+                                                               style="width: 50%;margin-left: 25%; display: none!important;"
+                                                               data-id="{{ $category->id }}">
+                                                                <span
+                                                                    class="align-middle">{{ trans('rest.button.save') }}</span>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -110,9 +138,10 @@
                                             <label>{{ trans('rest.button.rows_per_page') }}</label>
                                             <select id="per_page_dropdown" onchange="">
                                                 @for($i=5; $i<=20; $i+=5)
-                                                <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
-                                                    {{ $i }}
-                                                </option>
+                                                    <option
+                                                        {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url().'?per_page=' }}{{ $i }}">
+                                                        {{ $i }}
+                                                    </option>
                                                 @endfor
                                             </select>
                                         </div>
@@ -144,10 +173,13 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">
+                        <button type="button"
+                                class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
+                                data-bs-dismiss="modal">
                             {{ trans('rest.button.cancel') }}
                         </button>
-                        <button type="button" id="delete-category-btn" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">
+                        <button type="button" id="delete-category-btn"
+                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">
                             {{ trans('rest.button.delete') }}
                         </button>
                     </div>
@@ -169,7 +201,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                                data-bs-dismiss="modal">
                             {{ trans('rest.button.ok') }}
                         </button>
                     </div>

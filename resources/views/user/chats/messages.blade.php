@@ -5,12 +5,14 @@
 @foreach($messages as $key => $msg)
 
     @if(!in_array($key, $oldKey))
-{{--        @php array_push($oldKey, $key) @endphp--}}
+
         @php $oldKey[] = $key @endphp
     @endif
     @if (!in_array($previousKey, $oldKey))
         <p class="message-date text-center">
-            <span class="d-inline-block date_show"> {{ $key }} </span>
+            <span class="d-inline-block date_hidden date_show" > {{$key}} </span>
+{{--            <span class="d-inline-block date_show" style="display: none"> {{$key}} </span>--}}
+            <span class="page_count" style="display: none"> {{ $pageCount }} </span>
         </p>
         @php $previousKey = $key @endphp
     @endif

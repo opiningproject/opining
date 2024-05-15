@@ -10,6 +10,7 @@
     @if (!in_array($previousKey, $oldKey))
         <p class="message-date text-center">
             <span class="d-inline-block date_show"> {{ $key }} </span>
+            <span class="page_count" style="display: none"> {{ $pageCount }} </span>
         </p>
         @php $previousKey = $key @endphp
     @endif

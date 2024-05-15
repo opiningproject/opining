@@ -3589,3 +3589,7 @@ nav .pagination {
     outline: none !important;
     padding-left: 4px !important;
 }
+
+.chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p {
+    word-wrap: break-word;
+}

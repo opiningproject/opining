@@ -160,48 +160,52 @@ $(document).keypress(function () {
     };
 });
 
+let count = 0;
+
 $('.chat-messages-user_' + sender_id).on('wheel', function () {
     var st = $(this).scrollTop();
-    if (st < lastScrollTop){
-        var chatboxMain = $('.chat-messages-user_' + sender_id);
-        var contentHeight = chatboxMain[0].scrollHeight;
-        var containerHeight = chatboxMain.innerHeight();
-        // if (contentHeight > containerHeight && chatListpage === 1) {
-        if (contentHeight > containerHeight) {
-            fetchingOldMessages = true
-            chatListpage++
-            fetchChatUsers();
-            // $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
+    var chatboxMain = $('.chat-messages-user_' + sender_id);
+    var contentHeight = chatboxMain[0].scrollHeight;
+    var containerHeight = chatboxMain.innerHeight();
+        if (st == lastScrollTop) {
+            if (contentHeight > containerHeight && chatListpage != count) {
+                fetchingOldMessages = true
+                chatListpage++
+                fetchChatUsers();
+                $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
+                // $('.chat-messages-user_' + sender_id).animate({scrollTop: $('.chat-messages-user_' + sender_id).offset().top }, 2000);
+            }
         }
-
-        /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
-            // User has scrolled to the top
-            // Perform AJAX call here
-            fetchingOldMessages = true
-            chatListpage++
-            fetchChatUsers();
-            $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
-
-        }*/
-    }
     lastScrollTop = st;
 
 });
 
-
+var oldDate = new Array();
 function fetchChatUsers() {
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            var $htmlContent = $(this.responseText);
+            var inputValue = $htmlContent.find('.date_hidden').text();
+            count = $htmlContent.find('.page_count').text();
+
+            if (oldDate != '') {
+                if (oldDate != inputValue && inputValue != '') {
+                    oldDate = inputValue;
+                }
+            }
+            /*if (oldDate !='') {
+                $('.date_show').html(oldDate);
+            }*/
 
             $('.chat-messages-user_' + sender_id).prepend(this.responseText)
             var chatboxMain = $('.chat-messages-user_' + sender_id);
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
-                if (contentHeight > containerHeight && page === 1) {
-                $('.chat-messages-user_' + sender_id).stop().animate({ scrollTop: $(".chat-messages-users")[0].scrollHeight}, 100);
+            if (contentHeight > containerHeight && page != count) {
+                $('.chat-messages-user_' + sender_id).stop().animate({scrollTop: containerHeight}, 500);
             }
             page++;
         }

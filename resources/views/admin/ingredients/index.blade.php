@@ -56,7 +56,7 @@
                                                     <label for="input-file"
                                                            class="upload-file justify-content-center gap-2">
                                                         <img src="{{ asset('images/blank-img.svg')}}" id="img-preview"
-                                                             class="img-fluid svg" height="35" width="27">
+                                                             class="img-fluid" height="35" width="27">
                                                         <p class="mb-0"
                                                            id="img-label">{{ trans('rest.menu.ingredients.item_image') }}</p>
                                                     </label>

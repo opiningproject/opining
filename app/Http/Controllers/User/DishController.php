@@ -110,7 +110,7 @@ class DishController extends Controller
             $query->withWhereHas('paidDishIngredientWise', function ($q) use ($id) {
                 $q->whereDishId($id);
             });
-        })->get();
+        })->orderBy('sort_order', 'asc')->get();
 
         $totalAmt = $dish->price;
         $freeSelectedIngredients = [];

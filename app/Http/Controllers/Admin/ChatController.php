@@ -54,6 +54,9 @@ class ChatController extends Controller
                     ->where('receiver_id', $adminId);
             })->orderBy('created_at', 'desc')
             ->paginate(10, ['*'], 'page', $pageNumber); // Fetch messages
+        $pageCount = $messages->lastPage();
+        $messages->pageCount = $pageCount;
+
         $messages->getCollection()->transform(function ($item) {
 
             $item->appendStyle = '';
@@ -72,11 +75,12 @@ class ChatController extends Controller
         });
         //message read logic
         Chat::where('sender_id', $userId)->orWhere('receiver_id', $userId)->update(['is_read' => "1"]);
-        $chats = $messages->reverse()->groupBy(function($date) {
+        $chats = $messages->reverse();
+        $chats = $chats->groupBy(function($date) {
             return \Carbon\Carbon::parse($date->created_at)->format('d-M-Y');
         });
 
-        return view('admin.chats.messages', ['messages' => $chats]);
+        return view('admin.chats.messages', ['messages' => $chats, "pageCount" => $pageCount]);
     }
 
     /**

@@ -5288,9 +5288,17 @@ footer .footer-logo a {font-size: initial !important;}
     max-width: 14px;
 }
 
-.message-date span {
+.message-date .date_show {
     background-color: #f1efef;
     border-radius: 30px;
     padding: 5px 16px;
     font-size: 12px;
+    text-align:center;
+    /*position:fixed;*/
 }
+
+.chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p {
+    word-wrap: break-word;
+}
+
+

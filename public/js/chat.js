@@ -136,12 +136,16 @@ let activeDivId = null;
 let receiverId = null;
 let fetchingOldMessages = false;
 let userId = null;
+let count = 0;
 
 function fetchMessages(senderId, receiverId, userId) {
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            var $htmlContent = $(this.responseText);
+            var inputValue = $htmlContent.find('.date_hidden').text();
+            count = $htmlContent.find('.page_count').text();
 
             $('.chat-messages').prepend(this.responseText)
 
@@ -149,7 +153,7 @@ function fetchMessages(senderId, receiverId, userId) {
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
-            if (contentHeight > containerHeight && page === 1) {
+            if (contentHeight > containerHeight && page != count) {
                 $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 100);
             }
         }
@@ -172,7 +176,7 @@ $('.chat-messages').on('wheel', function () {
         var containerHeight = chatboxMain.innerHeight();
 
         // if (contentHeight > containerHeight && page === 1) {
-        if (contentHeight > containerHeight) {
+        if (contentHeight > containerHeight && page != count) {
             fetchingOldMessages = true
             page++
             fetchMessages(senderId, receiverId, userId);

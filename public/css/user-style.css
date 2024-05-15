@@ -616,7 +616,7 @@ a {
   pointer-events: none;
   top: 0;
   bottom: 0;
-  left: 27px;
+  left: 20px;
 }
 
 .offer-card-banner .card {
@@ -4984,7 +4984,7 @@ line-height: initial !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 1000;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;}
 .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
 .collected-points-list ul li {font-size: 14px;margin-bottom: 10px;}
@@ -5293,4 +5293,25 @@ footer .footer-logo a {font-size: initial !important;}
     border-radius: 30px;
     padding: 5px 16px;
     font-size: 12px;
+}
+
+.scrollable-tap {
+    position: relative;
+}
+.scrollable-tap .scroll-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #292929;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: #FFC00B;
+    border: 2px solid #ffffff;
+    z-index: 2;
+    text-align: center;
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.08);
 }

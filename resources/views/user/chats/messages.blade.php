@@ -3,20 +3,14 @@
     $oldKey = [];
 @endphp
 @foreach($messages as $key => $msg)
-
-    @if(!in_array($key, $oldKey))
-
-        @php $oldKey[] = $key @endphp
-    @endif
-    @if (!in_array($previousKey, $oldKey))
-        <p class="message-date text-center">
-            <span class="d-inline-block date_hidden date_show" > {{$key}} </span>
-{{--            <span class="d-inline-block date_show" style="display: none"> {{$key}} </span>--}}
+    <p class="message-date text-center">
+        <span class="date_hidden {date_new_{$key}}" style="display: none"> {{$key}} </span>
+        @if($previousKey != $key)
+            <span class="d-inline-block date_show" id="date_show"> {{$key}} </span>
             <span class="page_count" style="display: none"> {{ $pageCount }} </span>
-        </p>
-        @php $previousKey = $key @endphp
-    @endif
-
+        @endif
+    </p>
+    @php $previousKey = $key @endphp
     @foreach($msg as $message)
         @if($message->receiver_id)
             @php

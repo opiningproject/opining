@@ -22,7 +22,7 @@ var userIdData = localStorage.getItem("user_id")
 /*console.log("userIdData", socket.id)
 
 console.log("userLogin", userLogin.id, "socketId",socketId)*/
-socket.emit('updateSocketId', userLogin.id)
+socket.emit('updateSocketId', userId)
 
 let lastReceivedMessageTimestamp = 0;
 socket.on('getMessageAdmin', (data) => {
@@ -168,12 +168,12 @@ $('.chat-messages-user_' + sender_id).on('wheel', function () {
     var contentHeight = chatboxMain[0].scrollHeight;
     var containerHeight = chatboxMain.innerHeight();
         if (st == lastScrollTop) {
-            if (contentHeight > containerHeight && chatListpage != count) {
+            if (parseInt(chatListpage) != parseInt(count)) {
                 fetchingOldMessages = true
                 chatListpage++
                 fetchChatUsers();
-                $('.chat-messages-user_' + sender_id).animate({scrollTop: 0}, 500);
-                // $('.chat-messages-user_' + sender_id).animate({scrollTop: $('.chat-messages-user_' + sender_id).offset().top }, 2000);
+                // $('.chat-messages-user_' + sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
+                $('.chat-messages-user_' + sender_id).stop().animate({scrollTop: 0}, 500);
             }
         }
     lastScrollTop = st;
@@ -204,10 +204,9 @@ function fetchChatUsers() {
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
-            if (contentHeight > containerHeight && page != count) {
+            if (contentHeight > containerHeight && parseInt(chatListpage) != parseInt(count)) {
                 $('.chat-messages-user_' + sender_id).stop().animate({scrollTop: containerHeight}, 500);
             }
-            page++;
         }
     };
 

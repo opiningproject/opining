@@ -28,7 +28,7 @@
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                                        <form id="delivery-add-form">
+                                        <form id="delivery-add-form" class="text-center">
                                             <div class="mb-3">
                                                 <div class="form-group prev-input-group custom-icon-input-group mb-0">
                                                     <span class="input-group-icon">
@@ -48,9 +48,9 @@
                                             <!-- <a href="{{ route('user.dashboard') }}" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a> -->
                                             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
 
-                                            <a class="btn btn-custom-yellow btn-default w-100 btn-box-shadow mt-30px text-uppercase" href="{{ route('login') }}">
-                                                <img src="{{ asset('images/restaurant-icon-svg.svg') }}" alt="restaurant" class="img-fluid svg" width="22" height="22" />
-                                                <span class="align-middle ms-3">{{ trans('user.home.i_am_user') }}</span>
+                                            <a class="mt-30px text-uppercase d-inline-block text-decoration-underline" href="{{ route('login') }}">
+{{--                                                <img src="{{ asset('images/restaurant-icon-svg.svg') }}" alt="restaurant" class="img-fluid svg" width="22" height="22" />--}}
+                                                {{ trans('user.home.i_am_user') }}
                                             </a>
                                         </form>
                                     </div>

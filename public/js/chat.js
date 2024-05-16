@@ -33,11 +33,6 @@ socket.on('sendChatToClient', (message) => {
                 var contentHeight = chatBoxMain[0].scrollHeight;
 
                 $('.chat-messages').animate({scrollTop: chatBoxMain.offset().top + contentHeight - 726}, 500);
-                /*var chatboxMain = $('.chat-messages-user_' + data.data.sender_id);
-                var contentHeight = chatboxMain[0].scrollHeight;
-                $('.chat-messages-user_' + data.data.sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 500);*/
-                // $( ".chat-messages" ).html(data.data);
-                // socket.emit('updateSocketId', data.data.sender_id, data.data.receiver_id, html)
             }
         },
         error: function (data) {
@@ -153,8 +148,11 @@ function fetchMessages(senderId, receiverId, userId) {
             var contentHeight = chatboxMain[0].scrollHeight;
             var containerHeight = chatboxMain.innerHeight();
 
-            if (contentHeight > containerHeight && page != count) {
+            /*if (contentHeight > containerHeight && page != count) {
                 $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 100);
+            }*/
+            if (contentHeight > containerHeight && parseInt(page) != parseInt(count)) {
+                $('.chat-messages').stop().animate({scrollTop: containerHeight}, 500);
             }
         }
     };
@@ -170,16 +168,18 @@ var lastScrollTop = 0;
 $('.chat-messages').on('wheel', function () {
 
     var st = $(this).scrollTop();
-    if (st < lastScrollTop){
+    if (st == lastScrollTop) {
         var chatboxMain = $('.chat-messages');
         var contentHeight = chatboxMain[0].scrollHeight;
         var containerHeight = chatboxMain.innerHeight();
 
         // if (contentHeight > containerHeight && page === 1) {
-        if (contentHeight > containerHeight && page != count) {
+        // if (contentHeight > containerHeight && page != count) {
+        if (parseInt(page) != parseInt(count)) {
             fetchingOldMessages = true
             page++
             fetchMessages(senderId, receiverId, userId);
+            $('.chat-messages').stop().animate({scrollTop: 0}, 500);
         }
         /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
 
@@ -264,7 +264,7 @@ $(document).on('keyup', '#search-chat', debounce(function () {
 let fetchingOldUsers = false;
 
 function fetchChatUsers() {
-
+    $('.chat-user-list').html('')
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -273,7 +273,7 @@ function fetchChatUsers() {
         }
     };
 
-    const url = `chat/users?&page=${chatListpage}`; // Base URL
+    const url = `chat/users`; // Base URL
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -385,12 +385,12 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 */
 
-$('.ChatDiv').on('scroll', function () {
+/*$('.ChatDiv').on('scroll', function () {
     if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
         chatListpage++
         fetchChatUsers()
     }
-});
+});*/
 
 function debounce(func, wait, immediate) {
     var timeout;

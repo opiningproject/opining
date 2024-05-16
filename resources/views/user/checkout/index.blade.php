@@ -230,7 +230,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                           </div>
                         </div>
                         <div class="mobilecheckoutContent" id="payment-type-mobile-content">
-                          <div class=" payment-nav">
+                          <div class=" payment-nav payment-nav-mobile">
                             <div class="payment-navigation">
                               <h4 class="custom-card-title-1 form-group mobile-hide">{{ trans('user.checkout.payment') }}</h4>
                               <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -246,7 +246,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                               <div class="tab-content w-100" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-ideal" role="tabpanel" aria-labelledby="v-pills-ideal-tab" tabindex="0">
                                   <main class="bd-main order-1">
-                                    <div class="main-content d-flex flex-column px-2">
+                                    <div class="main-content d-flex flex-column p-0">
                                       <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                                         <div class="col-12">
                                           <h1 class="page-title">{{ trans('user.checkout.order_payment') }}</h1>
@@ -446,7 +446,22 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
         });
 
         const elements = stripe.elements();
-        const idealBank = elements.create('idealBank');
+        const options = {
+            // Custom styling can be passed to options when creating an Element
+            style: {
+                base: {
+                    padding: '10px 12px',
+                    color: '#32325d',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    },
+                },
+            },
+        };
+
+        const idealBank = elements.create('idealBank',options);
+
         idealBank.mount('#ideal-bank-element');
         var selectedBank = false
 

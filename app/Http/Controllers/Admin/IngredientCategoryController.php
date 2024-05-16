@@ -17,8 +17,8 @@ class IngredientCategoryController extends Controller
     public function index(Request $request)
     {
         $perPage = isset($request->per_page) ? $request->per_page : 10;
-        $ingredientCategory = IngredientCategory::orderBy('id','DESC')->paginate($perPage);
-        
+
+        $ingredientCategory = IngredientCategory::orderBy('sort_order','asc')->paginate($perPage);
         return view('admin.ingredients.ingredient-category', [
             'ingredientCategory' => $ingredientCategory,
             'perPage' => $perPage
@@ -39,9 +39,18 @@ class IngredientCategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            $storedcategory = IngredientCategory::orderBy('sort_order', 'desc')->first();
+
+            if(empty($storedcategory->sort_order)) {
+                $request->request->add(['sort_order' => 1]);
+            }else{
+                $request->request->add(['sort_order' =>  $storedcategory->sort_order + 1]);
+            }
+
             $category = IngredientCategory::create(
                 $request->all()
             );
+
             return response::json(['status' => 200, 'data' => $category, 'message' => trans('rest.message.category_add_success')]);
 
         } catch (Exception $e) {
@@ -93,8 +102,8 @@ class IngredientCategoryController extends Controller
             }
 
             return response::json(['status' => 200, 'data' => $category]);
-        } 
-        catch (Exception $e) 
+        }
+        catch (Exception $e)
         {
             return response::json(['status' => 400, 'message' => trans('rest.message.went_wrong')]);
         }
@@ -124,6 +133,16 @@ class IngredientCategoryController extends Controller
 
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateCategoryRowOrder(Request $request){
+        foreach ($request->order as $key => $order) {
+
+            $data=IngredientCategory::find($order['id']);
+            $data->sort_order=$order['position'];
+            $data->save();
+
         }
     }
 }

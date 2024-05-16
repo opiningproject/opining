@@ -45,7 +45,7 @@ $(document).on('click', '#change-order-status-btn', function ()
         type: 'GET',
         success: function (response) {
 
-            window.location.replace(baseURL + '/orders/'+id)
+            window.location.replace(baseURL + '/orders/'+id+'#order-'+id)
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

@@ -51,7 +51,7 @@ return [
             'content2' => 'I kindly ask for your prompt attention to this matter. Thank you for your understanding and assistance.',
         ],
         'order' => [
-            'subject' => 'New Order: :order_no',
+            'subject' => 'Your order has been placed successfully :order_no',
             'content1' => "We hope this message finds you well. We're excited to inform you that a new order has been placed.",
             'content2' => 'Please ensure that the order is prepared promptly and with utmost care. We trust in your expertise to provide an exceptional dining experience to our valued customers.',
             'content3' => "Thank you for your dedication and commitment to excellence.",

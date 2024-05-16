@@ -91,8 +91,20 @@
                                 <div class="swiper category-swiper-slider categoryslide-setion">
                                     <div class="category-slider swiper-wrapper">
                                         @if (count($categories) > 0)
-                                            @foreach ($categories as $category)
-                                                <div class="category-element swiper-slide" data-id="{{ $category->id }}"
+                                            @foreach ($categories as $key => $category)
+                                                    <?php
+                                                    $selected = '';
+
+                                                    if (isset($_GET['cat_id'])) {
+                                                        if ($_GET['cat_id'] == $category->id)
+                                                            $selected = 'swiper-slide-admin-cart-active';
+                                                    } else {
+                                                        if ($key == 0)
+                                                            $selected = 'swiper-slide-admin-cart-active';
+                                                    }
+                                                    ?>
+                                                <div class="category-element swiper-slide {{ $selected }} "
+                                                     data-id="{{ $category->id }}"
                                                      data-sort-order="{{ $category->sort_order }}">
                                                     <div class="card">
                                                         <div class="category-slide-btns">
@@ -120,6 +132,8 @@
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
                                                         </div>
+                                                        <a href="{{ route('home',['cat_id' => $category->id]) }}"
+                                                           class="link-abs"></a>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -135,13 +149,13 @@
                         <section class="custom-section">
                             <div class="section-page-title">
                                 <h1 class="section-title">{{ trans('rest.menu.dishes') }}</h1>
-                                <a href="{{ route('dish.index') }}" type="button"
+                                <!--                                <a href="{{ route('dish.index') }}" type="button"
                                    class="viewall-btn">{{ trans('rest.button.view_all') }}
-                                    <span class="ms-2">
-                                        <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24"
+                                <span class="ms-2">
+                                    <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24"
                                              width="24">
                                     </span>
-                                </a>
+                                </a>-->
                             </div>
                             <div class="dish-details-div">
                                 <div class="popular-item-grid">
@@ -154,8 +168,8 @@
                                                     <p class="mb-0 inoutstock-badge text-bg-success-1">{{ trans('rest.menu.dish.in_stock') }}</p>
                                                 @endif
                                                 <div class="card-body p-0">
-                                                    <p class="quantity-text badge">{{ trans('rest.menu.dish.qty') }}
-                                                        :{{ $dish->qty }}</p>
+                                                    <!--                                                    <p class="quantity-text badge">{{ trans('rest.menu.dish.qty') }}
+                                                    :{{ $dish->qty }}</p>-->
                                                     <div class="food-image">
                                                         <img src="{{ $dish->image }}" alt="burger imag"
                                                              class="img-fluid"/>
@@ -276,7 +290,7 @@
             </div>
         </div>
         <!-- start footer --> @include('layouts.admin.footer_design')
-    <!-- end footer -->
+        <!-- end footer -->
     </div>
     <!-- start add category Modal -->
     <div class="modal fade custom-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModal"
@@ -292,7 +306,7 @@
                         <div class="imageupload-box">
                             <label for="input-file" class="upload-file">
                                 <img src="{{ asset('images/blank-img.svg') }}" alt="blank image" id="img-preview"
-                                     class="img-fluid mb-2 svg" width="35" height="27">
+                                     class="img-fluid mb-2" width="35" height="27">
                                 <p class="mb-0" id="img-label">{{ trans('rest.modal.category.image') }}</p>
                             </label>
                             <input type="file" id="input-file" class="d-none" name="image">
@@ -334,7 +348,7 @@
                             <label for="edit-input-file" class="upload-file">
                                 <input type="file" id="edit-input-file" name="image">
                                 <img src="{{ asset('images/blank-img.svg') }}" alt="blank image" id="edit-img-preview"
-                                     width="35" height="27" class="img-fluid mb-2 svg">
+                                     width="35" height="27" class="img-fluid mb-2@">
                             </label>
                         </div>
                         <div class="form-group">

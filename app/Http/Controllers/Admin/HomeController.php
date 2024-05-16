@@ -63,9 +63,13 @@ class HomeController extends Controller
         $dishes = Dish::orderBy('id', 'desc');
 
         if (isset($request->cat_id)) {
-            $dishes = $dishes->whereCategoryId($request->cat_id)->limit(5)->get();
+            $dishes = $dishes->whereCategoryId($request->cat_id)->get();
         } else {
-            $dishes = $dishes->limit(5)->get();
+            if(!empty($categories)){
+                $dishes = $dishes->whereCategoryId($categories[0]->id)->get();
+            }else{
+                $dishes = $dishes->get();
+            }
         }
 
         $orderDetailsQuery = OrderDetail::whereHas('dishWithoutTrash')->select('dish_id', DB::raw('COUNT(*) as total_orders'))

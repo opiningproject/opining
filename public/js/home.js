@@ -2,10 +2,10 @@ var swiper = new Swiper(".category-swiper-slider", {
     slidesPerView: 1,
     spaceBetween: 4,
     // loop: true,
-    autoplay: {
+    /*autoplay: {
         delay: 2500,
         disableOnInteraction: false,
-    },
+    },*/
     pagination: false,
     breakpoints: {
         640: {

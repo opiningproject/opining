@@ -119,9 +119,12 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
             Route::post('/update-status/{ingredient}', [IngredientController::class, 'updateIngredientStatus']);
             Route::post('/update/{ingredient}', [IngredientController::class, 'updateIngredient']);
             Route::post('/ing-cat-wise/{ingredient}', [IngredientController::class => 'ingredientCategoryWise']);
+            Route::post('/updateingredientRowOrder',[IngredientController::class,'updateingredientRowOrder']);
         });
 
         Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
+        Route::post('/ingredients/category/updateCategoryRowOrder',[IngredientCategoryController::class,'updateCategoryRowOrder']);
+
         Route::resource('/ingredients/category', IngredientCategoryController::class, [
             'as' => 'ingred'
         ]);

@@ -60,6 +60,14 @@ color:  #212529 !important;
     pointer-events: none;
 }
 
+.category-section .category-slider .category-element .card {
+    border: 1px solid transparent;
+}
+
+.category-section .category-slider .category-element.swiper-slide-active .card {
+    /*border-color: #FFC00B;*/
+}
+
 
 
 @media screen and (max-width: 1600px) {
@@ -138,3 +146,6 @@ color:  #212529 !important;
     font-size: 12px;
 }
 
+.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card {
+    border-color: #FFC00B;
+}

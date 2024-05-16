@@ -14,6 +14,35 @@ $(function () {
         }
     });
 
+    $("#ingredientCategoryTbody").sortable({
+        update: function() {
+            updateRowOrder();
+        }
+    });
+
+    function updateRowOrder(){
+
+        var order = [];
+        $('tr.ingredientCategoryRow').each(function(index,element) {
+            order.push({
+                id: $(this).attr('data-id'),
+                position: index+1
+            });
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "category/updateCategoryRowOrder",
+            cursor: 'move',
+            data: {
+                order,
+            },
+            success: function(response) {
+
+            }
+        });
+    }
+
     $(document).on('click', '#delete-category-btn', function () {
 
         var id = $('#catId').val();

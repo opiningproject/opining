@@ -95,8 +95,9 @@
                                                     <?php
                                                     $selected = '';
 
-                                                    if (isset($_GET['cat_id']) && $_GET['cat_id'] == $category->id) {
-                                                        $selected = 'swiper-slide-admin-cart-active';
+                                                    if (isset($_GET['cat_id'])) {
+                                                        if ($_GET['cat_id'] == $category->id)
+                                                            $selected = 'swiper-slide-admin-cart-active';
                                                     } else {
                                                         if ($key == 0)
                                                             $selected = 'swiper-slide-admin-cart-active';
@@ -347,7 +348,7 @@
                             <label for="edit-input-file" class="upload-file">
                                 <input type="file" id="edit-input-file" name="image">
                                 <img src="{{ asset('images/blank-img.svg') }}" alt="blank image" id="edit-img-preview"
-                                     width="35" height="27" class="img-fluid mb-2">
+                                     width="35" height="27" class="img-fluid mb-2@">
                             </label>
                         </div>
                         <div class="form-group">

@@ -93,7 +93,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="points" class="form-label">{{ trans('rest.coupons.points') }}</label>
-                                <input type="number" class="form-control" id="points" name="points" min="1" max="1000" required>
+                                <input type="number" class="form-control" id="points" name="points" min="1" max="1000">
                             </div>
                         </div>
                         <div class="col-md-6">

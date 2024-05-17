@@ -156,11 +156,11 @@ if (!function_exists('getOrderDishIngredients')) {
 
         $dishData = Dish::withTrashed()->find($dish->dish_id);
 
-        if($dish->orderDishFreeIngredients->count() != $dishData->freeIngredients->count()){
+        if($dish->orderDishFreeIngredients->count() != $dishData->freeWithoutTrashIngredients->count()){
             $ingredients .= '-';
             $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
 
-            foreach ($dishData->freeIngredients as $freeIngredient) {
+            foreach ($dishData->freeWithoutTrashIngredients as $freeIngredient) {
                 if(!in_array($freeIngredient->id, $ingArray)){
                     $ingredients .= $freeIngredient->ingredient->name.', ';
                 }

@@ -35,7 +35,7 @@ class CouponController extends Controller
     {
         $user = Auth::user();
 
-        $coupons = Coupon::where('expiry_date','>=',date('Y-m-d'))->withActive()->orderBy('id', 'desc')->get();
+        $coupons = Coupon::where('expiry_date','>=',date('Y-m-d'))->withActive()->whereNotNull('points')->orderBy('id', 'desc')->get();
 
         return view('user.coupons', ['coupons' => $coupons,'user' => $user]);
     }
@@ -47,7 +47,7 @@ class CouponController extends Controller
             ['promo_code', $request->couponCode]
         ])->first();
 
-        if (!empty($coupon)) 
+        if (!empty($coupon))
         {
             $user = Auth::user();
 
@@ -96,8 +96,8 @@ class CouponController extends Controller
                     'message' => trans('user.message.invalid_coupon'),
                 ], 200);
             }
-        } 
-        else 
+        }
+        else
         {
             return response()->json([
                 'status' => 500,

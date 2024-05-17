@@ -20,7 +20,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::orderBy('id', 'desc')->whereNotNull('points')->get();
+        $coupons = Coupon::orderBy('id', 'desc')->get();
 
         return view('admin.coupons.index', ['coupons' => $coupons]);
     }

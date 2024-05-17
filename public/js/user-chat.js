@@ -164,9 +164,9 @@ let count = 0;
 
 $('.chat-messages-user_' + sender_id).on('wheel', function () {
     var st = $(this).scrollTop();
-    var chatboxMain = $('.chat-messages-user_' + sender_id);
+    /*var chatboxMain = $('.chat-messages-user_' + sender_id);
     var contentHeight = chatboxMain[0].scrollHeight;
-    var containerHeight = chatboxMain.innerHeight();
+    var containerHeight = chatboxMain.innerHeight();*/
         if (st == lastScrollTop) {
             if (parseInt(chatListpage) != parseInt(count)) {
                 fetchingOldMessages = true
@@ -174,10 +174,9 @@ $('.chat-messages-user_' + sender_id).on('wheel', function () {
                 fetchChatUsers();
                 // $('.chat-messages-user_' + sender_id).animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 1000);
                 $('.chat-messages-user_' + sender_id).stop().animate({scrollTop: 0}, 500);
+                lastScrollTop = st;
             }
         }
-    lastScrollTop = st;
-
 });
 
 var oldDate = new Array();

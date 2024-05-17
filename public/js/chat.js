@@ -153,6 +153,8 @@ function fetchMessages(senderId, receiverId, userId) {
             }*/
             if (contentHeight > containerHeight && parseInt(page) != parseInt(count)) {
                 $('.chat-messages').stop().animate({scrollTop: containerHeight}, 500);
+            } else {
+                $('.chat-messages').animate({scrollTop: containerHeight}, 100);
             }
         }
     };
@@ -168,11 +170,11 @@ var lastScrollTop = 0;
 $('.chat-messages').on('wheel', function () {
 
     var st = $(this).scrollTop();
-    if (st == lastScrollTop) {
-        var chatboxMain = $('.chat-messages');
-        var contentHeight = chatboxMain[0].scrollHeight;
-        var containerHeight = chatboxMain.innerHeight();
+    /*var chatboxMain = $('.chat-messages');
+    var contentHeight = chatboxMain[0].scrollHeight;
+    var containerHeight = chatboxMain.innerHeight();*/
 
+    if (st == lastScrollTop) {
         // if (contentHeight > containerHeight && page === 1) {
         // if (contentHeight > containerHeight && page != count) {
         if (parseInt(page) != parseInt(count)) {
@@ -180,6 +182,7 @@ $('.chat-messages').on('wheel', function () {
             page++
             fetchMessages(senderId, receiverId, userId);
             $('.chat-messages').stop().animate({scrollTop: 0}, 500);
+            lastScrollTop = st;
         }
         /*if ($(this).scrollTop() === 0 && !fetchingOldMessages) {
 
@@ -191,7 +194,6 @@ $('.chat-messages').on('wheel', function () {
             $('.chat-messages').animate({scrollTop: 0}, 500);
         }*/
     }
-    lastScrollTop = st;
 });
 
 
@@ -236,6 +238,9 @@ $(document).on('click', '.ChatDiv-list', function () {
     fetchMessages(senderId, receiverId, userId);
 });
 
+$(document).on('search', '.search-box', function (evt) {
+    fetchChatUsers()
+})
 
 $(document).on('keyup', '#search-chat', debounce(function () {
     let search = $(this).val();
@@ -250,6 +255,9 @@ $(document).on('keyup', '#search-chat', debounce(function () {
 
             $('#ChatDiv').html(newData)
             var strLength = $('.search-box').val().length;
+            if (strLength == 0) {
+                fetchChatUsers();
+            }
             $('.search-box').focus();
             $('.search-box')[0].setSelectionRange(strLength, strLength);
         },

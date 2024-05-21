@@ -113,7 +113,7 @@ $(function () {
     $(document).on('change', '#input-file', function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
-        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg','svg']) == -1) {
             alert($('#image_type_error').text());
             return false
         }
@@ -133,7 +133,7 @@ $(function () {
     $(document).on('change', '#edit-input-file', function () {
 
         var ext = $(this).val().split('.').pop().toLowerCase();
-        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg','svg']) == -1) {
             alert($('#image_type_error').text());
             return false
         }

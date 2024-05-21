@@ -5026,8 +5026,9 @@ border-color: #FFC00B !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 40px;}
-.ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 0px;}
+    .ordersdetails_sidebar.mobile_ordersdetails .orderdetails-footer{padding-bottom: 50px;margin-bottom: 10px;}
+    .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
 .collected-points-list ul li {font-size: 14px;margin-bottom: 10px;}
 .custom-card .card-body.px-0 {padding-left: 0px !important;padding-right: 0px !important;}

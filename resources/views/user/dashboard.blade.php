@@ -351,7 +351,8 @@ $cartValue = 0;
                                                     <p class="empty-card-text text-muted-1 mb-2">{{ trans('user.cart.empty') }}
                                                     </p>
                                                     <span>
-                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">
+{{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">--}}
+                                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo opacity-50">
                                                     </span>
                                                 </div>
                                                 <!-- End cart section -->
@@ -361,7 +362,8 @@ $cartValue = 0;
                                                     <p class="empty-card-text text-muted-1 mb-2">{{ trans('user.cart.empty') }}
                                                     </p>
                                                     <span>
-                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">
+{{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132">--}}
+                                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo opacity-50">
                                                     </span>
                                                 </div>
                                                 <!--end empty cart section -->

@@ -37,7 +37,7 @@
                                                             #{{ $a_order->id }}</div>
                                                         <div class="text">{{ $a_order->created_at }}</div>
                                                     </div>
-                                                    <div class="price"><span>€</span>{{ $a_order->total_amount}}</div>
+                                                    <div class="price"><span>€</span>{{ number_format($a_order->total_amount, 2)}}</div>
                                                     <button class="border-none outline-none arrow-with-bg">
                                                         <img src="{{ asset('images/chevron-down.svg') }}"
                                                              class="img-fluid svg" alt="" width="32" height="32">
@@ -63,7 +63,7 @@
                                                             #{{ $ord->id }}</div>
                                                         <div class="text">{{ $ord->created_at }}</div>
                                                     </div>
-                                                    <div class="price"><span>€</span>{{ $ord->total_amount}}</div>
+                                                    <div class="price"><span>€</span>{{ number_format($ord->total_amount, 2) }}</div>
                                                     <button class="border-none outline-none arrow-with-bg">
                                                         <img src="{{ asset('images/chevron-down.svg') }}"
                                                              class="img-fluid svg" alt="" width="32" height="32">

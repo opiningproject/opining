@@ -194,11 +194,12 @@ return [
 		'promo_code' => 'Promo code',
 		'get_code' => 'Get Code',
 		'confirmation' => 'Coupon confirmation',
-		'confirmation_msg' => 'Are you sure you want to buy this coupon code ?',
+		'confirmation_msg' => 'Are you sure you want to buy this coupon code?',
 		'close' => 'Close',
 		'want_coupon' => 'Yes! I want a Coupon!',
 		'coupon' => 'Coupon',
 		'off' => 'off',
+        'not_applicable' => 'This coupon is not applicable!'
 	],
 
 	'button'=> [

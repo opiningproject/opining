@@ -3607,3 +3607,10 @@ nav .pagination {
 .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p {
     word-wrap: break-word;
 }
+
+.footer-btn-sticky {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    padding: 30px 0 20px !important;
+}

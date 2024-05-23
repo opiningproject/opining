@@ -707,6 +707,20 @@ border: 1px solid #FFC00B;
   /* border-color: #dcdcdc; */
 }
 
+.category-section .category-slider .category-element .card:hover, .category-swiper-slider .swiper-slide.selected-cart-active .card {
+background: #FFC00B;
+    border-color: #FFC00B;
+}
+
+.category-section .category-slider .category-element .card:hover p, .category-swiper-slider .swiper-slide.selected-cart-active .card p {
+    color: #ffffff !important;
+}
+
+.category-section .category-slider .category-element .card:hover svg, .category-swiper-slider .swiper-slide.selected-cart-active .card svg {
+    fill: #ffffff;
+}
+
+
 .category-section .category-slider .category-element .card:hover *,
 .category-section .category-slider .category-element .card.active * {
   color: #000000 !important;

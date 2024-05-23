@@ -278,7 +278,7 @@ $userDetails = $order->orderUserDetails;
         </div>
     </div>
 </div>
-<div class="foodorder-box-details-footer d-flex align-items-center justify-content-between gap-2">
+<div class="foodorder-box-details-footer d-flex align-items-center justify-content-between gap-2 footer-btn-sticky">
     <a class="btn btn-auto"
        target="_blank"
        href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">{{ trans('rest.food_order.print') }}</a>

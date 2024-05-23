@@ -101,14 +101,14 @@
                                                            name="percentage_off"/>
                                                 </div>
                                             </div>
-                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+<!--                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="quantity"
                                                            class="form-label">{{ trans('rest.menu.dish.quantity') }}</label>
                                                     <input type="number" class="form-control" value="{{ $dish->qty }}" max="10000"
                                                            name="qty" id="qty"/>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="dishprice"

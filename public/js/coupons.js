@@ -1,16 +1,20 @@
 $(function () {
     $("#coupon-form").validate({
-        //debug:true,
         submitHandler: function (form) {
             saveCoupon();
         }
     });
 
-    $('#expiry_date').datepicker({
+    /*$('#expiry_date').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         orientation: "bottom left",
         startDate: new Date()
+    });*/
+
+    $('#expiry_date').daterangepicker({
+        minDate: new Date(),
+        enablePastDates: true
     });
 
     $(document).on('click', '#coupon-delete-btn', function () {
@@ -110,11 +114,13 @@ function editCoupon(id) {
         success: function (response) {
             var data = response.data;
 
+            var searched_date =  moment(data.start_expiry_date).format('MM/DD/YYYY') + ' - ' + moment(data.end_expiry_date).format('MM/DD/YYYY');
+
             $("#addCouponModal").find("#points").val(data.points);
             $("#addCouponModal").find("#price").val(data.price);
             $("#addCouponModal").find("#promo_code").val(data.promo_code);
             $("#addCouponModal").find("#percentage_off").val(data.percentage_off);
-            $("#addCouponModal").find("#expiry_date").val(data.expiry_date);
+            $("#addCouponModal").find("#expiry_date").val(searched_date);
             $("#addCouponModal").find("#description").val(data.description);
             $("#addCouponModal").find("#id").val(data.id);
 

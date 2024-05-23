@@ -182,10 +182,10 @@ function updateDishQty(operator, maxQty, dish_id) {
     }
 
     if (operator == '+' && !isNaN(current_qty)) {
-        if (current_qty >= maxQty) {
+        /*if (current_qty >= maxQty) {
             toastr.error(validationMsg.quantity_error)
             return false;
-        }
+        }*/
 
         $('input[name=qty-' + dish_id + ']').val(current_qty + 1);
     }
@@ -326,10 +326,10 @@ function addSubDishQuantities(dishId, operator, maxQty) {
     }
 
     if (operator == '+') {
-        if (currentQty >= maxQty) {
+        /*if (currentQty >= maxQty) {
             toastr.error(validationMsg.quantity_error)
             return false;
-        }
+        }*/
 
         $('input[name=qty-' + dishId + ']').val(currentQty + 1);
         updateCartAmount(dishId, dishAmt, 'add', 1)

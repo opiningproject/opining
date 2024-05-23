@@ -146,20 +146,60 @@ color:  #212529 !important;
     font-size: 12px;
 }
 
-.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card, .category-section .category-slider .category-element .card:hover {
+.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card {
     border-color: #FFC00B;
-    background: #FFC00B;
+    /*background: #FFC00B;*/
 }
 
-.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card p, .category-section .category-slider .category-element .card:hover p {
-   color: #ffffff !important;
+.category-section .category-slider .category-element .card:hover .btn-custom-yellow, .category-section .category-slider .category-element .card.active .btn-custom-yellow {
+background: #FFC00B !important;
 }
 
-.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card .btn-custom-yellow, .category-section .category-slider .category-element .card:hover .btn-custom-yellow {
-    background-color: #ffffff !important;
-    border-color: #ffffff !important;
+
+.category-section .category-slider .category-element .card:hover .btn-custom-yellow i, .category-section .category-slider .category-element .card.active .btn-custom-yellow i {
+    color: #292929 !important;
 }
 
-.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card .dish-item-icon svg, .category-section .category-slider .category-element .card:hover .dish-item-icon svg{
-fill: #ffffff;
+.category-section .category-slider .category-element .card:hover .btn-custom-yellow, .category-section .category-slider .category-element .card.active .btn-custom-yellow {
+    background: #FFC00B !important;
+    border-color: #FFC00B !important;
 }
+
+.category-section .category-slider .category-element .card:hover .category-slide-btns .btn-custom-yellow, .category-section .category-slider .category-element .card.active .category-slide-btns .btn-custom-yellow {
+    background: #ffffff !important;
+    border-color: #212529 !important;
+    color: #212529 !important;
+}
+
+
+.category-section .category-element .card .categoryfood-detail-card-btn .btn-custom-yellow:hover {
+    background: #ffffff !important;
+    border-color: #FFC00B !important;
+}
+.category-section .category-element .card .categoryfood-detail-card-btn .btn-custom-yellow:hover i {
+    color: #FFC00B !important;
+}
+
+.main-content .category-section .category-element .card .category-slide-btns .btn-custom-yellow:hover {
+    background: #ffffff !important;
+    border-color: #FFC00B !important;
+}
+.category-section .category-element .card .category-slide-btns .btn-custom-yellow:hover i {
+    color: #FFC00B !important;
+}
+
+
+
+
+/*.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card p, .category-section .category-slider .category-element .card:hover p {*/
+/*   color: #ffffff !important;*/
+/*}*/
+
+/*.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card .btn-custom-yellow, .category-section .category-slider .category-element .card:hover .btn-custom-yellow {*/
+/*    background-color: #ffffff !important;*/
+/*    border-color: #ffffff !important;*/
+/*}*/
+
+/*.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card .dish-item-icon svg, .category-section .category-slider .category-element .card:hover .dish-item-icon svg{*/
+/*fill: #ffffff;*/
+/*}*/

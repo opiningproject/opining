@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Coupon;
-Use App\Models\CouponTransaction;
+use App\Models\CouponTransaction;
 use Response;
 use DB;
 
@@ -35,9 +35,14 @@ class CouponController extends Controller
     {
         $user = Auth::user();
 
-        $coupons = Coupon::where('expiry_date','>=',date('Y-m-d'))->withActive()->whereNotNull('points')->orderBy('id', 'desc')->get();
+        $coupons = Coupon::where(
+            [
+                ['start_expiry_date', '<=', date('Y-m-d')],
+                ['end_expiry_date', '>=', date('Y-m-d')],
+            ]
+        )->withActive()->whereNotNull('points')->orderBy('id', 'desc')->get();
 
-        return view('user.coupons', ['coupons' => $coupons,'user' => $user]);
+        return view('user.coupons', ['coupons' => $coupons, 'user' => $user]);
     }
 
     public function apply(Request $request)
@@ -47,8 +52,7 @@ class CouponController extends Controller
             ['promo_code', $request->couponCode]
         ])->first();
 
-        if (!empty($coupon))
-        {
+        if (!empty($coupon)) {
             $user = Auth::user();
 
             $userCoupon = $user->coupons()->where([
@@ -56,19 +60,25 @@ class CouponController extends Controller
                 ['is_redeemed', '0'],
             ])->first();
 
-            if($userCoupon)
-            {
-                if (strtotime(now()) > strtotime($coupon->expiry_date . ' 23:59:59')) {
+            if ($userCoupon) {
+                if (strtotime(now()) > strtotime($coupon->end_expiry_date . ' 23:59:59')) {
                     return Response::json([
                         'status' => 401,
                         'message' => trans('user.message.coupon_expired'),
                     ]);
                 }
 
+                if (strtotime(now()) < strtotime($coupon->start_expiry_date . ' 23:59:59')) {
+                    return Response::json([
+                        'status' => 401,
+                        'message' => trans('user.message.not_applicable'),
+                    ]);
+                }
+
                 if ($request->orderAmount < $coupon->price) {
                     return response()->json([
                         'status' => 401,
-                        'message' => trans("user.message.coupon_min_order_price",['min_order_amount' => $coupon->price]),
+                        'message' => trans("user.message.coupon_min_order_price", ['min_order_amount' => $coupon->price]),
                     ], 200);
                 }
 
@@ -88,17 +98,13 @@ class CouponController extends Controller
                         'coupon_percent' => ($coupon->percentage_off / 100)
                     ]
                 ]);
-            }
-            else
-            {
+            } else {
                 return response()->json([
                     'status' => 500,
                     'message' => trans('user.message.invalid_coupon'),
                 ], 200);
             }
-        }
-        else
-        {
+        } else {
             return response()->json([
                 'status' => 500,
                 'message' => trans('user.message.invalid_coupon'),
@@ -112,10 +118,10 @@ class CouponController extends Controller
         $coupon = Coupon::find($request->id);
 
         User::where('id', $user->id)->update(array(
-                    'collected_points' => DB::raw('collected_points -'.$coupon->points)
-                ));
+            'collected_points' => DB::raw('collected_points -' . $coupon->points)
+        ));
 
-        CouponTransaction::create(['user_id' => $user->id,'coupon_id' => $coupon->id]);
+        CouponTransaction::create(['user_id' => $user->id, 'coupon_id' => $coupon->id]);
 
         return response::json(['status' => 1, 'message' => '']);
     }

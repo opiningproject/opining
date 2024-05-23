@@ -426,8 +426,10 @@ class CartController extends Controller
 
             if($restaurantDeliveringOption == '1'){
                 if ($user->cart->coupon) {
-                    if (strtotime($user->cart->coupon->expiry_date . ' 23:59:59') < strtotime(now())) {
+                    if ( strtotime($user->cart->coupon->start_expiry_date . ' 23:59:59') > strtotime(now())) {
                         return response::json(['status' => 406, 'message' => trans('user.message.coupon_expired')]);
+                    }else if(strtotime($user->cart->coupon->end_expiry_date . ' 23:59:59') < strtotime(now())){
+                        return response::json(['status' => 406, 'message' => trans('user.message.not_applicable')]);
                     }
                 }
 

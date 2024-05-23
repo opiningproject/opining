@@ -11,7 +11,7 @@ class Coupon extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['points','price','percentage_off','promo_code','expiry_date','description'];
+    protected $fillable = ['points','price','percentage_off','promo_code','start_expiry_date','end_expiry_date','description'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

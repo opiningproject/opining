@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin-style.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dark-mode.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

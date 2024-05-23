@@ -237,7 +237,7 @@ class DishController extends Controller
                 $dish->price = $request->price;
                 $dish->category_id = $request->category_id;
                 $dish->percentage_off = $request->percentage_off;
-                $dish->qty = $request->qty;
+//                $dish->qty = $request->qty;
                 $dish->out_of_stock = isset($request->out_of_stock) ? '1' : '0';
 
                 if ($request->has('image')) {

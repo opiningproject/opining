@@ -123,7 +123,8 @@ $cartValue = 0;
                                         $disableBtn = '';
                                         $customizeBtn = false;
 
-                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
+//                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
+                                        if ($dish->out_of_stock == '1') {
                                             $disableBtn = 'disabled';
                                             $customizeBtn = true;
                                         }
@@ -153,7 +154,8 @@ $cartValue = 0;
                                             <p class="food-price">€{{ number_format($dish->price, 2) }}</p>
 
                                             <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }} id="dish-cart-lbl-{{ $dish->id }}">
-                                                @if ($dish->qty == 0 || $dish->out_of_stock == '1')
+{{--                                                @if ($dish->qty == 0 || $dish->out_of_stock == '1')--}}
+                                                @if ($dish->out_of_stock == '1')
                                                     {{ trans('user.dashboard.out_of_stock') }}
                                                 @else
                                                     {{ trans('user.dashboard.add') }}
@@ -260,7 +262,8 @@ $cartValue = 0;
                                                                 $cartValue += $dish->qty * $paidIngredient;
                                                                 $outOfStock = '';
                                                                 $outOfStockDisplay = 'd-none';
-                                                                if ($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1') {
+//                                                                if ($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1') {
+                                                                if ($dish->dish->out_of_stock == '1') {
                                                                     $outOfStock = 'nostock-card';
                                                                     $outOfStockDisplay = '';
                                                                 }

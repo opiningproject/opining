@@ -162,9 +162,9 @@ class CheckoutController extends Controller
 
             if ($request->payment_type == '2') {
 
-                foreach ($user->cart->dishDetails as $dish) {
+               /* foreach ($user->cart->dishDetails as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
-                }
+                }*/
 
                 if(!empty($user->cart->coupon)){
                     $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
@@ -213,9 +213,9 @@ class CheckoutController extends Controller
                 );
 
                 if ($cardPaymentResponse->status == 'succeeded') {
-                    foreach ($user->cart->dishDetails as $dish) {
+                    /*foreach ($user->cart->dishDetails as $dish) {
                         Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
-                    }
+                    }*/
                     $user->cart->dishDetails()->update([
                         'is_cart' => '0'
                     ]);
@@ -291,9 +291,9 @@ class CheckoutController extends Controller
 
             if ($request->redirect_status == 'succeeded') {
 
-                foreach ($user->cart->dishDetails as $dish) {
+                /*foreach ($user->cart->dishDetails as $dish) {
                     Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
-                }
+                }*/
                 $user->cart->dishDetails()->update([
                     'is_cart' => '0'
                 ]);
@@ -371,9 +371,9 @@ class CheckoutController extends Controller
 
                         return redirect()->route('user.checkout');
                     }else{
-                        foreach ($user->cart->dishDetails as $dish) {
+                        /*foreach ($user->cart->dishDetails as $dish) {
                             Dish::find($dish->dish_id)->decrement('qty', $dish->qty);
-                        }
+                        }*/
 
                         $user->cart->dishDetails()->update([
                             'is_cart' => '0'

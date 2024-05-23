@@ -38,8 +38,11 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        $date = date('Y-m-d', strtotime($request->expiry_date . ' 00:00:00'));
-        $request->merge(['expiry_date' => $date]);
+        $expiryDate = explode(' - ',$request->expiry_date);
+        $startExpiryDate = date('Y-m-d', strtotime($expiryDate[0] . ' 00:00:00'));
+        $endExpiryDate = date('Y-m-d', strtotime($expiryDate[1] . ' 00:00:00'));
+        $request->merge(['start_expiry_date' => $startExpiryDate]);
+        $request->merge(['end_expiry_date' => $endExpiryDate]);
 
         try {
             $coupon = Coupon::updateOrCreate(

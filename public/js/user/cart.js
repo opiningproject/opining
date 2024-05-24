@@ -4,6 +4,24 @@ $(function () {
         "backgroundColor": "#ff0000" // Set your desired background color here
     }
 
+    /*$(document).scroll(function () {
+        if ($('.sticky').offset().top > $('#footer-container').offset().top) {
+            // hide the sticky
+        } else {
+            // show sticky
+        }
+    });*/
+
+    var distance = $('.content-main-part').offset().top;
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() >= distance ) {
+            $('.bottom-sticky').show()
+        } else {
+            $('.bottom-sticky').hide()
+        }
+    });
+
     $('.pills-delivery-tab').click(function () {
 
         var type = $(this).data('type')

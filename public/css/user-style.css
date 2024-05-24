@@ -5358,11 +5358,12 @@ footer .footer-logo a {font-size: initial !important;}
     position: relative;
 }
 .scrollable-tap .bottom-sticky {
-    position: sticky;
-    right: 0px;
-    bottom: 20px;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
     display: flex;
     justify-content: end;
+    z-index: 9999;
 }
 .scrollable-tap .bottom-sticky .scroll-top {
     display: flex;
@@ -5411,5 +5412,9 @@ footer .footer-logo a {font-size: initial !important;}
 
     .main-content.p-0 {
         padding: 0px !important;
+    }
+    .scrollable-tap .bottom-sticky {
+        right: 30px;
+        bottom: 30px;
     }
 }

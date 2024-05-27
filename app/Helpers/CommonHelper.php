@@ -43,7 +43,7 @@ if (!function_exists('uploadImageToBucket')) {
         $file_name = time() . '_' . $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
 
-        if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'svg') {
+        if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png') {
             $image = Image::make($file)->resize(300, 300);
             Storage::disk('s3')->put('/' . $type . '/thumb/' . $file_name, $image->stream());
         }

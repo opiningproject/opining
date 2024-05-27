@@ -26,7 +26,7 @@
                          </h3>
                          <h6>{{ trans('user.coupons.min_order') }} €{{ $coupon->price }}</h6>
                          <div class="dotted-divider"></div>
-                         <p class="valid-date mb-0">{{ trans('user.coupons.valid_till') }} {{ $coupon->expiry_date }}</p>
+                         <p class="valid-date mb-0">{{ trans('user.coupons.valid_till') }} {{ $coupon->end_expiry_date }}</p>
                        </div>
                        <div class="promocode-box">
                          @if($coupon->couponTransaction)

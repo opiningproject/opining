@@ -62,7 +62,7 @@
                                                         <div class="icontext-item d-flex align-items-center gap-1">
                                                             <img src="{{ asset('images/hand-money-icon.svg') }}" alt=""
                                                                  class="img-fluid svg" width="30" height="29">
-                                                            <div class="text">€{{ $ord->total_amount}}</div>
+                                                            <div class="text">€{{ number_format($ord->total_amount, 2) }}</div>
                                                         </div>
                                                     </div>
                                                 </div>

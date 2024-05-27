@@ -50,7 +50,7 @@
                                             <h3>{{ $coupon->percentage_off }}<sup>%</sup><sub>{{ trans('rest.coupons.off') }}</sub></h3>
                                             <h6>{{ trans('rest.coupons.per_off') }}</h6>
                                             <div class="dotted-divider"></div>
-                                            <p class="valid-date mb-0">{{ trans('rest.coupons.valid_until') }} {{ $coupon->expiry_date }}</p>
+                                            <p class="valid-date mb-0">{{ trans('rest.coupons.valid_until') }} {{ $coupon->end_expiry_date }}</p>
                                         </div>
                                         <div class="promocode-box">
                                             <p class="mb-0 d-inline-block">{{ trans('rest.coupons.promo_code') }}</p>

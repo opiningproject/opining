@@ -702,7 +702,9 @@ border: 1px solid #FFC00B;
 .category-section .category-slider .category-element .card.active {
   /* background-color: var(--theme-yellow2);
   color: var(--theme-text-white); */
-  background: #ffffff;
+  /*background: #ffffff;*/
+    background-color: #FFC00B;
+    color: #ffffff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 4px 1px;
   /* border-color: #dcdcdc; */
 }

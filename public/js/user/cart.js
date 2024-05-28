@@ -1,25 +1,12 @@
+var distance = $('.content-main-part').offset().top;
 $(function () {
-
     toastr.options = {
         "backgroundColor": "#ff0000" // Set your desired background color here
     }
-
-    /*$(document).scroll(function () {
-        if ($('.sticky').offset().top > $('#footer-container').offset().top) {
-            // hide the sticky
-        } else {
-            // show sticky
-        }
-    });*/
-
-    var distance = $('.content-main-part').offset().top;
+    scrollableIcon()
 
     $(window).scroll(function() {
-        if ($(this).scrollTop() >= distance ) {
-            $('.bottom-sticky').show()
-        } else {
-            $('.bottom-sticky').hide()
-        }
+        scrollableIcon()
     });
 
     $('.pills-delivery-tab').click(function () {
@@ -158,6 +145,14 @@ $(function () {
         })
     })
 });
+
+function scrollableIcon(){
+    if ($(window).scrollTop() > distance ) {
+        $('.bottom-sticky').show()
+    } else {
+        $('.bottom-sticky').hide()
+    }
+}
 
 function addToCart(id) {
     $.ajax({

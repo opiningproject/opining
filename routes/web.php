@@ -119,11 +119,11 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
             Route::post('/update-status/{ingredient}', [IngredientController::class, 'updateIngredientStatus']);
             Route::post('/update/{ingredient}', [IngredientController::class, 'updateIngredient']);
             Route::post('/ing-cat-wise/{ingredient}', [IngredientController::class => 'ingredientCategoryWise']);
-            Route::post('/updateingredientRowOrder',[IngredientController::class,'updateingredientRowOrder']);
+            Route::post('/updateingredientRowOrder', [IngredientController::class, 'updateingredientRowOrder']);
         });
 
         Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
-        Route::post('/ingredients/category/updateCategoryRowOrder',[IngredientCategoryController::class,'updateCategoryRowOrder']);
+        Route::post('/ingredients/category/updateCategoryRowOrder', [IngredientCategoryController::class, 'updateCategoryRowOrder']);
 
         Route::resource('/ingredients/category', IngredientCategoryController::class, [
             'as' => 'ingred'
@@ -172,7 +172,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
 
-     Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
+    Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
+    Route::post('/orders/searchOrder', [OrdersController::class, 'searchOrder'])->name('order-order');
 
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
 
@@ -182,8 +183,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'auth.user', 'localization'])->group(function ()
-{
+Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
     Route::group(['prefix' => '/user'], function () {
         Route::get('/settings', [App\Http\Controllers\User\SettingController::class, 'index'])->name('user.settings');
         Route::post('/settings/save-profile', [App\Http\Controllers\User\SettingController::class, 'saveProfile'])->name('user.settings.save-profile');

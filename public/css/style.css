@@ -3614,3 +3614,42 @@ nav .pagination {
     background: #ffffff;
     padding: 30px 0 20px !important;
 }
+
+.search-has {
+    position: relative;
+}
+.search-has .form-control {
+    padding-left: 20px;
+    padding-right: 50px;
+}
+
+.search-has .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+}
+
+
+.modal-md {
+    max-width: 667px;
+}
+
+.items-list-order .cart-title {font-size: 16px !important;}
+.orders_item .ord_item {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.items-list-order .orders_item .ord_item {margin-bottom: 8px;padding-bottom: 8px;border-bottom: 1px solid #dcdcdc;justify-content: space-between}
+.items-list-order .orders_item .ord_item:last-child {border-bottom: 0px}
+.orders_item .ord_item * {font-size: 14px !important;margin-bottom: 0px}

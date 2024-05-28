@@ -108,7 +108,7 @@
                                             <div class="category-element swiper-slide {{ $selected }}">
                                                 <div class="card">
                                             <span class="dish-item-icon">
-                                              <img src="{{ $cat->image }}" class="img-fluid" alt="bakery" width="56"
+                                              <img src="{{ $cat->image }}" class="img-fluid svg" alt="bakery" width="56"
                                                    height="56"/>
                                             </span>
                                                     <p class="mb-0 text-truncate text-muted" title="{{ $cat->name }}">

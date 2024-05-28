@@ -10,7 +10,7 @@ class CouponTransaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','coupon_id'];
+    protected $fillable = ['user_id','coupon_id', 'is_redeemed'];
     public $timestamps = false;
 
     public function user(){

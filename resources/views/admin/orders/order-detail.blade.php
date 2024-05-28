@@ -230,7 +230,7 @@ $userDetails = $order->orderUserDetails;
                     @endif
                     <div class="price d-flex flex-column">
                             <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
-                        <div class="title">€{{ $itemPrice }}</div>
+                        <div class="title">€{{ number_format($itemPrice, 2) }}</div>
                         <div class="text">x{{ $dish->qty }}</div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@ $userDetails = $order->orderUserDetails;
         <div class="footer-main-total-header d-flex align-items-center justify-content-between">
             <div class="text-grp d-flex align-items-center gap-2">
                 <div class="title">{{ trans('rest.food_order.total') }} :</div>
-                <div class="number">€{{ getOrderGrossAmount($order) }}</div>
+                <div class="number">€{{ number_format(getOrderGrossAmount($order), 2) }}</div>
             </div>
             <button class="bg-transparent border-0 d-flex align-items-center justify-content-center">
                 <img src="{{ asset('images/upward-arrow.svg') }}" alt="call" class="img-fluid svg" width="17"
@@ -253,27 +253,27 @@ $userDetails = $order->orderUserDetails;
             <div class="text-grp d-flex flex-column gap-3">
                 <div class="text d-flex align-items-center justify-content-between gap-2">
                     <div class="key">{{ trans('rest.food_order.item_total') }}</div>
-                    <div class="value">€{{ getOrderGrossAmount($order) }}</div>
+                    <div class="value">€{{ number_format(getOrderGrossAmount($order), 2) }}</div>
                 </div>
                 <div class="text d-flex align-items-center justify-content-between gap-2">
                     <div class="key">{{ trans('rest.food_order.service_charge') }}</div>
-                    <div class="value">€{{ $order->platform_charge }}</div>
+                    <div class="value">€{{ number_format($order->platform_charge, 2) }}</div>
                 </div>
                 <div class="text d-flex align-items-center justify-content-between gap-2">
                     <div
                         class="key">{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</div>
-                    <div class="value">€{{ $order->delivery_charge }}</div>
+                    <div class="value">€{{ number_format($order->delivery_charge, 2) }}</div>
                 </div>
                 <div class="active text d-flex align-items-center justify-content-between gap-2">
                     <div class="key">{{ trans('rest.food_order.discount') }}</div>
-                    <div class="value">-€{{ $order->coupon_discount }}</div>
+                    <div class="value">-€{{ number_format($order->coupon_discount, 2) }}</div>
                 </div>
             </div>
         </div>
         <div class="footer-main-total-footer">
             <div class="text-grp d-flex align-items-center gap-2 justify-content-between">
                 <div class="key">{{ trans('rest.food_order.total') }}</div>
-                <div class="value">€{{ $order->total_amount }}</div>
+                <div class="value">€{{ number_format($order->total_amount,2) }}</div>
             </div>
         </div>
     </div>

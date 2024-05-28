@@ -1,7 +1,7 @@
 $(function () {
     $(document).on('keyup', '#search-order', function () {
         var search = $(this).val();
-        var activeId = $('.foodorder-box-list-item').getActiv
+        // var activeId = $('.foodorder-box-list-item').getActiv
 
         $.ajax({
             url: baseURL + '/orders/searchOrder',

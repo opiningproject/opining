@@ -718,7 +718,7 @@ background: #FFC00B;
     color: #ffffff !important;
 }
 
-.category-section .category-slider .category-element .card:hover svg, .category-swiper-slider .swiper-slide.selected-cart-active .card svg {
+.category-section .category-slider .category-element .card:hover svg, .category-swiper-slider .swiper-slide.selected-cart-active .card svg, .category-section .category-slider .category-element .card:hover svg path, .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
     fill: #ffffff;
 }
 

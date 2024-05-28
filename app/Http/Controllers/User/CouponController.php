@@ -40,7 +40,8 @@ class CouponController extends Controller
                 ['start_expiry_date', '<=', date('Y-m-d')],
                 ['end_expiry_date', '>=', date('Y-m-d')],
             ]
-        )->withActive()->whereNotNull('points')->orderBy('id', 'desc')->get();
+//        )->withActive()->whereNotNull('points')->orderBy('id', 'desc')->get();
+        )->withActive()->orderBy('id', 'desc')->get();
 
         return view('user.coupons', ['coupons' => $coupons, 'user' => $user]);
     }
@@ -99,10 +100,53 @@ class CouponController extends Controller
                     ]
                 ]);
             } else {
-                return response()->json([
-                    'status' => 500,
-                    'message' => trans('user.message.invalid_coupon'),
-                ], 200);
+
+                if(is_null($coupon->points)){
+
+                    if (strtotime(now()) > strtotime($coupon->end_expiry_date . ' 23:59:59')) {
+                        return Response::json([
+                            'status' => 401,
+                            'message' => trans('user.message.coupon_expired'),
+                        ]);
+                    }
+
+                    if (strtotime(now()) < strtotime($coupon->start_expiry_date . ' 23:59:59')) {
+                        return Response::json([
+                            'status' => 401,
+                            'message' => trans('user.message.not_applicable'),
+                        ]);
+                    }
+
+                    if ($request->orderAmount < $coupon->price) {
+                        return response()->json([
+                            'status' => 401,
+                            'message' => trans("user.message.coupon_min_order_price", ['min_order_amount' => $coupon->price]),
+                        ], 200);
+                    }
+
+                    $discount_amount = $request->orderAmount * ($coupon->percentage_off / 100);
+
+                    $user->cart()->update([
+                        'coupon_id' => $coupon->id,
+                        'coupon_code' => $coupon->promo_code,
+                    ]);
+
+                    return Response::json([
+                        'status' => 200,
+                        'message' => trans('user.message.coupon_applied'),
+                        'data' => [
+                            'coupon_id' => $coupon->id,
+                            'discount_amount' => $discount_amount,
+                            'coupon_percent' => ($coupon->percentage_off / 100)
+                        ]
+                    ]);
+
+                }else{
+                    return response()->json([
+                        'status' => 500,
+                        'message' => trans('user.message.invalid_coupon'),
+                    ], 200);
+                }
             }
         } else {
             return response()->json([

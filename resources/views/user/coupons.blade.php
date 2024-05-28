@@ -18,7 +18,21 @@
                <div class="card-body coupon-card-grid">
                  @foreach($coupons as $key => $coupon)
                  <div class="card custom-card coupons-card p-0">
-                   <div class="card-body p-0 {{ ($user->collected_points >= $coupon->points || $coupon->couponTransaction) ? '': 'locked-coupon' }} ">
+                     <?php
+                         $lockedCoupon = '';
+                         ?>
+                     @if(!is_null($coupon->points) && $user->collected_points >= $coupon->points)
+                             <?php
+                             $lockedCoupon = 'locked-coupon';
+                             ?>
+                     @elseif(isset($coupon->couponTransaction))
+                         @if($coupon->couponTransaction->is_redeemed == '1')
+                            <?php
+                                 $lockedCoupon = 'locked-coupon';
+                                ?>
+                         @endif
+                     @endif
+                   <div class="card-body p-0 {{ $lockedCoupon }} ">
                      <div class="inner-card">
                        <div class="inner-card-body">
                          <h3>{{ $coupon->percentage_off }}<sup>%</sup>
@@ -29,8 +43,9 @@
                          <p class="valid-date mb-0">{{ trans('user.coupons.valid_till') }} {{ $coupon->end_expiry_date }}</p>
                        </div>
                        <div class="promocode-box">
-                         @if($coupon->couponTransaction)
-                            <p class="mb-0 d-inline-block">{{ trans('user.coupons.promo_code') }}</p>
+{{--                         @if($coupon->couponTransaction)--}}
+                           @if($coupon->couponTransaction || is_null($coupon->points))
+                           <p class="mb-0 d-inline-block">{{ trans('user.coupons.promo_code') }}</p>
                             <a href="javascript:void(0);" class="badge text-bg-white d-inline-block">{{ $coupon->promo_code }}</a>
                          @elseif($user->collected_points >= $coupon->points)
                            <p class="mb-0 d-inline-block">{{ trans('user.coupons.promo_code') }}</p>

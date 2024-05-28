@@ -283,8 +283,9 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                     {{--                                <input type="text" class="timepicker form-control time-form-control" name="custom-delivery-time" id="custom-delivery-time" style="max-height: fit-content">--}}
                                                                     <select
                                                                         class="form-control time-form-control"
-                                                                        name="custom-delivery-time"
+                                                                        name="del_time"
                                                                         id="custom-delivery-time">
+                                                                        <option value="">Please Select Time</option>
                                                                         <?php
                                                                         $startHour = date('H');
                                                                         $startMin = date('i');
@@ -702,7 +703,6 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
         async function addOrder() {
             var deliveryType = $('input[name=del_radio]:checked').val()
             var paymentType = $('#payment_type').val()
-
             var zipcode = $('#zipcode').val()
             console.log('zipcode', zipcode)
 

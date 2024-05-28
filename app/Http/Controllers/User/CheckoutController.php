@@ -145,7 +145,8 @@ class CheckoutController extends Controller
                 'platform_charge' => $serviceCharges,
                 'total_amount' => $totalAmtPaid,
                 'order_status' => '1',
-                'order_time' => $orderTime,
+                'order_time' => date('H:i:s'),
+                'delivery_time' => $orderTime,
                 'order_type' => session('zipcode') ? OrderType::Delivery : OrderType::TakeAway,
                 'delivery_date' => date('Y/m/d'),
                 'delivery_note' => $request->instructions ?? null,
@@ -167,9 +168,17 @@ class CheckoutController extends Controller
                 }*/
 
                 if(!empty($user->cart->coupon)){
-                    $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
-                        'is_redeemed' => '1'
-                    ]);
+
+                    if(is_null($user->cart->coupon->points)){
+                        $user->coupons()->create([
+                            'coupon_id' => $user->cart->coupon_id,
+                            'is_redeemed' => '1'
+                        ]);
+                    }else{
+                        $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                            'is_redeemed' => '1'
+                        ]);
+                    }
                 }
 
                 $user->cart->dishDetails()->update([
@@ -256,6 +265,7 @@ class CheckoutController extends Controller
                         'total_amount' => 0,
                         'order_status' => null,
                         'order_time' => null,
+                        'delivery_time' => null,
                         'delivery_date' => null,
                         'delivery_note' => '',
                         'receive_update_emails' => '0',
@@ -331,6 +341,7 @@ class CheckoutController extends Controller
                     'total_amount' => 0,
                     'order_status' => null,
                     'order_time' => null,
+                    'delivery_time' => null,
                     'delivery_date' => null,
                     'delivery_note' => '',
                     'receive_update_emails' => '0',
@@ -359,6 +370,7 @@ class CheckoutController extends Controller
                             'total_amount' => 0,
                             'order_status' => null,
                             'order_time' => null,
+                            'delivery_time' => null,
                             'delivery_date' => null,
                             'delivery_note' => '',
                             'receive_update_emails' => '0',

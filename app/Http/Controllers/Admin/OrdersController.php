@@ -8,6 +8,7 @@ use App\Models\Dish;
 use App\Models\Order;
 use App\Models\User;
 use App\Notifications\Admin\DeliveryTypeUpdate;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\OrderStatus;
@@ -38,21 +39,18 @@ class OrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
 
         $today_date = date('Y-m-d');
-        $dateFilterArray = [1,2,3];
+        $dateFilterArray = [1, 2, 3];
 
-        if($request->date_filter)
-        {
-            if(in_array($request->date_filter, $dateFilterArray)){
-                if($request->date_filter == 1)  // Today
+        if ($request->date_filter) {
+            if (in_array($request->date_filter, $dateFilterArray)) {
+                if ($request->date_filter == 1)  // Today
                 {
-                    $orders->whereBetween('created_at', [$today_date.' 00:00:00', $today_date.' 23:59:59']);
+                    $orders->whereBetween('created_at', [$today_date . ' 00:00:00', $today_date . ' 23:59:59']);
 
-                }
-                else if($request->date_filter == 2) // This week
+                } else if ($request->date_filter == 2) // This week
                 {
                     $orders->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
-                }
-                else // This month
+                } else // This month
                 {
                     $orders->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()]);
                 }
@@ -62,15 +60,14 @@ class OrdersController extends Controller
         $order = '';
         $orders = $orders->get();
 
-        if (count($orders) > 0)
-        {
-            if($request->date_filter){
-                if(in_array($request->date_filter, $dateFilterArray)){
+        if (count($orders) > 0) {
+            if ($request->date_filter) {
+                if (in_array($request->date_filter, $dateFilterArray)) {
                     $order = $orders[0];
-                }else{
+                } else {
                     $order = Order::find($request->date_filter);
                 }
-            }else{
+            } else {
                 $order = $orders[0];
             }
         }
@@ -91,8 +88,7 @@ class OrdersController extends Controller
 
         $order = getOrderStatus($order);
 
-        if($order->save())
-        {
+        if ($order->save()) {
             $order->user->notify(new DeliveryTypeUpdate($order));
 //            $this->sendMail($order);
         }
@@ -107,30 +103,51 @@ class OrdersController extends Controller
 
         $data['name'] = $user->full_name;
         $data['order_id'] = $order->id;
-        $data['delivery_charge'] = '€'.$order->delivery_charge;
-        $data['platform_charge'] = '€'.$order->platform_charge;
-        $data['total_amount'] = '€'.$order->total_amount;
-        $data['sub_total'] = '€'.getOrderGrossAmount($order);
+        $data['delivery_charge'] = '€' . $order->delivery_charge;
+        $data['platform_charge'] = '€' . $order->platform_charge;
+        $data['total_amount'] = '€' . $order->total_amount;
+        $data['sub_total'] = '€' . getOrderGrossAmount($order);
         $data['order_items'] = $order->dishDetails;
-        $data['coupon_discount'] = '- €'.$order->coupon_discount;
+        $data['coupon_discount'] = '- €' . $order->coupon_discount;
 
         $order_status_key = OrderStatus::getKey($order->order_status);
-        $order_status = strtolower(preg_replace('/(?<=\\w)(?=[A-Z])/'," $1", $order_status_key));
+        $order_status = strtolower(preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $order_status_key));
 
-        $subject = trans('email.order_status.subject',['order_id' => $order->id, 'order_status' => $order_status]);
+        $subject = trans('email.order_status.subject', ['order_id' => $order->id, 'order_status' => $order_status]);
 
-        $data['mail_body'] = trans('email.order_status.content',['order_id' => $order->id, 'order_status' => $order_status]);
+        $data['mail_body'] = trans('email.order_status.content', ['order_id' => $order->id, 'order_status' => $order_status]);
 
-        Mail::send('user.emails.order', $data, function($message) use($user,$subject)
-        {
+        Mail::send('user.emails.order', $data, function ($message) use ($user, $subject) {
             $message->to($user->email, $user->full_name)->subject($subject);
-            $message->from(config('mail.from.address'),config('mail.from.name'));
+            $message->from(config('mail.from.address'), config('mail.from.name'));
         });
     }
 
-    public function orderPrintLabel(string $id){
+    public function orderPrintLabel(string $id)
+    {
         $order = Order::find($id);
 
         return view('admin.orders.orders-print-label', ['order' => $order]);
+    }
+
+    public function searchOrder(Request $request)
+    {
+        try {
+            $orders = Order::orderBy('id');
+            if ($request->has('search')) {
+
+                $orders->whereHas('orderUserDetails', function ($query) use ($request) {
+                    $query->where('order_name', 'like', '%' . $request->search . '%')
+                        ->orWhere('house_no', 'like', '%' . $request->search . '%')
+                        ->orWhere('street_name', 'like', '%' . $request->search . '%')
+                        ->orWhere('city', 'like ', '%' . $request->search . '%');
+                })->orWhere('id', 'like', '%' . $request->search . '%');
+            }
+
+            return view('admin.orders.orders-list', ['orders' => $orders->get()]);
+
+        } catch (Exception $exception) {
+
+        }
     }
 }

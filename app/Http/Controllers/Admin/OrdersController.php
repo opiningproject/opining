@@ -133,7 +133,8 @@ class OrdersController extends Controller
     public function searchOrder(Request $request)
     {
         try {
-            $orders = Order::orderBy('id');
+            $orderExist = false;
+            $orders = Order::orderBy('id', 'desc');
             if ($request->has('search')) {
 
                 $orders->whereHas('orderUserDetails', function ($query) use ($request) {
@@ -144,10 +145,15 @@ class OrdersController extends Controller
                 })->orWhere('id', 'like', '%' . $request->search . '%');
             }
 
-            return view('admin.orders.orders-list', ['orders' => $orders->get()]);
+            $orderListIds = $orders->pluck('id')->toArray();
+            if (isset($request->activeId)) {
+                $orderExist = in_array($request->activeId, $orderListIds);
+            }
+
+            return view('admin.orders.orders-list', ['orders' => $orders->get(), 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
 
         } catch (Exception $exception) {
-
+            return response::json(['status' => 400, 'message' => $exception->getMessage()]);
         }
     }
 }

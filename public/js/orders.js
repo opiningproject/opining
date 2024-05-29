@@ -1,17 +1,21 @@
 $(function () {
     $(document).on('keyup', '#search-order', function () {
         var search = $(this).val();
-        // var activeId = $('.foodorder-box-list-item').getActiv
+        var activeId = $('.foodorder-box-list-item.active').attr('data-id')
+
+        console.log(activeId)
 
         $.ajax({
             url: baseURL + '/orders/searchOrder',
             type: 'POST',
             data: {
-                search
+                search,
+                activeId
             },
             datatype: 'json',
             success: function (response) {
                 $('#order-list-data-div').html(response)
+                $('.foodorder-box-details ').html('')
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message

@@ -52,7 +52,7 @@
                                     @if(count($orders))
                                         @foreach($orders as $key => $ord)
                                             <div
-                                                class="{{ $order->id == $ord->id ? 'active':'' }} foodorder-box-list-item d-flex"
+                                                class="{{ $order->id == $ord->id ? 'active':'' }} foodorder-box-list-item d-flex" data-id="{{ $ord->id }}"
                                                 onclick="orderDetail({{ $ord->id }})" id="order-{{ $ord->id }}">
                                                 <div class="details w-100 d-flex flex-column gap-3">
                                                     <div class="title">{{ trans('rest.food_order.order') }}

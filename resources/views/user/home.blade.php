@@ -48,7 +48,7 @@
                                             <!-- <a href="{{ route('user.dashboard') }}" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a> -->
                                             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
 
-                                            <a class="mt-30px text-uppercase d-inline-block text-decoration-underline" href="{{ route('login') }}">
+                                            <a class="mt-30px text-uppercase d-inline-block text-decoration-underline" style="font-size: 11px !important;" href="{{ route('login') }}">
 {{--                                                <img src="{{ asset('images/restaurant-icon-svg.svg') }}" alt="restaurant" class="img-fluid svg" width="22" height="22" />--}}
                                                 {{ trans('user.home.i_am_user') }}
                                             </a>

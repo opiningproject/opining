@@ -44,8 +44,8 @@ $(document).on('click', '#change-order-status-btn', function ()
         url: baseURL+'/orders/change-status/'+ id,
         type: 'GET',
         success: function (response) {
-
             window.location.replace(baseURL + '/orders/'+id+'#order-'+id)
+            setTimeout(() => { document. location. reload(); }, 1000);
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

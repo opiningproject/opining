@@ -69,10 +69,10 @@ class CouponController extends Controller
                     ]);
                 }
 
-                if (strtotime(now()) < strtotime($coupon->start_expiry_date . ' 23:59:59')) {
+                if (strtotime(now()) < strtotime($coupon->start_expiry_date . ' 00:00:00')) {
                     return Response::json([
                         'status' => 401,
-                        'message' => trans('user.message.not_applicable'),
+                        'message' => trans('user.coupons.not_applicable'),
                     ]);
                 }
 
@@ -110,10 +110,10 @@ class CouponController extends Controller
                         ]);
                     }
 
-                    if (strtotime(now()) < strtotime($coupon->start_expiry_date . ' 23:59:59')) {
+                    if (strtotime(now()) < strtotime($coupon->start_expiry_date . ' 00:00:00')) {
                         return Response::json([
                             'status' => 401,
-                            'message' => trans('user.message.not_applicable'),
+                            'message' => trans('user.coupons.not_applicable'),
                         ]);
                     }
 

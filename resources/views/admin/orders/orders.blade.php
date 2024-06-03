@@ -187,7 +187,7 @@
                                                 </div>
                                             @endif
 
-                                            @if($ord->order_type == OrderType::Delivery)
+                                            @if($order->order_type == OrderType::Delivery)
                                                     <?php $order_status = trans('rest.order_status.ready'); ?>
                                                 @if($order->order_status >= OrderStatus::Ready)
                                                     <div

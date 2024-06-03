@@ -2587,7 +2587,7 @@ table .input-group-text {
     height: 100%;
     padding: 0 8px 0 0;
     gap: 20px;
-    max-height: 1208px;
+    max-height: 1060px;
 }
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item {
     border: 1px solid var(--theme-gray2);

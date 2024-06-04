@@ -445,79 +445,10 @@
     {{-- </div> --}}
 
     <!-- start order category Modal -->
-    <div class="modal fade custom-modal" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModal"
-         aria-hidden="true">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content border-radius">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body pt-1">
-
-                    <div class="text-center mb-4">
-                        <h1 class="mb-4 font-18 text-center">Delivery</h1>
-                        <h3 class="mb-2 font-16 text-center">19:00</h3>
-                        <a href="#" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold px-5 mt-2 font-18">accept</a>
-                    </div>
-
-
-                    <div class="orderTop d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                        <div class="left d-flex align-items-center">
-                            <h3 class="font-14">Order #1022</h3>
-                            <h3 class="font-14">June 1, 2020, 08:22 AM</h3>
-                        </div>
-                        <div class="right d-flex align-items-center ml-auto font-14">
-                             <h3 class="font-14"><i class="fa fa-phone font-12 text-yellow-2"></i> +31614522453</h3>
-                        </div>
-                    </div>
-
-
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 mb-3">
-                            <div class="font-14">
-                                <h3 class="font-14"><i class="fa fa-location-dot font-12 text-yellow-2"></i> Naaldwijkstraat 29, 3061PG Rotterdam</h3>
-                                <p><span class="text-black">Delivery Instruction:</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. </p>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-5 text-md-left mb-3">
-                            <div class="font-14">
-                                <h4 class="text-black-50 font-14"><span class="text-black">Delivery Mode:</span> As Soon As Possible</h4>
-                                <h4 class="text-black-50 font-14"><span class="text-black">Payment Method:</span> Cash On Delivery</h4>
-                                <h4 class="text-black-50 font-14"><span class="text-black">Order Type:</span> Delivery</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="items-list-order">
-                        <h3 class="cart-title mb-4">Order list (2 x items)</h3>
-
-                        <div class="orders_item justify-content-between">
-                            <div class="ord_item">
-                                <h2><span class="me-2 d-inline-block">10 x</span> Bakery Burger</h2>
-                                <h4>+€176.00</h4>
-                            </div>
-
-                            <div class="ord_item">
-                                <h2><span class="me-2 d-inline-block">10 x</span> Bakery Burger</h2>
-                                <h4>+€176.00</h4>
-                            </div>
-
-                            <div class="ord_item">
-                                <h2><span class="me-2 d-inline-block">10 x</span> Bakery Burger</h2>
-                                <h4>+€176.00</h4>
-                            </div>
-
-                            <div class="ord_item">
-                                <h2><span class="me-2 d-inline-block">10 x</span> Bakery Burger</h2>
-                                <h4>+€176.00</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="order-modal-div" id="order-modal-div">
+<!--        <div class="modal fade custom-modal" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModal"
+             aria-hidden="true">
+        </div>-->
     </div>
     <!-- end order category  Modal -->
 
@@ -527,10 +458,5 @@
     <script type="text/javascript" src="{{ asset('js/category.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dish-home-operations.js') }}"></script>
-    <script type="text/javascript">
-        $(function (){
-            // $('#newOrderModal').modal('show')
-        })
-    </script>
-
+    <script type="text/javascript" src="{{ asset('js/order-notification.js')}}"></script>
 @endsection

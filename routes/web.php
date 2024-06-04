@@ -167,13 +167,15 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::post('/chat/attachment/store', [ChatController::class, 'storeAttachment'])->name('storeAttachment');
     Route::get('/chat/search-chat', [ChatController::class, 'searchChat']);
     Route::post('/chat/store', [ChatController::class, 'storeMessage']);
+
+    Route::get('/orders/not-notified-orders', [OrdersController::class, 'getNotNotifiedOrders'])->name('notNotifiedOrder');
     Route::get('/orders/{date_filter?}', [OrdersController::class, 'index'])->name('orders');
     Route::get('/orders/print-label/{order_id}', [OrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
 
     Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
-    Route::post('/orders/searchOrder', [OrdersController::class, 'searchOrder'])->name('order-order');
+    Route::post('/orders/searchOrder', [OrdersController::class, 'searchOrder'])->name('searchOrder');
 
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
 

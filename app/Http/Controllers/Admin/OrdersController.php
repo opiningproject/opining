@@ -156,4 +156,22 @@ class OrdersController extends Controller
             return response::json(['status' => 400, 'message' => $exception->getMessage()]);
         }
     }
+
+    public function getNotNotifiedOrders(){
+        try{
+            $orders = Order::where([
+                ['order_status', OrderStatus::Accepted],
+//                ['is_admin_notified', '0']
+            ])->orderBy('id','desc')->limit(1);
+
+            $orders->update([
+                'is_admin_notified' => '1'
+            ]);
+
+            return view('admin.orders.new-order-popup', ['orders' => $orders->get()]);
+
+        }catch (Exception $exception){
+            return response::json(['status' => 400, 'message' => '']);
+        }
+    }
 }

@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','transaction_id','coupon_id','refund_status','refund_description','payment_type','payment_status','delivery_charge','platform_charge','total_amount','order_status','order_type','order_date','delivery_date','delivery_time','delivery_note','receive_update_emails','points','coupon_code','payment_response','is_cart'];
+    protected $fillable = ['user_id','transaction_id','coupon_id','refund_status','refund_description','payment_type','payment_status','delivery_charge','platform_charge','total_amount','order_status','order_type','order_date','delivery_date','delivery_time','delivery_note','receive_update_emails','points','coupon_code','payment_response','is_cart','is_admin_notified'];
     protected $dates = ['created_at', 'updated_at'];
     protected $appends=['item_total'];
 

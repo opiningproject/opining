@@ -97,12 +97,14 @@ return [
 	],
 
 	'food_order' => [
+        'order_details' => 'Order Details',
 		'title' => 'Food Order',
 		'filter' => 'Filter Orders',
 		'today' => 'Today',
 		'week' => 'This week',
 		'month' => 'This month',
 		'order' => 'Order',
+		'order_type' => 'Order Type',
 		'no_order' => 'No orders',
 		'order_list' => 'Order List',
 		'notes' => 'Notes',
@@ -114,6 +116,7 @@ return [
 		'delivery_mode' => 'Delivery Mode',
 		'payment_method' => 'Payment Method',
 		'type' => 'Order Type',
+		'item_list' => 'Item List',
 		'instruction' => 'Delivery Instruction',
 		'card' => 'Card',
 

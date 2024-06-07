@@ -655,9 +655,13 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
     <script type="text/javascript" async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&loading=async"></script>
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
     <script>
-
+        var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
         var public_key = '{{ config('params.stripe.sandbox.public_key') }}';
         const stripe = Stripe(public_key, {
             apiVersion: '2020-08-27'
@@ -753,6 +757,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                 data: checkoutData,
                 async success(response) {
                     if (response.status == 200) {
+                        socket.emit('sendOrderNotification');
                         if (paymentType == '2') {
                             toastr.success(response.message.data)
 

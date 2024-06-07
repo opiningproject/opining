@@ -82,7 +82,6 @@
                 $('#order-modal-div').html(data)
                 $('.order-notification-popup').modal('show')
                 @if(getRestaurantDetail()->order_notif_sound)
-                console.log("data", data)
                 // $('.myaudio').play();
                 document.getElementById('myaudio').play();
                 @endif

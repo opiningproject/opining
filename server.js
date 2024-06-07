@@ -86,6 +86,14 @@ io.on("connection", function (socket) {
         // io.to(messageData.receiver_id).emit('sendChatToClient', adminMessage);
     });
 
+
+    socket.on('sendOrderNotification', () => {
+        console.log("sendOrderNotification");
+        io.emit('sendNotificationToAdmin');
+        // debugger
+
+    });
+
     // Listen for disconnection
     socket.on("disconnect", () => {
         // console.log("disconnect")

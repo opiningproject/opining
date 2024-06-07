@@ -11,7 +11,7 @@ class RestaurantDetail extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $fillable = ['user_id','restaurant_name','permit_id','phone_no','rest_address','latitude','longitude','online_order_accept','restaurant_logo','permit_doc','service_charge','footer_logo'];
+    protected $fillable = ['user_id','restaurant_name','permit_id','phone_no','rest_address','latitude','longitude','online_order_accept','restaurant_logo','permit_doc','service_charge','footer_logo', 'order_notif_sound'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 

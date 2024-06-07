@@ -137,9 +137,11 @@ class CartController extends Controller
                                 <img src='".asset('images/custom-dish.svg')."' alt='' class='svg edit-icon' height='13' width='14'/>
                             </a>
                             Edit
-                        </p>
-                        <p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total),2) . " </p>
-                      </div>
+                        </p>";
+                        if ($cart->qty * $cart->paid_ingredient_total > 0) {
+                            $html .= "<p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total), 2) . " </p>";
+                        }
+                     $html .= "</div> </div>
                       <div class='from-group addnote-from-group mb-0'>
                         <div class='form-group'>
                           <label for='dishnameenglish' class='form-label'>".trans('user.cart.add_notes')."</label>

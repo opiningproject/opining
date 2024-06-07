@@ -6,6 +6,8 @@ use App\Enums\PaymentType;
 
 ?>
 @foreach($orders as $order)
+    <?php $userDetails = $order->orderUserDetails; ?>
+
     <div class="modal fade custom-modal order-notification-popup" id="newOrderModal" tabindex="-1"
          aria-labelledby="newOrderModal"
          aria-hidden="true">
@@ -15,35 +17,38 @@ use App\Enums\PaymentType;
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pt-1">
-
                     <div class="text-center mb-4">
                         <h1 class="mb-4 font-18 text-center">{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}</h1>
-                        <h3 class="mb-2 font-16 text-center">19:00</h3>
+                        <h3 class="mb-2 font-16 text-center">{{ $order->delivery_time }} </h3>
                         <a href="{{ route('orders', ['date_filter' => $order->id]) }}" target="_blank"
                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold px-5 mt-2 font-18">{{ trans('rest.food_order.order_details') }}</a>
                     </div>
 
-
                     <div class="orderTop d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
                         <div class="left d-flex align-items-center">
                             <h3 class="font-14">{{ trans('rest.food_order.order') }} #{{ $order->id }}</h3>
-                            <h3 class="font-14">&nbsp;June 1, 2020, 08:22 AM</h3>
+                            <h3 class="font-14">&nbsp;{{$order->created_at}}</h3>
                         </div>
                         <div class="right d-flex align-items-center ml-auto font-14">
-                            <h3 class="font-14"><i class="fa fa-phone font-12 text-yellow-2"></i> +31614522453</h3>
+                            <h3 class="font-14"><i class="fa fa-phone font-12 text-yellow-2"></i> +31 {{ $userDetails->order_contact_number ?? "-"}} </h3>
                         </div>
                     </div>
-
-
                     <div class="row justify-content-between">
                         <div class="col-md-6 mb-3">
                             <div class="font-14">
                                 <h3 class="font-14"><i class="fa fa-location-dot font-12 text-yellow-2"></i>
-                                    Naaldwijkstraat
-                                    29, 3061PG Rotterdam</h3>
-                                <p><span class="text-black">{{ trans('rest.food_order.instruction') }}:</span> Lorem
-                                    ipsum
-                                    dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. </p>
+                                    @if($order->order_type == OrderType::Delivery)
+                                        <?php
+                                            echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                                        ?>
+                                    @else
+                                         {{ getRestaurantDetail()->rest_address }} </h3>
+                                    @endif
+                                @if($order->delivery_note)
+                                <p><span class="text-black">{{ trans('rest.food_order.instruction') }}:</span>
+                                    {{ $order->delivery_note ?? '-' }}
+                                </p>
+                                    @endif
                             </div>
                         </div>
 

@@ -149,6 +149,7 @@ return [
 			'logo' => 'Restaurant Logo',
 			'footer_logo' => 'Restaurant Footer Logo',
 			'order_acceptance' => 'Online Order Acceptance',
+			'notification_sound' => 'Order Notification Sound',
 			'address_details' => 'Address Details',
 			'permit_doc' => 'Company Permit Document',
 			'service_charge' => 'Service Charge',

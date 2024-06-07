@@ -757,7 +757,7 @@ crossorigin="anonymous"></script>
                 data: checkoutData,
                 async success(response) {
                     if (response.status == 200) {
-                        socket.emit('sendOrderNotification');
+                        socket.emit('sendOrderNotification'); 
                         if (paymentType == '2') {
                             toastr.success(response.message.data)
 

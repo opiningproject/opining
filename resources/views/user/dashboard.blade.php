@@ -402,10 +402,12 @@
                                                                                                         style="height: 13px;width: 14px;"/>
                                                                                                 </a> {{ trans('user.cart.edit') }}
                                                                                             </p>
+                                                                                            @if($paidIngredient * $dish->qty > 0)
                                                                                             <p class="price-opt mb-0 text-nowrap"
                                                                                                id="paid-ing-price{{ $dish->id }}">
                                                                                                 +€{{ number_format($paidIngredient * $dish->qty, 2) }}
                                                                                             </p>
+                                                                                            @endif
                                                                                         </div>
                                                                                         <div
                                                                                             class="from-group addnote-from-group mb-0">

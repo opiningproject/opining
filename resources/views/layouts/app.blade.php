@@ -24,7 +24,10 @@
     </div>
 </a>
 @endif--}}
-
+ <!-- start order category Modal -->
+    <div class="order-modal-div" id="order-modal-div"></div>
+ <!-- end order category  Modal -->
+ <audio id="myaudio" src="{{asset('/notificationSound/notification-sound.mp3')}}"> </audio>
 
 @include('layouts.admin.footer')
 @yield('script')

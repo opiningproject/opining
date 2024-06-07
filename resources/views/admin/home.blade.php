@@ -445,11 +445,11 @@
     {{-- </div> --}}
 
     <!-- start order category Modal -->
-    <div class="order-modal-div" id="order-modal-div">
+    {{-- <div class="order-modal-div" id="order-modal-div"> --}}
 <!--        <div class="modal fade custom-modal" id="newOrderModal" tabindex="-1" aria-labelledby="newOrderModal"
              aria-hidden="true">
         </div>-->
-    </div>
+    {{-- </div> --}}
     <!-- end order category  Modal -->
 
 @endsection
@@ -458,5 +458,4 @@
     <script type="text/javascript" src="{{ asset('js/category.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dish-home-operations.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/order-notification.js')}}"></script>
 @endsection

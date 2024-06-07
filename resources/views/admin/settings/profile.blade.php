@@ -70,13 +70,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 my-auto">
-                        <div class="form-group mb-0 mt-2">
-                            <div class="form-check form-switch custom-switch d-flex align-items-center gap-3 ps-0">
-                                <label class="form-check-label form-label mb-0">{{ trans('rest.settings.profile.order_acceptance') }}</label>
-                                <!-- <label class="text-yellow-2 float-end form-label mb-0 text-end">Active</label> -->
-                                <!-- switch online order Acceptance -->
-                                <input class="form-check-input" type="checkbox" name="online_order_accept" role="switch" {{ $user->online_order_accept ? 'checked':'' }}>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.service_charge') }}</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                                <input type="number" class="form-control" maxlength="4" value="{{ $user->service_charge }}" min="0" name="service_charge" required />
                             </div>
                         </div>
                     </div>
@@ -107,12 +106,20 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                        <div class="form-group">
-                            <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.service_charge') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">€</span>
-                                <input type="number" class="form-control" maxlength="4" value="{{ $user->service_charge }}" min="0" name="service_charge" required />
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 my-auto">
+                        <div class="form-group mb-0 mt-2">
+                            <div class="form-check form-switch custom-switch d-flex align-items-center gap-3 ps-0">
+                                <label class="form-check-label form-label mb-0">{{ trans('rest.settings.profile.order_acceptance') }}</label>
+                                <!-- <label class="text-yellow-2 float-end form-label mb-0 text-end">Active</label> -->
+                                <!-- switch online order Acceptance -->
+                                <input class="form-check-input" type="checkbox" name="online_order_accept" role="switch" {{ $user->online_order_accept ? 'checked':'' }}>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 mt-4">
+                            <div class="form-check form-switch custom-switch d-flex align-items-center gap-3 ps-0">
+                                <label class="form-check-label form-label mb-0">{{ trans('rest.settings.profile.notification_sound') }}</label>
+                                <!-- switch online order Acceptance -->
+                                <input class="form-check-input" type="checkbox" name="order_notif_sound" role="switch" {{ $user->order_notif_sound ? 'checked':'' }}>
                             </div>
                         </div>
                     </div>
@@ -158,7 +165,6 @@
         </div>
     </form>
 </div>
-
 <!-- start change password Modal -->
 <div class="modal fade custom-modal" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true">
     <div class="modal-dialog custom-w-441px modal-dialog-centered">

@@ -5418,5 +5418,6 @@ footer .footer-logo a {font-size: initial !important;}
     .scrollable-tap .bottom-sticky {
         right: 30px;
         bottom: 30px;
+        z-index: inherit;
     }
 }

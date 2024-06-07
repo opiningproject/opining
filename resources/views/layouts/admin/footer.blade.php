@@ -27,6 +27,9 @@
         integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
         crossorigin="anonymous"></script>
 <script>
+    
+    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+    
     var baseURL = "{{ url('/') }}"
     var theme = "{{ session('theme') }}";
 
@@ -57,6 +60,40 @@
         }
 
     inlineSVG.init(svg_options, () => console.log('All SVGs inlined'));
+    // show popup by socket io
+    
+    @if(auth()->user())
+    socket.on('socketConnectionSecured', (message) => {
+        $('#socket-id').val(message)
+    });
+    socket.on('sendNotificationToAdmin', () => {
+        // document.getElementById('myaudio').play();
+        checkNotifiedOrders()
+    });
+    // code for open popup
+    checkNotifiedOrders()
+
+    function checkNotifiedOrders() {
+    $.ajax({
+        type: 'GET',
+        url: baseURL + '/orders/not-notified-orders',
+        success: function (data) {
+            if(data) {
+                $('#order-modal-div').html(data)
+                $('.order-notification-popup').modal('show')
+                @if(getRestaurantDetail()->order_notif_sound)
+                console.log("data", data)
+                // $('.myaudio').play();
+                document.getElementById('myaudio').play();
+                @endif
+            }
+        },
+        error: function (data) {
+            alert("Error")
+        }
+    });
+}
+@endif
 </script>
 
 

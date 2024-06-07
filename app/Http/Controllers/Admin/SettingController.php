@@ -243,6 +243,7 @@ class SettingController extends Controller
         $restaurant->service_charge = $request->service_charge;
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
+        $restaurant->order_notif_sound = $request->order_notif_sound ? '1' : '0';
         $restaurant->save();
 
         $owner = User::find($user_id);

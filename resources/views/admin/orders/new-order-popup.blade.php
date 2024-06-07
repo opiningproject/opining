@@ -42,8 +42,9 @@ use App\Enums\PaymentType;
                                             echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
                                         ?>
                                     @else
-                                         {{ getRestaurantDetail()->rest_address }} </h3>
+                                         {{ getRestaurantDetail()->rest_address }}
                                     @endif
+                                </h3>
                                 @if($order->delivery_note)
                                 <p><span class="text-black">{{ trans('rest.food_order.instruction') }}:</span>
                                     {{ $order->delivery_note ?? '-' }}

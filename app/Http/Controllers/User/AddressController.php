@@ -31,7 +31,7 @@ class AddressController extends Controller
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);
 
-            return response::json(['status' => 1, 'message' => ""]);
+            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode ]);
         }
 
         return response::json(['status' => 2, 'message' => trans('user.message.invalid_zipcode')]);

@@ -101,7 +101,7 @@ class CouponController extends Controller
                 ]);
             } else {
 
-                if(is_null($coupon->points)){
+                if(is_null($coupon->points) || $coupon->points >= 0){
 
                     if (strtotime(now()) > strtotime($coupon->end_expiry_date . ' 23:59:59')) {
                         return Response::json([

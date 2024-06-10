@@ -93,7 +93,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="points" class="form-label">{{ trans('rest.coupons.points') }}</label>
-                                <input type="number" class="form-control" id="points" name="points" min="1" max="1000">
+                                <input type="number" class="form-control" id="points" name="points" min="0" max="1000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -101,7 +101,7 @@
                                 <label for="price" class="form-label">{{ trans('rest.coupons.min_order_price') }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">€</span>
-                                    <input type="text" class="form-control" id="price" min="1" name="price" required/>
+                                    <input type="text" class="form-control" id="price" min="0" name="price" required/>
                                 </div>
                             </div>
                         </div>

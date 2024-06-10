@@ -101,7 +101,7 @@
                                 <label for="price" class="form-label">{{ trans('rest.coupons.min_order_price') }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">€</span>
-                                    <input type="text" class="form-control" id="price" min="0" name="price" required/>
+                                    <input type="text" class="form-control" id="price" min="0" name="price"/>
                                 </div>
                             </div>
                         </div>

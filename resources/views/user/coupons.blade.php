@@ -18,20 +18,12 @@
                <div class="card-body coupon-card-grid">
                  @foreach($coupons as $key => $coupon)
                  <div class="card custom-card coupons-card p-0">
-                     <?php
-                         $lockedCoupon = '';
-                         ?>
-                     @if(!is_null($coupon->points) && $user->collected_points >= $coupon->points)
-                             <?php
-                             $lockedCoupon = 'locked-coupon';
-                             ?>
-                     @elseif(isset($coupon->couponTransaction))
-                         @if($coupon->couponTransaction->is_redeemed == '1')
-                            <?php
-                                 $lockedCoupon = 'locked-coupon';
-                                ?>
-                         @endif
-                     @endif
+                  <?php $lockedCoupon = ''; ?>
+                  @if(!empty($coupon->points) && $coupon->points >= $user->collected_points)
+                     <?php $lockedCoupon = 'locked-coupon'; ?>
+                  @elseif(isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1')
+                     <?php $lockedCoupon = 'locked-coupon'; ?>
+                  @endif
                    <div class="card-body p-0 {{ $lockedCoupon }} ">
                      <div class="inner-card">
                        <div class="inner-card-body">

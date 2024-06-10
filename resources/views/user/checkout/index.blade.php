@@ -101,11 +101,12 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         <div class="form-group">
                                                                             <label for="housenumber"
                                                                                    class="form-label">{{ trans('user.checkout.house_no') }}</label>
-                                                                            <input type="number" maxlength="9" min="0"
-                                                                                   name="house_no" id="house_no"
-                                                                                   class="form-control"
-                                                                                   value="{{ $addressData->house_no ?? $house_no }}"
-                                                                                   required/>
+                                                                           <input type="text"  class="form-control" 
+                                                                                maxlength="10" 
+                                                                                placeholder="{{ trans('modal.address.house_no') }}" 
+                                                                                value="{{ $addressData->house_no ?? $house_no }}"
+                                                                                name="house_no" id="house_no" 
+                                                                                required/>
                                                                         </div>
                                                                     </div>
                                                                     <div

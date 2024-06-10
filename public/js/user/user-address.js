@@ -99,7 +99,22 @@ function validateZipcode() {
                 $('#zipcode-error').text(response.message);
                 $('#zipcode-error').css("display", "block");
             } else {
-                window.location.href = url;
+
+                if(response.zipcode && response.house_number) {
+
+                    let houseNumber = response.house_number;
+                    let zipcode = response.zipcode;
+                    let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                    $("#zip_address").html('');
+                    $("#zip_address").html('<p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1">' + displayText + '</p>');
+                    $('#addressChangeModal').modal('hide');
+    
+                    // After closing modal set updated values
+                    $('#addressChangeModal').on('hidden.bs.modal', function () {
+                        $('#house_no').val(response.house_number)
+                        $('#zipcode').val(response.zipcode)
+                    });
+                }
             }
         },
         error: function (response) {

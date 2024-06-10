@@ -273,7 +273,7 @@
                                                                 class="d-flex align-items-center delivery-address-span address-field">
                                                                 <img src="{{ asset('images/delivery-address.svg') }}"
                                                                      alt="" class="svg" height="23" width="32">
-                                                                <p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1"> <?= $house_no ? $house_no . ', ' . $zipcode : '' ?> </p>
+                                                                <p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1" id="zip_address">{{ $house_no ? $house_no . ', ' . $zipcode : '' }}</p>
                                                             </div>
                                                             @if ($user && $user->id)
                                                                 <a href="javascript:void(0);" data-bs-toggle="modal"

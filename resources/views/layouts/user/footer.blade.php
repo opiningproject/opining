@@ -54,10 +54,22 @@
         $('#loader').addClass('d-none');
     })*/
 
-    const svg_options = {
-            svgSelector: 'img.svg', // the class attached to all images that should be inlined
-            initClass: 'js-inlinesvg', // class added to <html>
-        }
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('img.svg').forEach(function(img) {
+            const svg_options = {
+                    svgSelector: 'img.svg', // the class attached to all images that should be inlined
+                    initClass: 'js-inlinesvg', // class added to <html>
+                }
+            inlineSVG.init(svg_options, () => console.log('All SVGs inlined'));
+        });
+    });
 
-    inlineSVG.init(svg_options, () => console.log('All SVGs inlined'));
+
+    //     const svg_options = {
+    //         svgSelector: 'img.svg', // the class attached to all images that should be inlined
+    //         initClass: 'js-inlinesvg', // class added to <html>
+    //     }
+
+    // inlineSVG.init(svg_options, () => console.log('All SVGs inlined'));
+
 </script>

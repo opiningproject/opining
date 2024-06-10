@@ -60,7 +60,20 @@ $(function () {
                     $('#zipcode-error').text(response.data.message);
                     $('#zipcode-error').css("display", "block");
                 } else {
-                    location.reload()
+
+                    let houseNumber = response.data.house_no;
+                    let zipcode = response.data.zipcode;
+                    let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                    $("#zip_address").html('');
+                    $("#zip_address").html('<p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1">' + displayText + '</p>');
+
+                    $('#addressChangeModal').modal('hide');
+
+                    $('#addressChangeModal').on('hidden.bs.modal', function () {
+                        $('#zipcode').val(response.data.zipcode)
+                    $('#house_no').val(response.data.house_no)
+                    });
+
                 }
             },
             error: function (response) {

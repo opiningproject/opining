@@ -47,7 +47,23 @@ $(function () {
 
     $(document).on('click', '.select-address-btn', function () {
 
-        var addressId = $(this).data('id')
+        var parentId = $(this).closest('div[id^="address-"]').attr('id');
+
+        // Extract the address ID from the parent div's ID
+        var addressId = parentId.split('-')[1];
+
+        // Update the button text based on the address ID
+        $(this).text('Selected');
+
+        // Change the text of other buttons to 'Deliver Here' and remove styples except the clicked one
+        $('.select-address-btn').not($(this)).text('Deliver Here');
+        $('.select-address-btn').not($(this)).attr('style', '');
+
+
+
+        var dynamicStyle = 'pointer-events:none; cursor:default;';
+        $(this).attr('style', dynamicStyle);
+    
 
         $.ajax({
             url: baseURL + '/user/validate-address/' + addressId,

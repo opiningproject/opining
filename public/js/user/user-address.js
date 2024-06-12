@@ -127,8 +127,12 @@ function validateZipcode() {
             if (response.status == 2) {
                 $('#zipcode-error').text(response.message);
                 $('#zipcode-error').css("display", "block");
+            } else {          
+            let currentUrl = window.location.href;
+    
+            if(url !== currentUrl) {
+                window.location.href = url;
             } else {
-
                 if(response.zipcode && response.house_number) {
 
                     let houseNumber = response.house_number;
@@ -143,6 +147,7 @@ function validateZipcode() {
                         $('#house_no').val(response.house_number)
                         $('#zipcode').val(response.zipcode)
                     });
+                } 
                 }
             }
         },

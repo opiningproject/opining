@@ -20,7 +20,11 @@
                             class="section-page-title mb-0 d-flex align-items-center justify-content-between gap-2 foodorder-page-title">
                             <h1 class="page-title">{{ trans('rest.food_order.title') }}</h1>
                             <div class="btn-grp d-flex align-items-center flex-wrap">
-                                <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown"
+                                <div class="search-has">
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                    <input type="text" class="form-control" id="search-order" placeholder="Search">
+                                </div>
+                                {{-- <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown"
                                         aria-expanded="false">
                                     <img src="{{ asset('images/filter-icon.svg') }}" alt="img" class="img-fluid svg"
                                          width="22" height="20">
@@ -37,16 +41,43 @@
                                     <li><a class="dropdown-item"
                                            href="{{ route('orders',['date_filter'=>3]) }}">{{ trans('rest.food_order.month') }}</a>
                                     </li>
-                                </ul>
+                                </ul> --}}
+                                <form class="form" action="{{ 'invoice' }}" method="#">
+                                    <div class="input-group col-sm-3 col-xs-12 pull-left">
+                                        <input type="text" placeholder="Select Date For Filter" class="form-control" id="expiry_date" aria-label="dateofbirth" aria-describedby="basic-addon1" name="expiry_date" required>
+                                    </div>
+                                </form>
+                                {{-- <div> --}}
+                                    <button type="button" name="clear" value="Clear" id="clear" class="btn btn-success clear-button">Clear</button>
+                                {{-- </div> --}}
+
+                                <div class="dropdown userlogin-dropdown custom-default-dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}"
+                                             alt="user image" class="img-fluid">
+                                        <div class="d-inline-block text-start userdp-text">
+                                            <a href="javascript:void(0);"
+                                               class="text-yellow-2 d-block">{{ Auth::user()->name }}</a>
+                                            <span>{{ Auth::user()->email }}</span>
+                                        </div>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#"
+                                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                {{ trans('rest.settings.profile.logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}"
+                                                  method="POST" class="d-none"> @csrf </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="foodorder-box d-flex">
                             <div class="foodorder-box-list-wrp bg-white">
-
-                                <div class="form-group search-has">
-                                    <span class="fa fa-search form-control-feedback"></span>
-                                    <input type="text" class="form-control" id="search-order" placeholder="Search">
-                                </div>
 
                                 <div class="foodorder-box-list d-flex flex-column" id="order-list-data-div">
                                     @if(count($orders))

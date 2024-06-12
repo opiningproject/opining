@@ -38,35 +38,33 @@ class OrdersController extends Controller
     {
         $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
 
-        $today_date = date('Y-m-d');
-        $dateFilterArray = [1, 2, 3];
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
+       
+            if (!empty($start_date) && !empty($end_date)) {
 
-        if ($request->date_filter) {
-            if (in_array($request->date_filter, $dateFilterArray)) {
-                if ($request->date_filter == 1)  // Today
-                {
-                    $orders->whereBetween('created_at', [$today_date . ' 00:00:00', $today_date . ' 23:59:59']);
+                $start_date = date('Y-d-m', strtotime($start_date)) . ' 00:00:00';
+                $end_date = date('Y-d-m', strtotime($end_date)) . ' 23:59:59';
 
-                } else if ($request->date_filter == 2) // This week
-                {
-                    $orders->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
-                } else // This month
-                {
-                    $orders->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()]);
-                }
+                $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+            } else if (!empty($start_date) && empty($end_date)) {
+                $start_date = date('Y-d-m', strtotime($start_date)) . ' 00:00:00';
+                $end_date = date('Y-d-m') . ' 23:59:59';
+
+                $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+            } else if (empty($start_date) && !empty($end_date)) {
+                $end_date = date('Y-d-m', strtotime($end_date)) . ' 23:59:59';
+                $start_date = '2024-01-01 00:00:00';
+
+                $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
-        }
 
         $order = '';
         $orders = $orders->get();
 
         if (count($orders) > 0) {
             if ($request->date_filter) {
-                if (in_array($request->date_filter, $dateFilterArray)) {
-                    $order = $orders[0];
-                } else {
-                    $order = Order::find($request->date_filter);
-                }
+                $order = Order::find($request->date_filter);
             } else {
                 $order = $orders[0];
             }

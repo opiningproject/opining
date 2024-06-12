@@ -44,9 +44,9 @@ class CategoryController extends Controller
             }
             if($request->has('image')){
                 if($request->has('id')){
-                    $imageName = uploadImageToBucket($request, '/category', '');
+                    $imageName = uploadImageToLocal($request, '/category',$category->getRawOriginal('image'));
                 }else{
-                    $imageName = uploadImageToBucket($request, '/category');
+                    $imageName = uploadImageToLocal($request, '/category');
                 }
                 $category->image = $imageName;
             }

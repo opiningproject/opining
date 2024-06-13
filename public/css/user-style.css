@@ -5443,3 +5443,24 @@ footer .footer-logo a {font-size: initial !important;}
   color: var(--theme-dark2);
   background-color: var(--theme-yellow2);
 }
+
+
+
+@media (max-width: 768px) {
+  .footer-hide #footer-style {
+       display: none;
+   }
+}
+
+
+@media (min-width: 767px) {
+   .selectTimeValidation {
+       display: none;
+   }
+}
+/* Show error message on mobile */
+@media (max-width: 768px) {
+   .selectTimeValidation {
+       display: block;
+   }
+}

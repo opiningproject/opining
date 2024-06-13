@@ -23,7 +23,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
 ?>
 @section('content')
-    <div class="main">
+    <div class="main footer-hide">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.user.side_nav_bar')
@@ -245,8 +245,9 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                    id="del-type-mobile-text">{{ trans('user.checkout.asap') }}</p>
                                                             </div>
                                                             <span class="toggleIco ms-auto">
-                              <i class="fa-solid fa-angle-right"></i>
-                              <span>
+                                                                <i class="fa-solid fa-angle-right"></i>
+                                                            <span>
+                                
                                                         </div>
                                                     </div>
                                                     <div class="mobilecheckoutContent"
@@ -282,40 +283,48 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                     <label for="selecttime"
                                                                            class="form-label">{{ trans('user.checkout.select_time') }}</label>
                                                                     {{--                                <input type="text" class="timepicker form-control time-form-control" name="custom-delivery-time" id="custom-delivery-time" style="max-height: fit-content">--}}
-                                                                    <select
-                                                                        class="form-control time-form-control"
-                                                                        name="del_time"
-                                                                        id="custom-delivery-time">
-                                                                        <option value="">Please Select Time</option>
-                                                                        <?php
-                                                                        $startHour = date('H');
-                                                                        $startMin = date('i');
-                                                                        $endTime = date('H', strtotime($restaurantOpen->end_time));
-                                                                        ?>
-                                                                        @for($i = $startHour; $i <=24; $i++)
-                                                                            @if($endTime == $i)
-                                                                                    <?php break; ?>
-                                                                            @endif
-                                                                            @if($i == 24)
-                                                                                    <?php
-                                                                                    $i = 0;
-                                                                                    ?>
-                                                                            @endif
+                                                                    <select class="form-control time-form-control"
+                                                                    name="del_time" id="custom-delivery-time">
+                                                                    <option value="">Please Select Time</option>
+                                                                    <?php
+                                                                    $current_time = new DateTime();
+                                                                    $current_minute = (int) $current_time->format('i');
+                                                                    $current_hour = (int) $current_time->format('H');
+                                                                    ?>
 
-                                                                            @for($j = $startMin; $j<=59; $j+=30)
-                                                                                    <?php
-                                                                                    $time = sprintf( '%02d', $i ) . ":" . sprintf( '%02d', $j );
-                                                                                    ?>
-                                                                                <option
-                                                                                    value="{{ $time }}">{{$time}}</option>
-                                                                            @endfor
+                                                                    <?php
 
-                                                                        @endfor
-                                                                    </select>
+
+                                                                    if ($current_minute > 30) {
+
+                                                                        $current_hour += 2;
+                                                                        $current_minute = 0;
+                                                                    } elseif ($current_minute > 0) {
+
+                                                                        $current_hour += 1;
+                                                                        $current_minute = 30;
+                                                                    } else {
+
+                                                                        $current_hour += 1;
+                                                                        $current_minute = 0;
+                                                                    }
+
+
+                                                                    $current_time->setTime($current_hour % 24, $current_minute);
+
+
+                                                                    for ($i = 0; $i < 24; $i++) {
+                                                                        $time_options = $current_time->format('H:i');
+                                                                        $current_time->modify('+30 minutes'); ?>
+                                                                    <option value="{{ $time_options }}">
+                                                                        {{ $time_options }}</option>
+                                                                    <?php  } ?>
+                                                                </select>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <span class="selectTimeValidation"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -668,6 +677,24 @@ crossorigin="anonymous"></script>
             apiVersion: '2020-08-27'
         });
 
+
+
+        function isDesktopView() {
+            
+            return $(window).width() >= 768;
+
+        }
+
+        if (!isDesktopView()) {
+            $('input[type=radio][name=del_radio]').on('change', function() {
+                switch ($(this).val()) {
+                    case 'asap':
+                        $(".selectTimeValidation").text(" ").css("color", "");
+                    break;
+                }
+                });
+        }
+
         const elements = stripe.elements();
         const options = {
             // Custom styling can be passed to options when creating an Element
@@ -705,16 +732,43 @@ crossorigin="anonymous"></script>
             });
         })
 
+
+        $("#custom-delivery-time").change(function() {
+
+        var deliveryType = $('input[name=del_radio]:checked').val()
+        if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
+            // alert('Please select time')
+            $(".selectTimeValidation").text("Choose a delivery time").css("color", "red");
+            if (isDesktopView()) {
+                            alert('Please select time.');
+                        }
+            return false;
+        }
+        $(".selectTimeValidation").text(" ").css("color", "");
+
+        });
+
         async function addOrder() {
             var deliveryType = $('input[name=del_radio]:checked').val()
             var paymentType = $('#payment_type').val()
             var zipcode = $('#zipcode').val()
             console.log('zipcode', zipcode)
 
+            // if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
+            //     alert('Please select time')
+            //     return false
+            // }
+
             if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
-                alert('Please select time')
+                if (isDesktopView()) {
+                    alert('Please select time.');
+                }
+                // alert('Please select time');
+                $(".selectTimeValidation").text("Please Select Time first").css("color", "red");
                 return false
             }
+            $(".selectTimeValidation").text(" ").css("color", "");
+
 
             var checkoutData = new FormData(document.getElementById('final-checkout-form'))
             var latitude = ''

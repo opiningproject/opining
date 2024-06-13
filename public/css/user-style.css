@@ -5421,3 +5421,25 @@ footer .footer-logo a {font-size: initial !important;}
         z-index: inherit;
     }
 }
+
+
+/* My coupons new ui css */
+.customize-tab .nav-tabs {
+  -moz-column-gap: 2px;
+  column-gap: 2px;
+}
+.customize-tab .nav-tabs .nav-item .nav-link {
+  color: var(--theme-gray5);
+  text-align: center;
+  font-family: "Sebino-Medium", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 30px 24px;
+  border-radius: 16px 16px 0px 0px;
+  border-color: transparent;
+  background-color: var(--theme-bg-white);
+}
+.customize-tab .nav-tabs .nav-item .nav-link.active, .customize-tab .nav-tabs .nav-item .nav-link:hover {
+  color: var(--theme-dark2);
+  background-color: var(--theme-yellow2);
+}

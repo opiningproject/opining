@@ -245,7 +245,8 @@
                                                         aria-controls="pills-home" aria-selected="true">
                                                         <img src="{{ asset('images/scoter1.svg') }}" alt="" class="svg"
                                                              height="23" width="26"> {{ trans('user.cart.delivery') }}
-                                                    </button>
+                                                             </button>
+                                                            <span> {{ $deliveryTime }}</span>
                                                     <input type="hidden" value="{{ $house_no }}" id="del-house-no">
                                                     <input type="hidden" value="{{ $zipcode }}" id="del-zipcode">
                                                 </li>
@@ -258,7 +259,10 @@
                                                         aria-controls="pills-profile" aria-selected="false">
                                                         <img src="{{ asset('images/takeaway-icon.svg') }}" alt=""
                                                              class="svg" height="23"
-                                                             width="23"> {{ trans('user.cart.take_away') }}</button>
+                                                             width="23"> {{ trans('user.cart.take_away') }}
+                                                             
+                                                             </button>
+                                                            <span> {{ $takeAwayTime }}</span>
                                                 </li>
                                             </ul>
                                             <div class="d-flex flex-column flex-fill tab-content" id="pills-tabContent">

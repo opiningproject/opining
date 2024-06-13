@@ -129,6 +129,14 @@
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
                                 </a>
                             </li>
+
+                            {{-- New Coupons menu --}}
+                            <li class="nav-item">
+                                <a href="{{ route('user.couponss') }}" class="nav-link {{ activeMenu('user.couponss') }} align-middle auth-link-check">
+                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" width="40" height="40">
+                                    <span class="ms-1 d-sm-inline align-middle">My Coupenss</span>
+                                </a>
+                            </li>
                         </ul>
                         <div class="sidebar-bottom mb-5">
                             <div class="card sidebar-offer-card position-relative">

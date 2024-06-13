@@ -199,7 +199,9 @@ return [
 		'want_coupon' => 'Yes! I want a Coupon!',
 		'coupon' => 'Coupon',
 		'off' => 'off',
-        'not_applicable' => 'This coupon is not applicable!'
+        'not_applicable' => 'This coupon is not applicable!',
+        'unused' => 'Unused',
+        'expired' => 'Expired'
 	],
 
 	'button'=> [

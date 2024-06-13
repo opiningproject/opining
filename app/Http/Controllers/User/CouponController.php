@@ -46,6 +46,42 @@ class CouponController extends Controller
         return view('user.coupons', ['coupons' => $coupons, 'user' => $user]);
     }
 
+
+    public function coupons()
+    {
+        $user = Auth::user();
+
+        $unusedCouponIds = CouponTransaction::where(
+        [
+            ['user_id', '=', auth()->user()->id],
+            ['is_redeemed', '=', '0'],
+        ])->pluck('coupon_id');
+
+        $unusedCoupons = Coupon::where(
+            [
+                ['start_expiry_date', '<=', date('Y-m-d')],
+                ['end_expiry_date', '>=', date('Y-m-d')],
+            ]
+        )->withActive()->whereIn('id',$unusedCouponIds)->orderBy('id', 'desc')->get();
+
+
+        $expiredCouponIds = CouponTransaction::where(
+            [
+                ['user_id', '=', auth()->user()->id],
+                ['is_redeemed', '=', '1'],
+            ])->pluck('coupon_id');
+
+
+        $expiredCoupons = Coupon::where(
+                [
+                    ['start_expiry_date', '<=', date('Y-m-d')],
+                    ['end_expiry_date', '>=', date('Y-m-d')],
+                ]
+            )->withActive()->whereIn('id',$expiredCouponIds)->orderBy('id', 'desc')->get();
+
+        return view('user.coupons.index', ['coupons' => $unusedCoupons, 'user' => $user, 'expiredCoupons' =>$expiredCoupons]);
+    }
+
     public function apply(Request $request)
     {
         $coupon = Coupon::where([

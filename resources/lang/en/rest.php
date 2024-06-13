@@ -154,7 +154,9 @@ return [
 			'permit_doc' => 'Company Permit Document',
 			'service_charge' => 'Service Charge',
 			'opening_hours' => 'Restaurant Opening Hours',
-			'logout' => 'Logout'
+			'logout' => 'Logout',
+			'delivery_time' => 'Delivery Time',
+			'take_away_time' => 'Take Away Time'
 		],
 		'payment' => [
 			'history' => 'Payment History',

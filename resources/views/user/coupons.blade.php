@@ -19,7 +19,7 @@
                  @foreach($coupons as $key => $coupon)
                  <div class="card custom-card coupons-card p-0">
                   <?php $lockedCoupon = ''; ?>
-                  @if(!empty($coupon->points) && $coupon->points >= $user->collected_points)
+                  @if(!empty($coupon->points) && $coupon->points > $user->collected_points && empty($coupon->couponTransaction))
                      <?php $lockedCoupon = 'locked-coupon'; ?>
                   @elseif(isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1')
                      <?php $lockedCoupon = 'locked-coupon'; ?>

@@ -5416,8 +5416,8 @@ footer .footer-logo a {font-size: initial !important;}
         padding: 0px !important;
     }
     .scrollable-tap .bottom-sticky {
-        right: 30px;
-        bottom: 30px;
+        right: 20px;
+        bottom: 20px;
         z-index: inherit;
     }
 }
@@ -5463,4 +5463,51 @@ footer .footer-logo a {font-size: initial !important;}
    .selectTimeValidation {
        display: block;
    }
+}
+
+/* New design feedback css */
+footer .m-title {
+  font-weight: 500;
+  margin-bottom: 15px !important;
+}
+@media (max-width: 767px) {
+  footer {
+    padding: 36px 20px 20px 20px;
+  }
+  footer .footer-link-item .logo-col {
+    margin-bottom: 30px !important;
+  }
+  footer .m-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px !important;
+  }
+  footer .footer-link ul li {
+    margin-bottom: 6px !important;
+  }
+  footer .footer-link ul li, footer .footer-link ul li a {
+    font-size: 13px;
+    font-weight: 300;
+  }
+  footer .hrs-listing {
+    margin-bottom: 50px !important;
+  }
+  .footer-link ul li a>span {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  .contact-us-listing {
+    margin-bottom: 20px !important;
+  }
+  .footer-bottom-link a, footer .footer-copyright-text {
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: 300;
+    opacity: 0.7;
+    text-align: center;
+    line-height: 10px;
+    letter-spacing: 1px;
+  }
 }

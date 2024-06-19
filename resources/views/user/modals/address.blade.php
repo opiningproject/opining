@@ -49,7 +49,7 @@
                 }
                 ?>
                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10" style="padding: 5px !important;" id="address-{{ $add->id }}">
-                  <div class="card card-body h-100 address-card active">
+                  <div class="card card-body h-100 address-card active address-card-ui">
                     <p>{{ $add->company_name }} {{ $add->house_no }}, {{ $add->street_name }} , {{ $add->city }} {{ $add->zipcode }}</p>
                     <div class="d-flex align-items-center justify-content-between">
                       <a href="javascript:void(0);" class="btn btn-xs-sm btn-custom-yellow text-capitalize select-address-btn" {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a>

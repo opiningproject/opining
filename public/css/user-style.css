@@ -5910,6 +5910,10 @@ border-color: #FFC00B !important;
 
 .cart-sidebar .bill-detail-invoice table tbody tr:nth-last-child(2) td {padding-bottom: 10px;}
 
+.cart-sidebar.cartSidebarCustom .offcanvas-body {
+  padding-top: 20px;
+}
+
 footer .m-title {
   font-weight: 500;
   margin-bottom: 15px !important;

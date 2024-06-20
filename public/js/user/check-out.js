@@ -11,6 +11,7 @@ $(function () {
         }
     })
 
+if(isDesktopView()) {
     $("#final-checkout-form").validate({
         ignore: '[readonly]',
         errorPlacement: function(error, element) {
@@ -22,6 +23,16 @@ $(function () {
             addOrder()
         }
     });
+} else {
+    $('#delivery-mobile-content').toggle()
+    $('#delivery-user-mobile-content').toggle()
+    $("#final-checkout-form").on("submit", function (event) {
+        event.preventDefault();
+        addOrder();
+    });
+}
+
+   
 
     $('.payment-type-tab').click(function () {
         var paymentType = $(this).data('type')

@@ -1,6 +1,12 @@
 @extends('layouts.user-app')
 
 @section('content')
+<style>
+.disabled-coupon {
+    pointer-events: none;
+    opacity: var(--bs-btn-disabled-opacity);
+}
+</style>
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
@@ -112,7 +118,79 @@
                                             <h3 class="title-site mb-4">Offers</h3>
 
                                             <div class="accordion discount-coupon-accordian" id="accordionExample">
+                                                @foreach($coupons as $key => $coupon)
+                                        
+                                                <?php $lockedCoupon = ''; ?>
+                                                @if(isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1')
+                                                <?php $lockedCoupon = 'disabled-coupon'; ?>
+                                                @elseif($user->collected_points >= $coupon->points)
+                                                <?php $lockedCoupon = ''; ?>
+                                                @else
+                                                    <?php $lockedCoupon = 'disabled-coupon'; ?>
+                                                @endif
+                                            
+                                                @php 
+                                                $givenDate = $coupon->end_expiry_date; // example given date
+
+                                                // Create DateTime objects for the given date and the current date
+                                                $givenDateTime = new DateTime($givenDate);
+                                                $currentDateTime = new DateTime();
+
+                                                // Calculate the difference between the given date and the current date
+                                                $interval = $currentDateTime->diff($givenDateTime);
+
+                                                // Get the difference in days
+                                                $daysLeft = $interval->days;
+                                                $hoursLeft = $interval->h;
+
+                                                if ($daysLeft == 0 && $hoursLeft > 0) {
+                                                    $daysLeft = 1;
+                                                }
+
+                                                @endphp
                                                 <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#coupon-collapse-{{ $coupon->id }}"
+                                                            aria-expanded="true" aria-controls="coupon-collapse-{{ $coupon->id }}">
+                                                            <div class="acc-header">
+                                                                <div class="ico">
+                                                                    <img src="{{ getRestaurantDetail()->restaurant_logo }}" />
+                                                                </div>
+                                                                <div class="con-title">
+                                                                    <h3 class="mb-1">{{ $coupon->percentage_off }}% discount coupon</h3>
+                                                                    @if(($coupon->couponTransaction || is_null($coupon->points)) && (isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1'))
+                                                                        <p class="mb-0 d-inline-block">{{ trans('user.coupons.redeemed_points') }}</p>
+                                                                    @elseif(!empty($lockedCoupon))
+                                                                    <p class="mb-0 d-inline-block">{{ trans('user.coupons.earn_points',['points' => $coupon->points]) }}</p>
+                                                                    @elseif($daysLeft < 4)
+                                                                        <p class="mb-0 d-flex align-items-center free-coins"> <label> {{ $daysLeft === 1 ? "1" : "$daysLeft"; }} DAY LEFT</label></p>
+                                                                    @endif
+                                                                  
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="coupon-collapse-{{ $coupon->id }}" class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <h3>Conditions</h3>
+                                                            <ul class="mb-3">
+                                                                <li>{{ trans('user.coupons.min_order') }} €{{ $coupon->price }}</li>
+                                                                <li>{{ trans('user.coupons.valid_till') }} {{ $coupon->end_expiry_date }}</li>
+                                                            </ul>
+                                                            <a
+                                                                class="btn btn-custom-yellow btn-default d-block d-md-inline-block text-white {{ $lockedCoupon }}" id="coupon-code-{{ $coupon->id }}" data-code="{{ $coupon->promo_code }}" onclick='showCouponPopup({{ $coupon->id }})'>
+                                                                Redeem my points
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    @endforeach
+                                                    <input type="hidden" id="coupon-code">
+                                                    <input type="hidden" id="coupon-id">
+
+                                                {{-- <div class="accordion-item">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#collapseCpOne"
@@ -210,7 +288,7 @@
                                                             </a>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -240,10 +318,55 @@
         @include('layouts.user.footer_design')
         <!-- end footer -->
     </div>
+
+
+@include('user.modals.coupon-redeem')
+@include('user.modals.redeem-confirmation')
 @endsection
 
 @section('script')
     <script type="text/javascript">
+
+
+
+    $('#redeem-confirmed-btn').on('click', function(event) {
+        event.preventDefault(); 
+        var url = $(this).data('target');
+    
+        location.replace(baseURL+url);
+    });
+
+    function showCouponPopup(id)
+    {
+        var code = $('#coupon-code-'+id).data('code');
+
+        $('#redeemConfirmationModal').modal('show')
+        $('#coupon-code').val(code);
+        $('#coupon-id').val(id);
+        $('#coupon-code-name').text(code)
+    }
+
+    function couponCodeConfirmation() {
+            var code = $('#coupon-code').val();
+            var id = $('#coupon-id').val();
+    
+            $('#coupon-code-' + id).text(code)
+
+            $.ajax({
+                url: baseURL + '/user/coupons/confirm/' + id,
+                type: 'GET',
+                success: function(response) {
+                    $('#redeemConfirmationModal').modal('hide');
+                    $('#redeemConfirmedModal').modal('show')
+                    //location.reload()
+                },
+                error: function(response) {
+                    var errorMessage = JSON.parse(response.responseText).message
+                    alert(errorMessage);
+                }
+            })
+        }
+
         var collected_points = "<?php echo Auth::user()->collected_points; ?>";
 
         const chartData = [{

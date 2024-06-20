@@ -44,8 +44,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                         </button>
 
                         <section class="custom-section checkout-section pt-0 pt-md-5 pb-0">
-                            <h5 class="mobile-title mb-4 d-md-none all-validation-error" style="display: none"
-                                id="all-validation-error">Please fill all details to continue with your order.</h5>
+                            {{-- <h5 class="mobile-title mb-4 d-md-none all-validation-error" style="display: none"
+                                id="all-validation-error">Please fill all details to continue with your order.</h5> --}}
 
                             <form id="final-checkout-form">
                                 <input type="hidden" name="is_address_elected" value="{{ $address ?? 0 }}"
@@ -77,17 +77,13 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         {{ getRestaurantDetail()->rest_address }}
                                                                     @endif
                                                                 </p>
+                                                                <p class="without-check-error mb-0" id="deliviery-address-error"></p>
+
                                                             </div>
 
 
-                                                            <span class="success-ico">
-                                                                <svg width="14" height="11" viewBox="0 0 14 11"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <line x1="12.7071" y1="0.707107" x2="3.70711"
-                                                                        y2="9.70711" stroke="white" stroke-width="2" />
-                                                                    <line x1="0.707107" y1="5.29289" x2="3.70711"
-                                                                        y2="8.29289" stroke="white" stroke-width="2" />
-                                                                </svg>
+                                                            <span class="success-ico success-address">
+                                                                <img src="{{ asset('images/success-icon.svg') }}" class="svg" width="14" height="11">
                                                             </span>
 
                                                             <span class="toggleIco ms-auto">
@@ -186,6 +182,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         class="form-label">{{ trans('user.checkout.first_name') }}</label>
                                                                     <input type="text" class="form-control"
                                                                         name="first_name" required
+                                                                        id="first_name"
                                                                         value="{{ $user->first_name }}" />
                                                                 </div>
                                                             </div>
@@ -196,6 +193,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         class="form-label">{{ trans('user.checkout.last_name') }}</label>
                                                                     <input type="text" class="form-control"
                                                                         name="last_name"
+                                                                         id="last_name"
                                                                         value="{{ $user->last_name }}" />
                                                                 </div>
                                                             </div>
@@ -217,6 +215,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         <input type="number" class="form-control"
                                                                             minlength="10" maxlength="10" required
                                                                             name="phone_no" min="0"
+                                                                            id="phone_no"
                                                                             value="{{ $user->phone_no == '' ? $phone_no : $user->phone_no }}">
                                                                     </div>
                                                                 </div>
@@ -226,7 +225,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 <div class="form-group">
                                                                     <label for="email"
                                                                         class="form-label">{{ trans('user.checkout.email') }}</label>
-                                                                    <input type="email" required name="email"
+                                                                    <input type="email" name="email" required  id="email"
                                                                         class="form-control"
                                                                         value="{{ $user->email }}" />
                                                                 </div>
@@ -257,9 +256,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 <h3>{{ trans('user.checkout.delivery_time') }}</h3>
                                                                 <p class="mb-0" id="del-type-mobile-text">
                                                                     {{ trans('user.checkout.asap') }}</p>
-                                                                <p class="without-check-error mb-0">Choose a delivery time
-                                                                </p>
+                                                                <p class="without-check-error mb-0" id="delivery-time-error"></p>
                                                             </div>
+                                                            <span class="success-ico success-delivery-time">
+                                                                <img src="{{ asset('images/success-icon.svg') }}" class="svg" width="14" height="11">
+                                                            </span>
                                                             <span class="toggleIco ms-auto">
                                                                 <i class="fa-solid fa-angle-right"></i>
                                                                 <span>
@@ -274,7 +275,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 class="col-xxl-6 col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 my-auto">
                                                                 <div class="custom-radio custom-checkbox-group mb-2 flex-wrap radio-flex-row"
                                                                     style="margin-bottom: 30px">
-                                                                    <div class="radio">
+                                                                    <div class="radio delivery-time">
                                                                         <input id="radio-1" name="del_radio"
                                                                             type="radio" class="radio-del-time" checked
                                                                             value="asap">
@@ -282,7 +283,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             class="radio-label radio-del-time"
                                                                             id="asap">{{ trans('user.checkout.asap') }}</label>
                                                                     </div>
-                                                                    <div class="radio">
+                                                                    <div class="radio delivery-time">
                                                                         <input id="radio-2" name="del_radio"
                                                                             type="radio" class="radio-del-time"
                                                                             value="customize-time">
@@ -364,9 +365,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                             <div class="textCon">
                                                                 <h3>{{ trans('user.checkout.payment') }}</h3>
                                                                 <p class="mb-0" id="mobile-payment-type-text">iDEAL</p>
-                                                                <p class="without-check-error mb-0">Choose a payment method
-                                                                </p>
+                                                                <p class="without-check-error mb-0" id="payment-method-error"></p>
                                                             </div>
+                                                            <span class="success-ico success-payment-method">
+                                                                <img src="{{ asset('images/success-icon.svg') }}" class="svg" width="14" height="11">
+                                                            </span>
                                                             <span class="toggleIco ms-auto">
                                                                 <i class="fa-solid fa-angle-right"></i>
                                                                 <span>
@@ -379,7 +382,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                     {{ trans('user.checkout.payment') }}</h4>
                                                                 <div class="nav flex-column nav-pills" id="v-pills-tab"
                                                                     role="tablist" aria-orientation="vertical">
-                                                                    <button class="nav-link active payment-type-tab"
+                                                                    <button class="nav-link active payment-type-tab radio-del-time1"
                                                                         id="v-pills-ideal-tab" data-type="3"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-ideal" type="button"
@@ -392,7 +395,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
-                                                                                <input id="radio-1" name="del_radio"
+                                                                                <input id="ideal-radio" name="del_radio_new"
                                                                                     type="radio" class="radio-ideal"
                                                                                     checked="" value="asap">
                                                                                 <label for="radio-1"
@@ -402,7 +405,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         </div>
 
                                                                     </button>
-                                                                    <button class="nav-link payment-type-tab"
+                                                                    <button class="nav-link payment-type-tab radio-del-time1"
                                                                         data-type="1" id="v-pills-creditanddebitcard-tab"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-creditanddebitcard"
@@ -416,7 +419,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
-                                                                                <input id="radio-1" name="del_radio"
+                                                                                <input id="cc-radio" name="del_radio_new"
                                                                                     type="radio" class="radio-cc"
                                                                                     value="asap">
                                                                                 <label for="radio-1"
@@ -425,7 +428,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             </div>
                                                                         </div>
                                                                     </button>
-                                                                    <button class="nav-link payment-type-tab"
+                                                                    <button class="nav-link payment-type-tab radio-del-time1"
                                                                         id="v-pills-cashondelivery-tab" data-type="2"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-cashondelivery"
@@ -438,7 +441,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         {{ trans('user.checkout.cod') }}
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
-                                                                                <input id="radio-1" name="del_radio"
+                                                                                <input id="cod-radio" name="del_radio_new"
                                                                                     type="radio" class="radio-cod"
                                                                                     value="asap">
                                                                                 <label for="radio-1"
@@ -735,6 +738,30 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
     <script>
+
+        function isDesktopView() {
+            return $(window).width() >= 768;
+        }
+
+        $(".success-ico.success-address").hide();
+        $(".success-ico.success-delivery-time").hide();
+        $(".success-ico.success-payment-method").hide();
+
+      
+        // Mobile view radio button
+        $(document).on('click', '.radio-del-time1',function() {
+         let paymentType = $(this).data("type");
+            if(paymentType == 1) {
+            
+                $('#cc-radio').prop('checked', true);
+            } else if(paymentType == 2) {
+
+                $('#cod-radio').prop('checked', true);
+            } else {
+                $('#ideal-radio').prop('checked', true);
+            }
+        });
+        // Mobile view radio button
         $(".radio-del-time").change(function() {
             $(".radio").removeClass('selected-radio');
 
@@ -750,24 +777,6 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
         const stripe = Stripe(public_key, {
             apiVersion: '2020-08-27'
         });
-
-
-
-        function isDesktopView() {
-
-            return $(window).width() >= 768;
-
-        }
-
-        if (!isDesktopView()) {
-            $('input[type=radio][name=del_radio]').on('change', function() {
-                switch ($(this).val()) {
-                    case 'asap':
-                        $(".selectTimeValidation").text(" ").css("color", "");
-                        break;
-                }
-            });
-        }
 
         const elements = stripe.elements();
         const options = {
@@ -812,46 +821,83 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             var deliveryType = $('input[name=del_radio]:checked').val()
             if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
                 // alert('Please select time')
-                $(".selectTimeValidation").text("Choose a delivery time").css("color", "red");
                 if (isDesktopView()) {
                     alert('Please select time.');
                 }
+                $("#delivery-time-error").text("Choose a delivery time");
                 return false;
             }
-            $(".selectTimeValidation").text(" ").css("color", "");
+            $("#delivery-time-error").text("");
 
         });
 
         async function addOrder() {
+        
             var deliveryType = $('input[name=del_radio]:checked').val()
             var paymentType = $('#payment_type').val()
             var zipcode = $('#zipcode').val()
             console.log('zipcode', zipcode)
 
+            let first_name = $('#first_name').val();
+            let last_name = $('#last_name').val();
+            let email = $('#email').val();
+            let phone_no = $('#phone_no').val();
+        
             // if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
             //     alert('Please select time')
             //     return false
             // }
+            
+            if (!isDesktopView()) {
+                if(first_name == '' || last_name == '' || email == '' || phone_no == '') {
+                    $(".success-ico.success-address").hide();
+                    $("#deliviery-address-error").text("Please fill all address details.");
+                    return false
+                } else {
+                    $("#deliviery-address-error").text("");
+                    $(".success-ico.success-address").show();
+                }
+            } 
 
             if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
                 if (isDesktopView()) {
                     alert('Please select time.');
+                    return false
                 }
                 // alert('Please select time');
-                $(".selectTimeValidation").text("Please Select Time first").css("color", "red");
-                return false
-            }
-            $(".selectTimeValidation").text(" ").css("color", "");
 
+                $("#delivery-time-error").text("Choose a delivery time");
+                $(".success-ico.success-delivery-time").hide();
+                return false
+            } else {
+                if (!isDesktopView()) {
+                $(".success-ico.success-delivery-time").show();
+                $("#delivery-time-error").text(" ");
+                }
+            }
 
             var checkoutData = new FormData(document.getElementById('final-checkout-form'))
             var latitude = ''
             var longitude = ''
 
             if (paymentType == '3' && selectedBank == false) {
-                alert('Please select bank to continue')
+               
+                if (isDesktopView()) {
+                    alert('Please select bank to continue');
+                    return false
+                }
+
+                $("#payment-method-error").text("Choose a payment method");
+                $(".success-ico.success-payment-method").hide();
                 return false
+            } else {
+                if (!isDesktopView()) {
+                    $("#payment-method-error").text("");
+                    $(".success-ico.success-payment-method").show();
+                }
+
             }
+
 
             if (zipcode != undefined) {
                 var streetName = $('#street_name').val()

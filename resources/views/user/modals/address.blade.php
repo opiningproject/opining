@@ -52,33 +52,24 @@
                                 <?php
                                 $addressText = trans('modal.address.deliver_here');
                                 $style = '';
+                                $selectedAddress = '<span class="success-ico blank"></span>';
+
                                 if (session('address') == $add->id) {
                                     $addressText = 'Selected';
+                                    $selectedAddress = '<span class="success-ico"><img src="' . asset("images/success-icon.svg") . '" class="svg" width="14" height="11"></span>';
                                     $style = 'style=pointer-events:none;cursor:default';
                                 }
                                 ?>
-                                <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10"  id="address-{{ $add->id }}">
-                                    <div class="card card-body h-100 address-card address-card-ui">
+                                <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10 mt-2"  id="address-{{ $add->id }}">
+                                    <div class="card card-body h-100 address-card address-card-ui select-address-btn">
                                         <div class="d-flex  justify-content-between align-items-start">
                                             <p class="mb-0">{{ $add->company_name }} {{ $add->house_no }},
                                                 {{ $add->street_name }} <br/>{{ $add->city }} {{ $add->zipcode }}</p>
                                             <div class="d-flex align-items-center justify-content-end ps-3 align-items-center">
                                                 {{-- <a href="javascript:void(0);" class="btn btn-xs-sm btn-custom-yellow text-capitalize select-address-btn" {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a> --}}
                                          
-                                                <a href="javascript:void(0);" class="position-relative d-flex">
-                                                  <span class="success-ico blank">
-                                              
-                                                  </span>
-
-                                                  <span class="success-ico">
-                                                        <svg width="14" height="11" viewBox="0 0 14 11"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <line x1="12.7071" y1="0.707107" x2="3.70711"
-                                                                y2="9.70711" stroke="white" stroke-width="2"></line>
-                                                            <line x1="0.707107" y1="5.29289" x2="3.70711"
-                                                                y2="8.29289" stroke="white" stroke-width="2"></line>
-                                                        </svg>
-                                                    </span>
+                                                <a href="javascript:void(0);" class="position-relative d-flex selected-address" id="selected-address-{{ $add->id }}" data-selected-address="{{session('address')}}">
+                                                    {!! $selectedAddress !!}
                                                 </a>
                                                 <a class="btn-icon ms-2 p-2" onclick="deleteAddress({{ $add->id }})">
                                                     <i class="fa-regular fa-trash-can"></i>

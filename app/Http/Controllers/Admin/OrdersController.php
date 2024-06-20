@@ -43,17 +43,17 @@ class OrdersController extends Controller
        
             if (!empty($start_date) && !empty($end_date)) {
 
-                $start_date = date('Y-d-m', strtotime($start_date)) . ' 00:00:00';
-                $end_date = date('Y-d-m', strtotime($end_date)) . ' 23:59:59';
+                $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+                $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             } else if (!empty($start_date) && empty($end_date)) {
-                $start_date = date('Y-d-m', strtotime($start_date)) . ' 00:00:00';
-                $end_date = date('Y-d-m') . ' 23:59:59';
+                $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+                $end_date = date('Y-m-d') . ' 23:59:59';
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             } else if (empty($start_date) && !empty($end_date)) {
-                $end_date = date('Y-d-m', strtotime($end_date)) . ' 23:59:59';
+                $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
                 $start_date = '2024-01-01 00:00:00';
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));

@@ -621,6 +621,16 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                         Close</a>
                                                                                 </div>
                                                                             </div>
+
+                                                                            {{-- <div class="cart-items-list-row-n">
+                                                                            <div class="from-group addnote-from-group mb-0">
+                                                                                <div class="form-group mb-0 dish-group" data-dish-id="198">
+                                                                                    <label for="dishnameenglish" class="form-label mb-0">Add Notes</label>
+                                                                                    <input type="text" data-id="198" maxlength="50" class="form-control dish-notes" value="" placeholder="Type here">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> --}}
+
                                                                             <div
                                                                                 class="from-group addnote-from-group mb-0">
                                                                                 <div class="form-group">

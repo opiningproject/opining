@@ -196,8 +196,7 @@ background: #FFC00B !important;
     gap: 10px !important;
 }
 .header-filter-order .col {
-    flex: 0 0 250px;
-    max-width: 250px;
+    max-width: 270px;
 }
 
 

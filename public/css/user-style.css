@@ -5571,6 +5571,30 @@ footer .footer-logo a {font-size: initial !important;}
 .address-card.address-card-ui .success-ico.blank {background: #ffffff;border: 1px solid #292929;}
 .address-card.address-card-ui .btn-icon i {font-size: 20px;}
 
+.cart-items-list-row-n .addnote-from-group .form-label {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  color: #292929;
+  background: transparent !important;
+  padding: 0px !important;
+}
+
+.cart-items-list-row-n .addnote-from-group  .dish-notes {
+  border: 0px;
+  border-bottom: 1px solid #292929 !important;
+  border-radius: 0px !important;
+  padding: 5px 0px;
+  font-size: 12px !important;
+  height: 34px;
+  min-height: 34px !important;
+}
+
+.mobile-scrolllable-content .checkout-section .countrycode-phone-control .dropdown-toggle {
+  border-top-left-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+}
+
 footer .m-title {font-weight: 500;margin-bottom: 15px !important;}
 
 @media (max-width: 1800px) {
@@ -5586,6 +5610,11 @@ footer .m-title {font-weight: 500;margin-bottom: 15px !important;}
 
 @media (max-width: 1440px) {
     .coupon-card-row .coupon-row-grid .coupon-col {flex: 0 0 50%;max-width: 50%;}
+
+    .mobile-scrolllable-content .checkout-section .form-control, .mobile-scrolllable-content .checkout-section .form-select {
+      min-height: 40px !important;
+      height: 40px !important;
+    }
  }
 
 @media screen and (max-width: 1399px) {
@@ -5640,11 +5669,12 @@ footer {padding: 36px 20px 20px 20px;}
   .payment-nav-mobile .payment-navigation .nav .nav-link .custom-radio {display: block;}
   .mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link.active {border-color: #dcdcdc !important;background: #ffffff !important;}
   .mobile-scrolllable-content .payment-nav .nav {border-radius: 0px;}
+  .checkout-section .checkout-btn-sticky {height: 52px;}
 }
 @media (max-width: 375px) {
   .coupon-row-grid .coupon-flex .right-cp p {font-size: 10px;}
   .coupons-tab .nav-tabs {column-gap: 20px;}
   .coupons-tab .nav-tabs .nav-item {flex: 0 0 calc(50% - 10px);max-width: calc(50% - 10px);}
   .payment-nav-mobile .payment-navigation .nav .nav-link {font-size: 12px;}
-  .checkout-section .checkout-btn-sticky {height: 42px;}
+  .checkout-section .checkout-btn-sticky {height: 52px;}
 }

@@ -192,10 +192,10 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
         Route::get('/favorite', [App\Http\Controllers\User\DishController::class, 'getFavoriteDishes'])->name('user.favorite');
         Route::get('/points', [App\Http\Controllers\User\DishController::class, 'getCollectedPoints'])->name('user.points');
 
-        Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
+        // Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'index'])->name('user.coupons');
 
         // new coupons scenario
-        Route::get('/couponss', [App\Http\Controllers\User\CouponController::class, 'coupons'])->name('user.couponss');
+        Route::get('/coupons', [App\Http\Controllers\User\CouponController::class, 'coupons'])->name('user.coupons');
 
         Route::get('/coupons/confirm/{id}', [App\Http\Controllers\User\CouponController::class, 'confirm']);
 

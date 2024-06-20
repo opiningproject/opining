@@ -123,18 +123,18 @@
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" width="40" height="40">
-                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
+                                    <span class="ms-1 d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             {{-- New Coupons menu --}}
                             <li class="nav-item">
-                                <a href="{{ route('user.couponss') }}" class="nav-link {{ activeMenu('user.couponss') }} align-middle auth-link-check">
+                                <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" width="40" height="40">
-                                    <span class="ms-1 d-sm-inline align-middle">My Coupenss</span>
+                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons')}}</span>
                                 </a>
                             </li>
                         </ul>

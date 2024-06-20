@@ -73,6 +73,8 @@ class HomeController extends Controller
         }
 
         $serviceCharge = getRestaurantDetail()->service_charge;
+        $deliveryTime = getRestaurantDetail()->delivery_time;
+        $takeAwayTime = getRestaurantDetail()->take_away_time;
 
         if ($user) {
             if (isset($user->cart)) {
@@ -91,6 +93,8 @@ class HomeController extends Controller
             'user' => $user,
             'cart' => $cart,
             'serviceCharge' => $serviceCharge,
+            'deliveryTime' => $deliveryTime,
+            'takeAwayTime' => $takeAwayTime,
             'couponCode' => $couponCode,
             'couponDiscount' => $couponDiscount,
             'couponDiscountPercent' => $couponPercent,

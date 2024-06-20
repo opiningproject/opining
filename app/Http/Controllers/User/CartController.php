@@ -103,55 +103,110 @@ class CartController extends Controller
         $dishId = $dish->id;
         $dishPrice = $dish->price;
         $optionName = $dish->dishOption->name ?? '';
-        $ingredientData = getOrderDishIngredients($cart);
+        $ingredientData = getOrderDishIngredients1($cart);
 
         $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
-                    <div class='col-12'>
-                        <div class='d-flex cart-item-row'>
-                            <div class='cart-custom-w-col-img'>
-
-                    <img src=" . $dish->image . " alt='$dish->name' class='img-fluid' width='86' height='74px' />
-                    <div class='foodqty'>
-                      <span class='minus'>
-                        <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $cart->id . ")></i>
-                      </span>
-                      <input type='number' readonly class='count cart-amt' id='qty-$cart->id' name='qty-$cart->id' value=" . $cart->qty . " data-ing='$cart->paid_ingredient_total' data-id='$cart->id'>
-                      <input type='hidden' id='dish-price-$cart->id' value='$dishPrice'/>
-                      <span class='plus'>
-                        <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $cart->id . ")></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class='cart-custom-w-col-detail'>
-                    <div class='cart-item-detail'>
-                      <div class='d-flex align-items-center justify-content-between'>
-                        <p class='d-inline-block item-name mb-0'> $dish->name </p>
-                        <span class='cart-item-price' id='cart-item-price$cart->id'>+€$dish->price</span>
-                      </div>
-                      <div class='d-flex align-items-center'>
-                        <p class='mb-0 item-options mb-0'> $optionName </p>
-                        <span class='item-desc' id='item-ing-desc$cart->id'>$ingredientData</span>
-                        <p class='item-customize mb-0 ms-auto justify-content-end'>
-                            <a href='javascript:void(0);'
-                               onclick='customizeDish($dish->id,$cart->id);'>
-                                <img src='".asset('images/custom-dish.svg')."' alt='' class='svg edit-icon' height='13' width='14'/>
-                            </a>
-                            Edit
-                        </p>";
-                        if ($cart->qty * $cart->paid_ingredient_total > 0) {
-                            $html .= "<p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total), 2) . " </p>";
-                        }
-                     $html .= "</div> </div>
-                      <div class='from-group addnote-from-group mb-0'>
-                        <div class='form-group'>
-                          <label for='dishnameenglish' class='form-label'>".trans('user.cart.add_notes')."</label>
-                          <input type='text' class='form-control dish-notes' data-id='$cart->id' maxlength='50' placeholder='".trans('user.cart.type_here')."'/>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+    <div class='col-12 text-end d-flex align-items-center gap-2 mb-3 justify-content-end outof-stock-text d-none'>
+        <strong>Out of stock</strong>
+        <a class='remove-cart-dish' data-id='$cart->id' data-dish-id='$dish->id' href='javascript:void(0)'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='#ff0000' viewBox='0 0 24 24' width='20px' height='20px'>
+                <path d='M 10 2 L 9 3 L 4 3 L 4 5 L 5 5 L 5 20 C 5 20.522222 5.1913289 21.05461 5.5683594 21.431641 C 5.9453899 21.808671 6.4777778 22 7 22 L 17 22 C 17.522222 22 18.05461 21.808671 18.431641 21.431641 C 18.808671 21.05461 19 20.522222 19 20 L 19 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 7 5 L 17 5 L 17 20 L 7 20 L 7 5 z M 9 7 L 9 18 L 11 18 L 11 7 L 9 7 z M 13 7 L 13 18 L 15 18 L 15 7 L 13 7 z'></path>
+            </svg>
+        </a>
+    </div>
+    <div class='col-12'>
+        <div class='d-flex cart-item-row'>
+            <div class='cart-custom-w-col-img cart-name-price'>
+                <div class='d-flex align-items-start'>
+                    <p id='quantity-$cart->id' class='item-name pe-2'>$cart->qty</p>
+                    <p class='d-inline-block item-name mb-0' onclick='customizeDish($dish->id, $cart->id);'>
+                        $dish->name
+                    </p>
+                    <span class='cart-item-price ms-auto' id='cart-item-price$cart->id'>+€$dish->price</span>
                 </div>
-                </div></div>";
+            </div>";
+            $html .=  "<ul class='items-additional mb-2' id='item-ing-desc$cart->id'>";
+            $html .= $ingredientData;
+            $html .= "</ul>";
+            $html .= "<div class='cart-custom-w-col-img d-none'>
+                <img src='https://gomeal.s3.eu-central-1.amazonaws.com/dish/thumb/1715626618_Middel%204%403x.png' alt='pepperoni' class='img-fluid' width='86' height='74px'>
+            </div>
+            <div class='cart-custom-w-col-detail'>
+                <div class='cart-item-detail'>
+                    <div class='d-flex align-items-center'>
+                        <p class='mb-0 item-options mb-0'>
+                        </p>
+                    </div>
+                    <div class='d-flex cart-item-bt'>
+                        <div class='from-group addnote-from-group mb-0'>
+                            <div class='form-group mb-0 dish-group' data-dish-id='$dish->id'>
+                                <label for='dishnameenglish' class='form-label mb-0'>Add Notes</label>
+                                <input type='text' data-id='$cart->id' maxlength='50' class='form-control dish-notes d-none' value='' placeholder='Type here'>
+                            </div>
+                        </div>
+                        <div class='foodqty mt-0'>
+                            <span class='minus' onclick=updateDishQty('-'," . $dish->qty . "," . $cart->id . ")>
+                             <i class='fas fa-minus align-middle'></i>
+                            </span>
+                            <input type='number' readonly class='count cart-amt' id='qty-$cart->id' name='qty-$cart->id' value=" . $cart->qty . " data-ing='$cart->paid_ingredient_total' data-id='$cart->id'>
+                            <input type='hidden' id='dish-price-$cart->id' value='$dishPrice'>
+                            <span class='plus' onclick=updateDishQty('+'," . $dish->qty . "," . $cart->id . ")>
+                           <i class='fas fa-plus align-middle'></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";
+        // $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
+        //             <div class='col-12'>
+        //                 <div class='d-flex cart-item-row'>
+        //                     <div class='cart-custom-w-col-img'>
+
+        //             <img src=" . $dish->image . " alt='$dish->name' class='img-fluid' width='86' height='74px' />
+        //             <div class='foodqty'>
+        //               <span class='minus'>
+        //                 <i class='fas fa-minus align-middle' onclick=updateDishQty('-'," . $dish->qty . "," . $cart->id . ")></i>
+        //               </span>
+        //               <input type='number' readonly class='count cart-amt' id='qty-$cart->id' name='qty-$cart->id' value=" . $cart->qty . " data-ing='$cart->paid_ingredient_total' data-id='$cart->id'>
+        //               <input type='hidden' id='dish-price-$cart->id' value='$dishPrice'/>
+        //               <span class='plus'>
+        //                 <i class='fas fa-plus align-middle' onclick=updateDishQty('+'," . $dish->qty . "," . $cart->id . ")></i>
+        //               </span>
+        //             </div>
+        //           </div>
+        //           <div class='cart-custom-w-col-detail'>
+        //             <div class='cart-item-detail'>
+        //               <div class='d-flex align-items-center justify-content-between'>
+        //                 <p class='d-inline-block item-name mb-0'> $dish->name </p>
+        //                 <span class='cart-item-price' id='cart-item-price$cart->id'>+€$dish->price</span>
+        //               </div>
+        //               <div class='d-flex align-items-center'>
+        //                 <p class='mb-0 item-options mb-0'> $optionName </p>
+        //                 <span class='item-desc' id='item-ing-desc$cart->id'>$ingredientData</span>
+        //                 <p class='item-customize mb-0 ms-auto justify-content-end'>
+        //                     <a href='javascript:void(0);'
+        //                        onclick='customizeDish($dish->id,$cart->id);'>
+        //                         <img src='".asset('images/custom-dish.svg')."' alt='' class='svg edit-icon' height='13' width='14'/>
+        //                     </a>
+        //                     Edit
+        //                 </p>";
+        //                 if ($cart->qty * $cart->paid_ingredient_total > 0) {
+        //                     $html .= "<p class='price-opt mb-0 text-nowrap' id='paid-ing-price$cart->id'>+€" . number_format((float)($cart->qty * $cart->paid_ingredient_total), 2) . " </p>";
+        //                 }
+        //              $html .= "</div> </div>
+        //               <div class='from-group addnote-from-group mb-0'>
+        //                 <div class='form-group'>
+        //                   <label for='dishnameenglish' class='form-label'>".trans('user.cart.add_notes')."</label>
+        //                   <input type='text' class='form-control dish-notes' data-id='$cart->id' maxlength='50' placeholder='".trans('user.cart.type_here')."'/>
+        //                 </div>
+        //               </div>
+        //             </div>
+        //           </div>
+        //         </div>
+        //         </div></div>";
 
         return $html;
     }
@@ -342,7 +397,8 @@ class CartController extends Controller
                         ]);
                     }
                 }
-                $IngListData = getOrderDishIngredients($orderDetails);
+                $IngListData = getOrderDishIngredients1($orderDetails);
+                // $IngListData = getOrderDishIngredients($orderDetails);
 //                $paidIngAmt *= $request->dishQty;
 
             }

@@ -26,4 +26,19 @@ class Coupon extends Model
 
         return $this->hasOne(CouponTransaction::class,'coupon_id','id')->where('user_id',$user->id);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(CouponTransaction::class);
+    }
+
+    public function scopeExpired($query)
+    {
+        return $query->where('end_expiry_date', '<', now());
+    }
+
+    public function scopeUnexpired($query)
+    {
+        return $query->where('end_expiry_date', '>=', now());
+    }
 }

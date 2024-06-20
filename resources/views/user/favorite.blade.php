@@ -37,15 +37,14 @@
                                             <img src="{{ $dish->dish->image }}" class="img-fluid" width="100" height="100"/>
                                         </div>
                                         <h4 class="food-name-text">{{ $dish->dish->name_en }}</h4>
-                                        <p class="food-price">€ {{ number_format($dish->dish->price, 2) }}</p>
+                                        {{-- <p class="food-price">€ {{ number_format($dish->dish->price, 2) }}</p> --}}
 
                                         <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="customizeDish({{ $dish->dish->id }});" id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $disableBtn }}>
 {{--                                            @if($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1')--}}
                                             @if($dish->dish->out_of_stock == '1')
                                                 {{ trans('user.dashboard.out_of_stock') }}
                                             @else
-                                                {{ trans('user.dashboard.add') }}
-                                                <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">
+                                                <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9">€{{ number_format($dish->dish->price, 2) }}
                                             @endif
                                         </button>
 

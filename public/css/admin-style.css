@@ -188,6 +188,18 @@ background: #FFC00B !important;
     color: #FFC00B !important;
 }
 
+.header-filter-order {
+    gap: 10px;
+}
+
+.btn-grp-gap-10{
+    gap: 10px !important;
+}
+.header-filter-order .col {
+    flex: 0 0 250px;
+    max-width: 250px;
+}
+
 
 
 

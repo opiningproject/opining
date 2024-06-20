@@ -2889,7 +2889,7 @@ table .input-group-text {
 .foodorder-box .foodorder-box-details .footer-box-main .footer-main-total {
     border: 1px solid var(--theme-white3);
     border-radius: 10px;
-    padding: 15px 20px 30px;
+    padding: 15px 20px 20px;
     margin: 30px 0 0;
 }
 .foodorder-box .foodorder-box-details .footer-box-main .footer-main-total .footer-main-total-header {
@@ -3620,7 +3620,7 @@ nav .pagination {
 }
 .search-has .form-control {
     padding-left: 20px;
-    padding-right: 50px;
+    padding-right: 100px;
 }
 
 .search-has .form-control-feedback {
@@ -3632,7 +3632,7 @@ nav .pagination {
     line-height: 2.375rem;
     text-align: center;
     pointer-events: none;
-    color: #aaa;
+    color:var(--theme-yellow2);
     top: 50%;
     transform: translateY(-50%);
     right: 10px;
@@ -3653,3 +3653,24 @@ nav .pagination {
 .items-list-order .orders_item .ord_item {margin-bottom: 8px;padding-bottom: 8px;border-bottom: 1px solid #dcdcdc;justify-content: space-between}
 .items-list-order .orders_item .ord_item:last-child {border-bottom: 0px}
 .orders_item .ord_item * {font-size: 14px !important;margin-bottom: 0px}
+
+
+.footer-box-main-orderlist-main.collapsed  {
+    display: none !important;
+}
+
+
+.footer-main-total-main.collapsed  {
+    display: none !important;
+}
+
+
+
+.clear-button {
+    min-width: 5em;
+    padding: .75em !important;
+    margin-left: .1em;
+    margin-right: .1em;
+    color: white !important;
+    cursor: pointer;
+  }

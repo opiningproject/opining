@@ -125,6 +125,21 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="deliverytime" class="form-label">{{ trans('rest.settings.profile.delivery_time') }}</label>
+                            <input type="text" class="form-control" name="delivery_time" maxlength="25" value="{{ $user->delivery_time }}" required />
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="takeawaytime" class="form-label">{{ trans('rest.settings.profile.take_away_time') }}</label>
+                            <input type="text" class="form-control" name="take_away_time" maxlength="25" value="{{ $user->take_away_time }}" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                         <div class="form-group mb-0">
                             <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.opening_hours') }}</label>

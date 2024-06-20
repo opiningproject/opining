@@ -176,6 +176,40 @@ if (!function_exists('getOrderDishIngredients')) {
 
             }
         }
+        return trim($ingredients, ', ');
+
+    }
+}
+
+if (!function_exists('getOrderDishIngredients1')) {
+    function getOrderDishIngredients1($dish)
+    {
+        $ingredients = '';
+
+        $dishData = Dish::withTrashed()->find($dish->dish_id);
+
+        if($dish->orderDishFreeIngredients->count() != $dishData->freeWithoutTrashIngredients->count()){
+            // $ingredients .= '-';
+            $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
+
+            foreach ($dishData->freeWithoutTrashIngredients as $freeIngredient) {
+                if(!in_array($freeIngredient->id, $ingArray)){
+                    // $ingredients .= $freeIngredient->ingredient->name.', ';
+                    $ingredients .= "<li>-" .$freeIngredient->ingredient->name. "</li>";
+
+                }
+            }
+        }
+
+        if (count($dish->orderDishPaidIngredients)>0) {
+            
+            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
+
+                $price = $ingredient->quantity * $ingredient->price;
+                $ingredients .= "<li>+" .$ingredient->dishIngredient->ingredient->name. "(€" .number_format($price, 2) . ")" . "</li>";
+
+            }
+        }
 
         return trim($ingredients, ', ');
 
@@ -379,5 +413,30 @@ if (!function_exists('restaurantDeliveringOption')) {
 if (!function_exists('getAdminUser')) {
     function getAdminUser () {
         return User::where('user_role', '1')->first();
+    }
+}
+
+
+if (!function_exists('uploadImageToLocal')) {
+    function uploadImageToLocal($request, $type, $deleteImg = '')
+    {
+        if (!empty($deleteImg) && Storage::disk('public')->exists($type . '/' . $deleteImg)) {
+            Storage::disk('public')->delete($type . '/' . $deleteImg);
+            Storage::disk('public')->delete($type . '/thumb/' . $deleteImg);
+        }
+
+        $file = $request->file('image');
+        $file_name = time() . '_' . $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+
+        if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png') {
+            $image = Image::make($file)->resize(300, 300);
+            Storage::disk('public')->put('/' . $type . '/thumb/' . $file_name, $image->stream(), 'public');
+        }
+
+        $filePath = $type . '/' . $file_name;
+        Storage::disk('public')->put($filePath, file_get_contents($file));
+
+        return $file_name;
     }
 }

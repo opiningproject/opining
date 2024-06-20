@@ -243,6 +243,8 @@ class SettingController extends Controller
         $restaurant->service_charge = $request->service_charge;
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
+        $restaurant->delivery_time = $request->delivery_time;
+        $restaurant->take_away_time = $request->take_away_time;
         $restaurant->order_notif_sound = $request->order_notif_sound ? '1' : '0';
         $restaurant->save();
 

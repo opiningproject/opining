@@ -17,10 +17,24 @@
                 <main class="bd-main order-1 w-100 position-relative">
                     <div class="main-content d-flex flex-column h-100">
                         <div
-                            class="section-page-title mb-0 d-flex align-items-center justify-content-between gap-2 foodorder-page-title">
-                            <h1 class="page-title">{{ trans('rest.food_order.title') }}</h1>
-                            <div class="btn-grp d-flex align-items-center flex-wrap">
-                                <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown"
+                            class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 foodorder-page-title">
+                            <h1 class="page-title me-auto">{{ trans('rest.food_order.title') }}</h1>
+                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap">
+                               <div class="header-filter-order d-flex align-items-center flex-wrap">
+                                <div class="search-has col">
+                                    <span class="fa fa-search form-control-feedback"></span>
+                                    <input type="text" class="form-control" id="search-order" placeholder="Search">
+                                </div>
+                          
+                                <form class="form col" action="{{ 'invoice' }}" method="#">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Select Date For Filter" class="form-control" id="expiry_date" aria-label="dateofbirth" aria-describedby="basic-addon1" name="expiry_date" required>
+                                    </div>
+                                </form>
+                               </div>
+
+
+                                      {{-- <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown"
                                         aria-expanded="false">
                                     <img src="{{ asset('images/filter-icon.svg') }}" alt="img" class="img-fluid svg"
                                          width="22" height="20">
@@ -37,16 +51,15 @@
                                     <li><a class="dropdown-item"
                                            href="{{ route('orders',['date_filter'=>3]) }}">{{ trans('rest.food_order.month') }}</a>
                                     </li>
-                                </ul>
+                                </ul> --}}
+                                {{-- <div> --}}
+                                    <button type="button" name="clear" value="Clear" id="clear" style="background-color: var(--theme-yellow2);"  class="btn clear-button">Clear</button>
+                                {{-- </div> --}}
+
                             </div>
                         </div>
                         <div class="foodorder-box d-flex">
                             <div class="foodorder-box-list-wrp bg-white">
-
-                                <div class="form-group search-has">
-                                    <span class="fa fa-search form-control-feedback"></span>
-                                    <input type="text" class="form-control" id="search-order" placeholder="Search">
-                                </div>
 
                                 <div class="foodorder-box-list d-flex flex-column" id="order-list-data-div">
                                     @if(count($orders))
@@ -313,8 +326,15 @@
                                                         x {{ trans('rest.food_order.items') }})
                                                     </div>
                                                 </div>
+                                                <button id="toggleOrderList" class="bg-transparent border-0 d-flex align-items-center justify-content-center">
+                                                    <img src="{{ asset('images/upward-arrow.svg') }}" alt="call" class="uparrowOrderList"
+                                                     class="img-fluid svg" width="17" height="10">
+
+                                                     <img src="{{ asset('images/downward-arrow.svg') }}" class="downarrowOrderList" style="display: none !important;" alt="call"
+                                                     class="img-fluid svg" width="17" height="10">
+                                                </button>
                                             </div>
-                                            <div class="footer-box-main-orderlist-main d-flex flex-column">
+                                            <div class="footer-box-main-orderlist-main d-flex flex-column" id="orderList">
                                                     <?php $itemTotalPrice = 0; ?>
                                                 @foreach($order->dishDetails as $key => $dish)
                                                     <div class="footer-box-main-orderlist-main-item d-flex">
@@ -359,13 +379,16 @@
                                                     <div class="title">{{ trans('rest.food_order.total') }} :</div>
                                                     <div class="number">€{{ number_format(getOrderGrossAmount($order),2) }}</div>
                                                 </div>
-                                                <button
+                                                <button id="toggleTotal"
                                                     class="bg-transparent border-0 d-flex align-items-center justify-content-center">
-                                                    <img src="{{ asset('images/upward-arrow.svg') }}" alt="call"
+                                                    <img src="{{ asset('images/upward-arrow.svg') }}" alt="call" class="uparrowTotal"
+                                                         class="img-fluid svg" width="17" height="10">
+
+                                                    <img src="{{ asset('images/downward-arrow.svg') }}" class="downarrowTotal" style="display: none !important;" alt="call"
                                                          class="img-fluid svg" width="17" height="10">
                                                 </button>
                                             </div>
-                                            <div class="footer-main-total-main">
+                                            <div class="footer-main-total-main"  id="totalList">
                                                 <div class="title">{{ trans('rest.food_order.bill_details') }}</div>
                                                 <div class="text-grp d-flex flex-column gap-3">
                                                     <div

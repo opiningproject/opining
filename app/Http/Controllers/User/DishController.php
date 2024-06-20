@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\IngredientCategory;
 use App\Models\Order;
 use App\Models\OrderDishDetail;
@@ -78,7 +79,19 @@ class DishController extends Controller
 
     public function getCollectedPoints()
     {
-        return view('user.points');
+
+      // Coupons 
+        $user = Auth::user();
+
+        $coupons = Coupon::where(
+            [
+                ['start_expiry_date', '<=', date('Y-m-d')],
+                ['end_expiry_date', '>=', date('Y-m-d')],
+            ]
+        )->withActive()->orderBy('id', 'desc')->get();
+
+
+        return view('user.points', ['coupons' => $coupons, 'user' => $user]);
     }
 
     public function getDishDetails(string $id, string $doesExist)

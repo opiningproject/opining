@@ -192,6 +192,7 @@ function updateDishQty(operator, maxQty, dish_id) {
 
     if (operator == '-' && !isNaN(current_qty) && current_qty > 0) {
         $('input[name=qty-' + dish_id + ']').val(current_qty - 1);
+        $('#quantity-'+ dish_id).text(current_qty - 1);
     }
 
     if (operator == '+' && !isNaN(current_qty)) {
@@ -201,6 +202,7 @@ function updateDishQty(operator, maxQty, dish_id) {
         }*/
 
         $('input[name=qty-' + dish_id + ']').val(current_qty + 1);
+        $('#quantity-'+ dish_id).text(current_qty + 1);
     }
 
     var current_qty = parseInt($('input[name=qty-' + dish_id + ']').val());
@@ -497,5 +499,16 @@ function calculateTotalCartAmount() {
     $('#coupon-discount').val(couponDiscount.toFixed(2))
 
     $('#gross-total-bill').text('€' + totalAmt.toFixed(2))
+    $('#gross-total-bill1').text('€' + totalAmt.toFixed(2))
 }
+
+
+$(document).on('click', '.dish-group .form-label', function ()
+{
+    var formGroup = $(this).closest('.dish-group');
+    var inputField = formGroup.find('input.dish-notes');
+
+    $(this).addClass("d-none");
+    inputField.removeClass("d-none");
+})
 

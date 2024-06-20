@@ -30,8 +30,7 @@ class Category extends Model
 
     public function getImageAttribute($value){
         if(!empty($value)){
-            $s3 = Storage::disk('s3');
-            return $s3->url('/category/'.$value);
+            return asset('/storage/category/'.$value);
         }
         return asset('images/blank-img.svg');
     }

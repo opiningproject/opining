@@ -607,7 +607,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                     {{ getOrderDishIngredients($dishDetails) }}
                                                                                 </div>
 
-                                                                                <div class="text">
+                                                                                {{-- <div class="text">
                                                                                     <a class="item-customize"
                                                                                         href="javascript:void(0)"
                                                                                         id="read-more-{{ $dishDetails->id }}"
@@ -619,31 +619,18 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                         id="close-{{ $dishDetails->id }}"
                                                                                         onclick="hideReadMore({{ $dishDetails->id }})">
                                                                                         Close</a>
-                                                                                </div>
+                                                                                </div> --}}
                                                                             </div>
 
-                                                                            {{-- <div class="cart-items-list-row-n">
-                                                                            <div class="from-group addnote-from-group mb-0">
+                                                                            <div class="cart-items-list-row-n">
+                                                                            <div class="from-group addnote-from-group mb-0 mb-5">
                                                                                 <div class="form-group mb-0 dish-group" data-dish-id="198">
-                                                                                    <label for="dishnameenglish" class="form-label mb-0">Add Notes</label>
-                                                                                    <input type="text" data-id="198" maxlength="50" class="form-control dish-notes" value="" placeholder="Type here">
+                                                                                    <label for="dishnameenglish" class="form-label mb-0 {{ !empty($dishDetails->notes) ? 'd-none' : '' }}">Add Notes</label>
+                                                                                    <input type="text" data-id="198" maxlength="50" class="form-control dish-notes {{ !empty($dishDetails->notes) ? '' : 'd-none' }}"  value="{{ $dishDetails->notes }}"   data-id="{{ $dishDetails->id }}" placeholder="{{ trans('user.my_orders.type_here') }}">
                                                                                 </div>
                                                                             </div>
-                                                                        </div> --}}
+                                                                        </div>
 
-                                                                            <div
-                                                                                class="from-group addnote-from-group mb-0">
-                                                                                <div class="form-group">
-                                                                                    <label for="dishnameenglish"
-                                                                                        class="form-label">{{ trans('user.my_orders.add_notes') }}</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control dish-notes"
-                                                                                        maxlength="50"
-                                                                                        value="{{ $dishDetails->notes }}"
-                                                                                        data-id="{{ $dishDetails->id }}"
-                                                                                        placeholder="{{ trans('user.my_orders.type_here') }}">
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -988,5 +975,18 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             })
 
         }
+
+
+
+$(document).on('click', '.dish-group .form-label', function ()
+{
+    var formGroup = $(this).closest('.dish-group');
+    var inputField = formGroup.find('input.dish-notes');
+
+    $(this).addClass("d-none");
+    inputField.removeClass("d-none");
+})
+
+
     </script>
 @endsection

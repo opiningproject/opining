@@ -458,7 +458,7 @@
                                                                                                         class="form-group mb-0 dish-group" data-dish-id="{{ $dish->id }}">
                                                                                                         <label
                                                                                                             for="dishnameenglish"
-                                                                                                            class="form-label mb-0">{{ trans('user.cart.add_notes') }}</label>
+                                                                                                            class="form-label mb-0 dish-notes-label">{{ trans('user.cart.add_notes') }}</label>
                                                                                                         <input
                                                                                                             type="text"
                                                                                                             data-id="{{ $dish->id }}"

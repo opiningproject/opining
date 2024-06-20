@@ -105,3 +105,13 @@ if(isDesktopView()) {
         $('#payment-type-mobile-content').toggle()
     })
 });
+
+
+function checkScreenSize() {
+    if ($(window).width() <= 767) {
+        $('body').addClass('title-becomes');
+    } else {
+        $('body').removeClass('title-becomes');
+    }
+}
+checkScreenSize();

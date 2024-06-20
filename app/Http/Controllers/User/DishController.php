@@ -261,12 +261,12 @@ class DishController extends Controller
                                     </td>
                                     <td width='7%'>
                                       <div class='foodqty mt-0'>
-                                        <span class='minus'>
-                                          <i class='fas fa-minus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)></i>
+                                        <span class='minus' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)>
+                                          <i class='fas fa-minus align-middle'></i>
                                         </span>
                                         <input type='number' class='count dishPaidIngQty' data-id='$ingredient_id' readonly id='dishIng$ingredient->id' data-price='$ingredient_price' value='$paidQty'>
-                                        <span class='plus'>
-                                          <i class='fas fa-plus align-middle' onclick=addSubDishIngredientQuantities($ingredient->id,'+',$dish->id)></i>
+                                        <span class='plus' onclick=addSubDishIngredientQuantities($ingredient->id,'+',$dish->id)>
+                                          <i class='fas fa-plus align-middle'></i>
                                         </span>
                                       </div>
                                     </td>

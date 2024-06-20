@@ -512,3 +512,19 @@ $(document).on('click', '.dish-group .form-label', function ()
     inputField.removeClass("d-none");
 })
 
+let not_values = $('.dish-notes').val();
+ if(not_values.length > 0) {
+    $('.dish-notes-label').css('display','none');
+    // $('.dish-notes').css('display','block !important');
+    // $('.dish-notes').css({display:"block !important;"});
+    $('.dish-notes').removeClass('d-none');
+ }
+
+ function checkScreenSize() {
+    if ($(window).width() <= 767) {
+        $('body').addClass('title-becomes');
+    } else {
+        $('body').removeClass('title-becomes');
+    }
+}
+checkScreenSize();

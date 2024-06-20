@@ -198,10 +198,12 @@ return [
 		'close' => 'Close',
 		'want_coupon' => 'Yes! I want a Coupon!',
 		'coupon' => 'Coupon',
-		'off' => 'off',
+		'off' => 'OFF',
         'not_applicable' => 'This coupon is not applicable!',
         'unused' => 'Unused',
-        'expired' => 'Expired'
+        'expired' => 'Expired',
+		'redeemed_points' => 'You have redeemed this coupon',
+
 	],
 
 	'button'=> [

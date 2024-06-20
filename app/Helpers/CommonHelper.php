@@ -176,6 +176,40 @@ if (!function_exists('getOrderDishIngredients')) {
 
             }
         }
+        return trim($ingredients, ', ');
+
+    }
+}
+
+if (!function_exists('getOrderDishIngredients1')) {
+    function getOrderDishIngredients1($dish)
+    {
+        $ingredients = '';
+
+        $dishData = Dish::withTrashed()->find($dish->dish_id);
+
+        if($dish->orderDishFreeIngredients->count() != $dishData->freeWithoutTrashIngredients->count()){
+            // $ingredients .= '-';
+            $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
+
+            foreach ($dishData->freeWithoutTrashIngredients as $freeIngredient) {
+                if(!in_array($freeIngredient->id, $ingArray)){
+                    // $ingredients .= $freeIngredient->ingredient->name.', ';
+                    $ingredients .= "<li>-" .$freeIngredient->ingredient->name. "</li>";
+
+                }
+            }
+        }
+
+        if (count($dish->orderDishPaidIngredients)>0) {
+            
+            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
+
+                $price = $ingredient->quantity * $ingredient->price;
+                $ingredients .= "<li>+" .$ingredient->dishIngredient->ingredient->name. "(€" .number_format($price, 2) . ")" . "</li>";
+
+            }
+        }
 
         return trim($ingredients, ', ');
 

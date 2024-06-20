@@ -61,9 +61,11 @@
     </div>
 
     @include('user.modals.coupon-confirmation')
+    @include('user.modals.coupon-redeem')
 @endsection
 
 @section('script')
+<script type="text/javascript" src="{{ asset('js/user/coupons.js') }}"></script>
     <script type="text/javascript">
         $(".coupons-card").click(function() {
             $(".checkcircle").toggle();

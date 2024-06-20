@@ -51,35 +51,25 @@ class CouponController extends Controller
     {
         $user = Auth::user();
 
-        $unusedCouponIds = CouponTransaction::where(
-        [
-            ['user_id', '=', auth()->user()->id],
-            ['is_redeemed', '=', '0'],
-        ])->pluck('coupon_id');
+        $unexpiredCoupons = CouponTransaction::where('user_id',  auth()->user()->id)
+        ->where('is_redeemed','0')
+        ->whereHas('coupon', function ($query) {
+            $query->unexpired();
+        })->with('coupon')->get();
+        
 
-        $unusedCoupons = Coupon::where(
-            [
-                ['start_expiry_date', '<=', date('Y-m-d')],
-                ['end_expiry_date', '>=', date('Y-m-d')],
-            ]
-        )->withActive()->whereIn('id',$unusedCouponIds)->orderBy('id', 'desc')->get();
-
-
-        $expiredCouponIds = CouponTransaction::where(
-            [
-                ['user_id', '=', auth()->user()->id],
-                ['is_redeemed', '=', '1'],
-            ])->pluck('coupon_id');
+        $expiredCoupons = CouponTransaction::where('user_id', auth()->user()->id)
+        ->where(function ($query) {
+        $query->where('is_redeemed', 1)
+              ->orWhereHas('coupon', function ($query) {
+                  $query->expired();
+              });
+        })
+        ->with('coupon')
+        ->get();
 
 
-        $expiredCoupons = Coupon::where(
-                [
-                    ['start_expiry_date', '<=', date('Y-m-d')],
-                    ['end_expiry_date', '>=', date('Y-m-d')],
-                ]
-            )->withActive()->whereIn('id',$expiredCouponIds)->orderBy('id', 'desc')->get();
-
-        return view('user.coupons.index', ['coupons' => $unusedCoupons, 'user' => $user, 'expiredCoupons' =>$expiredCoupons]);
+        return view('user.coupons.index', ['unexpiredCoupons' => $unexpiredCoupons, 'user' => $user, 'expiredCoupons' =>$expiredCoupons]);
     }
 
     public function apply(Request $request)
@@ -91,6 +81,18 @@ class CouponController extends Controller
 
         if (!empty($coupon)) {
             $user = Auth::user();
+
+            $usedCoupon =  $userCoupon = $user->coupons()->where([
+                ['coupon_id', $coupon->id],
+                ['is_redeemed', '1'],
+            ])->first();
+    
+            if($usedCoupon) {
+                return Response::json([
+                    'status' => 401,
+                    'message' => trans('user.coupons.not_applicable'),
+                ]);
+            }
 
             $userCoupon = $user->coupons()->where([
                 ['coupon_id', $coupon->id],

@@ -48,7 +48,8 @@ var end = moment();
 
 var dateRange =''
 $('#expiry_date').daterangepicker({
-    maxDate: new Date(),
+    startDate: start,
+    endDate: end,
     ranges: {
        'Today': [moment(), moment()],
        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -64,10 +65,10 @@ $('#expiry_date').attr('placeholder','Select Date Range')
 
 $('#expiry_date').on('apply.daterangepicker', function(ev, picker) {
 
-    dateRange = $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    dateRange = $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
 
-    var start_date = picker.startDate.format('DD/MM/YYYY');
-    var end_date = picker.endDate.format('DD/MM/YYYY');
+    var start_date = picker.startDate.format('DD-MM-YYYY');
+    var end_date = picker.endDate.format('DD-MM-YYYY');
 
     value = "start_date="+ start_date + "&end_date=" + end_date;
 

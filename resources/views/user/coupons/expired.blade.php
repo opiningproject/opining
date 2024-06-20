@@ -5,8 +5,42 @@
 
             <div class="card-body coupon-card-row w-100 pb-0">
 
-                <div class="coupon-row-grid">
 
+                    @if (count($expiredCoupons) == 0)
+                    <p>No coupons.</p>
+                    @else
+                    <div class="coupon-row-grid">
+                        @foreach ($expiredCoupons as $key => $expiredCoupon)
+                        <?php  $coupon = $expiredCoupon->coupon ?>
+                            <div class="coupon-col">
+                                <div class="coupon-inn disabled">
+                                    <div class="coupon-flex">
+                                        <div class="left-cp">
+                                            <h2>{{ $coupon->percentage_off }}% {{ trans('user.coupons.off') }}</h2>
+                                            <p class="mb-0">{{ trans('user.coupons.min_order') }}  €{{ $coupon->price }}</p>
+                                        </div>
+                                        <div class="right-cp text-center">
+                                            <p class="mb-1">{{ trans('user.coupons.valid_till') }} {{ $coupon->end_expiry_date }}</p>
+                                            <a href='javascript:void(0);' class="get-code-btn">
+                                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <rect x="0.5" y="0.5" width="10" height="12" rx="1.5"
+                                                        stroke="#F8B602" />
+                                                    <rect x="3.5" y="3.5" width="10" height="12" rx="1.5"
+                                                        fill="white" stroke="#F8B602" />
+                                                </svg>
+                                                {{ $coupon->promo_code }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                            </div>
+
+                        @endforeach
+                    </div>
+                    @endif
+
+                {{-- <div class="coupon-row-grid">
                     <div class="coupon-col">
                         <div class="coupon-inn disabled">
                             <div class="coupon-flex">
@@ -174,8 +208,7 @@
                         </div>
 
                     </div>
-                </div>
-
+                </div> --}}
             </div>
 
         </div>

@@ -38,6 +38,13 @@ return [
 		'content' => 'Are you sure you want to buy this coupon code ?',
 	],
 
+	'redeem' => [
+		'title' => 'Coupon confirmation',
+		'coupon' => 'Coupon',
+		'content' => 'Are you sure you want to redeem your points for this coupon?',
+		'confirmed' => 'The coupon is added to your coupon list!',
+	],
+
 	'refund_req' => [
 		'title' => 'Refund Request',
 		'description' => 'Description',
@@ -60,6 +67,7 @@ return [
 	 	'close' => 'Close',
 	 	'add_item' => 'Add Item',
 	 	'want_coupon' => 'Yes! I want a Coupon!',
+	 	'see_my_coupons' => 'See My Coupons',
 	 ]
 
 ];

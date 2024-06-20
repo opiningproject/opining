@@ -179,7 +179,7 @@
                                                         width="100" height="100" />
                                                 </div>
                                                 <h4 class="food-name-text">{{ $dish->name }}</h4>
-                                                <p class="food-price">€{{ number_format($dish->price, 2) }}</p>
+                                                {{-- <p class="food-price">€{{ number_format($dish->price, 2) }}</p> --}}
 
                                                 <button type="button" class="btn btn-xs-sm btn-custom-yellow"
                                                     onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
@@ -188,9 +188,9 @@
                                                     @if ($dish->out_of_stock == '1')
                                                         {{ trans('user.dashboard.out_of_stock') }}
                                                     @else
-                                                        {{ trans('user.dashboard.add') }}
                                                         <img src="{{ asset('images/plus.svg') }}" class="svg"
-                                                            height="9" width="9">
+                                                            height="9" width="9">€{{ number_format($dish->price, 2) }}
+
                                                     @endif
                                                 </button>
 
@@ -283,7 +283,7 @@
                                                     tabindex="0">
 
                                                     <div class="text-center d-flex justify-content-center">
-                                                        <div class="cart-address-row">
+                                                        <div class="cart-address-row"  style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addressChangeModal">
                                                             <img src="{{ asset('images/delivery-address.svg') }}"
                                                                 alt="" class="svg" height="20"
                                                                 width="20" />
@@ -388,19 +388,25 @@
                                                                                     <div
                                                                                         class="cart-custom-w-col-img cart-name-price">
                                                                                         <div
-                                                                                            class="d-flex align-items-start justify-content-between">
+                                                                                            class="d-flex align-items-start">
+                                                                                            <p id="quantity-{{$dish->id}}" class="item-name pe-2">{{$dish->qty}}</p>
                                                                                             <p class="d-inline-block item-name mb-0"
                                                                                                 onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
                                                                                                 {{ $dish->dish->name }}
                                                                                             </p>
-                                                                                            <span class="cart-item-price"
+                                                                                            <span class="cart-item-price ms-auto"
                                                                                                 id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price), 2) }}</span>
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <ul class="items-additional mb-2">
-                                                                                        <li>+ Onion (€1,50)</li>
-                                                                                        <li>- Peppers (€2,00)</li>
+
+                                                                                    @php
+                                                                                        $htmlString = getOrderDishIngredients1($dish);
+                                                                                        $cleanedHtmlString = str_replace('"', '', $htmlString);
+                                                                                    @endphp
+
+                                                                                    <ul class="items-additional mb-2" id="item-ing-desc{{ $dish->id }}">
+                                                                                        {!! $cleanedHtmlString !!}
                                                                                     </ul>
 
                                                                                     <div
@@ -422,8 +428,8 @@
                                                                                                     class="mb-0 item-options mb-0">
                                                                                                     {{ $dish->dishOption->name ?? '' }}
                                                                                                 </p>
-                                                                                                <span class="item-desc"
-                                                                                                    id="item-ing-desc{{ $dish->id }}">{{ getOrderDishIngredients($dish) }}</span>
+                                                                                                {{-- <span class="item-desc"
+                                                                                                    id="item-ing-desc{{ $dish->id }}">{{ getOrderDishIngredients1($dish) }}</span> --}}
                                                                                                 {{-- <p
                                                                                                     class="item-customize mb-0 ms-auto justify-content-end">
                                                                                                     <a href="javascript:void(0);"
@@ -435,12 +441,12 @@
                                                                                                     </a>
                                                                                                     {{ trans('user.cart.edit') }}
                                                                                                 </p> --}}
-                                                                                                @if ($paidIngredient * $dish->qty > 0)
+                                                                                                {{-- @if ($paidIngredient * $dish->qty > 0)
                                                                                                     <p class="price-opt mb-0 text-nowrap"
                                                                                                         id="paid-ing-price{{ $dish->id }}">
                                                                                                         +€{{ number_format($paidIngredient * $dish->qty, 2) }}
                                                                                                     </p>
-                                                                                                @endif
+                                                                                                @endif --}}
                                                                                             </div>
 
                                                                                             <div
@@ -449,7 +455,7 @@
                                                                                                 <div
                                                                                                     class="from-group addnote-from-group mb-0">
                                                                                                     <div
-                                                                                                        class="form-group mb-0">
+                                                                                                        class="form-group mb-0 dish-group" data-dish-id="{{ $dish->id }}">
                                                                                                         <label
                                                                                                             for="dishnameenglish"
                                                                                                             class="form-label mb-0">{{ trans('user.cart.add_notes') }}</label>
@@ -464,9 +470,9 @@
                                                                                                 </div>
 
                                                                                                 <div class="foodqty mt-0">
-                                                                                                    <span class="minus">
+                                                                                                    <span class="minus" onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i class="fas fa-minus align-middle"
-                                                                                                            onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})"></i>
+                                                                                                            ></i>
                                                                                                     </span>
                                                                                                     <input type="number"
                                                                                                         readonly
@@ -479,9 +485,9 @@
                                                                                                     <input type="hidden"
                                                                                                         id="dish-price-{{ $dish->id }}"
                                                                                                         value="{{ $dish->dish->price }}" />
-                                                                                                    <span class="plus">
+                                                                                                    <span class="plus" onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i class="fas fa-plus align-middle"
-                                                                                                            onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})"></i>
+                                                                                                            ></i>
                                                                                                     </span>
                                                                                                 </div>
                                                                                             </div>
@@ -635,7 +641,7 @@
                             <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                 id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
-                                    {{ trans('user.cart.checkout') }} (<span class="bill-total-count" id="gross-total-bill">€12.95</span>)
+                                    {{ trans('user.cart.checkout') }} (<span class="bill-total-count" id="gross-total-bill1">€{{ number_format((float) ($cartValue + $serviceCharge - $cartValue * $couponDiscountPercent), 2) }}</span>)
                                 </span>
                             </a>
 

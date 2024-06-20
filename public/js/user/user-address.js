@@ -53,22 +53,24 @@ $(function () {
         var addressId = parentId.split('-')[1];
 
         // Update the button text based on the address ID
-        $(this).text('Selected');
+        // $(this).text('Selected');
 
         // Change the text of other buttons to 'Deliver Here' and remove styples except the clicked one
-        $('.select-address-btn').not($(this)).text('Deliver Here');
-        $('.select-address-btn').not($(this)).attr('style', '');
+      
+        $('.selected-address').html('<span class="success-ico blank"></span>');
+        // $('.select-address-btn').not($(this)).attr('style', '');
 
 
 
-        var dynamicStyle = 'pointer-events:none; cursor:default;';
-        $(this).attr('style', dynamicStyle);
-    
+        // var dynamicStyle = 'pointer-events:none; cursor:default;';
+        // $(this).attr('style', dynamicStyle);
+
 
         $.ajax({
             url: baseURL + '/user/validate-address/' + addressId,
             type: 'GET',
             success: function (response) {
+        
                 $('#zipcode').val(response.data.zipcode)
                 $('#house_no').val(response.data.house_no)
                 if (response.status == 406) {
@@ -77,11 +79,13 @@ $(function () {
                     $('#zipcode-error').css("display", "block");
                 } else {
 
+                    $('#selected-address-'+addressId).html('<span class="success-ico"><img src="/images/success-icon.svg" class="svg" width="14" height="11"></span>');
+
                     let houseNumber = response.data.house_no;
                     let zipcode = response.data.zipcode;
                     let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
                     $("#zip_address").html('');
-                    $("#zip_address").html('<p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1">' + displayText + '</p>');
+                    $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');
 
                     $('#addressChangeModal').modal('hide');
 
@@ -139,7 +143,7 @@ function validateZipcode() {
                     let zipcode = response.zipcode;
                     let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
                     $("#zip_address").html('');
-                    $("#zip_address").html('<p class="mb-0 d-inline-block ms-1 text-bold-1 mt-1">' + displayText + '</p>');
+                    $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');
                     $('#addressChangeModal').modal('hide');
     
                     // After closing modal set updated values

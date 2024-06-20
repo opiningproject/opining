@@ -5,9 +5,32 @@
 
             <div class="card-body coupon-card-row w-100 pb-0">
 
+                @if (count($unexpiredCoupons) == 0)
+                <p>No available coupons. Redeem points to get coupons at my points page.</p>
+                @else
+                <div class="coupon-row-grid">
+                    @foreach ($unexpiredCoupons as $key => $unexpiredCoupon)
+                    <?php  $coupon = $unexpiredCoupon->coupon ?>
+                        <div class="coupon-col">
+                            <div class="coupon-inn">
+                                <div class="coupon-flex">
+                                    <div class="left-cp">
+                                        <h2>{{ $coupon->percentage_off }}% {{ trans('user.coupons.off') }}</h2>
+                                        <p class="mb-0">{{ trans('user.coupons.min_order') }}  €{{ $coupon->price }}</p>
+                                    </div>
+                                    <div class="right-cp text-center">
+                                        <p class="mb-1">{{ trans('user.coupons.valid_till') }} {{ $coupon->end_expiry_date }}</p>
+                                        <a href="#" class="get-code-btn" data-code="{{ $coupon->promo_code }}" onclick="revealCode(event, this)">GET CODE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                @endif
                 <div class="coupon-row-grid">
 
-                    <div class="coupon-col">
+                    {{-- <div class="coupon-col">
                         <div class="coupon-inn">
                             <div class="coupon-flex">
                                 <div class="left-cp">
@@ -36,10 +59,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div> --}}
 
-                    </div>
-
-                    <div class="coupon-col">
+                    {{-- <div class="coupon-col">
                         <div class="coupon-inn">
                             <div class="coupon-flex">
                                 <div class="left-cp">
@@ -125,7 +147,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
 
                     {{-- @if (count($coupons) == 0)
                     <p>No available coupons. Redeem points to get coupons at my points page.</p>

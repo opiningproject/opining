@@ -31,8 +31,14 @@ if(isDesktopView()) {
         errorPlacement: function(error, element) {
 
             if(element[0].id == 'street_name' || element[0].id == 'house_no' || element[0].id == 'city' || element[0].id == 'first_name' || element[0].id == 'last_name' || element[0].id == 'email' || element[0].id == 'phone_no') {
+                let ret = element[0].id
+                .split("_")
+                .filter(x => x.length > 0)
+                .map((x) => (x.charAt(0).toUpperCase() + x.slice(1)))
+                .join(" ");
+
                 $(".success-ico.success-address").hide();
-                $("#deliviery-address-error").text("Please fill all address details.");
+                $("#deliviery-address-error").text("Please fill " + ret.toLowerCase() +" in address detail.");
                 return false
             } else {
                 $("#deliviery-address-error").text("");
@@ -40,7 +46,13 @@ if(isDesktopView()) {
             }
 
             if(element[0].id == 'card_name' || element[0].id == 'cvv' || element[0].id == 'exp_date') {
-                    $("#payment-method-error").text("Please fill all card details.");
+                let ret = element[0].id
+                .split("_")
+                .filter(x => x.length > 0)
+                .map((x) => (x.charAt(0).toUpperCase() + x.slice(1)))
+                .join(" ");
+
+                    $("#payment-method-error").text("Please fill " + ret.toLowerCase() +" in card details.");
                     $(".success-ico.success-payment-method").hide();
                 return false
             } else {

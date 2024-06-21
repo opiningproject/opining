@@ -1,6 +1,6 @@
 <aside class="menu-sidebar sticky-top">
     <div class="bd-navbar-toggle">
-        <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+        <button class="navbar-toggler p-2"  id="menu-sidebar" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
             <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="24" height="21">
             <span class="d-none fs-6 pe-1">Browse</span>
         </button>
@@ -78,7 +78,7 @@
                 @endif
             </div>
 
-            <button type="button" class="btn-close d-block drawer-close d-lg-none" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar">
+            <button type="button" class="btn-close d-block drawer-close d-lg-none" id="menu-sidebar-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar">
             </button>
         </div>
 

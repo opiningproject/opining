@@ -139,3 +139,29 @@ function addFooterLogoReadURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function checkScreenSize() {
+    if ($(window).width() <= 767) {
+        $('body').addClass('title-becomes');
+    } else {
+        $('body').removeClass('title-becomes');
+    }
+}
+
+function checkScreenSize1() {
+    if ($(window).width() <= 767) {
+        $('body').removeClass('title-becomes');
+    } else {
+        $('body').addClass('title-becomes');
+    }
+}
+
+// Add event listener for window resize
+$(window).on('resize', checkScreenSize);
+
+$(document).on('click','#menu-sidebar', function () {
+    checkScreenSize();
+});
+$(document).on('click','#menu-sidebar-close', function () {
+    checkScreenSize1();
+});

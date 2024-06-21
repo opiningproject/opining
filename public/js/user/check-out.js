@@ -26,10 +26,42 @@ if(isDesktopView()) {
 } else {
     $('#delivery-mobile-content').toggle()
     $('#delivery-user-mobile-content').toggle()
-    $("#final-checkout-form").on("submit", function (event) {
-        event.preventDefault();
-        addOrder();
+    $("#final-checkout-form").validate({
+        ignore: '[readonly]',
+        errorPlacement: function(error, element) {
+
+            if(element[0].id == 'street_name' || element[0].id == 'house_no' || element[0].id == 'city' || element[0].id == 'first_name' || element[0].id == 'last_name' || element[0].id == 'email' || element[0].id == 'phone_no') {
+                $(".success-ico.success-address").hide();
+                $("#deliviery-address-error").text("Please fill all address details.");
+                return false
+            } else {
+                $("#deliviery-address-error").text("");
+                $(".success-ico.success-address").show();
+            }
+
+            if(element[0].id == 'card_name' || element[0].id == 'cvv' || element[0].id == 'exp_date') {
+                    $("#payment-method-error").text("Please fill all card details.");
+                    $(".success-ico.success-payment-method").hide();
+                return false
+            } else {
+                    $("#payment-method-error").text("");
+                    $(".success-ico.success-payment-method").show();
+            }
+
+
+
+            error.insertAfter(element)
+            $('#all-validation-error').show()
+        },
+        submitHandler: function (form) {
+            $('#all-validation-error').hide()
+            addOrder()
+        }
     });
+    // $("#final-checkout-form").on("submit", function (event) {
+    //     event.preventDefault();
+    //     addOrder();
+    // });
 }
 
    
@@ -114,4 +146,21 @@ function checkScreenSize() {
         $('body').removeClass('title-becomes');
     }
 }
-checkScreenSize();
+
+function checkScreenSize1() {
+    if ($(window).width() <= 767) {
+        $('body').removeClass('title-becomes');
+    } else {
+        $('body').addClass('title-becomes');
+    }
+}
+
+// Add event listener for window resize
+$(window).on('resize', checkScreenSize);
+
+$(document).on('click','#menu-sidebar', function () {
+    checkScreenSize();
+});
+$(document).on('click','#menu-sidebar-close', function () {
+    checkScreenSize1();
+});

@@ -505,6 +505,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                     class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                                                                     <input type="text" name="exp_date"
                                                                                         required
+                                                                                        id="exp_date"
                                                                                         class="form-control expireYear card-validate"
                                                                                         readonly
                                                                                         placeholder="{{ trans('user.checkout.valid_till') }} (MM/YY)">
@@ -514,13 +515,14 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                     <input type="number" name="cvv"
                                                                                         required
                                                                                         class="form-control form-control-br-left card-validate"
+                                                                                        id="cvv"
                                                                                         readonly placeholder="CVV"
                                                                                         minlength="3" maxlength="3">
                                                                                 </div>
                                                                             </div>
                                                                             <input type="text"
                                                                                 class="form-control border-0 card-validate"
-                                                                                name="card_name" required readonly
+                                                                                name="card_name" required readonly id="card_name"
                                                                                 placeholder="{{ trans('user.checkout.card_name') }}">
                                                                         </div>
                                                                     </div>
@@ -550,7 +552,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                         <button type="submit"
                                                             class="align-middle btn btn-custom-yellow btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
                                                             €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}
-                                                            <span id="total-amt-pay-btn">iDEAL</span>
+                                                           &nbsp;<span id="total-amt-pay-btn">iDEAL</span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -834,7 +836,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             var paymentType = $('#payment_type').val()
             var zipcode = $('#zipcode').val()
             console.log('zipcode', zipcode)
-
+    
             let first_name = $('#first_name').val();
             let last_name = $('#last_name').val();
             let email = $('#email').val();
@@ -884,7 +886,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                     return false
                 }
 
-                $("#payment-method-error").text("Choose a payment method");
+                $("#payment-method-error").text("Please select bank to continue");
                 $(".success-ico.success-payment-method").hide();
                 return false
             } else {

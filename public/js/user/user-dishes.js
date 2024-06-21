@@ -46,12 +46,3 @@ function customizeDish(id, doesExist=0)
 
 
 }
-
-function checkScreenSize() {
-    if ($(window).width() <= 767) {
-        $('body').addClass('title-becomes');
-    } else {
-        $('body').removeClass('title-becomes');
-    }
-}
-checkScreenSize();

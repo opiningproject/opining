@@ -17,7 +17,7 @@
                                         <input type="password" class="form-control ps-5 text-indent-initial" name="password" placeholder="Enter Password" id="password" autocomplete="off"/>
                                     </div>
                                     @if($errors->any())
-                                        <h4 style="color: #ff0000">{{$errors->first()}}</h4>
+                                        <h6 style="color: #ff0000" class="mt-1">{{$errors->first()}}</h6>
                                     @endif
                                 </div>
                                 <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">

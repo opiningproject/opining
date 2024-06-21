@@ -118,8 +118,8 @@ class CartController extends Controller
         <div class='d-flex cart-item-row'>
             <div class='cart-custom-w-col-img cart-name-price'>
                 <div class='d-flex align-items-start'>
-                    <p id='quantity-$cart->id' class='item-name pe-2'>$cart->qty</p>
-                    <p class='d-inline-block item-name mb-0' onclick='customizeDish($dish->id, $cart->id);'>
+                    <p id='quantity-$cart->id' class='item-name pe-2 mb-0'>$cart->qty</p>
+                    <p class='d-inline-block item-name mb-0 text-decoration-underline' onclick='customizeDish($dish->id, $cart->id);'>
                         $dish->name
                     </p>
                     <span class='cart-item-price ms-auto' id='cart-item-price$cart->id'>+€$dish->price</span>

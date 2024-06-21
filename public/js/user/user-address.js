@@ -46,7 +46,7 @@ $(function () {
     });
 
     $(document).on('click', '.select-address-btn', function () {
-
+      
         var parentId = $(this).closest('div[id^="address-"]').attr('id');
 
         // Extract the address ID from the parent div's ID
@@ -64,7 +64,6 @@ $(function () {
 
         // var dynamicStyle = 'pointer-events:none; cursor:default;';
         // $(this).attr('style', dynamicStyle);
-
 
         $.ajax({
             url: baseURL + '/user/validate-address/' + addressId,
@@ -190,6 +189,17 @@ function deleteAddress(id) {
             console.log('success')
             console.log(response)
             $('#address-' + id).remove();
+
+            var mainDiv = $('#addresses-length');
+            // Find all div elements inside the main div
+            var childDivs = mainDiv.find('.total-addresses');
+            // Get the length of child divs
+            var numberOfChildDivs = childDivs.length;
+            // If there is only one child div, hide the delete button inside it
+            if (numberOfChildDivs === 1) {
+                childDivs.find('.delete-address').hide();
+            }
+
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

@@ -520,11 +520,3 @@ let not_values = $('.dish-notes').val();
     $('.dish-notes').removeClass('d-none');
  }
 
- function checkScreenSize() {
-    if ($(window).width() <= 767) {
-        $('body').addClass('title-becomes');
-    } else {
-        $('body').removeClass('title-becomes');
-    }
-}
-checkScreenSize();

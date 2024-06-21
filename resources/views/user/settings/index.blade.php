@@ -6,8 +6,10 @@
         @include('layouts.user.side_nav_bar') 
         <main class="bd-main order-1">
             <div class="main-content">
-              <div class="section-page-title main-page-title mb-0 align-items-start">
+              <div class="section-page-title main-page-title mb-0 align-items-start title-mobile">
+                <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                 <h1 class="page-title">{{ trans('user.profile.title') }}</h1>
+              </div>
               </div>
               <!-- start profile section -->
               <section class="custom-section profile-section h-100 pb-0">

@@ -551,8 +551,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                     <div class="form-group">
                                                         <button type="submit"
                                                             class="align-middle btn btn-custom-yellow btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
-                                                            €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}
-                                                           &nbsp;<span id="total-amt-pay-btn">iDEAL</span>
+                                                            €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}<span>&nbsp;<span id="total-amt-pay-btn">iDEAL</span></span> 
                                                         </button>
                                                     </div>
                                                 </div>

@@ -123,6 +123,8 @@
                                                 <?php $lockedCoupon = ''; ?>
                                                 @if(isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1')
                                                 <?php $lockedCoupon = 'disabled-coupon'; ?>
+                                                @elseif((isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '0'))
+                                                <?php $lockedCoupon = 'disabled-coupon'; ?>
                                                 @elseif($user->collected_points >= $coupon->points)
                                                 <?php $lockedCoupon = ''; ?>
                                                 @else
@@ -160,6 +162,8 @@
                                                                 <div class="con-title">
                                                                     <h3 class="mb-1">{{ $coupon->percentage_off }}% discount coupon</h3>
                                                                     @if(($coupon->couponTransaction || is_null($coupon->points)) && (isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1'))
+                                                                        <p class="mb-0 d-inline-block">{{ trans('user.coupons.redeemed_points') }}</p>
+                                                                    @elseif((isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '0'))
                                                                         <p class="mb-0 d-inline-block">{{ trans('user.coupons.redeemed_points') }}</p>
                                                                     @elseif(!empty($lockedCoupon))
                                                                     <p class="mb-0 d-inline-block">{{ trans('user.coupons.earn_points',['points' => $coupon->points]) }}</p>
@@ -350,7 +354,7 @@
             var code = $('#coupon-code').val();
             var id = $('#coupon-id').val();
     
-            $('#coupon-code-' + id).text(code)
+            // $('#coupon-code-' + id).text(code)
 
             $.ajax({
                 url: baseURL + '/user/coupons/confirm/' + id,

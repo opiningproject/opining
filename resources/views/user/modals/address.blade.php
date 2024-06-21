@@ -76,9 +76,9 @@
                                                 </a>
 
                                                 @if(count($addresses) > 1)
-                                                <a class="btn-icon ms-2 p-2 delete-address {{ $selected  == true ? 'd-none' : '' }}" onclick="deleteAddress({{ $add->id }})">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </a>
+                                                    <a class="btn-icon ms-2 p-2 delete-address {{ $selected  == true ? 'd-none' : '' }}" onclick="deleteAddress({{ $add->id }})">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </a>
                                                 @endif
                                             </div>
                                         </div>

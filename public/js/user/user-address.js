@@ -52,6 +52,14 @@ $(function () {
         // Extract the address ID from the parent div's ID
         var addressId = parentId.split('-')[1];
 
+
+        var $parentDiv = $(this).closest('.total-addresses');
+        // Hide the delete button in the clicked address div
+        $parentDiv.find('.delete-address').addClass('d-none');
+                
+        // Show the delete button in all other address divs
+        $('.total-addresses').not($parentDiv).find('.delete-address').removeClass('d-none');
+
         // Update the button text based on the address ID
         // $(this).text('Selected');
 

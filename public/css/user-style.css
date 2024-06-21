@@ -4535,7 +4535,7 @@ input[type=number] {
 .coupon-apply-btn {
   position: absolute;
   top: 0;
-  right: 10px;
+  right: 7px;
   bottom: 0;
   display: flex;
   align-items: center;
@@ -5534,8 +5534,8 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-sidebar .cart-items-list .cart-items-list-row .stock-card{position: relative;padding: 10px;border-radius: 8px;overflow: hidden;background: #ffffff;box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);margin-bottom: 15px;flex: 0 0 100%;max-width: 100%;width: 100%;margin: 0px !important;margin-bottom: 16px !important;}
 .cart-sidebar .cart-items-list .cart-items-list-row .cart-item-row {flex-direction: column;}
 .cart-sidebar .cart-items-list .cart-items-list-row .cart-item-row .cart-name-price {flex: 0 0 100%;max-width: 100%;}
-.cart-items-list-row .cart-item-row .cart-custom-w-col-detail {flex: 0 0 100%;max-width: 100%;padding: 0px 0px;}
-.cart-sidebar .cart-name-price .item-name {font-size: 16px;font-weight: #000000;font-weight: 600;cursor: pointer;}
+.cart-items-list-row .cart-item-row .cart-custom-w-col-detail {flex: 0 0 100%;max-width: 100%;padding: 5px 0px 0px;}
+.cart-sidebar .cart-name-price .item-name {font-size: 16px;color: #000000;font-weight: 600;cursor: pointer;}
 .cart-sidebar .cart-name-price .cart-item-price {white-space: nowrap;color: #000000;font-weight: 500;font-size: 18px;}
 .cart-sidebar .cart-item-row .items-additional {list-style-type: none;padding-left: 5px;padding-top: 5px;}
 .cart-sidebar .cart-item-row .items-additional li {list-style-type: none;color: #777777;font-size: 14px;}
@@ -5669,7 +5669,12 @@ footer {padding: 36px 20px 20px 20px;}
   .payment-nav-mobile .payment-navigation .nav .nav-link .custom-radio {display: block;}
   .mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link.active {border-color: #dcdcdc !important;background: #ffffff !important;}
   .mobile-scrolllable-content .payment-nav .nav {border-radius: 0px;}
-  .checkout-section .checkout-btn-sticky {height: 52px;}
+  .checkout-section .checkout-btn-sticky, .cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn{
+    height: 52px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
 }
 @media (max-width: 375px) {
   .coupon-row-grid .coupon-flex .right-cp p {font-size: 10px;}
@@ -5677,4 +5682,11 @@ footer {padding: 36px 20px 20px 20px;}
   .coupons-tab .nav-tabs .nav-item {flex: 0 0 calc(50% - 10px);max-width: calc(50% - 10px);}
   .payment-nav-mobile .payment-navigation .nav .nav-link {font-size: 12px;}
   .checkout-section .checkout-btn-sticky {height: 52px;}
+  .checkout-section .checkout-btn-sticky, .cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn{
+    height: 52px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+  }
 }

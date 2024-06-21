@@ -389,8 +389,8 @@
                                                                                         class="cart-custom-w-col-img cart-name-price">
                                                                                         <div
                                                                                             class="d-flex align-items-start">
-                                                                                            <p id="quantity-{{$dish->id}}" class="item-name pe-2">{{$dish->qty}}</p>
-                                                                                            <p class="d-inline-block item-name mb-0"
+                                                                                            <p id="quantity-{{$dish->id}}" class="item-name pe-2 mb-0">{{$dish->qty}}</p>
+                                                                                            <p class="d-inline-block item-name mb-0 text-decoration-underline"
                                                                                                 onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
                                                                                                 {{ $dish->dish->name }}
                                                                                             </p>

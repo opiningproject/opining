@@ -53,14 +53,17 @@
                                 $addressText = trans('modal.address.deliver_here');
                                 $style = '';
                                 $selectedAddress = '<span class="success-ico blank"></span>';
+                                $selected = false;
 
                                 if (session('address') == $add->id) {
+                                    $selected = true;
+
                                     $addressText = 'Selected';
                                     $selectedAddress = '<span class="success-ico"><img src="' . asset("images/success-icon.svg") . '" class="svg" width="14" height="11"></span>';
                                     $style = 'style=pointer-events:none;cursor:default';
                                 }
                                 ?>
-                                <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10 mt-2 total-addresses"  id="address-{{ $add->id }}">
+                                <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10 mt-2 total-addresses mb-3"  id="address-{{ $add->id }}">
                                     <div class="card card-body h-100 address-card address-card-ui">
                                         <div class="d-flex  justify-content-between align-items-start">
                                             <p class="mb-0">{{ $add->company_name }} {{ $add->house_no }},
@@ -73,7 +76,7 @@
                                                 </a>
 
                                                 @if(count($addresses) > 1)
-                                                <a class="btn-icon ms-2 p-2 delete-address" onclick="deleteAddress({{ $add->id }})">
+                                                <a class="btn-icon ms-2 p-2 delete-address {{ $selected  == true ? 'd-none' : '' }}" onclick="deleteAddress({{ $add->id }})">
                                                     <i class="fa-regular fa-trash-can"></i>
                                                 </a>
                                                 @endif

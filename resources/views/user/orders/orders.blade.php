@@ -17,7 +17,7 @@
                 @include('layouts.user.side_nav_bar')
                 <main class="bd-main order-1">
                     <div class="main-content">
-                        <div class="section-page-title main-page-title row justify-content-between d-sm-block">
+                        <div class="section-page-title main-page-title row justify-content-between d-sm-block title-mobile">
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                                 <h1 class="page-title">{{ trans('user.my_orders.title') }}</h1>
                             </div>

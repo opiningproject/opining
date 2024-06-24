@@ -330,15 +330,15 @@
                                                 <div class="tab-pane fade {{ !$zipcode ? 'show active' : '' }}"
                                                     id="pills-profile" role="tabpanel"
                                                     aria-labelledby="pills-profile-tab" tabindex="0">
-                                                    <div class="form-group addressMobile mb-3">
+                                                    <div class="form-group addressMobile mb-3 cart-address-row flex-wrap w-100">
                                                         <label
-                                                            class="form-label mb-1">{{ trans('user.cart.rest_address') }}</label>
-                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            class="form-label mb-0">{{ trans('user.cart.rest_address') }}</label>
+                                                        <div class="d-flex align-items-center justify-content-center flex-full">
                                                             <div class="d-flex align-items-start address-field">
                                                                 <img src="{{ asset('images/rest-address.svg') }}"
-                                                                    alt="" class="svg" height="20"
-                                                                    width="20">
-                                                                <p class="mb-0 d-inline-block text-bold-1 mt-0 ms-2">
+                                                                    alt="" class="svg" height="16"
+                                                                    width="16">
+                                                                <p class="mb-0 d-inline-block mt-0 ms-2">
                                                                     {{ getRestaurantDetail()->rest_address }} </p>
                                                             </div>
                                                         </div>
@@ -520,13 +520,13 @@
                                                                 <div
                                                                     class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
                                                                     <span class="input-group-icon">
-                                                                        <img src="{{ asset('images/coupon-code.svg') }}"
+                                                                        <img src="{{ asset('images/coupon-gray.svg') }}"
                                                                             alt="" class="svg img-fluid"
                                                                             height="18" width="29">
                                                                     </span>
                                                                     <input type="text"
                                                                         class="form-control bg-white custom-control-with-icon ps-5 dashed-border"
-                                                                        style="padding-right: 95px"
+                                                                        style="padding-right: 115px"
                                                                         placeholder="Coupon Code"
                                                                         value="{{ $couponCode }}"
                                                                         {{ !empty($couponCode) ? 'readonly' : '' }}

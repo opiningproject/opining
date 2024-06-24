@@ -5577,7 +5577,7 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-sidebar .bill-detail-invoice table {margin: 0px;}
 .cart-sidebar .bill-detail-invoice table tr td {padding: 1px 5px;font-size: 14px;}
 .cart-sidebar .bill-detail-invoice table tr td * {font-size: 14px;}
-.cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn {border-radius: 60px;}
+.cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn {border-radius: 10px;}
 .cartSidebarCustom .bill-detail-invoice {border-top: 0px solid #d5d5d5 !important;}
 .cart-sidebar .bill-detail-invoice table tfoot tr td, .cart-sidebar .bill-detail-invoice table tfoot tr td .bill-total-count {font-size: 18px;}
 .cart-sidebar .bill-detail-invoice table tbody tr:nth-last-child(2) td {padding-bottom: 10px;}
@@ -5621,6 +5621,11 @@ footer .footer-logo a {font-size: initial !important;}
 }
 
 footer .m-title {font-weight: 500;margin-bottom: 15px !important;}
+
+form .form-control, form .form-select {
+font-family: "SebinoRegular", sans-serif;
+font-size: 14px;
+}
 
 @media (max-width: 1800px) {
   .coupon-card-row .coupon-row-grid {margin: 0px -10px;}
@@ -5687,7 +5692,7 @@ footer {padding: 36px 20px 20px 20px;}
 }
 
 @media (max-width: 575px) {
-  .checkout-section .checkout-btn-sticky {height: 52px;display: flex !important;justify-content: center;align-items: center;text-align: center;border-radius: 9999px;position: fixed;bottom: 10px;width: 100% !important;max-width: calc(100% - 40px);margin: 0px auto;z-index: 1;left: 0px;right: 0px;}
+  .checkout-section .checkout-btn-sticky {height: 52px;display: flex !important;justify-content: center;align-items: center;text-align: center;border-radius: 16px;position: fixed;bottom: 10px;width: 100% !important;max-width: calc(100% - 40px);margin: 0px auto;z-index: 1;left: 0px;right: 0px;}
   .mobile-scrolllable-content {height: 100vh;max-height: 90vh;overflow: auto;}
   .custom-card-mobile-toggle .radio-flex-row {flex-direction: column;gap: 0;}
   .custom-card-mobile-toggle .radio-flex-row .radio {margin-bottom: 0px;padding: 15px;overflow: hidden;}

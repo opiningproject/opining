@@ -43,7 +43,8 @@
                                         <input type="password" class="form-control ps-5 text-indent-initial" name="password" placeholder="{{ trans('rest.auth.password') }}" id="password"  value="{{ old('password') }}" autocomplete="off">
 
                                         <span class="input-group-icon passwordeye-icon view-pwd-icon">
-                                            <img src="{{ asset('images/passwordeye-icon.svg') }}" class="svg" width="21" height="19">
+                                            <img src="{{ asset('images/passwordeye-icon.svg') }}" class="svg d-none show-password"  width="21" height="19"/>
+                                            <img src="{{ asset('images/passwordeye-open.svg') }}"  class="svg hide-password"  width="21" height="19"/>
                                         </span>
                                     </div>
                                     @error('password')
@@ -138,6 +139,9 @@
                 } else {
                     $('#password').attr('type', 'text')
                 }
+
+                $('.hide-password').toggleClass('d-none');
+                $('.show-password').toggleClass('d-none');
             })
 
             $('#resendPasswordModal').on('hidden.bs.modal', function () {

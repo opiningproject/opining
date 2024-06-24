@@ -51,6 +51,9 @@ $(function () {
         } else {
             $('.login-pwd-icon').attr('type', 'text')
         }
+
+        $('.hide-password').toggleClass('d-none');
+        $('.show-password').toggleClass('d-none');
     })
 
     $('#resendPasswordModal').on('hidden.bs.modal', function () {

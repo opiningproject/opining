@@ -37,8 +37,15 @@ if(isDesktopView()) {
                 .map((x) => (x.charAt(0).toUpperCase() + x.slice(1)))
                 .join(" ");
 
-                $(".success-ico.success-address").hide();
-                $("#deliviery-address-error").text("Please fill " + ret.toLowerCase() +" in address detail.");
+                if(element[0].id == 'phone_no') {
+
+                    let phone_error = element[0].value == '' ? "Please fill " + ret.toLowerCase() +" in address detail." : error[0].outerText;
+                    $(".success-ico.success-address").hide();
+                    $("#deliviery-address-error").text(phone_error);
+                } else {
+                    $(".success-ico.success-address").hide();
+                    $("#deliviery-address-error").text("Please fill " + ret.toLowerCase() +" in address detail.");
+                }
                 return false
             } else {
                 $("#deliviery-address-error").text("");

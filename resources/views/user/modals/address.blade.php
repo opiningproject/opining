@@ -65,15 +65,15 @@
                                 ?>
                                 <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 mobile-mb-10 mt-2 total-addresses mb-3"  id="address-{{ $add->id }}">
                                     <div class="card card-body h-100 address-card address-card-ui">
-                                        <div class="d-flex  justify-content-between align-items-start">
-                                            <p class="mb-0">{{ $add->company_name }} {{ $add->house_no }},
+                                        <div class="d-flex  justify-content-start align-items-center">
+                                            <a href="javascript:void(0);" class="position-relative d-flex select-address-btn selected-address" id="selected-address-{{ $add->id }}" data-selected-address="{{session('address')}}">
+                                                {!! $selectedAddress !!}
+                                            </a>
+                                            <p class="mb-0 ps-3">{{ $add->company_name }} {{ $add->house_no }},
                                                 {{ $add->street_name }} <br/>{{ $add->city }} {{ $add->zipcode }}</p>
-                                            <div class="d-flex align-items-center justify-content-end ps-3 align-items-center">
+                                            <div class="d-flex align-items-center justify-content-end ps-3 align-items-center ms-auto">
                                                 {{-- <a href="javascript:void(0);" class="btn btn-xs-sm btn-custom-yellow text-capitalize select-address-btn" {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a> --}}
                                          
-                                                <a href="javascript:void(0);" class="position-relative d-flex select-address-btn selected-address" id="selected-address-{{ $add->id }}" data-selected-address="{{session('address')}}">
-                                                    {!! $selectedAddress !!}
-                                                </a>
 
                                                 @if(count($addresses) > 1)
                                                     <a class="btn-icon ms-2 p-2 delete-address {{ $selected  == true ? 'd-none' : '' }}" onclick="deleteAddress({{ $add->id }})">

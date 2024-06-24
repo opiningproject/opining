@@ -283,7 +283,7 @@
                                                     tabindex="0">
 
                                                     <div class="text-center d-flex justify-content-center">
-                                                        <div class="cart-address-row"  style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addressChangeModal">
+                                                        <div class="cart-address-row w-100"  style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addressChangeModal">
                                                             <img src="{{ asset('images/delivery-address.svg') }}"
                                                                 alt="" class="svg" height="20"
                                                                 width="20" />
@@ -526,7 +526,7 @@
                                                                     </span>
                                                                     <input type="text"
                                                                         class="form-control bg-white custom-control-with-icon ps-5 dashed-border"
-                                                                        style="padding-right: 115px"
+                                                                        style="padding-right: 115px; box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);"
                                                                         placeholder="Coupon Code"
                                                                         value="{{ $couponCode }}"
                                                                         {{ !empty($couponCode) ? 'readonly' : '' }}

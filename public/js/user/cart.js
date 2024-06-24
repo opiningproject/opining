@@ -27,7 +27,9 @@ $(function () {
 
                 if (response.status == 200) {
                     if (type == '1') {
-                        $('#addressChangeModal').modal('show')
+
+                        // Hide as per client feeedback June CR points
+                        // $('#addressChangeModal').modal('show')
                     }
                 } else {
                     // alert(response.message);

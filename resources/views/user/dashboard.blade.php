@@ -330,7 +330,7 @@
                                                 <div class="tab-pane fade {{ !$zipcode ? 'show active' : '' }}"
                                                     id="pills-profile" role="tabpanel"
                                                     aria-labelledby="pills-profile-tab" tabindex="0">
-                                                    <div class="form-group addressMobile mb-3 cart-address-row flex-wrap">
+                                                    <div class="form-group addressMobile mb-3 cart-address-row flex-wrap w-100">
                                                         <label
                                                             class="form-label mb-0">{{ trans('user.cart.rest_address') }}</label>
                                                         <div class="d-flex align-items-center justify-content-center flex-full">

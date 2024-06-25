@@ -66,7 +66,8 @@ class HomeController extends Controller
         }
 
         if(count($dishes->get()) > 0){
-            $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
+            $dishes = ($request->all) ? $dishes->get() : $dishes->get();
+            // $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
         }else{
             $dishes = [];
 

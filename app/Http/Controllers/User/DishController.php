@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\IngredientCategory;
 use App\Models\Order;
@@ -332,4 +333,21 @@ class DishController extends Controller
 
         return response::json(['status' => 1, 'data' => $html]);
     }
+
+    function getDishes(Request $request,$cat_id) 
+    {
+
+      if ($cat_id) { 
+
+        $category = Category::find($cat_id);
+
+        $dishes = Dish::with(['favorite','category'])->where('category_id', $cat_id);
+    
+        $dishesHTML = view('user.dish.dish-list', ['dishes' => $dishes->get()])->render();
+
+        return response()->json(['status' => 1, 'data' =>  $dishesHTML,'cat_name' => $category->name]);
+
+      }
+    }
+    
 }

@@ -51,9 +51,11 @@ $(function (){
         $(window).scrollTop(0);
     })
 })
+
+var swiper = '';
 $(document).ready(function () {
 
-    var swiper = new Swiper(".category-swiper-slider", {
+    swiper = new Swiper(".category-swiper-slider", {
         slidesPerView: 3,
         spaceBetween: 6,
         // loop: true,
@@ -176,3 +178,44 @@ $(document).ready(function () {
 
 });
 
+  function activateSlide(categoryId) {
+
+    // Find the index of the slide with the given category ID
+    var slideIndex = $('.swiper-slide[data-category-id="' + categoryId + '"]').index();
+    // Check if the slide index is valid
+    if (slideIndex >= 0) {
+        // Use Swiper's slideTo method to make the specific slide active
+        swiper.slideTo(slideIndex);
+        
+        // Remove active class from all slides
+        $('.swiper-slide').removeClass('selected-cart-active swiper-slide-active');
+        
+        // Add active class to the selected slide
+        $('.swiper-slide[data-category-id="' + categoryId + '"]').addClass('selected-cart-active swiper-slide-active');
+    }
+}
+
+
+function getDishes(catId) {
+        
+    if(!catId) {
+        catId = $('#view-all-dishes').attr('data-category-id');
+    }
+    $.ajax({
+        url: `${baseURL}/get-dishes/${catId}`,
+        type: 'GET',
+        success: function (response) {
+          
+            activateSlide(catId);
+            window.history.pushState('',app_name, '/user/dashboard/'+catId);
+            
+            // update view all button attribute id
+            $('#view-all-dishes').attr('data-category-id',catId);
+        
+            $('.section-title.dish-list').text(response.cat_name)
+            $('.dish-details-div').html(response.data)
+        },
+        error: function (response) {}
+    })
+
+}

@@ -82,12 +82,12 @@ class CouponController extends Controller
         if (!empty($coupon)) {
             $user = Auth::user();
 
-            $usedCoupon =  $userCoupon = $user->coupons()->where([
+            $usedCoupon = $user->coupons()->where([
                 ['coupon_id', $coupon->id],
-                ['is_redeemed', '1'],
+                ['is_redeemed', '0'],
             ])->first();
     
-            if($usedCoupon) {
+            if(!$usedCoupon) {
                 return Response::json([
                     'status' => 401,
                     'message' => trans('user.coupons.not_applicable'),

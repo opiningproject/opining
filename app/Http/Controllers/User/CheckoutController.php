@@ -12,6 +12,7 @@ use App\Notifications\User\OrderAccepted;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\CouponTransaction;
 use App\Models\Dish;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +69,6 @@ class CheckoutController extends Controller
 
             $serviceCharges = getRestaurantDetail()->service_charge;
             $cartTotal = getCartTotalAmount();
-
             $deliveryCharges = 0.00;
             $couponDiscount = 0.00;
             $pointsRedeemed = 0;
@@ -169,16 +169,26 @@ class CheckoutController extends Controller
 
                 if(!empty($user->cart->coupon)){
 
-                    if(is_null($user->cart->coupon->points)){
-                        $user->coupons()->create([
-                            'coupon_id' => $user->cart->coupon_id,
-                            'is_redeemed' => '1'
-                        ]);
-                    }else{
-                        $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                    $couponTransaction = CouponTransaction::where('coupon_id',$user->cart->coupon_id)
+                        ->where('user_id',$user->id)->where('is_redeemed','0')->first();
+
+                    if(!empty($couponTransaction)) {
+                        $couponTransaction->update([
                             'is_redeemed' => '1'
                         ]);
                     }
+
+                    // Commented as per new coupon flow June CR Points
+                    // if(is_null($user->cart->coupon->points)){
+                    //     $user->coupons()->create([
+                    //         'coupon_id' => $user->cart->coupon_id,
+                    //         'is_redeemed' => '1'
+                    //     ]);
+                    // }else{
+                    //     $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                    //         'is_redeemed' => '1'
+                    //     ]);
+                    // }
                 }
 
                 $user->cart->dishDetails()->update([
@@ -230,9 +240,20 @@ class CheckoutController extends Controller
                     ]);
 
                     if(!empty($user->cart->coupon)){
-                        $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
-                            'is_redeemed' => '1'
-                        ]);
+
+                        $couponTransaction = CouponTransaction::where('coupon_id',$user->cart->coupon_id)
+                        ->where('user_id',$user->id)->where('is_redeemed','0')->first();
+
+                        if(!empty($couponTransaction)) {
+                            $couponTransaction->update([
+                                'is_redeemed' => '1'
+                            ]);
+                        }
+
+                        // Commented as per new coupon flow June CR Points
+                        // $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                        //     'is_redeemed' => '1'
+                        // ]);
                     }
 
                     $user->cart->update([
@@ -309,9 +330,21 @@ class CheckoutController extends Controller
                 ]);
 
                 if(!empty($user->cart->coupon)){
-                    $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
-                        'is_redeemed' => '1'
-                    ]);
+
+                    $couponTransaction = CouponTransaction::where('coupon_id',$user->cart->coupon_id)
+                    ->where('user_id',$user->id)->where('is_redeemed','0')->first();
+
+                    if(!empty($couponTransaction)) {
+                        $couponTransaction->update([
+                            'is_redeemed' => '1'
+                        ]);
+                    }
+
+
+                    // Commented as per new coupon flow June CR Points
+                    // $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                    //     'is_redeemed' => '1'
+                    // ]);
                 }
 
                 $user->cart->update([
@@ -392,9 +425,21 @@ class CheckoutController extends Controller
                         ]);
 
                         if(!empty($user->cart->coupon)){
-                            $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
-                                'is_redeemed' => '1'
-                            ]);
+
+
+                            $couponTransaction = CouponTransaction::where('coupon_id',$user->cart->coupon_id)
+                            ->where('user_id',$user->id)->where('is_redeemed','0')->first();
+        
+                            if(!empty($couponTransaction)) {
+                                $couponTransaction->update([
+                                    'is_redeemed' => '1'
+                                ]);
+                            }
+
+                            // Commented as per new coupon flow June CR Points
+                            // $user->coupons()->where('coupon_id', $user->cart->coupon_id)->update([
+                            //     'is_redeemed' => '1'
+                            // ]);
                         }
 
                         $user->cart->update([

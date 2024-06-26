@@ -7150,7 +7150,7 @@ form .form-select {
 
 .card.food-detail-card .btn-custom-yellow>svg {
   position: relative;
-  /* top: -1px; */
+  top: -1px;
 }
 
 @media (max-width: 1800px) {

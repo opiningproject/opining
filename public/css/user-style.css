@@ -192,6 +192,8 @@ body {
   color: var(--theme-dark1);
   padding-right: 0 !important;
   height: 100vh;
+  line-height: 1.5;
+  /* font-family: "SebinoRegular" !important; */
 }
 
 ::-webkit-scrollbar {
@@ -418,6 +420,7 @@ a {
   letter-spacing: 0.19px;
   padding: 10px 12px;
   border-radius: 16px;
+  line-height: initial;
 }
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active,
@@ -4836,7 +4839,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cart-amount-cal-data .prev-input-group .input-group-icon>img, .tab-pane form .input-group-icon>img, .cart-amount-cal-data .prev-input-group .input-group-icon svg, .tab-pane form .input-group-icon svg, form .prev-input-group .input-group-icon img, form .prev-input-group .input-group-icon svg {height: 100%;object-fit: contain;object-position: center;}
 .modal-dialog.custom-w-441px {margin-left: auto;margin-right: auto;}
 .dashed-border {border-style: dashed !important;}
-.category-list-section .category-list-item-grid .food-detail-card .btn-custom-yellow {line-height: initial;padding-bottom: 2px;min-width: 115px;width: auto;display: inline-flex;align-items: center;justify-content: center;column-gap: 3px;}
+.category-list-section .category-list-item-grid .food-detail-card .btn-custom-yellow {line-height: initial;padding-bottom: 2px;min-width: 115px;width: auto;display: inline-flex;align-items: center;justify-content: center;column-gap: 4px;}
 .category-list-section .food-detail-card .customize-foodlink {margin-top: 12px;}
 
 .mobileStaticToggle {position: relative;cursor: pointer;display: none;}
@@ -5121,7 +5124,7 @@ border-color: #FFC00B !important;
 .cart-section .cart-items .foodqty .count {min-width: 40px !important;width: 40px !important;font-size: 13px !important;}
 .cart-section .cart-items .foodqty {justify-content: center;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {padding-top: 60px !important;}
-.cartSidebarCustom .cartoffCanvas .offcanvas-body .head-title {position: fixed !important;left: initial !important;right: 0px !important;text-align: center !important;max-width: 400px;width: 100%;z-index: 2;background: #ffffff;top: 5px !important;}
+.cartSidebarCustom .cartoffCanvas .offcanvas-body .head-title {position: fixed !important;left: initial !important;right: 0px !important;text-align: center !important;max-width: 400px;width: 100%;z-index: 2;background: #ffffff;top: 0px !important;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 0px !important;right: 370px !important;left: initial;}
 
 .customisable-modal-body .modal-footer-sticky .qty-col {
@@ -5627,6 +5630,11 @@ font-family: "SebinoRegular", sans-serif;
 font-size: 14px;
 }
 
+.card.food-detail-card .btn-custom-yellow>svg {
+  position: relative;
+  top: -1px;
+}
+
 @media (max-width: 1800px) {
   .coupon-card-row .coupon-row-grid {margin: 0px -10px;}
   .coupon-card-row .coupon-row-grid .coupon-col {margin-bottom: 20px;padding: 0px 10px;}
@@ -5668,7 +5676,7 @@ font-size: 14px;
 .colleting-points h5 {font-size: 18px;}
 .colleting-points h3 {font-size: 14px;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .head-title.top-head-title {border-bottom: 0px;padding: 20px 0px !important;}
-.cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 15px !important;right: 330px !important;left: initial;width: 30px;height: 30px;background: #ffffff;border-radius: 9999px;box-shadow: 0px 1px 8px 2px rgba(0, 0, 0, 0.08);margin: 0px !important;}
+.cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 12px !important;right: 330px !important;left: initial;width: 30px;height: 30px;background: #ffffff;border-radius: 9999px;box-shadow: 0px 1px 8px 2px rgba(0, 0, 0, 0.08);margin: 0px !important;}
 .custom-tabs.cart-tab .nav .nav-link {padding: 6px 10px;}
 .main-content .cart-navbar-toggler-inn {top: -8px;position: relative;right: 0px;background: transparent;border-radius: 9999px;}
 #addressChangeModal .modal-title {font-size: 18px !important;}

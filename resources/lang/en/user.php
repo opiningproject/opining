@@ -203,6 +203,9 @@ return [
         'unused' => 'Unused',
         'expired' => 'Expired',
 		'redeemed_points' => 'You have redeemed this coupon',
+		'earned_points' => ':points',
+		'free_points' => 'FREE',
+
 
 	],
 

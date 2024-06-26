@@ -120,39 +120,47 @@
                                             <div class="accordion discount-coupon-accordian" id="accordionExample">
                                                 @foreach($coupons as $key => $coupon)
                                         
-                                                <?php $lockedCoupon = ''; ?>
-                                                @if(isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1')
-                                                <?php $lockedCoupon = 'disabled-coupon'; ?>
-                                                @elseif((isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '0'))
-                                                <?php $lockedCoupon = 'disabled-coupon'; ?>
-                                                @elseif($user->collected_points >= $coupon->points)
-                                                <?php $lockedCoupon = ''; ?>
-                                                @else
-                                                    <?php $lockedCoupon = 'disabled-coupon'; ?>
-                                                @endif
-                                            
                                                 @php 
+
                                                 $givenDate = $coupon->end_expiry_date; // example given date
 
-                                                // Create DateTime objects for the given date and the current date
-                                                $givenDateTime = new DateTime($givenDate);
-                                                $currentDateTime = new DateTime();
+                                                // Current date
+                                                $currentDate = new DateTime();
 
-                                                // Calculate the difference between the given date and the current date
-                                                $interval = $currentDateTime->diff($givenDateTime);
+                                                // Convert the target date to a DateTime object
+                                                $expirationDate = new DateTime($givenDate);
 
-                                                // Get the difference in days
+                                                // Calculate the difference between the two dates
+                                                $interval = $currentDate->diff($expirationDate);
+
+                                                // Get the number of days left
                                                 $daysLeft = $interval->days;
-                                                $hoursLeft = $interval->h;
 
-                                                if ($daysLeft == 0 && $hoursLeft > 0) {
-                                                    $daysLeft = 1;
+                                                $leftDays = '';
+
+                                                // Check if the target date is in the future
+                                                if ($expirationDate > $currentDate) {
+                                                    // Check if the difference is less than 1 day (but not zero)
+                                                    if ($interval->invert == 0 && $interval->days == 0 && $currentDate->format('Y-m-d') != $expirationDate->format('Y-m-d')) {
+                                                        $leftDays = '<label>1 DAY LEFT</label>';
+                                                    } else {
+                                                        $leftDays = '<label>'.$daysLeft.' DAYS LEFT</label>';
+                                                    }
                                                 }
-
+                                        
                                                 @endphp
+
+                                                <?php $lockedCoupon = ''; ?>
+                                                                    
+                                                @if($user->collected_points < $coupon->points)
+                                                    <?php $lockedCoupon = 'disabled-coupon'; ?>
+                                                @elseif($currentDate->format('Y-m-d') == $expirationDate->format('Y-m-d'))
+                                                    <?php $lockedCoupon = 'disabled-coupon'; ?>
+                                                @endif
+
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
-                                                        <button class="accordion-button" type="button"
+                                                        <button class="accordion-button {{ $key == 0 ? 'collapsed' : '' }}" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#coupon-collapse-{{ $coupon->id }}"
                                                             aria-expanded="true" aria-controls="coupon-collapse-{{ $coupon->id }}">
                                                             <div class="acc-header">
@@ -161,14 +169,12 @@
                                                                 </div>
                                                                 <div class="con-title">
                                                                     <h3 class="mb-1">{{ $coupon->percentage_off }}% discount coupon</h3>
-                                                                    @if(($coupon->couponTransaction || is_null($coupon->points)) && (isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '1'))
-                                                                        <p class="mb-0 d-inline-block">{{ trans('user.coupons.redeemed_points') }}</p>
-                                                                    @elseif((isset($coupon->couponTransaction) && $coupon->couponTransaction->is_redeemed == '0'))
-                                                                        <p class="mb-0 d-inline-block">{{ trans('user.coupons.redeemed_points') }}</p>
-                                                                    @elseif(!empty($lockedCoupon))
-                                                                    <p class="mb-0 d-inline-block">{{ trans('user.coupons.earn_points',['points' => $coupon->points]) }}</p>
-                                                                    @elseif($daysLeft < 4)
-                                                                        <p class="mb-0 d-flex align-items-center free-coins"> <label> {{ $daysLeft === 1 ? "1" : "$daysLeft"; }} DAY LEFT</label></p>
+                                                                    @if($user->collected_points < $coupon->points)
+                                                                    <p class="mb-0 d-flex align-items-center free-coins">{{ trans('user.coupons.earn_points',['points' => $coupon->points]) }} {!!$leftDays!!}</p>
+                                                                    @elseif($coupon->points > 0)
+                                                                        <p class="mb-0 d-flex align-items-center free-coins">{{ trans('user.coupons.earned_points',['points' => $coupon->points]) }} Points {!!$leftDays!!}</p>
+                                                                    @elseif($coupon->points == 0)
+                                                                        <p class="mb-0 d-flex align-items-center free-coins">{{ trans('user.coupons.free_points') }} {!!$leftDays!!}</p>
                                                                     @endif
                                                                   
                                                                 </div>

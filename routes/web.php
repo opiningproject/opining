@@ -78,6 +78,7 @@ Route::middleware(['localization'])->group(function () {
     Route::post('/validateZipcode', [App\Http\Controllers\User\AddressController::class, 'validateZipcode']);
     Route::post('/takeawayPhone', [App\Http\Controllers\User\AddressController::class, 'takeawayPhone']);
     Route::post('/dish/searchDish', [DishController::class, 'searchDish']);
+    Route::get('/get-dishes/{cat_id}', [App\Http\Controllers\User\DishController::class, 'getDishes']);
 
 });
 

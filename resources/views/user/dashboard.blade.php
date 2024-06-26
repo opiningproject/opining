@@ -107,7 +107,7 @@
                                                 }
                                             }
                                             ?>
-                                            <div class="category-element swiper-slide {{ $selected }}">
+                                            <div class="category-element swiper-slide {{ $selected }}" data-category-id={{$cat->id }}>
                                                 <div class="card">
                                                     <span class="dish-item-icon">
                                                         <img src="{{ $cat->image }}" class="img-fluid svg" alt="bakery"
@@ -116,8 +116,9 @@
                                                     <p class="mb-0 text-truncate text-muted" title="{{ $cat->name }}">
                                                         {{ $cat->name }}
                                                     </p>
-                                                    <a href="{{ route('user.dashboard', ['cat_id' => $cat->id]) }}"
-                                                        class="stretched-link"></a>
+                                                        <a href="javascript:void(0)" onclick="getDishes({{ $cat->id }})"
+                                                            {{-- <a href="{{ route('user.dashboard', ['cat_id' => $cat->id]) }}" --}}
+                                                                class="stretched-link"></a>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -129,7 +130,7 @@
                         <!-- start category list section -->
                         <section class="custom-section category-list-section pb-0 scrollable-tap">
                             <div class="section-page-title">
-                                <h1 class="section-title">{{ $category ? $category->name : '' }}</h1>
+                                <h1 class="section-title dish-list">{{ $category ? $category->name : '' }}</h1>
                                 <!--                            <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">{{ trans('user.button.view_all') }}
                                                                                 <span>
                                                                                     <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
@@ -683,5 +684,8 @@
 @endsection
 
 @section('script')
+<script>
+    var app_name = '{!! env('APP_NAME') !!}'
+</script>
     <script type="text/javascript" src="{{ asset('js/user/dashboard.js') }}"></script>
 @endsection

@@ -44,8 +44,12 @@ $(document).on('click', '#change-order-status-btn', function ()
         url: baseURL+'/orders/change-status/'+ id,
         type: 'GET',
         success: function (response) {
-            window.location.replace(baseURL + '/orders/'+id+'#order-'+id)
-            setTimeout(() => { document. location. reload(); }, 1000);
+            $('.foodorder-box-details').html(response);
+
+            $(".foodorder-box-list div").removeClass("active");
+            $('#order-' + id).addClass('active');
+            window.history.pushState('','', baseURL + '/orders/'+id+'#order-'+id);
+            $('#changeStatusModal').modal('hide');
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

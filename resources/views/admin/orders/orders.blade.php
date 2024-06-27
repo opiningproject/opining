@@ -26,9 +26,9 @@
                                     <input type="text" class="form-control" id="search-order" placeholder="Search">
                                 </div>
                           
-                                <form class="form col" action="{{ 'invoice' }}" method="#">
+                                <form class="form col" action="" method="#">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Select Date For Filter" class="form-control" id="expiry_date" aria-label="dateofbirth" aria-describedby="basic-addon1" name="expiry_date" required>
+                                        <input type="text" placeholder="Select Date For Filter" class="form-control" id="expiry_date" aria-label="expiry_date" name="expiry_date" required>
                                     </div>
                                 </form>
                                </div>

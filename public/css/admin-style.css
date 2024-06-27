@@ -68,6 +68,48 @@ color:  #212529 !important;
     /*border-color: #FFC00B;*/
 }
 
+.foodorder-box-list-top {
+    position: relative;
+    padding-top: 80px !important;
+}
+
+.foodorder-box-list-top .fixed-tab-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    right: 0px;
+    top: 10px;
+    padding: 10px 22px;
+}
+
+.foodorder-box-list-top .fixed-tab-buttons .btn-tap {
+    flex: 0 0 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 40px;
+    padding: 5px;
+    background: #ffffff;
+    color: #292929;
+    box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.07);
+    border: 0px;
+    outline: none;
+}
+.foodorder-box-list-top .fixed-tab-buttons .btn-tap.active {
+    background: #FFC00B;
+    color: #ffffff;
+}
+
+
 
 
 @media screen and (max-width: 1600px) {

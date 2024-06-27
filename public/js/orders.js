@@ -90,8 +90,8 @@ window.location.href = `${baseURL}/orders`;
  var endDate = getUrlParameter('end_date');
 
 if (startDate && endDate) {
-    $('#expiry_date').data('daterangepicker').setStartDate(moment(startDate, 'MM/DD/YYYY'));
-    $('#expiry_date').data('daterangepicker').setEndDate(moment(endDate, 'MM/DD/YYYY'));
+    $('#expiry_date').data('daterangepicker').setStartDate(moment(startDate, 'DD-MM-YYYY'));
+    $('#expiry_date').data('daterangepicker').setEndDate(moment(endDate, 'DD-MM-YYYY'));
     $('#expiry_date').val(startDate + ' - ' + endDate);
 }
 
@@ -104,7 +104,7 @@ function getUrlParameter(name) {
 }
 
 
-document.getElementById('toggleOrderList').addEventListener('click', function() {
+$(document).on('click', '#toggleOrderList', function () {
     const orderList = document.getElementById('orderList');
     const upArrow = this.querySelector('.uparrowOrderList');
     const downArrow = this.querySelector('.downarrowOrderList');
@@ -121,9 +121,9 @@ document.getElementById('toggleOrderList').addEventListener('click', function() 
     }
 
     orderList.classList.toggle('collapsed');
-});
+})
 
-document.getElementById('toggleTotal').addEventListener('click', function() {
+$(document).on('click', '#toggleTotal', function () {
     const orderList = document.getElementById('totalList');
     const upArrow = this.querySelector('.uparrowTotal');
     const downArrow = this.querySelector('.downarrowTotal');
@@ -143,4 +143,4 @@ document.getElementById('toggleTotal').addEventListener('click', function() {
     }
 
     orderList.classList.toggle('collapsed');
-});
+})

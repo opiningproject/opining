@@ -91,8 +91,7 @@ class OrdersController extends Controller
 //            $this->sendMail($order);
         }
 
-        return response::json(['status' => 1, 'message' => '']);
-
+        return view('admin.orders.order-detail', ['order' => $order]);
     }
 
     public function sendMail($order)

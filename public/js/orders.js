@@ -50,6 +50,7 @@ var dateRange =''
 $('#expiry_date').daterangepicker({
     startDate: start,
     endDate: end,
+    maxDate: moment(),
     ranges: {
        'Today': [moment(), moment()],
        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],

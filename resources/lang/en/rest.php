@@ -225,7 +225,7 @@ return [
 		'date_time' => 'Date & Time',
 		'order_price' => 'Order Price',
 		'coupon' => 'Coupon',
-        'enter_coupon' => 'Please Enter coupon',
+        'enter_coupon' => 'Please enter coupon',
 	],
 
 	'user_chat' => [

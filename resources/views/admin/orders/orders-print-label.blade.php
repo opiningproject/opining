@@ -174,7 +174,7 @@
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.total') }}</p>
-                <p>€{{ $order->total_amount }}</p>
+                <p>€{{ round($order->total_amount, 2) }}</p>
             </div>
         </div>
     

@@ -23,7 +23,7 @@ use App\Enums\OrderType;
                     ?>
             @endif
         @endif
-        <div class="foodorder-box-list-item d-flex"
+        <div class="foodorder-box-list-item d-flex order-{{ $order->id }}"
              onclick="orderDetail({{ $order->id }})" id="order-{{ $order->id }}" data-id="{{ $order->id }}">
             <div class="details w-100 d-flex flex-column gap-3">
                 <div class="title">{{ trans('rest.food_order.order') }}

@@ -47,7 +47,7 @@ $(document).on('click', '#change-order-status-btn', function ()
             $('.foodorder-box-details').html(response);
 
             $(".foodorder-box-list div").removeClass("active");
-            $('#order-' + id).addClass('active');
+            $('.order-' + id).addClass('active');
             window.history.pushState('','', baseURL + '/orders/'+id+'#order-'+id);
             $('#changeStatusModal').modal('hide');
         },

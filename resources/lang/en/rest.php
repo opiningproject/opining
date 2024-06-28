@@ -21,6 +21,8 @@ return [
 		'my_finance' => 'My Finance',
 		'coupons' => 'Coupons',
 		'user_chat' => 'User Chat',
+		'open' => 'Open',
+        'all' => 'All',
 	],
 
 	'menu' => [
@@ -128,6 +130,11 @@ return [
 		'free_delivery' => 'Free Delivery',
 		'discount' => 'Item Discount',
 		'print' => 'Print Label',
+		'order_time' => 'Order Time',
+		'order_amount' => 'Amount',
+		'order_description' => 'Description',
+		'order_price' => 'Price',
+		'order_enjoy' => 'Enjoy your food!',
 
 		'read_more' => 'Read More',
 		'close' => 'Close',

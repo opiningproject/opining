@@ -19,7 +19,7 @@
                         <div
                             class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 foodorder-page-title">
                             <h1 class="page-title me-auto">{{ trans('rest.food_order.title') }}</h1>
-                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap">
+                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
                                     <div class="search-has col">
                                         <span class="fa fa-search form-control-feedback"></span>
@@ -63,13 +63,47 @@
                         <div class="foodorder-box d-flex">
                             <div class="foodorder-box-list-wrp bg-white foodorder-box-list-top">
 
-                                <div class="fixed-tab-buttons">
-                                    <button class="btn-tap active">Open</button>
-                                    <button class="btn-tap">All</button>
+
+                                <div class="customize-tab coupons-tab">
+                                    <div class="fixed-tab-buttons border-0 flex-nowrap" id="pills-tab" role="tablist">
+                                        <button class="btn-tap" id="open-orders-tab" data-bs-toggle="pill" data-bs-target="#open-orders" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{ trans('rest.sidebar.open') }}</button>
+                                        <button class="btn-tap active" id="all-orders-tab" data-bs-toggle="pill" data-bs-target="#all-orders" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">{{ trans('rest.sidebar.all') }}</button>
+                                        
+                                    </div>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        @include('admin.orders.open')
+                                        @include('admin.orders.all')
+                                    </div>
                                 </div>
 
+                                  
+                                {{-- <div class="customize-tab coupons-tab">
+                                    <ul class="nav nav-tabs border-0 flex-nowrap" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="open-orders-tab" data-bs-toggle="tab"
+                                                data-bs-target="#open-orders-tab-pane" type="button" role="tab"
+                                                aria-controls="open-orders-tab-pane" aria-selected="false">
+                                                {{ trans('rest.sidebar.open') }}
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="all-orders-tab" data-bs-toggle="tab"
+                                                data-bs-target="#all-orders-tab-pane" type="button" role="tab"
+                                                aria-controls="all-orders-tab-pane"
+                                                aria-selected="false">{{ trans('rest.sidebar.all') }}
+                                            </button>
+                                        </li>
+                                    </ul>
 
-                                <div class="foodorder-box-list d-flex flex-column" id="order-list-data-div">
+                                    <div class="foodorder-box-list d-flex flex-column" id="order-list-data-div">
+                                        @include('admin.orders.open')
+                                        @include('admin.orders.all')
+                                    </div>
+                                </div> --}}
+
+
+
+                                {{-- <div class="foodorder-box-list d-flex flex-column" id="order-list-data-div">
 
                                    
 
@@ -111,7 +145,7 @@
                                     @else
                                         <span class="no-data">{{ trans('rest.food_order.no_order') }}</span>
                                     @endif
-                                </div>
+                                </div> --}}
                             </div>
 
                             @if (!empty($order))
@@ -179,7 +213,7 @@
                                                     </div>
                                                     <div class="text">
                                                         <span>{{ trans('rest.food_order.type') }}:
-                                                        </span>{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                                                        </span>{{ $order->order_type == OrderType::Delivery ?    trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
                                                     </div>
                                                 </div>
                                             </div>

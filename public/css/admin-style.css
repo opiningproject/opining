@@ -82,10 +82,10 @@ color:  #212529 !important;
     left: 0px;
     right: 0px;
     top: 10px;
-    padding: 10px 22px;
+    padding: 10px 35px 10px 22px;
 }
 
-.foodorder-box-list-top .fixed-tab-buttons .btn-tap {
+.foodorder-box-list-top .fixed-tab-buttons .btn-tap{
     flex: 0 0 calc(50% - 10px);
     max-width: calc(50% - 10px);
     display: flex;
@@ -256,3 +256,8 @@ background: #FFC00B !important;
 /*.category-section .category-slider .category-element.swiper-slide-admin-cart-active .card .dish-item-icon svg, .category-section .category-slider .category-element .card:hover .dish-item-icon svg{*/
 /*fill: #ffffff;*/
 /*}*/
+
+.disable-order-filters {
+    pointer-events: none;
+    opacity: 0.7;
+}

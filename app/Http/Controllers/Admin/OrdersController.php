@@ -38,6 +38,9 @@ class OrdersController extends Controller
     {
         $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
 
+        $openOrders = Order::where('is_cart', '0')->where('order_status',OrderStatus::Accepted)->whereDate('updated_at', Carbon::today())->orderBy('id', 'desc')->get();
+
+
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
        
@@ -69,8 +72,7 @@ class OrdersController extends Controller
                 $order = $orders[0];
             }
         }
-
-        return view('admin.orders.orders', ['orders' => $orders, 'order' => $order]);
+        return view('admin.orders.orders', ['openOrders' => $openOrders, 'allOrders' => $orders,'order' => $order]);
     }
 
     public function orderDetail(Request $request)
@@ -139,7 +141,7 @@ class OrdersController extends Controller
                         ->orWhere('house_no', 'like', '%' . $request->search . '%')
                         ->orWhere('street_name', 'like', '%' . $request->search . '%')
                         ->orWhere('city', 'like ', '%' . $request->search . '%');
-                })->orWhere('id', 'like', '%' . $request->search . '%');
+                })->orWhere('id', 'like', '%' . $request->search . '%')->where('is_cart', '0');
             }
 
             $orderListIds = $orders->pluck('id')->toArray();

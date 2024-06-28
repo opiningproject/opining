@@ -202,8 +202,19 @@ $userDetails = $order->orderUserDetails;
                 <div class="title">{{ trans('rest.food_order.order_list') }} :</div>
                 <div class="number">({{ count($order->dishDetails) }} x {{ trans('rest.food_order.items') }})</div>
             </div>
+            <button id="toggleOrderList"
+                class="bg-transparent border-0 d-flex align-items-center justify-content-center">
+                <img src="{{ asset('images/upward-arrow.svg') }}" alt="call"
+                    class="uparrowOrderList" class="img-fluid svg" width="17"
+                    height="10">
+
+                <img src="{{ asset('images/downward-arrow.svg') }}"
+                    class="downarrowOrderList" style="display: none !important;"
+                    alt="call" class="img-fluid svg" width="17"
+                    height="10">
+            </button>
         </div>
-        <div class="footer-box-main-orderlist-main d-flex flex-column">
+        <div class="footer-box-main-orderlist-main d-flex flex-column" id="orderList">
             <?php $itemTotalPrice = 0; ?>
             @foreach($order->dishDetails as $key => $dish)
                 <div class="footer-box-main-orderlist-main-item d-flex">
@@ -243,12 +254,19 @@ $userDetails = $order->orderUserDetails;
                 <div class="title">{{ trans('rest.food_order.total') }} :</div>
                 <div class="number">€{{ number_format(getOrderGrossAmount($order), 2) }}</div>
             </div>
-            <button class="bg-transparent border-0 d-flex align-items-center justify-content-center">
-                <img src="{{ asset('images/upward-arrow.svg') }}" alt="call" class="img-fluid svg" width="17"
-                     height="10">
-            </button>
+            <button id="toggleTotal"
+            class="bg-transparent border-0 d-flex align-items-center justify-content-center">
+            <img src="{{ asset('images/upward-arrow.svg') }}" alt="call"
+                class="uparrowTotal" class="img-fluid svg" width="17"
+                height="10">
+
+            <img src="{{ asset('images/downward-arrow.svg') }}"
+                class="downarrowTotal" style="display: none !important;"
+                alt="call" class="img-fluid svg" width="17"
+                height="10">
+        </button>
         </div>
-        <div class="footer-main-total-main">
+        <div class="footer-main-total-main" id="totalList">
             <div class="title">{{ trans('rest.food_order.bill_details') }}</div>
             <div class="text-grp d-flex flex-column gap-3">
                 <div class="text d-flex align-items-center justify-content-between gap-2">

@@ -145,7 +145,7 @@
             <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
 
             <div class="amount-description-price">
-                <p>{{count($order->dishDetails) }}x</p>
+                <p>{{$dish->qty }}x</p>
                 <p>{{ $dish->dish->name }} 
                     <br>
                    <span>{!! getOrderDishIngredients2($dish) !!}</span>
@@ -158,7 +158,7 @@
         
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.item_total') }}</p>
-                <p>€{{ getOrderGrossAmount($order) }}</p>
+                <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.service_charge') }}</p>

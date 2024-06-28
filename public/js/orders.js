@@ -14,7 +14,7 @@ $(function () {
             },
             datatype: 'json',
             success: function (response) {
-                $('#order-list-data-div').html(response)
+                $('#order-list-data-div1').html(response)
                 $('.foodorder-box-details ').html('')
             },
             error: function (response) {
@@ -33,7 +33,7 @@ function orderDetail(id) {
             $('.foodorder-box-details').html(response);
 
             $(".foodorder-box-list div").removeClass("active");
-            $('#order-' + id).addClass('active');
+            $('.order-' + id).addClass('active');
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message
@@ -144,4 +144,11 @@ $(document).on('click', '#toggleTotal', function () {
     }
 
     orderList.classList.toggle('collapsed');
+})
+
+$(document).on('click','#all-orders-tab', function() {
+    $('#order-dilters').removeClass('disable-order-filters');    
+})
+$(document).on('click','#open-orders-tab', function() {
+    $('#order-dilters').addClass('disable-order-filters');
 })

@@ -216,6 +216,37 @@ if (!function_exists('getOrderDishIngredients1')) {
     }
 }
 
+if (!function_exists('getOrderDishIngredients2')) {
+    function getOrderDishIngredients2($dish)
+    {
+        $ingredients = '';
+        $dishData = Dish::withTrashed()->find($dish->dish_id);
+
+        if($dish->orderDishFreeIngredients->count() != $dishData->freeWithoutTrashIngredients->count()){
+            // $ingredients .= '-';
+            $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
+
+            foreach ($dishData->freeWithoutTrashIngredients as $freeIngredient) {
+                if(!in_array($freeIngredient->id, $ingArray)){
+                    // $ingredients .= $freeIngredient->ingredient->name.', ';
+                    $ingredients .= "-" .$freeIngredient->ingredient->name. "\n";
+
+                }
+            }
+        }
+        if (count($dish->orderDishPaidIngredients)>0) {
+            
+            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
+
+                $price = $ingredient->quantity * $ingredient->price;
+                $ingredients .= "+" .$ingredient->dishIngredient->ingredient->name. "(€" .number_format($price, 2) . ")" . "\n";
+
+            }
+        }
+        return trim($ingredients, ', ');
+    }
+}
+
 if (!function_exists('getDeliveryCharges')) {
     function getDeliveryCharges($zipcode)
     {

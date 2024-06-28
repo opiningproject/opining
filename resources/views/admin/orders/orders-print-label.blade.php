@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Order Receipt')
 @section('content')
 
     <?php
@@ -116,10 +117,11 @@
         </div>
     
         <div class="section">
-            @if($order->order_type == OrderType::Delivery)
+           
+            <p><strong>{{$userDetails->order_name}}</strong></p>
+            <p><strong>Tel:</strong> +31 {{ $userDetails->order_contact_number }}</p>
 
-                <p><strong>{{$userDetails->order_name}}</strong></p>
-                <p><strong>Tel:</strong> +31 {{ $userDetails->order_contact_number }}</p>
+            @if($order->order_type == OrderType::Delivery)
                 <p><strong>{{ $userDetails->house_no }} {{ $userDetails->street_name}}</strong></p>
                 <p><strong>{{ $userDetails->city }} - {{$userDetails->zipcode}}</strong></p>
 

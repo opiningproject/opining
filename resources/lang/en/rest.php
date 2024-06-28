@@ -131,7 +131,7 @@ return [
 		'discount' => 'Item Discount',
 		'print' => 'Print Label',
 		'order_time' => 'Order Time',
-		'order_amount' => 'Amount',
+		'order_amount' => 'Qty',
 		'order_description' => 'Description',
 		'order_price' => 'Price',
 		'order_enjoy' => 'Enjoy your food!',

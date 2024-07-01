@@ -34,6 +34,7 @@
                                                     <th class="text-center">{{ trans('rest.coupons.points') }}</th>
                                                     <th class="text-center">{{ trans('rest.coupons.order_price') }}</th>
                                                     <th class="text-center">{{ trans('rest.coupons.coupon') }}</th>
+                                                    <th class="text-center">{{ trans('rest.coupons.coupon_discount') }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -51,6 +52,9 @@
                                                                 class="text-muted-1">{{ $order->points_redeemed == 0 ? 'FREE' :  $order->points_redeemed }}</span></td>
                                                         <td class="text-center"><span
                                                                 class="text-muted-1">€{{ number_format($order->total_amount,2) }}</span>
+                                                        </td>
+                                                        <td class="text-center"><span
+                                                                class="text-muted-1">{{ $order->coupon->promo_code }}</span>
                                                         </td>
                                                         <td class="text-center"><span
                                                                 class="text-muted-1">€{{ $order->coupon_discount ?? 0 }}</span>

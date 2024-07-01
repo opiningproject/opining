@@ -144,8 +144,8 @@ class OrdersController extends Controller
         $taxedValue = 0.09 * (float)$order->total_amount;
         $differenceValue = $order->total_amount - $taxedValue;
         
-        $order->sub_total = $taxedValue;
-        $order->tax_amount = $differenceValue;
+        $order->sub_total = $differenceValue;
+        $order->tax_amount = $taxedValue;
         return view('admin.orders.orders-print-label', ['order' => $order]);
     }
 

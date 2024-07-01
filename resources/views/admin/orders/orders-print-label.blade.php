@@ -157,6 +157,14 @@
             <br />
         
             <div class="amount-description-bottom">
+                <p>{{ trans('rest.food_order.tax') }}</p>
+                <p>€{{  round($order->tax_amount, 2) }}</p>
+            </div>
+            <div class="amount-description-bottom">
+                <p>{{ trans('rest.food_order.sub_total') }}</p>
+                <p>€{{  round($order->sub_total, 2) }}</p>
+            </div>
+            <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.item_total') }}</p>
                 <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
             </div>

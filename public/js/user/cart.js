@@ -515,7 +515,7 @@ $(document).on('click', '.dish-group .form-label', function ()
 })
 
 let not_values = $('.dish-notes').val();
- if(not_values.length > 0) {
+ if(not_values != undefined && not_values.length > 0) {
     $('.dish-notes-label').css('display','none');
     // $('.dish-notes').css('display','block !important');
     // $('.dish-notes').css({display:"block !important;"});

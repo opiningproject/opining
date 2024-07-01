@@ -7,7 +7,7 @@
     </div>
 
     <div class="siderbarmenu-brand">
-        <a href="#" class="navbar-brand sidebar-logo">
+        <a href="{{ route('user.dashboard') }}" class="navbar-brand sidebar-logo">
             <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
         </a>
     </div>

@@ -201,12 +201,13 @@ function getDishes(catId) {
     if(!catId) {
         catId = $('#view-all-dishes').attr('data-category-id');
     }
+    activateSlide(catId);
+
     $.ajax({
         url: `${baseURL}/get-dishes/${catId}`,
         type: 'GET',
         success: function (response) {
           
-            activateSlide(catId);
             window.history.pushState('',app_name, '/user/dashboard/'+catId);
             
             // update view all button attribute id

@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/font_bootstrap_icons.css') }}">
+    <link rel="shortcut icon" href="{{ getRestaurantDetail()->restaurant_logo }}">
 {{--    <link rel="stylesheet" href="{{ asset('css/font-awesome_6.4.2_all.min.css') }}" />--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}" />

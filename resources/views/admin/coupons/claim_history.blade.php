@@ -48,12 +48,12 @@
                                                                 class="text-muted-1">{{ date('d M Y | H:m A',strtotime($order->created_at)) }}</span>
                                                         </td>
                                                         <td class="text-center"><span
-                                                                class="text-muted-1">{{ $order->points }}</span></td>
+                                                                class="text-muted-1">{{ $order->points_redeemed }}</span></td>
                                                         <td class="text-center"><span
-                                                                class="text-muted-1">€{{ $order->total_amount }}</span>
+                                                                class="text-muted-1">€{{ number_format($order->total_amount,2) }}</span>
                                                         </td>
                                                         <td class="text-center"><span
-                                                                class="text-muted-1">€{{ $order->coupon_discount }}</span>
+                                                                class="text-muted-1">€{{ $order->coupon_discount ?? 0 }}</span>
                                                         </td>
                                                     </tr>
                                                 @endforeach

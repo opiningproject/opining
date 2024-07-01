@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div
-                    class="time d-flex flex-column align-items-center justify-content-center text-center gap-1">
+                    class="time d-flex flex-column align-items-center justify-content-center text-center gap-1 order-status-{{ $ord->id }}">
                     <img
                         src="{{ $ord->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-yellow.svg') }}"
                         alt="time"

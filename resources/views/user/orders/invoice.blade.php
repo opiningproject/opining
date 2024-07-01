@@ -107,7 +107,7 @@
         </tr>
         @endforeach
         <?php
-            $taxedValue = 0.9 * $itemTotalPrice;
+            $taxedValue = 0.09 * $itemTotalPrice;
             $differenceValue = $itemTotalPrice - $taxedValue;
             ?>
 

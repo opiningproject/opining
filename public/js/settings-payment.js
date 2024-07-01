@@ -44,7 +44,14 @@ $(document).on('click', '#change-order-status-btn', function ()
         url: baseURL+'/orders/change-status/'+ id,
         type: 'GET',
         success: function (response) {
-            $('.foodorder-box-details').html(response);
+
+            // Add gray-clock icon without refresh
+            if(response.clok_gray_svg) {
+                $('.order-status-' + id).empty();
+                $('.order-status-' + id).html(response.clok_gray_svg);
+            }
+
+            $('.foodorder-box-details').html(response.data);
 
             $(".foodorder-box-list div").removeClass("active");
             $('.order-' + id).addClass('active');

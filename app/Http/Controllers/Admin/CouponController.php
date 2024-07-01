@@ -132,7 +132,7 @@ class CouponController extends Controller
     {
         $perPage = isset($request->per_page) ? $request->per_page : 5;
 
-        $orders = Order::where('payment_status', PaymentStatus::Success)->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->paginate($perPage);
+        $orders = Order::where('coupon_id','<>', NULL)->where('order_status', OrderStatus::Accepted)->orderBy('id', 'desc')->paginate($perPage);
 
         return view('admin.coupons.claim_history', ['orders' => $orders, 'perPage' => $perPage]);
     }

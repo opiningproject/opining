@@ -203,9 +203,12 @@ class CouponController extends Controller
             'collected_points' => DB::raw('collected_points -' . $coupon->points)
         ));
 
+        // To get updated values of authenticatd user
+        $user->refresh(); 
+      
         CouponTransaction::create(['user_id' => $user->id, 'coupon_id' => $coupon->id]);
 
-        return response::json(['status' => 1, 'message' => '']);
+        return response::json(['status' => 1, 'message' => '', 'collected_points' => $user->collected_points]);
     }
 
     public function removeCoupon(Request $request)

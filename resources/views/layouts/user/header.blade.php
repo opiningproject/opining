@@ -7,6 +7,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="{{ getRestaurantDetail()->restaurant_logo }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}"  />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font_bootstrap_icons.css') }}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />

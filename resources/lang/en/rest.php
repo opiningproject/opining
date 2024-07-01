@@ -234,6 +234,7 @@ return [
 		'date_time' => 'Date & Time',
 		'order_price' => 'Order Price',
 		'coupon' => 'Coupon',
+		'coupon_discount' => 'Coupon Discount',
         'enter_coupon' => 'Please enter coupon',
 	],
 

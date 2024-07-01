@@ -82,7 +82,7 @@ Route::middleware(['localization'])->group(function () {
 
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('change-lang/{lang}', function ($lang) {
     session(['Accept-Language' => $lang]);

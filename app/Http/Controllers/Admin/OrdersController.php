@@ -38,7 +38,7 @@ class OrdersController extends Controller
     {
         $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
 
-        $openOrders = Order::where('is_cart', '0')->where('order_status',OrderStatus::Accepted)->whereDate('updated_at', Carbon::today())->orderBy('id', 'desc')->get();
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 
 
         $start_date = $request->get('start_date');
@@ -88,12 +88,27 @@ class OrdersController extends Controller
 
         $order = getOrderStatus($order);
 
+        $clok_gray_svg = '';
         if ($order->save()) {
             $order->user->notify(new DeliveryTypeUpdate($order));
 //            $this->sendMail($order);
+
+            if($order->order_status == OrderStatus::Delivered) {
+
+                $clok_gray_svg = '<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Group 3113">
+                <circle id="Ellipse 91" cx="14.5" cy="14.5" r="14.5" fill="#949494"/>
+                <path id="Line 85" d="M15 9V15" stroke="#292929" stroke-width="2" stroke-linecap="round"/>
+                <path id="Line 86" d="M19.0859 18.6406L15.0017 14.9959" stroke="#292929" stroke-width="2" stroke-linecap="round"/>
+                </g>
+                </svg>';
+            }
+
         }
 
-        return view('admin.orders.order-detail', ['order' => $order]);
+        $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
+
+        return response()->json(['status' => 1, 'data' =>  $dishesHTML,'clok_gray_svg' => $clok_gray_svg]);
     }
 
     public function sendMail($order)
@@ -126,6 +141,11 @@ class OrdersController extends Controller
     {
         $order = Order::find($id);
 
+        $taxedValue = 0.09 * (float)$order->total_amount;
+        $differenceValue = $order->total_amount - $taxedValue;
+        
+        $order->sub_total = $taxedValue;
+        $order->tax_amount = $differenceValue;
         return view('admin.orders.orders-print-label', ['order' => $order]);
     }
 

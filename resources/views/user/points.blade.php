@@ -144,7 +144,9 @@
                                                     if ($interval->invert == 0 && $interval->days == 0 && $currentDate->format('Y-m-d') != $expirationDate->format('Y-m-d')) {
                                                         $leftDays = '<label>1 DAY LEFT</label>';
                                                     } else {
-                                                        $leftDays = '<label>'.$daysLeft.' DAYS LEFT</label>';
+                                                        if($daysLeft < 4) {
+                                                            $leftDays = '<label>'.$daysLeft.' DAYS LEFT</label>';
+                                                        }
                                                     }
                                                 }
                                         
@@ -366,6 +368,12 @@
                 url: baseURL + '/user/coupons/confirm/' + id,
                 type: 'GET',
                 success: function(response) {
+
+                    // Disable coupon if points will be zero at time of redeeming the coupons
+                    if(response.collected_points === 0) {
+                        $('#coupon-code-'+id).addClass('disabled-coupon');
+                    }
+
                     $('#redeemConfirmationModal').modal('hide');
                     $('#redeemConfirmedModal').modal('show')
                     //location.reload()

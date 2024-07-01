@@ -219,7 +219,7 @@ $userDetails = $order->orderUserDetails;
             @foreach($order->dishDetails as $key => $dish)
                 <div class="footer-box-main-orderlist-main-item d-flex">
                     <div class="text-grp orderRead-more">
-                        <div class="title">{{ $dish->dish->name }}</div>
+                        <div class="title"><span>{{ $dish->qty }}x</span> {{ $dish->dish->name }}</div>
                         <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
                             <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
                             {{ getOrderDishIngredients($dish) }}
@@ -231,18 +231,18 @@ $userDetails = $order->orderUserDetails;
                                onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
                         </div>
                     </div>
-                    @if(!empty($dish->notes))
+                    {{-- @if(!empty($dish->notes))
                         <div class="notes">
                             <div
                                 class="text d-flex align-items-center justify-content-center">{{ trans('rest.food_order.notes') }}</div>
                             <input type="text" placeholder="{{ $dish->notes }}" class="input" data-toggle="tooltip"
                                    title="{{ $dish->notes }}" readonly>
                         </div>
-                    @endif
+                    @endif --}}
                     <div class="price d-flex flex-column">
                             <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
                         <div class="title">€{{ number_format($itemPrice, 2) }}</div>
-                        <div class="text">x{{ $dish->qty }}</div>
+                        {{-- <div class="text">x{{ $dish->qty }}</div> --}}
                     </div>
                 </div>
             @endforeach
@@ -310,7 +310,7 @@ $userDetails = $order->orderUserDetails;
     ?>
 
     @if($order_status_cur_val != OrderStatus::Delivered)
-        <button class="btn active btn-auto" class="customize-foodlink button"
+        <button class="btn active btn-auto move-order-button" class="customize-foodlink button"
                 onclick="changeOrderStatus({{ $order->id }},'{{ $order_status }}')">
             {{ trans('rest.food_order.move_to') }} '{{ $order_status }}'
         </button>

@@ -123,6 +123,8 @@ return [
 		'card' => 'Card',
 
 		'total' => 'Total',
+		'sub_total' => 'Sub total',
+		'tax' => 'Tax',
 		'bill_details' => 'Bill Details',
 		'item_total' => 'Item Total',
 		'service_charge' => 'Service charge',

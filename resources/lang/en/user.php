@@ -263,7 +263,7 @@ return [
 		'email_not_exist' => 'Email not registered with us',
 		'email_exist_with_gmail' => 'This email is registered with gmail login',
 		'incorrect_password' => 'Incorrect password',
-		'incorrect_right' => 'Incorrect rights',
+		'incorrect_rights' => 'Incorrect rights',
 		'email_already_exist' => 'Entered email id is already registered with us',
 		'reset_password' => 'We have sent reset password link to your email',
 		'cart_item_out_of_stock' => 'Few items are out of stock. Please remove them to continue.',

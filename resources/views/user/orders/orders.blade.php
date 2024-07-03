@@ -197,8 +197,6 @@
                                                             x{{ $dish->qty }}
                                                         </div>
                                                         <div class="orderdetails-desc-card orderdetails-flex-200">
-                                                            <img src="{{ $dish->dish->image }}" class="img-fluid" alt=""
-                                                                 width="85">
                                                             <div class="text-grp">
                                                                 <div class="title">{{ $dish->dish->name }}</div>
                                                                 <div class="text line-clamp-2"
@@ -278,7 +276,7 @@
                                     </div>
                                     <div class="orderdetails-footer">
                                         <div class="btn-grp d-flex flex-wrap">
-                                            <a href="{{ route('user.download-invoice',['order_id' => $order->id]) }}"
+                                            <a href="{{ route('user.orders.printLabel',['order_id' => $order->id]) }}"
                                                class="customize-foodlink button active">
                                                 <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg"
                                                      alt="" width="14" height="14">

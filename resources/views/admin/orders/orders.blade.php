@@ -2,13 +2,13 @@
 @section('content')
 
     <?php
-    
+
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
     use App\Enums\PaymentType;
     use App\Enums\RefundStatus;
-    
+
     ?>
     <div class="main">
         <div class="main-view">
@@ -68,7 +68,7 @@
                                     <div class="fixed-tab-buttons border-0 flex-nowrap" id="pills-tab" role="tablist">
                                         <button class="btn-tap" id="open-orders-tab" data-bs-toggle="pill" data-bs-target="#open-orders" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{ trans('rest.sidebar.open') }}</button>
                                         <button class="btn-tap active" id="all-orders-tab" data-bs-toggle="pill" data-bs-target="#all-orders" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">{{ trans('rest.sidebar.all') }}</button>
-                                        
+
                                     </div>
                                     <div class="tab-content" id="pills-tabContent">
                                         @include('admin.orders.open')
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
 
-                                  
+
                                 {{-- <div class="customize-tab coupons-tab">
                                     <ul class="nav nav-tabs border-0 flex-nowrap" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
@@ -105,7 +105,7 @@
 
                                 {{-- <div class="foodorder-box-list d-flex flex-column" id="order-list-data-div">
 
-                                   
+
 
                                     @if (count($orders))
                                         @foreach ($orders as $key => $ord)
@@ -403,6 +403,7 @@
                                                                     {{ $dish->dishOption->name ?? '' }} </b>
                                                                 {{ getOrderDishIngredients($dish) }}
                                                             </div>
+                                                            @if(count($dish->orderDishPaidIngredients) > 2)
                                                             <div class="text">
                                                                 <a href="javascript:void(0)"
                                                                     id="read-more-{{ $dish->id }}"
@@ -412,6 +413,7 @@
                                                                     id="close-{{ $dish->id }}"
                                                                     onclick="hideReadMore({{ $dish->id }})">{{ trans('rest.food_order.close') }}</a>
                                                             </div>
+                                                                @endif
                                                         </div>
                                                         @if (!empty($dish->notes))
                                                             <div class="notes">
@@ -503,7 +505,7 @@
 
                                         <?php
                                         $order_status_cur_val = $order->order_status;
-                                        
+
                                         $order = getOrderStatus($order);
                                         $order_status_key = OrderStatus::getKey($order->order_status);
                                         $order_status = preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $order_status_key);

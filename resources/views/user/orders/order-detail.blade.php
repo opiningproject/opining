@@ -189,7 +189,7 @@ use App\Enums\RefundStatus;
 </div>
 <div class="orderdetails-footer">
     <div class="btn-grp d-flex flex-wrap">
-        <a href="{{ route('user.orders.printLabel',['order_id' => $order->id]) }}"
+        <a href="{{ route('user.orders.printLabel',['order_id' => $order->id]) }}" target="_blank"
            class="customize-foodlink button active">
             <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg" alt="" width="14" height="14">
             <div class="text-truncate">

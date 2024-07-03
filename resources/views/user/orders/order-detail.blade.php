@@ -115,29 +115,35 @@ use App\Enums\RefundStatus;
                         x{{ $dish->qty }}
                     </div>
                     <div class="orderdetails-desc-card orderdetails-flex-400">
-                        <img src="{{ $dish->dish->image }}" class="img-fluid" alt="" width="85">
                         <div class="text-grp ps-3">
                             <div class="title">{{ $dish->dish->name }}</div>
                             <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
                                 <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
                                 {{ getOrderDishIngredients($dish) }}
                             </div>
+                            @if(count($dish->orderDishPaidIngredients) > 2)
                             <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                 <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
                                    onclick="readMore({{ $dish->id}})">{{ trans('user.my_orders.read_more') }}</a>
                                 <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"
                                    onclick="hideReadMore({{ $dish->id}})">{{ trans('user.my_orders.close') }}</a>
                             </div>
+                            @endif
+                            @if(!empty($dish->notes))
+                                <div class="notes mt-2">
+                                    <u>{{ $dish->notes }}</u>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
-                @if(!empty($dish->notes))
+                {{--@if(!empty($dish->notes))
                     <div class="orderdetails-desc-note ms-auto">
                         <Label>{{ trans('user.my_orders.notes') }}</Label>
                         <input type="text" placeholder="{{ $dish->notes }}" readonly data-toggle="tooltip"
                                title="{{ $dish->notes }}">
                     </div>
-                @endif
+                @endif--}}
                 <div class="orderdetails-desc-price">
                         <?php
 
@@ -183,7 +189,7 @@ use App\Enums\RefundStatus;
 </div>
 <div class="orderdetails-footer">
     <div class="btn-grp d-flex flex-wrap">
-        <a href="{{ route('user.download-invoice',['order_id' => $order->id]) }}"
+        <a href="{{ route('user.orders.printLabel',['order_id' => $order->id]) }}"
            class="customize-foodlink button active">
             <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg" alt="" width="14" height="14">
             <div class="text-truncate">

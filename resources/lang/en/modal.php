@@ -53,7 +53,8 @@ return [
 	'dish' => [
 		'existing_ingredients' => 'Existing Ingredients',
 		'extra_ingredients' => 'Add Extra Ingredients',
-		'select_option' => 'Please select option'
+		'select_option' => 'Please select option',
+		'field_required' => 'This field is required.'
 	],
 
 	'button' => [

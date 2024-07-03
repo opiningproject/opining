@@ -213,7 +213,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                             class="form-control countrycode-input" readonly
                                                                             value="+31">
                                                                         <input type="number" class="form-control"
-                                                                            minlength="10" maxlength="10" required
+                                                                            minlength="9" maxlength="9" required
                                                                             name="phone_no" min="0"
                                                                             id="phone_no"
                                                                             value="{{ $user->phone_no == '' ? $phone_no : $user->phone_no }}">
@@ -380,7 +380,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                             <div class="payment-navigation">
                                                                 <h4 class="custom-card-title-1 form-group mobile-hide">
                                                                     {{ trans('user.checkout.payment') }}</h4>
-                                                                <div class="nav flex-column nav-pills" id="v-pills-tab"
+                                                                <div class="nav flex-column nav-pills custom-radio-place" id="v-pills-tab"
                                                                     role="tablist" aria-orientation="vertical">
                                                                     <button class="nav-link active payment-type-tab radio-del-time1"
                                                                         id="v-pills-ideal-tab" data-type="3"
@@ -551,7 +551,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                     <div class="form-group">
                                                         <button type="submit"
                                                             class="align-middle btn btn-custom-yellow btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
-                                                            €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}<span>&nbsp;<span id="total-amt-pay-btn">iDEAL</span></span> 
+                                                            €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}<span>&nbsp;<span id="total-amt-pay-btn">iDEAL</span></span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -745,12 +745,12 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
         $(".success-ico.success-delivery-time").hide();
         $(".success-ico.success-payment-method").hide();
 
-      
+
         // Mobile view radio button
         $(document).on('click', '.radio-del-time1',function() {
          let paymentType = $(this).data("type");
             if(paymentType == 1) {
-            
+
                 $('#cc-radio').prop('checked', true);
             } else if(paymentType == 2) {
 
@@ -830,22 +830,22 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
         });
 
         async function addOrder() {
-        
+
             var deliveryType = $('input[name=del_radio]:checked').val()
             var paymentType = $('#payment_type').val()
             var zipcode = $('#zipcode').val()
             console.log('zipcode', zipcode)
-    
+
             let first_name = $('#first_name').val();
             let last_name = $('#last_name').val();
             let email = $('#email').val();
             let phone_no = $('#phone_no').val();
-        
+
             // if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
             //     alert('Please select time')
             //     return false
             // }
-            
+
             if (!isDesktopView()) {
                 if(first_name == '' || last_name == '' || email == '' || phone_no == '') {
                     $(".success-ico.success-address").hide();
@@ -855,7 +855,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                     $("#deliviery-address-error").text("");
                     $(".success-ico.success-address").show();
                 }
-            } 
+            }
 
             if (deliveryType == 'customize-time' && $('#custom-delivery-time').val() == '') {
                 if (isDesktopView()) {
@@ -879,7 +879,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
             var longitude = ''
 
             if (paymentType == '3' && selectedBank == false) {
-               
+
                 if (isDesktopView()) {
                     alert('Please select bank to continue');
                     return false

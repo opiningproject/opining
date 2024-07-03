@@ -99,6 +99,18 @@ class OrderController extends Controller
         $document->Output($documentFileName, 'D');
     }
 
+    public function orderPrintLabel(string $id)
+    {
+        $order = Order::find($id);
+
+        $taxedValue = 0.09 * (float)$order->total_amount;
+        $differenceValue = $order->total_amount - $taxedValue;
+
+        $order->sub_total = $differenceValue;
+        $order->tax_amount = $taxedValue;
+        return view('user.orders.orders-print-label', ['order' => $order]);
+    }
+
     public function sendRefundRequest(Request $request)
     {
         try {

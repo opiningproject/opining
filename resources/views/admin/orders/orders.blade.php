@@ -414,18 +414,13 @@
                                                                     onclick="hideReadMore({{ $dish->id }})">{{ trans('rest.food_order.close') }}</a>
                                                             </div>
                                                                 @endif
+                                                            @if (!empty($dish->notes))
+                                                                <div class="notes">
+                                                                    <u>{{ $dish->notes }}</u>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        @if (!empty($dish->notes))
-                                                            <div class="notes">
-                                                                {{ $dish->notes }}
-                                                                {{-- <div
-                                                                    class="text d-flex align-items-center justify-content-center">
-                                                                    {{ trans('rest.food_order.notes') }}</div>
-                                                                <input type="text" placeholder="{{ $dish->notes }}"
-                                                                    class="input" data-toggle="tooltip"
-                                                                    title="{{ $dish->notes }}" readonly> --}}
-                                                            </div>
-                                                        @endif
+
                                                         <div class="price d-flex flex-column">
                                                             <?php $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total; ?>
                                                             <div class="title">€{{ number_format($itemPrice, 2) }}</div>

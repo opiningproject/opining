@@ -224,22 +224,33 @@ $userDetails = $order->orderUserDetails;
                             <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
                             {{ getOrderDishIngredients($dish) }}
                         </div>
-                        <div class="text">
-                            <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
-                               onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }}</a>
-                            <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"
-                               onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
-                        </div>
+                        @if(count($dish->orderDishPaidIngredients) > 2)
+                            <div class="text">
+                                <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
+                                   onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }}</a>
+                                <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"
+                                   onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
+                            </div>
+                        @endif
+                        @if(!empty($dish->notes))
+                            <div class="notes">
+                                <u>{{ $dish->notes }}</u>
+                                {{-- <div
+                                    class="text d-flex align-items-center justify-content-center">{{ trans('rest.food_order.notes') }}</div>
+                                <input type="text" placeholder="{{ $dish->notes }}" class="input" data-toggle="tooltip"
+                                       title="{{ $dish->notes }}" readonly> --}}
+                            </div>
+                        @endif
                     </div>
-                    @if(!empty($dish->notes))
+                    {{--@if(!empty($dish->notes))
                         <div class="notes">
                             {{ $dish->notes }}
-                            {{-- <div
+                            --}}{{-- <div
                                 class="text d-flex align-items-center justify-content-center">{{ trans('rest.food_order.notes') }}</div>
                             <input type="text" placeholder="{{ $dish->notes }}" class="input" data-toggle="tooltip"
-                                   title="{{ $dish->notes }}" readonly> --}}
+                                   title="{{ $dish->notes }}" readonly> --}}{{--
                         </div>
-                    @endif
+                    @endif--}}
                     <div class="price d-flex flex-column">
                             <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
                         <div class="title">€{{ number_format($itemPrice, 2) }}</div>

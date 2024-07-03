@@ -81,7 +81,7 @@ class DishController extends Controller
     public function getCollectedPoints()
     {
 
-      // Coupons 
+      // Coupons
         $user = Auth::user();
 
         $coupons = Coupon::where(
@@ -169,13 +169,14 @@ class DishController extends Controller
                           <div class='form-group mb-0'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
-                                <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100' id='dish-option$dish->id'>
-                                <option value=''>".trans('modal.dish.select_option')."</option>";
+                                <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100 dish-option-select' id='dish-option$dish->id'>
+                                <option disabled selected value=''>".trans('modal.dish.select_option')."</option>";
             foreach ($options as $option) {
                 $selected = $selectedOption == $option->id ? 'selected' : '';
                 $html_options .= "<option value='$option->id' $selected >$option->name</option>";
             }
             $html_options .= "</select>
+                                <label class='error dish-option-error d-none'>".trans('modal.dish.field_required')."</label>
                               </div>
                             </div>
                           </div>
@@ -301,7 +302,7 @@ class DishController extends Controller
                       </div>
                       <h4>$dish->name</h4>
                       <p class='my-0'>$dish->description</p>
-                      <span class='food-custom-price mb-0' id='dish_price'>€".number_format($dish->price,2)."</span>
+                      <span class='food-custom-price mb-3' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
                       $html_options
                     </div>
@@ -334,20 +335,20 @@ class DishController extends Controller
         return response::json(['status' => 1, 'data' => $html]);
     }
 
-    function getDishes(Request $request,$cat_id) 
+    function getDishes(Request $request,$cat_id)
     {
 
-      if ($cat_id) { 
+      if ($cat_id) {
 
         $category = Category::find($cat_id);
 
         $dishes = Dish::with(['favorite','category'])->where('category_id', $cat_id);
-    
+
         $dishesHTML = view('user.dish.dish-list', ['dishes' => $dishes->get()])->render();
 
         return response()->json(['status' => 1, 'data' =>  $dishesHTML,'cat_name' => $category->name]);
 
       }
     }
-    
+
 }

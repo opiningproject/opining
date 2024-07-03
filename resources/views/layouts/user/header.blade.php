@@ -5,7 +5,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title', config('app.name', 'Laravel'))</title>
     <!-- Bootstrap CSS -->
     <link rel="shortcut icon" href="{{ getRestaurantDetail()->restaurant_logo }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}"  />

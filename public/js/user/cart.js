@@ -376,10 +376,18 @@ function addCustomizedCart(id, doesExist = 0) {
 
     var dishData = new FormData();
     var totalDishQty = $('#totalDishQty').val()
-
-    if ($("#dish-option" + id).length) {
-        dishData.append('option', $("#dish-option" + id).val())
-    }
+    $("#dish-option" + id).on('change', function () {
+        $('.dish-option-error').hide();
+    })
+        if ($("#dish-option" + id).length > 0 && $("#dish-option" + id).val() != null) {
+            dishData.append('option', $("#dish-option" + id).val())
+            $('.dish-option-error').hide();
+        } else {
+            if ($("#dish-option" + id).length > 0) {
+                $('.dish-option-error').removeClass('d-none');
+                return false;
+            }
+        }
 
     if ($('.dishFreeIngQty').length) {
         $('.dishFreeIngQty:checked').each(function (index, element) {

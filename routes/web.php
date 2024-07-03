@@ -204,6 +204,7 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
 
         Route::get('/orders/order-detail/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderDetail'])->name('user.order-detail');
         Route::get('/orders/download-invoice/{order_id}', [App\Http\Controllers\User\OrderController::class, 'downloadInvoice'])->name('user.download-invoice');
+        Route::get('/orders/print-label/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderPrintLabel'])->name('user.orders.printLabel');
 
         Route::post('/orders/send-refund-req', [App\Http\Controllers\User\OrderController::class, 'sendRefundRequest']);
 

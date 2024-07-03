@@ -2064,8 +2064,9 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
 }
 
 .cart-section .prev-input-group .coupon-apply-btn .btn-custom-yellow {
-  min-width: 100px;
-  height: 38px;
+    min-width: 92px;
+    height: 46px;
+    border-radius: 0px 8px 8px 0px;
 }
 
 .prev-input-group .form-control:focus {
@@ -3106,7 +3107,7 @@ input[type=number] {
 }
 
 .ordersdetails .orderdetails-main .orderdetails-desc:not(:last-of-type) {
-  margin: 0 0 71px;
+  margin: 0 0 30px !important;
 }
 
 .ordersdetails .orderdetails-main .orderdetails-desc .orderdetails-desc-main {
@@ -3354,6 +3355,10 @@ input[type=number] {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.dish-option-error {
+    margin-left: -43px;
+    margin-top: 6px;
 }
 
 @media screen and (max-width: 1279px) {
@@ -4552,7 +4557,7 @@ input[type=number] {
 .coupon-apply-btn {
   position: absolute;
   top: 0;
-  right: 7px;
+  right: 1px !important;
   bottom: 0;
   display: flex;
   align-items: center;
@@ -5117,7 +5122,7 @@ border-color: #FFC00B !important;
 .custom-tabs.cart-tab .nav .nav-link svg {width: 24px;}
 .bg-arrow-mobile {background-image: none !important;opacity: 1;left: 0px;right: initial !important;}
 .cartSidebarCustom .bill-detail-invoice .bill-count {font-size: 16px;}
-.bg-arrow-mobile>i {display: inline-block !important;color: #292929 !important;}
+.bg-arrow-mobile>i {display: inline-block !important;color: #292929 !important; position: relative; top: 2px;}
 .category-section .category-slider-navigation {display: none;}
 .category-section .category-slider .category-element .card {padding: 14px 7px;}
 .cart-section .cart-items .foodqty .plus, .cart-section .cart-items .foodqty .minus {height: 30px !important;min-width: 30px !important;width: 30px !important;line-height: 26px;}
@@ -5427,6 +5432,15 @@ footer .footer-logo a {font-size: initial !important;}
         border: 0px;
         display: flex;
         gap: 10px;
+        padding: 10px 10px;
+        margin: 0px -10px;
+    }
+    .nav-pills.custom-radio-place .nav-link.payment-type-tab {
+        padding-left: 50px !important;
+    }
+    .nav-pills.custom-radio-place .nav-link.payment-type-tab .custom-radio {
+        left: 15px;
+        right: initial;
     }
 
     .payment-nav-mobile .payment-navigation .nav .nav-link {
@@ -5638,6 +5652,10 @@ font-size: 14px;
   top: -1px;
 }
 
+.dish-option-select{
+    max-width: 200px !important;
+}
+
 @media (max-width: 1800px) {
   .coupon-card-row .coupon-row-grid {margin: 0px -10px;}
   .coupon-card-row .coupon-row-grid .coupon-col {margin-bottom: 20px;padding: 0px 10px;}
@@ -5711,8 +5729,17 @@ footer {padding: 36px 20px 20px 20px;}
   .custom-card-mobile-toggle .radio-flex-row .radio:last-child {margin-bottom: 0px;}
   .checkout-form-steps .card .form-group .form-label {margin-bottom: 5px;}
   .payment-nav-mobile .payment-navigation .nav .nav-link .custom-radio {display: block;}
-  .mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link.active {border-color: #dcdcdc !important;background: #ffffff !important;}
-  .mobile-scrolllable-content .payment-nav .nav {border-radius: 0px;}
+  /*.mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link.active {border-color: #dcdcdc !important;background: #ffffff !important;}*/
+    .mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link.active {
+        border-color: transparent !important;
+        background: #ffffff !important;
+        box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);
+    }
+    .mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link {
+        background: #ffffff !important;
+        border: 0px !important;
+    }
+    .mobile-scrolllable-content .payment-nav .nav {border-radius: 0px;}
   .checkout-section .checkout-btn-sticky, .cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn{
     height: 52px;
     display: flex !important;

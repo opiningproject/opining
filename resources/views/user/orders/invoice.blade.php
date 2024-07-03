@@ -1,156 +1,197 @@
- <style>
-    .invoice-box table {
-        width: 100%;
-        line-height: inherit;
-        text-align: left;
-    }
-    .invoice-box table td {
-        padding: 5px;
-        vertical-align: top;
-    }
-    .invoice-box table tr.top table td {
-        padding-bottom: 20px;
-    }
-    .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-    }
-    .tblClass{
-        border-collapse: collapse;
-    }
-    .tblClass td,th {
-        border: 1px solid gray;
-        padding: 15px;
-    }
-    .invoice_align{
-        text-align:right;
-    }
-</style>
-<?php
+@extends('layouts.app')
+@section('title', 'Order Receipt')
+@section('content')
+
+    <?php
+
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
     use App\Enums\PaymentType;
-?>
-<div class="invoice-box">
-    <table>
-        <tr>
-            <td colspan="4">
-                <?php
+    use App\Enums\RefundStatus;
 
-                    if($order->order_type == OrderType::Delivery)
-                    {
-                        echo "<b>".trans('user.invoice.address')."</b><br>";
+    ?>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 342px;
+            margin: auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 10px !important;
+        }
 
-                        $address = $order->orderUserDetails;
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-                        echo $address->house_no.' '.$address->street_name.'<br>'.$address->city.'<br>'.$address->zipcode;
-                    }
-                    else
-                    {
-                        echo "<b>".trans('user.invoice.restaurant_address')."</b><br>";
+        .header img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
 
-                        echo str_replace(',', '<br>', getRestaurantDetail()->rest_address);
-                    }
-                ?>
-            </td>
-            <td style="padding-top: 0px;">
-                <table cellpadding="0" cellspacing="0" border="0" width="auto" align="right" style="width: auto;">
-                    <tr>
-                        <td colspan="2" align="right" style="padding-top: 0px;">
-                            <h2 style="margin-top: 0px;margin-bottom: 10px;line-height: 16px;">Invoice</h2>
-                        </td>
-                    </tr>
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
-                    <tr>
-                        <td width="150">
-                            <b>{{ trans('user.invoice.title') }} #<br>
-                            {{ trans('user.invoice.date') }}<br>
-                            {{ trans('user.invoice.mode') }}</b>
-                        </td>
-                        <td>
-                            {{ $order->id }}<br>
-                            {{ $order->created_at }}<br>
-                            {{ $order->payment_type == PaymentType::Card ? trans('user.invoice.card'): ($order->payment_type == PaymentType::Cash ? trans('user.invoice.cash'):'Ideal') }}
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-    <br>
-    <table class="tblClass">
-        <tr style="background-color:#D7DBDD;">
-            <th colspan="4">{{ trans('user.invoice.item') }}</th>
-            <th>{{ trans('user.invoice.price') }}</th>
-            <th>{{ trans('user.invoice.discount') }}</th>
-            <th>{{ trans('user.invoice.qty') }}</th>
-            <th>{{ trans('user.invoice.amount') }}</th>
-        </tr>
+        .section {
+            margin-bottom: 20px;
+        }
 
-        <?php $itemTotalPrice = 0; ?>
+        .section p {
+            margin: 5px 0;
+        }
 
-        @foreach($order->dishDetails as $key => $dish)
-        <tr>
-            <td colspan="4">{{ $dish->dish->name }}<br><b>{{ $dish->dishOption->name ?? '' }}</b>{{ getOrderDishIngredients($dish) }}</td>
-            <td>€{{ $dish->price }}</td>
-            <td>{{ $dish->dish->percentage_off }}%</td>
-            <td>{{ $dish->qty }}</td>
-            <td>
-            <?php
-                    $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total;
-                    $itemTotalPrice += $itemPrice;
-                    echo '€'.number_format($itemPrice,2);
-            ?>
-            </td>
-        </tr>
-        @endforeach
-        <?php
-            $taxedValue = 0.09 * $itemTotalPrice;
-            $differenceValue = $itemTotalPrice - $taxedValue;
-            ?>
+        .bold {
+            font-weight: bold;
+        }
 
-        <tr>
-            <td colspan="8" rowspan="1"></td>
-            <br>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.tax') }}</td>
-            <td>€{{ $differenceValue }}</td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.subtotal') }}</td>
-            <td>€{{ $taxedValue }}</td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.total') }}</td>
-            <td>€{{ number_format($itemTotalPrice, 2) }}</td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.service_charge') }}</td>
-            <td>€{{ number_format($order->platform_charge, 2) }}</td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.delivery_charge') }}</td>
-            <td>€{{ number_format($order->delivery_charge, 2) }}</td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.coupon_discount') }}</td>
-            <td>€{{ number_format($order->coupon_discount, 2) }}</td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td colspan="3">{{ trans('user.invoice.amount_paid') }}</td>
-            <td>€{{ number_format($order->total_amount, 2) }}</td>
-        </tr>
-    </table>
-</div>
+        .amount-description-price {
+            display: flex;
+            justify-content: space-between;
+        }
 
+        .amount-description-bottom {
+            display: flex;
+            justify-content: space-between;
+        }
 
+        .total {
+            font-weight: bold;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .amount-description-price-header {
+            display: flex;
+            /* justify-content: space-between; */
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            padding-top: 10px;
+        }
+
+        .amount-description-price-header p:last-child,
+        .amount-description-price p:last-child {
+            margin-left: auto;
+        }
+
+        .amount-description-price-header p:first-child,
+        .amount-description-price p:first-child {
+            flex: 0 0 80px;
+            max-width: 80px;
+        }
+        .amount-description-price-no-flex {
+            text-align: center;
+        }
+        .amount-description-price span {
+            font-size: 12px;
+        }
+
+        .amount-description-price p {
+            margin-top: 5px;
+        }
+    </style>
+    <div class="main">
+        @if(!empty($order))
+            <?php $userDetails = $order->orderUserDetails; ?>
+            <div class="header">
+                <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
+                <h1> {{getRestaurantDetail()->restaurant_name}}</h1>
+                <p> {{getRestaurantDetail()->rest_address}} <br> +{{ getRestaurantDetail()->phone_no }}</p>
+
+            </div>
+
+            <div class="section">
+                <p><strong>{{ trans('rest.food_order.order') }}:</strong> #{{$order->id }}</p>
+                <p><strong>{{trans('rest.food_order.order_time')}}:</strong> {{ $order->created_at }}</p>
+                <p><strong>{{ trans('rest.food_order.delivery_mode') }}:</strong> {{ $order->delivery_time }}</p>
+                <p><strong>{{ trans('rest.food_order.type') }}:</strong> {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}</p>
+            </div>
+
+            <div class="section">
+
+                <p><strong>{{$userDetails->order_name}}</strong></p>
+                <p><strong>Tel:</strong> +31 {{ $userDetails->order_contact_number }}</p>
+
+                @if($order->order_type == OrderType::Delivery)
+                    <p><strong>{{ $userDetails->house_no }} {{ $userDetails->street_name}}</strong></p>
+                    <p><strong>{{ $userDetails->city }} - {{$userDetails->zipcode}}</strong></p>
+
+                @else
+                    <p><strong>{{ getRestaurantDetail()->rest_address }}</strong></p>
+                @endif
+
+            </div>
+
+            <div class="section">
+                <p><strong>{{ $order->delivery_note ?? '' }}</strong></p>
+            </div>
+
+            <div class="section">
+                <div class="amount-description-price-header">
+                    <p>{{ trans('rest.food_order.order_amount') }}</p>
+                    <p>{{ trans('rest.food_order.order_description') }}</p>
+                    <p>{{ trans('rest.food_order.order_price') }}</p>
+                </div>
+                @foreach($order->dishDetails as $key => $dish)
+                    <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
+
+                    <div class="amount-description-price">
+                        <p>{{$dish->qty }}x</p>
+                        <p>{{ $dish->dish->name }}
+                            <br>
+                            <span>{!! getOrderDishIngredients2($dish) !!}</span>
+                        </p>
+                        <p>€{{ $itemPrice }}</p>
+                    </div>
+                @endforeach
+
+                <br />
+
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.tax') }}</p>
+                    <p>€{{  round($order->tax_amount, 2) }}</p>
+                </div>
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.sub_total') }}</p>
+                    <p>€{{  round($order->sub_total, 2) }}</p>
+                </div>
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.item_total') }}</p>
+                    <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
+                </div>
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.service_charge') }}</p>
+                    <p>€{{ $order->platform_charge }}</p>
+                </div>
+                <div class="amount-description-bottom">
+                    <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
+                    <p>€{{ $order->delivery_charge }}</p>
+                </div>
+                <div class="amount-description-bottom" style="color: #4ECA39">
+                    <p>{{ trans('rest.food_order.discount') }}</p>
+                    <p>-€{{ $order->coupon_discount }}</p>
+                </div>
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.total') }}</p>
+                    <p>€{{ round($order->total_amount, 2) }}</p>
+                </div>
+            </div>
+
+            <div class="footer center">
+                <p><strong>{{ trans('rest.food_order.payment_method') }} : </strong> {{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card'): ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod'):'Ideal') }}</p>
+                <p>{{ trans('rest.food_order.order_enjoy') }}</p>
+            </div>
+        @endif
+    </div>
+@endsection
+@section('script')
+@endsection

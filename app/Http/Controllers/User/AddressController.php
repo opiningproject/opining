@@ -40,7 +40,10 @@ class AddressController extends Controller
                     session(['city' => $validAddress->city]);
                 }
             }
-
+            if ($checkUserAddress) {
+                session(['street_name' => $checkUserAddress->street_name]);
+                session(['city' => $checkUserAddress->city]);
+            }
             session()->forget('address');
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);

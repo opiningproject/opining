@@ -4,14 +4,14 @@
     <?php
     $zipcode = session('zipcode');
     $house_no = session('house_no');
-    
+
     $showModal = 0;
-    
+
     if (!session('showLoginModal')) {
         $showModal = 1;
         Session::put('showLoginModal', '1', '1440');
     }
-    
+
     $cartValue = 0;
     ?>
     <div class="main">
@@ -96,7 +96,7 @@
                                         @foreach ($categories as $key => $cat)
                                             <?php
                                             $selected = '';
-                                            
+
                                             if (!isset($_GET['all']) && $cat_id == '') {
                                                 if ($key == 0) {
                                                     $selected = 'selected-cart-active';
@@ -144,17 +144,17 @@
                                             <?php
                                             $disableBtn = '';
                                             $customizeBtn = false;
-                                            
+
                                             //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                             if ($dish->out_of_stock == '1') {
                                                 $disableBtn = 'disabled';
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             if (count($dish->ingredientsWithoutTrash) == 0) {
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             ?>
                                             <div class="card food-detail-card">
                                                 @if ($dish->percentage_off > 0)
@@ -332,7 +332,7 @@
                                                     id="pills-profile" role="tabpanel"
                                                     aria-labelledby="pills-profile-tab" tabindex="0">
                                                     <div class="form-group addressMobile mb-3 cart-address-row flex-wrap w-100">
-                                                       
+
                                                         <div class="d-flex align-items-center justify-content-center flex-full">
                                                             <div class="d-flex align-items-start address-field">
                                                                 <img src="{{ asset('images/rest-address.svg') }}"

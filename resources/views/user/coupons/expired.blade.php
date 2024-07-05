@@ -5,7 +5,6 @@
 
             <div class="card-body coupon-card-row w-100 pb-0">
 
-
                     @if (count($expiredCoupons) == 0)
                     <p>No coupons.</p>
                     @else
@@ -33,7 +32,7 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                             </div>
 
                         @endforeach

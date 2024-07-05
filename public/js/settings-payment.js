@@ -50,7 +50,13 @@ $(document).on('click', '#change-order-status-btn', function ()
                 $('.order-status-' + id).empty();
                 $('.order-status-' + id).html(response.clok_gray_svg);
             }
+            if (response.orderStatus == "6") {
+                $('#order-list-data-div .order-' + id).remove();
 
+                // get realtime open order count
+                var currentOrderCount = $('.order-count').text();
+                $('.order-count').html(currentOrderCount - 1);
+            }
             $('.foodorder-box-details').html(response.data);
 
             $(".foodorder-box-list div").removeClass("active");

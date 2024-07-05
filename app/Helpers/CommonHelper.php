@@ -202,7 +202,7 @@ if (!function_exists('getOrderDishIngredients1')) {
         }
 
         if (count($dish->orderDishPaidIngredients)>0) {
-            
+
             foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
 
                 $price = $ingredient->quantity * $ingredient->price;
@@ -235,7 +235,7 @@ if (!function_exists('getOrderDishIngredients2')) {
             }
         }
         if (count($dish->orderDishPaidIngredients)>0) {
-            
+
             foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
 
                 $price = $ingredient->quantity * $ingredient->price;
@@ -469,5 +469,42 @@ if (!function_exists('uploadImageToLocal')) {
         Storage::disk('public')->put($filePath, file_get_contents($file));
 
         return $file_name;
+    }
+}
+
+if (!function_exists('getOpenOrders')) {
+    function getOpenOrders()
+    {
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+
+        return count($openOrders);
+    }
+}
+
+if (!function_exists('validateAddressByPostCode')) {
+    function validateAddressByPostCode ($data) {
+        $curl = curl_init();
+        $postCodeApiKey = config('params.postCodeApiKey');
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.postcodeapi.nu/v3/lookup/' . $data['zipcode'] . '/'. $data['house_no'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                "x-api-key: " . $postCodeApiKey
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+        if ($httpcode == 400 || $httpcode == 404) {
+            return null;
+        }
+        return $response;
     }
 }

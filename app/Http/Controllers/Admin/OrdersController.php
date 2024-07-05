@@ -43,7 +43,7 @@ class OrdersController extends Controller
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
-       
+
             if (!empty($start_date) && !empty($end_date)) {
 
                 $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
@@ -87,7 +87,7 @@ class OrdersController extends Controller
         $order = Order::find($request->id);
 
         $order = getOrderStatus($order);
-
+        $orderStatus = 0;
         $clok_gray_svg = '';
         if ($order->save()) {
             $order->user->notify(new DeliveryTypeUpdate($order));
@@ -103,13 +103,12 @@ class OrdersController extends Controller
                 <path id="Line 86" d="M19.0859 18.6406L15.0017 14.9959" stroke="#292929" stroke-width="2" stroke-linecap="round"/>
                 </g>
                 </svg><div class="text">'.$delivery_time.'</div>';
+                $orderStatus = OrderStatus::Delivered;
             }
-
         }
 
         $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
-
-        return response()->json(['status' => 1, 'data' =>  $dishesHTML,'clok_gray_svg' => $clok_gray_svg]);
+        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'clok_gray_svg' => $clok_gray_svg]);
     }
 
     public function sendMail($order)
@@ -144,7 +143,7 @@ class OrdersController extends Controller
 
         $taxedValue = 0.09 * (float)$order->total_amount;
         $differenceValue = $order->total_amount - $taxedValue;
-        
+
         $order->sub_total = $differenceValue;
         $order->tax_amount = $taxedValue;
         return view('admin.orders.orders-print-label', ['order' => $order]);
@@ -177,13 +176,29 @@ class OrdersController extends Controller
         }
     }
 
+    public function getRealTimeOrder(Request $request)
+    {
+        try {
+            $orderExist = false;
+            $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc');
+            $orderListIds = $orders->pluck('id')->toArray();
+            if (isset($request->activeId)) {
+                $orderExist = in_array($request->activeId, $orderListIds);
+            }
+            return view('admin.orders.orders-list', ['orders' => $orders->get(), 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
+
+        } catch (Exception $exception) {
+            return response::json(['status' => 400, 'message' => $exception->getMessage()]);
+        }
+    }
+
     public function getNotNotifiedOrders(){
         try{
             $orderIds = Order::where([
                 ['order_status', OrderStatus::Accepted],
                ['is_admin_notified', '0']
             ])->pluck('id');
-         
+
             // Perform the update
             Order::whereIn('id', $orderIds)->update(['is_admin_notified' => '1']);
 

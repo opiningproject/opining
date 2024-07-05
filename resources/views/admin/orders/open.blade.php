@@ -1,15 +1,15 @@
 <div class="tab-pane fade" id="open-orders" role="tabpanel" aria-labelledby="open-orders-tab">
-    <div class="foodorder-box-list d-flex flex-column mt-2" id="order-list-data-div">
+    <div class="foodorder-box-list d-flex flex-column mt-2 order-list-data-div1" id="order-list-data-div">
     <?php
 
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
-    
+
     ?>
-    
+
     @if(count($openOrders))
         @foreach($openOrders as $key => $ord)
-        
+
             <div  class="{{ $order->id == $ord->id ? 'active' : '' }} foodorder-box-list-item d-flex order-{{ $ord->id }}"
                  onclick="orderDetail({{ $ord->id }})" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
                 <div class="details w-100 d-flex flex-column gap-3">
@@ -44,6 +44,6 @@
     @else
         <span class="no-data">{{ trans('rest.food_order.no_order') }}</span>
     @endif
-    
+
     </div>
 </div>

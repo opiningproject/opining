@@ -69,12 +69,12 @@
     });
     socket.on('sendNotificationToAdmin', () => {
         // document.getElementById('myaudio').play();
-        checkNotifiedOrders()
+        checkNotifiedOrdersPopup()
     });
     // code for open popup
-    checkNotifiedOrders()
+    checkNotifiedOrdersPopup()
 
-    function checkNotifiedOrders() {
+    function checkNotifiedOrdersPopup() {
 
     $.ajax({
         type: 'GET',

@@ -106,18 +106,18 @@
             <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
             <h1> {{getRestaurantDetail()->restaurant_name}}</h1>
             <p> {{getRestaurantDetail()->rest_address}} <br> +{{ getRestaurantDetail()->phone_no }}</p>
-           
+
         </div>
-    
+
         <div class="section">
             <p><strong>{{ trans('rest.food_order.order') }}:</strong> #{{$order->id }}</p>
             <p><strong>{{trans('rest.food_order.order_time')}}:</strong> {{ $order->created_at }}</p>
             <p><strong>{{ trans('rest.food_order.delivery_mode') }}:</strong> {{ $order->delivery_time }}</p>
             <p><strong>{{ trans('rest.food_order.type') }}:</strong> {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}</p>
         </div>
-    
+
         <div class="section">
-           
+
             <p><strong>{{$userDetails->order_name}}</strong></p>
             <p><strong>Tel:</strong> +31 {{ $userDetails->order_contact_number }}</p>
 
@@ -128,13 +128,13 @@
             @else
                 <p><strong>{{ getRestaurantDetail()->rest_address }}</strong></p>
             @endif
-            
+
         </div>
-    
+
         <div class="section">
             <p><strong>{{ $order->delivery_note ?? '' }}</strong></p>
         </div>
-    
+
         <div class="section">
             <div class="amount-description-price-header">
                 <p>{{ trans('rest.food_order.order_amount') }}</p>
@@ -146,16 +146,17 @@
 
             <div class="amount-description-price">
                 <p>{{$dish->qty }}x</p>
-                <p>{{ $dish->dish->name }} 
+                <p>{{ $dish->dish->name }}
                     <br>
                    <span>{!! getOrderDishIngredients2($dish) !!}</span>
+                    <span><u>{{ $dish->notes }}</u></span>
                 </p>
                 <p>€{{ $itemPrice }}</p>
             </div>
             @endforeach
-    
+
             <br />
-        
+
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.tax') }}</p>
                 <p>€{{  round($order->tax_amount, 2) }}</p>
@@ -170,22 +171,22 @@
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.service_charge') }}</p>
-                <p>€{{ $order->platform_charge }}</p>
+                <p>€{{ number_format($order->platform_charge , 2) }}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
-                <p>€{{ $order->delivery_charge }}</p>
+                <p>€{{ number_format($order->delivery_charge,2) }}</p>
             </div>
             <div class="amount-description-bottom" style="color: #4ECA39">
                 <p>{{ trans('rest.food_order.discount') }}</p>
-                <p>-€{{ $order->coupon_discount }}</p>
+                <p>-€{{ $order->coupon_discount == 0 ? number_format($order->coupon_discount, 2) : $order->coupon_discount}}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.total') }}</p>
                 <p>€{{ round($order->total_amount, 2) }}</p>
             </div>
         </div>
-    
+
         <div class="footer center">
             <p><strong>{{ trans('rest.food_order.payment_method') }} : </strong> {{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card'): ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod'):'Ideal') }}</p>
             <p>{{ trans('rest.food_order.order_enjoy') }}</p>

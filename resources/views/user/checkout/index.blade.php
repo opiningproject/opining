@@ -13,7 +13,7 @@ $serviceCharge = getRestaurantDetail()->service_charge;
 
 $address = session('address');
 $phone_no = session('phone_no');
-
+$addressData = null;
 if ($address) {
     $addressData = getAddressDetails($address);
 }
@@ -103,10 +103,17 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         <div class="form-group">
                                                                             <label for="streetname"
                                                                                 class="form-label">{{ trans('user.checkout.delivery_address') }}</label>
-                                                                            <input type="text" name="street_name"
-                                                                                id="street_name" class="form-control"
-                                                                                required
-                                                                                value="{{ $addressData->street_name ?? '' }}" />
+                                                                            @if(session('street_name') && !$addressData)
+                                                                                <input type="text" name="street_name"
+                                                                                       id="street_name" class="form-control"
+                                                                                       required
+                                                                                       value="{{ session('street_name') ? session('street_name') : ''}}" />
+                                                                            @else
+                                                                                <input type="text" name="street_name"
+                                                                                       id="street_name" class="form-control"
+                                                                                       required
+                                                                                       value="{{ $addressData->street_name ?? '' }}" />
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                     <div
@@ -137,10 +144,17 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         <div class="form-group">
                                                                             <label for="city"
                                                                                 class="form-label">{{ trans('user.checkout.city') }}</label>
+                                                                            @if(session('city') && !$addressData)
+                                                                            <input type="text" maxlength="25" required
+                                                                                name="city" id="city"
+                                                                                class="form-control"
+                                                                                value="{{ session('city') ? session('city') : ''}}" />
+                                                                            @else
                                                                             <input type="text" maxlength="25" required
                                                                                 name="city" id="city"
                                                                                 class="form-control"
                                                                                 value="{{ $addressData->city ?? '' }}" />
+                                                                                @endif
                                                                         </div>
                                                                     </div>
                                                                     <div
@@ -435,7 +449,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         type="button" role="tab"
                                                                         aria-controls="v-pills-cashondelivery"
                                                                         aria-selected="false">
-                                                                        <img src="{{ asset('images/cod.svg') }}"
+                                                                        <img src="{{ asset('images/cod_new.svg') }}"
                                                                             alt="" height="30" width="31"
                                                                             class="svg">
                                                                         {{ trans('user.checkout.cod') }}

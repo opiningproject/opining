@@ -177,6 +177,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
     Route::post('/orders/searchOrder', [OrdersController::class, 'searchOrder'])->name('searchOrder');
+    Route::post('/orders/getRealTimeOrder', [OrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
 
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
 

@@ -147,8 +147,21 @@ $(document).on('click', '#toggleTotal', function () {
 })
 
 $(document).on('click','#all-orders-tab', function() {
-    $('#order-dilters').removeClass('disable-order-filters');    
+    $('#order-dilters').removeClass('disable-order-filters');
 })
 $(document).on('click','#open-orders-tab', function() {
     $('#order-dilters').addClass('disable-order-filters');
+})
+
+// notification popup click event code.
+$(document).on('click','.order_details_button', function() {
+    var urlLastElement = document.location.pathname
+    if (urlLastElement == '/orders') {
+        let id = $(this).attr("data-id");
+        $('.order-' + id).addClass('active');
+        $('.order-notification-popup').modal('hide')
+    } else {
+        $('.order-notification-popup').modal('hide')
+    }
+
 })

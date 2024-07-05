@@ -27,6 +27,20 @@ class AddressController extends Controller
 
         if($zipcode)
         {
+            $zipcodeData = [
+                'zipcode' => $request->zipcode,
+                'house_no' => $request->house_no
+            ];
+            $checkUserAddress = Address::where('zipcode', $request->zipcode)->where('house_no', $request->house_no)->first();
+            if (!$checkUserAddress) {
+                $validAddress = validateAddressByPostCode($zipcodeData);
+                if ($validAddress) {
+                    $validAddress = json_decode($validAddress);
+                    session(['street_name' => $validAddress->street]);
+                    session(['city' => $validAddress->city]);
+                }
+            }
+
             session()->forget('address');
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);

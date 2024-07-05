@@ -11,7 +11,7 @@
 
 <script type="text/javascript" src="{{ asset('js/jquery.datepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
-<script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.24.0/full-all/ckeditor.js"></script>
 <script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>
@@ -28,9 +28,9 @@
         integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
         crossorigin="anonymous"></script>
 <script>
-    
+
     var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
-    
+
     var baseURL = "{{ url('/') }}"
     var theme = "{{ session('theme') }}";
 
@@ -62,7 +62,7 @@
 
     inlineSVG.init(svg_options, () => console.log('All SVGs inlined'));
     // show popup by socket io
-    
+
     @if(auth()->user())
     socket.on('socketConnectionSecured', (message) => {
         $('#socket-id').val(message)
@@ -75,6 +75,7 @@
     checkNotifiedOrders()
 
     function checkNotifiedOrders() {
+
     $.ajax({
         type: 'GET',
         url: baseURL + '/orders/not-notified-orders',
@@ -86,6 +87,27 @@
                 // $('.myaudio').play();
                 document.getElementById('myaudio').play();
                 @endif
+                    getLiveOrderList();
+            }
+        },
+        error: function (data) {
+            alert("Error")
+        }
+    });
+}
+function getLiveOrderList() {
+    var activeId = $('.foodorder-box-list-item.active').attr('data-id')
+    $.ajax({
+        type: 'POST',
+        url: baseURL + '/orders/getRealTimeOrder',
+        data: {
+            activeId
+        },
+        datatype: 'json',
+        success: function (data) {
+            if(data) {
+                $('.order-list-data-div1').html(data)
+                $('.order-notification-popup').modal('show')
             }
         },
         error: function (data) {

@@ -15,13 +15,16 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 20px !important;
             max-width: 342px;
             margin: auto;
             border: 1px solid #ddd;
-            padding: 20px;
             margin-top: 10px !important;
         }
+
+        /*.main {
+            width: 93% !important;
+        }*/
 
         .header {
             text-align: center;
@@ -149,6 +152,7 @@
                 <p>{{ $dish->dish->name }}
                     <br>
                    <span>{!! getOrderDishIngredients2($dish) !!}</span>
+                    <span><u>{{ $dish->notes }}</u></span>
                 </p>
                 <p>€{{ $itemPrice }}</p>
             </div>
@@ -170,15 +174,15 @@
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.service_charge') }}</p>
-                <p>€{{ $order->platform_charge }}</p>
+                <p>€{{ number_format($order->platform_charge, 2) }}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
-                <p>€{{ $order->delivery_charge }}</p>
+                <p>€{{ number_format($order->delivery_charge, 2) }}</p>
             </div>
             <div class="amount-description-bottom" style="color: #4ECA39">
                 <p>{{ trans('rest.food_order.discount') }}</p>
-                <p>-€{{ $order->coupon_discount }}</p>
+                <p>-€{{ number_format($order->coupon_discount,2) }}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.total') }}</p>

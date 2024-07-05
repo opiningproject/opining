@@ -34,6 +34,7 @@
                                 <a href="{{ route('orders') }}" class="nav-link {{ activeMenu('orders') }} align-middle">
                                     <img class="svg" src="{{ asset('images/order-menu.svg') }}" alt="" height="40" width="40">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.food_order') }}</span>
+                                    <span class="ms-1 d-sm-inline align-middle order-count"><b> {{ getOpenOrders() }} </b></span>
                                 </a>
                             </li>
                             <li class="nav-item">

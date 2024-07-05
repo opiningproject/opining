@@ -3113,6 +3113,7 @@ input[type=number] {
 .ordersdetails .orderdetails-main .orderdetails-desc .orderdetails-desc-main {
   display: flex;
   max-width: 400px;
+  line-height: 19px !important;
 }
 
 .ordersdetails .orderdetails-main .orderdetails-desc .orderdetails-desc-main .orderdetails-desc-card {

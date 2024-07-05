@@ -110,7 +110,7 @@ use App\Enums\RefundStatus;
         <?php $itemTotalPrice = 0; ?>
         @foreach($order->dishDetails as $key => $dish)
             <div class="orderdetails-desc custom-orderdetails-desc">
-                <div class="orderdetails-desc-main orderdetails-desc-320 align-items-center">
+                <div class="orderdetails-desc-main orderdetails-desc-320">
                     <div class="orderdetails-desc-count">
                         x{{ $dish->qty }}
                     </div>

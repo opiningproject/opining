@@ -108,6 +108,9 @@ function getLiveOrderList() {
             if(data) {
                 $('.order-list-data-div1').html(data)
                 $('.order-notification-popup').modal('show')
+                // get realtime open order count
+                var currentOrderCount = parseInt($('.order-count').text());
+                $('.order-count').html(currentOrderCount + 1);
             }
         },
         error: function (data) {

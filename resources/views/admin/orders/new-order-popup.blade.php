@@ -20,7 +20,7 @@ use App\Enums\PaymentType;
                     <div class="text-center mb-4">
                         <h1 class="mb-4 font-18 text-center">{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}</h1>
                         <h3 class="mb-2 font-16 text-center">{{ $order->delivery_time }} </h3>
-                        @if(str_contains(url()->current(), '/orders/') == true)
+                        @if(str_contains(url()->current(), '/orders') == true)
                             <button class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold px-5 mt-2 font-18 order_details_button" data-id="{{ $order->id }}" onclick="orderDetail({{ $order->id }})" >{{ trans('rest.food_order.order_details') }}</button>
                         @else
                             <a href="{{ route('orders', ['date_filter' => $order->id]) }}" target="_blank"

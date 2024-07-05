@@ -54,8 +54,8 @@ $(document).on('click', '#change-order-status-btn', function ()
                 $('#order-list-data-div .order-' + id).remove();
 
                 // get realtime open order count
-                var currentOrderCount = $('.order-count').text();
-                $('.order-count').html(currentOrderCount - 1);
+                // var currentOrderCount = $('.order-count').text();
+                // $('.order-count').html(currentOrderCount - 1);
             }
             $('.foodorder-box-details').html(response.data);
 

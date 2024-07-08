@@ -108,9 +108,15 @@ function getLiveOrderList() {
             if(data) {
                 $('.order-list-data-div1').html(data)
                 $('.order-notification-popup').modal('show')
+
                 // get realtime open order count
-                // var currentOrderCount = parseInt($('.order-count').text());
-                // $('.order-count').html(currentOrderCount + 1);
+                var totalAmountCount = $('.order-count').text();
+                totalAmountCount = totalAmountCount.replace('€', '').trim();
+                var currentOrderCount = $('.order-notification-popup .modal-body .items-list-order .ord_item .total_amount').html();
+                var amountWithoutEuro = currentOrderCount.replace('+', '').trim().replace('+', '').replace('€', '').trim();
+                currentOrderCount = parseFloat(amountWithoutEuro);
+                var totalPrice = parseFloat(totalAmountCount) + parseFloat(currentOrderCount);
+                $('.order-count').html('€' + totalPrice.toFixed(2));
             }
         },
         error: function (data) {

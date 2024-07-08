@@ -114,9 +114,9 @@ function getLiveOrderList() {
                 totalAmountCount = totalAmountCount.replace('€', '').trim();
                 var currentOrderCount = $('.order-notification-popup .modal-body .items-list-order .ord_item .total_amount').html();
                 var amountWithoutEuro = currentOrderCount.replace('+', '').trim().replace('+', '').replace('€', '').trim();
-                currentOrderCount = parseFloat(amountWithoutEuro);
-                var totalPrice = parseFloat(totalAmountCount) + parseFloat(currentOrderCount);
-                $('.order-count').html('€' + totalPrice.toFixed(2));
+                currentOrderCount = parseInt(amountWithoutEuro);
+                var totalPrice = parseInt(totalAmountCount) + parseInt(currentOrderCount);
+                $('.order-count').html('€' + totalPrice);
             }
         },
         error: function (data) {

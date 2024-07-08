@@ -33,7 +33,9 @@ function orderDetail(id) {
             $('.foodorder-box-details').html(response);
 
             $(".foodorder-box-list div").removeClass("active");
+            $('.foodorder-box-list .time img').attr('src', baseURL + '/images/clock-yellow.svg');
             $('.order-' + id).addClass('active');
+            $('.foodorder-box-list .active .time img').attr('src', baseURL + '/images/clock-black.svg');
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

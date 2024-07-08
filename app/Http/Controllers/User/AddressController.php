@@ -22,6 +22,7 @@ class AddressController extends Controller
 
     public function validateZipcode(Request $request)
     {
+        session()->forget(['street_name', 'city']);
         $zip =substr($request->zipcode, 0, 4);
         $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status','1')->first();
 

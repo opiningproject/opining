@@ -39,7 +39,7 @@ use App\Enums\OrderType;
                     <div class="icontext-item d-flex align-items-center gap-1">
                         <img src="{{ asset('images/hand-money-icon.svg') }}" alt=""
                              class="img-fluid svg" width="30" height="29">
-                        <div class="text">
+                        <div class="text total_amount">
                             €{{ number_format($order->total_amount, 2) }}</div>
                     </div>
                 </div>

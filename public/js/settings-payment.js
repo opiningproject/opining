@@ -54,8 +54,12 @@ $(document).on('click', '#change-order-status-btn', function ()
                 $('#order-list-data-div .order-' + id).remove();
 
                 // get realtime open order count
-                // var currentOrderCount = $('.order-count').text();
-                // $('.order-count').html(currentOrderCount - 1);
+                var totalAmountCount = $('.order-count').text();
+                totalAmountCount = totalAmountCount.replace('€', '').trim();
+                var currentOrderCount = $('.foodorder-box-list .active .total_amount').html()
+                var amountWithoutEuro = currentOrderCount.replace('€', '').trim();
+                currentOrderCount = parseFloat(amountWithoutEuro);
+                $('.order-count').html('€' + parseFloat(totalAmountCount - currentOrderCount).toFixed(2));
             }
             $('.foodorder-box-details').html(response.data);
 

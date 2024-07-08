@@ -58,8 +58,8 @@ $(document).on('click', '#change-order-status-btn', function ()
                 totalAmountCount = totalAmountCount.replace('€', '').trim();
                 var currentOrderCount = $('.foodorder-box-list .active .total_amount').html()
                 var amountWithoutEuro = currentOrderCount.replace('€', '').trim();
-                currentOrderCount = parseFloat(amountWithoutEuro);
-                $('.order-count').html('€' + parseFloat(totalAmountCount - currentOrderCount).toFixed(2));
+                currentOrderCount = parseInt(amountWithoutEuro);
+                $('.order-count').html('€' + parseInt(totalAmountCount - currentOrderCount));
             }
             $('.foodorder-box-details').html(response.data);
 

@@ -115,11 +115,11 @@ color:  #212529 !important;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    font-size: 13px;
+    font-size: 12px;
     background: #FFC00B;
     border-radius: 8px;
     line-height: initial;
-    padding: 8px 8px 4px;
+    padding: 8px 6px 4px;
     color: #292929;
     position: relative;
     top: -1px;
@@ -128,6 +128,14 @@ color:  #212529 !important;
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active .order-count, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover .order-count  {
     background: #ffffff;
     color: #292929;
+}
+
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
+    font-size: 16px !important;
+}
+
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
+    padding: 16px 16px !important;
 }
 
 @media screen and (max-width: 1600px) {

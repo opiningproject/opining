@@ -95,4 +95,3 @@ use App\Enums\PaymentType;
         </div>
     </div>
 @endforeach
-

@@ -47,17 +47,17 @@ use App\Enums\PaymentType;
                                 <h3 class="font-14"><i class="fa fa-location-dot font-12 text-yellow-2"></i>
                                     @if($order->order_type == OrderType::Delivery)
                                         <?php
-                                            echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                                        echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
                                         ?>
                                     @else
-                                         {{ getRestaurantDetail()->rest_address }}
+                                        {{ getRestaurantDetail()->rest_address }}
                                     @endif
                                 </h3>
                                 @if($order->delivery_note)
-                                <p><span class="text-black">{{ trans('rest.food_order.instruction') }}:</span>
-                                    {{ $order->delivery_note ?? '-' }}
-                                </p>
-                                    @endif
+                                    <p><span class="text-black">{{ trans('rest.food_order.instruction') }}:</span>
+                                        {{ $order->delivery_note ?? '-' }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
 

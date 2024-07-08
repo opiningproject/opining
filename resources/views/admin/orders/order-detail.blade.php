@@ -224,7 +224,7 @@ $userDetails = $order->orderUserDetails;
                             <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>
                             {{ getOrderDishIngredients($dish) }}
                         </div>
-                        @if(count($dish->orderDishPaidIngredients) > 2)
+                        @if(count($dish->orderDishPaidIngredients) > 3)
                             <div class="text">
                                 <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
                                    onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }}</a>

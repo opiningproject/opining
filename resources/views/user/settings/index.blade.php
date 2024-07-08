@@ -1,9 +1,9 @@
-@extends('layouts.user-app') 
-@section('content') 
+@extends('layouts.user-app')
+@section('content')
 <div class="main">
   <div class="main-view">
-    <div class="container-fluid bd-gutter bd-layout"> 
-        @include('layouts.user.side_nav_bar') 
+    <div class="container-fluid bd-gutter bd-layout">
+        @include('layouts.user.side_nav_bar')
         <main class="bd-main order-1">
             <div class="main-content">
               <div class="section-page-title main-page-title mb-0 align-items-start title-mobile">
@@ -59,7 +59,7 @@
                                 <img src="{{ asset('images/netherlands-flag.svg') }}" alt="netherlands Flag" class="img-fluid">
                               </button>
                               <input type="text" class="form-control countrycode-input" readonly value="+31">
-                              <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" maxlength="10" minlength="10" min="1" required>
+                              <input type="number" class="form-control" value="{{ $user->phone_no }}" name="phone_no" maxlength="9" minlength="9" min="1" required>
                             </div>
                           </div>
                         </div>
@@ -106,15 +106,15 @@
         </main>
     </div>
   </div>
-  <!-- start footer --> 
+  <!-- start footer -->
   @include('layouts.user.footer_design')
   <!-- end footer -->
-</div> 
+</div>
 
-@include('user.modals.change-password') 
-@endsection 
+@include('user.modals.change-password')
+@endsection
 
-@section('script') 
+@section('script')
 <script>
   $(function() {
     $('#dob').datepicker({
@@ -124,5 +124,5 @@
       orientation: "bottom left",
     });
   });
-</script> 
+</script>
 @endsection

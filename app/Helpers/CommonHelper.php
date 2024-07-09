@@ -475,8 +475,8 @@ if (!function_exists('uploadImageToLocal')) {
 if (!function_exists('getOpenOrders')) {
     function getOpenOrders()
     {
-        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->sum('total_amount');
-        return $openOrders ? (int) $openOrders : 0;
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+        return count($openOrders);
     }
 }
 

@@ -41,7 +41,7 @@
                   <div class="text-grp d-flex flex-column gap-2">
                     <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                     <div class="number">
-                      <span class="fw-600">€</span>{{ $totalIncome }}
+                      <span class="fw-600">€</span>{{ number_format($totalIncome, 2) }}
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
                           <div class="text-grp d-flex flex-column gap-1">
                               <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                               <div class="number">
-                                  <span class="fw-600">€</span><span id="chart-fluctuate-amount">{{ $monthlyAmount }}</span>
+                                  <span class="fw-600">€</span><span id="chart-fluctuate-amount">{{ number_format($monthlyAmount, 2) }}</span>
                               </div>
                           </div>
                           <div class="btn-grp d-flex flex-wrap align-items-center">

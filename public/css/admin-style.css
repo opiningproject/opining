@@ -112,15 +112,19 @@ color:  #212529 !important;
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link .order-count {
     white-space: nowrap;
-    font-size: 13px;
+    font-size: 12px;
     background: #FFC00B;
-    /* overflow: hidden; */
     border-radius: 9999px;
     line-height: initial;
     padding: 9px 7px 5px;
     color: #292929;
     position: relative;
-    top: 2px;
+    top: -2px;
+    display: inline-flex !important;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active .order-count, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover .order-count  {

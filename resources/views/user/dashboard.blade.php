@@ -4,7 +4,8 @@
     <?php
     $zipcode = session('zipcode');
     $house_no = session('house_no');
-
+    $street_name = session('street_name');
+    $city = session('city');
     $showModal = 0;
 
     if (!session('showLoginModal')) {
@@ -289,7 +290,12 @@
                                                                 alt="" class="svg" height="20"
                                                                 width="20" />
                                                             <p id="zip_address" class="mb-0">
-                                                                {{ $house_no ? $house_no . ', ' . $zipcode : '' }}</p>
+                                                                @if($street_name)
+                                                                    {{ ($house_no ? $house_no. ', ' : '') . ($street_name ? $street_name : '')}}
+                                                                @else
+                                                                    {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                                                @endif
+                                                            </p>
                                                         </div>
                                                     </div>
 

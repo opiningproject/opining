@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*font-family: "Poppins", sans-serif;*/
 
 @font-face {
   font-family: "Sebino-Medium";
@@ -193,7 +194,8 @@ body {
   padding-right: 0 !important;
   height: 100vh;
   line-height: 1.5;
-  font-family: "SebinoRegular" !important;
+  /*font-family: "SebinoRegular" !important;*/
+    font-family: "Poppins", sans-serif !important;
 }
 
 ::-webkit-scrollbar {
@@ -1818,7 +1820,6 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
     background:inherit !important;
     align-items:inherit !important;
     justify-content: inherit !important;
-    position: absolute !important;
     top: 0px !important;
 }
 
@@ -4830,7 +4831,29 @@ label.error {
 /*Rekha Sharma*/
 
 .bag-count {position: relative;}
-.bag-count .count {display: flex;align-items: center;justify-content: center;font-size: 10px;color: #ffffff;background: #3BCE62;text-align: center;overflow: hidden;border-radius: 9999px;width: 18px;height: 18px;position: absolute;bottom: -5px;right: -7px;line-height: initial;pointer-events: none;line-height: 10px;}
+.bag-count .count {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #ffffff;
+    background: #3BCE62;
+    text-align: center;
+    overflow: hidden;border-radius: 9999px;width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: -5px;
+    right: -7px;
+    line-height: initial;
+    pointer-events: none;
+    /*line-height: 10px;*/
+    /*font-family: "SebinoRegular" !important;*/
+    font-family: "Poppins", sans-serif !important;
+}
 
 .checkout-bag-count .count {
     display: flex;

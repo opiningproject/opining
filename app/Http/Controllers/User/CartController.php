@@ -533,7 +533,7 @@ class CartController extends Controller
                                 if ($request->totalAmt >= $deliveryCharges->min_order_price) {
                                     return response::json(['status' => 200, 'message' => '']);
                                 } else {
-                                    return response::json(['status' => 412, 'message' => trans('user.message.min_order_price',['min_order_price' => $deliveryCharges->min_order_price])]);
+                                    return response::json(['status' => 412, 'message' => trans('user.message.min_order_price',['min_order_price' => number_format($deliveryCharges->min_order_price, 2)])]);
                                 }
                             }
                         } else {

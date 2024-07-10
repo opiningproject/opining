@@ -48,8 +48,9 @@ class AddressController extends Controller
             session()->forget('address');
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);
-
-            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode ]);
+            $street_name = session('street_name') ?? '';
+            $city = session('city') ?? '';
+            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode, "street_name" => $street_name, "city" => $city]);
         }
 
         return response::json(['status' => 2, 'message' => trans('user.message.invalid_zipcode')]);
@@ -73,11 +74,15 @@ class AddressController extends Controller
 
             $response['zipcode'] = $address->zipcode;
             $response['house_no'] = $address->house_no;
+            $response['street_name'] = $address->street_name;
+            $response['city'] = $address->city;
 
             if($zipcode){
 
                 session(['zipcode'=> $address->zipcode]);
                 session(['house_no'=> $address->house_no]);
+                session(['street_name' => $address->street_name]);
+                session(['city' => $address->city]);
                 session(['address' => $id]);
                 $response['message'] = '';
 

@@ -46,7 +46,7 @@ $(function () {
     });
 
     $(document).on('click', '.select-address-btn', function () {
-      
+
         var parentId = $(this).closest('div[id^="address-"]').attr('id');
 
         // Extract the address ID from the parent div's ID
@@ -56,7 +56,7 @@ $(function () {
         var $parentDiv = $(this).closest('.total-addresses');
         // Hide the delete button in the clicked address div
         $parentDiv.find('.delete-address').addClass('d-none');
-                
+
         // Show the delete button in all other address divs
         $('.total-addresses').not($parentDiv).find('.delete-address').removeClass('d-none');
 
@@ -64,7 +64,7 @@ $(function () {
         // $(this).text('Selected');
 
         // Change the text of other buttons to 'Deliver Here' and remove styples except the clicked one
-      
+
         $('.selected-address').html('<span class="success-ico blank"></span>');
         // $('.select-address-btn').not($(this)).attr('style', '');
 
@@ -77,9 +77,11 @@ $(function () {
             url: baseURL + '/user/validate-address/' + addressId,
             type: 'GET',
             success: function (response) {
-        
+
                 $('#zipcode').val(response.data.zipcode)
                 $('#house_no').val(response.data.house_no)
+                $('#city').val(response.data.city)
+                $('#street_name').val(response.data.street_name)
                 if (response.status == 406) {
 
                     $('#zipcode-error').text(response.data.message);
@@ -90,7 +92,13 @@ $(function () {
 
                     let houseNumber = response.data.house_no;
                     let zipcode = response.data.zipcode;
+                    let city = response.data.city;
+                    let street_name = response.data.street_name;
                     let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                    if (street_name) {
+                        displayText = houseNumber + ', ' + street_name ;
+                    }
+
                     $("#zip_address").html('');
                     $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');
 
@@ -98,7 +106,9 @@ $(function () {
 
                     $('#addressChangeModal').on('hidden.bs.modal', function () {
                         $('#zipcode').val(response.data.zipcode)
-                    $('#house_no').val(response.data.house_no)
+                        $('#house_no').val(response.data.house_no)
+                        $('#city').val(response.data.city)
+                        $('#street_name').val(response.data.street_name)
                     });
 
                 }
@@ -138,9 +148,9 @@ function validateZipcode() {
             if (response.status == 2) {
                 $('#zipcode-error').text(response.message);
                 $('#zipcode-error').css("display", "block");
-            } else {          
+            } else {
             let currentUrl = window.location.href;
-    
+
             if(url !== currentUrl) {
                 window.location.href = url;
             } else {
@@ -148,17 +158,22 @@ function validateZipcode() {
 
                     let houseNumber = response.house_number;
                     let zipcode = response.zipcode;
+                    let city = response.city;
+                    let street_name = response.street_name;
                     let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                    if (street_name) {
+                        displayText = houseNumber + ', ' + street_name ;
+                    }
                     $("#zip_address").html('');
                     $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');
                     $('#addressChangeModal').modal('hide');
-    
+
                     // After closing modal set updated values
                     $('#addressChangeModal').on('hidden.bs.modal', function () {
                         $('#house_no').val(response.house_number)
                         $('#zipcode').val(response.zipcode)
                     });
-                } 
+                }
                 }
             }
         },

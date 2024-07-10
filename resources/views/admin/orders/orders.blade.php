@@ -10,6 +10,7 @@
     use App\Enums\RefundStatus;
 
     ?>
+    <span class="last_page" style="display: none"> {{ $lastPage }}</span>
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">

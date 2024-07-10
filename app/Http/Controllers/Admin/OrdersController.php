@@ -34,7 +34,7 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request, $id = null)
     {
         $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
 
@@ -63,16 +63,18 @@ class OrdersController extends Controller
             }
 
         $order = '';
-        $orders = $orders->get();
-
+        $orders = $orders->paginate(10);
         if (count($orders) > 0) {
-            if ($request->date_filter) {
-                $order = Order::find($request->date_filter);
+            if ($id) {
+                $order = Order::find($id);
             } else {
                 $order = $orders[0];
             }
         }
-        return view('admin.orders.orders', ['openOrders' => $openOrders, 'allOrders' => $orders,'order' => $order]);
+        if ($request->ajax()) {
+            return view('admin.orders.orders-list', ['orders' => $orders, 'activeId' => $request->activeId ?? 0]);
+        }
+        return view('admin.orders.orders', ['openOrders' => $openOrders, 'allOrders' => $orders,'order' => $order,'lastPage' => $orders->lastPage()]);
     }
 
     public function orderDetail(Request $request)

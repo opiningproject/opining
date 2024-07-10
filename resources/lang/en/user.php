@@ -268,7 +268,7 @@ return [
 		'reset_password' => 'We have sent reset password link to your email',
 		'cart_item_out_of_stock' => 'Few items are out of stock. Please remove them to continue.',
 		'restaurant_closed' => "The restaurant doesn't deliver at this time. Please try again after sometime.",
-		'min_order_price' => 'The minimum order amount should be :min_order_price',
+		'min_order_price' => 'The minimum order amount should be €:min_order_price',
 		'coupon_expired' => 'Coupon is expired.',
 		'invalid_coupon' => 'Invalid Coupon.',
 		'coupon_applied' => 'Coupon Applied.',

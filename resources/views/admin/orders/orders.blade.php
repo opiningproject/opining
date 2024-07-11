@@ -10,56 +10,13 @@
     use App\Enums\RefundStatus;
 
     ?>
+    <span class="last_page" style="display: none"> {{ $lastPage }}</span>
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.admin.side_nav_bar')
-                <main class="bd-main order-1 w-100 position-relative">
+                <main class="bd-main updated_order order-1 w-100 position-relative">
                     <div class="main-content d-flex flex-column h-100">
-                        <div
-                            class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 foodorder-page-title">
-                            <h1 class="page-title me-auto">{{ trans('rest.food_order.title') }}</h1>
-                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
-                                <div class="header-filter-order d-flex align-items-center flex-wrap">
-                                    <div class="search-has col">
-                                        <span class="fa fa-search form-control-feedback"></span>
-                                        <input type="text" class="form-control" id="search-order" placeholder="Search">
-                                    </div>
-
-                                    <form class="form col" action="" method="#">
-                                        <div class="input-group">
-                                            <input type="text" placeholder="Select Date For Filter" class="form-control"
-                                                id="expiry_date" aria-label="expiry_date" name="expiry_date" required>
-                                        </div>
-                                    </form>
-                                </div>
-
-
-                                {{-- <button class="btn d-flex align-items-center bg-white" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                    <img src="{{ asset('images/filter-icon.svg') }}" alt="img" class="img-fluid svg"
-                                         width="22" height="20">
-                                    <div class="text">{{ trans('rest.food_order.filter') }}</div>
-                                </button>
-
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('orders',['date_filter'=>1]) }}">{{ trans('rest.food_order.today') }}</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('orders',['date_filter'=>2]) }}">{{ trans('rest.food_order.week') }}</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('orders',['date_filter'=>3]) }}">{{ trans('rest.food_order.month') }}</a>
-                                    </li>
-                                </ul> --}}
-                                {{-- <div> --}}
-                                <button type="button" name="clear" value="Clear" id="clear"
-                                    style="background-color: var(--theme-yellow2);" class="btn clear-button">Clear</button>
-                                {{-- </div> --}}
-
-                            </div>
-                        </div>
                         <div class="foodorder-box d-flex">
                             <div class="foodorder-box-list-wrp bg-white foodorder-box-list-top">
 

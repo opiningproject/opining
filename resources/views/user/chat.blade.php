@@ -1,7 +1,7 @@
 @extends('layouts.user-app')
 
 @section('content')
-    <div class="main">
+    <div class="main chat-main-screen">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.user.side_nav_bar')
@@ -22,7 +22,7 @@
                             {{-- Dynamic Message Block --}}
                             <div class="chatbox d-flex flex-column flex-fill h-100">
                                 <div class="chatbox-header d-flex gap-3">
-                                    <div class="profile-item d-flex gap-2 gap-sm-4 align-items-center">
+                                    <div class="profile-item d-flex gap-2 align-items-center">
                                         <div class="profile-img">
                                             <img
                                                 src="{{ getAdminUser()->image ? getAdminUser()->image : asset('images/user-profile-img.svg') }}"
@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="profile-textgrp">
                                             <div class="profile-title">{{ ucwords(getAdminUser()->first_name) }}</div>
-                                            <div class="profile-text d-flex align-items-center gap-1 gap-sm-2">
+                                            <div class="profile-text d-flex align-items-center gap-1 gap-sm-1">
                                                 @if(getAdminUser()->is_online == 1)
                                                     <span class="activicon"></span> {{ trans('user.chat.online') }}
                                                 @else
@@ -50,12 +50,13 @@
                                 <div class="chatbox-footer">
                                     <div
                                         class="form-group mb-0 position-relative d-flex gap-2 bg-gray align-items-center">
+                                        <div id="image-holder" class="image-holder"></div>
                                         <input type="text" id="message-input"
                                                class="form-control w-100 bg-transparent border-0 outline-0 message-input"
                                                placeholder="Write your message...">
                                         <div class="d-flex gap-2 gap-sm-3 align-items-center">
                                             <label for="chat_attachment" class="custom-file-upload">
-                                                <img src={{ asset('images/attach.svg') }}/>
+                                                <img src={{ asset('images/attach.svg') }} />
                                                 <input id="chat_attachment" accept="image/*" type="file" name="chat_attachment"
                                                        class="chat_attachment" style="display: none"/>
                                             </label>
@@ -65,8 +66,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <br>
-                                    <div id="image-holder" class="image-holder"> </div>
+                                    
                                 </div>
                             </div>
                             {{-- Dynamic Message Block --}}

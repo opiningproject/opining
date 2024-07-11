@@ -167,3 +167,82 @@ $(document).on('click','.order_details_button', function() {
     }
 
 })
+
+var page = 2;
+var isLoading = false;
+var endOfData = false;
+var lastPage = $('.lastPage').html(); // Adjust according to the last page number
+var url = window.location.pathname;
+var id = url.substring(url.lastIndexOf('/') + 1);
+
+$(".order-list-data-div1").scroll(function () {
+    if (endOfData || isLoading) return;
+
+    var scrollTop = $(this).scrollTop();
+    var containerHeight = $(this).height();
+    var contentHeight = $(this).get(0).scrollHeight;
+
+    // Check if the scroll position reaches near the bottom of the container
+    if (scrollTop + containerHeight >= contentHeight - 10) {
+       isLoading = true; // Set loading state before making the request
+        loadMoreData(page);
+    }
+});
+$("#order-list-data-div1").scroll(function () {
+    if (endOfData || isLoading) return;
+
+    var scrollTop = $(this).scrollTop();
+    var containerHeight = $(this).height();
+    var contentHeight = $(this).get(0).scrollHeight;
+
+    // Check if the scroll position reaches near the bottom of the container
+    if (scrollTop + containerHeight >= contentHeight - 10) {
+        isLoading = true; // Set loading state before making the request
+        loadMoreData(page);
+    }
+});
+
+$("#order-list-data-div1").scroll(function () {
+    if (endOfData || isLoading) return;
+
+    var scrollTop = $(this).scrollTop();
+    var containerHeight = $(this).height();
+    var contentHeight = $(this).get(0).scrollHeight;
+
+    // Check if the scroll position reaches near the bottom of the container
+    if (scrollTop + containerHeight >= contentHeight - 10) {
+        isLoading = true; // Set loading state before making the request
+        loadMoreData(page);
+    }
+});
+//
+
+function loadMoreData(currentPage) {
+    $.ajax({
+        url: '?page=' + currentPage,
+        type: "get",
+        beforeSend: function() {
+            $('#loader').show();
+        }
+    })
+        .done(function(data) {
+            if (data.trim().length === 0 || currentPage >= lastPage) {
+                $('#loader').hide();
+                $('#end-of-data').show();
+                endOfData = true;
+                return;
+            }
+
+            $(".order-list-data-div1").append(data);
+            if (parseInt(id)) {
+                orderDetail(id)
+            }
+            $('#loader').hide();
+            page = currentPage + 1; // Increment page number after successful data load
+            isLoading = false; // Reset loading state
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError) {
+            // alert('Server not responding...');
+            isLoading = false; // Reset loading state even if the request fails
+        });
+}

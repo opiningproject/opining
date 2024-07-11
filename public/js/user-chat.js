@@ -252,7 +252,7 @@ function readURL(input) {
         $('.image-holder').empty();
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
+            $('.image-holder').append('<div class="image-group"><img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i></div>');
         }
         reader.readAsDataURL(input.files[0]);
     }

@@ -19,7 +19,7 @@
                         <input type="hidden" name="receiver_id" class="receiver_id"
                                value="{{ $chat->chats->sender_id }}"
                                id="receiver_id_{{ $chat->chats->sender_id }}">
-                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-3"
+                        <div class="ChatDiv-item d-flex align-items-center justify-content-start gap-2"
                              id="chat_item_{{ $chat->chats->id }}">
                             <img src="{{ $chat->image ? $chat->image : asset('images/user-profile-img.svg') }}"
                                  alt="Profile-Img" class="img-fluid userimage" width="56" height="56">

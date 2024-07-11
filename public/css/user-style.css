@@ -3726,7 +3726,7 @@ input[type=number] {
 }
 
 @media (max-width: 767px) {
-  
+
   .orders {
     padding: 20px;
     border-radius: 12px;
@@ -5728,7 +5728,7 @@ footer {padding: 36px 20px 20px 20px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .form-control:-ms-input-placeholder {font-size: 14px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .form-control:-moz-placeholder {font-size: 14px;}
 .chat-main-screen .chatbox .chatbox-footer .image-holder .attachImage {object-fit: contain;width: 70px !important;height: 70px !important;object-position: center;background: #ffffff;padding: 5px;margin-right: 0px;}
-.chat-main-screen .chatbox .chatbox-footer .form-group #image-holder {position: absolute;background: whitesmoke;width: 100%;left: 0px;right: 0px;padding: 10px 10px 10px;top: -89px;border-radius: 8px 8px 0px 0px;border-bottom: 1px solid #dcdcdc;display: flex !important;gap: 10px;}
+.chat-main-screen .chatbox .chatbox-footer .form-group #image-holder {position: absolute;background: whitesmoke;width: 100%;left: 0px;right: 0px;padding: 10px 10px 10px;top: -89px;border-radius: 8px 8px 0px 0px;border-bottom: 1px solid #dcdcdc;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder:empty {display: none !important;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder .image-group {position: relative;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder .image-group:empty {display: none !important;}

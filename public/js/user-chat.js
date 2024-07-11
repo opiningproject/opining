@@ -3,7 +3,7 @@ var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['we
 
 let senderId = null;
 var sender = $('#auth-user-id').val();
-let page = 1;
+let pageNumber = 1;
 let fetchingOldMessages = false;
 let userId = $('.auth-user-id').val();
 let chatListpage = 1;
@@ -242,6 +242,7 @@ $(document).on('change', '.chat_attachment', function () {
 })
 // click on cross icon remove image.
 $(document).on('click', '.remove-image', function () {
+    $('.image-holder').hide();
     $('.attachImage').closest('img').remove();
     $('.remove-image').closest('i').remove();
     $(".chat_attachment").val('');
@@ -249,6 +250,7 @@ $(document).on('click', '.remove-image', function () {
 
 function readURL(input) {
     if (input.files && input.files[0]) {
+        $('.image-holder').empty();
         var reader = new FileReader();
         reader.onload = function (e) {
             $('.image-holder').append('<div class="image-group"><img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i></div>');

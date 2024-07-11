@@ -64,22 +64,20 @@ function sendRefundRequest()
 var page = 2;
 var isLoading = false;
 var endOfData = false;
-var lastPage = 9; // Adjust according to the last page number
-var url = window.location.pathname;
-var id = url.substring(url.lastIndexOf('/') + 1);
-console.log("url",id)
+var lastPage = $('.lastPage').html(); // Adjust according to the last page number
 
 
-$(".orders-list").scroll(function () {
+$(".overview-orders").scroll(function () {
     if (endOfData || isLoading) return;
 
     var scrollTop = $(this).scrollTop();
     var containerHeight = $(this).height();
     var contentHeight = $(this).get(0).scrollHeight;
 
+    // Logging for debugging
+
     // Check if the scroll position reaches near the bottom of the container
-    if (scrollTop + containerHeight >= contentHeight - 10) {
-        console.log("in");
+    if (scrollTop + containerHeight >= contentHeight - 32) {
         isLoading = true; // Set loading state before making the request
         loadMoreData(page);
     }
@@ -95,18 +93,13 @@ function loadMoreData(currentPage) {
         }
     })
         .done(function(data) {
-            if (data.trim().length === 0 || currentPage >= lastPage) {
-                $('#loader').hide();
-                $('#end-of-data').show();
+            if (data.trim().length === 0 || currentPage >= parseInt(lastPage)) {
                 endOfData = true;
                 return;
             }
 
-            $(".orders-list").append(data);
-            if (id) {
-                orderDetail(id)
-            }
-            $('#loader').hide();
+            $(".overview-orders").append(data);
+
             page = currentPage + 1; // Increment page number after successful data load
             isLoading = false; // Reset loading state
         })

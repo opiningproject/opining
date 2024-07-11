@@ -2081,9 +2081,15 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
     padding: 9px 12px !important;
     font-family: "Poppins", sans-serif;
     line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 600;
 }
-
+.cart-section .prev-input-group .coupon-apply-btn .btn-custom-yellow>span {
+  position: relative;
+  top: -1px;
+}
 .prev-input-group .form-control:focus {
   box-shadow: none;
   border-color: var(--theme-yellow2);
@@ -4780,7 +4786,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .bill-detail-invoice {position: absolute;left: 0px;right: 0px;bottom: 0px;background: #ffffff;z-index: 2;width: 100%;padding: 10px 20px 20px;box-shadow: 0px 0px 10px 0px #d9d9d9;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body, .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {height: 100%;}
 
-.cartSidebarCustom {padding-bottom: 180px;}
+.cartSidebarCustom {padding-bottom: 270px;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {box-shadow: none;outline: none;}
 
 
@@ -4957,7 +4963,7 @@ border-color: #FFC00B !important;
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {padding-top: 50px !important;}
 .cart-sidebar .stickyOnMobile {position: absolute;right: 0px;left: 0px;bottom: 10px;max-width: 90%;margin: 0px auto !important;width: 100%;z-index: 9;}
   #coupon_code_apply_btn.btn {padding: 4px 12px !important;}
-  .cartSidebarCustom .cartoffCanvas{padding-bottom: 220px;}
+  .cartSidebarCustom .cartoffCanvas{padding-bottom: 270px;}
   .cartSidebarCustom {padding-bottom: 0px;}
 }
 @media screen and (max-width: 1365px) {
@@ -5102,7 +5108,7 @@ footer .footer-logo a {font-size: initial !important;}
 .bill-detail-invoice .table-responsive {margin: 0px -8px;}
 .bill-detail-invoice .table-responsive table td {padding-top: 5px;padding-bottom: 5px;}
 .cart-sidebar .offcanvas-body {padding-bottom: 60px !important;}
-.cartSidebarCustom .cartoffCanvas {padding-bottom: 180px;}
+.cartSidebarCustom .cartoffCanvas {padding-bottom: 290px;}
 .bill-detail-invoice table {margin: 0px 0px;}
 .customisable-modal-body .modal-footer-sticky .btn-mobile {
   padding: 12px 8px 8px !important;
@@ -5682,7 +5688,7 @@ footer {padding: 36px 20px 20px 20px;}
 .chat-main-screen .section-page-title {margin-bottom: 20px;}
 .chat-main-screen .ChatDiv-main {gap: 0px;overflow-y: hidden;}
 .chat-main-screen .ChatDiv {border-top-right-radius: 0px;border-bottom-right-radius: 0px;padding: 10px;padding-top: 0px;max-width: 350px;min-height: 90vh;max-height: 90vh;}
-.chat-main-screen .chatbox .chatbox-main {min-height: initial;max-height: calc(100vh - 252px);height: 100%;}
+.chat-main-screen .chatbox .chatbox-main {min-height: calc(100vh - 252px);max-height: calc(100vh - 252px);height: 100%;}
 .chat-main-screen .ChatDiv .search-top {margin: 0px -8px 0px -10px;position: sticky;top: 0px;z-index: 1;background: #ffffff;}
 .chat-main-screen .ChatDiv .search-top .search-box {border: 0px;border-bottom: 1px solid #dcdcdc;border-radius: 0px;font-size: 14px;padding: 5px 20px;padding-left: 50px;min-height: 60px;max-height: 60px;}
 .chat-main-screen .ChatDiv .search-top svg {position: absolute;left: 20px;top: 50%;transform: translateY(-50%);z-index: 1;pointer-events: none;fill: #777777;}
@@ -5704,9 +5710,9 @@ footer {padding: 36px 20px 20px 20px;}
 .chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .text-grp .text {font-size: 10px;line-height: normal;}
 .chat-main-screen .ChatDiv .chat-user-list {position: relative;}
 .chat-main-screen .ChatDiv .chat-user-list .ChatDiv-type {margin-bottom: 5px;}
-.chatbox .chatbox-header .profile-item .profile-textgrp .profile-title {font-size: 16px;}
-.chatbox .chatbox-header .profile-item .profile-textgrp .profile-text {font-size: 12px;}
-.chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {width: 10px;height: 10px;border-radius: 9999px;background: #E36E49;}
+.chat-main-screen .chatbox .chatbox-header .profile-item .profile-textgrp .profile-title {font-size: 16px !important;}
+.chat-main-screen .chatbox .chatbox-header .profile-item .profile-textgrp .profile-text {font-size: 12px !important;}
+.chat-main-screen .chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {width: 10px;height: 10px;border-radius: 9999px;background: #E36E49;}
 .chat-main-screen .chatbox .chatbox-footer {padding: 20px 20px 20px;border-top: 1px solid #dcdcdc;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;}
 .chat-main-screen .chatbox .chatbox-footer .custom-file-upload {display: flex;align-items: center;cursor: pointer;justify-content: center;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .btn-custom-yellow {height: 40px;padding: 9px 19px;border-radius: 8px;font-size: 16px;cursor: pointer;width: 80px;}
@@ -5729,6 +5735,15 @@ footer {padding: 36px 20px 20px 20px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder .remove-image {border-radius: 9999px;font-size: 12px;padding: 3px 4px;top: 5px;right: -15px;}
 .chat-main-screen .chat-item-textgrp a>img {object-fit: contain;object-position: center;}
 
+
+.bill-detail-invoice  .cart-coupon-section {
+  position: absolute;
+  top: -80px;
+  left: 0px;
+  right: 0px;
+  margin: 0px auto;
+  max-width: calc(100% - 40px);
+}
 
 @media (max-width: 767px) {
   /* .chatbox {

@@ -171,7 +171,8 @@ $(document).on('click','.order_details_button', function() {
 var page = 2;
 var isLoading = false;
 var endOfData = false;
-var lastPage = $('.lastPage').html(); // Adjust according to the last page number
+var lastPage = $('.last_page').html(); // Adjust according to the last page number
+console.log("lastPage",lastPage)
 var url = window.location.pathname;
 var id = url.substring(url.lastIndexOf('/') + 1);
 
@@ -185,33 +186,6 @@ $(".order-list-data-div1").scroll(function () {
     // Check if the scroll position reaches near the bottom of the container
     if (scrollTop + containerHeight >= contentHeight - 10) {
        isLoading = true; // Set loading state before making the request
-        loadMoreData(page);
-    }
-});
-$("#order-list-data-div1").scroll(function () {
-    if (endOfData || isLoading) return;
-
-    var scrollTop = $(this).scrollTop();
-    var containerHeight = $(this).height();
-    var contentHeight = $(this).get(0).scrollHeight;
-
-    // Check if the scroll position reaches near the bottom of the container
-    if (scrollTop + containerHeight >= contentHeight - 10) {
-        isLoading = true; // Set loading state before making the request
-        loadMoreData(page);
-    }
-});
-
-$("#order-list-data-div1").scroll(function () {
-    if (endOfData || isLoading) return;
-
-    var scrollTop = $(this).scrollTop();
-    var containerHeight = $(this).height();
-    var contentHeight = $(this).get(0).scrollHeight;
-
-    // Check if the scroll position reaches near the bottom of the container
-    if (scrollTop + containerHeight >= contentHeight - 10) {
-        isLoading = true; // Set loading state before making the request
         loadMoreData(page);
     }
 });

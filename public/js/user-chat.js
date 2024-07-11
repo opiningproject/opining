@@ -242,6 +242,7 @@ $(document).on('change', '.chat_attachment', function () {
 })
 // click on cross icon remove image.
 $(document).on('click', '.remove-image', function () {
+    $('.image-holder').hide();
     $('.attachImage').closest('img').remove();
     $('.remove-image').closest('i').remove();
     $(".chat_attachment").val('');

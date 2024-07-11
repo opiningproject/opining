@@ -24,7 +24,7 @@
                         </div>
                         <div class="d-flex orders-main order-non-active">
                             <div class="orders d-flex">
-                                <div class=" orders-type">
+                                <div class="orders-type">
                                     <div class="orders-title mb-1">{{ trans('user.my_orders.active_orders') }}</div>
                                     @if(count($active_orders))
                                         <div class="orders-list py-3 px-0 pb-0">
@@ -53,7 +53,8 @@
                                 @if(count($orders))
                                     <div class="orders-type">
                                         <div class="orders-title mb-1">{{ trans('user.my_orders.overview') }}</div>
-                                        <div class="orders-list py-3 px-1">
+                                        <span class="lastPage" style="display: none"> {{$lastPage}}</span>
+                                        <div class="orders-list overview-orders py-3 px-1">
                                             @foreach($orders as $key => $ord)
                                                 <div onclick="orderDetail({{ $ord->id }})" style="cursor: pointer;"
                                                      class="{{ $ord->id == $order->id ? 'active':'' }} orders-item d-flex align-items-center justify-content-between gap-2"

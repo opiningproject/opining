@@ -61,5 +61,53 @@ function sendRefundRequest()
     })
 }
 
+var page = 2;
+var isLoading = false;
+var endOfData = false;
+var lastPage = $('.lastPage').html(); // Adjust according to the last page number
+
+
+$(".overview-orders").scroll(function () {
+    if (endOfData || isLoading) return;
+
+    var scrollTop = $(this).scrollTop();
+    var containerHeight = $(this).height();
+    var contentHeight = $(this).get(0).scrollHeight;
+
+    // Logging for debugging
+
+    // Check if the scroll position reaches near the bottom of the container
+    if (scrollTop + containerHeight >= contentHeight - 32) {
+        isLoading = true; // Set loading state before making the request
+        loadMoreData(page);
+    }
+});
+//
+
+function loadMoreData(currentPage) {
+    $.ajax({
+        url: '?page=' + currentPage,
+        type: "get",
+        beforeSend: function() {
+            $('#loader').show();
+        }
+    })
+        .done(function(data) {
+            if (data.trim().length === 0 || currentPage >= parseInt(lastPage)) {
+                endOfData = true;
+                return;
+            }
+
+            $(".overview-orders").append(data);
+
+            page = currentPage + 1; // Increment page number after successful data load
+            isLoading = false; // Reset loading state
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError) {
+            // alert('Server not responding...');
+            isLoading = false; // Reset loading state even if the request fails
+        });
+}
+
 
 

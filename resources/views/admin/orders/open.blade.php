@@ -7,9 +7,8 @@
 
     ?>
 
-    @if(count($openOrders))
-        @foreach($openOrders as $key => $ord)
-
+    @if(count($openOrders) && $order != '')
+            @foreach($openOrders as $key => $ord)
             <div  class="{{ $order->id == $ord->id ? 'active' : '' }} foodorder-box-list-item d-flex order-{{ $ord->id }}"
                  onclick="orderDetail({{ $ord->id }})" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
                 <div class="details w-100 d-flex flex-column gap-3">

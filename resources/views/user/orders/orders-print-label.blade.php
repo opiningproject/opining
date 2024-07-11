@@ -17,6 +17,7 @@
             margin: 0;
             padding: 10px 15px; /* Adjust padding */
             max-width: 100%; /* Full width */
+            font-size: 14px;
         }
 
         .header {
@@ -27,6 +28,7 @@
         .header img {
             width: 80px; /* Adjust image size */
             margin-bottom: 5px; /* Adjust margin */
+            filter: grayscale(100%) brightness(0%);
         }
 
         .header h1 {
@@ -35,11 +37,11 @@
         }
 
         .section {
-            margin-bottom: 10px; /* Adjust margin */
+            margin-bottom: 5px; /* Adjust margin */
         }
 
         .section p {
-            margin: 3px 0; /* Adjust margin */
+            margin: 0px 0px; /* Adjust margin */
         }
 
         .bold {
@@ -65,7 +67,7 @@
             border-bottom: 1px solid #000;
             padding-bottom: 5px;
             margin-bottom: 5px;
-            padding-top: 10px;
+            padding-top: 5px;
         }
 
         .amount-description-price-header p:last-child,
@@ -165,7 +167,7 @@
                 <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
                 <p>€{{ number_format($order->delivery_charge, 2) }}</p>
             </div>
-            <div class="amount-description-bottom" style="color: #4ECA39">
+            <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.discount') }}</p>
                 <p>-€{{ number_format($order->coupon_discount,2) }}</p>
             </div>

@@ -248,7 +248,7 @@ $(document).on('keyup', '#search-chat', debounce(function () {
         url: baseURL + '/chat/search-chat?q=' + search,
         type: 'GET',
         success: function (response) {
-            let searchbox = '<div class="mb-2">\n' +
+            let searchbox = '<div class="search-top">\n' +
                 '    <input type="search" name="q" id="search-chat" class="search-box form-control" value="' + search + '" placeholder="Search...">\n' +
                 '    </div>'
             let newData = [searchbox, response]
@@ -328,7 +328,7 @@ function readURL(input) {
         $('.image-holder').empty();
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px; border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');
+            $('.image-holder').append('<div class="image-group"><img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px; border-radius: 20%;"/><i class="fa-solid fa-xmark remove-image"></i></div>');
         }
         reader.readAsDataURL(input.files[0]);
     }

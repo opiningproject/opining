@@ -219,7 +219,7 @@ $(document).on('click', '.ChatDiv-list', function () {
 
     let status = $(this).data('status');
 
-    // let initialSenderName = status == '1' ? $(".profile-text").html('<span class="activicon"></span> ' + chatValidationMsg.online) : $(".profile-text").html('<span class="inactivicon"></span> ' + chatValidationMsg.offline);
+    let initialSenderName = status == '1' ? $(".profile-text").html('<span class="activicon"></span> ' + chatValidationMsg.online) : $(".profile-text").html('<span class="inactivicon"></span> ' + chatValidationMsg.offline);
 
     var senderName = $(this).find('.title').text(); // Get the sender's name
 

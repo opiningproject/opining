@@ -106,17 +106,8 @@ function getLiveOrderList() {
         datatype: 'json',
         success: function (data) {
             if(data) {
-                $('.order-list-data-div1').html(data)
+                $('.order-list-data-div1').prepend(data.data)
                 $('.order-notification-popup').modal('show')
-
-                // get realtime open order count
-               /* var totalAmountCount = $('.order-count').text();
-                totalAmountCount = totalAmountCount.replace('€', '').trim();
-                var currentOrderCount = $('.order-notification-popup .modal-body .items-list-order .ord_item .total_amount').html();
-                var amountWithoutEuro = currentOrderCount.replace('+', '').trim().replace('+', '').replace('€', '').trim();
-                currentOrderCount = parseInt(amountWithoutEuro);
-                var totalPrice = parseInt(totalAmountCount) + parseInt(currentOrderCount);
-                $('.order-count').html('€' + totalPrice);*/
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);
             }

@@ -3,7 +3,7 @@ var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['we
 
 let senderId = null;
 var sender = $('#auth-user-id').val();
-let page = 1;
+let pageNumber = 1;
 let fetchingOldMessages = false;
 let userId = $('.auth-user-id').val();
 let chatListpage = 1;
@@ -249,6 +249,7 @@ $(document).on('click', '.remove-image', function () {
 
 function readURL(input) {
     if (input.files && input.files[0]) {
+        $('.image-holder').empty();
         var reader = new FileReader();
         reader.onload = function (e) {
             $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px;border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');

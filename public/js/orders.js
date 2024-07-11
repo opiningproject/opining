@@ -174,8 +174,6 @@ var endOfData = false;
 var lastPage = $('.lastPage').html(); // Adjust according to the last page number
 var url = window.location.pathname;
 var id = url.substring(url.lastIndexOf('/') + 1);
-console.log("url",id)
-
 
 $(".order-list-data-div1").scroll(function () {
     if (endOfData || isLoading) return;
@@ -236,7 +234,7 @@ function loadMoreData(currentPage) {
             }
 
             $(".order-list-data-div1").append(data);
-            if (id) {
+            if (parseInt(id)) {
                 orderDetail(id)
             }
             $('#loader').hide();

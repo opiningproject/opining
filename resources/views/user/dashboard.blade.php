@@ -7,12 +7,12 @@
     $street_name = session('street_name');
     $city = session('city');
     $showModal = 0;
-    
+
     if (!session('showLoginModal')) {
         $showModal = 1;
         Session::put('showLoginModal', '1', '1440');
     }
-    
+
     $cartValue = 0;
     ?>
     <div class="main">
@@ -97,7 +97,7 @@
                                         @foreach ($categories as $key => $cat)
                                             <?php
                                             $selected = '';
-                                            
+
                                             if (!isset($_GET['all']) && $cat_id == '') {
                                                 if ($key == 0) {
                                                     $selected = 'selected-cart-active';
@@ -145,17 +145,17 @@
                                             <?php
                                             $disableBtn = '';
                                             $customizeBtn = false;
-                                            
+
                                             //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                             if ($dish->out_of_stock == '1') {
                                                 $disableBtn = 'disabled';
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             if (count($dish->ingredientsWithoutTrash) == 0) {
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             ?>
                                             <div class="card food-detail-card">
                                                 @if ($dish->percentage_off > 0)
@@ -567,12 +567,6 @@
 
                                 <div class="cart-amount-cal-data" id="cart-amount-cal-data"
                                     {{ count($cart) > 0 ? '' : 'style=display:none' }}>
-                                    <!--                                                      <div class="form-group prev-input-group custom-icon-input-group">
-                                                                                    <span class="input-group-icon">
-                                                                                      <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg img-fluid" height="22" width="25">
-                                                                                    </span>
-                                                                                    <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}" placeholder="{{ trans('user.cart.instruction') }}" />
-                                                                                  </div>-->
                                     <div class="mb-4 pb-1">
                                         <div
                                             class="form-group prev-input-group position-relative d-flex align-items-center mb-0">

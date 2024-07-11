@@ -693,7 +693,7 @@ form .prev-input-group .input-group-icon svg {
 .chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {width: 12px;height: 12px;border-radius: 9999px;}
 .chat-main-screen .chatbox .chatbox-footer {padding: 20px 20px 20px;border-top: 1px solid #dcdcdc;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;}
 .chat-main-screen .chatbox .chatbox-footer .custom-file-upload {display: flex;align-items: center;cursor: pointer;justify-content: center;}
-.chat-main-screen .chatbox .chatbox-footer .form-group .btn-custom-yellow {height: 40px;padding: 9px 19px;border-radius: 8px;font-size: 16px;cursor: pointer;width: 80px;}
+.chat-main-screen .chatbox .chatbox-footer .form-group .btn-custom-yellow {height: 40px;padding: 9px 19px;border-radius: 8px;font-size: 16px;cursor: pointer;width: 80px;display: flex;align-items: center;font-family: "Poppins", sans-serif;line-height: 1.4;font-weight: 500;}
 .chat-main-screen .chatbox .chatbox-footer .form-group {border-radius: 8px;padding: 5px 10px;}
 .chat-main-screen .chatbox .chatbox-main .chats-grp {padding: 32px 20px 56px 20px;width: calc(100% + 4px);}
 .chat-main-screen .chatbox .chatbox-main .chats-grp::-webkit-scrollbar {width: 5px;}

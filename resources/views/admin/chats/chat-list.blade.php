@@ -3,12 +3,6 @@
         @if ($chat != null)
             @if ($chat->id !== auth()->id())
                 <div class="ChatDiv-type">
-                    {{--                @if ($chat->unreadCount && $chat->unreadCount > 0 && $chat->chats->sender_id != auth()->id())--}}
-                    {{--                    <span class="badge badge_{{ $chat->chats->sender_id }}">--}}
-                    {{--                        {{ $chat->unreadCount ? $chat->unreadCount : 0 }} </span>--}}
-                    {{--                    @else--}}
-                    {{--                    <span class="badge badge_{{ $chat->chats->sender_id }}" style="display: none"> </span>--}}
-                    {{--                @endif--}}
                     <div class="ChatDiv-list" data-id="{{ getAdminUser()->id }}" data-receiver-id="{{ $chat->id }}"
                          data-chat-id="{{ $chat->chats->id }}" data-status="{{ $chat->is_online }}"
                          data-user="{{ $chat->id }}">
@@ -30,11 +24,6 @@
 
                                 </div>
                                 <div class="text">{{ $chat->chats->created_at->format('h:i a | d, M Y') }}</div>
-                                @if ($chat->is_online == 1)
-                                    <p>
-                                        <span class="activicon"></span> <span>Online</span>
-                                    </p>
-                                @endif
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*font-family: "Poppins", sans-serif;*/
+
 .text-indent-initial {
     text-indent: initial !important;
 }
@@ -249,7 +252,6 @@ form .prev-input-group .input-group-icon svg {
     font-size: 12px;
     background: #FFC00B;
     border-radius: 9999px;
-    line-height: initial;
     padding: 9px 7px 5px;
     color: #292929;
     position: relative;
@@ -260,8 +262,10 @@ form .prev-input-group .input-group-icon svg {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    font-family: "Poppins", sans-serif !important;
+    line-height: 1.5;
+    font-weight: 500;
 }
-
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active .order-count,
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover .order-count {
     background: #ffffff;
@@ -273,7 +277,8 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
-    padding: 16px 16px !important;
+    padding: 12px 10px !important;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 1600px) {

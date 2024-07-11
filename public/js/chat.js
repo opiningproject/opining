@@ -125,7 +125,7 @@ $(document).keypress(function () {
     ;
 });
 
-let page = 1;
+ let pageNumber = 1;
 let activeDivId = null;
 
 let receiverId = null;
@@ -151,7 +151,7 @@ function fetchMessages(senderId, receiverId, userId) {
             /*if (contentHeight > containerHeight && page != count) {
                 $('.chat-messages').animate({scrollTop: chatboxMain.offset().top + contentHeight - 726}, 100);
             }*/
-            if (contentHeight > containerHeight && parseInt(page) != parseInt(count)) {
+            if (contentHeight > containerHeight && parseInt(pageNumber) != parseInt(count)) {
                 $('.chat-messages').stop().animate({scrollTop: containerHeight}, 500);
             } else {
                 $('.chat-messages').animate({scrollTop: containerHeight}, 100);
@@ -159,7 +159,7 @@ function fetchMessages(senderId, receiverId, userId) {
         }
     };
 
-    const url = `chat/messages/${senderId}?receiver_id=${receiverId}&user_id=${userId}&page=${page}`; // Base URL
+    const url = `chat/messages/${senderId}?receiver_id=${receiverId}&user_id=${userId}&page=${pageNumber}`; // Base URL
     xhttp.open("GET", url, true);
     xhttp.send();
 }
@@ -177,9 +177,9 @@ $('.chat-messages').on('wheel', function () {
     if (st == lastScrollTop) {
         // if (contentHeight > containerHeight && page === 1) {
         // if (contentHeight > containerHeight && page != count) {
-        if (parseInt(page) != parseInt(count)) {
+        if (parseInt(pageNumber) != parseInt(count)) {
             fetchingOldMessages = true
-            page++
+            pageNumber++
             fetchMessages(senderId, receiverId, userId);
             $('.chat-messages').stop().animate({scrollTop: 0}, 500);
             lastScrollTop = st;
@@ -234,7 +234,7 @@ $(document).on('click', '.ChatDiv-list', function () {
     $('#chatbox-username').text(senderName); // Update displayed username
     $('.chat-profile').attr("src", image); // Update displayed username
     $('.chatbox-footer').show()
-    page = 1;
+    pageNumber = 1;
     fetchMessages(senderId, receiverId, userId);
 });
 
@@ -325,6 +325,7 @@ $(document).on('click', '.remove-image', function () {
 
 function readURL(input) {
     if (input.files && input.files[0]) {
+        $('.image-holder').empty();
         var reader = new FileReader();
         reader.onload = function (e) {
             $('.image-holder').append('<img class="attachImage" src="' + e.target.result + '" style="height: 100px; width: 100px; border-radius: 20%;"/> <i class="fa-solid fa-xmark remove-image"></i>');

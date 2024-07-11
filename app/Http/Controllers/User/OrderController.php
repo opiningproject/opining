@@ -42,7 +42,7 @@ class OrderController extends Controller
         $user_id = Auth::user()->id;
 
         $active_orders = Order::where('user_id', $user_id)->where('is_cart', '0')->where('order_status', '<>', OrderStatus::Delivered)->orderBy('id', 'desc')->get();
-        $orders = Order::where('user_id', $user_id)->where('is_cart', '0')->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+        $orders = Order::where('user_id', $user_id)->where('is_cart', '0')->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->paginate(10);
 
         $order = '';
 
@@ -55,8 +55,10 @@ class OrderController extends Controller
                 $order = $orders[0];
             }
         }
-
-        return view('user.orders.orders', ['orders' => $orders, 'active_orders' => $active_orders, 'order' => $order]);
+        if ($request->ajax()) {
+            return view('user.orders.overview-order-list', ['orders' => $orders, 'order' => $order]);
+        }
+        return view('user.orders.orders', ['orders' => $orders, 'active_orders' => $active_orders, 'order' => $order, 'lastPage' => $orders->lastPage()]);
     }
 
     public function orderLocation(Request $request)

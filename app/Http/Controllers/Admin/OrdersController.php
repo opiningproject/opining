@@ -181,13 +181,31 @@ class OrdersController extends Controller
     public function getRealTimeOrder(Request $request)
     {
         try {
-            $orderExist = false;
-            $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc');
-            $orderListIds = $orders->pluck('id')->toArray();
-            if (isset($request->activeId)) {
-                $orderExist = in_array($request->activeId, $orderListIds);
-            }
-            return view('admin.orders.orders-list', ['orders' => $orders->get(), 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
+            $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
+            $html = '<div class="foodorder-box-list-item d-flex order-' . $orders->id . '"
+                     onclick="orderDetail(' . $orders->id . ')" id="order-' . $orders->id . '" data-id="' . $orders->id . '">
+                    <div class="details w-100 d-flex flex-column gap-3">
+                        <div class="title">' . trans('rest.food_order.order') . ' #'. $orders->id .' | ' . $orders->created_at . '</div>
+                        <div class="icontext-grp d-flex align-items-center justify-content-between">
+                            <div class="icontext-item d-flex align-items-center gap-1">
+                                <img src="' . asset('images/fork-knife-icon.svg') . '"
+                                     class="img-fluid svg" alt="" height="22" width="22">
+                                <div class="text">' . ($orders->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup')) . '</div>
+                            </div>
+                            <div class="icontext-item d-flex align-items-center gap-1">
+                                <img src="' . asset('images/hand-money-icon.svg') . '" alt=""
+                                     class="img-fluid svg" width="30" height="29">
+                                <div class="text total_amount">€' . number_format($orders->total_amount, 2) . '</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time d-flex flex-column align-items-center justify-content-center text-center gap-1 order-status-' . $orders->id . '">
+                        <img src="' . ($orders->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-yellow.svg')) . '"
+                            alt="time" class="img-fluid svg" width="29" height="29">
+                        <div class="text">' . $orders->delivery_time . '</div>
+                    </div>
+                </div>';
+            return response()->json(['data' => $html]);
 
         } catch (Exception $exception) {
             return response::json(['status' => 400, 'message' => $exception->getMessage()]);

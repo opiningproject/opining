@@ -4963,6 +4963,7 @@ border-color: #FFC00B !important;
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {padding-top: 50px !important;}
 .cart-sidebar .stickyOnMobile {position: absolute;right: 0px;left: 0px;bottom: 10px;max-width: 90%;margin: 0px auto !important;width: 100%;z-index: 9;}
   #coupon_code_apply_btn.btn {padding: 4px 12px !important;}
+  #coupon_code_remove_btn.btn {padding: 4px 12px !important;}
   .cartSidebarCustom .cartoffCanvas{padding-bottom: 160px;}
   .cartSidebarCustom {padding-bottom: 0px;}
 }

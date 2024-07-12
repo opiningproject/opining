@@ -537,7 +537,7 @@
                                                                                                         </span>
                                                                                                         <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}" placeholder="{{ trans('user.cart.instruction') }}" />
                                                                                                       </div>-->
-                                                                <div class="mb-4 pb-1">
+                                                                <div class="mb-4 pb-3">
                                                                     <div
                                                                         class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
                                                                     <span class="input-group-icon">

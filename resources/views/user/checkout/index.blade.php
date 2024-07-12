@@ -646,11 +646,12 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
                                                                             <div
                                                                                 class="d-flex align-items-center justify-content-between">
-                                                                                <p class="d-inline-flex flex-nowrap item-name mb-0 text-decoration-underline">
+                                                                                <p class="d-inline-flex flex-nowrap item-name mb-0">
 {{--                                                                                    <span class="order-total-item pe-2 mb-0">{{ $dishDetails->qty }}</span>--}}
                                                                                     <span
                                                                                         class="order-total-item pe-2 mb-0">{{ $dishDetails->qty }}</span>
-                                                                                    {{ $dishDetails->dish->name }}</p>
+                                                                                    <span class="text-decoration-underline">
+                                                                                    {{ $dishDetails->dish->name }}</span></p>
                                                                                 <span
                                                                                     class="cart-item-price ms-auto">+€{{ $dishDetails->dish->price }}</span>
                                                                             </div>

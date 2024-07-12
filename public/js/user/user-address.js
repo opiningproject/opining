@@ -96,7 +96,7 @@ $(function () {
                     let street_name = response.data.street_name;
                     let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
                     if (street_name) {
-                        displayText = houseNumber + ', ' + street_name ;
+                        displayText = street_name + ' ' + houseNumber ;
                     }
 
                     $("#zip_address").html('');
@@ -162,7 +162,7 @@ function validateZipcode() {
                     let street_name = response.street_name;
                     let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
                     if (street_name) {
-                        displayText = houseNumber + ', ' + street_name ;
+                        displayText = street_name + ' ' + houseNumber ;
                     }
                     $("#zip_address").html('');
                     $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');

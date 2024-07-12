@@ -525,6 +525,51 @@
                                                         </div>
                                                     </div>
 
+                                                        <div class="cart-section">
+                                                            {{-- <h6 class="cart-title d-none d-md-block">
+                                                                {{ trans('user.cart.title') }}</h6> --}}
+
+                                                            <div class="cart-amount-cal-data" id="cart-amount-cal-data"
+                                                                {{ count($cart) > 0 ? '' : 'style=display:none' }}>
+                                                            <!--                                                      <div class="form-group prev-input-group custom-icon-input-group">
+                                                                                                        <span class="input-group-icon">
+                                                                                                          <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg img-fluid" height="22" width="25">
+                                                                                                        </span>
+                                                                                                        <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}" placeholder="{{ trans('user.cart.instruction') }}" />
+                                                                                                      </div>-->
+                                                                <div class="mb-4 pb-1">
+                                                                    <div
+                                                                        class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
+                                                                    <span class="input-group-icon">
+                                                                        <img src="{{ asset('images/coupon-gray.svg') }}"
+                                                                             alt="" class="svg img-fluid"
+                                                                             height="18" width="29">
+                                                                    </span>
+                                                                        <input type="text"
+                                                                               class="form-control bg-white custom-control-with-icon ps-5 dashed-border"
+                                                                               style="padding-right: 115px; box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);"
+                                                                               placeholder="Coupon Code"
+                                                                               value="{{ $couponCode }}"
+                                                                               {{ !empty($couponCode) ? 'readonly' : '' }}
+                                                                               id="coupon_code">
+                                                                        <div class="coupon-apply-btn">
+                                                                            <button class="btn btn-xs-sm btn-custom-yellow"
+                                                                                    onclick="applyCoupon()"
+                                                                                    id="coupon_code_apply_btn"
+                                                                                {{ !empty($couponCode) ? 'style=display:none' : '' }}>
+                                                                                <span>{{ trans('user.cart.apply') }} </button>
+                                                                            <button class="btn btn-xs-sm btn-custom-yellow"
+                                                                                    onclick="removeCoupon()"
+                                                                                    id="coupon_code_remove_btn"
+                                                                                {{ !empty($couponCode) ? '' : 'style=display:none' }}>
+                                                                                {{ trans('user.cart.remove') }} </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <label id="coupon-code-error"
+                                                                           class="error d-none"></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     <div class="empty-card-div w-100 mt-lg-5 pt-lg-5" id="empty-cart-div"
                                                         {{ count($cart) > 0 ? 'style=display:none' : '' }}>
@@ -559,42 +604,6 @@
                             </div>
                         </div>
                         <div class="bill-detail-invoice {{ count($cart) == 0 ? 'd-none' : '' }}" id="cart-bill-div">
-
-
-                            <div class="cart-section cart-coupon-section">
-                                {{-- <h6 class="cart-title d-none d-md-block">
-                                    {{ trans('user.cart.title') }}</h6> --}}
-
-                                <div class="cart-amount-cal-data" id="cart-amount-cal-data"
-                                    {{ count($cart) > 0 ? '' : 'style=display:none' }}>
-                                    <div class="mb-4 pb-1">
-                                        <div
-                                            class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
-                                            <span class="input-group-icon">
-                                                <img src="{{ asset('images/coupon-gray.svg') }}" alt=""
-                                                    class="svg img-fluid" height="18" width="29">
-                                            </span>
-                                            <input type="text"
-                                                class="form-control bg-white custom-control-with-icon ps-5 dashed-border"
-                                                style="padding-right: 115px; box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);"
-                                                placeholder="Coupon Code" value="{{ $couponCode }}"
-                                                {{ !empty($couponCode) ? 'readonly' : '' }} id="coupon_code">
-                                            <div class="coupon-apply-btn">
-                                                <button class="btn btn-xs-sm btn-custom-yellow" onclick="applyCoupon()"
-                                                    id="coupon_code_apply_btn"
-                                                    {{ !empty($couponCode) ? 'style=display:none' : '' }}>
-                                                    <span>{{ trans('user.cart.apply') }}</span> </button>
-                                                <button class="btn btn-xs-sm btn-custom-yellow" onclick="removeCoupon()"
-                                                    id="coupon_code_remove_btn"
-                                                    {{ !empty($couponCode) ? '' : 'style=display:none' }}>
-                                                    {{ trans('user.cart.remove') }} </button>
-                                            </div>
-                                        </div>
-                                        <label id="coupon-code-error" class="error d-none"></label>
-                                    </div>
-                                </div>
-                            </div>
-
                             <h6 class="cart-title mb-1 d-none">{{ trans('user.cart.bill_details') }}</h6>
                             <div class="table-responsive">
                                 <table class="table table-borderless mb-2">

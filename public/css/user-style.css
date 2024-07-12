@@ -4786,7 +4786,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .bill-detail-invoice {position: absolute;left: 0px;right: 0px;bottom: 0px;background: #ffffff;z-index: 2;width: 100%;padding: 10px 20px 20px;box-shadow: 0px 0px 10px 0px #d9d9d9;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body, .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {height: 100%;}
 
-.cartSidebarCustom {padding-bottom: 270px;}
+.cartSidebarCustom {padding-bottom: 180px;}
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {box-shadow: none;outline: none;}
 
 
@@ -4963,7 +4963,7 @@ border-color: #FFC00B !important;
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {padding-top: 50px !important;}
 .cart-sidebar .stickyOnMobile {position: absolute;right: 0px;left: 0px;bottom: 10px;max-width: 90%;margin: 0px auto !important;width: 100%;z-index: 9;}
   #coupon_code_apply_btn.btn {padding: 4px 12px !important;}
-  .cartSidebarCustom .cartoffCanvas{padding-bottom: 270px;}
+  .cartSidebarCustom .cartoffCanvas{padding-bottom: 160px;}
   .cartSidebarCustom {padding-bottom: 0px;}
 }
 @media screen and (max-width: 1365px) {
@@ -5108,7 +5108,7 @@ footer .footer-logo a {font-size: initial !important;}
 .bill-detail-invoice .table-responsive {margin: 0px -8px;}
 .bill-detail-invoice .table-responsive table td {padding-top: 5px;padding-bottom: 5px;}
 .cart-sidebar .offcanvas-body {padding-bottom: 60px !important;}
-.cartSidebarCustom .cartoffCanvas {padding-bottom: 290px;}
+.cartSidebarCustom .cartoffCanvas {padding-bottom: 180px;}
 .bill-detail-invoice table {margin: 0px 0px;}
 .customisable-modal-body .modal-footer-sticky .btn-mobile {
   padding: 12px 8px 8px !important;

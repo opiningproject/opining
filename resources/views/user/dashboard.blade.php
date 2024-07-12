@@ -292,7 +292,7 @@
                                                                 width="20" />
                                                             <p id="zip_address" class="mb-0">
                                                                 @if ($street_name)
-                                                                    {{ ($house_no ? $house_no . ', ' : '') . ($street_name ? $street_name : '') }}
+                                                                    {{ ($street_name ? $street_name : '') . ' '. ($house_no ? $house_no : '') }}
                                                                 @else
                                                                     {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
                                                                 @endif

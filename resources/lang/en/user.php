@@ -76,6 +76,7 @@ return [
 		'service_charge' => 'Service charge',
 		'discount' => 'Item discount',
 		'total' => 'Total',
+		'minimum_amount' => 'minimum €',
 		'checkout' => 'Checkout'
 	],
 

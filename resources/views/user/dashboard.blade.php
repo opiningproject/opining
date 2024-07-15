@@ -6,6 +6,7 @@
     $house_no = session('house_no');
     $street_name = session('street_name');
     $city = session('city');
+    $min_order_price = session('min_order_price');
     $showModal = 0;
 
     if (!session('showLoginModal')) {
@@ -243,9 +244,9 @@
                                         <div class="cart-custom-tab cart-tab custom-tabs d-flex flex-column h-100">
                                             <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab"
                                                 role="tablist">
-                                                <li class="nav-item" role="presentation">
+                                                <li class="nav-item delivery-tab" role="presentation">
                                                     <button
-                                                        class="nav-link {{ $zipcode ? 'active' : '' }} pills-delivery-tab"
+                                                        class="nav-link {{ $zipcode ? 'active' : '' }} pills-delivery-tab delivery-tab"
                                                         id="pills-home-tab" data-bs-toggle="pill"
                                                         data-type="{{ \App\Enums\OrderType::Delivery }}"
                                                         data-bs-target="#pills-home" type="button" role="tab"
@@ -261,9 +262,9 @@
                                                     <input type="hidden" value="{{ $house_no }}" id="del-house-no">
                                                     <input type="hidden" value="{{ $zipcode }}" id="del-zipcode">
                                                 </li>
-                                                <li class="nav-item" role="presentation">
+                                                <li class="nav-item TakeAway-tab" role="presentation">
                                                     <button
-                                                        class="nav-link {{ !$zipcode ? 'active' : '' }} pills-delivery-tab"
+                                                        class="nav-link {{ !$zipcode ? 'active' : '' }} pills-delivery-tab TakeAway-tab"
                                                         id="pills-profile-tab" data-bs-toggle="pill"
                                                         data-type="{{ \App\Enums\OrderType::TakeAway }}"
                                                         data-bs-target="#pills-profile" type="button" role="tab"
@@ -613,6 +614,9 @@
                                             <td class="text-start">
                                                 <span
                                                     class="text-muted-1 bill-count-name">{{ trans('user.cart.item_total') }}</span>
+
+                                                <span class="min_order_price" style="display: none"> {{ number_format($min_order_price, 2) }}</span>
+                                                <span class="text-muted-1 minimum_amount" style="display: none">({{ trans('user.cart.minimum_amount').''. number_format($min_order_price, 2)}}) </span>
                                             </td>
                                             <td class="text-end">
                                                 <span class="bill-count"
@@ -660,7 +664,7 @@
                                 </table>
                             </div>
 
-                            <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
+                            <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                 id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
                                     {{ trans('user.cart.checkout') }} (<span class="bill-total-count"

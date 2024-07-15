@@ -3,18 +3,21 @@ $(function () {
     // checkout button enables disable as per client feeedback july 2024 CR points
     var min_order_price = $('.min_order_price').html()
     var currentAmount = $('.bill-total-count').html()
-    currentAmount = currentAmount.replace('€', '')
-    if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
-        $('.checkout-sticky-btn').removeClass('show-hide-btn');
-    } else {
-        $('.checkout-sticky-btn').addClass('show-hide-btn');
+    if (currentAmount) {
+        currentAmount = currentAmount.replace('€', '')
+        if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+            $('.checkout-sticky-btn').removeClass('show-hide-btn');
+        } else {
+            $('.checkout-sticky-btn').addClass('show-hide-btn');
+        }
+        if ($('.TakeAway-tab .active').length == 0) {
+            $('.minimum_amount').show();
+        } else {
+            $('.minimum_amount').hide();
+            $('.checkout-sticky-btn').removeClass('show-hide-btn');
+        }
     }
-    if ($('.TakeAway-tab .active').length == 0) {
-        $('.minimum_amount').show();
-    } else {
-        $('.minimum_amount').hide();
-        $('.checkout-sticky-btn').removeClass('show-hide-btn');
-    }
+
     var url = baseURL + '/user/dashboard';
 
     $("#delivery-add-form").validate({

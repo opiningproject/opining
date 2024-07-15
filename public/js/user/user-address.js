@@ -1,4 +1,20 @@
 $(function () {
+
+    // checkout button enables disable as per client feeedback july 2024 CR points
+    var min_order_price = $('.min_order_price').html()
+    var currentAmount = $('.bill-total-count').html()
+    currentAmount = currentAmount.replace('€', '')
+    if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+        $('.checkout-sticky-btn').removeClass('show-hide-btn');
+    } else {
+        $('.checkout-sticky-btn').addClass('show-hide-btn');
+    }
+    if ($('.TakeAway-tab .active').length == 0) {
+        $('.minimum_amount').show();
+    } else {
+        $('.minimum_amount').hide();
+        $('.checkout-sticky-btn').removeClass('show-hide-btn');
+    }
     var url = baseURL + '/user/dashboard';
 
     $("#delivery-add-form").validate({
@@ -102,6 +118,18 @@ $(function () {
                     $("#zip_address").html('');
                     $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');
 
+                    // checkout button enables disable as per client feeedback july 2024 CR points
+                    $('.minimum_amount').html('<span class="minimum_amounts">'+ '(minimum €'+response.data.min_order_price.toFixed(2) +')</span>')
+                    $('.min_order_price').html(response.data.min_order_price.toFixed(2))
+                    var min_order_price = response.data.min_order_price
+                    var currentAmount = $('.bill-total-count').html()
+                    currentAmount = currentAmount.replace('€', '')
+                    if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+                        $('.checkout-sticky-btn').removeClass('show-hide-btn');
+                    } else {
+                        $('.checkout-sticky-btn').addClass('show-hide-btn');
+                    }
+
                     $('#addressChangeModal').modal('hide');
 
                     $('#addressChangeModal').on('hidden.bs.modal', function () {
@@ -172,6 +200,18 @@ function validateZipcode() {
                     $('#addressChangeModal').on('hidden.bs.modal', function () {
                         $('#house_no').val(response.house_number)
                         $('#zipcode').val(response.zipcode)
+
+                        // checkout button enables disable as per client feeedback july 2024 CR points
+                        var min_order_price = $('.min_order_price').html()
+                        var currentAmount = $('.bill-total-count').html()
+                        currentAmount = currentAmount.replace('€', '')
+                        if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+                            $('.checkout-sticky-btn').removeClass('show-hide-btn');
+                        } else {
+                            $('.checkout-sticky-btn').addClass('show-hide-btn');
+                        }
+                        $('.minimum_amount').show();
+                        $('.minimum_amount').html('<span class="minimum_amounts">'+ 'minimum €' + response.min_order_price.toFixed(2) +'</span>')
                     });
                 }
                 }
@@ -209,8 +249,6 @@ function deleteAddress(id) {
         url: baseURL + '/user/delete-address/' + id,
         type: 'GET',
         success: function (response) {
-            console.log('success')
-            console.log(response)
             $('#address-' + id).remove();
 
             var mainDiv = $('#addresses-length');

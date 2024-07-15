@@ -4958,6 +4958,13 @@ border-color: #FFC00B !important;
   padding: 8px 10px;
 }
 }
+/* checkout button enable disabled css added */
+.show-hide-btn {
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: transparent;
+    border-color: #292929 !important;
+}
 
 @media screen and (max-width: 1400px) {
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .navbar {padding-top: 50px !important;}
@@ -4987,6 +4994,8 @@ border-color: #FFC00B !important;
 }
 
 @media screen and (max-width: 767px) {
+    /*admin chat css*/
+.chat-main-screen .ChatDiv-main {overflow-y: inherit !important;}
 .searcheaderBox .has-search .form-control-feedback {left: 15px !important;}
 .section-page-title .searcheaderBox.toggled {display: flex !important;top: 0px;}
 .searcheaderBox.has-search .form-control {font-size: 14px !important;}

@@ -3,7 +3,7 @@ $(function () {
         var search = $(this).val();
         var activeId = $('.foodorder-box-list-item.active').attr('data-id')
 
-        console.log(activeId)
+        // console.log(activeId)
 
         $.ajax({
             url: baseURL + '/orders/searchOrder',
@@ -45,7 +45,7 @@ function orderDetail(id) {
 }
 
 
-var start = moment().subtract(10, 'days');
+var start = moment().subtract(0, 'days');
 var end = moment();
 
 var dateRange =''
@@ -63,8 +63,8 @@ $('#expiry_date').daterangepicker({
     }
 });
 
-$('#expiry_date').val('')
-$('#expiry_date').attr('placeholder','Select Date Range')
+// $('#expiry_date').val('')
+// $('#expiry_date').attr('placeholder','Select Date Range')
 
 $('#expiry_date').on('apply.daterangepicker', function(ev, picker) {
 
@@ -84,9 +84,15 @@ $('#expiry_date').on('cancel.daterangepicker', function(ev, picker) {
 
 $('#clear').on("click",function()
 {
-window.location.href = `${baseURL}/orders`;
+    var clearAll = $(this).val();
+    window.location.href = `${baseURL}/orders?${clearAll}`;
 });
 
+var currentURL = window.location.href;
+if (currentURL.includes('all')) {
+    $('#expiry_date').val('')
+    $('#expiry_date').attr('placeholder','Select Date Range')
+}
 
  // Get start and end dates from URL parameters
  var startDate = getUrlParameter('start_date');
@@ -172,11 +178,9 @@ var page = 2;
 var isLoading = false;
 var endOfData = false;
 var lastPage = $('.last_page').html(); // Adjust according to the last page number
-console.log("lastPage",lastPage)
-var url = window.location.pathname;
-var id = url.substring(url.lastIndexOf('/') + 1);
-
-$(".order-list-data-div1").scroll(function () {
+$(".all-orders").scroll(function () {
+    var url = window.location.href;
+    var id = url.substring(url.lastIndexOf('/') + 1);
     if (endOfData || isLoading) return;
 
     var scrollTop = $(this).scrollTop();
@@ -186,14 +190,14 @@ $(".order-list-data-div1").scroll(function () {
     // Check if the scroll position reaches near the bottom of the container
     if (scrollTop + containerHeight >= contentHeight - 10) {
        isLoading = true; // Set loading state before making the request
-        loadMoreData(page);
+        loadMoreData(page, url);
     }
 });
 //
 
-function loadMoreData(currentPage) {
+function loadMoreData(currentPage, url) {
     $.ajax({
-        url: '?page=' + currentPage,
+        url: url +'&page=' + currentPage,
         type: "get",
         beforeSend: function() {
             $('#loader').show();
@@ -207,7 +211,7 @@ function loadMoreData(currentPage) {
                 return;
             }
 
-            $(".order-list-data-div1").append(data);
+            $(".all-orders").append(data);
             if (parseInt(id)) {
                 orderDetail(id)
             }

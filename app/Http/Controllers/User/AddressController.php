@@ -26,6 +26,7 @@ class AddressController extends Controller
         $zip =substr($request->zipcode, 0, 4);
         $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status','1')->first();
 
+        $min_order_price = 0;
         if($zipcode)
         {
             $zipcodeData = [
@@ -48,9 +49,10 @@ class AddressController extends Controller
             session()->forget('address');
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);
+            session(['min_order_price' => $zipcode->min_order_price]);
             $street_name = session('street_name') ?? '';
             $city = session('city') ?? '';
-            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode, "street_name" => $street_name, "city" => $city]);
+            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode, "street_name" => $street_name, "city" => $city, 'min_order_price' => $zipcode->min_order_price]);
         }
 
         return response::json(['status' => 2, 'message' => trans('user.message.invalid_zipcode')]);
@@ -76,6 +78,7 @@ class AddressController extends Controller
             $response['house_no'] = $address->house_no;
             $response['street_name'] = $address->street_name;
             $response['city'] = $address->city;
+            $response['min_order_price'] = $zipcode->min_order_price;
 
             if($zipcode){
 
@@ -84,6 +87,7 @@ class AddressController extends Controller
                 session(['street_name' => $address->street_name]);
                 session(['city' => $address->city]);
                 session(['address' => $id]);
+                session(['min_order_price' => $zipcode->min_order_price]);
                 $response['message'] = '';
 
                 return response::json(['status' => 200, 'data' => $response]);

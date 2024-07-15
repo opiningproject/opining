@@ -55,7 +55,7 @@
                                     </li>
                                 </ul> --}}
                                 {{-- <div> --}}
-                                <button type="button" name="clear" value="Clear" id="clear"
+                                <button type="button" name="clear" value="all" id="clear"
                                     style="background-color: var(--theme-yellow2);" class="btn clear-button">Clear</button>
                                 {{-- </div> --}}
 

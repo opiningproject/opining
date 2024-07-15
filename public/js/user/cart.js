@@ -12,6 +12,11 @@ $(function () {
     $('.pills-delivery-tab').click(function () {
 
         var type = $(this).data('type')
+        if (type == "2") {
+            $('.minimum_amount').hide()
+        } else {
+            $('.minimum_amount').show()
+        }
         var zipcode = $('#del-zipcode').val()
         var houseNo = $('#del-house-no').val()
 
@@ -28,8 +33,19 @@ $(function () {
                 if (response.status == 200) {
                     if (type == '1') {
 
+                        // checkout button enables disable as per client feeedback july 2024 CR points
+                        var min_order_price = $('.min_order_price').html()
+                        var currentAmount = $('.bill-total-count').html()
+                        currentAmount = currentAmount.replace('€', '')
+                        if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+                            $('.checkout-sticky-btn').removeClass('show-hide-btn');
+                        } else {
+                            $('.checkout-sticky-btn').addClass('show-hide-btn');
+                        }
                         // Hide as per client feeedback June CR points
                         // $('#addressChangeModal').modal('show')
+                    } else {
+                        $('.checkout-sticky-btn').removeClass('show-hide-btn');
                     }
                 } else {
                     // alert(response.message);
@@ -510,6 +526,20 @@ function calculateTotalCartAmount() {
 
     $('#gross-total-bill').text('€' + totalAmt.toFixed(2))
     $('#gross-total-bill1').text('€' + totalAmt.toFixed(2))
+
+    // checkout button enables disable as per client feeedback july 2024 CR points
+    var min_order_price = $('.min_order_price').html()
+    var currentAmount = $('.bill-total-count').html()
+    currentAmount = currentAmount.replace('€', '')
+    if ($('.TakeAway-tab .active').length == 0) {
+        if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+            $('.checkout-sticky-btn').removeClass('show-hide-btn');
+        } else {
+            $('.checkout-sticky-btn').addClass('show-hide-btn');
+        }
+    } else {
+        $('.checkout-sticky-btn').removeClass('show-hide-btn');
+    }
 }
 
 

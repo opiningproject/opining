@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
+use Illuminate\Support\Facades\Date;
 use Response;
 use Mail;
 use Carbon\Carbon;
@@ -40,9 +41,10 @@ class OrdersController extends Controller
 
         $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 
-
-        $start_date = $request->get('start_date');
-        $end_date = $request->get('end_date');
+        $pageNumber = request()->input('page', 1);
+        if (!$request->has('all')) {
+            $start_date = $request->get('start_date') ? $request->get('start_date') : Carbon::now()->format('Y-m-d');
+            $end_date = $request->get('end_date') ? $request->get('end_date') : Carbon::now()->format('Y-m-d');
 
             if (!empty($start_date) && !empty($end_date)) {
 
@@ -61,9 +63,10 @@ class OrdersController extends Controller
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
+        }
 
         $order = '';
-        $orders = $orders->paginate(10);
+        $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
         if (count($orders) > 0) {
             if ($id) {
                 $order = Order::find($id);

@@ -30,12 +30,12 @@
         quantity_error: '{{ trans('rest.message.quantity_max') }}',
     }
 </script>
+<script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-dishes.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/user-address.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/cart.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/user/orders.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
 
 <input type="hidden" id="auth-check" value="{{ auth()->check() ? 1 : 0 }}">
 <script>
@@ -54,7 +54,7 @@
         $('#loader').addClass('d-none');
     })*/
 
-  
+
         const svg_options = {
             svgSelector: 'img.svg', // the class attached to all images that should be inlined
             initClass: 'js-inlinesvg', // class added to <html>

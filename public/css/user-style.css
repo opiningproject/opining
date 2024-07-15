@@ -5723,7 +5723,7 @@ footer {padding: 36px 20px 20px 20px;}
 .chat-main-screen .chatbox .chatbox-header .profile-item .profile-textgrp .profile-title {font-size: 16px !important;}
 .chat-main-screen .chatbox .chatbox-header .profile-item .profile-textgrp .profile-text {font-size: 12px !important;}
 .chat-main-screen .chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {width: 10px;height: 10px;border-radius: 9999px;background: #E36E49;}
-.chat-main-screen .chatbox .chatbox-footer {padding: 20px 20px 20px;border-top: 1px solid #dcdcdc;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;}
+.chat-main-screen .chatbox .chatbox-footer {padding: 14px 20px 20px;border-top: 1px solid #dcdcdc;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;}
 .chat-main-screen .chatbox .chatbox-footer .custom-file-upload {display: flex;align-items: center;cursor: pointer;justify-content: center;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .btn-custom-yellow {height: 40px;padding: 9px 19px;border-radius: 8px;font-size: 16px;cursor: pointer;width: 80px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group {border-radius: 8px;padding: 5px 10px;}
@@ -5921,5 +5921,9 @@ footer {padding: 36px 20px 20px 20px;}
   .chat-main-screen .chatbox .chatbox-footer .form-group {
     padding: 10px 10px;
 }
+    .chatbox .chatbox-header {
+        margin: -10px -20px 0;
+    }
+
 
 }

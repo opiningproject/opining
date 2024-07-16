@@ -521,13 +521,13 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                          tabindex="0">
                                                                         <main class="bd-main order-1">
                                                                             <div
-                                                                                class="d-flex flex-column p-0">
+                                                                                class="d-flex flex-column p-0 w-100">
                                                                                 <div
                                                                                     class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                                                                                     <div class="col-12">
-                                                                                        <h1 class="page-title">
-                                                                                            {{ trans('user.checkout.order_payment') }}
-                                                                                        </h1>
+                                                                                        <h4
+                                                                                            class="custom-card-title-1 form-group mobile-hide">
+                                                                                            {{ trans('user.checkout.order_payment') }}</h4>
                                                                                     </div>
                                                                                 </div>
                                                                                 <form id="payment-form">

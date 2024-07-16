@@ -340,7 +340,7 @@
                                                     id="pills-profile" role="tabpanel"
                                                     aria-labelledby="pills-profile-tab" tabindex="0">
                                                     <div
-                                                        class="form-group addressMobile mb-3 cart-address-row flex-wrap w-100">
+                                                        class="form-group addressMobile cart-address-row flex-wrap w-100">
 
                                                         <div
                                                             class="d-flex align-items-center justify-content-center flex-full">

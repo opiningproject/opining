@@ -3,6 +3,8 @@
 <?php
 $zipcode = session('zipcode');
 $house_no = session('house_no');
+$street_name = session('street_name');
+$city = session('city');
 $cartAmount = 0.0;
 $deliveryCharges = 0.0;
 
@@ -23,23 +25,28 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
 
 ?>
 @section('content')
-    <div class="main footer-hide">
+    <div class="main footer-hide header-fixed-page">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.user.side_nav_bar')
                 <main class="bd-main order-1">
-                    <div class="main-content pb-5 mobile-scrolllable-content">
-                        <div class="section-page-title main-page-title mb-0 title-mobile">
+                    <div class="main-content pb-5 mobile-scrolllable-content checkout-mobile-scrolllable-content">
+                        <div class="section-page-title main-page-title mb-0 title-mobile events-title">
+                            <button type="button" class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 me-md-2 mt-md-2 end-0 ms-2 bg-arrow-mobile" data-bs-dismiss="offcanvas" aria-label="Close"
+                                    data-bs-target="#bdSidebarCart"  onclick="window.location.href='{{ url('/user/dashboard') }}';">
+                                <i class="fa-solid fa-angle-left d-none"></i>
+                            </button>
+
+
                             <h1 class="page-title">{{ trans('user.checkout.title') }}</h1>
-                        </div>
 
-                        <button class="navbar-toggler checkout-bag-count cart-navbar-toggler-inn p-2 d-none" type="button"
-                                data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart"
-                                aria-label="Toggle docs navigation">
-                            {{-- <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18"> --}}
-                            <span class="count" id="cart-item-count">{{ isset(Auth::user()->cart) ? Auth::user()->cart->dishDetails->count() : 0 }}</span>
+                            <button class="navbar-toggler checkout-bag-count cart-navbar-toggler-inn p-2 d-none at-top-head" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#bdSidebarCart" aria-controls="bdSidebarCart"
+                                    aria-label="Toggle docs navigation">
+                                {{-- <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18"> --}}
+                                <span class="count" id="cart-item-count">{{ isset(Auth::user()->cart) ? Auth::user()->cart->dishDetails->count() : 0 }}</span>
 
-                            <svg width="22px" height="22px" viewBox="-4 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                <svg width="22px" height="22px" viewBox="-4 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><defs></defs>
                                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
                                         <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-572.000000, -723.000000)" fill="#FFC00B">
@@ -49,9 +56,8 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                         </g>
                                     </g>
                                 </svg>
-
-
-                        </button>
+                            </button>
+                        </div>
 
                         <section class="custom-section checkout-section pt-0 pt-md-5 pb-0">
                             {{-- <h5 class="mobile-title mb-4 d-md-none all-validation-error" style="display: none"
@@ -81,7 +87,9 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 <h3>{{ session('zipcode') ? trans('user.checkout.delivery_address') : trans('user.checkout.takeaway_address') }}
                                                                 </h3>
                                                                 <p class="mb-0">
-                                                                    @if (session('zipcode'))
+                                                                    @if ($street_name)
+                                                                        {{ ($street_name ? $street_name : '') . ' '. ($house_no ? $house_no : '') }}
+                                                                    @elseif (session('zipcode') && !$street_name)
                                                                         {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
                                                                     @else
                                                                         {{ getRestaurantDetail()->rest_address }}
@@ -420,12 +428,12 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                         </div>
                                                     </div>
                                                     <div class="mobilecheckoutContent" id="payment-type-mobile-content">
-                                                        <div class=" payment-nav payment-nav-mobile">
+                                                        <div class=" payment-nav payment-nav-mobile mb-0">
                                                             <div class="payment-navigation">
                                                                 <h4 class="custom-card-title-1 form-group mobile-hide">
                                                                     {{ trans('user.checkout.payment') }}</h4>
                                                                 <div
-                                                                    class="nav flex-column nav-pills custom-radio-place"
+                                                                    class="nav flex-column nav-pills custom-radio-place overflow-initial"
                                                                     id="v-pills-tab"
                                                                     role="tablist" aria-orientation="vertical">
                                                                     <button
@@ -513,7 +521,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                          tabindex="0">
                                                                         <main class="bd-main order-1">
                                                                             <div
-                                                                                class="main-content d-flex flex-column p-0">
+                                                                                class="d-flex flex-column p-0">
                                                                                 <div
                                                                                     class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                                                                                     <div class="col-12">

@@ -12,7 +12,7 @@
                 <input type="hidden" name="receiver_id" class="receiver_id" value="{{ getAdminUser()->id }}" id="receiver_id_1">
                 <main class="bd-main order-1 w-100">
                     <div class="main-content">
-                        <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
+                        <div class="section-page-title main-page-title row justify-content-between d-none d-lg-block">
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                                 <h1 class="page-title"> {{ trans('user.chat.chat_text') }}</h1>
                             </div>
@@ -66,7 +66,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             {{-- Dynamic Message Block --}}

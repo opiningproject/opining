@@ -323,7 +323,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 <div
                                                                     class="custom-radio custom-checkbox-group mb-2 flex-wrap radio-flex-row"
                                                                     style="margin-bottom: 30px">
-                                                                    <div class="radio delivery-time">
+                                                                    <div class="radio delivery-time selected-radio">
                                                                         <input id="radio-1" name="del_radio"
                                                                                type="radio" class="radio-del-time"
                                                                                checked
@@ -413,7 +413,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                      alt=""/>
                                                             </div>
                                                             <div class="textCon">
-                                                                <h3>{{ trans('user.checkout.payment') }}</h3>
+                                                                <h3>{{ trans('user.checkout.payment_method') }}</h3>
                                                                 <p class="mb-0" id="mobile-payment-type-text">iDEAL</p>
                                                                 <p class="without-check-error mb-0"
                                                                    id="payment-method-error"></p>

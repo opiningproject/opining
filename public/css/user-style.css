@@ -726,9 +726,6 @@ background: #FFC00B;
     color: #ffffff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 4px 1px;
   }
-  .category-section .category-slider .category-element .card:hover svg{
-        fill: #ffc00b !important;
-    }
   .category-section .category-slider .category-element .card:hover {
     background: #FFC00B;
     border-color: #FFC00B;
@@ -746,13 +743,17 @@ background: #FFC00B;
 .category-section .category-slider .category-element .card:hover * {
   color: #000000 !important;
 }
+
+    .category-section .category-slider .category-element .card:hover svg path, .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
+        fill: #ffffff;
+    }
 }
 
 .category-swiper-slider .swiper-slide.selected-cart-active .card p {
     color: #ffffff !important;
 }
 
-.category-swiper-slider .swiper-slide.selected-cart-active .card svg, .category-section .category-slider .category-element .card:hover svg path, .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
+.category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
     fill: #ffffff;
 }
 

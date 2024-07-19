@@ -101,6 +101,7 @@ return [
 		'customize_time' => 'Customize Time',
 		'select_time' => 'Select Time',
 		'payment' => 'Payment',
+		'payment_method' => 'Payment Method',
 		'ideal' => 'IDEAL',
 		'cc_card' => 'Credit & Debit cards',
 	    'cod' => 'Cash On Delivery',

@@ -728,7 +728,7 @@ background: #FFC00B;
   }
   .category-section .category-slider .category-element .card:hover {
     background: #FFC00B;
-    border-color: #FFC00B;    
+    border-color: #FFC00B;
   }
 
   .category-section .category-slider .category-element .card:hover p {
@@ -4174,7 +4174,7 @@ input[type=number] {
   }
 
   .custom-checkbox .form-check-label {
-    font-size: 10px;
+    font-size: 12px;
     line-height: initial;
   }
 

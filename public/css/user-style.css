@@ -703,7 +703,7 @@ border: 1px solid #FFC00B;
 .category-slider {
   padding: 10px 0px;
 }
-.category-section .category-slider .category-element .card:hover,
+
 .category-section .category-slider .category-element .card.active {
   /* background-color: var(--theme-yellow2);
   color: var(--theme-text-white); */
@@ -714,21 +714,45 @@ border: 1px solid #FFC00B;
   /* border-color: #dcdcdc; */
 }
 
-.category-section .category-slider .category-element .card:hover, .category-swiper-slider .swiper-slide.selected-cart-active .card {
+.category-swiper-slider .swiper-slide.selected-cart-active .card {
 background: #FFC00B;
     border-color: #FFC00B;
 }
 
-.category-section .category-slider .category-element .card:hover p, .category-swiper-slider .swiper-slide.selected-cart-active .card p {
+
+@media (min-width: 768px) {
+  .category-section .category-slider .category-element .card:hover {
+    background-color: #FFC00B;
+    color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 4px 1px;
+  }
+  .category-section .category-slider .category-element .card:hover {
+    background: #FFC00B;
+    border-color: #FFC00B;    
+  }
+
+  .category-section .category-slider .category-element .card:hover p {
     color: #ffffff !important;
 }
 
-.category-section .category-slider .category-element .card:hover svg, .category-swiper-slider .swiper-slide.selected-cart-active .card svg, .category-section .category-slider .category-element .card:hover svg path, .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
+.category-section .category-slider .category-element .card:hover svg{
     fill: #ffffff;
 }
 
 
-.category-section .category-slider .category-element .card:hover *,
+.category-section .category-slider .category-element .card:hover * {
+  color: #000000 !important;
+}
+}
+
+.category-swiper-slider .swiper-slide.selected-cart-active .card p {
+    color: #ffffff !important;
+}
+
+.category-swiper-slider .swiper-slide.selected-cart-active .card svg, .category-section .category-slider .category-element .card:hover svg path, .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
+    fill: #ffffff;
+}
+
 .category-section .category-slider .category-element .card.active * {
   color: #000000 !important;
 }
@@ -4150,7 +4174,8 @@ input[type=number] {
   }
 
   .custom-checkbox .form-check-label {
-    font-size: 12px;
+    font-size: 10px;
+    line-height: initial;
   }
 
   .chart-caption {
@@ -5540,6 +5565,7 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-sidebar .bill-detail-invoice table tbody tr:nth-last-child(2) td {padding-bottom: 10px;}
 .cart-sidebar.cartSidebarCustom .offcanvas-body {padding-top: 20px;}
 .custom-card-mobile-toggle .mobileStaticToggle .innerCon .success-ico {display: flex;width: 26px;height: 26px;align-items: center;justify-content: center;text-align: center;border-radius: 9999px;overflow: hidden;background: #3F9C2F;position: absolute;right: 20px;top: 50%;transform: translateY(-50%);pointer-events: none;}
+.custom-card-mobile-toggle .mobileStaticToggle .innerCon .success-ico svg {position: relative;top: 1px !important;}
 .without-check-error {color: #F91414 !important;font-size: 12px !important;}
 .checkout-form-steps .card .form-group .form-label {margin-bottom: 5px;font-size: 12px;line-height: initial;}
 .mobile-scrolllable-content .checkout-section .form-group {margin-bottom: 10px;}
@@ -5747,7 +5773,7 @@ footer {padding: 36px 20px 20px 20px;}
   .coupon-row-grid .coupon-flex .right-cp p {font-size: 10px;}
   .coupons-tab .nav-tabs {column-gap: 20px;}
   .coupons-tab .nav-tabs .nav-item {flex: 0 0 calc(50% - 10px);max-width: calc(50% - 10px);}
-  .payment-nav-mobile .payment-navigation .nav .nav-link {font-size: 12px;}
+  .payment-nav-mobile .payment-navigation .nav .nav-link {font-size: 14px;}
   .checkout-section .checkout-btn-sticky {height: 52px;}
   .checkout-section .checkout-btn-sticky, .cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn{
     height: 52px;
@@ -5758,6 +5784,9 @@ footer {padding: 36px 20px 20px 20px;}
   }
 }
 
+@media (max-width: 576px) {
+  .payment-nav-mobile .payment-navigation .nav .nav-link {font-size: 14px;}
+}
 /* Chat Screen UI update css */
 .chat-main-screen .section-page-title {margin-bottom: 20px;}
 .chat-main-screen .ChatDiv-main {gap: 0px;overflow-y: hidden;}
@@ -5809,7 +5838,10 @@ footer {padding: 36px 20px 20px 20px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder .remove-image {border-radius: 9999px;font-size: 12px;padding: 3px 4px;top: 5px;right: -15px;}
 .chat-main-screen .chat-item-textgrp a>img {object-fit: contain;object-position: center;}
 
-
+.form-check-input:checked[type=checkbox] {
+  border-color: #FFC00B !important;
+  background-color: #FFC00B !important;
+}
 .bill-detail-invoice  .cart-coupon-section {
   position: absolute;
   top: -80px;

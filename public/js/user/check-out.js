@@ -26,6 +26,7 @@ if(isDesktopView()) {
 } else {
     $('#delivery-mobile-content').toggle()
     $('#delivery-user-mobile-content').toggle()
+    $('#delivery-type-mobile-content').toggle()
     $("#final-checkout-form").validate({
         ignore: '[readonly]',
         errorPlacement: function(error, element) {
@@ -83,7 +84,7 @@ if(isDesktopView()) {
     // });
 }
 
-   
+
 
     $('.payment-type-tab').click(function () {
         var paymentType = $(this).data('type')

@@ -4179,7 +4179,7 @@ input[type=number] {
 
   .custom-checkbox .form-check-label {
     font-size: 12px !important;
-    line-height: initial;
+    line-height: 12px !important;
   }
 
   .chart-caption {

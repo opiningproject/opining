@@ -726,6 +726,9 @@ background: #FFC00B;
     color: #ffffff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 4px 1px;
   }
+  .category-section .category-slider .category-element .card:hover svg{
+        fill: #ffc00b !important;
+    }
   .category-section .category-slider .category-element .card:hover {
     background: #FFC00B;
     border-color: #FFC00B;
@@ -4174,7 +4177,7 @@ input[type=number] {
   }
 
   .custom-checkbox .form-check-label {
-    font-size: 12px;
+    font-size: 12px !important;
     line-height: initial;
   }
 
@@ -5410,7 +5413,7 @@ footer .footer-logo a {font-size: initial !important;}
         border-radius: 12px !important;
         overflow: hidden;
         padding: 15px 16px;
-        font-size: 14px;
+        font-size: 14px !important;
     }
 
     .payment-nav-mobile .payment-navigation .nav .nav-link.active {

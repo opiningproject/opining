@@ -5050,6 +5050,15 @@ border-color: #FFC00B !important;
 
 .custom-card-mobile-toggle {padding: 15px 20px !important;background: #ffffff;box-shadow: none !important;border: 1px solid #dcdcdc !important;}
 .custom-card-mobile-toggle .card-body {padding: 0px !important;}
+
+.final-checkout-form .custom-card-mobile-toggle {
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2) !important;
+    border: 0px !important;
+}
+
+.final-checkout-form .checkout-form-item .cart-form-card-body {
+    padding-bottom: 20px !important;
+}
 .mobileStaticToggle {display: block;}
 .mobilecheckoutContent {display: none;padding-top: 20px;}
 .checkout-form-item .cart-form-card-body {padding-bottom: 15px !important;}

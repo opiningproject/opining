@@ -63,7 +63,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                             {{-- <h5 class="mobile-title mb-4 d-md-none all-validation-error" style="display: none"
                                 id="all-validation-error">Please fill all details to continue with your order.</h5> --}}
 
-                            <form id="final-checkout-form">
+                            <form id="final-checkout-form" class="final-checkout-form">
                                 <input type="hidden" name="is_address_elected" value="{{ $address ?? 0 }}"
                                        id="address_selected">
                                 <div class="row checkout-form-steps">

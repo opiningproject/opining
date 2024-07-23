@@ -159,18 +159,24 @@
                 <p>{{ trans('rest.food_order.item_total') }}</p>
                 <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
             </div>
-            <div class="amount-description-bottom">
-                <p>{{ trans('rest.food_order.service_charge') }}</p>
-                <p>€{{ number_format($order->platform_charge , 2) }}</p>
-            </div>
-            <div class="amount-description-bottom">
-                <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
-                <p>€{{ number_format($order->delivery_charge,2) }}</p>
-            </div>
-            <div class="amount-description-bottom">
-                <p>{{ trans('rest.food_order.discount') }}</p>
-                <p>-€{{ $order->coupon_discount == 0 ? number_format($order->coupon_discount, 2) : $order->coupon_discount}}</p>
-            </div>
+            @if($order->platform_charge > 0)
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.service_charge') }}</p>
+                    <p>€{{ number_format($order->platform_charge , 2) }}</p>
+                </div>
+            @endif
+            @if($order->delivery_charge > 0)
+                <div class="amount-description-bottom">
+                    <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
+                    <p>€{{ number_format($order->delivery_charge,2) }}</p>
+                </div>
+            @endif
+            @if($order->coupon_discount > 0)
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.discount') }}</p>
+                    <p>-€{{ $order->coupon_discount == 0 ? number_format($order->coupon_discount, 2) : $order->coupon_discount}}</p>
+                </div>
+            @endif
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.total') }}</p>
                 <p>€{{ round($order->total_amount, 2) }}</p>

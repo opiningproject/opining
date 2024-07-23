@@ -73,12 +73,13 @@
         .amount-description-price-header p:last-child,
         .amount-description-price p:last-child {
             margin-left: auto;
+            padding-left: 5px;
         }
 
         .amount-description-price-header p:first-child,
         .amount-description-price p:first-child {
-            flex: 0 0 80px;
-            max-width: 80px;
+            flex: 0 0 35px;
+            max-width: 35px;
         }
 
         .amount-description-price span {
@@ -159,18 +160,25 @@
                 <p>{{ trans('rest.food_order.item_total') }}</p>
                 <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
             </div>
+            @if($order->platform_charge > 0)
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.service_charge') }}</p>
                 <p>€{{ number_format($order->platform_charge, 2) }}</p>
             </div>
-            <div class="amount-description-bottom">
-                <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
-                <p>€{{ number_format($order->delivery_charge, 2) }}</p>
-            </div>
-            <div class="amount-description-bottom">
-                <p>{{ trans('rest.food_order.discount') }}</p>
-                <p>-€{{ number_format($order->coupon_discount,2) }}</p>
-            </div>
+            @endif
+
+            @if($order->delivery_charge > 0)
+                <div class="amount-description-bottom">
+                    <p>{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</p>
+                    <p>€{{ number_format($order->delivery_charge, 2) }}</p>
+                </div>
+            @endif
+            @if($order->coupon_discount > 0)
+                <div class="amount-description-bottom">
+                    <p>{{ trans('rest.food_order.discount') }}</p>
+                    <p>-€{{ number_format($order->coupon_discount,2) }}</p>
+                </div>
+            @endif
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.total') }}</p>
                 <p>€{{ round($order->total_amount, 2) }}</p>

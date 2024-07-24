@@ -42,9 +42,9 @@ class OrdersController extends Controller
         $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 
         $pageNumber = request()->input('page', 1);
-        if (!$request->has('all')) {
-            $start_date = $request->get('start_date') ? $request->get('start_date') : Carbon::now()->format('Y-m-d');
-            $end_date = $request->get('end_date') ? $request->get('end_date') : Carbon::now()->format('Y-m-d');
+
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
 
             if (!empty($start_date) && !empty($end_date)) {
 
@@ -63,7 +63,6 @@ class OrdersController extends Controller
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
-        }
 
         $order = '';
         $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);

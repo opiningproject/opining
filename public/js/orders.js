@@ -45,7 +45,7 @@ function orderDetail(id) {
 }
 
 
-var start = moment().subtract(0, 'days');
+var start = moment().subtract(10, 'days');
 var end = moment();
 
 var dateRange =''
@@ -63,8 +63,8 @@ $('#expiry_date').daterangepicker({
     }
 });
 
-// $('#expiry_date').val('')
-// $('#expiry_date').attr('placeholder','Select Date Range')
+$('#expiry_date').val('')
+$('#expiry_date').attr('placeholder','Select Date Range')
 
 $('#expiry_date').on('apply.daterangepicker', function(ev, picker) {
 
@@ -84,15 +84,8 @@ $('#expiry_date').on('cancel.daterangepicker', function(ev, picker) {
 
 $('#clear').on("click",function()
 {
-    var clearAll = $(this).val();
-    window.location.href = `${baseURL}/orders?${clearAll}`;
+    window.location.href = `${baseURL}/orders`;
 });
-
-var currentURL = window.location.href;
-if (currentURL.includes('all')) {
-    $('#expiry_date').val('')
-    $('#expiry_date').attr('placeholder','Select Date Range')
-}
 
  // Get start and end dates from URL parameters
  var startDate = getUrlParameter('start_date');
@@ -197,7 +190,7 @@ $(".all-orders").scroll(function () {
 
 function loadMoreData(currentPage, url) {
     $.ajax({
-        url: url +'&page=' + currentPage,
+        url: url +'?page=' + currentPage,
         type: "get",
         beforeSend: function() {
             $('#loader').show();

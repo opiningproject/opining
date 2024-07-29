@@ -6073,3 +6073,45 @@ position: fixed !important;
 }
 
 .form-group.mb-0 {margin-bottom: 0px !important;}
+
+
+/* Order page mobile css starts */
+.mobile-order-page {padding: 0px 4px;}
+.mobile-order-page .mobile-head-belt {position: relative;display: flex;text-align: center;justify-content: center;align-items: center;margin-top: 30px;}
+.mobile-order-page .mobile-head-belt .btn-close {width: 40px;height: 40px;display: flex;align-items: center;justify-content: center;border: 0.5px solid #e5e5e5;border-radius: 9999px;position: absolute;left: 0px;top: 50%;transform: translateY(-50%);z-index: 1;background: #ffffff;box-shadow: 2px 2px 50px 0px rgb(0 0 0 / 20%);}
+.mobile-order-page .mobile-head-belt .btn-close>i {top: 0px;font-size: 20px;}
+.mobile-order-page .mobile-head-belt h1 {font-size: 18px;font-weight: 600;margin-bottom: 0px;}
+.mobile-order-page .order-details-block {position: relative;margin-top: 45px;}
+.mobile-order-page .order-details-block .order-details-accordion {overflow: hidden;border-radius: 10px;background: #ffffff;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);margin-bottom: 24px;}
+.mobile-order-page .order-details-block .order-details-accordion .accordion-button {background: #ffffff !important;box-shadow: none;outline: none;font-family: "Sebino-Medium";color: #000000;padding: 12px 20px 12px;font-size: 14px;line-height: initial;}
+.mobile-order-page .order-details-block .order-details-options .accordion-button {color: #F8B602;}
+.mobile-order-page .order-details-block .order-details-accordion .accordion-item {border: 0px;border-radius: 0px;border-bottom: 1px solid #E3E3E3;}
+.mobile-order-page .order-details-block .order-details-accordion .accordion-item:last-child {border-bottom: 0px !important;}
+.mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body {padding: 20px;padding-top: 5px;}
+.mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body * {font-size: 13px;color: #636363;}
+.order-detail-body .table, .order-detail-body .table td {border: 0px;}
+.order-detail-body .table td {padding: 2px 0px;}
+.order-details-block .order-wise-details {position: relative;}
+.order-details-block .order-wise-details .items {padding: 12px 20px;border-bottom: 1px solid #E3E3E3;}
+.order-details-block .order-wise-details .items:last-child {border-bottom: 0px;}
+.order-details-block .order-wise-details .items>h3 {font-size: 14px;font-family: "Sebino-Medium";color: #949494;}
+.order-details-block .order-wise-details .items .order-items .details-row {display: flex;justify-content: space-between;}
+.order-details-block .order-wise-details .items .order-items .details-row .left-details {display: flex;flex-wrap: nowrap;flex: auto;}
+.details-row .left-details .number {flex: 0 0 20px;max-width: 20px;line-height: initial;}
+.details-row .right-details {flex: 0 0 100px;max-width: 100px;}
+.order-details-block .order-wise-details .items .order-items .details-row * {font-size: 13px;color: #292929;}
+.order-details-block .order-wise-details .items .order-items .details-row ul {list-style: none;padding-left: 0px;margin-bottom: 0px;padding-top: 5px;}
+.order-details-block .order-wise-details .items .order-items .details-row ul li {font-size: 10px;list-style: none;color: #292929;}
+.order-details-block .order-wise-details h4 {margin-bottom: 0px;}
+.order-details-block .order-wise-details .table, .order-details-block .total-price-table .table td, .order-details-block .order-wise-details .table * {border: 0px;font-size: 13px;color: #949494;padding: 2px 0px;}
+.text-green {color: #2E9C4B !important;}
+.order-details-block .order-wise-details .items .order-items-total * {font-size: 16px !important;}
+.order-details-block .accordion .btn-acc {display: flex;width: 100%;justify-content: center;align-items: center;border: 1px solid #F8B602;border-radius: 10px;text-align: center;font-size: 16px !important;color: #F8B602 !important;background: #ffffff;padding: 11px 5px;}
+.order-details-block .accordion p {color: #ACACAC !important;font-size: 14px !important;line-height: initial;}
+.bg-theme-box {overflow: hidden;border-radius: 10px;background: #ffffff;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);margin-bottom: 24px;}
+
+@media (max-width: 767px) {
+  .mobile-order-page {display: block !important;}
+}
+
+/* Order page mobile css ends */

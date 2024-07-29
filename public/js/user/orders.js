@@ -22,8 +22,7 @@ function orderDetail(id)
 }
 
 $(function () {
-
-    orderDetail(77)
+    
     $("#refund-form").validate({
         //debug:true,
         submitHandler: function (form) {

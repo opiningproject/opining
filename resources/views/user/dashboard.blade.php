@@ -111,7 +111,7 @@
                                             ?>
                                             <div class="category-element swiper-slide {{ $selected }}"
                                                 data-category-id={{ $cat->id }}>
-                                                <div class="card">
+                                                <div class="card shadow-mobile">
                                                     <span class="dish-item-icon">
                                                         <img src="{{ $cat->image }}" class="img-fluid svg" alt="bakery"
                                                             width="56" height="56" />
@@ -158,7 +158,7 @@
                                             }
 
                                             ?>
-                                            <div class="card food-detail-card">
+                                            <div class="card food-detail-card shadow-mobile">
                                                 @if ($dish->percentage_off > 0)
                                                     <p class="mb-0 offer-percantage">
                                                         {{ $dish->percentage_off }}%

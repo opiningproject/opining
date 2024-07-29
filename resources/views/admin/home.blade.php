@@ -161,7 +161,7 @@
                                 <div class="popular-item-grid">
                                     @if (count($dishes) > 0)
                                         @foreach ($dishes as $dish)
-                                            <div class="card food-detail-card">
+                                            <div class="card food-detail-card shadow-mobile">
                                                 @if ($dish->out_of_stock == '1' || $dish->qty <= 0)
                                                     <p class="mb-0 inoutstock-badge text-bg-danger-1">{{ trans('rest.menu.dish.out_of_stock') }}</p>
                                                 @else

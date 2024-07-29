@@ -1,7 +1,7 @@
 <div class="popular-item-grid">
     @if(count($dishes) > 0)
         @foreach ($dishes as $dish)
-            <div class="card food-detail-card dish-card-div{{ $dish->id }}">
+            <div class="card food-detail-card shadow-mobile dish-card-div{{ $dish->id }}">
                 @if($dish->out_of_stock == '1')
                     <p class="mb-0 inoutstock-badge text-bg-danger-1">{{ trans('rest.menu.dish.out_of_stock') }}</p>
                 @else

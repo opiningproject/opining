@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="offer-card-banner offercard-slider">
-                            <div class="card position-relative">
+                            <div class="card position-relative shadow-mobile">
                                 <div class="bg-offercard-circle-1">
                                     <img class="svg" src="{{ asset('images/ban-grade1.svg') }}" alt=""
                                         width="175" height="102">

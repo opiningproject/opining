@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="d-flex orders-main order-non-active">
-                            <div class="orders d-flex">
+                            <div class="orders d-flex order-mobile">
                                 <div class="orders-type">
                                     <div class="orders-title mb-1">{{ trans('user.my_orders.active_orders') }}</div>
                                     @if(count($active_orders))

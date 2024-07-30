@@ -12,11 +12,11 @@
               </div>
               </div>
               <!-- start profile section -->
-              <section class="custom-section profile-section h-100 pb-0">
-                <div class="card custom-card h-100">
+              <section class="custom-section profile-section h-100 pb-0 pt-2">
+                <div class="card custom-card h-100 shadow-mobile">
                   <form class="form" id="user-profile-form" action="{{ route('user.settings.save-profile') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="card-body pb-1">
+                    <div class="card-body">
                       <div class="row">
                         <div class="col-12 custom-w-col-15">
                           <div class="form-group">

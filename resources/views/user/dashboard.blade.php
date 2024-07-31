@@ -625,7 +625,7 @@
                                                     value="{{ $cartValue }}">
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr  {{ $serviceCharge > 0 ? '' : 'style=display:none' }}>
                                             <td class="text-start">
                                                 <span
                                                     class="text-muted-1 bill-count-name">{{ trans('user.cart.service_charge') }}</span>

@@ -5702,6 +5702,9 @@ footer {padding: 36px 20px 20px 20px;}
 
 @media (min-width: 768px) {
   .cart-navbar-toggler-inn svg g{fill: #000000 !important;}
+  .orders-details-mobile {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -5821,6 +5824,9 @@ footer {padding: 36px 20px 20px 20px;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
   .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 220px) !important;}
 
+.orders-details-web {
+  display: none;
+}
 }
 
 /* Order page mobile css ends */

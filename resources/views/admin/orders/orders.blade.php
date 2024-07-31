@@ -461,7 +461,7 @@
                                                         <div class="value">
                                                             €{{ number_format(getOrderGrossAmount($order), 2) }}</div>
                                                     </div>
-                                                    <div
+                                                    <div {{ $order->platform_charge > 0 ? '' : 'style=display:none' }}
                                                         class="text d-flex align-items-center justify-content-between gap-2">
                                                         <div class="key">{{ trans('rest.food_order.service_charge') }}
                                                         </div>

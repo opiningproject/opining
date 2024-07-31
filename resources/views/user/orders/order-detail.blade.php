@@ -9,7 +9,7 @@ use App\Enums\RefundStatus;
 ?>
 
 
-<div class="mobile-order-page d-none">
+<div class="mobile-order-page d-none orders-details-mobile">
     <div class="mobile-head-belt">
         <a href="{{route('user.orders') }}">
 
@@ -153,12 +153,9 @@ use App\Enums\RefundStatus;
                                 {{ $order->delivery_charge > 0 ? '€'.number_format($order->delivery_charge, 2) : 'FREE' }}
                             </td>
                         </tr>
-                        <tr>
-                            <td><div class="list-item active" {{ isset($order->coupon) ? '' : 'style=display:none' }}>
-                                <div class="text">{{ trans('user.my_orders.item_discount') }}</div>
-                                <div class="number">-€{{ number_format($order->coupon_discount, 2) }}</div>
-                            </div>
-                            </td>
+                        <tr  {{ isset($order->coupon) ? '' : 'style=display:none' }}>
+                            <td>{{ trans('user.my_orders.item_discount') }}</td>
+                            <td class="text-end text-green"> -€{{ number_format($order->coupon_discount, 2) }}</td>                           
                         </tr>
                     </tbody>
                 </table>
@@ -484,8 +481,12 @@ use App\Enums\RefundStatus;
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                     data-bs-parent="#accordionOrderOptions">
                     <div class="accordion-body">
-                        <h3>Call us</h3>
-                        <a href="#" class="btn-acc">{{ getRestaurantDetail()->phone_no }}</a>
+                        <h3>{{ trans('user.my_orders.call_us') }}</h3>
+                        <a href="tel:+31{{ getRestaurantDetail()->phone_no }}" class="btn-acc">{{ getRestaurantDetail()->phone_no }}</a>
+                    </div>
+                    <div class="accordion-body">
+                        <h3>{{ trans('user.my_orders.chat_with_us') }}</h3>
+                        <a href="{{ route('user.chat') }}" class="btn-acc">{{ trans('user.my_orders.chat') }}</a>
                     </div>
                 </div>
             </div>
@@ -509,13 +510,12 @@ use App\Enums\RefundStatus;
     </div>
 </div>
 
-
-<div class="d-none">
+<div class="position-relatve orders-details-web">
     <h3 class="text-center fs-5 mb-4 d-block d-md-none">{{ trans('user.my_orders.my_order') }}</h3>
     <button type="button"
         class="btn-close d-block d-md-none order-detail-close-btn position-absolute top-0 end-0 p-3"></button>
     <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
-    <div class="ordersdetails-header d-flex justify-content-between align-items-center">
+    <div class="ordersdetails-header d-flex justify-content-between align-items-center mb-3">
         <div class="ordersdetails-title me-auto">{{ trans('user.my_orders.order_details') }}</div>
         <div class="btn-grp d-flex flex-wrap">
             @if ($order->order_type == '1')
@@ -532,7 +532,7 @@ use App\Enums\RefundStatus;
         </div>
     </div>
 
-    <div class="orderdetails-main px-0 px-md-3">
+    <div class="orderdetails-main px-0 px-md-3 mb-3">
         <div class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
             <div class="textgrp d-flex flex-column gap-1 gap-sm-3">
                 <div class="title">{{ trans('user.my_orders.order') }} #{{ $order->id }}</div>
@@ -670,7 +670,7 @@ use App\Enums\RefundStatus;
                     <div class="text">{{ trans('user.my_orders.item_total') }}</div>
                     <div class="number">€{{ number_format(getOrderGrossAmount($order), 2) }}</div>
                 </div>
-                <div class="list-item">
+                <div class="list-item" {{ $order->platform_charge > 0 ? '' : 'style=display:none' }}>
                     <div class="text">{{ trans('user.my_orders.service_charge') }}</div>
                     <div class="number">€{{ number_format($order->platform_charge, 2) }}</div>
                 </div>

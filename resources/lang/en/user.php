@@ -167,6 +167,10 @@ return [
 		'see_points' => 'See Points',
 		'cancel_order' => 'Cancel Order',
 		'cancel_order_string' => 'Once the order is in Kitchen, it is not possible to cancel order anymore. If you want to cancel order what is not prepared yet, you can take contact and we help you further',
+		'call_us' => 'Call Us',
+		'chat_with_us' => 'Chat with us',
+		'chat' => 'Chat',
+
 
 	],
 

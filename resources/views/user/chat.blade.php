@@ -82,11 +82,30 @@
 @endsection
 @section('script')
     <script>
+
+    checkScreenSize()
         const userLogin = {
             id: {{ auth()->user()->id }},
             socketId: $('#socket-id').val()
         }
         var userData = {!! auth()->user() !!}
+
+
+        function checkScreenSize() {
+            if ($(window).width() <= 767) {
+                $('#footer-style').hide();
+                $('body').addClass('overflow-hidden');
+            } else {
+                $('#footer-style').show();
+                $('body').removeClass('overflow-hidden');
+
+            }
+        }
+
+        // Add event listener for window resize
+        $(window).on('resize', checkScreenSize);
+
+
     </script>
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
             integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"

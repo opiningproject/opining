@@ -753,7 +753,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                     class="bill-count">€{{ number_format(getCartTotalAmount(), 2) }}</span>
                                                                             </td>
                                                                         </tr>
-                                                                        <tr>
+                                                                        <tr {{ $serviceCharge > 0 ? '' : 'style=display:none' }}>
                                                                             <td class="text-start">
                                                                                 <span
                                                                                     class="text-muted-1 bill-count-name">{{ trans('user.my_orders.service_charge') }}</span>

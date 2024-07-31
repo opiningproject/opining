@@ -5710,7 +5710,6 @@ footer {padding: 36px 20px 20px 20px;}
 @media (max-width: 767px) {
   body {background: #ffffff !important;}
 
-
   .mobile-order-page {padding: 0px 4px;}
 .mobile-order-page .mobile-head-belt {position: relative;display: flex;text-align: center;justify-content: center;align-items: center;margin-top: 0px;min-height: 50px;}
 /* .mobile-order-page .mobile-head-belt {
@@ -5760,6 +5759,7 @@ footer {padding: 36px 20px 20px 20px;}
 .bg-theme-box {overflow: hidden;border-radius: 10px;background: #ffffff;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);margin-bottom: 20px;}
 
 .order-details-block .order-progress {padding: 20px;position: relative;padding-bottom: 75px;}
+.order-details-block .order-progress.no-track {padding-bottom: 20px;}
 .order-details-block .progress-steps {display: flex;flex-direction: column;position: relative;}
 .order-details-block .progress-steps::before {width: 1px;height: 100%;border: 1px dotted #DADADA;content: "";left: 14px;top: 0px;position: absolute;z-index: 1;}
 .order-details-block .progress-steps .step {display: flex;margin-bottom: 15px;align-items: center;gap: 10px;}
@@ -5772,8 +5772,6 @@ footer {padding: 36px 20px 20px 20px;}
 .order-details-block .progress-steps .step h3 {font-size: 13px;color: #C1C1C1;}
 .order-details-block .progress-steps .step.active h3 {font-size: 13px;color: #292929;}
 .order-details-block .order-progress .track-order-btn {display: flex;align-items: center;justify-content: center;height: 54px;text-align: center;font-size: 15px;background: #FFC00B;color: #292929;position: absolute;left: 0px;bottom: 0px;right: 0px;width: 100%;border-top-left-radius: 0px;border-top-right-radius: 0px;margin-top: 0px;gap: 10px;}
-
-
 
   .mobile-order-page {display: block !important;}
   .card-theme-box {border: 0px !important;border-radius: 10px;background: transparent !important;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);}
@@ -5811,7 +5809,7 @@ footer {padding: 36px 20px 20px 20px;}
   .order-details-block .cart-section .cart-items .item-name * {color: #000000 !important;}
   .order-details-block .cart-section .cart-items .cart-item-price {font-family: "SebinoRegular" !important;font-size: 14px;font-weight: normal;right: 5px;}
   .order-details-block .cart-section .cart-items .cart-item-detail {row-gap: 2px;}
-  .order-details-block .cart-sidebar .cart-item-row .items-additional li {color: #000000;font-size: 12px;}
+  .cart-sidebar .cart-item-row .items-additional li {color: #000000;font-size: 12px;}
   .mobile-order-page .order-details-block {position: relative;margin-top: 35px;}
   .mobile-order-page .bill-detail-invoice {background: #E0E0E0;border-radius: 10px;overflow: hidden;padding: 12px 20px;}
   .mobile-order-page .bill-detail-invoice * {background: transparent;}
@@ -5823,10 +5821,8 @@ footer {padding: 36px 20px 20px 20px;}
   .chat-main-screen .bd-gutter, .chat-main-screen .bd-main, .chat-main-screen .main-content, .chat-main-screen .chatDivMobile {height: 100%;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
   .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 220px) !important;}
-
-.orders-details-web {
-  display: none;
-}
+  .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
+  .orders-details-web {display: none;}
 }
 
 /* Order page mobile css ends */

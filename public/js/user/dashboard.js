@@ -56,8 +56,8 @@ var swiper = '';
 $(document).ready(function () {
 
     swiper = new Swiper(".category-swiper-slider", {
-        slidesPerView: 2,
-        spaceBetween: 10,
+        slidesPerView: 3,
+        spaceBetween: 12,
         // loop: true,
         // autoplay: {
         //     delay: 1000,
@@ -220,3 +220,16 @@ function getDishes(catId) {
     })
 
 }
+
+
+function checkScreenSize() {
+    if ($(window).width() <= 767) {
+        $('body').addClass('body-bg-mobile');
+    } else {
+        $('body').removeClass('body-bg-mobile');
+    }
+}
+
+checkScreenSize()
+// Add event listener for window resize
+$(window).on('resize', checkScreenSize);

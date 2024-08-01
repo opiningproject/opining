@@ -1742,7 +1742,7 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
   color: var(--theme-dark2);
   font-family: "Sebino-Medium", sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 300;
   text-transform: capitalize;
 }
 
@@ -1843,7 +1843,7 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
   left: 0;*/
     font-size: 16px !important;
     color: #000000 !important;
-    font-weight: 600 !important;
+    font-weight: 300 !important;
     cursor: pointer !important;
     background:inherit !important;
     align-items:inherit !important;
@@ -5296,7 +5296,7 @@ footer .footer-logo a {font-size: initial !important;}
 .collecting-accordian .accordion-item:last-child {border-bottom: 0px;}
 .collecting-accordian .accordion-item .accordion-button {padding: 10px 0px;background: transparent !important;font-weight: 500;font-size: 16px;color: #000000;border: 0px;box-shadow: none;outline: none;}
 .collecting-accordian .accordion-body {padding: 0px 0px 10px;font-size: 14px;}
-.title-site {font-size: 30px;font-weight: 600;}
+.title-site {font-size: 30px;font-weight: 300;}
 .discount-coupon-accordian .accordion-item {border: 1px solid #C1C1C1;margin-bottom: 16px;border-radius: 10px;overflow: hidden;padding: 16px;}
 .discount-coupon-accordian .accordion-item:last-child {margin-bottom: 0px;}
 .discount-coupon-accordian .accordion-item .accordion-button {outline: none;box-shadow: none;background: #ffffff !important;padding: 0px !important;}

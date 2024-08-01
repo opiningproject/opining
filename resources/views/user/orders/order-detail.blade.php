@@ -148,7 +148,7 @@ use App\Enums\RefundStatus;
                             <td class="text-end">€{{ number_format($order->platform_charge, 2) }}</td>
                         </tr>
                         <tr>
-                            <td>{{ $order->delivery_charge ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.free_charges') }}</td>
+                            <td>{{ $order->delivery_charge ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</td>
                             <td class="text-end {{ $order->delivery_charge > 0 ? '' : 'text-green' }}">
                                 {{ $order->delivery_charge > 0 ? '€'.number_format($order->delivery_charge, 2) : 'FREE' }}
                             </td>
@@ -177,7 +177,7 @@ use App\Enums\RefundStatus;
             </div>
         </div>
 
-        <div class="order-progress bg-theme-box">
+        <div class="order-progress bg-theme-box {{ $order->order_type == '1' ? '' : 'no-track' }}">
             <div class="progress-steps">
                 <div class="step active">
                     <div class="icon">
@@ -674,9 +674,12 @@ use App\Enums\RefundStatus;
                     <div class="text">{{ trans('user.my_orders.service_charge') }}</div>
                     <div class="number">€{{ number_format($order->platform_charge, 2) }}</div>
                 </div>
-                <div class="list-item" {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
-                    <div class="text">{{ $order->delivery_charge ? 'Delivery Charge' : 'Free Delivery' }}</div>
-                    <div class="number">€{{ number_format($order->delivery_charge, 2) }}</div>
+                <div class="list-item  {{ $order->delivery_charge > 0 ? '' : 'delivery-charge' }}" {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
+                    <div class="text">{{ $order->delivery_charge ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</div>
+                    <div class="number {{ $order->delivery_charge > 0 ? '' : 'text-green' }}">
+                        {{ $order->delivery_charge > 0 ? '€'.number_format($order->delivery_charge, 2) : 'FREE' }}
+                    </div>
+
                 </div>
                 <div class="list-item active" {{ isset($order->coupon) ? '' : 'style=display:none' }}>
                     <div class="text">{{ trans('user.my_orders.item_discount') }}</div>

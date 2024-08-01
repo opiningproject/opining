@@ -5764,6 +5764,7 @@ footer {padding: 36px 20px 20px 20px;}
 .order-details-block .progress-steps::before {width: 1px;height: 100%;border: 1px dotted #DADADA;content: "";left: 14px;top: 0px;position: absolute;z-index: 1;}
 .order-details-block .progress-steps .step {display: flex;margin-bottom: 15px;align-items: center;gap: 10px;}
 .order-details-block .progress-steps .step:last-child {margin-bottom: 0px;}
+.order-details-block .progress-steps .step:last-child .icon:after {display: none !important;}
 .order-details-block .progress-steps .step .icon {flex: 0 0 30px;height: 30px;max-width: 30px;display: flex;align-items: center;justify-content: center;border-radius: 9999px;background: #D9D9D9;position: relative;z-index: 2;}
 .order-details-block .progress-steps .step.active .icon {background: #FFC00B;}
 .order-details-block .progress-steps .step.active .icon:after {width: 2px;height: 30px;content: "";left: 14px;top: 100%;position: absolute;z-index: 1;background: #FFC00B;}
@@ -5826,3 +5827,9 @@ footer {padding: 36px 20px 20px 20px;}
 }
 
 /* Order page mobile css ends */
+
+input.form-control.dish-notes {
+  background: inherit;
+}
+
+.delivery-charge .number {color: var(--theme-success3) !important;}

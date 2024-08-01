@@ -3,6 +3,9 @@ $(function () {
     // checkout button enables disable as per client feeedback july 2024 CR points
     var min_order_price = $('.min_order_price').html()
     var currentAmount = $('.bill-total-count').html()
+    if(!zipcode) {
+        $('#delivery-charge-tab').hide()
+    }
     if (currentAmount) {
         currentAmount = currentAmount.replace('€', '')
         if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
@@ -125,8 +128,19 @@ $(function () {
                     $('.minimum_amount').html('<span class="minimum_amounts">'+ '(minimum €'+response.data.min_order_price.toFixed(2) +')</span>')
                     $('.min_order_price').html(response.data.min_order_price.toFixed(2))
                     var min_order_price = response.data.min_order_price
-                    var currentAmount = $('.bill-total-count').html()
-                    currentAmount = currentAmount.replace('€', '')
+
+                    if(response.data.delivery_charge) {
+                        let currentAmount = $('#total-cart-bill').html()
+                        currentAmount = currentAmount.replace('€', '')
+                        $('#delivery-charge-tab').show()
+                        $('.delivery_charge_amount').html('<span class="bill-count delivery_charge_amount">€'+response.data.delivery_charge.toFixed(2) +'</span>')
+                        $('#delivery-charge').val(response.data.delivery_charge.toFixed(2))
+                        let amount = parseFloat(currentAmount)
+                       
+                        amount += response.data.delivery_charge;
+                        $('#gross-total-bill').text('€' + amount.toFixed(2))
+                    }
+
                     if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
                         $('.checkout-sticky-btn').removeClass('show-hide-btn');
                     } else {

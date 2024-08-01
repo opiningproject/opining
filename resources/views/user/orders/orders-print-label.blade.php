@@ -15,7 +15,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 10px 15px; /* Adjust padding */
+            padding: 10px 15px !important; /* Adjust padding */
             max-width: 100%; /* Full width */
             font-size: 14px;
         }
@@ -89,8 +89,34 @@
         .amount-description-price p {
             margin-top: 5px;
         }
+
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            z-index: 9;
+        }
+
+        .back-arrow svg{
+            width: 20px;
+            height: 20px;
+        }
+
+        @media print {
+        .no-print {
+            display: none !important;
+        }
+        }
     </style>
     <div class="main">
+
+
+<div class="no-print" id="no_print">
+    <a href="{{ route('user.orders',['order_id' => $order->id]) }}" class="back-arrow">
+    <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.17,24a1,1,0,0,1-.71-.29L8.29,15.54a5,5,0,0,1,0-7.08L16.46.29a1,1,0,1,1,1.42,1.42L9.71,9.88a3,3,0,0,0,0,4.24l8.17,8.17a1,1,0,0,1,0,1.42A1,1,0,0,1,17.17,24Z"/></svg>
+</a>
+</div>
+
         @if(!empty($order))
         <?php $userDetails = $order->orderUserDetails; ?>
         <div class="header">
@@ -202,5 +228,18 @@
                 clearInterval(interval)
             }
         })
+
+        function checkScreenSize() {
+            if ($(window).width() <= 767) {
+                $('#no_print').show();
+            } else {
+                $('#no_print').hide();
+            }
+        }
+
+        checkScreenSize()
+        // Add event listener for window resize
+        $(window).on('resize', checkScreenSize);
+
     </script>
 @endsection

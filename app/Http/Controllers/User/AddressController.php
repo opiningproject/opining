@@ -50,6 +50,7 @@ class AddressController extends Controller
             session(['zipcode' => $request->zipcode]);
             session(['house_no' => $request->house_no]);
             session(['min_order_price' => $zipcode->min_order_price]);
+            session(['delivery_charge' => $zipcode->delivery_charge]);
             $street_name = session('street_name') ?? '';
             $city = session('city') ?? '';
             return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode, "street_name" => $street_name, "city" => $city, 'min_order_price' => $zipcode->min_order_price]);
@@ -79,6 +80,7 @@ class AddressController extends Controller
             $response['street_name'] = $address->street_name;
             $response['city'] = $address->city;
             $response['min_order_price'] = $zipcode->min_order_price;
+            $response['delivery_charge'] = $zipcode->delivery_charge;
 
             if($zipcode){
 
@@ -88,6 +90,7 @@ class AddressController extends Controller
                 session(['city' => $address->city]);
                 session(['address' => $id]);
                 session(['min_order_price' => $zipcode->min_order_price]);
+                session(['delivery_charge' => $zipcode->delivery_charge]);
                 $response['message'] = '';
 
                 return response::json(['status' => 200, 'data' => $response]);

@@ -8475,9 +8475,9 @@ textarea.form-control-lg {
   text-decoration: none !important;
 }
 
-.text-decoration-underline {
+/* .text-decoration-underline {
   text-decoration: underline !important;
-}
+} */
 
 .text-decoration-line-through {
   text-decoration: line-through !important;

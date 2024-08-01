@@ -7,6 +7,7 @@
     $street_name = session('street_name');
     $city = session('city');
     $min_order_price = session('min_order_price');
+    $delivery_charge = session('delivery_charge');
     $showModal = 0;
 
     if (!session('showLoginModal')) {
@@ -635,6 +636,17 @@
                                                 <input type="hidden" id="service-charge" value="{{ $serviceCharge }}">
                                             </td>
                                         </tr>
+
+                                        <tr id="delivery-charge-tab">
+                                            <td class="text-start">
+                                                <span
+                                                    class="text-muted-1 bill-count-name delivery_charge_name">{{ trans('user.cart.delivery_charge') }}</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="bill-count delivery_charge_amount">€{{ number_format($delivery_charge, 2) }}</span>
+                                                <input type="hidden" id="delivery-charge" value="{{ $delivery_charge }}">
+                                            </td>
+                                        </tr>
                                         <tr class="item-discount" id="item-discount"
                                             {{ !empty($couponCode) ? '' : 'style=display:none' }}>
                                             <td class="text-start">
@@ -652,12 +664,18 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    @php
+                                        $amount =  number_format((float) ($cartValue + $serviceCharge - $cartValue * $couponDiscountPercent), 2);
+                                        if($zipcode) {
+                                            $amount = number_format((float) ($cartValue + $serviceCharge + $delivery_charge - $cartValue * $couponDiscountPercent), 2);
+                                        }
+                                    @endphp
                                     <tfoot>
                                         <tr>
                                             <td class="text-start">{{ trans('user.cart.total') }}</td>
                                             <td class="text-end">
                                                 <span class="bill-total-count"
-                                                    id="gross-total-bill">€{{ number_format((float) ($cartValue + $serviceCharge - $cartValue * $couponDiscountPercent), 2) }}</span>
+                                                    id="gross-total-bill">€{{ $amount }}</span>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -667,8 +685,9 @@
                             <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                 id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
-                                    {{ trans('user.cart.checkout') }} (<span class="bill-total-count"
-                                        id="gross-total-bill1">€{{ number_format((float) ($cartValue + $serviceCharge - $cartValue * $couponDiscountPercent), 2) }}</span>)
+                                    {{ trans('user.cart.checkout') }} 
+                                    (<span class="bill-total-count"
+                                        id="gross-total-bill1">€{{ number_format((float) ($cartValue + $serviceCharge + $delivery_charge - $cartValue * $couponDiscountPercent), 2) }}</span>)
                                 </span>
                             </a>
 
@@ -713,6 +732,8 @@
 @section('script')
     <script>
         var app_name = '{!! env('APP_NAME') !!}'
+
+        var zipcode = {!! json_encode($zipcode) !!};
     </script>
     <script type="text/javascript" src="{{ asset('js/user/dashboard.js') }}"></script>
 @endsection

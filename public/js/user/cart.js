@@ -31,20 +31,40 @@ $(function () {
             success: function (response) {
 
                 if (response.status == 200) {
+                    // checkout button enables disable as per client feeedback july 2024 CR points
+                    var min_order_price = $('.min_order_price').html()
+                    var currentAmount = $('.bill-total-count').html()
+                    currentAmount = currentAmount.replace('€', '')
+
+                    let total_amount = parseFloat(currentAmount)
+
+                    let deliveryCharge = $('#delivery-charge').val()
+
                     if (type == '1') {
 
-                        // checkout button enables disable as per client feeedback july 2024 CR points
-                        var min_order_price = $('.min_order_price').html()
-                        var currentAmount = $('.bill-total-count').html()
-                        currentAmount = currentAmount.replace('€', '')
+
                         if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
                             $('.checkout-sticky-btn').removeClass('show-hide-btn');
                         } else {
                             $('.checkout-sticky-btn').addClass('show-hide-btn');
                         }
+                        $('#delivery-charge-tab').show()
                         // Hide as per client feeedback June CR points
                         // $('#addressChangeModal').modal('show')
+                        if(deliveryCharge) {
+                            total_amount += parseFloat(deliveryCharge);
+                            $('#gross-total-bill').text('€' + total_amount.toFixed(2))
+                        }
                     } else {
+                        let del_charge = $('.delivery_charge_amount').text()
+                        del_charge = del_charge.replace('€', '')
+                        
+                        if(del_charge) {
+                            total_amount -= parseFloat(del_charge);
+                            $('#gross-total-bill').text('€' + total_amount.toFixed(2))
+                        }
+                        $('#delivery-charge-tab').hide()
+            
                         $('.checkout-sticky-btn').removeClass('show-hide-btn');
                     }
                 } else {
@@ -505,6 +525,8 @@ function calculateTotalCartAmount() {
 
     var totalAmt = 0.00;
     var serviceCharge = $('#service-charge').val()
+    var deliveryCharge = $('#delivery-charge').val()
+
     var couponDiscountPercent = $('#coupon-discount-percent').val()
     var couponDiscount = 0.00
 
@@ -524,6 +546,9 @@ function calculateTotalCartAmount() {
 
     couponDiscount = parseFloat(couponDiscountPercent) * totalAmt
     totalAmt += parseFloat(serviceCharge)
+    if(deliveryCharge) {
+        totalAmt += parseFloat(deliveryCharge)
+    }
     totalAmt -= parseFloat(couponDiscount)
 
     $('#coupon-discount-text').text('-€' + couponDiscount.toFixed(2))

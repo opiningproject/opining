@@ -14,7 +14,7 @@
                         $customizeBtn = true;
                     }
                     ?>
-                <div class="card food-detail-card">
+                <div class="card food-detail-card shadow-mobile">
                     @if($dish->percentage_off > 0)<p class="mb-0 offer-percantage">{{ $dish->percentage_off }}%</p>@endif
                     <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? 'd-none':'' }}" onclick="favorite({{ $dish->id }})" id="unfavorite-icon-{{ $dish->id }}">
                         <img src="{{ asset('images/favorite-before-icon.svg') }}" alt="" class="svg" height="20" width="22">

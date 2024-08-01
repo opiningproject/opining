@@ -102,7 +102,7 @@ class CartController extends Controller
         $dish = $cart->dish;
         $dishId = $dish->id;
         $dishPrice = $dish->price;
-        $optionName = $dish->dishOption->name ?? '';
+        $optionName = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
         $ingredientData = getOrderDishIngredients1($cart);
 
         $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
@@ -134,7 +134,8 @@ class CartController extends Controller
             <div class='cart-custom-w-col-detail'>
                 <div class='cart-item-detail'>
                     <div class='d-flex align-items-center'>
-                        <p class='mb-0 item-options mb-0'>
+                        <p class='mb-0 item-options mb-0' id='dish-option-$cart->id' data-dish-option='$optionName->option_en'>
+                        $optionName->option_en
                         </p>
                     </div>
                     <div class='d-flex cart-item-bt'>
@@ -365,12 +366,19 @@ class CartController extends Controller
                     $response['cartHtml'] = $this->cartHtml($orderDetails);
                 }
             }else{
+
+                if($dish->option &&  $request->option) {
+                    $optionName = $dish->option->where('id', $request->option)->where('dish_id',$dish->id)->first() ?? '';
+                }
                 $sameDish = $request->doesExist;
                 $orderDetails = $order->dishDetails()->find($request->doesExist);
 //                ->update([
                     $orderDetails->qty = $request->dishQty;
                     $orderDetails->price = $dish->price;
                     $orderDetails->total_price = $orderDetails->qty * $dish->price;
+
+                    // update dish option, if it comes in request ( CR: July )
+                    $orderDetails->dish_option_id =  $request->option ?? null;
                     $orderDetails->save();
 //                ]);
                 $orderDetails->orderDishDetails()->forceDelete();
@@ -433,6 +441,7 @@ class CartController extends Controller
             $response['paidIngAmt'] = $paidIngAmt;
             $response['ingListData'] = $IngListData;
             $response['addedDishId'] = $sameDish;
+            $response['dishOption'] = $optionName ?? '';
             return response::json(['status' => 200, 'message' => $response]);
 
 

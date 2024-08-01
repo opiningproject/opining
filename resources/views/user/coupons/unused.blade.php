@@ -12,7 +12,7 @@
                     @foreach ($unexpiredCoupons as $key => $unexpiredCoupon)
                     <?php  $coupon = $unexpiredCoupon->coupon ?>
                         <div class="coupon-col">
-                            <div class="coupon-inn">
+                            <div class="coupon-inn shadow-mobile">
                                 <div class="coupon-flex">
                                     <div class="left-cp">
                                         <h2>{{ $coupon->percentage_off }}% {{ trans('user.coupons.off') }}</h2>

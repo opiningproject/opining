@@ -448,6 +448,11 @@ function addCustomizedCart(id, doesExist = 0) {
                         $('#item-ing-desc' + doesExist).html(response.message.ingListData)
                         $('#qty-' + doesExist).attr('data-ing', response.message.paidIngAmt)
                     }
+                    if(response.message.dishOption) {
+                        $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
+                        $('#dish-option-' + response.message.addedDishId).text(response.message.dishOption.option_en);
+                    }
+                
                     $('#qty-' + response.message.addedDishId).val(totalAmount)
                 } else {
                     /*$("#dish-cart-lbl-" + id).text('Added to cart');

@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="d-flex orders-main order-non-active">
-                            <div class="orders d-flex">
+                            <div class="orders d-flex order-mobile">
                                 <div class="orders-type">
                                     <div class="orders-title mb-1">{{ trans('user.my_orders.active_orders') }}</div>
                                     @if(count($active_orders))
@@ -78,10 +78,10 @@
                             </div>
                             @if(!empty($order))
                                 <div
-                                    class="ordersdetails ordersdetails_sidebar mobile_ordersdetails ordersdetails_sidebar">
+                                    class="ordersdetails ordersdetails_sidebar mobile_ordersdetails ordersdetails_sidebar gap-0">
                                     <input type="hidden" name="order_id" id="order_id" value="{{ $order->id }}">
                                     <!-- with two button -->
-                                    <div class="ordersdetails-header d-flex justify-content-between align-items-center">
+                                    <div class="ordersdetails-header d-flex justify-content-between align-items-center mb-3">
                                         <button type="button"
                                                 class="btn-close d-block d-md-none order-detail-close-btn">
                                         </button>
@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="orderdetails-main">
+                                    <div class="orderdetails-main mb-3">
                                         <div
                                             class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
                                             <div class="textgrp d-flex flex-column gap-1 gap-sm-3">
@@ -246,7 +246,7 @@
                                                     <div class="number">
                                                         €{{ number_format(getOrderGrossAmount($order),2) }}</div>
                                                 </div>
-                                                <div class="list-item">
+                                                <div class="list-item" {{ $order->platform_charge > 0 ? '' : 'style=display:none' }}>
                                                     <div class="text">{{ trans('user.my_orders.service_charge') }}</div>
                                                     <div class="number">
                                                         €{{ number_format($order->platform_charge,2) }}</div>

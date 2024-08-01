@@ -14,20 +14,20 @@
 
 
                         <section class="custom-section h-100 pb-0 mobile-card-bg">
-                            <div class="card custom-card h-100">
+                            <div class="card custom-card h-100 mobile-card-transperant">
 
-                                <div class="card-body">
+                                <div class="card-body card-body-mobile">
                                     <div class="customize-tab coupons-tab">
                                         <ul class="nav nav-tabs border-0 flex-nowrap" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="unused-coupons-tab" data-bs-toggle="tab"
+                                                <button class="nav-link active shadow-mobile" id="unused-coupons-tab" data-bs-toggle="tab"
                                                     data-bs-target="#unused-tab-pane" type="button" role="tab"
                                                     aria-controls="unused-tab-pane" aria-selected="false">
                                                     {{ trans('user.coupons.unused') }}
                                                 </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="expired-coupons-tab" data-bs-toggle="tab"
+                                                <button class="nav-link shadow-mobile" id="expired-coupons-tab" data-bs-toggle="tab"
                                                     data-bs-target="#expired-tab-pane" type="button" role="tab"
                                                     aria-controls="expired-tab-pane"
                                                     aria-selected="false">{{ trans('user.coupons.expired') }}

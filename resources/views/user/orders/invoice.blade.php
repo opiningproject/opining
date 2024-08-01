@@ -168,7 +168,7 @@
                     <p>{{ trans('rest.food_order.item_total') }}</p>
                     <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
                 </div>
-                <div class="amount-description-bottom">
+                <div class="amount-description-bottom" {{ $order->platform_charge > 0 ? '' : 'style=display:none' }}>
                     <p>{{ trans('rest.food_order.service_charge') }}</p>
                     <p>€{{ $order->platform_charge }}</p>
                 </div>

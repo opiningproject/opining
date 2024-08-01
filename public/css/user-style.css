@@ -5160,12 +5160,13 @@ footer .footer-logo a {font-size: initial !important;}
 .category-section .category-slider .category-element .card .dish-item-icon {margin-bottom: 10px;}
 .category-section .section-page-title {margin-bottom: 5px !important;}
 .section-title {font-size: 18px !important;}
+.collected-points-charts {height: 310px !important; margin-top: -60px; margin-bottom: -35px;}
 
 }
 @media screen and (max-width: 484px) {
 .category-list-item-grid .food-detail-card .btn-custom-yellow, .category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {width: 110px;font-size: 12px !important;letter-spacing: initial;}
 .modal-dialog.custom-w-441px {max-width: 380px;}
-.collected-points-charts {height: 290px !important;}
+.collected-points-charts {height: 310px !important; margin-top: -60px; margin-bottom: -35px;}
 }
 @media screen and (max-width: 400px) {
   .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {right: initial !important;left: 0px !important;}
@@ -5393,6 +5394,12 @@ footer .footer-logo a {font-size: initial !important;}
 }
 
 @media (max-width: 767px) {
+  .add-more-btn-sticky {
+    height: 49px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
 .coupon-row-grid .coupon-flex .right-cp p {font-size: 12px;}
 body.title-becomes .main-page-title.title-mobile {opacity: 0;}
 body.title-becomes .header-fixed-page .main-page-title.title-mobile {opacity: 1;}
@@ -5437,6 +5444,13 @@ footer {padding: 36px 20px 20px 20px;}
 }
 
 @media (max-width: 575px) {
+  .add-more-btn-sticky {
+    height: 49px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
   .checkout-section .checkout-btn-sticky {height: 52px;display: flex !important;justify-content: center;align-items: center;text-align: center;border-radius: 16px;position: fixed;bottom: 10px;width: 100% !important;max-width: calc(100% - 40px);margin: 0px auto;z-index: 1;left: 0px;right: 0px;}
   .mobile-scrolllable-content {height: 100vh;max-height: 90vh;overflow: auto;}
   .checkout-mobile-scrolllable-content {height: initial !important;max-height: initial !important;overflow: hidden !important;}

@@ -78,7 +78,8 @@ return [
 		'discount' => 'Item discount',
 		'total' => 'Total',
 		'minimum_amount' => 'minimum €',
-		'checkout' => 'Checkout'
+		'checkout' => 'Checkout',
+		'add_more' => 'Add More'
 	],
 
 	'checkout' => [

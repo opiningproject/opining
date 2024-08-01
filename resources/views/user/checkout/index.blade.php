@@ -659,7 +659,6 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                             class="d-flex align-items-center justify-content-between">
                                                                                             <p
                                                                                                 class="d-inline-flex flex-nowrap item-name mb-0">
-                                                                                                {{--                                                                                    <span class="order-total-item pe-2 mb-0">{{ $dishDetails->qty }}</span> --}}
                                                                                                 <span
                                                                                                     class="order-total-item pe-2 mb-0">{{ $dishDetails->qty }}</span>
                                                                                                 <span
@@ -670,10 +669,10 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                                 class="cart-item-price ms-auto">+€{{ $dishDetails->dish->price }}</span>
                                                                                         </div>
                                                                                         <div class="d-flex">
-                                                                                            <div class="text "
+                                                                                            <div class="text"
                                                                                                 id="order-ingredient-{{ $dishDetails->id }}">
                                                                                                 <p
-                                                                                                    class="mb-0 item-options mb-0">
+                                                                                                    class="mb-0 item-options mb-0 {{ !empty($dishDetails->dishOption->name) ? '' : 'd-none' }}">
                                                                                                     {{ $dishDetails->dishOption->name ?? '' }}
                                                                                                 </p>
                                                                                                 @php
@@ -687,7 +686,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                                     );
                                                                                                 @endphp
 
-                                                                                                <ul class="items-additional mb-2"
+                                                                                                <ul class="items-additional mb-2 {{ !empty($htmlString) ? '' : 'd-none' }}"
                                                                                                     id="item-ing-desc{{ $dishDetails->id }}">
                                                                                                     {!! $cleanedHtmlString !!}
                                                                                                 </ul>
@@ -709,7 +708,7 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                         </div> --}}
                                                                                         </div>
 
-                                                                                        <div class="cart-items-list-row-n">
+                                                                                        <div class="cart-items-list-row-n {{ !empty($dishDetails->notes) ? '' : 'd-none' }}">
                                                                                             <div
                                                                                                 class="from-group addnote-from-group mb-0 mb-1">
                                                                                                 <div class="form-group mb-0 dish-group"
@@ -767,11 +766,11 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                         <tr>
                                                                             <td class="text-start">
                                                                                 <span
-                                                                                    class="text-muted-1 bill-count-name">{{ trans('user.my_orders.delivery_charge') }}</span>
+                                                                                    class="text-muted-1 bill-count-name">{{ $deliveryCharges ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</span>
                                                                             </td>
                                                                             <td class="text-end">
                                                                                 <span
-                                                                                    class="bill-count">€{{ number_format($deliveryCharges, 2) }}</span>
+                                                                                    class="bill-count {{ $deliveryCharges > 0 ? '' : 'text-custom-light-green' }}"> {{ $deliveryCharges > 0 ? '€'.number_format($deliveryCharges, 2) : 'FREE' }}</span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr

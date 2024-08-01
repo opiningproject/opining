@@ -102,9 +102,13 @@ class CartController extends Controller
         $dish = $cart->dish;
         $dishId = $dish->id;
         $dishPrice = $dish->price;
-        $optionName = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
+        $option = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
         $ingredientData = getOrderDishIngredients1($cart);
 
+        $optionName= '';
+        if($option) {
+            $optionName= $option->option_en;
+        }
         $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
     <div class='col-12 text-end d-flex align-items-center gap-2 mb-3 justify-content-end outof-stock-text d-none'>
         <strong>Out of stock</strong>
@@ -134,8 +138,8 @@ class CartController extends Controller
             <div class='cart-custom-w-col-detail'>
                 <div class='cart-item-detail'>
                     <div class='d-flex align-items-center'>
-                        <p class='mb-0 item-options mb-0' id='dish-option-$cart->id' data-dish-option='$optionName->option_en'>
-                        $optionName->option_en
+                        <p class='mb-0 item-options mb-0' id='dish-option-$cart->id' data-dish-option='$optionName'>
+                        $optionName
                         </p>
                     </div>
                     <div class='d-flex cart-item-bt'>
@@ -457,6 +461,8 @@ class CartController extends Controller
                 session()->forget('address');
                 session(['zipcode' => $request->zipcode]);
                 session(['house_no' => $request->houseNo]);
+                session()->forget('street_name');
+                session()->forget('delivery_charge');
 
             } else {
                 session()->forget(['house_no', 'zipcode', 'address']);

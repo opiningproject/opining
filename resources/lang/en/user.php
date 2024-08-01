@@ -59,6 +59,7 @@ return [
 		'title' => 'My Cart',
 		'change' => 'Change',
 		'delivery' => 'Delivery',
+		'delivery_charge' => 'Delivery Charge',
 		'take_away' => 'Take Away',
 		'rest_address' => 'Restaurants Address',
 		'delivery_address' => 'Delivery Address',

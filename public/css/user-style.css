@@ -1757,7 +1757,7 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
 
 .cart-section .cart-items .item-options {
   color: var(--theme-dark2);
-  font-family: "Sebino-Medium", sans-serif;
+  font-family: "Sebino-Bold", sans-serif;
   font-size: 14px;
   font-weight: 400;
   text-transform: capitalize;
@@ -5758,6 +5758,8 @@ footer {padding: 36px 20px 20px 20px;}
 .order-details-block .accordion p {color: #ACACAC !important;font-size: 14px !important;line-height: initial;}
 .bg-theme-box {overflow: hidden;border-radius: 10px;background: #ffffff;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);margin-bottom: 20px;}
 
+.mobile-order-page .bill-detail-invoice .text-custom-light-green {color: #2E9C4B !important;}
+
 .order-details-block .order-progress {padding: 20px;position: relative;padding-bottom: 75px;}
 .order-details-block .order-progress.no-track {padding-bottom: 20px;}
 .order-details-block .progress-steps {display: flex;flex-direction: column;position: relative;}
@@ -5805,8 +5807,9 @@ footer {padding: 36px 20px 20px 20px;}
   .menu-sidebar .menu-sidebar-content .side-bar-menu {padding: 20px 15px 15px 15px;}
   .menu-sidebar .menu-sidebar-content .sidebar-bottom {padding: 0 15px 0px 15px;}
   .order-details-block .cart-sidebar-content .cart-section .cart-items .stock-card {border-radius: 10px;background: #ffffff;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);margin-bottom: 20px !important;padding: 16px 10px !important;}
-  .order-details-block .cart-section .cart-items .order-total-item {font-size: 14px !important;font-weight: normal !important;font-family: "SebinoRegular" !important;}
-  .order-details-block .cart-section .cart-items .item-name {font-size: 14px;font-weight: normal;font-family: "SebinoRegular" !important;color: #000000 !important;}
+  .order-details-block .cart-section .cart-items .order-total-item {font-size: 14px !important;font-weight: normal !important;font-family: "SebinoRegular" !important;flex: 0 0 20px;max-width: 20px;}
+  .order-details-block .cart-section .cart-items .item-name {font-size: 14px;font-weight: normal;font-family: "SebinoRegular" !important;color: #000000 !important;width: 100%;}
+  .cart-sidebar .cart-item-row .items-additional, .order-details-block .cart-section .cart-items .item-options {padding-left: 18px;}
   .order-details-block .cart-section .cart-items .item-name * {color: #000000 !important;}
   .order-details-block .cart-section .cart-items .cart-item-price {font-family: "SebinoRegular" !important;font-size: 14px;font-weight: normal;right: 5px;}
   .order-details-block .cart-section .cart-items .cart-item-detail {row-gap: 2px;}

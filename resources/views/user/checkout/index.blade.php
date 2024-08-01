@@ -714,16 +714,17 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                                                 class="from-group addnote-from-group mb-0 mb-1">
                                                                                                 <div class="form-group mb-0 dish-group"
                                                                                                     data-dish-id="198">
-                                                                                                    <label
+                                                                                                    {{-- <label
                                                                                                         for="dishnameenglish"
                                                                                                         class="form-label mb-0 {{ !empty($dishDetails->notes) ? 'd-none' : '' }}">Add
-                                                                                                        Notes</label>
+                                                                                                        Notes</label> --}}
                                                                                                     <input type="text"
                                                                                                         data-id="198"
                                                                                                         maxlength="50"
                                                                                                         class="form-control dish-notes {{ !empty($dishDetails->notes) ? '' : 'd-none' }}"
                                                                                                         value="{{ $dishDetails->notes }}"
                                                                                                         data-id="{{ $dishDetails->id }}"
+                                                                                                        readonly
                                                                                                         placeholder="{{ trans('user.my_orders.type_here') }}">
                                                                                                 </div>
                                                                                             </div>

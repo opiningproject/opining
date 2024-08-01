@@ -445,7 +445,7 @@
                                                                                             <div
                                                                                                 class="d-flex align-items-center">
                                                                                                 <p
-                                                                                                    class="mb-0 item-options mb-0">
+                                                                                                    class="mb-0 item-options mb-0" id='dish-option-{{$dish->id}}' data-dish-option='{{$dish->dishOption->name ?? '' }}'>
                                                                                                     {{ $dish->dishOption->name ?? '' }}
                                                                                                 </p>
                                                                                                 {{-- <span class="item-desc"

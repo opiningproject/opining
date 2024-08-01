@@ -799,6 +799,13 @@ $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_
                                                                 </table>
                                                             </div>
                                                         </div>
+                                                        <a class="align-middle btn btn-custom-yellow btn-default d-block w-100 add-more-btn-sticky mt-3 d-none"
+                                                        href="{{ route('user.dashboard') }}">
+                                                        <span class="align-middle">
+                                                            {{ trans('user.cart.add_more') }} 
+                                            
+                                                        </span>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>

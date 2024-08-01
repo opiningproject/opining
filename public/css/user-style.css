@@ -5041,7 +5041,7 @@ border-color: #FFC00B !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 0px;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 120px !important;}
     .ordersdetails_sidebar.mobile_ordersdetails .orderdetails-footer{padding-bottom: 50px;margin-bottom: 10px;}
     .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
@@ -5160,13 +5160,13 @@ footer .footer-logo a {font-size: initial !important;}
 .category-section .category-slider .category-element .card .dish-item-icon {margin-bottom: 10px;}
 .category-section .section-page-title {margin-bottom: 5px !important;}
 .section-title {font-size: 18px !important;}
-.collected-points-charts {height: 310px !important; margin-top: -60px; margin-bottom: -35px;}
+.collected-points-charts {height: 310px !important; margin-top: -60px !important; margin-bottom: -35px !important;}
 
 }
 @media screen and (max-width: 484px) {
 .category-list-item-grid .food-detail-card .btn-custom-yellow, .category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {width: 110px;font-size: 12px !important;letter-spacing: initial;}
 .modal-dialog.custom-w-441px {max-width: 380px;}
-.collected-points-charts {height: 310px !important; margin-top: -60px; margin-bottom: -35px;}
+.collected-points-charts {height: 310px !important; margin-top: -60px !important; margin-bottom: -35px !important;}
 }
 @media screen and (max-width: 400px) {
   .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {right: initial !important;left: 0px !important;}
@@ -5794,8 +5794,8 @@ footer {padding: 36px 20px 20px 20px;}
   .card-theme-box {border: 0px !important;border-radius: 10px;background: transparent !important;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);}
   .shadow-mobile {box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%) !important;}
   .category-slider .card.shadow-mobile {box-shadow: 0px 3px 11px -1px rgb(0 0 0 / 20%) !important;}
-  .category-slider {padding: 10px 0px;left: -10px;}
-  .category-swiper-slider {padding: 0px 15px;}
+  .category-slider {padding: 10px 0px;left: 0px;}
+  .category-swiper-slider {padding: 0px;}
   .card-theme-box.shadow-nonw {box-shadow: none !important;}
   .collecting-accordian .accordion-item {border-radius: 10px;margin-bottom: 12px;overflow: hidden;}
   .collecting-accordian .accordion-item .accordion-header {padding: 10px 16px;}
@@ -5810,7 +5810,7 @@ footer {padding: 36px 20px 20px 20px;}
   .informativeterms-section .title-site {font-size: 24px;font-family: "Sebino-Bold";}
   .cart-sidebar .cart-items-list .cart-items-list-row .stock-card {margin-bottom: 20px !important;}
   .order-mobile {padding: 0px !important;}
-  .orders .orders-type .orders-list .orders-item {box-shadow: 2px 2px 14px 0px rgb(0 0 0 / 20%);border: 0px !important;}
+  .orders .orders-type .orders-list .orders-item {box-shadow: 2px 2px 20px 0px rgb(0 0 0 / 12%);border: 0px !important;}
   .orders .orders-type .orders-list {padding: 15px 15px !important;margin: 0px -15px;}
   .main-view .menu-sidebar.sticky {position: fixed;}#user-profile-form .file-upload-field {line-height: 24px;}
   .custom-card .card-body-mobile {padding: 0px !important;}
@@ -5841,6 +5841,18 @@ footer {padding: 36px 20px 20px 20px;}
   .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 220px) !important;}
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
+
+  body.body-bg-mobile {
+    background: #F5F5F5 !important;
+  }
+  body.body-bg-mobile .category-list-section .category-list-item-grid .food-detail-card {
+    box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+  .category-slider .card.shadow-mobile {
+    box-shadow: none !important;
+}
+
+
 }
 
 /* Order page mobile css ends */
@@ -5850,3 +5862,7 @@ input.form-control.dish-notes {
 }
 
 .delivery-charge .number {color: var(--theme-success3) !important;}
+
+.text-decoration-underline {
+  text-decoration: none !important;
+}

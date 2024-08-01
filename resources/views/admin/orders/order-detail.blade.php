@@ -285,7 +285,7 @@ $userDetails = $order->orderUserDetails;
                     <div class="key">{{ trans('rest.food_order.item_total') }}</div>
                     <div class="value">€{{ number_format(getOrderGrossAmount($order), 2) }}</div>
                 </div>
-                <div class="text d-flex align-items-center justify-content-between gap-2">
+                <div class="text d-flex align-items-center justify-content-between gap-2" {{ $order->platform_charge > 0 ? '' : 'style=display:none' }}>
                     <div class="key">{{ trans('rest.food_order.service_charge') }}</div>
                     <div class="value">€{{ number_format($order->platform_charge, 2) }}</div>
                 </div>

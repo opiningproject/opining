@@ -12,7 +12,7 @@
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.user.side_nav_bar')
                 <main class="bd-main order-1">
-                    <div class="main-content">
+                    <div class="main-content mobile-minus-margin">
                         <div class="section-page-title main-page-title mb-0 title-mobile">
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
                                 <h1 class="page-title">{{ trans('user.collected_points.title') }}</h1>
@@ -20,20 +20,17 @@
                         </div>
                         <!-- start category list section -->
                         <section class="custom-section informativeterms-section h-100 pb-0">
-                            <div class="card custom-card h-100 overflow-hidden px-0">
+                            <div class="card custom-card h-100 overflow-hidden px-0 card-theme-box shadow-nonw">
 
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
                                             <div id="chart-container-one" class="collected-points-charts"></div>
                                         </div>
-                                        <div class="col-md-6 mb-4 text-start">
+                                        <div class="col-md-6 mb-4 text-start d-none">
 
                                             <div class="colleting-points">
-                                                <h5>How do I earn points?</h5>
-                                                <h3>{{ trans('user.collected_points.content_1') }}</h3>
-                                                <h3 class="mb-0">
-                                                    {{ trans('user.collected_points.content_2') }}</h3>
+                                               
                                             </div>
 
                                             {{-- <a class="btn btn-custom-yellow track-order-btn mt-4"  href="{{ route('user.dashboard') }}">
@@ -52,27 +49,27 @@
                                   </div>
                               </div> --}}
 
-                                    <div class="row justify-content-center mb-5">
+                                    <div class="row justify-content-center mb-4 mb-md-5">
                                         <div class="col-12">
                                             <div class="accordion collecting-accordian" id="accordionExample">
-                                                <div class="accordion-item">
+                                                <div class="accordion-item shadow-mobile">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                             aria-expanded="true" aria-controls="collapseOne">
-                                                            What are points?
+                                                            How do I earn points?
                                                         </button>
                                                     </h2>
                                                     <div id="collapseOne" class="accordion-collapse collapse show"
                                                         data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non
-                                                            porttitor nisi, et dictum nibh. Aenean facilisis enim lectus, at
-                                                            sagittis ipsum tincidunt quis.
+                                                            <p>{{ trans('user.collected_points.content_1') }}</p>
+                                                            <p class="mb-0">
+                                                                {{ trans('user.collected_points.content_2') }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="accordion-item">
+                                                <div class="accordion-item shadow-mobile">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button collapsed" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#collapseTwo"
@@ -89,7 +86,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="accordion-item">
+                                                <div class="accordion-item shadow-mobile">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button collapsed" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#collapseThree"
@@ -115,7 +112,7 @@
 
                                         <div class="col-12">
 
-                                            <h3 class="title-site mb-4">Offers</h3>
+                                            <h3 class="title-site mb-2 mb-md-4">Offers</h3>
 
                                             <div class="accordion discount-coupon-accordian" id="accordionExample">
                                                 @foreach($coupons as $key => $coupon)
@@ -160,7 +157,7 @@
                                                     <?php $lockedCoupon = 'disabled-coupon'; ?>
                                                 @endif
 
-                                                <div class="accordion-item">
+                                                <div class="accordion-item shadow-mobile">
                                                     <h2 class="accordion-header">
                                                         <button class="accordion-button {{ $key == 0 ? 'collapsed' : '' }}" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#coupon-collapse-{{ $coupon->id }}"

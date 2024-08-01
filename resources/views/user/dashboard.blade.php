@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="offer-card-banner offercard-slider">
-                            <div class="card position-relative">
+                            <div class="card position-relative shadow-mobile">
                                 <div class="bg-offercard-circle-1">
                                     <img class="svg" src="{{ asset('images/ban-grade1.svg') }}" alt=""
                                         width="175" height="102">
@@ -111,7 +111,7 @@
                                             ?>
                                             <div class="category-element swiper-slide {{ $selected }}"
                                                 data-category-id={{ $cat->id }}>
-                                                <div class="card">
+                                                <div class="card shadow-mobile">
                                                     <span class="dish-item-icon">
                                                         <img src="{{ $cat->image }}" class="img-fluid svg" alt="bakery"
                                                             width="56" height="56" />
@@ -158,7 +158,7 @@
                                             }
 
                                             ?>
-                                            <div class="card food-detail-card">
+                                            <div class="card food-detail-card shadow-mobile">
                                                 @if ($dish->percentage_off > 0)
                                                     <p class="mb-0 offer-percantage">
                                                         {{ $dish->percentage_off }}%
@@ -445,7 +445,7 @@
                                                                                             <div
                                                                                                 class="d-flex align-items-center">
                                                                                                 <p
-                                                                                                    class="mb-0 item-options mb-0">
+                                                                                                    class="mb-0 item-options mb-0" id='dish-option-{{$dish->id}}' data-dish-option='{{$dish->dishOption->name ?? '' }}'>
                                                                                                     {{ $dish->dishOption->name ?? '' }}
                                                                                                 </p>
                                                                                                 {{-- <span class="item-desc"
@@ -625,7 +625,7 @@
                                                     value="{{ $cartValue }}">
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr  {{ $serviceCharge > 0 ? '' : 'style=display:none' }}>
                                             <td class="text-start">
                                                 <span
                                                     class="text-muted-1 bill-count-name">{{ trans('user.cart.service_charge') }}</span>

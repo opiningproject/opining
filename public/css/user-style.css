@@ -5839,7 +5839,7 @@ footer {padding: 36px 20px 20px 20px;}
   .cart-order-details-sidebar #bdSidebarCart{border: 0px !important;width: 100%;}
   .chat-main-screen .bd-gutter, .chat-main-screen .bd-main, .chat-main-screen .main-content, .chat-main-screen .chatDivMobile {height: 100%;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
-  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 191px) !important;}
+  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 220px) !important;}
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
 
@@ -5910,8 +5910,16 @@ input.form-control.dish-notes {
 @supports (-webkit-touch-callout: none) {
    /* Target iOS devices  */
   @media only screen and (min-device-width: 320px) and (max-device-width: 812px) {
-    .chat-main-screen .ChatDiv-main .chatbox {
-      height: calc(100vh - 170px) !important;
-    }
+    .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 260px) !important;}
+  }
+}
+
+@media only screen and (max-device-width: 768px){
+  .chat-main-screen .chatDivMobile .chatbox-footer {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 9999;
   }
 }

@@ -186,10 +186,10 @@ $(document).ready(function () {
     if (slideIndex >= 0) {
         // Use Swiper's slideTo method to make the specific slide active
         swiper.slideTo(slideIndex);
-        
+
         // Remove active class from all slides
         $('.swiper-slide').removeClass('selected-cart-active swiper-slide-active');
-        
+
         // Add active class to the selected slide
         $('.swiper-slide[data-category-id="' + categoryId + '"]').addClass('selected-cart-active swiper-slide-active');
     }
@@ -197,7 +197,7 @@ $(document).ready(function () {
 
 
 function getDishes(catId) {
-        
+
     if(!catId) {
         catId = $('#view-all-dishes').attr('data-category-id');
     }
@@ -207,12 +207,12 @@ function getDishes(catId) {
         url: `${baseURL}/get-dishes/${catId}`,
         type: 'GET',
         success: function (response) {
-          
+
             window.history.pushState('',app_name, '/user/dashboard/'+catId);
-            
+
             // update view all button attribute id
             $('#view-all-dishes').attr('data-category-id',catId);
-        
+
             $('.section-title.dish-list').text(response.cat_name)
             $('.dish-details-div').html(response.data)
         },
@@ -225,6 +225,16 @@ function getDishes(catId) {
 function checkScreenSize() {
     if ($(window).width() <= 767) {
         $('body').addClass('body-bg-mobile');
+        var invoiceHeight = $('.cartSidebarCustom .bill-detail-invoice').height();
+        var newHeight = invoiceHeight + 20;
+        $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+
+        if ($('.pills-delivery-tab.active').data('type') == "1") {
+            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+        } else {
+            newHeight = invoiceHeight - 20
+            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+        }
     } else {
         $('body').removeClass('body-bg-mobile');
     }

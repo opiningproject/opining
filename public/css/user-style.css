@@ -5840,7 +5840,15 @@ footer {padding: 36px 20px 20px 20px;}
   .cart-order-details-sidebar #bdSidebarCart{border: 0px !important;width: 100%;}
   .chat-main-screen .bd-gutter, .chat-main-screen .bd-main, .chat-main-screen .main-content, .chat-main-screen .chatDivMobile {height: 100%;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
-  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 160px) !important;}
+  .chat-main-screen .chatbox .chatbox-main {
+    max-height: calc(100vh - 191px) !important;
+    min-height: 100% !important;
+  }
+  .chat-main-screen .chatbox .chatbox-main .chats-grp {
+    max-height: initial !important;
+    min-height: 100% !important;
+    padding-bottom: 100px !important;
+  }
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
 
@@ -5929,7 +5937,10 @@ input.form-control.dish-notes {
 @supports (-webkit-touch-callout: none) {
    /* Target iOS devices  */
   @media only screen and (min-device-width: 320px) and (max-device-width: 812px) {
-    .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 260px) !important;}
+    /* .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 260px) !important;} */
+    .chat-main-screen .chatbox .chatbox-main .chats-grp {
+      padding-top: 150px !important;
+    }
   }
 }
 

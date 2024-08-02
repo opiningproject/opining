@@ -23,6 +23,14 @@ $restaurantOpen = getRestaurantOpenTime();
 
 $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * getCartTotalAmount() : 0;
 
+if($user->cart && $user->cart->order_type == 2) {
+
+    session()->forget('address');
+    session()->forget('zipcode');
+    session()->forget('house_no');
+    session()->forget('street_name');
+    session()->forget('delivery_charge');
+}
 ?>
 @section('content')
     <div class="main footer-hide header-fixed-page">

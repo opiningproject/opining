@@ -8,6 +8,11 @@ use App\Enums\PaymentType;
 $userDetails = $order->orderUserDetails;
 
 ?>
+<style>
+    .text-green {
+        color: var(--theme-success3) !important;
+    }
+</style>
 <div class="footer-box-details-header d-flex align-items-center justify-content-between gap-lg-3 flex-wrap">
     <ul class="list-inline text-grp mb-0 p-0 d-flex align-items-center flex-fill">
         <li class="list-inline-item d-flex align-items-center">{{ trans('rest.food_order.order') }}
@@ -289,11 +294,16 @@ $userDetails = $order->orderUserDetails;
                     <div class="key">{{ trans('rest.food_order.service_charge') }}</div>
                     <div class="value">€{{ number_format($order->platform_charge, 2) }}</div>
                 </div>
-                <div class="text d-flex align-items-center justify-content-between gap-2">
+
+                <div class="text d-flex align-items-center justify-content-between gap-2" style="{{ $order->order_type == '2' ? 'display:none !important;' : '' }}">
                     <div
-                        class="key">{{ $order->delivery_charge ? trans('rest.food_order.delivery_charge'):trans('rest.food_order.free_delivery') }}</div>
-                    <div class="value">€{{ number_format($order->delivery_charge, 2) }}</div>
+                        class="key">{{ $order->delivery_charge ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</div>
+                    <div class="value {{ $order->delivery_charge > 0 ? '' : 'text-green' }}">
+                        {{ $order->delivery_charge > 0 ? '€'.number_format($order->delivery_charge, 2) : 'FREE' }}
+                    </div>
                 </div>
+
+
                 <div class="active text d-flex align-items-center justify-content-between gap-2">
                     <div class="key">{{ trans('rest.food_order.discount') }}</div>
                     <div class="value">-€{{ number_format($order->coupon_discount, 2) }}</div>

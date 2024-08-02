@@ -13,8 +13,12 @@ $(function () {
 
         var type = $(this).data('type')
         if (type == "2") {
+            var newHeights = invoiceHeight - 20;
+            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeights + 'px');
             $('.minimum_amount').hide()
         } else {
+            var newHeight = invoiceHeight + 50;
+            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
             $('.minimum_amount').show()
         }
         var zipcode = $('#del-zipcode').val()
@@ -61,14 +65,14 @@ $(function () {
                     } else {
                         let del_charge = $('.delivery_charge_amount').text()
                         del_charge = del_charge.replace('€', '')
-                        
+
                         if(del_charge) {
                             total_amount -= parseFloat(del_charge);
                             $('#gross-total-bill').text('€' + total_amount.toFixed(2))
                             $('#gross-total-bill1').text('€' + total_amount.toFixed(2))
                         }
                         $('#delivery-charge-tab').hide()
-            
+
                         $('.checkout-sticky-btn').removeClass('show-hide-btn');
                     }
                 } else {
@@ -476,7 +480,7 @@ function addCustomizedCart(id, doesExist = 0) {
                         $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
                         $('#dish-option-' + response.message.addedDishId).text(response.message.dishOption.option_en);
                     }
-                
+
                     $('#qty-' + response.message.addedDishId).val(totalAmount)
                 } else {
                     /*$("#dish-cart-lbl-" + id).text('Added to cart');

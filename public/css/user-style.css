@@ -5229,7 +5229,7 @@ footer .footer-logo a {font-size: initial !important;}
 .item-customize a .edit-icon {max-width: 14px;}
 .message-date .date_show {background-color: #f1efef;border-radius: 30px;padding: 5px 16px;font-size: 12px;text-align:center;}
 .scrollable-tap {position: relative;}
-.scrollable-tap .bottom-sticky {position: fixed;right: 40px;bottom: 40px;display: flex;justify-content: end;z-index: 9999;}
+.scrollable-tap .bottom-sticky {position: fixed;right: 40px;bottom: 40px;display: flex;justify-content: end;z-index: 0!important;}
 .scrollable-tap .bottom-sticky .scroll-top {display: flex;align-items: center;justify-content: center;color: #292929;width: 44px;height: 44px;border-radius: 9999px;background: #FFC00B;border: 2px solid #ffffff;z-index: 2;text-align: center;box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);}
 .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p {word-wrap: break-word;}
 
@@ -5847,7 +5847,7 @@ footer {padding: 36px 20px 20px 20px;}
   .chat-main-screen .chatbox .chatbox-main .chats-grp {
     max-height: initial !important;
     min-height: 100% !important;
-    padding-bottom: 100px !important;
+    padding-bottom: 170px !important;
   }
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
@@ -5940,7 +5940,9 @@ input.form-control.dish-notes {
     /* .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 260px) !important;} */
     .chat-main-screen .chatbox .chatbox-main .chats-grp {
       padding-top: 150px !important;
+      padding-bottom: 100px !important;
     }
+
   }
 }
 

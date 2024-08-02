@@ -1875,9 +1875,9 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
   letter-spacing: 0.18px;
 }
 
-.bill-detail-invoice tfoot {
+/* .bill-detail-invoice tfoot {
   border-top: 1px solid var(--theme-gray2) !important;
-}
+} */
 
 .bill-detail-invoice tfoot td {
   color: var(--theme-dark2);
@@ -5041,7 +5041,7 @@ border-color: #FFC00B !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 120px !important;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 100px !important;}
     .ordersdetails_sidebar.mobile_ordersdetails .orderdetails-footer{padding-bottom: 50px;margin-bottom: 10px;}
     .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
@@ -5056,7 +5056,7 @@ border-color: #FFC00B !important;
 .custom-card-mobile-toggle .card-body {padding: 0px !important;}
 
 .final-checkout-form .custom-card-mobile-toggle {
-    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 2px 2px 60px 0px rgba(0, 0, 0, 0.2) !important;
     border: 0px !important;
 }
 
@@ -5092,7 +5092,7 @@ border-color: #FFC00B !important;
 .custom-tabs.cart-tab .nav .nav-link {font-size: 12px;display: flex;align-items: center;justify-content: center;column-gap: 4px;padding: 8px 10px;}
 .custom-tabs.cart-tab .nav .nav-link svg {width: 24px;}
 .bg-arrow-mobile {background-image: none !important;opacity: 1;left: 0px;right: initial !important;}
-.cartSidebarCustom .bill-detail-invoice .bill-count {font-size: 16px;}
+.cartSidebarCustom .bill-detail-invoice .bill-count {font-size: 14px;}
 .bg-arrow-mobile>i {display: inline-block !important;color: #292929 !important; position: relative; top: 2px;}
 .category-section .category-slider-navigation {display: none;}
 .category-section .category-slider .category-element .card {padding: 14px 7px;}
@@ -5136,12 +5136,12 @@ footer {padding: 30px 5px 15px 5px;}
 .customisable-table .food-custom-price {font-size: 16px !important;}
 footer .footer-logo a {font-size: initial !important;}
 .bill-detail-invoice .bill-count-name {font-size: 16px !important;}
-.bill-detail-invoice tfoot td {font-size: 20px !important;}
+.bill-detail-invoice tfoot td {font-size: 16px !important;}
 .bill-detail-invoice .cart-title {font-size: 16px !important;}
 .bill-detail-invoice .table-responsive {margin: 0px -8px;}
 .bill-detail-invoice .table-responsive table td {padding-top: 5px;padding-bottom: 5px;}
 .cart-sidebar .offcanvas-body {padding-bottom: 60px !important;}
-.cartSidebarCustom .cartoffCanvas {padding-bottom: 180px;}
+.cartSidebarCustom .cartoffCanvas {padding-bottom: 140px;}
 .bill-detail-invoice table {margin: 0px 0px;}
 .customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 8px 8px !important;font-size: 12px !important;}
 .customisable-modal-body .pro-image img {height: auto;}
@@ -5808,7 +5808,7 @@ footer {padding: 36px 20px 20px 20px;}
   .free-coins label {font-size: 10px;white-space: nowrap;}
   .discount-coupon-accordian .accordion-body h3 {font-family: "Sebino-Medium";}
   .informativeterms-section .title-site {font-size: 24px;font-family: "Sebino-Bold";}
-  .cart-sidebar .cart-items-list .cart-items-list-row .stock-card {margin-bottom: 20px !important;}
+  .cart-sidebar .cart-items-list .cart-items-list-row .stock-card {margin-bottom: 20px !important;padding-left: 0px;padding-right: 0px;}
   .order-mobile {padding: 0px !important;}
   .orders .orders-type .orders-list .orders-item {box-shadow: 2px 2px 20px 0px rgb(0 0 0 / 12%);border: 0px !important;}
   .orders .orders-type .orders-list {padding: 15px 15px !important;margin: 0px -15px;}
@@ -5823,8 +5823,9 @@ footer {padding: 36px 20px 20px 20px;}
   .order-details-block .cart-sidebar-content .cart-section .cart-items .stock-card {border-radius: 10px;background: #ffffff;box-shadow: 2px 2px 60px 0px rgb(0 0 0 / 20%);margin-bottom: 20px !important;padding: 16px 10px !important;}
   .order-details-block .cart-section .cart-items .order-total-item {font-size: 14px !important;font-weight: normal !important;font-family: "SebinoRegular" !important;flex: 0 0 20px;max-width: 20px;}
   .order-details-block .cart-section .cart-items .item-name {font-size: 14px;font-weight: normal;font-family: "SebinoRegular" !important;color: #000000 !important;width: 100%;}
-  .cart-sidebar .cart-item-row .items-additional, .order-details-block .cart-section .cart-items .item-options {padding-left: 18px;}
+  .order-details-block .cart-section .cart-items .item-options {padding-left: 18px;}
   .order-details-block .cart-section .cart-items .item-name * {color: #000000 !important;}
+  .cart-sidebar .cart-item-row .items-additional {padding-left: 0px;padding-top: 2px;}
   .order-details-block .cart-section .cart-items .cart-item-price {font-family: "SebinoRegular" !important;font-size: 14px;font-weight: normal;right: 5px;}
   .order-details-block .cart-section .cart-items .cart-item-detail {row-gap: 2px;}
   .cart-sidebar .cart-item-row .items-additional li {color: #000000;font-size: 12px;}
@@ -5838,7 +5839,7 @@ footer {padding: 36px 20px 20px 20px;}
   .cart-order-details-sidebar #bdSidebarCart{border: 0px !important;width: 100%;}
   .chat-main-screen .bd-gutter, .chat-main-screen .bd-main, .chat-main-screen .main-content, .chat-main-screen .chatDivMobile {height: 100%;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
-  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 220px) !important;}
+  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 191px) !important;}
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
 
@@ -5852,6 +5853,43 @@ footer {padding: 36px 20px 20px 20px;}
     box-shadow: none !important;
 }
 
+.cart-sidebar .cart-items-list .cart-items-list-row .stock-card {
+  box-shadow: 2px 2px 60px 0px rgba(0, 0, 0, 0.2);
+}
+
+.cart-sidebar .cart-name-price .item-name {
+  font-weight: normal;
+}
+
+.chat-main-screen .chatDivMobile .chatbox-footer {
+  padding: 0px !important;
+  border-radius: 0px !important;
+}
+
+.chat-main-screen .chatbox .chatbox-footer .form-group {
+  border-radius: 0px !important;
+}
+
+.cart-sidebar .cart-name-price .item-name, .cart-sidebar .item-options {
+  font-family: "Sebino-Medium" !important;
+  font-weight: normal !important;
+}
+.cart-sidebar .cart-items-list .cart-items-list-row .cart-item-row .cart-name-price {
+  padding: 0px;
+}
+
+.cart-sidebar .cart-items-list .cart-items-list-row .cart-item-row {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.cartSidebarCustom .bill-detail-invoice .bill-count {
+  font-weight: normal !important;font-family: "SebinoRegular" !important;
+}
+.cart-sidebar .bill-detail-invoice table tfoot tr td .bill-total-count {
+  font-size: 16px;
+  font-family: "Sebino-Bold";
+}
 
 }
 
@@ -5865,4 +5903,15 @@ input.form-control.dish-notes {
 
 .text-decoration-underline {
   text-decoration: none !important;
+}
+
+
+/* General iOS-specific styles  */
+@supports (-webkit-touch-callout: none) {
+   /* Target iOS devices  */
+  @media only screen and (min-device-width: 320px) and (max-device-width: 812px) {
+    .chat-main-screen .ChatDiv-main .chatbox {
+      height: calc(100vh - 170px) !important;
+    }
+  }
 }

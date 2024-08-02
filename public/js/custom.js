@@ -7,16 +7,16 @@ $(document).ready(function(){
         $(".searcheaderBox").removeClass("toggled");
       });
 
-      function checkScreenSize() {
-        if ($(window).width() <= 767) {
-            $('.menu-sidebar').addClass('sticky');
-        } else {
-            $('.menu-sidebar').removeClass('sticky');
-        }
-    }
+    //   function checkScreenSize() {
+    //     if ($(window).width() <= 767) {
+    //         $('.menu-sidebar').addClass('sticky');
+    //     } else {
+    //         $('.menu-sidebar').removeClass('sticky');
+    //     }
+    // }
 
-    // Add event listener for window resize
-    $(window).on('resize', checkScreenSize);
-    checkScreenSize()
+    // // Add event listener for window resize
+    // $(window).on('resize', checkScreenSize);
+    // checkScreenSize()
     
   });

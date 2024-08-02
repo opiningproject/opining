@@ -38,8 +38,6 @@ $(function () {
 
                     let total_amount = parseFloat(currentAmount)
 
-                    let deliveryCharge = $('#delivery-charge').val()
-
                     if (type == '1') {
 
 
@@ -51,9 +49,14 @@ $(function () {
                         $('#delivery-charge-tab').show()
                         // Hide as per client feeedback June CR points
                         // $('#addressChangeModal').modal('show')
-                        if(deliveryCharge) {
-                            total_amount += parseFloat(deliveryCharge);
+
+                        let del_charge = $('.delivery_charge_amount').text()
+                        del_charge = del_charge.replace('€', '')
+
+                        if(del_charge) {
+                            total_amount += parseFloat(del_charge);
                             $('#gross-total-bill').text('€' + total_amount.toFixed(2))
+                            $('#gross-total-bill1').text('€' + total_amount.toFixed(2))
                         }
                     } else {
                         let del_charge = $('.delivery_charge_amount').text()
@@ -62,6 +65,7 @@ $(function () {
                         if(del_charge) {
                             total_amount -= parseFloat(del_charge);
                             $('#gross-total-bill').text('€' + total_amount.toFixed(2))
+                            $('#gross-total-bill1').text('€' + total_amount.toFixed(2))
                         }
                         $('#delivery-charge-tab').hide()
             

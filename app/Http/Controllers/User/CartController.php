@@ -459,8 +459,10 @@ class CartController extends Controller
         try {
             if ($request->type == OrderType::Delivery) {
                 session()->forget('address');
-                session(['zipcode' => $request->zipcode]);
-                session(['house_no' => $request->houseNo]);
+                session()->forget('zipcode');
+                session()->forget('house_no');
+                // session(['zipcode' => $request->zipcode]);
+                // session(['house_no' => $request->houseNo]);
                 session()->forget('street_name');
                 session()->forget('delivery_charge');
 

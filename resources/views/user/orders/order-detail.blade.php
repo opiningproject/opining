@@ -147,7 +147,7 @@ use App\Enums\RefundStatus;
                             <td>{{ trans('user.my_orders.service_charge') }}</td>
                             <td class="text-end">€{{ number_format($order->platform_charge, 2) }}</td>
                         </tr>
-                        <tr>
+                        <tr {{ $order->order_type == '2' ? 'style=display:none' : '' }}>
                             <td>{{ $order->delivery_charge ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</td>
                             <td class="text-end {{ $order->delivery_charge > 0 ? '' : 'text-green' }}">
                                 {{ $order->delivery_charge > 0 ? '€'.number_format($order->delivery_charge, 2) : 'FREE' }}

@@ -771,7 +771,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                     class="bill-count">€{{ number_format($serviceCharge, 2) }}</span>
                                                                             </td>
                                                                         </tr>
-                                                                        <tr>
+                                                                        <tr {{ $user->cart->order_type == '2' ? 'style=display:none' : '' }}>
                                                                             <td class="text-start">
                                                                                 <span
                                                                                     class="text-muted-1 bill-count-name">{{ $deliveryCharges ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</span>

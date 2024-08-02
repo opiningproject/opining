@@ -5751,6 +5751,7 @@ footer {padding: 36px 20px 20px 20px;}
 .mobile-order-page .order-details-block .order-details-accordion .accordion-item:last-child {border-bottom: 0px !important;}
 .mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body {padding: 20px;padding-top: 5px;}
 .mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body * {font-size: 13px;color: #636363;}
+.mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body .cart-address-row svg {display: none;}
 .mobile-order-page .order-detail-body .table, .mobile-order-page .order-detail-body .table td {border: 0px;}
 .mobile-order-page .order-detail-body .table td {padding: 2px 0px;}
 .order-details-block .order-wise-details {position: relative;}
@@ -5839,7 +5840,7 @@ footer {padding: 36px 20px 20px 20px;}
   .cart-order-details-sidebar #bdSidebarCart{border: 0px !important;width: 100%;}
   .chat-main-screen .bd-gutter, .chat-main-screen .bd-main, .chat-main-screen .main-content, .chat-main-screen .chatDivMobile {height: 100%;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
-  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 220px) !important;}
+  .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 190px) !important;display: none !important;}
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
 
@@ -5891,6 +5892,24 @@ footer {padding: 36px 20px 20px 20px;}
   font-family: "Sebino-Bold";
 }
 
+.offer-card-banner .card.shadow-mobile, body.body-bg-mobile .category-list-section .category-list-item-grid .food-detail-card {
+  box-shadow: none !important;
+}
+
+.category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow {
+  line-height: initial;
+  min-width: 115px;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
+  min-height: 32px;
+}
+.category-list-section .favorite-item-grid .food-detail-card .btn-custom-yellow span {
+  position: relative;
+  top: 2px;
+}
 }
 
 /* Order page mobile css ends */

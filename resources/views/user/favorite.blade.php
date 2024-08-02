@@ -41,11 +41,11 @@
 
                                         <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="customizeDish({{ $dish->dish->id }});" id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $disableBtn }}>
 {{--                                            @if($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1')--}}
-                                            @if($dish->dish->out_of_stock == '1')
-                                                {{ trans('user.dashboard.out_of_stock') }}
-                                            @else
-                                                <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9"> €{{ number_format($dish->dish->price, 2) }}
-                                            @endif
+                                           <span> @if($dish->dish->out_of_stock == '1')
+                                            {{ trans('user.dashboard.out_of_stock') }}
+                                        @else
+                                            <img src="{{ asset('images/plus.svg') }}" alt="" class="svg" height="9" width="9"> €{{ number_format($dish->dish->price, 2) }}
+                                        @endif</span>
                                         </button>
 
                                         @if(!$customizeBtn)

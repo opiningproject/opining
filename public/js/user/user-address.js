@@ -138,7 +138,12 @@ $(function () {
                         let amount = parseFloat(currentAmount)
                        
                         amount += response.data.delivery_charge;
+                        let serviceCharge = $('#service-charge').val()
+                        if( serviceCharge) {
+                            amount += parseFloat(serviceCharge);
+                        }
                         $('#gross-total-bill').text('€' + amount.toFixed(2))
+                        $('#gross-total-bill1').text('€' + amount.toFixed(2))
                     }
 
                     if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {

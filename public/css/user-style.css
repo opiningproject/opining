@@ -1875,9 +1875,9 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
   letter-spacing: 0.18px;
 }
 
-.bill-detail-invoice tfoot {
+/* .bill-detail-invoice tfoot {
   border-top: 1px solid var(--theme-gray2) !important;
-}
+} */
 
 .bill-detail-invoice tfoot td {
   color: var(--theme-dark2);
@@ -5041,7 +5041,7 @@ border-color: #FFC00B !important;
 .chat_main_screen {background: #ffffff;}
 .category-list-section .favorite-item-grid {grid-template-columns: repeat(2, 1fr);}
 .orderdetails-desc .orderdetails-desc-note input {min-height: 30px;}
-.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 120px !important;}
+.ordersdetails_sidebar.mobile_ordersdetails {z-index: 999999;top: 0px;left: 0px;right: 0px;width: 100% !important;max-width: 100%;margin: 0px auto;height: 100vh !important;border-radius: 0px !important;padding-bottom: 100px !important;}
     .ordersdetails_sidebar.mobile_ordersdetails .orderdetails-footer{padding-bottom: 50px;margin-bottom: 10px;}
     .ordersdetails.mobile_ordersdetails .orderdetails-main .orderdetails-desclist {max-height: initial !important;padding: 25px 0px;overflow-x: hidden;}
 .food-detail-card {padding: 12px 15px 18px 15px !important;}
@@ -5903,4 +5903,15 @@ input.form-control.dish-notes {
 
 .text-decoration-underline {
   text-decoration: none !important;
+}
+
+
+/* General iOS-specific styles  */
+@supports (-webkit-touch-callout: none) {
+   /* Target iOS devices  */
+  @media only screen and (min-device-width: 320px) and (max-device-width: 812px) {
+    .chat-main-screen .ChatDiv-main .chatbox {
+      height: calc(100vh - 170px) !important;
+    }
+  }
 }

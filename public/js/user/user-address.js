@@ -2,7 +2,9 @@ $(function () {
 
     // checkout button enables disable as per client feeedback july 2024 CR points
     var min_order_price = $('.min_order_price').html()
-    var currentAmount = $('.bill-total-count').html()
+    var currentAmount = $('.bill-count').html()
+
+    // var currentAmount = $('.bill-total-count').html()
     if(!zipcode) {
         $('#delivery-charge-tab').hide()
     }
@@ -225,7 +227,9 @@ function validateZipcode() {
 
                         // checkout button enables disable as per client feeedback july 2024 CR points
                         var min_order_price = $('.min_order_price').html()
-                        var currentAmount = $('.bill-total-count').html()
+                        // var currentAmount = $('.bill-total-count').html()
+                        var currentAmount = $('.bill-count').html()
+
                         currentAmount = currentAmount.replace('€', '')
                         if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
                             $('.checkout-sticky-btn').removeClass('show-hide-btn');

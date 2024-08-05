@@ -1,4 +1,16 @@
 var distance = $('.content-main-part').offset().top;
+var invoiceHeight = $('.cartSidebarCustom .bill-detail-invoice').height();
+
+function addPaddingToCouponTag(type,newHeight) {
+    if(invoiceHeight) {
+        if (type == "2") {
+            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+        } else {
+            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+        }
+    }
+}
+
 $(function () {
     toastr.options = {
         "backgroundColor": "#ff0000" // Set your desired background color here
@@ -12,19 +24,15 @@ $(function () {
     $('.pills-delivery-tab').click(function () {
         var type = $(this).data('type')
 
-        var invoiceHeight = $('.cartSidebarCustom .bill-detail-invoice').height();
-
         if (type == "2") {
-            if(invoiceHeight) {
-                var newHeights = invoiceHeight - 20;
-                $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeights + 'px');
-            }
+            let newHeights = invoiceHeight - 11;
+
+            addPaddingToCouponTag(type,newHeights)
             $('.minimum_amount').hide()
         } else {
-            if(invoiceHeight) {
-                var newHeight = invoiceHeight + 50;
-                $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
-            }
+            let newHeight = invoiceHeight + 20;
+
+            addPaddingToCouponTag(type,newHeight)
             $('.minimum_amount').show()
         }
 
@@ -51,7 +59,11 @@ $(function () {
 
                     if (type == '1') {
 
-                        if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+
+                        var itemTotal = $('.bill-count').html()
+                        itemTotal = itemTotal.replace('€', '')
+
+                        if (parseFloat(itemTotal) >= parseFloat(min_order_price)) {
                             $('.checkout-sticky-btn').removeClass('show-hide-btn');
                         } else {
                             $('.checkout-sticky-btn').addClass('show-hide-btn');
@@ -328,6 +340,15 @@ function applyCoupon() {
             orderAmount
         },
         success: function (response) {
+
+            if ($('.TakeAway-tab .active').length == 0) {
+               let newHeight = invoiceHeight + 20;
+               addPaddingToCouponTag(1,newHeight)
+            } else {
+                let newHeight = invoiceHeight - 11;
+                addPaddingToCouponTag(2,newHeight)
+            }
+    
             if (response.status == 200) {
                 $("#coupon_code_remove_btn").show();
                 $("#coupon_code_apply_btn").hide();
@@ -573,7 +594,7 @@ function calculateTotalCartAmount() {
 
     // checkout button enables disable as per client feeedback july 2024 CR points
     var min_order_price = $('.min_order_price').html()
-    var currentAmount = $('.bill-total-count').html()
+    var currentAmount = $('.bill-count').html()
     currentAmount = currentAmount.replace('€', '')
     if ($('.TakeAway-tab .active').length == 0) {
         if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {

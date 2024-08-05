@@ -457,18 +457,20 @@ class CartController extends Controller
     public function updateDeliveryType(Request $request)
     {
         try {
-            if ($request->type == OrderType::Delivery) {
-                session()->forget('address');
-                session()->forget('zipcode');
-                session()->forget('house_no');
-                // session(['zipcode' => $request->zipcode]);
-                // session(['house_no' => $request->houseNo]);
-                session()->forget('street_name');
-                session()->forget('delivery_charge');
 
-            } else {
-                session()->forget(['house_no', 'zipcode', 'address']);
-            }
+            // Commented as on july CR points
+            // if ($request->type == OrderType::Delivery) {
+            //     session()->forget('address');
+            //     session()->forget('zipcode');
+            //     session()->forget('house_no');
+            //     // session(['zipcode' => $request->zipcode]);
+            //     // session(['house_no' => $request->houseNo]);
+            //     session()->forget('street_name');
+            //     session()->forget('delivery_charge');
+
+            // } else {
+            //     session()->forget(['house_no', 'zipcode', 'address']);
+            // }
 
             if (!Auth::user()) {
                 return response::json(['status' => 401, 'message' => '']);
@@ -557,7 +559,7 @@ class CartController extends Controller
                             return response::json(['status' => 406, 'message' => trans('user.message.invalid_zipcode')]);
                         }
                     } else {
-                        return response::json(['status' => 200, 'message' => '']);
+                        return response::json(['status' => 412, 'message' => trans('user.message.valid_address')]);
                     }
                 } else {
                     return response::json(['status' => 200, 'message' => '']);

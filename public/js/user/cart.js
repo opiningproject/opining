@@ -342,10 +342,10 @@ function applyCoupon() {
         success: function (response) {
 
             if ($('.TakeAway-tab .active').length == 0) {
-               let newHeight = invoiceHeight + 20;
+               let newHeight = invoiceHeight + 30;
                addPaddingToCouponTag(1,newHeight)
             } else {
-                let newHeight = invoiceHeight - 11;
+                let newHeight = invoiceHeight - 18;
                 addPaddingToCouponTag(2,newHeight)
             }
     

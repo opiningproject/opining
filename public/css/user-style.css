@@ -542,7 +542,7 @@ a {
 
 .cart-sidebar .empty-card-div .empty-card-text {
   font-family: "Sebino-Medium", sans-serif;
-  font-size: 20px;
+  font-size: 20px !important;
   font-weight: 400;
   letter-spacing: 0.3px;
   margin-bottom: 33px;

@@ -10,17 +10,24 @@ $(function () {
     });
 
     $('.pills-delivery-tab').click(function () {
-
         var type = $(this).data('type')
+
+        var invoiceHeight = $('.cartSidebarCustom .bill-detail-invoice').height();
+
         if (type == "2") {
-            var newHeights = invoiceHeight - 20;
-            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeights + 'px');
+            if(invoiceHeight) {
+                var newHeights = invoiceHeight - 20;
+                $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeights + 'px');
+            }
             $('.minimum_amount').hide()
         } else {
-            var newHeight = invoiceHeight + 50;
-            $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+            if(invoiceHeight) {
+                var newHeight = invoiceHeight + 50;
+                $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
+            }
             $('.minimum_amount').show()
         }
+
         var zipcode = $('#del-zipcode').val()
         var houseNo = $('#del-house-no').val()
 
@@ -43,7 +50,6 @@ $(function () {
                     let total_amount = parseFloat(currentAmount)
 
                     if (type == '1') {
-
 
                         if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
                             $('.checkout-sticky-btn').removeClass('show-hide-btn');

@@ -296,6 +296,7 @@ return [
 		'coupon_applied' => 'Coupon Applied.',
 		'coupon_min_order_price' => 'To use this coupon minimum order amount should be €:min_order_amount',
 		'valid_zipcode_house_number' => 'Please enter correct zipcode and house number',
+		'valid_address' => 'Please select delivery address',
 	],
 
 ];

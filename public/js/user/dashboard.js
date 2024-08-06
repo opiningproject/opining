@@ -58,6 +58,9 @@ $(document).ready(function () {
     swiper = new Swiper(".category-swiper-slider", {
         slidesPerView: 3,
         spaceBetween: 12,
+        progress : 1,
+        speed: 100,
+        freeMode: true,
         // loop: true,
         // autoplay: {
         //     delay: 1000,

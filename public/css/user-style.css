@@ -5216,7 +5216,7 @@ footer {padding: 36px 20px 20px 20px;}
   .category-slider {padding: 10px 0px;left: 0px;}
   .category-swiper-slider {padding: 0px;}
   .card-theme-box.shadow-nonw {box-shadow: none !important;}
-  .collecting-accordian .accordion-item {border-radius: 0px;margin-bottom: 12px;overflow: hidden;}
+  .collecting-accordian .accordion-item {border-radius: 0px;margin-bottom: 0px;overflow: hidden;}
   .collecting-accordian .accordion-item .accordion-header {padding: 10px 16px;}
   .collecting-accordian .accordion-item .accordion-header .accordion-button {padding: 0px;font-size: 14px;font-family: "Sebino-Medium";}
   .collecting-accordian .accordion-item .accordion-body {padding: 10px 15px;}

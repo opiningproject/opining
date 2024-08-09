@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <!-- start category section -->
-                        <section class="custom-section category-section pb-0">
+                        <section class="custom-section category-section pb-0 swiper-container-mobile">
                             <div class="section-page-title">
                                 <h1 class="section-title">{{ trans('user.dashboard.category') }}</h1>
                             </div>
@@ -487,6 +487,18 @@
                                                                                                             class="form-control dish-notes d-none"
                                                                                                             value="{{ $dish->notes }}"
                                                                                                             placeholder="{{ trans('user.cart.type_here') }}" />
+
+                                                                                                            <a href="#" class="note-close-btn">
+
+                                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                    id="Outline"
+                                                                                                                    viewBox="0 0 24 24"
+                                                                                                                    width="20"
+                                                                                                                    height="20">
+                                                                                                                    <path
+                                                                                                                        d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z" />
+                                                                                                                </svg>
+                                                                                                            </a>
                                                                                                     </div>
                                                                                                 </div>
 
@@ -737,3 +749,4 @@
     </script>
     <script type="text/javascript" src="{{ asset('js/user/dashboard.js') }}"></script>
 @endsection
+

@@ -68,6 +68,14 @@ class OrderController extends Controller
         return view('user.orders.order-location', ['order' => $order]);
     }
 
+    // Cr aug new track order page controller
+    public function orderLocationNew(Request $request)
+    {
+        $order = OrderUserDetail::where('order_id', $request->order_id)->first();
+
+        return view('user.orders.order-location-new', ['order' => $order]);
+    }
+
     public function orderDetail(Request $request)
     {
         $order = Order::find($request->order_id);

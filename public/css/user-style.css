@@ -4809,6 +4809,42 @@ footer .footer-logo a {font-size: initial !important;}
 .chart-box .chart-point-box h2{font-size: 18px;}
 .chart-box .chart-point-box .point{color: #F8B602;font-size: 50px;font-family: "Sebino-Bold";}
 
+.order-success-note {
+  position: relative;
+  padding: 0px 10px;
+}
+
+.order-success-note .order-succes-box {
+  width: 100%;
+  max-width: 280px;
+  margin: 0px auto;
+}
+
+.order-success-note .order-succes-box h1 {
+  color: #292929;
+  font-size: 26px;
+  font-family: "Sebino-Medium";
+  margin-bottom: 15px;
+}
+
+.order-success-note .order-succes-box p {
+  color: #292929;
+  font-size: 14px;
+  font-family: "Sebino-Medium";
+}
+
+.order-success-note .order-succes-box .back-link {
+  color: #292929;
+  font-size: 18px;
+  font-family: "Sebino-Medium";
+}
+
+.order-success-note .success-footer .btn{color: #ffffff !important;}
+
+.category-list-section .food-detail-card {
+min-height: 268px;
+}
+
 @media (max-width: 1800px) {
   .coupon-card-row .coupon-row-grid {margin: 0px -10px;}
   .coupon-card-row .coupon-row-grid .coupon-col {margin-bottom: 20px;padding: 0px 10px;}
@@ -4900,6 +4936,9 @@ footer {padding: 36px 20px 20px 20px;}
   /* .mobile-scrolllable-content .payment-nav-mobile .payment-navigation .nav .nav-link.active {border-color: transparent !important;background: #ffffff !important;box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 0.07);} */
   .mobile-scrolllable-content .payment-nav .nav {border-radius: 0px;}
   .checkout-section .checkout-btn-sticky, .cartSidebarCustom .bill-detail-invoice .checkout-sticky-btn{height: 52px;display: flex !important;align-items: center;justify-content: center;}
+  .category-list-section .food-detail-card {
+    min-height: 220px;
+    }
 }
 
 @media (max-width: 375px) {

@@ -347,10 +347,11 @@
                             </div>
                         </div>
 
-                        <div class="order-success-note text-center  d-none">
+                         <!-- Order Accepted mobile page HTML starts -->
+                        <div class="order-success-note order-success-note-mobile text-center d-none">
                             <div class="order-succes-box">
-                                <div class="icon">
-                                    <img src="{{ asset('images/shopping-bag.svg') }}"  alt=""  />
+                                <div class="icon mb-4">
+                                    <img src="{{ asset('images/shopping-bag.png') }}"  alt=""  />
                                 </div>
 
                                 <h1>Your order has been accepted</h1>
@@ -364,10 +365,43 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Order Accepted mobile page HTML starts -->
                     </div>
                 </main>
             </div>
         </div>
+
+
+        <!-- Order Accepted modal HTML starts -->
+
+        <div class="modal fade custom-modal" id="orderAcceptedModal" tabindex="-1" aria-labelledby="orderAcceptedModal" aria-hidden="true">
+  <div class="modal-dialog custom-w-441px modal-dialog-centered">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+      <div class="order-success-note text-center">
+                            <div class="order-succes-box">
+                                <div class="icon mb-3">
+                                    <img src="{{ asset('images/shopping-bag.png') }}"  alt=""  />
+                                </div>
+
+                                <h1>Your order has been accepted</h1>
+                                <p>You can see your order details on my orders page</p>
+
+                                <div class="success-footer mt-5">
+                                    <a class="btn btn-custom-yellow btn-default d-block">My Order</a>
+                                    <div class="text-center mt-4">
+                                        <a href="#" class="back-link">Back to Home</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Order Accepted modal HTML ends -->
 
         <!-- start footer -->
         @include('layouts.user.footer_design')

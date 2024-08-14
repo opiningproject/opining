@@ -143,78 +143,79 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
-                                             style="float: left;margin-right: 10px;">
-                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <div class="form-group">
-                                                    <label for="password"
-                                                           class="form-label">{{ trans('rest.menu.dish.option') }}
-                                                        <span class="text-custom-muted">(English)</span>
-                                                    </label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="option_name_en"
-                                                               id="option_name_en">
-                                                        <button
-                                                            class="input-group-btn btn btn-custom-yellow btn-icon h-50px"
-                                                            type="button" id="addOptionBtn">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <div class="form-group">
-                                                    <label for="password"
-                                                           class="form-label">{{ trans('rest.menu.dish.option') }}
-                                                        <span class="text-custom-muted">(Dutch)</span>
-                                                    </label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="option_name_nl"
-                                                               id="option_name_nl">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="dish-option-div">
-                                            @foreach ($dish->option as $option)
-                                                <div
-                                                    class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 addedOptionDiv"
-                                                    style="float:left;margin-right: 10px;">
-                                                    <div
-                                                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                        <div class="form-group">
-                                                            <input type="hidden" value="{{ $option->id }}" class="id">
-                                                            <label for="password"
-                                                                   class="form-label">{{ trans('rest.menu.dish.option') }}
-                                                                <span class="text-custom-muted">(English)</span>
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control name_en"
-                                                                       value="{{ $option->option_en }}">
-                                                                <button
-                                                                    class="input-group-btn btn btn-custom-gray btn-icon h-50px del-added-option-btn"
-                                                                    type="button" id="{{ $option->id }}">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                        <div class="form-group">
-                                                            <label for="password"
-                                                                   class="form-label">{{ trans('rest.menu.dish.option') }}
-                                                                <span class="text-custom-muted">(Dutch)</span>
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control name_nl"
-                                                                       value="{{ $option->option_nl }}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                        {{-- old dish option code comment on 10-08-2024 --}}
+{{--                                        <div class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"--}}
+{{--                                             style="float: left;margin-right: 10px;">--}}
+{{--                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label for="password"--}}
+{{--                                                           class="form-label">{{ trans('rest.menu.dish.option') }}--}}
+{{--                                                        <span class="text-custom-muted">(English)</span>--}}
+{{--                                                    </label>--}}
+{{--                                                    <div class="input-group">--}}
+{{--                                                        <input type="text" class="form-control" name="option_name_en"--}}
+{{--                                                               id="option_name_en">--}}
+{{--                                                        <button--}}
+{{--                                                            class="input-group-btn btn btn-custom-yellow btn-icon h-50px"--}}
+{{--                                                            type="button" id="addOptionBtn">--}}
+{{--                                                            <i class="fa-solid fa-plus"></i>--}}
+{{--                                                        </button>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label for="password"--}}
+{{--                                                           class="form-label">{{ trans('rest.menu.dish.option') }}--}}
+{{--                                                        <span class="text-custom-muted">(Dutch)</span>--}}
+{{--                                                    </label>--}}
+{{--                                                    <div class="input-group">--}}
+{{--                                                        <input type="text" class="form-control" name="option_name_nl"--}}
+{{--                                                               id="option_name_nl">--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div id="dish-option-div">--}}
+{{--                                            @foreach ($dish->option as $option)--}}
+{{--                                                <div--}}
+{{--                                                    class="row col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 addedOptionDiv"--}}
+{{--                                                    style="float:left;margin-right: 10px;">--}}
+{{--                                                    <div--}}
+{{--                                                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <input type="hidden" value="{{ $option->id }}" class="id">--}}
+{{--                                                            <label for="password"--}}
+{{--                                                                   class="form-label">{{ trans('rest.menu.dish.option') }}--}}
+{{--                                                                <span class="text-custom-muted">(English)</span>--}}
+{{--                                                            </label>--}}
+{{--                                                            <div class="input-group">--}}
+{{--                                                                <input type="text" class="form-control name_en"--}}
+{{--                                                                       value="{{ $option->option_en }}">--}}
+{{--                                                                <button--}}
+{{--                                                                    class="input-group-btn btn btn-custom-gray btn-icon h-50px del-added-option-btn"--}}
+{{--                                                                    type="button" id="{{ $option->id }}">--}}
+{{--                                                                    <i class="fa-solid fa-xmark"></i>--}}
+{{--                                                                </button>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div--}}
+{{--                                                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label for="password"--}}
+{{--                                                                   class="form-label">{{ trans('rest.menu.dish.option') }}--}}
+{{--                                                                <span class="text-custom-muted">(Dutch)</span>--}}
+{{--                                                            </label>--}}
+{{--                                                            <div class="input-group">--}}
+{{--                                                                <input type="text" class="form-control name_nl"--}}
+{{--                                                                       value="{{ $option->option_nl }}">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            @endforeach--}}
+{{--                                        </div>--}}
                                         <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
                                                 <button type="submit"

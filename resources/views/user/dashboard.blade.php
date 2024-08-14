@@ -415,6 +415,7 @@
 
 
                                                                                     @php
+                                                                                        /*old code comment on 13-08-2024*/
                                                                                         $htmlString = getOrderDishIngredients1(
                                                                                             $dish,
                                                                                         );
@@ -445,9 +446,10 @@
 
                                                                                             <div
                                                                                                 class="d-flex align-items-center">
+{{--                                                                                                $htmlString = getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id'));--}}
                                                                                                 <p
                                                                                                     class="mb-0 item-options mb-0" id='dish-option-{{$dish->id}}' data-dish-option='{{$dish->dishOption->name ?? '' }}'>
-                                                                                                    {{ $dish->dishOption->name ?? '' }}
+                                                                                                    {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
                                                                                                 </p>
                                                                                                 {{-- <span class="item-desc"
                                                                                                     id="item-ing-desc{{ $dish->id }}">{{ getOrderDishIngredients1($dish) }}</span> --}}
@@ -685,7 +687,7 @@
                             <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                 id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
-                                    {{ trans('user.cart.checkout') }} 
+                                    {{ trans('user.cart.checkout') }}
                                     (<span class="bill-total-count"
                                         id="gross-total-bill1">€{{ number_format((float) ($cartValue + $serviceCharge + $delivery_charge - $cartValue * $couponDiscountPercent), 2) }}</span>)
                                 </span>

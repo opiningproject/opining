@@ -4,7 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
+use App\Models\DishCategoryOption;
 use App\Models\DishIngredient;
+use App\Models\DishOption;
+use App\Models\DishOptionCategory;
+use App\Models\OrderDishOptionDetails;
 use App\Models\RestaurantDetail;
 use App\Models\Zipcode;
 use Exception;
@@ -102,13 +106,18 @@ class CartController extends Controller
         $dish = $cart->dish;
         $dishId = $dish->id;
         $dishPrice = $dish->price;
-        $option = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
-        $ingredientData = getOrderDishIngredients1($cart);
-
         $optionName= '';
-        if($option) {
-            $optionName= $option->option_en;
+
+        if (request('option')) {
+            $optionName = getDishOptionCategoryName(request('option'));
         }
+        $ingredientData = getOrderDishIngredients1($cart);
+        // old code comment 12-08-2024
+//        $option = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
+//        if($option) {
+//            $optionName= $option->option_en;
+//        }
+
         $html = "<div class='row stock-card mb-0' id=cart-$cart->id>
     <div class='col-12 text-end d-flex align-items-center gap-2 mb-3 justify-content-end outof-stock-text d-none'>
         <strong>Out of stock</strong>
@@ -287,8 +296,18 @@ class CartController extends Controller
             sort($selectedFreeIng);
 
             if($request->doesExist == 0){
+//                old option id code comment on 12-08-2024
+//                $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->whereDishOptionId($request->option)->get();
 
-                $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->whereDishOptionId($request->option)->get();
+                if ($request->option) {
+                    $requestOptions = $request->option; // This is the array of option IDs
+                    $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)
+                        ->whereDoesntHave('orderDishOptionDetails', function ($query) use ($requestOptions) {
+                            $query->whereNotIn('dish_option_id', $requestOptions);
+                        })->get();
+                } else {
+                    $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->get();
+                }
 
                 if ($dishExist) {
 
@@ -333,7 +352,7 @@ class CartController extends Controller
                         "dish_id" => $id,
                         "price" => $dish->price,
                         "qty" => $request->dishQty,
-                        "dish_option_id" => $request->option ?? null,
+//                        "dish_option_id" => $request->option ?? null, // old code comment on 13-08-2024
                         "total_price" => $dish->price * $request->dishQty,
                         "notes" => '',
                     ];
@@ -341,6 +360,15 @@ class CartController extends Controller
                     $orderDetails = $order->dishDetails()->create(
                         $cartArr
                     );
+
+                    if ($request->option && count($request->option) > 0 ) {
+                        foreach ($request->option as $optionKey => $optionValue) {
+                            $addDishOption = OrderDishOptionDetails::create([
+                                "order_detail_id"=>$orderDetails->id,
+                                "dish_option_id"=>$optionValue
+                            ]);
+                        }
+                    }
                     $orderDetails->fresh();
 
                     if (isset($request->freeIng)) {
@@ -382,8 +410,18 @@ class CartController extends Controller
                     $orderDetails->total_price = $orderDetails->qty * $dish->price;
 
                     // update dish option, if it comes in request ( CR: July )
-                    $orderDetails->dish_option_id =  $request->option ?? null;
+                    // old code comment on 13-08-2024
+//                    $orderDetails->dish_option_id =  $request->option ?? null;
                     $orderDetails->save();
+                if (count($request->option) > 0 ) {
+                    OrderDishOptionDetails::where("order_detail_id",$orderDetails->id)->delete();
+                    foreach ($request->option as $optionKey => $optionValue){
+                        $addDishOption = OrderDishOptionDetails::create([
+                            "order_detail_id"=>$orderDetails->id,
+                            "dish_option_id"=>$optionValue
+                        ]);
+                    }
+                }
 //                ]);
                 $orderDetails->orderDishDetails()->forceDelete();
                 if (isset($request->freeIng)) {
@@ -441,11 +479,16 @@ class CartController extends Controller
             if ($cartData) {
                 $response['cartHtml'] = $this->cartHtml($orderDetails);
             }*/
+            if (request('option')) {
+                $optionName = getDishOptionCategoryName(request('option'));
+            }
+//            dd($orderDetails->total_price);
             $response['msg'] = '';
             $response['paidIngAmt'] = $paidIngAmt;
             $response['ingListData'] = $IngListData;
             $response['addedDishId'] = $sameDish;
             $response['dishOption'] = $optionName ?? '';
+            $response['totalAmount'] = $orderDetails->total_price ?? '';
             return response::json(['status' => 200, 'message' => $response]);
 
 

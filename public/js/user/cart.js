@@ -348,7 +348,7 @@ function applyCoupon() {
                 let newHeight = invoiceHeight - 18;
                 addPaddingToCouponTag(2,newHeight)
             }
-    
+
             if (response.status == 200) {
                 $("#coupon_code_remove_btn").show();
                 $("#coupon_code_apply_btn").hide();
@@ -447,19 +447,33 @@ function addCustomizedCart(id, doesExist = 0) {
 
     var dishData = new FormData();
     var totalDishQty = $('#totalDishQty').val()
-    $("#dish-option" + id).on('change', function () {
-        $('.dish-option-error').hide();
-    })
-        if ($("#dish-option" + id).length > 0 && $("#dish-option" + id).val() != null) {
-            dishData.append('option', $("#dish-option" + id).val())
-            $('.dish-option-error').hide();
-        } else {
-            if ($("#dish-option" + id).length > 0) {
-                $('.dish-option-error').removeClass('d-none');
-                return false;
-            }
-        }
 
+    // old code comment 13-08-2024
+    /*$("#dish-option" + id).on('change', function () {
+        $('.dish-option-error').hide();
+    })*/
+
+    var isValid = true;
+
+    // Check each dropdown
+    $('.dish-option-select').each(function () {
+        if ($(this).val() === null) {
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').removeClass('d-none');
+            isValid = false;
+        } else {
+            dishData.append('option[]', $(this).val())
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').hide();
+        }
+        $(".dish-option-select").on('change', function () {
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').hide();
+        })
+
+    });
+
+if (isValid == true) {
+    $(".dish-option-select").change(function () {
+        $(this).closest('.custom-default-dropdown').find('.dish-option-error').hide();
+    })
     if ($('.dishFreeIngQty').length) {
         $('.dishFreeIngQty:checked').each(function (index, element) {
             dishData.append('freeIng[]', $(element).data('id'))
@@ -503,15 +517,22 @@ function addCustomizedCart(id, doesExist = 0) {
                         $('#item-ing-desc' + doesExist).html(response.message.ingListData)
                         $('#qty-' + doesExist).attr('data-ing', response.message.paidIngAmt)
                     }
-                    if(response.message.dishOption) {
+                    // old code commented 13-08-2024
+                    /*if (response.message.dishOption) {
                         $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
                         $('#dish-option-' + response.message.addedDishId).text(response.message.dishOption.option_en);
+                    }*/
+                    if (response.message.dishOption) {
+                        $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
+                        $('#dish-option-' + response.message.addedDishId).text(response.message.dishOption);
                     }
-
                     $('#qty-' + response.message.addedDishId).val(totalAmount)
+
+                    //update dish qty realtime code
+                    $('#quantity-' + response.message.addedDishId).html(totalAmount)
                 } else {
                     /*$("#dish-cart-lbl-" + id).text('Added to cart');
-                    $("#dish-cart-lbl-" + id).prop('disabled',
+                        $("#dish-cart-lbl-" + id).prop('disabled',
                     );*/
                     $('.cart-items').append(response.message.cartHtml);
                     $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
@@ -523,6 +544,9 @@ function addCustomizedCart(id, doesExist = 0) {
                 $('#cart-bill-div').removeClass('d-none')
                 $('#cart-amount-cal-data').show()
                 calculateTotalCartAmount()
+
+                console.log("totalAmount", response.message.totalAmount + response.message.paidIngAmt)
+                console.log(",",  parseInt($('#cart-item-price' + response.message.addedDishId).html(response.message.totalAmount + response.message.paidIngAmt)))
             }
 
         },
@@ -532,6 +556,7 @@ function addCustomizedCart(id, doesExist = 0) {
             // alert(errorMessage);;
         }
     })
+    }
 }
 
 function updateCartAmount(dishId, amount, type, dish = 0) {

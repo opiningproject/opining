@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="orderdetails-main mb-3">
+                                    <div class="orderdetails-main px-0 px-md-3 mb-3">
                                         <div
                                             class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
                                             <div class="textgrp d-flex flex-column gap-1 gap-sm-3">
@@ -198,11 +198,11 @@
                                                             x{{ $dish->qty }}
                                                         </div>
                                                         <div class="orderdetails-desc-card orderdetails-flex-200">
-                                                            <div class="text-grp">
+                                                            <div class="text-grp ps-3">
                                                                 <div class="title">{{ $dish->dish->name }}</div>
                                                                 <div class="text line-clamp-2"
                                                                      id="order-ingredient-{{ $dish->id}}">
-                                                                    <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>
+                                                                    <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
                                                                     {{ getOrderDishIngredients($dish) }}
                                                                 </div>
                                                                 <div

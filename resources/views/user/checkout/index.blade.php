@@ -679,9 +679,14 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                         <div class="d-flex">
                                                                                             <div class="text"
                                                                                                 id="order-ingredient-{{ $dishDetails->id }}">
+                                                                                                    {{-- old code comment 13-08-2024--}}
+{{--                                                                                                <p--}}
+{{--                                                                                                    class="mb-0 item-options mb-0 {{ !empty($dishDetails->dishOption->name) ? '' : 'd-none' }}">--}}
+{{--                                                                                                    {{ $dishDetails->dishOption->name ?? '' }}--}}
+{{--                                                                                                </p>--}}
                                                                                                 <p
-                                                                                                    class="mb-0 item-options mb-0 {{ !empty($dishDetails->dishOption->name) ? '' : 'd-none' }}">
-                                                                                                    {{ $dishDetails->dishOption->name ?? '' }}
+                                                                                                    class="mb-0 item-options mb-0 ">
+                                                                                                    {{ getDishOptionCategoryName($dishDetails->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
                                                                                                 </p>
                                                                                                 @php
                                                                                                     $htmlString = getOrderDishIngredients1(
@@ -810,8 +815,8 @@ if($user->cart && $user->cart->order_type == 2) {
                                                         <a class="align-middle btn btn-custom-yellow btn-default d-block w-100 add-more-btn-sticky mt-3 d-none"
                                                         href="{{ route('user.dashboard') }}">
                                                         <span class="align-middle">
-                                                            {{ trans('user.cart.add_more') }} 
-                                            
+                                                            {{ trans('user.cart.add_more') }}
+
                                                         </span>
                                                         </a>
                                                     </div>

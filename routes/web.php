@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DishController;
+use App\Http\Controllers\Admin\DishOptionCategoryController;
+use App\Http\Controllers\Admin\DishOptionsController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\SettingController;
@@ -132,6 +134,19 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
         Route::resource('/ingredients', IngredientController::class);
 
+        // Dish option category route
+        Route::resource('/dish-option', DishOptionsController::class);
+        Route::group(['prefix' => '/dish-option'], function () {
+            Route::post('/update/{ingredient}', [DishOptionsController::class, 'updateIngredient']);
+            Route::post('/update-status/{ingredient}', [DishOptionsController::class, 'updateIngredientStatus']);
+            Route::post('/updateingredientRowOrder', [DishOptionsController::class, 'updateingredientRowOrder']);
+//            Route::post('/update/{ingredient}', [DishOptionsController::class, 'updateIngredient']);
+        });
+        Route::resource('/dish-options/category', DishOptionCategoryController::class, [
+            'as' => 'dishOption'
+        ]);
+        Route::post('/dish-options/category/updateCategoryRowOrder', [DishOptionCategoryController::class, 'updateCategoryRowOrder']);
+        Route::get('/dish-options/category/checkItems/{category}', [DishOptionCategoryController::class, 'checkAttachedItems']);
     });
     // Restaurant Menu Routes
 

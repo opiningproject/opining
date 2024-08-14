@@ -54,6 +54,7 @@ return [
 		'existing_ingredients' => 'Existing Ingredients',
 		'extra_ingredients' => 'Add Extra Ingredients',
 		'select_option' => 'Please select option',
+		'select_category' => 'Please select :category',
 		'field_required' => 'This field is required.'
 	],
 

@@ -238,8 +238,10 @@
 {{--                                                                        <b class="mb-0 item-options">--}}
 {{--                                                                            {{ $dish->dishOption->name ?? '' }} </b>--}}
 {{--                                                                        {{ getOrderDishIngredients($dish) }}--}}
-                                                                        <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
-                                                                        <br>
+                                                                        @if(count($dish->orderDishOptionDetails) > 0)
+                                                                            <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                                                            <br>
+                                                                        @endif
                                                                         {{ getOrderDishIngredients($dish) }}
                                                                     </div>
                                                                     <div

@@ -18,4 +18,5 @@ return [
 	],
     "postCodeApiKey" => "4Xp8vCpWYb4a45IXHjZDN32yCRMO2ChU2EyHO08Q",
 	'page_limit' => 5,
+	'country_code' => '+31',
 ];

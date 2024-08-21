@@ -74,6 +74,9 @@ class OrderController extends Controller
     {
         $order = OrderUserDetail::where('order_id', $request->order_id)->first();
         $trackOrder = TrackOrder::where('order_id', $order->order_id)->get();
+        if (count($trackOrder) == 0) {
+            return redirect()->back();
+        }
         return view('user.orders.order-location-new', ['order' => $order, 'trackOrder' => $trackOrder]);
     }
 

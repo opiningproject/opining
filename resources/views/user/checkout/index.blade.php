@@ -673,8 +673,12 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                                     class="text-decoration-underline">
                                                                                                     {{ $dishDetails->dish->name }}</span>
                                                                                             </p>
+                                                                                            @php
+                                                                                                $totalAmount = getOrderDishIngredientsTotal($dishDetails);
+
+                                                                                            @endphp
                                                                                             <span
-                                                                                                class="cart-item-price ms-auto">+€{{ $dishDetails->dish->price }}</span>
+                                                                                                class="cart-item-price ms-auto">+€{{ number_format(($dishDetails->dish->price * $dishDetails->qty) + $dishDetails->paid_ingredient_total, 2) }}</span>
                                                                                         </div>
                                                                                         <div class="d-flex">
                                                                                             <div class="text"
@@ -1063,7 +1067,7 @@ if($user->cart && $user->cart->order_type == 2) {
                             toastr.success(response.message.data)
 
                             setTimeout(function() {
-                                window.location.replace(baseURL + '/user/orders')
+                                window.location.replace(baseURL + '/user/orders?order=is_new')
                             }, 2000);
 
                         } else if (paymentType == '3') {
@@ -1086,7 +1090,7 @@ if($user->cart && $user->cart->order_type == 2) {
                             if (response.message.cardPayment == 200) {
                                 toastr.success(response.message.data)
                                 setTimeout(function() {
-                                    window.location.replace(baseURL + '/user/orders')
+                                    window.location.replace(baseURL + '/user/orders?order=is_new')
                                 }, 2000);
                             } else if (response.message.cardPayment == 402) {
                                 window.location.replace(response.message.redirectionUrl)

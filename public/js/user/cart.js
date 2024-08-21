@@ -539,14 +539,19 @@ if (isValid == true) {
                     $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) + 1)
                 }
 
+
+
                 $('#empty-cart-div').hide()
                 $('#checkout-cart').removeClass('d-none')
                 $('#cart-bill-div').removeClass('d-none')
                 $('#cart-amount-cal-data').show()
+                // when update ingredients then update amount in cart.
+                var totalAmounts  = parseFloat(response.message.totalAmount + response.message.paidIngAmt).toFixed(2)
+                $('#cart-item-price' + response.message.addedDishId).html('+€' + totalAmounts)
+                $('#dish-price-' + response.message.addedDishId).val(totalAmounts)
+                // when update ingredients then update amount in cart.
                 calculateTotalCartAmount()
 
-                console.log("totalAmount", response.message.totalAmount + response.message.paidIngAmt)
-                console.log(",",  parseInt($('#cart-item-price' + response.message.addedDishId).html(response.message.totalAmount + response.message.paidIngAmt)))
             }
 
         },
@@ -592,13 +597,13 @@ function calculateTotalCartAmount() {
 
     $('.cart-amt').each(function (index, element) {
         var id = $(element).data('id')
-
         var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
 
         $('#cart-item-price' + id).text('+€' + itemAmount.toFixed(2))
         $('#paid-ing-price' + id).text('+€' + (parseFloat($(element).val()) * parseFloat($(element).attr('data-ing'))).toFixed(2))
-        totalAmt += itemAmount + parseFloat(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing')))
-
+        // old code comment on 13-08-2024
+        // totalAmt += itemAmount + parseFloat(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing')))
+        totalAmt += itemAmount
     })
 
     $('#total-cart-bill').text('€' + totalAmt.toFixed(2))
@@ -632,7 +637,7 @@ function calculateTotalCartAmount() {
     }
 }
 
-
+// add note close button new code implemented
 $(document).on('click', '.dish-group .form-label', function ()
 {
     var formGroup = $(this).closest('.dish-group');
@@ -640,13 +645,74 @@ $(document).on('click', '.dish-group .form-label', function ()
 
     $(this).addClass("d-none");
     inputField.removeClass("d-none");
+    formGroup.find('a.note-close-btn').removeClass("d-none")
 })
 
-let not_values = $('.dish-notes').val();
+$(document).on('click', '.note-close-btn', function(e) {
+
+    e.preventDefault(); // Prevent the default action of the link
+    var notes = " "
+    var id = $(this).data('id')
+    var noteCloseBtn = $(this)
+
+    // Find the parent .dish-group div that matches the data-dish-id
+    let parentGroup = $(this).closest('.dish-group[data-dish-id="' + id + '"]');
+
+    $.ajax({
+        url: baseURL + '/user/cart/update-notes/' + id,
+        type: 'PATCH',
+        data: {
+            notes
+        },
+        success: function (response) {
+            if (response.status != 200) {
+                // alert(response.message);
+                toastr.warning(response.message);
+            }
+            if (response.status == 200) {
+                // Find the corresponding input and label within the parent group
+                let dishNotesInput = parentGroup.find('.dish-notes');
+                let dishNotesLabel = parentGroup.find('.dish-notes-label');
+
+                // Clear the input value
+                dishNotesInput.val('');
+
+                // Add the d-none class to the input and close button
+                dishNotesInput.addClass('d-none');
+                noteCloseBtn.addClass('d-none');
+
+                // Remove the d-none class from the label
+                dishNotesLabel.removeClass('d-none');
+                dishNotesLabel.css('display', 'block');
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            toastr.error(errorMessage)
+            // alert(errorMessage);
+        }
+    })
+})
+
+$(".dish-notes").each(function(){
+    let not_values = $(this).val();
+    if(not_values !== undefined && not_values.length > 0) {
+        // Hide the associated label and show the notes and close button
+        $(this).closest('.dish-group').find('.dish-notes-label').hide();
+        $(this).removeClass('d-none');
+        $(this).closest('.dish-group').find('.note-close-btn').removeClass('d-none');
+    }
+});
+// add note close button new code implemented
+
+
+/*let not_values = $('.dish-notes').val();
+console.log('not_values', not_values)
  if(not_values != undefined && not_values.length > 0) {
     $('.dish-notes-label').css('display','none');
     // $('.dish-notes').css('display','block !important');
     // $('.dish-notes').css({display:"block !important;"});
     $('.dish-notes').removeClass('d-none');
- }
+    $('.note-close-btn').removeClass('d-none');
+ }*/
 

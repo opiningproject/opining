@@ -403,6 +403,7 @@
                                                                 {{-- old code comment 13-08-2024 --}}
                                                                 {{-- <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>--}}
                                                                 <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                                                <br>
                                                                 {{ getOrderDishIngredients($dish) }}
                                                             </div>
                                                             @if(count($dish->orderDishPaidIngredients) > 2)

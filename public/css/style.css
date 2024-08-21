@@ -716,7 +716,36 @@ a {
 }
 @media (min-width: 1537px) {
     .page-control .btn {
-        padding: 16px 24px;
+        padding: 16px 8px;
+    }
+}
+
+.page-control .btn>span {
+    position: relative;
+    top: 1px;
+}
+
+@media (max-width: 1600px) {
+    .page-control .btn {
+        padding: 8px 6px !important;
+        display: flex;
+        align-items: center;
+        font-size: 12px !important;
+    }
+    .page-control .btn>span {
+        position: relative;
+        top: 1px;
+    }
+    .userlogin-dropdown .dropdown-toggle {
+        -moz-column-gap: 8px;
+        column-gap: 8px;}
+    .userlogin-dropdown .userdp-text>a {
+        position: relative;
+        top: 3px;
+    }
+    .page-control .btn>svg {
+        width: 16px;
+        height: 16px;
     }
 }
 @media (max-width: 1536px) {
@@ -2112,8 +2141,8 @@ table .upload-file {
     min-height: 35px !important;
 }
 table .form-control {
-    height: 35px;
-    min-height: 35px;
+    height: 38px;
+    min-height: 38px;
     border-radius: 12px;
 }
 table .input-group-text {

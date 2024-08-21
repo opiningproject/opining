@@ -224,8 +224,8 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
 
         Route::post('/orders/send-refund-req', [App\Http\Controllers\User\OrderController::class, 'sendRefundRequest']);
 
-        Route::get('/order-location/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
-        Route::get('/order-location-new/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocationNew'])->name('user.order-location-new');
+//        Route::get('/order-location/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocation'])->name('user.order-location');
+        Route::get('/order-location/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderLocationNew'])->name('user.order-location-new');
         Route::post('/update-dish-qty', [App\Http\Controllers\User\CartController::class, 'updateDishQty']);
         Route::get('/chat', [App\Http\Controllers\User\ChatController::class, 'index'])->name('user.chat');
         Route::post('/chat/store', [App\Http\Controllers\User\ChatController::class, 'storeMessage'])->name('user.store');

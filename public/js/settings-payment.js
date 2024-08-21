@@ -38,8 +38,9 @@ function changeOrderStatus(order_id,order_status)
 
 $(document).on('click', '#change-order-status-btn', function ()
 {
-    var id = $('#id').val();
+    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
 
+    var id = $('#id').val();
     $.ajax({
         url: baseURL+'/orders/change-status/'+ id,
         type: 'GET',
@@ -69,6 +70,7 @@ $(document).on('click', '#change-order-status-btn', function ()
             $('.order-' + id).addClass('active');
             window.history.pushState('','', baseURL + '/orders/'+id+'#order-'+id);
             $('#changeStatusModal').modal('hide');
+            socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

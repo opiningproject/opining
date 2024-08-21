@@ -407,9 +407,12 @@
                                                                                                 onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
                                                                                                 {{ $dish->dish->name }}
                                                                                             </p>
+                                                                                            @php
+                                                                                                $totalAmount = getOrderDishIngredientsTotal($dish);
+                                                                                            @endphp
                                                                                             <span
                                                                                                 class="cart-item-price ms-auto"
-                                                                                                id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price), 2) }}</span>
+                                                                                                id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price) + ($paidIngredient * $dish->qty), 2) }}</span>
                                                                                         </div>
                                                                                     </div>
 
@@ -490,7 +493,7 @@
                                                                                                             value="{{ $dish->notes }}"
                                                                                                             placeholder="{{ trans('user.cart.type_here') }}" />
 
-                                                                                                            <a href="#" class="note-close-btn">
+                                                                                                            <a href="#" class="note-close-btn d-none"  data-id="{{ $dish->id }}">
 
                                                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                                                     id="Outline"
@@ -520,7 +523,7 @@
                                                                                                         data-id="{{ $dish->id }}" />
                                                                                                     <input type="hidden"
                                                                                                         id="dish-price-{{ $dish->id }}"
-                                                                                                        value="{{ $dish->dish->price }}" />
+                                                                                                        value="{{ $dish->dish->price + $totalAmount }}" />
                                                                                                     <span class="plus"
                                                                                                         onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i

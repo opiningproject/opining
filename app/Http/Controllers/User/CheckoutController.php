@@ -6,6 +6,7 @@ use App\Enums\OrderType;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\TrackOrder;
 use App\Models\User;
 use App\Notifications\Admin\AdminOrderReceived;
 use App\Notifications\User\OrderAccepted;
@@ -44,6 +45,9 @@ class CheckoutController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if ($user->cart == null) {
+            return redirect()->route('user.orders');
+        }
         $cartTotal = $user->cart->dishDetails()->select(DB::raw('sum(qty * price) as total'))->get()->sum('total');
 
         return view('user.checkout.index', ['user' => $user, 'cartAmount' => $cartTotal]);
@@ -156,6 +160,14 @@ class CheckoutController extends Controller
                 'points_claimed' => $pointClaimed,
                 'payment_status' => '0',
             ]);
+
+            // added data in track order table
+            if (session('zipcode')) {
+                $addTrackOrder = TrackOrder::create([
+                    'order_id' => $orderId,
+                    'order_status' => '1'
+                ]);
+            }
 
             $user->update([
                 'enable_email_notification' => isset($request->receive_mail) ? '1' : '0',
@@ -429,7 +441,7 @@ class CheckoutController extends Controller
 
                             $couponTransaction = CouponTransaction::where('coupon_id',$user->cart->coupon_id)
                             ->where('user_id',$user->id)->where('is_redeemed','0')->first();
-        
+
                             if(!empty($couponTransaction)) {
                                 $couponTransaction->update([
                                     'is_redeemed' => '1'
@@ -456,7 +468,7 @@ class CheckoutController extends Controller
                         $user->notify(new OrderAccepted($order));
                         $admin->notify(new AdminOrderReceived($order));
 
-                        return redirect()->route('user.orders');
+                        return redirect()->route('user.orders', ['order' => 'is_new']);
                     }
                 }
             }

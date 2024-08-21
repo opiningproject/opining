@@ -1,6 +1,6 @@
 $(function () {
 
-    $("#ingCategoryForm").validate({
+    $("#dishOptionCategoryForm").validate({
         rules: {
             name_en: {
                 required: true
@@ -87,7 +87,7 @@ $(function () {
         var id = $(this).attr('data-id');
 
         $.ajax({
-            url: baseURL + '/menu/ingredients/category/checkItems/' + id,
+            url: baseURL + '/menu/dish-options/category/checkItems/' + id,
             type: 'GET',
             success: function (response) {
                 if (response.status == 200) {
@@ -106,6 +106,7 @@ $(function () {
     })
 
     $(document).on('click', '.save-edit-btn', function () {
+        console.log("in")
         var id = $(this).attr('data-id')
 
         var name_en = $('#name_en' + id).val()
@@ -122,7 +123,7 @@ $(function () {
         }
 
         $.ajax({
-            url: baseURL + '/menu/ingredients/category/' + id,
+            url: baseURL + '/menu/dish-options/category/' + id,
             type: 'PUT',
             data: {
                 name_en,
@@ -152,14 +153,14 @@ $(function () {
 });
 
 function saveIngredientCategory() {
-    var ingredientData = new FormData(document.getElementById('ingCategoryForm'));
+    var dishOptionData = new FormData(document.getElementById('dishOptionCategoryForm'));
 
     $.ajax({
-        url: baseURL + '/menu/ingredients/category',
+        url: baseURL + '/menu/dish-options/category',
         type: 'POST',
         processData: false,
         contentType: false,
-        data: ingredientData,
+        data: dishOptionData,
         success: function (response) {
             if (response.status == 200) {
                 var id = response.data.id
@@ -201,7 +202,7 @@ function saveIngredientCategory() {
                     '</td>' +
                     '</tr>';
                 $('#ingredientCategoryTbody').prepend(html)
-                $('#ingCategoryForm').trigger('reset')
+                $('#dishOptionCategoryForm').trigger('reset')
 
                 toastr.success(response.message)
 

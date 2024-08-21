@@ -400,8 +400,10 @@
                                                             <div class="title"><span>{{ $dish->qty }}x</span> {{ $dish->dish->name }}</div>
                                                             <div class="text line-clamp-2"
                                                                 id="order-ingredient-{{ $dish->id }}">
-                                                                <b class="mb-0 item-options">
-                                                                    {{ $dish->dishOption->name ?? '' }} </b>
+                                                                {{-- old code comment 13-08-2024 --}}
+                                                                {{-- <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>--}}
+                                                                <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                                                <br>
                                                                 {{ getOrderDishIngredients($dish) }}
                                                             </div>
                                                             @if(count($dish->orderDishPaidIngredients) > 2)
@@ -468,7 +470,7 @@
                                                         <div class="value">
                                                             €{{ number_format($order->platform_charge, 2) }}</div>
                                                     </div>
-                                        
+
                                                     <div class="text d-flex align-items-center justify-content-between gap-2" style="{{ $order->order_type == '2' ? 'display:none !important;' : '' }}">
                                                         <div
                                                             class="key">{{ $order->delivery_charge ?   trans('user.my_orders.delivery_charges') :  trans('user.my_orders.delivery') }}</div>

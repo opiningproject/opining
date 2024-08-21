@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\DishOption;
+use App\Models\DishOptionCategory;
 use App\Models\IngredientCategory;
 use App\Models\Order;
 use App\Models\OrderDishDetail;
@@ -117,6 +119,9 @@ class DishController extends Controller
         }
 
         $dish = Dish::find($id);
+
+        $dishOption = null;
+
         $options = $dish->optionWithoutTrashed;
         $freeIngredients = $dish->freeWithoutTrashIngredients;
 
@@ -150,7 +155,7 @@ class DishController extends Controller
             })->with('orderDishFreeIngredients')->first();
 
 
-            $selectedOption = $dishDetail->dish_option_id ?? '';
+            $selectedOption = $dishDetail->orderDishOptionDetails ? $dishDetail->orderDishOptionDetails->pluck('dish_option_id') : [];
 
             if ($paidDishDetail) {
                 $paidSelectedIngredients = $paidDishDetail->orderDishPaidIngredients->pluck('quantity', 'dish_ingredient_id')->toArray();
@@ -161,27 +166,34 @@ class DishController extends Controller
             }
         }
 
-        $html_options = '';
-        if (count($options) > 0) {
+        $catId = null;
 
-            $html_options = "<div class='row justify-content-center'>
-                        <div class='col-xl-5'>
-                          <div class='form-group mb-0'>
+        $dishOptionCategoryData = getDishOptionCategory($dish->id);
+        $html_options = '';
+        if (count($dishOptionCategoryData) > 0) {
+            foreach($dishOptionCategoryData as $key => $value) {
+                    $html_options .= "<div class='row justify-content-center'>
+                        <div class='col-xl-6'>
+                          <div class='form-group mb-3'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
-                                <select class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100 dish-option-select' id='dish-option$dish->id'>
-                                <option disabled selected value=''>".trans('modal.dish.select_option')."</option>";
-            foreach ($options as $option) {
-                $selected = $selectedOption == $option->id ? 'selected' : '';
-                $html_options .= "<option value='$option->id' $selected >$option->name</option>";
+                                <select name='dish_option' class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100 dish-option-select' id='dish-option$dish->id'>
+                                <option disabled selected value=''>".trans('modal.dish.select_category',['category' => $value->name])."</option>";
+                                                foreach ($value->dishCategoryOption as $optionKey => $option) {
+                                                    $selected = '';
+                                                    if ($selectedOption != '') {
+                                                        $selected = in_array($option->id, $selectedOption->toArray()) ? 'selected' : '';
+                                                    }
+                                                    $html_options .= "<option value='$option->id' $selected >$option->name</option>";
+                                                }
+                                    $html_options .= "</select>
+                                                        <label class='error dish-option-error d-none'>".trans('modal.dish.field_required')."</label>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>";
             }
-            $html_options .= "</select>
-                                <label class='error dish-option-error d-none'>".trans('modal.dish.field_required')."</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>";
         }
 
         $html_free_ingredients = '';

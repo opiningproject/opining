@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <!-- start category section -->
-                        <section class="custom-section category-section pb-0">
+                        <section class="custom-section category-section pb-0 swiper-container-mobile">
                             <div class="section-page-title">
                                 <h1 class="section-title">{{ trans('user.dashboard.category') }}</h1>
                             </div>
@@ -407,14 +407,18 @@
                                                                                                 onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
                                                                                                 {{ $dish->dish->name }}
                                                                                             </p>
+                                                                                            @php
+                                                                                                $totalAmount = getOrderDishIngredientsTotal($dish);
+                                                                                            @endphp
                                                                                             <span
                                                                                                 class="cart-item-price ms-auto"
-                                                                                                id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price), 2) }}</span>
+                                                                                                id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price) + ($paidIngredient * $dish->qty), 2) }}</span>
                                                                                         </div>
                                                                                     </div>
 
 
                                                                                     @php
+                                                                                        /*old code comment on 13-08-2024*/
                                                                                         $htmlString = getOrderDishIngredients1(
                                                                                             $dish,
                                                                                         );
@@ -445,9 +449,10 @@
 
                                                                                             <div
                                                                                                 class="d-flex align-items-center">
+{{--                                                                                                $htmlString = getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id'));--}}
                                                                                                 <p
                                                                                                     class="mb-0 item-options mb-0" id='dish-option-{{$dish->id}}' data-dish-option='{{$dish->dishOption->name ?? '' }}'>
-                                                                                                    {{ $dish->dishOption->name ?? '' }}
+                                                                                                    {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
                                                                                                 </p>
                                                                                                 {{-- <span class="item-desc"
                                                                                                     id="item-ing-desc{{ $dish->id }}">{{ getOrderDishIngredients1($dish) }}</span> --}}
@@ -487,6 +492,18 @@
                                                                                                             class="form-control dish-notes d-none"
                                                                                                             value="{{ $dish->notes }}"
                                                                                                             placeholder="{{ trans('user.cart.type_here') }}" />
+
+                                                                                                            <a href="#" class="note-close-btn d-none"  data-id="{{ $dish->id }}">
+
+                                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                    id="Outline"
+                                                                                                                    viewBox="0 0 24 24"
+                                                                                                                    width="20"
+                                                                                                                    height="20">
+                                                                                                                    <path
+                                                                                                                        d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z" />
+                                                                                                                </svg>
+                                                                                                            </a>
                                                                                                     </div>
                                                                                                 </div>
 
@@ -506,7 +523,7 @@
                                                                                                         data-id="{{ $dish->id }}" />
                                                                                                     <input type="hidden"
                                                                                                         id="dish-price-{{ $dish->id }}"
-                                                                                                        value="{{ $dish->dish->price }}" />
+                                                                                                        value="{{ $dish->dish->price + $totalAmount }}" />
                                                                                                     <span class="plus"
                                                                                                         onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i
@@ -685,7 +702,7 @@
                             <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                 id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
-                                    {{ trans('user.cart.checkout') }} 
+                                    {{ trans('user.cart.checkout') }}
                                     (<span class="bill-total-count"
                                         id="gross-total-bill1">€{{ number_format((float) ($cartValue + $serviceCharge + $delivery_charge - $cartValue * $couponDiscountPercent), 2) }}</span>)
                                 </span>
@@ -737,3 +754,4 @@
     </script>
     <script type="text/javascript" src="{{ asset('js/user/dashboard.js') }}"></script>
 @endsection
+

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\TrackOrder;
 use App\Notifications\User\RefundRequest;
 use Illuminate\Http\Request;
 use App\Models\DishFavorites;
@@ -66,6 +67,14 @@ class OrderController extends Controller
         $order = OrderUserDetail::where('order_id', $request->order_id)->first();
 
         return view('user.orders.order-location', ['order' => $order]);
+    }
+
+    // Cr aug new track order page controller
+    public function orderLocationNew(Request $request)
+    {
+        $order = OrderUserDetail::where('order_id', $request->order_id)->first();
+        $trackOrder = TrackOrder::where('order_id', $order->order_id)->get();
+        return view('user.orders.order-location-new', ['order' => $order, 'trackOrder' => $trackOrder]);
     }
 
     public function orderDetail(Request $request)

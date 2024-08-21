@@ -84,13 +84,13 @@ use App\Enums\RefundStatus;
                                 @if ($order->order_type == OrderType::Delivery)
                                 <?php
                                 $address = $order->orderUserDetails;
-                                
+
                                 echo $address->house_no . ', ' . $address->street_name . ', ' . $address->city . ', ' . $address->zipcode;
                                 ?>
                                 @else
                                 {{ getRestaurantDetail()->rest_address }}
                                 @endif
-                             
+
                             </h4>
                         </div>
                     </div>
@@ -111,6 +111,10 @@ use App\Enums\RefundStatus;
                             <div class="number">{{ $dish->qty }}</div>
                             <div class="details">
                                 <h4>{{ $dish->dish->name }}</h4>
+                                <b class="mb-0 item-options" style="font-size: 10px !important;">
+                                    {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
+                                </b>
+                                <br>
                                 @php
                                     $htmlString = getOrderDishIngredients1($dish);
                                     $cleanedHtmlString = str_replace('"','',$htmlString);
@@ -124,7 +128,7 @@ use App\Enums\RefundStatus;
 
                         <div class="right-details text-end">
                             <?php
-                        
+
                             $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total;
                             $itemTotalPrice += $itemPrice;
                             ?>
@@ -155,7 +159,7 @@ use App\Enums\RefundStatus;
                         </tr>
                         <tr  {{ isset($order->coupon) ? '' : 'style=display:none' }}>
                             <td>{{ trans('user.my_orders.item_discount') }}</td>
-                            <td class="text-end text-green"> -€{{ number_format($order->coupon_discount, 2) }}</td>                           
+                            <td class="text-end text-green"> -€{{ number_format($order->coupon_discount, 2) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -253,7 +257,7 @@ use App\Enums\RefundStatus;
                     </div>
                     <h3 class="mb-0">{{ trans('rest.order_status.in_kitchen') }}</h3>
                 </div>
-               
+
                 @if ($order->order_type == OrderType::Delivery)
                     <div class="{{ $order->order_status >= OrderStatus::Ready ? 'step active' : 'step' }}">
                         <div class="icon">
@@ -327,12 +331,12 @@ use App\Enums\RefundStatus;
                                     d="M3.26028 9.79592C2.82595 9.79592 2.39162 9.79373 1.95749 9.7976C1.86165 9.79845 1.82754 9.77957 1.82813 9.69111C1.83205 8.94432 1.83146 8.1977 1.82892 7.45092C1.82872 7.37694 1.84812 7.3483 1.94259 7.34864C2.81439 7.35167 3.68638 7.35167 4.55817 7.34864C4.65499 7.3483 4.67812 7.37593 4.67773 7.45496C4.67479 8.19888 4.67596 8.94281 4.67596 9.68673C4.67596 9.79558 4.67557 9.79575 4.54366 9.79592C4.116 9.79592 3.68814 9.79592 3.26048 9.79592H3.26028ZM3.26028 7.84015C3.00254 7.84015 2.74461 7.84116 2.48688 7.83931C2.42514 7.8388 2.3977 7.85531 2.39927 7.91126C2.4024 8.02617 2.40221 8.14126 2.39927 8.25634C2.39789 8.31178 2.42416 8.32913 2.48648 8.32896C2.99549 8.32762 3.50469 8.32728 4.01369 8.3293C4.08895 8.32964 4.10914 8.30386 4.10718 8.24421C4.10346 8.13772 4.10228 8.03089 4.10757 7.9244C4.1109 7.85632 4.07935 7.83796 4.00448 7.8388C3.75654 7.84183 3.50841 7.83998 3.26048 7.83998L3.26028 7.84015ZM3.2497 9.30643C3.50429 9.30643 3.75889 9.30525 4.0133 9.30727C4.07856 9.30778 4.10894 9.29126 4.10679 9.23094C4.10306 9.11889 4.10306 9.0065 4.10679 8.89428C4.10875 8.83463 4.08033 8.81711 4.01408 8.81728C3.50508 8.81879 2.99588 8.81896 2.48688 8.81728C2.41573 8.81694 2.39731 8.84204 2.39887 8.89765C2.40201 9.00701 2.40299 9.11653 2.39868 9.22589C2.39613 9.28907 2.42435 9.30845 2.4957 9.30778C2.74696 9.30508 2.99823 9.30677 3.2495 9.30677L3.2497 9.30643Z"
                                     fill="#292929" />
                             </svg>
-    
+
                         </div>
                         <h3 class="mb-0">{{ trans('rest.order_status.delivered') }}</h3>
                     </div>
-                @else 
-    
+                @else
+
                     <div class="{{ $order->order_status >= OrderStatus::ReadyForPickup ? 'step active' : 'step' }}">
                         <div class="icon">
                             <svg width="21" height="16" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -385,17 +389,17 @@ use App\Enums\RefundStatus;
                                     d="M3.26028 9.79592C2.82595 9.79592 2.39162 9.79373 1.95749 9.7976C1.86165 9.79845 1.82754 9.77957 1.82813 9.69111C1.83205 8.94432 1.83146 8.1977 1.82892 7.45092C1.82872 7.37694 1.84812 7.3483 1.94259 7.34864C2.81439 7.35167 3.68638 7.35167 4.55817 7.34864C4.65499 7.3483 4.67812 7.37593 4.67773 7.45496C4.67479 8.19888 4.67596 8.94281 4.67596 9.68673C4.67596 9.79558 4.67557 9.79575 4.54366 9.79592C4.116 9.79592 3.68814 9.79592 3.26048 9.79592H3.26028ZM3.26028 7.84015C3.00254 7.84015 2.74461 7.84116 2.48688 7.83931C2.42514 7.8388 2.3977 7.85531 2.39927 7.91126C2.4024 8.02617 2.40221 8.14126 2.39927 8.25634C2.39789 8.31178 2.42416 8.32913 2.48648 8.32896C2.99549 8.32762 3.50469 8.32728 4.01369 8.3293C4.08895 8.32964 4.10914 8.30386 4.10718 8.24421C4.10346 8.13772 4.10228 8.03089 4.10757 7.9244C4.1109 7.85632 4.07935 7.83796 4.00448 7.8388C3.75654 7.84183 3.50841 7.83998 3.26048 7.83998L3.26028 7.84015ZM3.2497 9.30643C3.50429 9.30643 3.75889 9.30525 4.0133 9.30727C4.07856 9.30778 4.10894 9.29126 4.10679 9.23094C4.10306 9.11889 4.10306 9.0065 4.10679 8.89428C4.10875 8.83463 4.08033 8.81711 4.01408 8.81728C3.50508 8.81879 2.99588 8.81896 2.48688 8.81728C2.41573 8.81694 2.39731 8.84204 2.39887 8.89765C2.40201 9.00701 2.40299 9.11653 2.39868 9.22589C2.39613 9.28907 2.42435 9.30845 2.4957 9.30778C2.74696 9.30508 2.99823 9.30677 3.2495 9.30677L3.2497 9.30643Z"
                                     fill="#292929" />
                             </svg>
-    
+
                         </div>
                         <h3 class="mb-0">{{ trans('rest.order_status.delivered') }}</h3>
                     </div>
-    
+
                 @endif
-    
+
             </div>
 
             @if ($order->order_type == '1')
-            <a href="{{ route('user.order-location', ['order_id' => $order->id]) }}"  class="track-order-btn">
+            <a href="{{ route('user.order-location-new', ['order_id' => $order->id]) }}"  class="track-order-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 32" fill="#292929" class="svg inlined-svg"
                     height="20" width="20" role="img" aria-labelledby="_edjx9teli">
                     <title id="_edjx9teli"></title>
@@ -519,7 +523,7 @@ use App\Enums\RefundStatus;
         <div class="ordersdetails-title me-auto">{{ trans('user.my_orders.order_details') }}</div>
         <div class="btn-grp d-flex flex-wrap">
             @if ($order->order_type == '1')
-                <button onclick="location.href='{{ route('user.order-location', ['order_id' => $order->id]) }}'">
+                <button onclick="location.href='{{ route('user.order-location-new', ['order_id' => $order->id]) }}'">
                     <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt=""
                         width="35" height="32">
                     {{ trans('user.my_orders.track_order') }}
@@ -582,7 +586,7 @@ use App\Enums\RefundStatus;
                             alt="" width="12" height="16">
                         <?php
                         $address = $order->orderUserDetails;
-                        
+
                         echo $address->house_no . ', ' . $address->street_name . ', ' . $address->city . ', ' . $address->zipcode;
                         ?>
                     </div>
@@ -623,7 +627,8 @@ use App\Enums\RefundStatus;
                             <div class="text-grp ps-3">
                                 <div class="title">{{ $dish->dish->name }}</div>
                                 <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id }}">
-                                    <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>
+                                    <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                    <br>
                                     {{ getOrderDishIngredients($dish) }}
                                 </div>
                                 @if (count($dish->orderDishPaidIngredients) > 3)
@@ -652,7 +657,7 @@ use App\Enums\RefundStatus;
                 @endif --}}
                     <div class="orderdetails-desc-price">
                         <?php
-                        
+
                         $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total;
                         $itemTotalPrice += $itemPrice;
                         ?>

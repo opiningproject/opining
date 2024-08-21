@@ -2,6 +2,9 @@
 
 use App\Models\Address;
 use App\Models\Dish;
+use App\Models\DishCategoryOption;
+use App\Models\DishOption;
+use App\Models\DishOptionCategory;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\RestaurantOperatingHour;
@@ -482,10 +485,11 @@ if (!function_exists('getOpenOrders')) {
 
 if (!function_exists('validateAddressByPostCode')) {
     function validateAddressByPostCode ($data) {
+
         $curl = curl_init();
         $postCodeApiKey = config('params.postCodeApiKey');
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.postcodeapi.nu/v3/lookup/' . $data['zipcode'] . '/'. $data['house_no'],
+            CURLOPT_URL => 'https://api.postcodeapi.nu/v3/lookup/' . $data['zipcode'] . '/'. (int)$data['house_no'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -499,11 +503,70 @@ if (!function_exists('validateAddressByPostCode')) {
         ));
 
         $response = curl_exec($curl);
+//        dd($response);
         $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
         if ($httpcode == 400 || $httpcode == 404) {
             return null;
         }
         return $response;
+    }
+}
+
+if (!function_exists('getDishOptionCategory')) {
+    function getDishOptionCategory($dishId)
+    {
+        $dishOptionCategoryData = [];
+        $getDishOptionCategory = DishOption::with('dishCategoryOption')->where('dish_id', $dishId)->get();
+        $optionIds = $getDishOptionCategory->pluck('id');
+        if (count($getDishOptionCategory) > 0) {
+            $catId = $getDishOptionCategory->pluck('dishCategoryOption.cat_id');
+            $dishCategoryOptionsId = $getDishOptionCategory->pluck('dish_category_options_id');
+            $dishOptionCategoryData = DishOptionCategory::whereIn('id', $catId)
+                ->with(['dishCategoryOption' => function ($query) use ($dishCategoryOptionsId) {
+                    $query->whereIn('id', $dishCategoryOptionsId);
+                }])->get();
+        }
+
+        return $dishOptionCategoryData;
+    }
+}
+
+if (!function_exists('getDishOptionCategoryName')) {
+    function getDishOptionCategoryName($optionIds)
+    {
+        $optionName ='';
+        $option = DishCategoryOption::whereIn('id',$optionIds)->get();
+        if(count($option) > 0) {
+            $optionName = $option->pluck('name')->implode(', ');
+        }
+        return $optionName;
+    }
+}
+if (!function_exists('orderDishOptionDetails')) {
+    function orderDishOptionDetails($optionIds)
+    {
+        $optionName ='';
+        $option = DishCategoryOption::whereIn('id',$optionIds)->get();
+        if(count($option) > 0) {
+            $optionName = $option->pluck('name')->implode(', ');
+        }
+        return $optionName;
+    }
+}
+// Order Dish Ingredients calculation
+if (!function_exists('getOrderDishIngredientsTotal')) {
+    function getOrderDishIngredientsTotal($dish)
+    {
+        $ingredients = '';
+        $dishData = Dish::withTrashed()->find($dish->dish_id);
+        $ingredientTotalAmount = 0;
+        if (count($dish->orderDishPaidIngredients)>0) {
+            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
+                $price = $ingredient->quantity * $ingredient->price;
+                $ingredientTotalAmount = $ingredientTotalAmount += $price;
+            }
+        }
+        return $ingredientTotalAmount;
     }
 }

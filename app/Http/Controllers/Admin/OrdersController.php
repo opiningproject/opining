@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dish;
 use App\Models\Order;
+use App\Models\TrackOrder;
 use App\Models\User;
 use App\Notifications\Admin\DeliveryTypeUpdate;
 use Exception;
@@ -110,9 +111,16 @@ class OrdersController extends Controller
                 $orderStatus = OrderStatus::Delivered;
             }
         }
-
+        if ($order->order_type == "1") {
+            $addTrackOrder = TrackOrder::create([
+                'order_id' => $order->id,
+                'order_status' => $order->order_status
+            ]);
+        }
+        $orderData = Order::find($request->id);
+        $trackOrderData = TrackOrder::where('order_id', $orderData->id)->where('order_status', $orderData->order_status)->first();
         $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
-        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'clok_gray_svg' => $clok_gray_svg]);
+        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData->created_at, 'updatedStatus' =>  $orderData->order_status, 'clok_gray_svg' => $clok_gray_svg]);
     }
 
     public function sendMail($order)

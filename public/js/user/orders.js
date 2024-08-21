@@ -114,31 +114,27 @@ function loadMoreData(currentPage) {
 
 function checkScreenSize1() {
     if ($(window).width() <= 767) {
-        //mobile screen
-        $('.order-success-note-mobile').addClass('d-none');
-        $('.orderAcceptedModal').css({
-            'display': 'block',
-            'opacity': '1'
-        });
-    } else {
         $('.orderAcceptedModal').css({
             'display': 'none',
             'opacity': '0',
             'backdrop': 'static',
         });
-        $('#orderAcceptedModal').modal({
-            backdrop: 'static',  // Prevents closing when clicking outside the modal
-            keyboard: true       // Allows closing with the Esc key
+        $('.main-content').css({
+            'height': '534px',
         });
+
         $('.order-success-note-mobile').removeClass('d-none');
+        //mobile screen
+        console.log("if")
+    } else {
+        $('.order-success-note-mobile').addClass('d-none');
+        $('.orderAcceptedModal').css({
+            'display': 'block',
+            'opacity': '1'
+        });
     }
 }
-$(document).ready(function() {
-    $('.orderAcceptedModal').modal({
-        backdrop: 'static',
-        keyboard: true // Optional: prevents closing with the Esc key
-    });
-});
+
 checkScreenSize1()
 $(window).on('resize', checkScreenSize1);
 

@@ -287,13 +287,17 @@ class CartController extends Controller
 
             $user_id = $user->id;
             $order = $user->cart;
-
+            $order_type = session('zipcode') == null ?  '2' : '1';
             if (empty($order)) {
                 $order = $user->cart()->create([
                     'is_cart' => 1,
-                    'order_type' => session('zipcode') ? '1' : '2'
+                    'order_type' => $order_type
                 ]);
+            } else {
+                $order->order_type = $order_type;
+                $order->save();
             }
+
             $order->fresh();
             $dish = Dish::find($id);
 
@@ -613,7 +617,11 @@ class CartController extends Controller
                             return response::json(['status' => 406, 'message' => trans('user.message.invalid_zipcode')]);
                         }
                     } else {
+                        if ($user->cart->order_type == OrderType::Delivery ) {
                         return response::json(['status' => 412, 'message' => trans('user.message.valid_address')]);
+                        } else {
+                            return response::json(['status' => 200, 'message' => '']);
+                        }
                     }
                 } else {
                     return response::json(['status' => 200, 'message' => '']);

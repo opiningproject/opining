@@ -111,10 +111,12 @@ use App\Enums\RefundStatus;
                             <div class="number">{{ $dish->qty }}</div>
                             <div class="details">
                                 <h4>{{ $dish->dish->name }}</h4>
-                                <b class="mb-0 item-options" style="font-size: 10px !important;">
-                                    {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
-                                </b>
-                                <br>
+                                @if(count($dish->orderDishOptionDetails) > 0)
+                                    <b class="mb-0 item-options" style="font-size: 10px !important;">
+                                        {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
+                                    </b>
+                                    <br>
+                                @endif
                                 @php
                                     $htmlString = getOrderDishIngredients1($dish);
                                     $cleanedHtmlString = str_replace('"','',$htmlString);
@@ -627,8 +629,10 @@ use App\Enums\RefundStatus;
                             <div class="text-grp ps-3">
                                 <div class="title">{{ $dish->dish->name }}</div>
                                 <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id }}">
-                                    <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
-                                    <br>
+                                    @if(count($dish->orderDishOptionDetails) > 0)
+                                        <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                        <br>
+                                    @endif
                                     {{ getOrderDishIngredients($dish) }}
                                 </div>
                                 @if (count($dish->orderDishPaidIngredients) > 3)

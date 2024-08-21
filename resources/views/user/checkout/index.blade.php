@@ -688,10 +688,12 @@ if($user->cart && $user->cart->order_type == 2) {
 {{--                                                                                                    class="mb-0 item-options mb-0 {{ !empty($dishDetails->dishOption->name) ? '' : 'd-none' }}">--}}
 {{--                                                                                                    {{ $dishDetails->dishOption->name ?? '' }}--}}
 {{--                                                                                                </p>--}}
-                                                                                                <p
-                                                                                                    class="mb-0 item-options mb-0 ">
-                                                                                                    {{ getDishOptionCategoryName($dishDetails->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
-                                                                                                </p>
+                                                                                                @if(count($dishDetails->orderDishOptionDetails) > 0)
+                                                                                                    <p class="mb-0 item-options mb-0 ">
+                                                                                                        {{ getDishOptionCategoryName($dishDetails->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
+                                                                                                    </p>
+                                                                                                    <br>
+                                                                                                @endif
                                                                                                 @php
                                                                                                     $htmlString = getOrderDishIngredients1(
                                                                                                         $dishDetails,

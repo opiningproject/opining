@@ -226,10 +226,12 @@ $userDetails = $order->orderUserDetails;
                     <div class="text-grp orderRead-more">
                         <div class="title"><span>{{ $dish->qty }}x</span> {{ $dish->dish->name }}</div>
                         <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
-                            <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
-                            <br>
+
+                            @if(count($dish->orderDishOptionDetails) > 0)
+                                <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                <br>
+                            @endif
                             {{-- old code comment 13-08-2024 --}}
-                            {{-- <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? ''}} </b>--}}
                             {{ getOrderDishIngredients($dish) }}
                         </div>
                         @if(count($dish->orderDishPaidIngredients) > 3)

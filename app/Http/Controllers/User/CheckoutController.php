@@ -278,7 +278,7 @@ class CheckoutController extends Controller
                     //Notification New Order
                     $order = Order::find($orderId);
 
-                    $this->twilioClient->messages->create('+91'.$request->phone_no,
+                    $this->twilioClient->messages->create(config('params.country_code').$request->phone_no,
                         ['from' => $this->twilioNumber, 'body' => $textBody] );
 
                     $user->notify(new OrderAccepted($order));
@@ -367,7 +367,7 @@ class CheckoutController extends Controller
 
                 $order = Order::find($orderId);
 
-                $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                $this->twilioClient->messages->create(config('params.country_code').$order->orderUserDetails->order_contact_number,
                     ['from' => $this->twilioNumber, 'body' => $textBody] );
 
                 $user->notify(new OrderAccepted($order));
@@ -462,7 +462,7 @@ class CheckoutController extends Controller
 
                         $order = Order::find($orderId);
 
-                        $this->twilioClient->messages->create('+91'.$order->orderUserDetails->order_contact_number,
+                        $this->twilioClient->messages->create(config('params.country_code').$order->orderUserDetails->order_contact_number,
                             ['from' => $this->twilioNumber, 'body' => $textBody]);
 
                         $user->notify(new OrderAccepted($order));

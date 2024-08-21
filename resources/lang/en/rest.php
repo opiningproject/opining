@@ -38,6 +38,7 @@ return [
 		'popular_week' => 'Popular This Week',
 		'best_seller' => 'Best Seller',
 		'sold_dishes' => 'Sold :sold_qty dishes',
+		'dish_options' => 'Add Option Category',
 		'category' => [
 			'add' => 'Add Category',
 			'edit' => 'Edit Category',
@@ -95,6 +96,23 @@ return [
 			'click_to_update' => 'Click to update',
 			'free' => '(Free)',
 			'more' => '(More)'
+		],
+        'dish_option' => [
+			'title' => 'Dish Options',
+			'add_option' => 'Add New Dish Option',
+			'add_option_category' => 'Add Dish Option Category',
+			'name' => 'Name',
+			'image' => 'Image',
+			'dish_option_name' => 'Dish Option Name',
+			'dish_option_category' => 'Dish Option Category',
+			'dish_option_dish' => 'Add For Dish Option dish',
+			'dish_option_categories' => 'Dish Option Category',
+			'item_image' => 'Upload Image of Item',
+			'select_category' => 'Select Category',
+			'click_to_update' => 'Click to update',
+			'free' => '(Free)',
+			'more' => '(More)',
+            'individual_dish' => 'Add For Individual dish',
 		]
 	],
 
@@ -327,6 +345,12 @@ return [
 		'category_delete_success' => 'Category Deleted Successfully',
 		'category_add_success' => 'Category Added Successfully',
 		'category_update_success' => 'Category Updated Successfully',
+
+		'dish_category_add_success' => 'Dish Option Category Added Successfully',
+		'dish_category_update_success' => 'Dish Option Category Updated Successfully',
+        'dish_category_delete_success' => 'Dish Option Deleted Successfully',
+        'dish_category_updated_success' => 'Dish Option Updated Successfully',
+        'dish_category_status_success' => 'Dish Option Status Updated Successfully',
 
 		'coupon_delete_success' => 'Coupon Deleted Successfully',
 		'coupon_add_success' => 'Coupon Added Successfully',

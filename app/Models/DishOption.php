@@ -10,20 +10,23 @@ class DishOption extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['dish_id','option_en','option_nl'];
+    protected $fillable = ['dish_id','dish_category_options_id'];
     protected $dates = ['created_at', 'updated_at'];
     public $timestamps = true;
 
-    protected $appends = [
-        'name',
-    ];
+//    protected $appends = [
+//        'name',
+//    ];
 
     public function dish(){
         return $this->belongsTo(Dish::class,'dish_id','id');
     }
 
-    public function getNameAttribute()
+//    public function dishCategoryOption(){
+//        return $this->hasMany(DishCategoryOption::class,'id','dish_category_options_id')->withTrashed();
+//    }
+    public function dishCategoryOption()
     {
-        return $this->attributes['option_' . app()->getlocale()];
+        return $this->belongsTo(DishCategoryOption::class, 'dish_category_options_id');
     }
 }

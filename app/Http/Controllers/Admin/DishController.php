@@ -100,7 +100,7 @@ class DishController extends Controller
     {
         $ingredientCategories = IngredientCategory::all();
         $categories = Category::all();
-        $dish = Dish::with('category', 'option', 'freeIngredients.ingredient.category', 'paidIngredients.ingredient.category')->find($id);
+        $dish = Dish::with('category', 'freeIngredients.ingredient.category', 'paidIngredients.ingredient.category')->find($id);
         return view('admin.dish.edit', ['dish' => $dish, 'categories' => $categories, 'ingredientCategories' => $ingredientCategories]);
     }
 

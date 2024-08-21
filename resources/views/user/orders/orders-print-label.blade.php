@@ -165,7 +165,9 @@
                 <p>{{$dish->qty }}x</p>
                 <p>{{ $dish->dish->name }}
                     <br>
-                   <span>{!! getOrderDishIngredients2($dish) !!}</span>
+                    <span>{{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}</span>
+                   <br>
+                    <span>{!! getOrderDishIngredients2($dish) !!}</span>
                     <span><u>{{ $dish->notes }}</u></span>
                 </p>
                 <p>€{{ $itemPrice }}</p>

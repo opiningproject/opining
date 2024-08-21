@@ -58,7 +58,11 @@ class Dish extends Model
 
     }
 
-    public function option()
+//    public function option()
+//    {
+//        return $this->hasMany(DishOption::class, 'dish_id', 'id')->withTrashed();
+//    }
+    public function dishOption()
     {
         return $this->hasMany(DishOption::class, 'dish_id', 'id')->withTrashed();
     }

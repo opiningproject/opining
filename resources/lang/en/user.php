@@ -172,8 +172,9 @@ return [
 		'call_us' => 'Call Us',
 		'chat_with_us' => 'Chat with us',
 		'chat' => 'Chat',
-
-
+		'order_accepted' => 'Your order has been accepted',
+		'details_on_my_orders_page' => 'You can see your order details on my orders page',
+		'back_to_home' => 'Back to Home',
 	],
 
 	'chat' => [

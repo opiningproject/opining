@@ -173,20 +173,17 @@ class DishController extends Controller
         if (count($dishOptionCategoryData) > 0) {
             foreach($dishOptionCategoryData as $key => $value) {
                     $html_options .= "<div class='row justify-content-center'>
-                        <div class='col-xl-5'>
+                        <div class='col-xl-6'>
                           <div class='form-group mb-3'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
                                 <select name='dish_option' class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100 dish-option-select' id='dish-option$dish->id'>
                                 <option disabled selected value=''>".trans('modal.dish.select_category',['category' => $value->name])."</option>";
                                                 foreach ($value->dishCategoryOption as $optionKey => $option) {
-//                                                    dump($selectedOption, $option);
                                                     $selected = '';
                                                     if ($selectedOption != '') {
-//                                                        $selected = $selectedOption == $option->id ? 'selected' : '';
                                                         $selected = in_array($option->id, $selectedOption->toArray()) ? 'selected' : '';
                                                     }
-//                                                    dump($selected);
                                                     $html_options .= "<option value='$option->id' $selected >$option->name</option>";
                                                 }
                                     $html_options .= "</select>
@@ -264,7 +261,6 @@ class DishController extends Controller
                     $ingredient_name = $ingredient->name;
                     $ingredient_image = $ingredient->image;
                     $ingredient_price = $ingredient->paidDishIngredientWise->price;
-//                    dd($ingredient_name);
                     $ingredient_id = $ingredient->paidDishIngredientWise->id;
                     if (array_key_exists($ingredient_id, $paidSelectedIngredients)) {
                         $paidQty = $paidSelectedIngredients[$ingredient_id];

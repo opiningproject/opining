@@ -554,3 +554,19 @@ if (!function_exists('orderDishOptionDetails')) {
         return $optionName;
     }
 }
+// Order Dish Ingredients calculation
+if (!function_exists('getOrderDishIngredientsTotal')) {
+    function getOrderDishIngredientsTotal($dish)
+    {
+        $ingredients = '';
+        $dishData = Dish::withTrashed()->find($dish->dish_id);
+        $ingredientTotalAmount = 0;
+        if (count($dish->orderDishPaidIngredients)>0) {
+            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
+                $price = $ingredient->quantity * $ingredient->price;
+                $ingredientTotalAmount = $ingredientTotalAmount += $price;
+            }
+        }
+        return $ingredientTotalAmount;
+    }
+}

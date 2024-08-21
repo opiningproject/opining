@@ -22,7 +22,7 @@ function orderDetail(id)
 }
 
 $(function () {
-    
+
     $("#refund-form").validate({
         //debug:true,
         submitHandler: function (form) {
@@ -109,6 +109,38 @@ function loadMoreData(currentPage) {
             isLoading = false; // Reset loading state even if the request fails
         });
 }
+
+
+
+function checkScreenSize1() {
+    if ($(window).width() <= 767) {
+        //mobile screen
+        $('.order-success-note-mobile').addClass('d-none');
+        $('.orderAcceptedModal').css({
+            'display': 'block',
+            'opacity': '1'
+        });
+    } else {
+        $('.orderAcceptedModal').css({
+            'display': 'none',
+            'opacity': '0',
+            'backdrop': 'static',
+        });
+        $('#orderAcceptedModal').modal({
+            backdrop: 'static',  // Prevents closing when clicking outside the modal
+            keyboard: true       // Allows closing with the Esc key
+        });
+        $('.order-success-note-mobile').removeClass('d-none');
+    }
+}
+$(document).ready(function() {
+    $('.orderAcceptedModal').modal({
+        backdrop: 'static',
+        keyboard: true // Optional: prevents closing with the Esc key
+    });
+});
+checkScreenSize1()
+$(window).on('resize', checkScreenSize1);
 
 
 

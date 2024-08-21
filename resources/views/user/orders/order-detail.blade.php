@@ -111,6 +111,10 @@ use App\Enums\RefundStatus;
                             <div class="number">{{ $dish->qty }}</div>
                             <div class="details">
                                 <h4>{{ $dish->dish->name }}</h4>
+                                <b class="mb-0 item-options" style="font-size: 10px !important;">
+                                    {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
+                                </b>
+                                <br>
                                 @php
                                     $htmlString = getOrderDishIngredients1($dish);
                                     $cleanedHtmlString = str_replace('"','',$htmlString);
@@ -395,7 +399,7 @@ use App\Enums\RefundStatus;
             </div>
 
             @if ($order->order_type == '1')
-            <a href="{{ route('user.order-location', ['order_id' => $order->id]) }}"  class="track-order-btn">
+            <a href="{{ route('user.order-location-new', ['order_id' => $order->id]) }}"  class="track-order-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 32" fill="#292929" class="svg inlined-svg"
                     height="20" width="20" role="img" aria-labelledby="_edjx9teli">
                     <title id="_edjx9teli"></title>
@@ -519,7 +523,7 @@ use App\Enums\RefundStatus;
         <div class="ordersdetails-title me-auto">{{ trans('user.my_orders.order_details') }}</div>
         <div class="btn-grp d-flex flex-wrap">
             @if ($order->order_type == '1')
-                <button onclick="location.href='{{ route('user.order-location', ['order_id' => $order->id]) }}'">
+                <button onclick="location.href='{{ route('user.order-location-new', ['order_id' => $order->id]) }}'">
                     <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt=""
                         width="35" height="32">
                     {{ trans('user.my_orders.track_order') }}
@@ -624,6 +628,7 @@ use App\Enums\RefundStatus;
                                 <div class="title">{{ $dish->dish->name }}</div>
                                 <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id }}">
                                     <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                    <br>
                                     {{ getOrderDishIngredients($dish) }}
                                 </div>
                                 @if (count($dish->orderDishPaidIngredients) > 3)

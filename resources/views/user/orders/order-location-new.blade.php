@@ -1,5 +1,15 @@
 @extends('layouts.user-app')
 @section('content')
+    @php
+    $orderId = $trackOrder->first()->order_id;
+    $accepted_status_date = $trackOrder->where('order_status',"1")->first()->created_at ?? null;
+    $in_kitchen_status_date = $trackOrder->where('order_status',"2")->first()->created_at ?? null;
+    $ready_status_date = $trackOrder->where('order_status',"3")->first()->created_at ?? null;
+    $out_for_delivery_status_date = $trackOrder->where('order_status',"5")->first()->created_at ?? null;
+    $delivered_status_date = $trackOrder->where('order_status',"6")->first()->created_at ?? null;
+    @endphp
+
+
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
@@ -31,7 +41,7 @@
                                 <div class="trackOrderBox">
                                     <div class="order-progress bg-theme-box">
                                         <div class="progress-steps">
-                                            <div class="step active">
+                                            <div class="step {{ in_array('1',$trackOrder->pluck('order_status')->toArray()) ?'active' :'' }}" id="accept_status_{{ $orderId }}">
                                                 <div class="icon">
                                                     <svg width="14" height="13" viewBox="0 0 14 13" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -61,12 +71,11 @@
                                                 </div>
                                                 <h3 class="mb-0">Order Accepted</h3>
 
-                                                <h4 class="date mb-0 ms-auto">7 June 20:45</h4>
+                                                <h4 class="date mb-0 ms-auto" id="accept_status_date_{{ $orderId }}">{{ $accepted_status_date ? $accepted_status_date : '-' }}</h4>
                                             </div>
 
-                                            <div class="step active">
+                                            <div class="step {{ in_array('2',$trackOrder->pluck('order_status')->toArray()) ?'active' :'' }}" id="in_kitchen_status_{{ $orderId }}">
                                                 <div class="icon">
-
                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_5775_2463)">
@@ -107,10 +116,10 @@
                                                 </div>
                                                 <h3 class="mb-0">In kitchen</h3>
 
-                                                <h4 class="date mb-0 ms-auto">7 June 20:45</h4>
+                                                <h4 class="date mb-0 ms-auto" id="in_kitchen_status_date_{{ $orderId }}">{{ $in_kitchen_status_date ? $in_kitchen_status_date : '-' }}</h4>
                                             </div>
 
-                                            <div class="step">
+                                            <div class="step {{ in_array('3',$trackOrder->pluck('order_status')->toArray()) ?'active' :'' }}" id="ready_status_{{ $orderId }}">
                                                 <div class="icon">
                                                     <svg width="21" height="16" viewBox="0 0 15 19" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -158,10 +167,10 @@
                                                 </div>
                                                 <h3 class="mb-0">Ready</h3>
 
-                                                <h4 class="date mb-0 ms-auto">7 June 20:45</h4>
+                                                <h4 class="date mb-0 ms-auto" id="ready_status_date_{{ $orderId }}">{{ $ready_status_date ? $ready_status_date : '-' }}</h4>
                                             </div>
 
-                                            <div class="step">
+                                            <div class="step {{ in_array('5',$trackOrder->pluck('order_status')->toArray()) ?'active' :'' }}" id="out_for_delivery_status_{{ $orderId }}">
                                                 <div class="icon">
                                                     <svg width="21" height="16" viewBox="0 0 21 16" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -180,9 +189,9 @@
                                                     </svg>
                                                 </div>
                                                 <h3 class="mb-0">Out For Delivery</h3>
-                                                <h4 class="date mb-0 ms-auto">-</h4>
+                                                <h4 class="date mb-0 ms-auto" id="out_for_delivery_status_date_{{ $orderId }}">{{ $out_for_delivery_status_date ? $out_for_delivery_status_date : '-' }}</h4>
                                             </div>
-                                            <div class="step">
+                                            <div class="step {{ in_array('6',$trackOrder->pluck('order_status')->toArray()) ?'active' :'' }}" id="delivered_status_{{ $orderId }}">
                                                 <div class="icon">
                                                     <svg width="14" height="13" viewBox="0 0 14 13"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -211,7 +220,7 @@
 
                                                 </div>
                                                 <h3 class="mb-0">Delivered</h3>
-                                                <h4 class="date mb-0 ms-auto">-</h4>
+                                                <h4 class="date mb-0 ms-auto" id="delivered_status_date_{{ $orderId }}">{{ $delivered_status_date ? $delivered_status_date : '-' }}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -231,22 +240,26 @@
                                                     </span>
                                                     <div class="details">
                                                         <h4 class="mb-1">Restaurant adress</h4>
-                                                        <p class="mb-0">Zaagmolenstraat 18</p>
+                                                        <p class="mb-0">{{ getRestaurantDetail()->rest_address }}</p>
                                                     </div>
                                                 </div>
 
                                                 <div class="circle"></div>
                                             </div>
 
-                                            <div class="address-row">
+                                            <div class="address-row {{ $delivered_status_date ?'active' :''}}" id="delivered_order_{{$orderId}}"}}>
                                                 <div class="addess-list">
                                                     <span class="ico">
                                                         <img src="{{ asset('images/flag-icon.svg') }}" alt=""
                                                             height="19" width="19" />
                                                     </span>
+                                                    @php
+                                                        $userDetails = $order->order->orderUserDetails;
+                                                    @endphp
                                                     <div class="details">
                                                         <h4 class="mb-1">Delivery Address</h4>
-                                                        <p class="mb-0">Tochtstraat 40</p>
+                                                       <p class="mb-0">{{ $userDetails->house_no }} {{ $userDetails->street_name}}</p>
+                                                        <p class="mb-0">{{ $userDetails->city }} - {{$userDetails->zipcode}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="circle"></div>
@@ -258,7 +271,7 @@
                             </div>
                         </div>
                         </div>
-                       
+
 
                     </div>
                 </main>
@@ -273,67 +286,34 @@
 @endsection
 
 @section('script')
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw"></script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+            integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous">
+    </script>
     <script>
-        var order_type = "<?= $order->order->order_type ?>";
-        var latitude = "<?= $order->latitude == null ? getRestaurantDetail()->latitude : $order->latitude ?>";
-        var logitude = "<?= $order->longitude == null ? getRestaurantDetail()->longitude : $order->longitude ?>";
-
-        var rest_latitude = "<?= getRestaurantDetail()->latitude ?>";
-        var rest_logitude = "<?= getRestaurantDetail()->longitude ?>";
-
-        if (order_type == 1) {
-            var MapPoints = '[{"lat":' + latitude + ',"lng":' + logitude + '},{"lat":' + rest_latitude + ',"lng":' +
-                rest_logitude + '}]';
-        } else {
-            var MapPoints = '[{"lat":' + rest_latitude + ',"lng":' + rest_logitude + '}]';
-        }
-
-        var MY_MAPTYPE_ID = 'custom_style';
-
-        function initialize() {
-            if (jQuery('#map').length > 0) {
-                var locations = jQuery.parseJSON(MapPoints);
-
-                window.map = new google.maps.Map(document.getElementById('map'), {
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    scrollwheel: false
-                });
-
-                var infowindow = new google.maps.InfoWindow();
-                var flightPlanCoordinates = [];
-                var bounds = new google.maps.LatLngBounds();
-
-                for (i = 0; i < locations.length; i++) {
-                    marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-                        map: map
-                    });
-                    flightPlanCoordinates.push(marker.getPosition());
-                    bounds.extend(marker.position);
-
-                    /*display marker tag name
-                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                      infowindow.setContent("point"+[i]);
-                      infowindow.open(map, marker);
-                    }
-                    })(marker, i));*/
-                }
-
-                map.fitBounds(bounds);
-
-                var flightPath = new google.maps.Polyline({
-                    map: map,
-                    path: flightPlanCoordinates,
-                    strokeColor: "#FF0000",
-                    strokeOpacity: 1.0,
-                    strokeWeight: 2
-                });
-
+        var sockets = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+        sockets.on('trackUserOrder', (orderId, updatedStatus, orderDate) => {
+            console.log("trackUserOrdertrackUserOrder")
+            if (updatedStatus == "1") {
+                $('#accept_status_' + orderId).addClass('active')
+                $('#accept_status_date_' + orderId).html(orderDate)
             }
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
+            if (updatedStatus == "2") {
+                $('#in_kitchen_status_' + orderId).addClass('active')
+                $('#in_kitchen_status_date_' + orderId).html(orderDate)
+            }
+            if (updatedStatus == "3") {
+                $('#ready_status_' + orderId).addClass('active')
+                $('#ready_status_date_' + orderId).html(orderDate)
+            }
+            if (updatedStatus == "5") {
+                $('#out_for_delivery_status_' + orderId).addClass('active')
+                $('#out_for_delivery_status_date_' + orderId).html(orderDate)
+            }
+            if (updatedStatus == "6") {
+                $('#delivered_status_' + orderId).addClass('active')
+                $('#delivered_status_date_' + orderId).html(orderDate)
+                $('#delivered_order_' + orderId).addClass('active')
+            }
+        });
     </script>
 @endsection

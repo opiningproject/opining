@@ -90,8 +90,10 @@ io.on("connection", function (socket) {
     socket.on('sendOrderNotification', () => {
         console.log("sendOrderNotification");
         io.emit('sendNotificationToAdmin');
-        // debugger
+    });
 
+    socket.on('orderTrackAdmin', (orderId, updatedStatus, orderDate) => {
+        io.emit('trackUserOrder', orderId, updatedStatus, orderDate);
     });
 
     // Listen for disconnection

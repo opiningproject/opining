@@ -17,6 +17,12 @@
                 @include('layouts.user.side_nav_bar')
                 <main class="bd-main order-1">
                     <div class="main-content">
+                        @php
+                            $isNew = request()->query('order');
+                        @endphp
+                        @if($isNew == 'is_new')
+                            @include('user.orders.accept-order')
+                        @else
                         <div class="position-relative">
                             <div
                                 class="section-page-title main-page-title row justify-content-between d-sm-block title-mobile">
@@ -98,8 +104,16 @@
                                                 {{ trans('user.my_orders.order_details') }}</div>
                                             <div class="btn-grp d-flex flex-wrap">
                                                 @if ($order->order_type == '1')
+                                                    {{-- old code comment on 13-aug-2024 --}}
+{{--                                                    <button--}}
+{{--                                                        onclick="location.href='{{ route('user.order-location', ['order_id' => $order->id]) }}'">--}}
+{{--                                                        <img src="{{ asset('images/trackorder-icon.svg') }}"--}}
+{{--                                                            class="img-fluid svg" alt="" width="35"--}}
+{{--                                                            height="32">--}}
+{{--                                                        {{ trans('user.my_orders.track_order') }}--}}
+{{--                                                    </button>--}}
                                                     <button
-                                                        onclick="location.href='{{ route('user.order-location', ['order_id' => $order->id]) }}'">
+                                                        onclick="location.href='{{ route('user.order-location-new', ['order_id' => $order->id]) }}'">
                                                         <img src="{{ asset('images/trackorder-icon.svg') }}"
                                                             class="img-fluid svg" alt="" width="35"
                                                             height="32">
@@ -114,7 +128,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="orderdetails-main mb-3">
+                                        <div class="orderdetails-main px-0 px-md-3 mb-3">
                                             <div
                                                 class="orderdetails-maintop d-flex justify-content-between gap-2 gap-sm-3 flex-wrap align-items-center">
                                                 <div class="textgrp d-flex flex-column gap-1 gap-sm-3">
@@ -216,12 +230,16 @@
                                                                 x{{ $dish->qty }}
                                                             </div>
                                                             <div class="orderdetails-desc-card orderdetails-flex-200">
-                                                                <div class="text-grp">
+                                                                <div class="text-grp ps-3">
                                                                     <div class="title">{{ $dish->dish->name }}</div>
                                                                     <div class="text line-clamp-2"
                                                                         id="order-ingredient-{{ $dish->id }}">
-                                                                        <b class="mb-0 item-options">
-                                                                            {{ $dish->dishOption->name ?? '' }} </b>
+                                                                            {{-- old code comment on 13-08-2024 --}}
+{{--                                                                        <b class="mb-0 item-options">--}}
+{{--                                                                            {{ $dish->dishOption->name ?? '' }} </b>--}}
+{{--                                                                        {{ getOrderDishIngredients($dish) }}--}}
+                                                                        <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                                                        <br>
                                                                         {{ getOrderDishIngredients($dish) }}
                                                                     </div>
                                                                     <div
@@ -346,62 +364,12 @@
                                 @endif
                             </div>
                         </div>
-
-                         <!-- Order Accepted mobile page HTML starts -->
-                        <div class="order-success-note order-success-note-mobile text-center d-none">
-                            <div class="order-succes-box">
-                                <div class="icon mb-4">
-                                    <img src="{{ asset('images/shopping-bag.png') }}"  alt=""  />
-                                </div>
-
-                                <h1>Your order has been accepted</h1>
-                                <p>You can see your order details on my orders page</p>
-
-                                <div class="success-footer mt-5">
-                                    <a class="btn btn-custom-yellow btn-default d-block">My Order</a>
-                                    <div class="text-center mt-4">
-                                        <a href="#" class="back-link">Back to Home</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Order Accepted mobile page HTML starts -->
+                        @endif
                     </div>
                 </main>
             </div>
         </div>
 
-
-        <!-- Order Accepted modal HTML starts -->
-
-        <div class="modal fade custom-modal" id="orderAcceptedModal" tabindex="-1" aria-labelledby="orderAcceptedModal" aria-hidden="true">
-  <div class="modal-dialog custom-w-441px modal-dialog-centered">
-    <div class="modal-content">
-
-      <div class="modal-body">
-      <div class="order-success-note text-center">
-                            <div class="order-succes-box">
-                                <div class="icon mb-3">
-                                    <img src="{{ asset('images/shopping-bag.png') }}"  alt=""  />
-                                </div>
-
-                                <h1>Your order has been accepted</h1>
-                                <p>You can see your order details on my orders page</p>
-
-                                <div class="success-footer mt-5">
-                                    <a class="btn btn-custom-yellow btn-default d-block">My Order</a>
-                                    <div class="text-center mt-4">
-                                        <a href="#" class="back-link">Back to Home</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
- <!-- Order Accepted modal HTML ends -->
 
         <!-- start footer -->
         @include('layouts.user.footer_design')

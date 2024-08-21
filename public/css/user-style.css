@@ -1738,6 +1738,12 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
   row-gap: 15px;
 }
 
+.cart-sidebar .cart-items-list .cart-items-list-row .stock-card .cart-custom-w-col-detail .cart-item-detail .item-options {
+    margin-bottom: 5px !important;
+    max-width: 150px;
+    font-size: 14px;
+}
+
 .cart-section .cart-items .item-name {
   color: var(--theme-dark2);
   font-family: "Sebino-Medium", sans-serif;
@@ -4044,6 +4050,10 @@ input[type=number] {
   footer .footer-copyright-text {
     letter-spacing: initial;
 }
+
+  .favorite-item-grid .food-detail-card {
+      box-shadow: none !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -4769,7 +4779,7 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-items-list-row-n .addnote-from-group .dish-notes {border: 0px;border-bottom: 1px solid #292929 !important;border-radius: 0px !important;padding: 5px 0px;font-size: 12px !important;height: 34px;min-height: 34px !important;}
 .mobile-scrolllable-content .checkout-section .countrycode-phone-control .dropdown-toggle {border-top-left-radius: 6px !important;border-bottom-left-radius: 6px !important;}footer .m-title {font-weight: 500;margin-bottom: 15px !important;}form .form-control, form .form-select {font-family: "SebinoRegular", sans-serif;font-size: 14px;}
 .card.food-detail-card .btn-custom-yellow>svg {position: relative;top: -1px;}
-.dish-option-select{max-width: 200px !important;}
+.dish-option-select{max-width: 237px !important;}
 
 .cart-sidebar-content .cart-section .cart-items .stock-card{height: auto !important; position: relative;padding: 10px;border-radius: 8px;overflow: hidden;background: #ffffff;box-shadow: 1px 2px 10px 8px rgba(0, 0, 0, 0.08);flex: 0 0 100%;max-width: 100%;width: 100%;margin: 0px !important;margin-bottom: 20px !important;}
 
@@ -4844,7 +4854,13 @@ footer .footer-logo a {font-size: initial !important;}
   font-family: "Sebino-Medium";
 }
 
-.order-success-note .success-footer .btn{color: #ffffff !important;min-height: 60px;}
+.order-success-note .success-footer .btn{
+    color: #ffffff !important;min-height: 60px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px !important;
+}
 
 .category-list-section .food-detail-card {
 min-height: 268px;
@@ -5304,7 +5320,7 @@ footer {padding: 36px 20px 20px 20px;}
   .chat-main-screen .chatDivMobile .chatbox-footer {margin-top: auto;}
   .chat-main-screen .chatbox .chatbox-main {max-height: calc(100vh - 191px) !important;min-height: 100% !important;}
   .chat-main-screen .chatbox .chatbox-main .chats-grp {max-height: initial !important;min-height: 100% !important;padding-bottom: 170px !important;}
-  
+
   .discount-coupon-accordian .accordion-item .accordion-button {background: transparent !important;}
   .orders-details-web {display: none;}
 
@@ -5372,7 +5388,7 @@ footer {padding: 36px 20px 20px 20px;}
 
 }
 
-@media only screen and (max-device-width: 768px) and (min-device-height: 376px){ 
+@media only screen and (max-device-width: 768px) and (min-device-height: 376px){
 
   .order-success-note.order-success-note-mobile .success-footer {
     position: absolute;

@@ -112,6 +112,8 @@ class CartController extends Controller
             $optionName = getDishOptionCategoryName(request('option'));
         }
         $ingredientData = getOrderDishIngredients1($cart);
+        $ingredientTotalAmount = getOrderDishIngredientsTotal($cart);
+        $totalDishAmount = $ingredientTotalAmount + $dish->price;
         // old code comment 12-08-2024
 //        $option = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
 //        if($option) {
@@ -135,7 +137,7 @@ class CartController extends Controller
                     <p class='d-inline-block item-name mb-0 text-decoration-underline' onclick='customizeDish($dish->id, $cart->id);'>
                         $dish->name
                     </p>
-                    <span class='cart-item-price ms-auto' id='cart-item-price$cart->id'>+€$dish->price</span>
+                    <span class='cart-item-price ms-auto' id='cart-item-price$cart->id'>+€$totalDishAmount </span>
                 </div>
             </div>";
             $html .=  "<ul class='items-additional mb-2' id='item-ing-desc$cart->id'>";
@@ -153,9 +155,19 @@ class CartController extends Controller
                     </div>
                     <div class='d-flex cart-item-bt'>
                         <div class='from-group addnote-from-group mb-0'>
-                            <div class='form-group mb-0 dish-group' data-dish-id='$dish->id'>
-                                <label for='dishnameenglish' class='form-label mb-0'>Add Notes</label>
+                            <div class='form-group mb-0 dish-group' data-dish-id='$cart->id'>
+                                <label for='dishnameenglish' class='form-label mb-0 dish-notes-label'>Add Notes</label>
                                 <input type='text' data-id='$cart->id' maxlength='50' class='form-control dish-notes d-none' value='' placeholder='Type here'>
+                                <a href='#' class='note-close-btn d-none'  data-id='$cart->id'>
+                                    <svg xmlns='http://www.w3.org/2000/svg'
+                                        id='Outline'
+                                        viewBox='0 0 24 24'
+                                        width='20'
+                                        height='20'>
+                                        <path
+                                            d='M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z' />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                         <div class='foodqty mt-0'>
@@ -163,7 +175,7 @@ class CartController extends Controller
                              <i class='fas fa-minus align-middle'></i>
                             </span>
                             <input type='number' readonly class='count cart-amt' id='qty-$cart->id' name='qty-$cart->id' value=" . $cart->qty . " data-ing='$cart->paid_ingredient_total' data-id='$cart->id'>
-                            <input type='hidden' id='dish-price-$cart->id' value='$dishPrice'>
+                            <input type='hidden' id='dish-price-$cart->id' value='$totalDishAmount'>
                             <span class='plus' onclick=updateDishQty('+'," . $dish->qty . "," . $cart->id . ")>
                            <i class='fas fa-plus align-middle'></i>
                             </span>
@@ -221,7 +233,7 @@ class CartController extends Controller
         //           </div>
         //         </div>
         //         </div></div>";
-
+        $ingredientTotalAmount = 0;
         return $html;
     }
 
@@ -282,7 +294,6 @@ class CartController extends Controller
                     'order_type' => session('zipcode') ? '1' : '2'
                 ]);
             }
-//            dd($request->all());
             $order->fresh();
             $dish = Dish::find($id);
 
@@ -413,7 +424,7 @@ class CartController extends Controller
                     // old code comment on 13-08-2024
 //                    $orderDetails->dish_option_id =  $request->option ?? null;
                     $orderDetails->save();
-                if (count($request->option) > 0 ) {
+                if ($request->option && count($request->option) > 0 ) {
                     OrderDishOptionDetails::where("order_detail_id",$orderDetails->id)->delete();
                     foreach ($request->option as $optionKey => $optionValue){
                         $addDishOption = OrderDishOptionDetails::create([

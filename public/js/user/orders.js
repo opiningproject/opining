@@ -119,15 +119,13 @@ function checkScreenSize1() {
             'opacity': '0',
             'backdrop': 'static',
         });
-        $('.main-content').css({
-            'height': '534px',
-        });
 
-        $('.order-success-note-mobile').removeClass('d-none');
+        $('.mobile-accept-order').removeClass('d-none');
+        $('.position-relative').addClass('d-none');
         //mobile screen
-        console.log("if")
     } else {
-        $('.order-success-note-mobile').addClass('d-none');
+        $('.mobile-accept-order').addClass('d-none');
+        $('.position-relative').removeClass('d-none');
         $('.orderAcceptedModal').css({
             'display': 'block',
             'opacity': '1'

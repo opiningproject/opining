@@ -22,7 +22,6 @@
                         @endphp
                         @if($isNew == 'is_new')
                             @include('user.orders.accept-order')
-                        @else
                         <div class="position-relative">
                             <div
                                 class="section-page-title main-page-title row justify-content-between d-sm-block title-mobile">
@@ -373,9 +372,13 @@
         </div>
 
 
-        <!-- start footer -->
+    @if(!$isNew)
         @include('layouts.user.footer_design')
+    @endif
+        <!-- start footer -->
+
         <!-- end footer -->
+
     </div>
     @include('user.modals.refund')
 @endsection

@@ -120,7 +120,7 @@ class OrdersController extends Controller
         $orderData = Order::find($request->id);
         $trackOrderData = TrackOrder::where('order_id', $orderData->id)->where('order_status', $orderData->order_status)->first();
         $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
-        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData->created_at, 'updatedStatus' =>  $orderData->order_status, 'clok_gray_svg' => $clok_gray_svg]);
+        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData ? $trackOrderData->created_at :'', 'updatedStatus' =>  $orderData->order_status, 'clok_gray_svg' => $clok_gray_svg]);
     }
 
     public function sendMail($order)

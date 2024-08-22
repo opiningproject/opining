@@ -24,7 +24,7 @@
 
                         <div class="mobile-order-page d-none orders-details-mobile">
                             <div class="mobile-head-belt">
-                                <a href="http://127.0.0.1:8000/user/orders">
+                                <a href="{{route('user.orders')}}">
 
                                     <button type="button" class="btn-close bg-arrow-mobile">
                                         <i class="fa-solid fa-angle-left d-none"></i>

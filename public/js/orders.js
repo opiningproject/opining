@@ -147,12 +147,24 @@ $(document).on('click', '#toggleTotal', function () {
     orderList.classList.toggle('collapsed');
 })
 
-$(document).on('click','#all-orders-tab', function() {
-    $('#order-dilters').removeClass('disable-order-filters');
-})
-$(document).on('click','#open-orders-tab', function() {
-    $('#order-dilters').addClass('disable-order-filters');
-})
+$('#order-tabs-dropdown').on('change', function () {
+
+    var target = $(this).val(); // Get selected value (target id)
+    if (target == "#open-orders") {
+        $('.order-filters-search').addClass('disable-order-filters');
+    } else {
+        $('.order-filters-search').removeClass('disable-order-filters');
+    }
+    $('.tab-pane').removeClass('show active'); // Hide all content
+    $(target).addClass('show active'); // Show the selected content
+});
+
+// $(document).on('click','#all-orders-tab', function() {
+//     $('#order-dilters').removeClass('disable-order-filters');
+// })
+// $(document).on('click','#open-orders-tab', function() {
+//     $('#order-dilters').addClass('disable-order-filters');
+// })
 
 // notification popup click event code.
 $(document).on('click','.order_details_button', function() {
@@ -172,8 +184,7 @@ var isLoading = false;
 var endOfData = false;
 var lastPage = $('.last_page').html(); // Adjust according to the last page number
 $(".all-orders").scroll(function () {
-    var url = window.location.href;
-    var id = url.substring(url.lastIndexOf('/') + 1);
+    var url = `${baseURL}/orders`;
     if (endOfData || isLoading) return;
 
     var scrollTop = $(this).scrollTop();

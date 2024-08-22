@@ -278,8 +278,8 @@ class CheckoutController extends Controller
                     //Notification New Order
                     $order = Order::find($orderId);
 
-                    $this->twilioClient->messages->create(config('params.country_code').$request->phone_no,
-                        ['from' => $this->twilioNumber, 'body' => $textBody] );
+                    /*$this->twilioClient->messages->create(config('params.country_code').$request->phone_no,
+                        ['from' => $this->twilioNumber, 'body' => $textBody] );*/
 
                     $user->notify(new OrderAccepted($order));
                     $admin->notify(new AdminOrderReceived($order));
@@ -367,8 +367,8 @@ class CheckoutController extends Controller
 
                 $order = Order::find($orderId);
 
-                $this->twilioClient->messages->create(config('params.country_code').$order->orderUserDetails->order_contact_number,
-                    ['from' => $this->twilioNumber, 'body' => $textBody] );
+                /*$this->twilioClient->messages->create(config('params.country_code').$order->orderUserDetails->order_contact_number,
+                    ['from' => $this->twilioNumber, 'body' => $textBody] );*/
 
                 $user->notify(new OrderAccepted($order));
                 $admin->notify(new AdminOrderReceived($order));
@@ -462,8 +462,8 @@ class CheckoutController extends Controller
 
                         $order = Order::find($orderId);
 
-                        $this->twilioClient->messages->create(config('params.country_code').$order->orderUserDetails->order_contact_number,
-                            ['from' => $this->twilioNumber, 'body' => $textBody]);
+                        /*$this->twilioClient->messages->create(config('params.country_code').$order->orderUserDetails->order_contact_number,
+                            ['from' => $this->twilioNumber, 'body' => $textBody]);*/
 
                         $user->notify(new OrderAccepted($order));
                         $admin->notify(new AdminOrderReceived($order));

@@ -22,7 +22,9 @@
                         @endphp
                         @if($isNew == 'is_new')
                             @include('user.orders.accept-order')
-                        <div class="position-relative">
+                        @endif
+
+                        <div class="position-relative order-position-relative">
                             <div
                                 class="section-page-title main-page-title row justify-content-between d-sm-block title-mobile">
                                 <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
@@ -365,7 +367,7 @@
                                 @endif
                             </div>
                         </div>
-                        @endif
+
                     </div>
                 </main>
             </div>

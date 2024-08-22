@@ -1,5 +1,5 @@
 <!-- Order Accepted mobile page HTML starts -->
-<div class="order-success-note mobile-accept-order text-center d-none">
+<div class="order-success-note order-success-note-mobile mobile-accept-order text-center d-none">
     <div class="order-succes-box">
         <div class="icon mb-4">
             <img src="{{ asset('images/shopping-bag.png') }}"  alt=""  />

@@ -373,7 +373,7 @@ class CheckoutController extends Controller
                 $user->notify(new OrderAccepted($order));
                 $admin->notify(new AdminOrderReceived($order));
 
-                return redirect()->route('user.orders');
+                return redirect()->route('user.orders', ['order' => 'is_new']);
 
             } else if($request->redirect_status == 'failed'){
                 $user->decrement('collected_points', $user->cart->points_claimed);

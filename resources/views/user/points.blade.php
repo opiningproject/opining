@@ -54,11 +54,11 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="chart-box">
-                                                <h1 class="chart-title">Hi Serdar Orman!</h1>
+                                                <h1 class="chart-title">Hi {{ auth()->user()->full_name }}!</h1>
 
                                                 <div class="chart-point-box">
                                                     <h2>Your Points</h2>
-                                                    <h3 class="point">4</h3>
+                                                    <h3 class="point">{{$user->collected_points}}</h3>
                                                 </div>
                                             </div>
                                         </div>

@@ -717,14 +717,25 @@ form .prev-input-group .input-group-icon svg {
 
 
 /* Order page update UI css starts */
+
 .header-filter-order .select-options {min-width: 100px;position: relative;}.header-filter-order .select-options::after {content: "\f107";font-family: "Font Awesome 6 Free";top: 50%;transform: translateY(-50%);right: 12px;font-weight: 900;position: absolute;pointer-events: none;}
 .header-filter-order .select-options .form-control {background-color: #ffffff !important;background-image: none !important;}
-.foodorder-box .foodorder-box-list-wrp {max-height: calc(100vh - 138px) !important;}
-.foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 343px) !important;overflow: auto;padding-right: 5px;padding-bottom: 5px;}
+/* .foodorder-box .foodorder-box-list-wrp {max-height: calc(100vh - 138px) !important;} */
+.foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 270px) !important;overflow: auto;padding-right: 5px;padding-bottom: 5px;}
 .footer-btn-sticky {bottom: 0px !important;}
 .foodorder-box .foodorder-box-details .foodorder-box-details-footer {position: relative;top: 0px;margin-top: auto;}
 .foodorder-box .foodorder-box-details .footer-box-main .footer-main-total {margin: 10px 0 0;}
 .foodorder-box .foodorder-box-details .footer-box-details-header {flex-wrap: nowrap !important;}
 .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main {min-height: initial !important;}
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {padding-bottom: 2px !important;}
+.foodorder-box .foodorder-box-details .footer-box-details-header .text-grp li {font-size: 16px !important;}
+.foodorder-box .foodorder-box-details .footer-box-details-header .contact-list  {flex: none;}
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 150px) !important;}
+.foodorder-box {margin-top: 14px !important;}
+.food-order-main-content {padding-top: 25px !important;padding-bottom: 20px !important;}
+
+@media screen and (min-width: 1600px) {
+    .foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 320px) !important;}
+    .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 170px) !important;}
+}
 /* Order page update UI css ends */

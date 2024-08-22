@@ -16,7 +16,7 @@
             <div class="container-fluid bd-gutter bd-layout">
                 @include('layouts.admin.side_nav_bar')
                 <main class="bd-main updated_order order-1 w-100 position-relative">
-                    <div class="main-content d-flex flex-column h-100">
+                    <div class="main-content food-order-main-content d-flex flex-column h-100">
                         <div
                             class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 foodorder-page-title">
                             <h1 class="page-title me-auto">{{ trans('rest.food_order.title') }}</h1>

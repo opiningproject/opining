@@ -22,7 +22,15 @@
                             <h1 class="page-title me-auto">{{ trans('rest.food_order.title') }}</h1>
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
-                                    <div class="search-has col">
+                                
+                                <div class="select-options">
+                                    <select class="form-control">
+                                        <option selected>Open</option>
+                                        <option>All</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="search-has col">
                                         <span class="fa fa-search form-control-feedback"></span>
                                         <input type="text" class="form-control" id="search-order" placeholder="Search">
                                     </div>
@@ -66,11 +74,11 @@
 
 
                                 <div class="customize-tab coupons-tab">
-                                    <div class="fixed-tab-buttons border-0 flex-nowrap" id="pills-tab" role="tablist">
+                                    <!-- <div class="fixed-tab-buttons border-0 flex-nowrap" id="pills-tab" role="tablist">
                                         <button class="btn-tap" id="open-orders-tab" data-bs-toggle="pill" data-bs-target="#open-orders" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{ trans('rest.sidebar.open') }}</button>
                                         <button class="btn-tap active" id="all-orders-tab" data-bs-toggle="pill" data-bs-target="#all-orders" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">{{ trans('rest.sidebar.all') }}</button>
 
-                                    </div>
+                                    </div> -->
                                     <div class="tab-content" id="pills-tabContent">
                                         @include('admin.orders.open')
                                         @include('admin.orders.all')

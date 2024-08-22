@@ -121,11 +121,19 @@ function checkScreenSize1() {
         });
 
         $('.mobile-accept-order').removeClass('d-none');
-        $('.position-relative').addClass('d-none');
+
+        //get url with query parameter.
+            var url = window.location.href;
+            var queryString = url.split('?')[1];
+            var params = queryString ? queryString.split('&') : [];
+        //get url with query parameter.
+        if (params.length > 0 && params[0] == "order=is_new") {
+            $('.order-position-relative').addClass('d-none');
+        }
         //mobile screen
     } else {
         $('.mobile-accept-order').addClass('d-none');
-        $('.position-relative').removeClass('d-none');
+        $('.order-position-relative').removeClass('d-none');
         $('.orderAcceptedModal').css({
             'display': 'block',
             'opacity': '1'

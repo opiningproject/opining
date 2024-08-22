@@ -22,21 +22,23 @@
                             <h1 class="page-title me-auto">{{ trans('rest.food_order.title') }}</h1>
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
-                                
+
                                 <div class="select-options">
-                                    <select class="form-control">
-                                        <option selected>Open</option>
-                                        <option>All</option>
+                                    <select class="form-control" id="order-tabs-dropdown">
+                                        <option value="#all-orders"  selected>{{ trans('rest.sidebar.all') }}</option>
+                                        <option value="#open-orders" >{{ trans('rest.sidebar.open') }}</option>
                                     </select>
                                 </div>
-                                
-                                <div class="search-has col">
+                                    {{--{{ trans('rest.sidebar.open') }}
+                                    {{ trans('rest.sidebar.all') }}--}}
+
+                                <div class="search-has col order-filters-search">
                                         <span class="fa fa-search form-control-feedback"></span>
                                         <input type="text" class="form-control" id="search-order" placeholder="Search">
                                     </div>
 
                                     <form class="form col" action="" method="#">
-                                        <div class="input-group">
+                                        <div class="input-group order-filters-search">
                                             <input type="text" placeholder="Select Date For Filter" class="form-control"
                                                 id="expiry_date" aria-label="expiry_date" name="expiry_date" required>
                                         </div>
@@ -64,7 +66,7 @@
                                 </ul> --}}
                                 {{-- <div> --}}
                                 <button type="button" name="clear" value="all" id="clear"
-                                    style="background-color: var(--theme-yellow2);" class="btn clear-button">Clear</button>
+                                    style="background-color: var(--theme-yellow2);" class="btn clear-button order-filters-search">Clear</button>
                                 {{-- </div> --}}
 
                             </div>

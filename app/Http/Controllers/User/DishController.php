@@ -306,7 +306,7 @@ class DishController extends Controller
 
         $totalAmt *= $orderQty;
         $html = "<div class='modal-content'>
-                  <div class='modal-header border-0 d-block'>
+                  <div class='modal-header border-0 d-block pb-0'>
                     <button type='button' class='btn-close float-end' data-bs-dismiss='modal' aria-label='Close'></button>
                     <div class='customisable-item-detail mt-3 text-center'>
                       <div class='mb-3 text-center pro-image'>
@@ -316,10 +316,10 @@ class DishController extends Controller
                       <p class='my-0'>$dish->description</p>
                       <span class='food-custom-price mb-3' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
-                      $html_options
-                    </div>
+                      </div>
                   </div>
                   <div class='modal-body pt-0 pb-0'>
+                    $html_options  
                     $html_free_ingredients
                     $html_paid_ingredients
                   </div>

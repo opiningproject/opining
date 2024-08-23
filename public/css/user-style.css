@@ -5441,3 +5441,17 @@ input.form-control.dish-notes {background: inherit;}
 .trackOrderBox .progress-steps .step {gap: 10px;}
 .category-section .swiper-container-mobile.mobile-slider-sticky .category-element .card p {font-size: 13px !important;}
 }
+
+@media (max-width: 767px) {
+.dashboard-custom .bottom-sticky {
+  display: none !important;
+}
+}
+
+/* New Css CR4 */
+.customisable-modal-body .modal-body .dish-option-select {
+  margin: 0px auto;
+}
+.customisable-modal-body .modal-header.pb-0 {
+  padding-bottom: 0px !important;
+}

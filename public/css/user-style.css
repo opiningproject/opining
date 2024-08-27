@@ -5356,7 +5356,18 @@ footer {padding: 36px 20px 20px 20px;}
 .address-step-box .addess-list .ico {padding-right: 15px;}
 .address-step-box .addess-list p {font-size: 11px;}
 .track-order-content {margin-top: 35px;}
-.swiper-container-mobile.mobile-slider-sticky {position: fixed;left: 0px;right: 0px;top: 60px;padding: 10px 20px !important;background: #F8F8F8;z-index: 9;}
+.swiper-container-mobile.mobile-slider-sticky {
+  position: sticky;
+  left: 0;
+  right: 0px;
+  top: 58px;
+  padding: 10px 20px !important;
+  background: #F8F8F8;
+  z-index: 9;
+  width: 100vw;
+  margin: 0 auto;
+  margin-left: -20px;
+}
 .swiper-container-mobile.mobile-slider-sticky .category-slider .category-element .card .dish-item-icon {display: none;}
 .swiper-container-mobile.mobile-slider-sticky .category-element .card {border-radius: 10px;padding: 11px 7px;}
 .swiper-container-mobile.mobile-slider-sticky .category-element .card p {font-size: 15px !important;}

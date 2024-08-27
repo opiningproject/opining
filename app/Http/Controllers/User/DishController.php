@@ -233,7 +233,7 @@ class DishController extends Controller
         $html_paid_ingredients = '';
 
         if (count($paidIngredients) > 0) {
-            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-4'>
+            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-1'>
                       <table class='w-100'>
                         <thead>
                           <tr>

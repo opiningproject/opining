@@ -283,7 +283,7 @@ class DishController extends Controller
                                     <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>".number_format($ingredient_price,2)."</span></span>
                                     </td>
                                     <td width='7%'>
-                                      <div class='foodqty mt-0'>
+                                      <div class='foodqty mt-1'>
                                         <span class='minus' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)>
                                           <i class='fas fa-minus align-middle'></i>
                                         </span>
@@ -327,7 +327,7 @@ class DishController extends Controller
                       <p class='my-0'>$dish->description</p>
                       <span class='food-custom-price mb-3' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
-                      </div>  
+                      </div>
                   $html_options
                     $html_free_ingredients
                     $html_paid_ingredients
@@ -335,7 +335,7 @@ class DishController extends Controller
                   <div class='modal-footer border-top-0 d-block px-2 px-xxl-3'>
                     <div class='row align-items-center modal-footer-sticky'>
                       <div class='col qty-col'>
-                        <div class='foodqty mt-0 mb-0'>
+                        <div class='foodqty mt-1 mb-0'>
                           <span class='minus'>
                             <i class='fas fa-minus align-middle' onclick=addSubDishQuantities($dish->id,'-',$dish->qty)></i>
                           </span>

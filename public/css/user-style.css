@@ -3413,7 +3413,7 @@ input[type=number] {
   line-height: normal;
 }
 .dish-option-error {
-    margin-left: -80px;
+    margin-left: 10px;
     margin-top: 6px;
 }
 
@@ -5444,6 +5444,10 @@ input.form-control.dish-notes {background: inherit;}
 }
 
 @media (max-width: 767px) {
+
+.ingredientslist-dp.custom-default-dropdown .dish-option-error{
+    margin-left: 45px !important;
+}
 .dashboard-custom .bottom-sticky {
   display: none !important;
 }
@@ -5493,7 +5497,6 @@ body {
 }
 
 .ingredientslist-dp.custom-default-dropdown .dish-option-error{
-  margin-left: 10px !important;
   font-size: 14px;
 }
 

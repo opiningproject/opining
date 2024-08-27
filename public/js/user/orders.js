@@ -130,12 +130,14 @@ function checkScreenSize1() {
         if (params.length > 0 && params[0] == "order=is_new") {
             $('.order-position-relative').addClass('d-none');
             $('.menu-sidebar').addClass('d-none');
+            $('body').css('overflow', 'hidden');
         }
         //mobile screen
     } else {
         $('.mobile-accept-order').addClass('d-none');
         $('.order-position-relative').removeClass('d-none');
         $('.menu-sidebar').removeClass('d-none');
+        $('body').css('overflow', 'scroll');
         $('.orderAcceptedModal').css({
             'display': 'block',
             'opacity': '1'

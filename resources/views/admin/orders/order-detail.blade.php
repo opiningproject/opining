@@ -224,28 +224,28 @@ $userDetails = $order->orderUserDetails;
             @foreach($order->dishDetails as $key => $dish)
                 <div class="footer-box-main-orderlist-main-item d-flex">
                     <div class="text-grp orderRead-more">
-                    <span>{{ $dish->qty }}x</span>    
-                    
+                    <span>{{ $dish->qty }}x</span>
+
                        <div class="content-for-orders">
                        <div class="title">{{ $dish->dish->name }}</div>
-                         <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
-
+                         <div class="text" id="order-ingredient-{{ $dish->id}}">
+                             {{-- remove line-clamp-2 class --}}
                             @if(count($dish->orderDishOptionDetails) > 0)
                                 <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
                                 <br>
                             @endif
-                            {{-- old code comment 13-08-2024 --}}
                             {{ getOrderDishIngredients($dish) }}
                         </div>
-                        @if(count($dish->orderDishPaidIngredients) > 3)
+                       {{--read more code comment --}}
+                       {{-- @if(count($dish->orderDishPaidIngredients) > 3)
                             <div class="text">
                                 <a href="javascript:void(0)" id="read-more-{{ $dish->id}}"
                                    onclick="readMore({{ $dish->id}})">{{ trans('rest.food_order.read_more') }}</a>
                                 <a href="javascript:void(0)" style="display:none;" id="close-{{ $dish->id}}"
                                    onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
                             </div>
-                        @endif
-                      
+                        @endif--}}
+
                        </div>
                     </div>
                     @if(!empty($dish->notes))

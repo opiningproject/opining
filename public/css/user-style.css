@@ -5467,3 +5467,14 @@ input.form-control.dish-notes {background: inherit;}
 .customisable-modal-body .modal-header.pb-0 {
   padding-bottom: 0px !important;
 }
+
+.paid_ingredients-list{
+    color: var(--theme-dark2);
+    font-family: "SebinoRegular", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    padding: 1rem 0;
+    background-color: transparent;
+}

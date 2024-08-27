@@ -407,8 +407,11 @@
                                                 @foreach ($order->dishDetails as $key => $dish)
                                                     <div class="footer-box-main-orderlist-main-item d-flex">
                                                         <div class="text-grp orderRead-more">
-                                                            <div class="title"><span>{{ $dish->qty }}x</span> {{ $dish->dish->name }}</div>
-                                                            <div class="text line-clamp-2"
+                                                            <span>{{ $dish->qty }}x</span>
+                                                            <!-- <div class="text line-clamp-2" -->
+                                                            <div class="content-for-orders">
+                                                                <div class="title">{{ $dish->dish->name }}</div>
+                                                             <div class="text clearfix"
                                                                 id="order-ingredient-{{ $dish->id }}">
                                                                 {{-- old code comment 13-08-2024 --}}
                                                                 {{-- <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>--}}
@@ -418,7 +421,9 @@
                                                                 @endif
                                                                 {{ getOrderDishIngredients($dish) }}
                                                             </div>
-                                                            @if(count($dish->orderDishPaidIngredients) > 2)
+                                                            </div>
+                                                             {{--read more code comment --}}
+                                                             {{--@if(count($dish->orderDishPaidIngredients) > 2)
                                                             <div class="text">
                                                                 <a href="javascript:void(0)"
                                                                     id="read-more-{{ $dish->id }}"
@@ -428,7 +433,7 @@
                                                                     id="close-{{ $dish->id }}"
                                                                     onclick="hideReadMore({{ $dish->id }})">{{ trans('rest.food_order.close') }}</a>
                                                             </div>
-                                                                @endif
+                                                                @endif--}}
                                                             @if (!empty($dish->notes))
                                                                 <div class="notes">
                                                                     <u>{{ $dish->notes }}</u>

@@ -733,9 +733,23 @@ form .prev-input-group .input-group-icon svg {
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 150px) !important;}
 .foodorder-box {margin-top: 14px !important;}
 .food-order-main-content {padding-top: 25px !important;padding-bottom: 20px !important;}
-
+.food-order-main-content .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main {
+max-height: none !important;
+}
 @media screen and (min-width: 1600px) {
     .foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 320px) !important;}
     .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 170px) !important;}
 }
 /* Order page update UI css ends */
+
+.footer-box-main-orderlist-main-item {
+    position: relative;
+}
+.footer-box-main-orderlist-main-item .orderRead-more{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+.footer-box-main-orderlist-main-item .orderRead-more .content-for-orders {
+    padding-top: 3px;
+}

@@ -233,9 +233,9 @@
                                                             <div class="orderdetails-desc-card orderdetails-flex-200">
                                                                 <div class="text-grp ps-3">
                                                                     <div class="title">{{ $dish->dish->name }}</div>
-                                                                    <div class="text line-clamp-2"
+                                                                    <div class="text"
                                                                         id="order-ingredient-{{ $dish->id }}">
-                                                                            {{-- old code comment on 13-08-2024 --}}
+                                                                        {{-- remove line-clamp-2 class --}}
 {{--                                                                        <b class="mb-0 item-options">--}}
 {{--                                                                            {{ $dish->dishOption->name ?? '' }} </b>--}}
 {{--                                                                        {{ getOrderDishIngredients($dish) }}--}}
@@ -245,7 +245,7 @@
                                                                         @endif
                                                                         {{ getOrderDishIngredients($dish) }}
                                                                     </div>
-                                                                    <div
+                                                                    {{--<div
                                                                         class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                                                         <a href="javascript:void(0)"
                                                                             id="read-more-{{ $dish->id }}"
@@ -257,7 +257,7 @@
                                                                             onclick="hideReadMore({{ $dish->id }})">
                                                                             {{ trans('user.my_orders.close') }}
                                                                         </a>
-                                                                    </div>
+                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                         </div>

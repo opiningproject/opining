@@ -966,7 +966,7 @@ if($user->cart && $user->cart->order_type == 2) {
             var deliveryType = $('input[name=del_radio]:checked').val()
             var paymentType = $('#payment_type').val()
             var zipcode = $('#zipcode').val()
-            console.log('zipcode', zipcode)
+            console.log('zipcode')
 
             let first_name = $('#first_name').val();
             let last_name = $('#last_name').val();
@@ -1066,11 +1066,12 @@ if($user->cart && $user->cart->order_type == 2) {
                     if (response.status == 200) {
                         socket.emit('sendOrderNotification');
                         if (paymentType == '2') {
-                            toastr.success(response.message.data)
+                            // Remove order place message 27-08-2024
+                            // toastr.success(response.message.data)
 
                             setTimeout(function() {
                                 window.location.replace(baseURL + '/user/orders?order=is_new')
-                            }, 2000);
+                            }, 1000);
 
                         } else if (paymentType == '3') {
                             const {
@@ -1090,7 +1091,8 @@ if($user->cart && $user->cart->order_type == 2) {
                             }
                         } else {
                             if (response.message.cardPayment == 200) {
-                                toastr.success(response.message.data)
+                                // Remove order place message 27-08-2024
+                                // toastr.success(response.message.data)
                                 setTimeout(function() {
                                     window.location.replace(baseURL + '/user/orders?order=is_new')
                                 }, 2000);

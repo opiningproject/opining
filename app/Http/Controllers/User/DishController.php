@@ -173,7 +173,7 @@ class DishController extends Controller
         if (count($dishOptionCategoryData) > 0) {
             foreach($dishOptionCategoryData as $key => $value) {
                     $html_options .= "<div class='row justify-content-center'>
-                        <div class='col-xl-6'>
+                        <div class='col-sm-6'>
                           <div class='form-group mb-3'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
@@ -233,7 +233,7 @@ class DishController extends Controller
         $html_paid_ingredients = '';
 
         if (count($paidIngredients) > 0) {
-            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-4'>
+            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-1'>
                       <table class='w-100'>
                         <thead>
                           <tr>
@@ -246,11 +246,20 @@ class DishController extends Controller
             foreach ($paidIngredients as $key => $category) {
                 $show = ($key == 0) ? ' show' : '';
                 $collapsed = ($key != 0) ? ' collapsed' : '';
+                // old code commented  on 27-08-2024
+//                $html_paid_ingredients .= "<div class='accordion-item'>
+//                          <h2 class='accordion-header'>
+//                            <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
+//                          </h2>
+//                          <div id='collapse$category->id' class='accordion-collapse collapse $show' data-bs-parent='#accordionExample'>
+//                            <div class='accordion-body py-1'>
+//                              <table>
+//                                <tbody>";
                 $html_paid_ingredients .= "<div class='accordion-item'>
                           <h2 class='accordion-header'>
-                            <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
+                            <h2 class='paid_ingredients-list pb-0'> $category->name </h2>
                           </h2>
-                          <div id='collapse$category->id' class='accordion-collapse collapse $show' data-bs-parent='#accordionExample'>
+                          <div id='collapse$category->id' data-bs-parent='#accordionExample'>
                             <div class='accordion-body py-1'>
                               <table>
                                 <tbody>";
@@ -274,7 +283,7 @@ class DishController extends Controller
                                     <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>".number_format($ingredient_price,2)."</span></span>
                                     </td>
                                     <td width='7%'>
-                                      <div class='foodqty mt-0'>
+                                      <div class='foodqty mt-1'>
                                         <span class='minus' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)>
                                           <i class='fas fa-minus align-middle'></i>
                                         </span>
@@ -306,9 +315,11 @@ class DishController extends Controller
 
         $totalAmt *= $orderQty;
         $html = "<div class='modal-content'>
-                  <div class='modal-header border-0 d-block'>
+                  <div class='modal-header border-0 d-block pb-0'>
                     <button type='button' class='btn-close float-end' data-bs-dismiss='modal' aria-label='Close'></button>
-                    <div class='customisable-item-detail mt-3 text-center'>
+                    </div>
+                  <div class='modal-body pt-0 pb-0'>
+                  <div class='customisable-item-detail mt-3 text-center'>
                       <div class='mb-3 text-center pro-image'>
                       <img src='$dish->image' alt='burger' width='100' height='100' id='dish_image'>
                       </div>
@@ -316,17 +327,15 @@ class DishController extends Controller
                       <p class='my-0'>$dish->description</p>
                       <span class='food-custom-price mb-3' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
-                      $html_options
-                    </div>
-                  </div>
-                  <div class='modal-body pt-0 pb-0'>
+                      </div>
+                  $html_options
                     $html_free_ingredients
                     $html_paid_ingredients
                   </div>
                   <div class='modal-footer border-top-0 d-block px-2 px-xxl-3'>
                     <div class='row align-items-center modal-footer-sticky'>
                       <div class='col qty-col'>
-                        <div class='foodqty mt-0 mb-0'>
+                        <div class='foodqty mt-1 mb-0'>
                           <span class='minus'>
                             <i class='fas fa-minus align-middle' onclick=addSubDishQuantities($dish->id,'-',$dish->qty)></i>
                           </span>

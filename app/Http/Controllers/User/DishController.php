@@ -246,11 +246,20 @@ class DishController extends Controller
             foreach ($paidIngredients as $key => $category) {
                 $show = ($key == 0) ? ' show' : '';
                 $collapsed = ($key != 0) ? ' collapsed' : '';
+                // old code commented  on 27-08-2024
+//                $html_paid_ingredients .= "<div class='accordion-item'>
+//                          <h2 class='accordion-header'>
+//                            <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
+//                          </h2>
+//                          <div id='collapse$category->id' class='accordion-collapse collapse $show' data-bs-parent='#accordionExample'>
+//                            <div class='accordion-body py-1'>
+//                              <table>
+//                                <tbody>";
                 $html_paid_ingredients .= "<div class='accordion-item'>
                           <h2 class='accordion-header'>
-                            <button class='accordion-button $collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$category->id' aria-expanded='true' aria-controls='collapseOne'> $category->name </button>
+                            <h2 class='paid_ingredients-list'> $category->name </h2>
                           </h2>
-                          <div id='collapse$category->id' class='accordion-collapse collapse $show' data-bs-parent='#accordionExample'>
+                          <div id='collapse$category->id' data-bs-parent='#accordionExample'>
                             <div class='accordion-body py-1'>
                               <table>
                                 <tbody>";
@@ -319,7 +328,7 @@ class DishController extends Controller
                       </div>
                   </div>
                   <div class='modal-body pt-0 pb-0'>
-                    $html_options  
+                    $html_options
                     $html_free_ingredients
                     $html_paid_ingredients
                   </div>

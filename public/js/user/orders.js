@@ -129,11 +129,13 @@ function checkScreenSize1() {
         //get url with query parameter.
         if (params.length > 0 && params[0] == "order=is_new") {
             $('.order-position-relative').addClass('d-none');
+            $('.menu-sidebar').addClass('d-none');
         }
         //mobile screen
     } else {
         $('.mobile-accept-order').addClass('d-none');
         $('.order-position-relative').removeClass('d-none');
+        $('.menu-sidebar').removeClass('d-none');
         $('.orderAcceptedModal').css({
             'display': 'block',
             'opacity': '1'

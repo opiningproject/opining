@@ -4318,7 +4318,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cart-section .cart-items .foodqty .plus i, .cart-section .cart-items .foodqty .minus i {margin-left: 0px !important;font-size: 15px !important;line-height: initial !important;}
 .foodqty .minus, .foodqty .plus {height: 35px !important;min-width: 35px !important;border-color: #f0eff5 !important;width: 35px;flex: 0 0 35px !important;display: flex !important;align-items: center;justify-content: center;background: #f0eff5 !important;}
 .foodqty .plus i, .foodqty .minus i {margin-left: 0px !important;font-size: 15px !important;line-height: initial !important;}
-.customisable-modal-body .modal-body {max-height: 30vh;padding-bottom: 20px !important;}
+.customisable-modal-body .modal-body {max-height: 60vh;padding-bottom: 20px !important;}
 .customisable-modal-body .customisable-table table td {padding: 20px 5px 0px 0px;}
 .customisable-modal-body .modal-header {padding-top: 30px;margin-bottom: 20px;}
 .customisable-modal-body .modal-header .btn-close {position: absolute;top: 25px;right: 25px;z-index: 2;}
@@ -5409,6 +5409,7 @@ footer {padding: 36px 20px 20px 20px;}
       top: 50%;
       transform: translateY(-50%);
       height: 100%;
+      padding-bottom: 70px;
   }
 }
 
@@ -5447,7 +5448,7 @@ input.form-control.dish-notes {background: inherit;}
   display: none !important;
 }
 .customisable-modal-body .modal-body {
-  max-height: 24vh;
+  max-height: 64vh;
 }
 .customisable-modal-body .pro-image img {
   max-height: 75px;
@@ -5458,6 +5459,16 @@ input.form-control.dish-notes {background: inherit;}
   font-size: 14px;
   line-height: 20px;
 }
+.menu-sidebar.sticky-top {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+}
+body {
+  padding-top: 60px !important;
+}
 }
 
 /* New Css CR4 */
@@ -5465,16 +5476,32 @@ input.form-control.dish-notes {background: inherit;}
   margin: 0px auto;
 }
 .customisable-modal-body .modal-header.pb-0 {
-  padding-bottom: 0px !important;
+  /* padding-bottom: 0px !important; */
 }
 
 .paid_ingredients-list{
     color: var(--theme-dark2);
     font-family: "SebinoRegular", sans-serif;
-    font-size: 18px;
+    font-size: 16px !important;
     font-weight: 400;
     letter-spacing: 0.5px;
     text-transform: capitalize;
     padding: 1rem 0;
     background-color: transparent;
+    border-bottom: 1px solid #E0E0E0;
+    padding-bottom: 10px !important;
+}
+
+.ingredientslist-dp.custom-default-dropdown .dish-option-error{
+  margin-left: 10px !important;
+  font-size: 14px;
+}
+
+.customisable-modal-body .customisable-table table td {
+  padding: 2px 5px 0px 0px !important;
+  font-size: 14px !important;
+}
+
+.accordion-flush .accordion-item {
+  border: 0px !important;
 }

@@ -173,7 +173,7 @@ class DishController extends Controller
         if (count($dishOptionCategoryData) > 0) {
             foreach($dishOptionCategoryData as $key => $value) {
                     $html_options .= "<div class='row justify-content-center'>
-                        <div class='col-xl-6'>
+                        <div class='col-sm-6'>
                           <div class='form-group mb-3'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
@@ -257,7 +257,7 @@ class DishController extends Controller
 //                                <tbody>";
                 $html_paid_ingredients .= "<div class='accordion-item'>
                           <h2 class='accordion-header'>
-                            <h2 class='paid_ingredients-list'> $category->name </h2>
+                            <h2 class='paid_ingredients-list pb-0'> $category->name </h2>
                           </h2>
                           <div id='collapse$category->id' data-bs-parent='#accordionExample'>
                             <div class='accordion-body py-1'>
@@ -317,7 +317,9 @@ class DishController extends Controller
         $html = "<div class='modal-content'>
                   <div class='modal-header border-0 d-block pb-0'>
                     <button type='button' class='btn-close float-end' data-bs-dismiss='modal' aria-label='Close'></button>
-                    <div class='customisable-item-detail mt-3 text-center'>
+                    </div>
+                  <div class='modal-body pt-0 pb-0'>
+                  <div class='customisable-item-detail mt-3 text-center'>
                       <div class='mb-3 text-center pro-image'>
                       <img src='$dish->image' alt='burger' width='100' height='100' id='dish_image'>
                       </div>
@@ -325,10 +327,8 @@ class DishController extends Controller
                       <p class='my-0'>$dish->description</p>
                       <span class='food-custom-price mb-3' id='dish_price'>€".number_format($dish->price,2)."</span>
                       <input type='hidden' id='dish-org-price' value='$dish->price'>
-                      </div>
-                  </div>
-                  <div class='modal-body pt-0 pb-0'>
-                    $html_options
+                      </div>  
+                  $html_options
                     $html_free_ingredients
                     $html_paid_ingredients
                   </div>

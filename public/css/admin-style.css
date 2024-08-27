@@ -741,3 +741,15 @@ max-height: none !important;
     .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 170px) !important;}
 }
 /* Order page update UI css ends */
+
+.footer-box-main-orderlist-main-item {
+    position: relative;
+}
+.footer-box-main-orderlist-main-item .orderRead-more{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+.footer-box-main-orderlist-main-item .orderRead-more .content-for-orders {
+    padding-top: 3px;
+}

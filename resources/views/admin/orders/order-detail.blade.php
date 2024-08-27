@@ -224,8 +224,11 @@ $userDetails = $order->orderUserDetails;
             @foreach($order->dishDetails as $key => $dish)
                 <div class="footer-box-main-orderlist-main-item d-flex">
                     <div class="text-grp orderRead-more">
-                        <div class="title"><span>{{ $dish->qty }}x</span> {{ $dish->dish->name }}</div>
-                        <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
+                    <span>{{ $dish->qty }}x</span>    
+                    
+                       <div class="content-for-orders">
+                       <div class="title">{{ $dish->dish->name }}</div>
+                         <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id}}">
 
                             @if(count($dish->orderDishOptionDetails) > 0)
                                 <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
@@ -242,7 +245,10 @@ $userDetails = $order->orderUserDetails;
                                    onclick="hideReadMore({{ $dish->id}})">{{ trans('rest.food_order.close') }}</a>
                             </div>
                         @endif
-                        @if(!empty($dish->notes))
+                      
+                       </div>
+                    </div>
+                    @if(!empty($dish->notes))
                             <div class="notes">
                                 <u>{{ $dish->notes }}</u>
                                 {{-- <div
@@ -251,7 +257,6 @@ $userDetails = $order->orderUserDetails;
                                        title="{{ $dish->notes }}" readonly> --}}
                             </div>
                         @endif
-                    </div>
                     {{--@if(!empty($dish->notes))
                         <div class="notes">
                             {{ $dish->notes }}

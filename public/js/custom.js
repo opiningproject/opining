@@ -22,39 +22,52 @@ $(document).ready(function(){
   });
 
   $(document).ready(function() {
-    function applyStickySlider() {
-        var windowWidth = $(window).width();
-        var elementTop = $('.swiper-container-mobile').offset().top;
-        var elementHeight = $('.swiper-container-mobile').outerHeight();
+    var $swiperContainer = $('.swiper-container-mobile');
+    var stickyOffset = $swiperContainer.offset().top;
 
-        if (windowWidth <= 767) {
-            $(window).scroll(function() {
-                var windowTop = $(this).scrollTop();
-
-                if (windowTop >= elementTop) {
-                    $('.swiper-container-mobile').addClass('mobile-slider-sticky');
-                    $('body').css('padding-top', elementHeight + 'px'); 
-                } else {
-                    $('.swiper-container-mobile').removeClass('mobile-slider-sticky');
-                    $('body').css('padding-top', '0'); 
-                }
-
-                if (windowTop === 0) {
-                    $('.swiper-container-mobile').removeClass('mobile-slider-sticky');
-                    $('body').css('padding-top', '0'); 
-                }
-            });
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > stickyOffset) {
+            $swiperContainer.addClass('mobile-slider-sticky');
         } else {
-            // Ensure to remove the sticky class and padding if screen width is above 768px
-            $('.swiper-container-mobile').removeClass('mobile-slider-sticky');
-            $('body').css('padding-top', '0');
-            $(window).off('scroll'); // Remove scroll event handler for larger screens
+            $swiperContainer.removeClass('mobile-slider-sticky');
         }
-    }
-
-    applyStickySlider(); // Apply on page load
-
-    $(window).resize(function() {
-        applyStickySlider(); // Reapply on window resize
     });
 });
+
+
+  $(document).ready(function() {
+    
+    // function applyStickySlider() {
+    //     var windowWidth = $(window).width();
+    //     var elementTop = $('.swiper-container-mobile').offset().top;
+    //     var elementHeight = $('.swiper-container-mobile').outerHeight();
+
+    //     if (windowWidth <= 767) {
+    //         $(window).scroll(function() {
+    //             var windowTop = $(this).scrollTop();
+
+    //             if (windowTop >= elementTop) {
+    //                 $('.swiper-container-mobile').addClass('mobile-slider-sticky');
+    //             } else {
+    //                 $('.swiper-container-mobile').removeClass('mobile-slider-sticky');
+    //             }
+
+    //             if (windowTop === 0) {
+    //                 $('.swiper-container-mobile').removeClass('mobile-slider-sticky');
+    //             }
+    //         });
+    //     } else {
+    //         // Ensure to remove the sticky class and padding if screen width is above 768px
+    //         $('.swiper-container-mobile').removeClass('mobile-slider-sticky');
+    //         $(window).off('scroll'); // Remove scroll event handler for larger screens
+    //     }
+    // }
+
+    // applyStickySlider(); // Apply on page load
+
+    // $(window).resize(function() {
+    //     applyStickySlider(); // Reapply on window resize
+    // });
+});
+
+

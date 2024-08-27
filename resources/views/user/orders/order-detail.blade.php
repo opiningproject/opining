@@ -628,14 +628,16 @@ use App\Enums\RefundStatus;
                         <div class="orderdetails-desc-card orderdetails-flex-400">
                             <div class="text-grp ps-3">
                                 <div class="title">{{ $dish->dish->name }}</div>
-                                <div class="text line-clamp-2" id="order-ingredient-{{ $dish->id }}">
+                                <div class="text" id="order-ingredient-{{ $dish->id }}">
+                                    {{-- remove line-clamp-2 class --}}
                                     @if(count($dish->orderDishOptionDetails) > 0)
                                         <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
                                         <br>
                                     @endif
                                     {{ getOrderDishIngredients($dish) }}
                                 </div>
-                                @if (count($dish->orderDishPaidIngredients) > 3)
+                                {{--read more code comment --}}
+                                {{--@if (count($dish->orderDishPaidIngredients) > 3)
                                     <div class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                         <a href="javascript:void(0)" id="read-more-{{ $dish->id }}"
                                             onclick="readMore({{ $dish->id }})">{{ trans('user.my_orders.read_more') }}</a>
@@ -643,7 +645,7 @@ use App\Enums\RefundStatus;
                                             id="close-{{ $dish->id }}"
                                             onclick="hideReadMore({{ $dish->id }})">{{ trans('user.my_orders.close') }}</a>
                                     </div>
-                                @endif
+                                @endif--}}
                                 @if (!empty($dish->notes))
                                     <div class="notes mt-2">
                                         <u>{{ $dish->notes }}</u>

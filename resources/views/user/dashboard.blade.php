@@ -282,7 +282,7 @@
                                                 </li>
                                             </ul>
                                             <div class="d-flex flex-column flex-fill tab-content" id="pills-tabContent">
-                                                <div class="tab-pane fade {{ $zipcode ? 'show active' : '' }}"
+                                                <div class="pills-home tab-pane fade {{ $zipcode ? 'show active' : '' }}"
                                                     id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                                                     tabindex="0">
 

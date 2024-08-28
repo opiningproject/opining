@@ -129,7 +129,19 @@ $(function () {
                     window.location.replace(baseURL + '/user/checkout')
                 } else {
                     // alert(response.message);
-                    toastr.error(response.message);
+                    var errorOccurred = true; // Replace this with actual error detection logic
+                        if (errorOccurred) {
+                            var targetElement = $('.pills-home');
+                            // Add the shake class to the element
+                            targetElement.addClass('shake');
+                            $('.cart-sidebar .cart-address-row').css('box-shadow', '0px 0px 7px 1px #d7a209');
+                            // Remove the shake class after the animation completes (0.5s)
+                            setTimeout(function() {
+                                targetElement.removeClass('shake');
+                                $('.cart-sidebar .cart-address-row').css('box-shadow', '1px 2px 10px 8px rgba(0, 0, 0, 0.08)');
+                            }, 500);
+                        }
+                    // toastr.error(response.message);
                 }
             },
             error: function (response) {

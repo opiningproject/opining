@@ -130,17 +130,27 @@ $(function () {
                 } else {
                     // alert(response.message);
                     var errorOccurred = true; // Replace this with actual error detection logic
-                        if (errorOccurred) {
-                            var targetElement = $('.pills-home');
+                    if (errorOccurred) {
+                        var targetElement = $('.pills-home');
+                        // Check if the shake class is already present
+                        if (!targetElement.hasClass('shake')) {
                             // Add the shake class to the element
                             targetElement.addClass('shake');
+                            // Scroll to the element inside the .offcanvas-body container
+                            var scrollableContainer = $('.offcanvas-body');
+                            scrollableContainer.animate({
+                                scrollTop: scrollableContainer.scrollTop() + scrollableContainer.offset().top - scrollableContainer.offset().top
+                            }, 500);
                             $('.cart-sidebar .cart-address-row').css('box-shadow', '0px 0px 7px 1px #d7a209');
+
                             // Remove the shake class after the animation completes (0.5s)
                             setTimeout(function() {
                                 targetElement.removeClass('shake');
                                 $('.cart-sidebar .cart-address-row').css('box-shadow', '1px 2px 10px 8px rgba(0, 0, 0, 0.08)');
                             }, 500);
                         }
+                    }
+
                     // toastr.error(response.message);
                 }
             },

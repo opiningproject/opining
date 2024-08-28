@@ -11,7 +11,9 @@
 
 <script type="text/javascript" src="{{ asset('js/jquery.datepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
-<script src="https://cdn.ckeditor.com/4.24.0/full-all/ckeditor.js"></script>
+{{--<script src="https://cdn.ckeditor.com/4.24.0/full-all/ckeditor.js"></script>--}}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.8.0/ckeditor.js"></script>
+
 <script src="{{ asset('js/jquery.timepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/settings-profile.js')}}"></script>

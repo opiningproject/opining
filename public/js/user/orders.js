@@ -148,5 +148,21 @@ function checkScreenSize1() {
 checkScreenSize1()
 $(window).on('resize', checkScreenSize1);
 
+    // on track order page to back button code.
+    function getPathSegment(index) {
+        // Get the pathname from the URL
+        const path = window.location.pathname.split('/');
+        return path[index] || '';
+    }
+
+    // Extract the order_id from the path
+    const orderId = getPathSegment(3); // Adjust the index based on your URL structure
+    if (orderId) {
+        window.onload = function() {
+            orderDetail(orderId);
+        };
+    } else {
+        console.log('No Order ID found in the URL.');
+    }
 
 

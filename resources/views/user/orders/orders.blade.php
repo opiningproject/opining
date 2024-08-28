@@ -32,6 +32,8 @@
                                 </div>
                             </div>
                             <div class="d-flex orders-main order-non-active">
+
+                                {{-- for mobile view --}}
                                 <div class="orders d-flex order-mobile">
                                     <div class="orders-type">
                                         <div class="orders-title mb-1">{{ trans('user.my_orders.active_orders') }}</div>
@@ -245,6 +247,11 @@
                                                                         @endif
                                                                         {{ getOrderDishIngredients($dish) }}
                                                                     </div>
+                                                                    @if (!empty($dish->notes))
+                                                                        <div class="notes mt-2">
+                                                                            <u>{{ $dish->notes }}</u>
+                                                                        </div>
+                                                                    @endif
                                                                     {{--<div
                                                                         class="text {{ getOrderDishIngredients($dish) == '' ? 'd-none' : '' }}">
                                                                         <a href="javascript:void(0)"
@@ -261,13 +268,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @if (!empty($dish->notes))
-                                                            <div class="orderdetails-desc-note">
-                                                                <Label>{{ trans('user.my_orders.notes') }}</Label>
-                                                                <input type="text" placeholder="{{ $dish->notes }}"
-                                                                    readonly>
-                                                            </div>
-                                                        @endif
+{{--                                                        @if (!empty($dish->notes))--}}
+{{--                                                            <div class="notes mt-2">--}}
+{{--                                                                <Label>{{ trans('user.my_orders.notes') }}</Label>--}}
+{{--                                                                <input type="text" placeholder="{{ $dish->notes }}"--}}
+{{--                                                                    readonly>--}}
+{{--                                                            </div>--}}
+{{--                                                        @endif--}}
                                                         <div class="orderdetails-desc-price">
                                                             <?php
                                                             $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total;

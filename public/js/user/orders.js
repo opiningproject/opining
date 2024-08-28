@@ -158,9 +158,9 @@ $(window).on('resize', checkScreenSize1);
     // Extract the order_id from the path
     const orderId = getPathSegment(3); // Adjust the index based on your URL structure
     if (orderId) {
-        window.onload = function() {
+        $(document).ready(function() {
             orderDetail(orderId);
-        };
+        });
     } else {
         console.log('No Order ID found in the URL.');
     }

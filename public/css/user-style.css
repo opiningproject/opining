@@ -4744,7 +4744,7 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-sidebar .cart-item-row .items-additional li {list-style-type: none;color: #777777;font-size: 14px;}
 .cart-items-list-row .cart-custom-w-col-detail .addnote-from-group {flex: auto;padding-right: 15px;position: relative;}
 .cart-items-list-row .cart-custom-w-col-detail .addnote-from-group .note-close-btn {position: absolute;top: 5px;right: 18px;opacity: 0.7;}
-.cart-items-list-row .cart-custom-w-col-detail .addnote-from-group .dish-notes {border: 0px;border-bottom: 1px solid #292929;border-radius: 0px;padding: 5px 0px;font-size: 12px;height: 34px;min-height: 34px;}
+.cart-items-list-row .cart-custom-w-col-detail .addnote-from-group .dish-notes {padding-right: 21px !important;border: 0px;border-bottom: 1px solid #292929;border-radius: 0px;padding: 5px 0px;font-size: 12px;height: 34px;min-height: 34px;}
 .cart-items-list-row .addnote-from-group .form-label {cursor: pointer;text-decoration: underline;font-size: 14px;color: #292929;}
 .cart-items-list-row .addnote-from-group .form-label:hover {color: #FFC00B;}
 .cart-items-list-row .cart-custom-w-col-detail .foodqty .minus, .cart-items-list-row .cart-custom-w-col-detail .foodqty .plus{height: 30px !important;min-width: 30px !important;border-color: #D9D9D9 !important;width: 30px;flex: 0 0 30px !important;display: flex !important;align-items: center;justify-content: center;background: #D9D9D9 !important;box-shadow: none;}

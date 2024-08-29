@@ -217,6 +217,8 @@ Route::middleware(['auth', 'auth.user', 'localization'])->group(function () {
         Route::get('/coupons/confirm/{id}', [App\Http\Controllers\User\CouponController::class, 'confirm']);
 
         Route::get('/orders/{order_id?}', [App\Http\Controllers\User\OrderController::class, 'index'])->name('user.orders');
+        // use for show order details on track order back button
+        Route::get('/order/order-detail/{order_id?}', [App\Http\Controllers\User\OrderController::class, 'ordersDetailMobile'])->name('user.ordersDetailMobile');
 
         Route::get('/orders/order-detail/{order_id}', [App\Http\Controllers\User\OrderController::class, 'orderDetail'])->name('user.order-detail');
         Route::get('/orders/download-invoice/{order_id}', [App\Http\Controllers\User\OrderController::class, 'downloadInvoice'])->name('user.download-invoice');

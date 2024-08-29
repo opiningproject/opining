@@ -1160,6 +1160,7 @@ footer .footer-copyright-text {
   font-weight: 400;
   text-transform: capitalize;
   margin: 0;
+  margin-bottom: 12px;
 }
 
 .customisable-item-detail p {
@@ -1171,6 +1172,7 @@ footer .footer-copyright-text {
   letter-spacing: 0.815px;
   text-transform: capitalize;
   line-height: 23px;
+  margin-bottom: 10px !important;
 }
 
 .customisable-item-detail .form-control {
@@ -1196,7 +1198,7 @@ footer .footer-copyright-text {
 .customisable-table table th {
   padding: 0;
   color: var(--theme-dark2);
-  font-family: "Sebino-Medium", sans-serif;
+  font-family: "Sebino-Bold";
   font-size: 18px;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -2271,7 +2273,7 @@ input[type=number] {
 .food-custom-price {
   color: var(--theme-dark2);
   text-align: center;
-  font-family: "SebinoRegular", sans-serif;
+  font-family: "Sebino-Medium", sans-serif;
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.815px;
@@ -4229,7 +4231,8 @@ input[type=number] {
 .category-section .swiper-container .swiper-button-next {right: -30px;}
 .category-section .swiper-container .swiper-button-prev {left: -30px;}
 .ordersdetails_sidebar {position: fixed;z-index: 99999;top: 136px;left: 0px;right: 0px;overflow: auto;width: 100% !important;max-width: 92%;margin: -90px auto;height: 83vh !important;visibility: hidden;opacity: 0;}
-.ordersdetails_sidebar.open {display: block;visibility: visible;opacity: 1;}body.sidebar-open {overflow: hidden !important;}
+.ordersdetails_sidebar.open {display: block;visibility: visible;opacity: 1;}
+body.sidebar-open {overflow: hidden !important;}
 .overlay-custom {display: none;position: fixed;top: 0;left: 0;z-index: 1000;width: 100vw;height: 100vh;background-color: #000;opacity: 0.5;}body.sidebar-open .overlay-custom {display: block;}
 .track-order-main .clock-icon {bottom: -40px !important;}
 .order-non-active .orders .orders-type .orders-list .orders-item.active {border: 1px solid var(--theme-gray2);background-color: #ffffff;filter: initial;}
@@ -4519,10 +4522,9 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 0px !important;right: 370px !important;left: initial;}
 
 .customisable-modal-body .modal-footer-sticky .qty-col {flex: 0 0 115px;max-width: 115px;}
-.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 10px 8px !important;font-size: 12px !important;}
+.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 10px 8px !important;font-size: 12px !important;max-width: 190px !important;}
 .customisable-modal-body .modal-footer-sticky .foodqty .minus, .customisable-modal-body .modal-footer-sticky .foodqty .plus {height: 30px !important;min-width: 30px !important;width: 30px;flex: 0 0 30px !important;}
 .customisable-modal-body .modal-footer-sticky .foodqty .count {min-width: 40px;width: 40px;font-size: 16px;}
-
 }
 
 @media screen and (max-width: 640px) {
@@ -4567,7 +4569,7 @@ footer .footer-logo a {font-size: initial !important;}
 @media screen and (max-width: 576px) {
 #final-checkout-form .checkout-form-steps {padding-left: 0px;margin: 0px auto;}
 .food-detail-card .btn {font-size: 12px !important;}
-.custom-modal .modal-body, .custom-modal .modal-footer {padding: 15px 15px 25px;}
+.custom-modal .modal-body, .custom-modal .modal-footer {padding: 15px 20px 25px;}
 .category-section .category-slider .category-element .card p {font-size: 13px;}
 .category-section .category-slider .category-element .card .dish-item-icon {margin-bottom: 10px;}
 .category-section .section-page-title {margin-bottom: 5px !important;}
@@ -5452,6 +5454,9 @@ input.form-control.dish-notes {background: inherit;}
   .trackOrderBox .progress-steps .step h4 {font-size: 11px;}
 .trackOrderBox .progress-steps .step {gap: 10px;}
 .category-section .swiper-container-mobile.mobile-slider-sticky .category-element .card p {font-size: 13px !important;}
+.customisable-modal-body .dish-option-select {
+  max-width: 100% !important;
+}
 }
 
 @media (max-width: 767px) {
@@ -5466,7 +5471,7 @@ input.form-control.dish-notes {background: inherit;}
   max-height: 64vh;
 }
 .customisable-modal-body .pro-image img {
-  max-height: 75px;
+  max-height: 85px;
   object-fit: contain;
   object-position: center;
 }
@@ -5484,6 +5489,37 @@ input.form-control.dish-notes {background: inherit;}
 body {
   padding-top: 60px !important;
 }
+
+.category-list-section .dish-details-div {
+  min-height: 220px;
+}
+
+.customisable-item-detail h4 {
+  font-size: 18px;
+}
+
+.customisable-item-detail p {
+  font-size: 11px;
+  line-height: 16px;
+  margin-bottom: 10px;
+}
+
+.customisable-item-detail .food-custom-price {
+  color: #292929;
+  font-size: 16px !important;
+  margin-top: 0px;
+}
+
+ .customisable-table table th {
+  font-size: 12px;
+ }
+ .accordion-item .paid_ingredients-list {
+  font-size: 12px !important;
+}
+.customisable-modal-body .customisable-table table td {
+  font-size: 12px !important;
+}
+
 }
 
 /* New Css CR4 */

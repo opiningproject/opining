@@ -24,7 +24,7 @@
 
                         <div class="mobile-order-page d-none orders-details-mobile">
                             <div class="mobile-head-belt">
-                                <a href="{{route('user.orders', ['order_id' => $orderId])}}">
+                                <a href="{{route('user.ordersDetailMobile', ['order_id' => $orderId])}}">
 
                                     <button type="button" class="btn-close bg-arrow-mobile">
                                         <i class="fa-solid fa-angle-left d-none"></i>

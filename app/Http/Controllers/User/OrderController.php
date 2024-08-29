@@ -62,6 +62,33 @@ class OrderController extends Controller
         return view('user.orders.orders', ['orders' => $orders, 'active_orders' => $active_orders, 'order' => $order, 'lastPage' => $orders->lastPage()]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
+    public function ordersDetailMobile(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        $active_orders = Order::where('user_id', $user_id)->where('is_cart', '0')->where('order_status', '<>', OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+        $orders = Order::where('user_id', $user_id)->where('is_cart', '0')->where('order_status', OrderStatus::Delivered)->orderBy('id', 'desc')->paginate(10);
+
+        $order = '';
+        if ($request->order_id) {
+            $order = Order::find($request->order_id);
+        } else {
+            if (count($active_orders)) {
+                $order = $active_orders[0];
+            } else if (count($orders)) {
+                $order = $orders[0];
+            }
+        }
+        if ($request->order_id) {
+            return view('user.orders.order-detail-mobile', ['orders' => $orders, 'order' => $order]);
+        }
+        return view('user.orders.orders', ['orders' => $orders, 'active_orders' => $active_orders, 'order' => $order, 'lastPage' => $orders->lastPage()]);
+    }
+
     public function orderLocation(Request $request)
     {
         $order = OrderUserDetail::where('order_id', $request->order_id)->first();

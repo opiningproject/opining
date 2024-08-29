@@ -277,7 +277,7 @@ class DishController extends Controller
                     }
 
                     $html_paid_ingredients .= "<tr>
-                                    <td width='15%'>
+                                    <td width='16%'>
                                       <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                     </td>
                                     <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>".number_format($ingredient_price,2)."</span></span>

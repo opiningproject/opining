@@ -178,15 +178,15 @@
 
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.tax') }}</p>
-                <p>€{{  round($order->tax_amount, 2) }}</p>
+                <p>€{{  number_format($order->tax_amount, 2) }}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.sub_total') }}</p>
-                <p>€{{  round($order->sub_total, 2) }}</p>
+                <p>€{{  number_format($order->sub_total, 2) }}</p>
             </div>
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.item_total') }}</p>
-                <p>€{{  round(getOrderGrossAmount($order), 2) }}</p>
+                <p>€{{  number_format(getOrderGrossAmount($order), 2) }}</p>
             </div>
             @if($order->platform_charge > 0)
             <div class="amount-description-bottom">
@@ -209,7 +209,7 @@
             @endif
             <div class="amount-description-bottom">
                 <p>{{ trans('rest.food_order.total') }}</p>
-                <p>€{{ round($order->total_amount, 2) }}</p>
+                <p>€{{ number_format($order->total_amount, 2) }}</p>
             </div>
         </div>
 

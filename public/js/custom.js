@@ -26,7 +26,7 @@ $(document).ready(function() {
   function initStickySwiper() {
       var $swiperContainer = $('.swiper-container-mobile');
       var $productContainer = $('.category-list-section');
-      
+
       // Ensure the swiper container exists in the DOM
       if ($swiperContainer.length > 0) {
           // If the container does not exist, add it to the DOM (optional)
@@ -36,7 +36,8 @@ $(document).ready(function() {
       }
 
       // Get the initial offset of the container
-      var stickyOffset = $productContainer.offset().top - 150;
+      // var stickyOffset = $productContainer.offset().top - 150;
+      var stickyOffset = $productContainer.offset().top - 90;
 
       // Attach the scroll event listener
       $(window).scroll(function() {

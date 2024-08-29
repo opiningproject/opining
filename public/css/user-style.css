@@ -4522,7 +4522,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 0px !important;right: 370px !important;left: initial;}
 
 .customisable-modal-body .modal-footer-sticky .qty-col {flex: 0 0 115px;max-width: 115px;}
-.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 10px 8px !important;font-size: 12px !important;max-width: 190px !important;}
+.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 10px 10px !important;font-size: 12px !important;max-width: 190px !important;}
 .customisable-modal-body .modal-footer-sticky .foodqty .minus, .customisable-modal-body .modal-footer-sticky .foodqty .plus {height: 30px !important;min-width: 30px !important;width: 30px;flex: 0 0 30px !important;}
 .customisable-modal-body .modal-footer-sticky .foodqty .count {min-width: 40px;width: 40px;font-size: 16px;}
 }
@@ -5462,7 +5462,7 @@ input.form-control.dish-notes {background: inherit;}
 @media (max-width: 767px) {
 
 .ingredientslist-dp.custom-default-dropdown .dish-option-error{
-    margin-left: 45px !important;
+    margin-left: 5px !important;
 }
 .dashboard-custom .bottom-sticky {
   display: none !important;

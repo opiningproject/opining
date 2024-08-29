@@ -37,7 +37,7 @@ $(document).ready(function() {
 
       // Get the initial offset of the container
       // var stickyOffset = $productContainer.offset().top - 150;
-      var stickyOffset = $productContainer.offset().top - 90;
+      var stickyOffset = $productContainer.offset().top - 120;
 
       // Attach the scroll event listener
       $(window).scroll(function() {

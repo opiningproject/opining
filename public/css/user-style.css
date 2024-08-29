@@ -4404,6 +4404,9 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 #coupon_code_apply_btn.btn {padding: 4px 12px !important;}
 .mobile-scrolllable-content .checkout-section .countrycode-phone-control .dropdown-toggle {min-height: 40px;height: 40px;padding: 8px 10px;}
 .input-group .btn {height: 40px;}
+.customisable-modal-body .modal-footer-sticky .btn-mobile {
+    padding: 12px 12px 11px !important;
+}
 }
 /* checkout button enable disabled css added */
 .show-hide-btn {pointer-events: none;opacity: 0.5;background-color: transparent;border-color: #292929 !important;}
@@ -4522,7 +4525,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .cartoffCanvas .offcanvas-body .bg-arrow-mobile {z-index: 2;position: fixed !important;top: 0px !important;right: 370px !important;left: initial;}
 
 .customisable-modal-body .modal-footer-sticky .qty-col {flex: 0 0 115px;max-width: 115px;}
-.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 10px 8px !important;font-size: 12px !important;max-width: 190px !important;}
+.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 10px 11px !important;font-size: 12px !important;max-width: 190px !important;}
 .customisable-modal-body .modal-footer-sticky .foodqty .minus, .customisable-modal-body .modal-footer-sticky .foodqty .plus {height: 30px !important;min-width: 30px !important;width: 30px;flex: 0 0 30px !important;}
 .customisable-modal-body .modal-footer-sticky .foodqty .count {min-width: 40px;width: 40px;font-size: 16px;}
 }
@@ -4557,7 +4560,7 @@ footer .footer-logo a {font-size: initial !important;}
 .cart-sidebar .offcanvas-body {padding-bottom: 60px !important;}
 .cartSidebarCustom .cartoffCanvas {padding-bottom: 140px;}
 .bill-detail-invoice table {margin: 0px 0px;}
-.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 8px 8px !important;font-size: 12px !important;}
+.customisable-modal-body .modal-footer-sticky .btn-mobile {padding: 12px 8px 11px !important;font-size: 12px !important;}
 .customisable-modal-body .pro-image img {height: auto;}
 .customisable-modal-body .modal-header .food-custom-price {font-size: 20px !important;}
 .custom-modal .customisable-modal-body.custom-modal .modal-header {padding-bottom: 10px !important;}
@@ -5462,7 +5465,7 @@ input.form-control.dish-notes {background: inherit;}
 @media (max-width: 767px) {
 
 .ingredientslist-dp.custom-default-dropdown .dish-option-error{
-    margin-left: 45px !important;
+    margin-left: 5px !important;
 }
 .dashboard-custom .bottom-sticky {
   display: none !important;

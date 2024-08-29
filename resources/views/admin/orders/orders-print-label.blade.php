@@ -143,7 +143,7 @@
                    <span>{!! getOrderDishIngredients2($dish) !!}</span>
                     <span><u>{{ $dish->notes }}</u></span>
                 </p>
-                <p>€{{ $itemPrice }}</p>
+                <p>€{{ number_format($itemPrice, 2) }}</p>
             </div>
             @endforeach
 

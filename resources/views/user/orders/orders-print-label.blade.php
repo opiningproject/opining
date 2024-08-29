@@ -112,7 +112,7 @@
 
 
 <div class="no-print" id="no_print">
-    <a href="{{ route('user.orders',['order_id' => $order->id]) }}" class="back-arrow">
+    <a href="{{ route('user.ordersDetailMobile',['order_id' => $order->id]) }}" class="back-arrow">
     <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M17.17,24a1,1,0,0,1-.71-.29L8.29,15.54a5,5,0,0,1,0-7.08L16.46.29a1,1,0,1,1,1.42,1.42L9.71,9.88a3,3,0,0,0,0,4.24l8.17,8.17a1,1,0,0,1,0,1.42A1,1,0,0,1,17.17,24Z"/></svg>
 </a>
 </div>
@@ -170,7 +170,7 @@
                     <span>{!! getOrderDishIngredients2($dish) !!}</span>
                     <span><u>{{ $dish->notes }}</u></span>
                 </p>
-                <p>€{{ $itemPrice }}</p>
+                <p>€{{ number_format($itemPrice, 2) }}</p>
             </div>
             @endforeach
 

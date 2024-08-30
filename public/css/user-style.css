@@ -326,6 +326,9 @@ a {
 .custom-w-625px {
   max-width: 625px;
 }
+.custom-w-425px {
+  max-width: 425px;
+}
 
 .h-50px {
   height: 50px;
@@ -1156,7 +1159,7 @@ footer .footer-copyright-text {
 .customisable-item-detail h4 {
   color: var(--theme-dark2);
   font-family: "Sebino-Medium", sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   text-transform: capitalize;
   margin: 0;
@@ -4326,6 +4329,11 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .customisable-modal-body .modal-header {padding-top: 30px;margin-bottom: 20px;}
 .customisable-modal-body .modal-header .btn-close {position: absolute;top: 25px;right: 25px;z-index: 2;}
 
+.customisable-modal .customisable-modal-body .ingredients-table table td {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
 /*Ui Datepicker css*/
 .ui-timepicker-container {border: 1px solid #d9d9d9 !important;padding: 5px;border-radius: 12px !important;margin-top: 5px !important;}
 .ui-timepicker-container ul.ui-timepicker-viewport {display: flex;flex-wrap: wrap;}
@@ -5361,23 +5369,27 @@ footer {padding: 36px 20px 20px 20px;}
 .address-step-box .addess-list .ico {padding-right: 15px;}
 .address-step-box .addess-list p {font-size: 11px;}
 .track-order-content {margin-top: 35px;}
-.swiper-container-mobile.mobile-slider-sticky {
-  position: fixed;
+.swiper-container-mobile {
   left: 0;
   right: 0px;
   top: 58px;
-  padding: 10px 20px !important;
-  background: #F8F8F8;
   z-index: 9;
   width: 100%;
   margin: 0 auto;
   margin-left: 0px;
+  position: sticky;
 }
-.swiper-container-mobile.mobile-slider-sticky .category-slider .category-element .card .dish-item-icon {display: none;}
-.swiper-container-mobile.mobile-slider-sticky .category-element .card {border-radius: 10px;padding: 11px 7px;}
-.swiper-container-mobile.mobile-slider-sticky .category-element .card p {font-size: 15px !important;}
-.swiper-container-mobile.mobile-slider-sticky .category-slider {padding: 0px;}
-.swiper-container-mobile.mobile-slider-sticky .section-page-title {display: none;}
+.swiper-container-mobile.sticky {
+  padding: 10px 20px !important;
+  background: #F8F8F8;
+  margin-left: -20px;
+  width: calc(100% + 40px);
+}
+.swiper-container-mobile.sticky .category-slider .category-element .card .dish-item-icon {display: none;}
+.swiper-container-mobile.sticky .category-element .card {border-radius: 10px;padding: 11px 7px;}
+.swiper-container-mobile.sticky .category-element .card p {font-size: 15px !important;}
+.swiper-container-mobile.sticky .category-slider {padding: 0px;}
+.swiper-container-mobile.sticky .section-page-title {display: none;}
 
 /* Mobile Track Order page css ends */
 
@@ -5456,7 +5468,7 @@ input.form-control.dish-notes {background: inherit;}
 @media (max-width: 575px) {
   .trackOrderBox .progress-steps .step h4 {font-size: 11px;}
 .trackOrderBox .progress-steps .step {gap: 10px;}
-.category-section .swiper-container-mobile.mobile-slider-sticky .category-element .card p {font-size: 13px !important;}
+.category-section .swiper-container-mobile.sticky .category-element .card p {font-size: 13px !important;}
 .customisable-modal-body .dish-option-select {
   max-width: 100% !important;
 }
@@ -5479,7 +5491,7 @@ input.form-control.dish-notes {background: inherit;}
   object-position: center;
 }
 .customisable-item-detail p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 20px;
 }
 .menu-sidebar.sticky-top {
@@ -5494,16 +5506,16 @@ body {
 }
 
 .category-list-section .dish-details-div {
-  min-height: 220px;
+  min-height: 260px;
 }
 
 .customisable-item-detail h4 {
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .customisable-item-detail p {
-  font-size: 11px;
-  line-height: 16px;
+  font-size: 15px;
+  line-height: 22px;
   margin-bottom: 10px;
 }
 
@@ -5517,7 +5529,7 @@ body {
   font-size: 12px;
  }
  .accordion-item .paid_ingredients-list {
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 .customisable-modal-body .customisable-table table td {
   font-size: 12px !important;
@@ -5528,6 +5540,7 @@ body {
 /* New Css CR4 */
 .customisable-modal-body .modal-body .dish-option-select {
   margin: 0px auto;
+  font-size: 13px;
 }
 .customisable-modal-body .modal-header.pb-0 {
   /* padding-bottom: 0px !important; */
@@ -5579,3 +5592,35 @@ body {
     border-color: red !important; /* Ensures the border is red while shaking */
 }
 
+
+.customisable-modal-body .customisable-item-detail .pro-image {
+  width: 100%;
+  max-width: 180px;
+  margin: 0px auto;
+  height: 180px;
+}
+.customisable-modal-body .customisable-item-detail .pro-image>img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  max-height: none !important;
+}
+
+.customisable-item-detail .food-custom-price {
+  font-family: "Sebino-Bold" !important;
+}
+
+.ingredientslist-dp .option_label {
+  font-family: "Sebino-Bold";
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: #292929 !important;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.customisable-modal-body .customisable-item-detail .foodqty .count {
+  font-size: 22px !important;
+}

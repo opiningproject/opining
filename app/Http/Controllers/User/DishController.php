@@ -173,7 +173,7 @@ class DishController extends Controller
         if (count($dishOptionCategoryData) > 0) {
             foreach($dishOptionCategoryData as $key => $value) {
                     $html_options .= "<div class='row justify-content-center'>
-                        <div class='col-sm-6'>
+                        <div class='col-sm-9'>
                           <div class='form-group mb-3'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
@@ -198,7 +198,7 @@ class DishController extends Controller
 
         $html_free_ingredients = '';
         if (count($freeIngredients) > 0) {
-            $html_free_ingredients .= "<div class='customisable-table custom-table'>
+            $html_free_ingredients .= "<div class='customisable-table custom-table ingredients-table'>
                       <table class='w-100'>
                         <thead>
                           <tr>

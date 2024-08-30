@@ -112,12 +112,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('user.settings') }}" class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/settings-menu.svg') }}" class="svg" width="40" height="40">
-                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ route('user.points') }}" class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/collected-points-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
@@ -135,6 +129,12 @@
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                     <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" width="40" height="40">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons')}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('user.settings') }}" class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
+                                    <img src="{{ asset('images/settings-menu.svg') }}" class="svg" width="40" height="40">
+                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
                                 </a>
                             </li>
                         </ul>

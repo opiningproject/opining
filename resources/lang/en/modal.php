@@ -52,7 +52,9 @@ return [
 
 	'dish' => [
 		'existing_ingredients' => 'Existing Ingredients',
+		'ingredients' => 'ingredients',
 		'extra_ingredients' => 'Add Extra Ingredients',
+		'extras' => 'Extra\'s',
 		'select_option' => 'Please select option',
 		'select_category' => 'Choose :category',
 		'field_required' => 'This field is required.'

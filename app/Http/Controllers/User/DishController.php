@@ -202,7 +202,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>".trans('modal.dish.existing_ingredients')."</th>
+                            <th colspan='3'>".trans('modal.dish.ingredients')."</th>
                           </tr>
                         </thead>
                         <tbody>";
@@ -237,7 +237,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>".trans('modal.dish.extra_ingredients')."</th>
+                            <th colspan='3'>".trans('modal.dish.extras')."</th>
                           </tr>
                         </thead>
                       </table>

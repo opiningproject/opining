@@ -38,12 +38,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('settings') }}" class="nav-link {{ activeMenu('settings') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/settings-menu.svg') }}" alt="" height="40" width="40">
-                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.settings') }}</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ route('payments') }}" class="nav-link {{ activeMenu('payments') }} align-middle">
                                     <img class="svg" src="{{ asset('images/finance-menu.svg') }}" alt="" height="40" width="40">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.my_finance') }}</span>
@@ -59,6 +53,12 @@
                                 <a href="{{ route('chat') }}" class="nav-link {{ activeMenu('chat') }} align-middle">
                                     <img class="svg" src="{{ asset('images/user-chat-menu.svg') }}" alt="" height="40" width="40">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.user_chat') }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('settings') }}" class="nav-link {{ activeMenu('settings') }} align-middle">
+                                    <img class="svg" src="{{ asset('images/settings-menu.svg') }}" alt="" height="40" width="40">
+                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.settings') }}</span>
                                 </a>
                             </li>
                         </ul>

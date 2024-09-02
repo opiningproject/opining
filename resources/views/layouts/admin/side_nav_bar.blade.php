@@ -26,38 +26,38 @@
                         <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                             <li class="nav-item">
                                 <a href="{{ route('home') }}" class="nav-link {{ activeMenu('menu') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/menu-menu.svg') }}" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/menu-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.menu') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('orders') }}" class="nav-link {{ activeMenu('orders') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/order-menu.svg') }}" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/order-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.food_order') }}</span>
                                     <span class="ms-1 d-sm-inline align-middle order-count">{{ getOpenOrders() }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('payments') }}" class="nav-link {{ activeMenu('payments') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/finance-menu.svg') }}" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/finance-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.my_finance') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('coupons.index') }}" class="nav-link {{ activeMenu('coupons') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/coupons-menu.svg') }}" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/coupons-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.coupons') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('chat') }}" class="nav-link {{ activeMenu('chat') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/user-chat-menu.svg') }}" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/user-chat-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.user_chat') }}</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item fixed_bottom">
                                 <a href="{{ route('settings') }}" class="nav-link {{ activeMenu('settings') }} align-middle">
-                                    <img class="svg" src="{{ asset('images/settings-menu.svg') }}" alt="" height="40" width="40">
+                                    <img class="svg" src="{{ asset('images/settings-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.settings') }}</span>
                                 </a>
                             </li>
@@ -67,31 +67,33 @@
             </nav>
 
         </div>
-        <div class="offcanvas-footer">
-            <div class="sidebar-bottom mb-5">
-                <div class="dropdown dropdown-center">
-                  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if(App::isLocale('en'))
-                      <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28" />
-                      <span class="">English</span>
-                    @else
-                      <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28" />
-                      <span class="">Dutch</span>
-                    @endif
-                  </button>
-                  <ul class="multi-language-div dropdown-menu">
-                      <li>
-                        <a class="dropdown-item {{ (App::isLocale('en')) ? 'active': '' }}" href="{{ route('app.setLocal', 'en') }}">
-                          <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />English
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item {{ (App::isLocale('nl')) ? 'active': '' }}" href="{{ route('app.setLocal', 'nl') }}">
-                          <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />Dutch
-                        </a>
-                      </li>
-                    </ul>
-                </div>
+        
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="sidebar-bottom mb-2">
+            <div class="dropdown dropdown-center">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                @if(App::isLocale('en'))
+                  <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28" />
+                  <span class="">English</span>
+                @else
+                  <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28" />
+                  <span class="">Dutch</span>
+                @endif
+              </button>
+              <ul class="multi-language-div dropdown-menu">
+                  <li>
+                    <a class="dropdown-item {{ (App::isLocale('en')) ? 'active': '' }}" href="{{ route('app.setLocal', 'en') }}">
+                      <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />English
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item {{ (App::isLocale('nl')) ? 'active': '' }}" href="{{ route('app.setLocal', 'nl') }}">
+                      <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag" />Dutch
+                    </a>
+                  </li>
+                </ul>
             </div>
         </div>
     </div>

@@ -214,7 +214,7 @@ class DishController extends Controller
                 $ingredient_image = $ingredient->ingredient->image;
 
                 $html_free_ingredients .= "<tr>
-                                  <td width='10%'>
+                                  <td width='16%'>
                                     <img src='$ingredient_image' class='img-fluid me-15px' alt='$ingredient_name' width='50' height='50'>
                                   </td>
                                   <td class='text-left'>$ingredient_name</td>
@@ -233,7 +233,7 @@ class DishController extends Controller
         $html_paid_ingredients = '';
 
         if (count($paidIngredients) > 0) {
-            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-1'>
+            $html_paid_ingredients .= "<div class='customisable-table custom-table mt-2'>
                       <table class='w-100'>
                         <thead>
                           <tr>
@@ -283,7 +283,7 @@ class DishController extends Controller
                                     <td class='text-left paid-ing-text'>$ingredient_name <span class='food-custom-price'>€<span id='ing-price-val$ingredient->id'>".number_format($ingredient_price,2)."</span></span>
                                     </td>
                                     <td width='7%'>
-                                      <div class='foodqty mt-1'>
+                                      <div class='foodqty mt-0'>
                                         <span class='minus' onclick=addSubDishIngredientQuantities($ingredient->id,'-',$dish->id)>
                                           <i class='fas fa-minus align-middle'></i>
                                         </span>

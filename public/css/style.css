@@ -521,7 +521,7 @@ a {
 .menu-sidebar .offcanvas-footer {
     text-align: center;
     display: block;
-    position: relative; 
+    position: relative;
 }
 .menu-sidebar .offcanvas-footer .sidebar-bottom .dropdown .btn {
     padding: 10px;
@@ -3725,13 +3725,14 @@ nav .pagination {
   }
 
   .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link {
-    background: #ffffff;
-    padding: 10px 50px !important;
-    border-radius: 0px !important;
+      padding: 6px 16px 6px 16px !important;
+      border-radius: 9999px !important;
+      margin: 0px 15px 0px 40px;
+      max-width: 251px;
   }
 
   .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link svg, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link svg path {
-    fill: rgb(255, 192, 11);
+    /*fill: rgb(255, 192, 11);*/
   }
 
   body .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
@@ -3746,3 +3747,4 @@ nav .pagination {
 .menu-sidebar .offcanvas-footer .sidebar-bottom .dropdown .dropdown-item {
     margin-bottom: 0px !important;
 }
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {border-radius: 9999px !important;}

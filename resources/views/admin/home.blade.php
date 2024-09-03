@@ -128,7 +128,7 @@
                                                         </div>
                                                         <span class="dish-item-icon">
                                                     <img src="{{ $category->image }}" class="img-fluid svg" alt="bakery"
-                                                         style="height: 80px !important;">
+                                                         style="height: 45px !important;">
                                                 </span>
                                                         <p class="mb-0 category-item-name text-truncate w-100"
                                                            title="{{ $category->name }}">{{ $category->name }}</p>

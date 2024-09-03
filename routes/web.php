@@ -137,9 +137,10 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
         // Dish option category route
         Route::resource('/dish-option', DishOptionsController::class);
         Route::group(['prefix' => '/dish-option'], function () {
-            Route::post('/update/{ingredient}', [DishOptionsController::class, 'updateIngredient']);
-            Route::post('/update-status/{ingredient}', [DishOptionsController::class, 'updateIngredientStatus']);
-            Route::post('/updateingredientRowOrder', [DishOptionsController::class, 'updateingredientRowOrder']);
+            Route::post('/update/{dish_option_id}', [DishOptionsController::class, 'updateDishCategoryOption']);
+            Route::post('/update-status/{dish_option_id}', [DishOptionsController::class, 'updateDishCategoryOptionStatus']);
+            Route::post('/updateDishCategoryOptionRowOrder', [DishOptionsController::class, 'updateDishCategoryOptionRowOrder']);
+            Route::get('/checkAttachedDish/{dish_option_id}', [DishOptionsController::class, 'checkAttachedDish']);
 //            Route::post('/update/{ingredient}', [DishOptionsController::class, 'updateIngredient']);
         });
         Route::resource('/dish-options/category', DishOptionCategoryController::class, [

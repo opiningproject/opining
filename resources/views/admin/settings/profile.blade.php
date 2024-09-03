@@ -137,6 +137,40 @@
                             <input type="text" class="form-control" name="take_away_time" maxlength="25" value="{{ $user->take_away_time }}" required />
                         </div>
                     </div>
+                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="language" class="form-label">{{ trans('user.profile.language') }}</label>
+                            <div class="custom-select-wrapper">
+                                <div class="custom-select">
+                                    <div class="custom-select-trigger dropdown-toggle form-control">
+                                              <span>
+                                                    <img
+                                                        src="{{ App::isLocale('nl') ? asset('images/dutch-flag.svg') : asset('images/english-flag.svg') }}"
+                                                        width="20" height="20" alt="flag"/>
+                                                    {{ App::isLocale('nl') ? 'Dutch' : 'English' }}
+                                                </span>
+                                        <div class="arrow"></div>
+                                    </div>
+                                    <div class="custom-options">
+                                                <span class="custom-option {{ App::isLocale('en') ? 'selected' : '' }}"
+                                                      data-value="en">
+                                                    <img src="{{ asset('images/english-flag.svg') }}" width="20"
+                                                         height="20" alt="English flag"> English
+                                                </span>
+                                        <span class="custom-option {{ App::isLocale('nl') ? 'selected' : '' }}"
+                                              data-value="nl">
+                                                    <img src="{{ asset('images/dutch-flag.svg') }}" width="20"
+                                                         height="20" alt="Dutch flag"> Dutch
+                                                </span>
+                                    </div>
+                                </div>
+                                <select id="language" name="language" required style="display: none;">
+                                    <option value="en" {{ App::isLocale('en') ? 'selected' : '' }}>English</option>
+                                    <option value="nl" {{ App::isLocale('nl') ? 'selected' : '' }}>Dutch</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">

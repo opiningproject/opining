@@ -132,17 +132,25 @@
                 <p>{{ trans('rest.food_order.order_price') }}</p>
             </div>
             @foreach($order->dishDetails as $key => $dish)
-            <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total; ?>
+
 
             <div class="amount-description-price">
                 <p>{{$dish->qty }}x</p>
                 <p>{{ $dish->dish->name }}
-                    <br>
-                    <span>{{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}</span>
+                    @if($dish->orderDishOptionDetails->pluck('dish_option_id'))
+                    @endif
+                @php
+                $dishIngredientsTotalAmount = getDishOptionCategoryTotalAmount($dish->orderDishOptionDetails->pluck('dish_option_id'));
+                @endphp
+                    @if($dishIngredientsTotalAmount > 0)
+                        <br>
+                    @endif
+                    <span> <b> {!! getDishOptionCategoryName2($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' !!} </b> </span>
                     <br>
                    <span>{!! getOrderDishIngredients2($dish) !!}</span>
                     <span><u>{{ $dish->notes }}</u></span>
                 </p>
+                <?php $itemPrice = ($dish->price * $dish->qty) + $dish->paid_ingredient_total + $dishIngredientsTotalAmount; ?>
                 <p>€{{ number_format($itemPrice, 2) }}</p>
             </div>
             @endforeach

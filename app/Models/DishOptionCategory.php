@@ -12,9 +12,9 @@ class DishOptionCategory extends Model
 
     protected $table = 'dish_options_categories';
 
-    protected $fillable = ['name_en','name_nl', 'sort_order'];
+    protected $fillable = ['name_en','name_nl','title_en', 'title_nl', 'sort_order'];
 
-    protected $appends = ['name'];
+    protected $appends = ['name', 'title'];
 
 
     public function dishCategoryOption(){
@@ -22,5 +22,12 @@ class DishOptionCategory extends Model
     }
     public function getNameAttribute(){
         return $this->attributes['name_' . app()->getlocale()];
+    }
+    public function getTitleAttribute(){
+        return $this->attributes['title_' . app()->getlocale()];
+    }
+
+    public function dishCategoryOptionWithoutTrash(){
+        return $this->belongsTo(DishCategoryOption::class, 'dish_category_options_id', 'id');
     }
 }

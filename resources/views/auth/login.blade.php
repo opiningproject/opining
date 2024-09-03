@@ -11,7 +11,7 @@
                             <div class="logo-text text-dark-1 mb-0">
                                 <a href="javascript:void(0);">
                                     <div>
-                                        <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
+                                        <img src="{{ asset('images/logo-admin.png') }}" class="web-logo">
                                     </div>
                                 </a>
                             </div>

@@ -44,20 +44,21 @@ class DishOptionsController extends Controller
     public function store(Request $request)
     {
         try {
-            $storedIngredient = DishCategoryOption::orderBy('sort_order', 'desc')->first();
+            $storedDishCategoryOption = DishCategoryOption::orderBy('sort_order', 'desc')->first();
 
-            $ingredient = new DishCategoryOption();
-            $ingredient->name_en = $request->name_en;
-            $ingredient->name_nl = $request->name_nl;
-            $ingredient->cat_id = $request->category_id;
+            $dishCategoryOption = new DishCategoryOption();
+            $dishCategoryOption->name_en = $request->name_en;
+            $dishCategoryOption->name_nl = $request->name_nl;
+            $dishCategoryOption->cat_id = $request->category_id;
+            $dishCategoryOption->price = $request->price;
 
-            if(empty($storedIngredient->sort_order)) {
-                $ingredient->sort_order = 1;
+            if(empty($storedDishCategoryOption->sort_order)) {
+                $dishCategoryOption->sort_order = 1;
             }else{
-                $ingredient->sort_order = $storedIngredient->sort_order + 1;
+                $dishCategoryOption->sort_order = $storedDishCategoryOption->sort_order + 1;
             }
 
-            $ingredient->save();
+            $dishCategoryOption->save();
 
             return redirect()->back();
         } catch (Exception $e) {
@@ -71,7 +72,7 @@ class DishOptionsController extends Controller
     public function show(string $id)
     {
         try {
-            $ingredients = Ingredient::where('id', $id)->has('dishIngredient')->get();
+            $dishCategoryOption = DishCategoryOption::where('id', $id)->has('dishIngredient')->get();
 
             return response::json(['status' => 1, 'data' => '']);
         } catch (Exception $e) {
@@ -101,7 +102,7 @@ class DishOptionsController extends Controller
     public function destroy(string $id)
     {
         try {
-            Ingredient::find($id)->delete();
+            DishCategoryOption::find($id)->delete();
             return response::json(['status' => 200, 'message' => trans('rest.message.dish_category_delete_success')]);
 
         } catch (Exception $e) {
@@ -109,15 +110,15 @@ class DishOptionsController extends Controller
         }
     }
 
-    public function updateIngredientStatus(Request $request, string $id)
+    public function updateDishCategoryOptionStatus(Request $request, string $id)
     {
         try {
-            $ingredient = DishCategoryOption::find($id);
-            if ($ingredient) {
-                $ingredient->status = $request->status;
-                $ingredient->save();
+            $dishCategoryOption = DishCategoryOption::find($id);
+            if ($dishCategoryOption) {
+                $dishCategoryOption->status = $request->status;
+                $dishCategoryOption->save();
 
-                return response::json(['status' => 200, 'data' => $ingredient, 'message' => trans('rest.message.dish_category_status_success')]);
+                return response::json(['status' => 200, 'data' => $dishCategoryOption, 'message' => trans('rest.message.dish_category_status_success')]);
             }
             else
             {
@@ -132,8 +133,8 @@ class DishOptionsController extends Controller
     public function ingredientCategoryWise(string $id)
     {
         try {
-            $ingredients = Ingredient::where('category_id', $id)->get();
-            return response::json(['status' => 200, 'data' => $ingredients]);
+            $dishCategoryOption = DishCategoryOption::where('category_id', $id)->get();
+            return response::json(['status' => 200, 'data' => $dishCategoryOption]);
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
         }
@@ -142,12 +143,11 @@ class DishOptionsController extends Controller
     public function checkAttachedDish(string $id)
     {
         try {
-            $ingredients = Ingredient::has('dishIngredientWithoutTrash')->find($id);
-
-            if($ingredients){
-                return response::json(['status' => 400, 'data' => $ingredients]);
+            $dishCategoryOption = DishOption::has('dishCategoryOptionWithoutTrash')->find($id);
+            if($dishCategoryOption){
+                return response::json(['status' => 400, 'data' => $dishCategoryOption]);
             }else{
-                return response::json(['status' => 200, 'data' => $ingredients]);
+                return response::json(['status' => 200, 'data' => $dishCategoryOption]);
             }
 
         } catch (Exception $e) {
@@ -155,9 +155,8 @@ class DishOptionsController extends Controller
         }
     }
 
-    public function updateIngredient(Request $request, string $id){
+    public function updateDishCategoryOption(Request $request, string $id){
         try {
-//            dd($request->all());
             $optionCategory = DishCategoryOption::find($id);
             if($optionCategory){
 //                dd($ingredient);
@@ -165,6 +164,7 @@ class DishOptionsController extends Controller
                 $optionCategory->name_en = $request->name_en;
                 $optionCategory->name_nl = $request->name_nl;
                 $optionCategory->cat_id = $request->category_id;
+                $optionCategory->price = $request->price;
                 $optionCategory->save();
                 if(!empty($request->deletedDish)){
                     $dishList = explode(',', $request->deletedDish);
@@ -190,7 +190,7 @@ class DishOptionsController extends Controller
         }
     }
 
-    public function updateingredientRowOrder(Request $request){
+    public function updateDishCategoryOptionRowOrder(Request $request){
 
         foreach ($request->order as $key => $order) {
 

@@ -222,31 +222,31 @@ if (!function_exists('getOrderDishIngredients1')) {
 if (!function_exists('getOrderDishIngredients2')) {
     function getOrderDishIngredients2($dish)
     {
-        $ingredients = '';
+        $ingredients = [];
         $dishData = Dish::withTrashed()->find($dish->dish_id);
 
-        if($dish->orderDishFreeIngredients->count() != $dishData->freeWithoutTrashIngredients->count()){
-            // $ingredients .= '-';
+        // Check for missing free ingredients
+        if ($dish->orderDishFreeIngredients->count() != $dishData->freeWithoutTrashIngredients->count()) {
             $ingArray = $dish->orderDishFreeIngredients->pluck('dish_ingredient_id')->all();
 
             foreach ($dishData->freeWithoutTrashIngredients as $freeIngredient) {
-                if(!in_array($freeIngredient->id, $ingArray)){
-                    // $ingredients .= $freeIngredient->ingredient->name.', ';
-                    $ingredients .= "-" .$freeIngredient->ingredient->name. "\n";
-
+                if (!in_array($freeIngredient->id, $ingArray)) {
+                    // Add missing free ingredients with a minus sign
+                    $ingredients[] = "-" . $freeIngredient->ingredient->name;
                 }
             }
         }
-        if (count($dish->orderDishPaidIngredients)>0) {
 
-            foreach ($dish->orderDishPaidIngredients as $key => $ingredient) {
-
+        // Add paid ingredients with a plus sign and price
+        if (count($dish->orderDishPaidIngredients) > 0) {
+            foreach ($dish->orderDishPaidIngredients as $ingredient) {
                 $price = $ingredient->quantity * $ingredient->price;
-                $ingredients .= "+" .$ingredient->dishIngredient->ingredient->name. "(€" .number_format($price, 2) . ")" . "\n";
-
+                $ingredients[] = "+" . $ingredient->dishIngredient->ingredient->name . " (€" . number_format($price, 2) . ")";
             }
         }
-        return trim($ingredients, ', ');
+
+        // Join all ingredients with a comma and a space
+        return implode(', ', $ingredients);
     }
 }
 
@@ -561,15 +561,19 @@ if (!function_exists('getDishOptionCategoryName')) {
 if (!function_exists('getDishOptionCategoryName2')) {
     function getDishOptionCategoryName2($optionIds)
     {
-        $ingredients = '';
-        $optionData = DishCategoryOption::whereIn('id',$optionIds)->get();
-        if (count($optionData)>0) {
-            foreach ($optionData as $key => $optionCategory) {
+        $ingredients = [];
+        $optionData = DishCategoryOption::whereIn('id', $optionIds)->get();
+
+        if ($optionData->count() > 0) {
+            foreach ($optionData as $optionCategory) {
                 $price = $optionCategory->price;
-                $ingredients .= "+" . $optionCategory->name . "(€" . number_format($price, 2) . ")" . "\n";
+                // Format: +ingredient_name (€price)
+                $ingredients[] = "+" . $optionCategory->name . " (€" . number_format($price, 2) . ")";
             }
         }
-        return trim($ingredients, ', ');
+
+        // Join all ingredients with a comma and a space
+        return implode(', ', $ingredients);
     }
 }
 

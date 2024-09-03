@@ -351,7 +351,7 @@ class DishController extends Controller
                           </span>
                         </div>
                       </div>
-                      <div class='col col-xx-6 col-xl-7 col-lg-6 col-md-6 text-end float-end ms-auto'>
+                      <div class='col col-xx-7 col-xl-7 col-lg-6 col-md-6 text-end float-end ms-auto'>
                         <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart($dish->id,$doesExist)>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>" . number_format((float)$totalAmt + $optionTotalAmount, 2) . "</span>
                         </a>
                       </div>

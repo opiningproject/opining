@@ -5545,7 +5545,7 @@ body {
 }
 
  .customisable-table table th {
-  font-size: 12px;
+  font-size: 12px !important;
  }
  .accordion-item .paid_ingredients-list {
   font-size: 11px !important;
@@ -5589,6 +5589,10 @@ body {
 
 .accordion-flush .accordion-item {
   border: 0px !important;
+}
+
+.customisable-modal .modal-footer-sticky .btn {
+font-size: 14px !important;
 }
 
 @keyframes shake {

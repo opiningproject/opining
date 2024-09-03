@@ -512,7 +512,7 @@
                                                                                                     @endphp
 
                                                                                                     <ul class="items-additional mb-2"
-                                                                                                        id="item-ing-desc{{ $dish->id }}">
+                                                                                                        id="dish-option-{{ $dish->id }}">
                                                                                                         {!! $cleanedDishOptionHtmlString !!}
                                                                                                     </ul>
                                                                                                 {{-- <span class="item-desc"

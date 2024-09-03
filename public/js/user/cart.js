@@ -576,7 +576,7 @@ if (isValid == true) {
                     }*/
                     if (response.message.dishOption) {
                         $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
-                        $('#dish-option-' + response.message.addedDishId).text(response.message.dishOption);
+                        $('#dish-option-' + response.message.addedDishId).html(response.message.dishOption);
                     }
                     $('#qty-' + response.message.addedDishId).val(totalAmount)
 

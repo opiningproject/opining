@@ -465,6 +465,36 @@ function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
     }
 }
 
+function addDishOptionPrice(dishId,amount) {
+    var totalAmount = 0
+    var lastAmount = 0 ;
+    var ingAmount = 0.00
+
+        if ($('.dishPaidIngQty').length) {
+            $('.dishPaidIngQty').each(function (index, element) {
+                if ($(element).val() > 0) {
+                    ingAmount += parseFloat($(element).data('price')) * parseInt($(element).val())
+                }
+            })
+        }
+    $('.dish-option-select').each(function () {
+        let selectedOption = $(this).find('option:selected');
+        let amount = parseFloat(selectedOption.data('price')) || 0;
+        totalAmount += amount;
+    });
+    let currentVal = parseFloat($('#total-amt' + dishId).text().replace(/,/g, '')) || 0;
+    if (lastAmount > 0 ) {
+        currentVal -= lastAmount;
+    }
+    lastAmount = totalAmount;
+    // Update the total amount directly
+    var newAmount = parseFloat($('#dish-org-price').val()) + parseFloat(totalAmount) + parseFloat(ingAmount);
+    $('#total-amt' + dishId).text((newAmount).toFixed(2));
+    // console.log("totalAmount", totalAmount, parseFloat($('#dish-org-price').val()), $('#dish-org-price').val())
+    // var newAmount = $('#dish-org-price').val() + totalAmount
+    // updateCartAmount(dishId, totalAmount, 'add')
+}
+
 function addCustomizedCart(id, doesExist = 0) {
 
     var dishData = new FormData();
@@ -568,7 +598,7 @@ if (isValid == true) {
                 $('#cart-bill-div').removeClass('d-none')
                 $('#cart-amount-cal-data').show()
                 // when update ingredients then update amount in cart.
-                var totalAmounts  = parseFloat(response.message.totalAmount + response.message.paidIngAmt).toFixed(2)
+                var totalAmounts  = parseFloat(response.message.totalAmount + response.message.paidIngAmt + response.message.optionTotalAmount).toFixed(2)
                 $('#cart-item-price' + response.message.addedDishId).html('+€' + totalAmounts)
                 $('#dish-price-' + response.message.addedDishId).val(totalAmounts)
                 // when update ingredients then update amount in cart.

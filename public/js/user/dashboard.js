@@ -200,6 +200,10 @@ $(document).ready(function () {
 
 
 function getDishes(catId) {
+    var targetOffset = $('.section-page-title').offset().top;
+    $('html, body').animate({
+        scrollTop: targetOffset
+    }, 500);
 
     if(!catId) {
         catId = $('#view-all-dishes').attr('data-category-id');

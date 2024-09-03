@@ -753,3 +753,84 @@ max-height: none !important;
 .footer-box-main-orderlist-main-item .orderRead-more .content-for-orders {
     padding-top: 3px;
 }
+.content-for-orders .items-additional li {
+    list-style-type: none;
+}
+.content-for-orders ul {
+    padding-left: 15px;
+}
+
+/* language dropdown css*/
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.custom-select-trigger img {
+    margin-right: 10px;
+}
+
+.custom-options {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 2;
+}
+
+.custom-options .custom-option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.custom-options .custom-option img {
+    margin-right: 10px;
+}
+
+.custom-options .custom-option:hover,
+.custom-options .custom-option.selected {
+    background-color: #f0f0f0;
+}
+
+.dishOptionRow .dishOptionCol {
+    flex: 0 0 22%;
+    max-width: 22%;
+}
+
+.dishOptionRow .dishBtnAddCol {
+    flex: 0 0 12%;
+    max-width: 12%;
+}
+.dishOptionRow .dishBtnAddCol button {width: 100%;}
+@media screen and (max-width: 1440px) {
+    .dishOptionRow .dishOptionCol {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    .dishOptionRow .dishBtnAddCol {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}

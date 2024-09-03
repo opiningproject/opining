@@ -225,7 +225,7 @@
                                             </div>
 
                                             <div class="orderdetails-desclist">
-                                                <?php $itemTotalPrice = 0; ?>
+                                                <?php $itemTotalPrice = 0; $dishIngredientsTotalAmount = 0; ?>
                                                 @foreach ($order->dishDetails as $key => $dish)
                                                     <div class="orderdetails-desc custom-orderdetails-desc">
                                                         <div class="orderdetails-desc-main orderdetails-desc-320">
@@ -242,8 +242,24 @@
 {{--                                                                            {{ $dish->dishOption->name ?? '' }} </b>--}}
 {{--                                                                        {{ getOrderDishIngredients($dish) }}--}}
                                                                         @if(count($dish->orderDishOptionDetails) > 0)
-                                                                            <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
-                                                                            <br>
+{{--                                                                            <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>--}}
+                                                                            <b><span style="font-size: 12px"> Options </span></b>
+                                                                            @php
+                                                                                /*old code comment on 13-08-2024*/
+                                                                                $htmlStringDishOptionCategory = getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' ;
+                                                                                $cleanedDishOptionHtmlString = str_replace(
+                                                                                    '"',
+                                                                                    '',
+                                                                                    $htmlStringDishOptionCategory,
+                                                                                );
+                                                                                $dishIngredientsTotalAmount = getDishOptionCategoryTotalAmount($dish->orderDishOptionDetails->pluck('dish_option_id'));
+                                                                            @endphp
+                                                                            <ul class="items-additional mb-2"
+                                                                                id="item-ing-desc">
+                                                                                {!! $cleanedDishOptionHtmlString !!}
+                                                                            </ul>
+                                                                        @else
+                                                                            @php $dishIngredientsTotalAmount = 0 ;@endphp
                                                                         @endif
                                                                         {{ getOrderDishIngredients($dish) }}
                                                                     </div>
@@ -277,7 +293,7 @@
 {{--                                                        @endif--}}
                                                         <div class="orderdetails-desc-price">
                                                             <?php
-                                                            $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total;
+                                                            $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total + $dishIngredientsTotalAmount ;
                                                             ?>
                                                             €{{ number_format($itemPrice, 2) }}
                                                         </div>
@@ -321,7 +337,7 @@
                                                 <div class="list">
                                                     <div class="list-item">
                                                         <div class="text">{{ trans('user.my_orders.total') }}</div>
-                                                        <div class="number">€{{ $order->total_amount }}</div>
+                                                        <div class="number">€{{ number_format($order->total_amount, 2) }}</div>
                                                     </div>
                                                 </div>
                                             </div>

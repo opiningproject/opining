@@ -56,7 +56,7 @@ return [
 		'extra_ingredients' => 'Add Extra Ingredients',
 		'extras' => 'Extra\'s',
 		'select_option' => 'Please select option',
-		'select_category' => 'Choose :category',
+		'select_category' => 'Choose category',
 		'field_required' => 'This field is required.'
 	],
 

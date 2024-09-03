@@ -137,7 +137,7 @@ class DishController extends Controller
         $selectedOption = '';
 
         $dishDetail = [];
-
+        $optionTotalAmount = 0;
         if ($doesExist) {
 
             /*$dishDetail = $user->cart()
@@ -156,6 +156,10 @@ class DishController extends Controller
 
 
             $selectedOption = $dishDetail->orderDishOptionDetails ? $dishDetail->orderDishOptionDetails->pluck('dish_option_id') : [];
+            if (count($selectedOption) > 0) {
+                $optionTotalAmount = getDishOptionCategoryTotalAmount($selectedOption);
+                $optionTotalAmount = $optionTotalAmount * $dishDetail->qty;
+            }
 
             if ($paidDishDetail) {
                 $paidSelectedIngredients = $paidDishDetail->orderDishPaidIngredients->pluck('quantity', 'dish_ingredient_id')->toArray();
@@ -177,14 +181,16 @@ class DishController extends Controller
                           <div class='form-group mb-3'>
                             <div class='input-group w-100'>
                               <div class='dropdown w-100  ingredientslist-dp custom-default-dropdown'>
-                                <select name='dish_option' class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100 dish-option-select' id='dish-option$dish->id'>
-                                <option disabled selected value=''>".trans('modal.dish.select_category',['category' => $value->name])."</option>";
+                              <label class='option_label'>$value->title</label>
+                                <select name='dish_option' class='form-control bg-white dropdown-toggle d-flex align-items-center justify-content-between w-100 dish-option-select' id='dish-option$dish->id' onchange='addDishOptionPrice($dish->id, this.options[this.selectedIndex].getAttribute(\"data-price\"),this.options[this.selectedIndex].getAttribute(\"data-id\"))'>
+                                <option disabled selected value=''>".trans('modal.dish.select_category')."</option>";
                                                 foreach ($value->dishCategoryOption as $optionKey => $option) {
                                                     $selected = '';
+                                                    $price = $option->price ? '+€'.number_format($option->price, 2) : '';
                                                     if ($selectedOption != '') {
                                                         $selected = in_array($option->id, $selectedOption->toArray()) ? 'selected' : '';
                                                     }
-                                                    $html_options .= "<option value='$option->id' $selected >$option->name</option>";
+                                                    $html_options .= "<option value='$option->id' $selected data-price='$option->price' data-id='$option->id' >$option->name $price</option>";
                                                 }
                                     $html_options .= "</select>
                                                         <label class='error dish-option-error d-none'>".trans('modal.dish.field_required')."</label>
@@ -346,7 +352,7 @@ class DishController extends Controller
                         </div>
                       </div>
                       <div class='col col-xx-6 col-xl-7 col-lg-6 col-md-6 text-end float-end ms-auto'>
-                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart($dish->id,$doesExist)>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>" . number_format((float)$totalAmt, 2) . "</span>
+                        <a href='javascript:void(0);' class='btn btn-custom-yellow fw-400 text-uppercase font-sebibold m-0 w-100 btn-mobile' onclick=addCustomizedCart($dish->id,$doesExist)>$addUpdateText<span>&nbsp;&nbsp;| €</span><span id='total-amt$dish->id'>" . number_format((float)$totalAmt + $optionTotalAmount, 2) . "</span>
                         </a>
                       </div>
                     </div>

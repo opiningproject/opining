@@ -2,6 +2,12 @@ $(function () {
 
     $("#dishOptionCategoryForm").validate({
         rules: {
+            title_en: {
+                required: true
+            },
+            title_nl: {
+                required: true
+            },
             name_en: {
                 required: true
             },
@@ -48,7 +54,7 @@ $(function () {
         var id = $('#catId').val();
 
         $.ajax({
-            url: baseURL + '/menu/ingredients/category/' + id,
+            url: baseURL + '/menu/dish-options/category/' + id,
             type: 'DELETE',
             success: function (response) {
                 $('#ing-tr'+id).remove();
@@ -85,24 +91,25 @@ $(function () {
     $(document).on('click', '.del-cat-icon', function () {
 
         var id = $(this).attr('data-id');
-
-        $.ajax({
-            url: baseURL + '/menu/dish-options/category/checkItems/' + id,
-            type: 'GET',
-            success: function (response) {
-                if (response.status == 200) {
-                    $('#catId').val(id)
-                    $('#deleteAlertModal').modal('show')
-                } else {
-                    $('#deleteAlertModalMsg').modal('show')
-                }
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                toastr.error(errorMessage)
-                // alert(errorMessage);
-            }
-        })
+        $('#catId').val(id)
+        $('#deleteAlertModal').modal('show')
+        // $.ajax({
+        //     url: baseURL + '/menu/dish-options/category/checkItems/' + id,
+        //     type: 'GET',
+        //     success: function (response) {
+        //         if (response.status == 200) {
+        //             $('#catId').val(id)
+        //             $('#deleteAlertModal').modal('show')
+        //         } else {
+        //             $('#deleteAlertModalMsg').modal('show')
+        //         }
+        //     },
+        //     error: function (response) {
+        //         var errorMessage = JSON.parse(response.responseText).message
+        //         toastr.error(errorMessage)
+        //         // alert(errorMessage);
+        //     }
+        // })
     })
 
     $(document).on('click', '.save-edit-btn', function () {
@@ -111,6 +118,8 @@ $(function () {
 
         var name_en = $('#name_en' + id).val()
         var name_nl = $('#name_nl' + id).val()
+        var title_en = $('#title_en' + id).val()
+        var title_nl = $('#title_nl' + id).val()
 
         if(name_en == ''){
             $('#name_en' + id).focus();
@@ -121,19 +130,31 @@ $(function () {
             $('#name_nl' + id).focus();
             return false
         }
+        if(title_en == ''){
+            $('#title_en' + id).focus();
+            return false
+        }
+        if(title_nl == ''){
+            $('#title_nl' + id).focus();
+            return false
+        }
 
         $.ajax({
             url: baseURL + '/menu/dish-options/category/' + id,
             type: 'PUT',
             data: {
                 name_en,
-                name_nl
+                name_nl,
+                title_en,
+                title_nl
             },
             success: function (response) {
                 console.log(response.data)
                 if (response.status == 200) {
                     $('#name_en'+id).prop('readonly', true)
                     $('#name_nl'+id).prop('readonly', true)
+                    $('#title_en'+id).prop('readonly', true)
+                    $('#title_nl'+id).prop('readonly', true)
                     $('#edit-btn'+id).show()
                     $('#del-btn'+id).show()
                     $('#save-edit-btn'+id).attr('style','width: 50%;margin-left: 25%; display: none!important; !important')
@@ -179,6 +200,18 @@ function saveIngredientCategory() {
                     '                               id="name_nl' + id + '"' +
                     '                               readonly/>' +
                     '</td>' +
+                    '<td class="text-center"><input type="text"' +
+                    '                               class="form-control text-center w-10r m-auto"' +
+                    '                               value="' + response.data.title_en + '"' +
+                    '                               id="title_en' + id + '"' +
+                    '                               readonly/>' +
+                    '</td>' +
+                    '<td class="text-center"><input type="text"' +
+                    '                               class="form-control text-center w-10r m-auto"' +
+                    '                               value="' + response.data.title_nl + '"' +
+                    '                               id="title_nl' + id + '"' +
+                    '                               readonly/>' +
+                    '</td>' +
                     '<td class="text-center">' +
                     '    <div class="">' +
                     '        <a class="btn btn-custom-yellow btn-icon edit-cat-icon"' +
@@ -194,7 +227,7 @@ function saveIngredientCategory() {
                     '        </a>' +
                     '        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"' +
                     '           id="save-edit-btn' + id + '"' +
-                    '           style="width: 50%;margin-left: 25%; display: none!important;"' +
+                    '           style="width: auto;margin-left: 0%; display: none!important;"' +
                     '           data-id="' + id + '">' +
                     '            <span class="align-middle">'+ dishValidation.save_btn +'</span>' +
                     '        </a>' +

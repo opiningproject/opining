@@ -199,6 +199,7 @@ return [
 		'male' => 'Male',
 		'female' => 'Female',
 		'other' => 'Other',
+		'language' => 'Language',
 	],
 
 	'collected_points' => [

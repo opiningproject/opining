@@ -92,6 +92,8 @@ class DishOptionCategoryController extends Controller
             {
                 $category->name_en = $request->name_en;
                 $category->name_nl = $request->name_nl;
+                $category->title_en = $request->title_en;
+                $category->title_nl = $request->title_nl;
                 $category->save();
 
                 return response::json(['status' => 200, 'message' => trans('rest.message.dish_category_update_success')]);
@@ -124,7 +126,7 @@ class DishOptionCategoryController extends Controller
 
     public function checkAttachedItems(string $id){
         try {
-            $ingredients = DishOptionCategory::has('ingredients.dishIngredient')->find($id);
+            $ingredients = DishOptionCategory::has('dishCategoryOptionWithoutTrash')->find($id);
             if($ingredients){
                 return response::json(['status' => 400, 'data' => $ingredients]);
             }else{

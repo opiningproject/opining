@@ -16,6 +16,8 @@
     }
 
     $cartValue = 0;
+    $dishOptionCategoryTotalAmount = 0
+
     ?>
     <div class="main">
         <div class="main-view">
@@ -406,9 +408,12 @@
                                                                 @if (count($cart) > 0)
                                                                     @foreach ($cart as $key => $dish)
                                                                         <?php
+                                                                        $dishOptionCategoryTotalAmount = getDishOptionCategoryTotalAmount($dish->orderDishOptionDetails->pluck('dish_option_id'));
+//                                                                        dump($dishOptionCategoryTotalAmount);
                                                                         $cartValue += $dish->qty * $dish->dish->price;
                                                                         $paidIngredient = $dish->orderDishPaidIngredients()->select(DB::raw('sum(quantity * price) as total'))->get()->sum('total');
                                                                         $cartValue += $dish->qty * $paidIngredient;
+                                                                        $cartValue += $dish->qty * $dishOptionCategoryTotalAmount;
                                                                         $outOfStock = '';
                                                                         $outOfStockDisplay = 'd-none';
                                                                         //                                                                if ($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1') {
@@ -456,7 +461,7 @@
                                                                                             @endphp
                                                                                             <span
                                                                                                 class="cart-item-price ms-auto"
-                                                                                                id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price) + ($paidIngredient * $dish->qty), 2) }}</span>
+                                                                                                id="cart-item-price{{ $dish->id }}">+€{{ number_format((float) ($dish->qty * $dish->dish->price) + ($paidIngredient * $dish->qty) + ($dishOptionCategoryTotalAmount * $dish->qty), 2) }}</span>
                                                                                         </div>
                                                                                     </div>
 
@@ -492,16 +497,24 @@
                                                                                     <div
                                                                                         class="cart-custom-w-col-detail">
                                                                                         <div class="cart-item-detail">
-
+                                                                                            @if(count($dish->orderDishOptionDetails) > 0)
+                                                                                            <b><span style="font-size: 14px"> Options </span></b>
                                                                                             <div
                                                                                                 class="d-flex align-items-center">
-                                                                                                {{--                                                                                                $htmlString = getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id'));--}}
-                                                                                                <p
-                                                                                                    class="mb-0 item-options mb-0"
-                                                                                                    id='dish-option-{{$dish->id}}'
-                                                                                                    data-dish-option='{{$dish->dishOption->name ?? '' }}'>
-                                                                                                    {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
-                                                                                                </p>
+                                                                                                    @php
+                                                                                                        /*old code comment on 13-08-2024*/
+                                                                                                        $htmlStringDishOptionCategory = getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' ;
+                                                                                                        $cleanedDishOptionHtmlString = str_replace(
+                                                                                                            '"',
+                                                                                                            '',
+                                                                                                            $htmlStringDishOptionCategory,
+                                                                                                        );
+                                                                                                    @endphp
+
+                                                                                                    <ul class="items-additional mb-2"
+                                                                                                        id="item-ing-desc{{ $dish->id }}">
+                                                                                                        {!! $cleanedDishOptionHtmlString !!}
+                                                                                                    </ul>
                                                                                                 {{-- <span class="item-desc"
                                                                                                     id="item-ing-desc{{ $dish->id }}">{{ getOrderDishIngredients1($dish) }}</span> --}}
                                                                                                 {{-- <p
@@ -522,6 +535,7 @@
                                                                                                     </p>
                                                                                                 @endif --}}
                                                                                             </div>
+                                                                                            @endif
 
                                                                                             <div
                                                                                                 class="d-flex cart-item-bt">
@@ -576,7 +590,7 @@
                                                                                                            data-id="{{ $dish->id }}"/>
                                                                                                     <input type="hidden"
                                                                                                            id="dish-price-{{ $dish->id }}"
-                                                                                                           value="{{ $dish->dish->price + $totalAmount }}"/>
+                                                                                                           value="{{ $dish->dish->price + $totalAmount +$dishOptionCategoryTotalAmount }}"/>
                                                                                                     <span class="plus"
                                                                                                           onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i
@@ -755,7 +769,6 @@
                                     </tfoot>
                                 </table>
                             </div>
-
                             <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">

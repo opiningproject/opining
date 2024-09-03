@@ -403,7 +403,7 @@
                                                 </button>
                                             </div>
                                             <div class="footer-box-main-orderlist-main d-flex flex-column" id="orderList">
-                                                <?php $itemTotalPrice = 0; ?>
+                                                <?php $itemTotalPrice = 0; $dishIngredientsTotalAmount = 0;?>
                                                 @foreach ($order->dishDetails as $key => $dish)
                                                     <div class="footer-box-main-orderlist-main-item d-flex">
                                                         <div class="text-grp orderRead-more">
@@ -416,8 +416,25 @@
                                                                 {{-- old code comment 13-08-2024 --}}
                                                                 {{-- <b class="mb-0 item-options"> {{ $dish->dishOption->name ?? '' }} </b>--}}
                                                                 @if(count($dish->orderDishOptionDetails) > 0)
-                                                                    <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
-                                                                    <br>
+                                                                   {{-- <b class="mb-0 item-options"> {{ getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }} </b>
+                                                                    <br>--}}
+                                                                     <b><span style="font-size: 12px"> Options </span></b>
+                                                                     @php
+                                                                         /*old code comment on 13-08-2024*/
+                                                                         $htmlStringDishOptionCategory = getDishOptionCategoryName($dish->orderDishOptionDetails->pluck('dish_option_id')) ?? '' ;
+                                                                         $cleanedDishOptionHtmlString = str_replace(
+                                                                             '"',
+                                                                             '',
+                                                                             $htmlStringDishOptionCategory,
+                                                                         );
+                                                                         $dishIngredientsTotalAmount = getDishOptionCategoryTotalAmount($dish->orderDishOptionDetails->pluck('dish_option_id'));
+                                                                     @endphp
+                                                                     <ul class="items-additional mb-2"
+                                                                         id="item-ing-desc">
+                                                                         {!! $cleanedDishOptionHtmlString !!}
+                                                                     </ul>
+                                                                    @else
+                                                                    @php $dishIngredientsTotalAmount = 0 ;@endphp
                                                                 @endif
                                                                 {{ getOrderDishIngredients($dish) }}
                                                             </div>
@@ -442,7 +459,7 @@
                                                         </div>
 
                                                         <div class="price d-flex flex-column">
-                                                            <?php $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total; ?>
+                                                            <?php $itemPrice = $dish->price * $dish->qty + $dish->paid_ingredient_total + $dishIngredientsTotalAmount; ?>
                                                             <div class="title">€{{ number_format($itemPrice, 2) }}</div>
                                                             {{-- <div class="text">x{{ $dish->qty }}</div> --}}
                                                         </div>

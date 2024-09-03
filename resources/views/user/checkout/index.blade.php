@@ -675,10 +675,10 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                             </p>
                                                                                             @php
                                                                                                 $totalAmount = getOrderDishIngredientsTotal($dishDetails);
-
+                                                                                                $dishOptionCategoryTotalAmount = getDishOptionCategoryTotalAmount($dishDetails->orderDishOptionDetails->pluck('dish_option_id'));
                                                                                             @endphp
                                                                                             <span
-                                                                                                class="cart-item-price ms-auto">+€{{ number_format(($dishDetails->dish->price * $dishDetails->qty) + $dishDetails->paid_ingredient_total, 2) }}</span>
+                                                                                                class="cart-item-price ms-auto">+€{{ number_format(($dishDetails->dish->price * $dishDetails->qty) + $dishDetails->paid_ingredient_total + $dishOptionCategoryTotalAmount, 2) }}</span>
                                                                                         </div>
                                                                                         <div class="d-flex">
                                                                                             <div class="text"
@@ -688,12 +688,6 @@ if($user->cart && $user->cart->order_type == 2) {
 {{--                                                                                                    class="mb-0 item-options mb-0 {{ !empty($dishDetails->dishOption->name) ? '' : 'd-none' }}">--}}
 {{--                                                                                                    {{ $dishDetails->dishOption->name ?? '' }}--}}
 {{--                                                                                                </p>--}}
-                                                                                                @if(count($dishDetails->orderDishOptionDetails) > 0)
-                                                                                                    <p class="mb-0 item-options mb-0 ">
-                                                                                                        {{ getDishOptionCategoryName($dishDetails->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}
-                                                                                                    </p>
-                                                                                                    <br>
-                                                                                                @endif
                                                                                                 @php
                                                                                                     $htmlString = getOrderDishIngredients1(
                                                                                                         $dishDetails,
@@ -709,6 +703,26 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                                     id="item-ing-desc{{ $dishDetails->id }}">
                                                                                                     {!! $cleanedHtmlString !!}
                                                                                                 </ul>
+                                                                                                @if(count($dishDetails->orderDishOptionDetails) > 0)
+                                                                                                    <b><span style="font-size: 14px"> Options </span></b>
+                                                                                                    @php
+                                                                                                        /*old code comment on 13-08-2024*/
+                                                                                                        $htmlStringDishOptionCategory = getDishOptionCategoryName($dishDetails->orderDishOptionDetails->pluck('dish_option_id')) ?? '' ;
+                                                                                                        $cleanedDishOptionHtmlString = str_replace(
+                                                                                                            '"',
+                                                                                                            '',
+                                                                                                            $htmlStringDishOptionCategory,
+                                                                                                        );
+                                                                                                    @endphp
+                                                                                                    <ul class="items-additional mb-2"
+                                                                                                        id="item-ing-desc">
+                                                                                                        {!! $cleanedDishOptionHtmlString !!}
+                                                                                                    </ul>
+{{--                                                                                                    <p class="mb-0 item-options mb-0 ">--}}
+{{--                                                                                                        {{ getDishOptionCategoryName($dishDetails->orderDishOptionDetails->pluck('dish_option_id')) ?? '' }}--}}
+{{--                                                                                                    </p>--}}
+                                                                                                @endif
+
                                                                                                 {{--                                                                                    {{ getOrderDishIngredients($dishDetails) }} --}}
                                                                                             </div>
 

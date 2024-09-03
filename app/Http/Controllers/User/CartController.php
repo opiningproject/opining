@@ -165,7 +165,7 @@ class CartController extends Controller
                 <div class='cart-item-detail'>
                     $optionTitle
                     <div class='d-flex align-items-center'>
-                       <ul class='items-additional mb-2' id='item-ing-desc{{ $dish->id }}'>
+                       <ul class='items-additional mb-2' id='dish-option-$cart->id'>
                          $cleanedDishOptionHtmlString
                        </ul>
 
@@ -430,7 +430,6 @@ class CartController extends Controller
                     $response['cartHtml'] = $this->cartHtml($orderDetails);
                 }
             }else{
-
                 if($dish->option &&  $request->option) {
                     $optionName = $dish->option->where('id', $request->option)->where('dish_id',$dish->id)->first() ?? '';
                 }
@@ -522,7 +521,7 @@ class CartController extends Controller
             $response['dishOption'] = $optionName ?? '';
             $response['optionTotalAmount'] = $optionTotalAmount ?? 0;
 //            $response['totalAmount'] = $orderDetails->total_price ?? '';  // old code comment aug cr.
-            $response['totalAmount'] = $orderDetails->price ?? '';
+            $response['totalAmount'] = $dish->price ?? '';
             return response::json(['status' => 200, 'message' => $response]);
 
 

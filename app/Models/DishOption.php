@@ -29,4 +29,8 @@ class DishOption extends Model
     {
         return $this->belongsTo(DishCategoryOption::class, 'dish_category_options_id');
     }
+
+    public function dishCategoryOptionWithoutTrash(){
+        return $this->belongsTo(DishCategoryOption::class, 'dish_category_options_id', 'id');
+    }
 }

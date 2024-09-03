@@ -5610,7 +5610,65 @@ body {
     animation-iteration-count: 3; /* Shake 3 times */
     border-color: red !important; /* Ensures the border is red while shaking */
 }
+.orderdetails-desc .orderdetails-desc-card .items-additional li {
+    list-style-type: none;
+}
+.orderdetails-desc .orderdetails-desc-card ul {
+    padding-left: 15px;
+}
 
+/* language dropdown css*/
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.custom-select-trigger img {
+    margin-right: 10px;
+}
+
+.custom-options {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 2;
+}
+
+.custom-options .custom-option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.custom-options .custom-option img {
+    margin-right: 10px;
+}
+
+.custom-options .custom-option:hover,
+.custom-options .custom-option.selected {
+    background-color: #f0f0f0;
+}
 
 .customisable-modal-body .customisable-item-detail .pro-image {
   width: 100%;
@@ -5632,7 +5690,7 @@ body {
 
 .ingredientslist-dp .option_label {
   font-family: "Sebino-Bold";
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.5px;
   color: #292929 !important;
@@ -5642,4 +5700,14 @@ body {
 
 .customisable-modal-body .customisable-item-detail .foodqty .count {
   font-size: 22px !important;
+}
+
+.ingredientslist-dp  .dish-option-select {
+    max-width: 100% !important;
+}
+
+@media (max-width: 767px) {
+    .ingredientslist-dp .option_label {
+        font-size: 12px;
+    }
 }

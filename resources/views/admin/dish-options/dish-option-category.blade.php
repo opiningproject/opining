@@ -40,8 +40,26 @@
                                 <div class="card-body py-0">
                                     <form method="POST" name="dishOptionCategoryForm" id="dishOptionCategoryForm">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                                        <div class="row dishOptionRow">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishOptionCol">
+                                                <div class="form-group">
+                                                    <label for="ingredientsnameenglish"
+                                                           class="form-label">{{ trans('rest.menu.dish_option.dish_option_category_title') }}
+                                                        <span class="text-custom-muted">(English)</span></label>
+                                                    <input type="text" class="form-control" name="title_en"
+                                                           maxlength="250" id="title_en"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishOptionCol">
+                                                <div class="form-group">
+                                                    <label for="ingredientsnameenglish"
+                                                           class="form-label">{{ trans('rest.menu.dish_option.dish_option_category_title') }}
+                                                        <span class="text-custom-muted">(Dutch)</span></label>
+                                                    <input type="text" class="form-control" name="title_nl"
+                                                           maxlength="250" id="title_nl"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishOptionCol">
                                                 <div class="form-group">
                                                     <label for="ingredientsnameenglish"
                                                            class="form-label">{{ trans('rest.menu.dish_option.dish_option_category') }}
@@ -50,7 +68,7 @@
                                                            maxlength="250" id="name_en"/>
                                                 </div>
                                             </div>
-                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishOptionCol">
                                                 <div class="form-group">
                                                     <label for="ingredientsnamedutch"
                                                            class="form-label">{{ trans('rest.menu.dish_option.dish_option_category') }}
@@ -60,11 +78,11 @@
                                                            maxlength="250" id="name_nl"/>
                                                 </div>
                                             </div>
-                                            <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                                            <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishBtnAddCol">
                                                 <div class="form-group">
-                                                    <label for="discountpercentage" class="form-label"></label>
+                                                    <label for="discountpercentage" class="form-label">&nbsp;</label>
                                                     <button type="submit"
-                                                            class="btn btn-custom-yellow btn-default d-block w-130px mt-3 save-ing-cat-div">
+                                                            class="btn btn-custom-yellow btn-default d-block w-130px mt-0 save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                     </button>
                                                 </div>
@@ -87,6 +105,15 @@
                                                     <span class="text-custom-muted font-regularcustom">(Dutch)</span>
                                                 </th>
                                                 <th scope="col"
+                                                    class="text-center">{{ trans('rest.menu.dish_option.dish_option_category_title') }}
+                                                    <span class="text-custom-muted font-regularcustom">(English)</span>
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-center">{{ trans('rest.menu.dish_option.dish_option_category_title') }}
+                                                    <span class="text-custom-muted font-regularcustom">(Dutch)</span>
+                                                </th>
+
+                                                <th scope="col"
                                                     class="text-center">{{ trans('rest.button.action') }}</th>
                                             </tr>
                                             </thead>
@@ -96,13 +123,24 @@
                                                 <tr id="ing-tr{{ $category->id }}" draggable="true"
                                                     class="ingredientCategoryRow" data-id="{{ $category->id }}">
                                                     <td class="text-center">
-                                                        <input type="text" class="form-control text-center w-10r m-auto"
+                                                        <input type="text" class="form-control text-center m-auto"
+                                                               data-id="{{ $category->id }}"
+                                                               value="{{ $category->title_en }}"
+                                                               id="title_en{{ $category->id }}" readonly/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" class="form-control text-center m-auto"
+                                                               value="{{ $category->title_nl }}"
+                                                               id="title_nl{{ $category->id }}" readonly/>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" class="form-control text-center m-auto"
                                                                data-id="{{ $category->id }}"
                                                                value="{{ $category->name_en }}"
                                                                id="name_en{{ $category->id }}" readonly/>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" class="form-control text-center w-10r m-auto"
+                                                        <input type="text" class="form-control text-center m-auto"
                                                                value="{{ $category->name_nl }}"
                                                                id="name_nl{{ $category->id }}" readonly/>
                                                     </td>
@@ -120,7 +158,7 @@
                                                             </a>
                                                             <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
                                                                id="save-edit-btn{{ $category->id }}"
-                                                               style="width: 50%;margin-left: 25%; display: none!important;"
+                                                               style="width: auto;margin-left: 0px; display: none!important;"
                                                                data-id="{{ $category->id }}">
                                                                 <span
                                                                     class="align-middle">{{ trans('rest.button.save') }}</span>

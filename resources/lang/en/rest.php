@@ -17,6 +17,7 @@ return [
 	'sidebar' => [
 		'menu' => 'Menu',
 		'food_order' => 'Food Order',
+		'archive_order' => 'Archive',
 		'settings' => 'Settings',
 		'my_finance' => 'My Finance',
 		'coupons' => 'Coupons',
@@ -105,6 +106,7 @@ return [
 			'image' => 'Image',
 			'dish_option_name' => 'Dish Option Name',
 			'dish_option_category' => 'Dish Option Category',
+			'dish_option_category_title' => 'Dish Option Category Title',
 			'dish_option_dish' => 'Add For Dish Option dish',
 			'dish_option_categories' => 'Dish Option Category',
 			'item_image' => 'Upload Image of Item',
@@ -113,6 +115,7 @@ return [
 			'free' => '(Free)',
 			'more' => '(More)',
             'individual_dish' => 'Add For Individual dish',
+            'price' => 'Price',
 		]
 	],
 
@@ -281,6 +284,10 @@ return [
 		'ingred' => [
 			'delete_message' => 'Are you sure you want to delete this Ingredient?',
 			'alert_message' => 'There are dishes added to this ingredients. Please remove them to delete this ingredient.',
+		],
+        'dish_option' => [
+			'delete_message' => 'Are you sure you want to delete this dish option?',
+			'alert_message' => 'There are dishes added to this dish option. Please remove them to delete this dish option.',
 		],
 
 		'ingred_category' => [

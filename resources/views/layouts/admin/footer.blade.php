@@ -41,6 +41,35 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    // language dropdown code
+    $(document).ready(function() {
+        $('.custom-select-trigger').on('click', function() {
+            $(this).siblings('.custom-options').toggle();
+        });
+
+        $('.custom-option').on('click', function() {
+            var value = $(this).data('value');
+            var text = $(this).html();
+            $('.custom-select-trigger span').html(text);
+            $('#language').val(value).change();
+            $('.custom-options').hide();
+            $('.custom-option').removeClass('selected');
+            $(this).addClass('selected');
+            if (value == "en") {
+                window.location.href = "{{ route('app.setLocal', 'en') }}";
+            } else if(value == "nl") {
+                window.location.href = "{{ route('app.setLocal', 'nl') }}";
+            }
+        });
+
+        // Close dropdown when clicking outside
+        $(document).click(function(e) {
+            if (!$(e.target).closest('.custom-select').length) {
+                $('.custom-options').hide();
+            }
+        });
+
+    });
 
     /*jQuery(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');

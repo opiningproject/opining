@@ -106,14 +106,29 @@ class CartController extends Controller
         $dish = $cart->dish;
         $dishId = $dish->id;
         $dishPrice = $dish->price;
-        $optionName= '';
-
+        $cleanedDishOptionHtmlString= '';
+        $optionTitle = "";
         if (request('option')) {
-            $optionName = getDishOptionCategoryName(request('option'));
+            $htmlStringDishOptionCategory = getDishOptionCategoryName(request('option')) ?? '' ;
+            $cleanedDishOptionHtmlString = str_replace(
+                '"',
+                '',
+                $htmlStringDishOptionCategory,
+            );
+
+            $optionTitle = "<b><span style='font-size: 14px'> Options </span></b>";
+
+//            $optionName = getDishOptionCategoryName(request('option'));
         }
         $ingredientData = getOrderDishIngredients1($cart);
         $ingredientTotalAmount = getOrderDishIngredientsTotal($cart);
-        $totalDishAmount = $ingredientTotalAmount + $dish->price;
+        $optionTotalAmount = 0;
+        if (request('option')) {
+            $optionTotalAmount = getDishOptionCategoryTotalAmount(request('option'));
+            $optionTotalAmount = $optionTotalAmount * $cart->qty;
+        }
+        $totalDishAmount = $ingredientTotalAmount + $dish->price + $optionTotalAmount;
+
         // old code comment 12-08-2024
 //        $option = $dish->option->where('id',request('option'))->where('dish_id',$dish->id)->first() ?? '';
 //        if($option) {
@@ -148,10 +163,12 @@ class CartController extends Controller
             </div>
             <div class='cart-custom-w-col-detail'>
                 <div class='cart-item-detail'>
+                    $optionTitle
                     <div class='d-flex align-items-center'>
-                        <p class='mb-0 item-options mb-0' id='dish-option-$cart->id' data-dish-option='$optionName'>
-                        $optionName
-                        </p>
+                       <ul class='items-additional mb-2' id='item-ing-desc{{ $dish->id }}'>
+                         $cleanedDishOptionHtmlString
+                       </ul>
+
                     </div>
                     <div class='d-flex cart-item-bt'>
                         <div class='from-group addnote-from-group mb-0'>
@@ -496,14 +513,16 @@ class CartController extends Controller
             }*/
             if (request('option')) {
                 $optionName = getDishOptionCategoryName(request('option'));
+                $optionTotalAmount = getDishOptionCategoryTotalAmount(request('option'));
             }
-//            dd($orderDetails->total_price);
             $response['msg'] = '';
             $response['paidIngAmt'] = $paidIngAmt;
             $response['ingListData'] = $IngListData;
             $response['addedDishId'] = $sameDish;
             $response['dishOption'] = $optionName ?? '';
-            $response['totalAmount'] = $orderDetails->total_price ?? '';
+            $response['optionTotalAmount'] = $optionTotalAmount ?? 0;
+//            $response['totalAmount'] = $orderDetails->total_price ?? '';  // old code comment aug cr.
+            $response['totalAmount'] = $orderDetails->price ?? '';
             return response::json(['status' => 200, 'message' => $response]);
 
 

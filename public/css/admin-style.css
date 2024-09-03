@@ -65,8 +65,26 @@ form .prev-input-group .input-group-icon svg {
     padding-bottom: 10px;
 }
 
+
 .category-section .category-slider .category-element .card .categoryfood-detail-card-btn {
-    max-width: 100px;
+    max-width: 90px;
+}
+
+.category-section .category-slider .category-element .card .categoryfood-detail-card-btn .btn-icon {
+    padding: 5px 10px !important;
+    font-size: 14px !important;
+}
+
+.category-section .swiper-container .category-swiper-slider .category-slider {
+    flex-wrap: wrap;
+    margin: 0px -7.5px;
+}
+
+.category-section .swiper-container .category-swiper-slider .category-slider .category-element {
+    flex: 0 0 14.28%;
+    max-width: 14.28%;
+    padding: 0px 7.5px;
+    margin-bottom: 15px;
 }
 
 .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main .footer-box-main-orderlist-main-item .orderRead-more {
@@ -515,8 +533,8 @@ form .prev-input-group .input-group-icon svg {
 
 @media screen and (max-width: 1200px) {
     .menu-sidebar {
-        max-width: 28vw;
-        min-width: 28vw;
+        max-width: 24vw;
+        min-width: 24vw;
     }
 
     .signin-card .card-body {
@@ -736,6 +754,11 @@ form .prev-input-group .input-group-icon svg {
 .food-order-main-content .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist .footer-box-main-orderlist-main {
 max-height: none !important;
 }
+
+.category-section .swiper-container {
+    width: 100%;
+}
+
 @media screen and (min-width: 1600px) {
     .foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 320px) !important;}
     .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 170px) !important;}
@@ -752,4 +775,103 @@ max-height: none !important;
 }
 .footer-box-main-orderlist-main-item .orderRead-more .content-for-orders {
     padding-top: 3px;
+}
+
+@media screen and (max-width: 1440px) {
+.category-section .swiper-container .category-swiper-slider .category-slider .category-element {
+    flex: 0 0 20%;
+    max-width: 20%;
+   }
+}
+
+@media screen and (max-width: 1200px) {
+    .category-section .swiper-container .category-swiper-slider .category-slider .category-element {
+        flex: 0 0 25%;
+        max-width: 25%;
+       }
+    }
+
+
+
+
+.content-for-orders .items-additional li {
+    list-style-type: none;
+}
+.content-for-orders ul {
+    padding-left: 15px;
+}
+
+/* language dropdown css*/
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.custom-select-trigger img {
+    margin-right: 10px;
+}
+
+.custom-options {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 2;
+}
+
+.custom-options .custom-option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.custom-options .custom-option img {
+    margin-right: 10px;
+}
+
+.custom-options .custom-option:hover,
+.custom-options .custom-option.selected {
+    background-color: #f0f0f0;
+}
+
+.dishOptionRow .dishOptionCol {
+    flex: 0 0 22%;
+    max-width: 22%;
+}
+
+.dishOptionRow .dishBtnAddCol {
+    flex: 0 0 12%;
+    max-width: 12%;
+}
+.dishOptionRow .dishBtnAddCol button {width: 100%;}
+@media screen and (max-width: 1440px) {
+    .dishOptionRow .dishOptionCol {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    .dishOptionRow .dishBtnAddCol {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
 }

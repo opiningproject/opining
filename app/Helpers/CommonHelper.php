@@ -304,7 +304,12 @@ if (!function_exists('getCartTotalAmount')) {
         $user = Auth::user();
         $cartTotal = $user->cart->dishDetails()->get()->sum('dish_price');
         $cartIngredient = $user->cart->dishDetails()->get()->sum('paid_ingredient_total');
-        return (float)($cartTotal + $cartIngredient);
+        $dishIds = $user->cart->dishDetails()->pluck('dish_id');
+        $getDish = Dish::with('order')->whereIn('id',$dishIds)->get();
+        $orderDetailsId = $user->cart->dishDetails()->first()->id;
+        $getOrderDetailsData = \App\Models\OrderDishOptionDetails::where('order_detail_id', $orderDetailsId)->pluck('dish_option_id');
+        $dishOptionCategoryTotalAmount = getDishOptionCategoryTotalAmount($getOrderDetailsData);
+        return (float)($cartTotal + $cartIngredient + $dishOptionCategoryTotalAmount);
     }
 
 }
@@ -318,14 +323,19 @@ if (!function_exists('orderTotalPayAmount')) {
         $cartTotal = $cartTotal + $cartIngredient;
         $serviceCharge = getRestaurantDetail()->service_charge;
         $zipcode = session('zipcode');
+        $dishIds = $user->cart->dishDetails()->pluck('dish_id');
+        $getDish = Dish::with('order')->whereIn('id',$dishIds)->get();
+        $orderDetailsId = $user->cart->dishDetails()->first()->id;
+        $getOrderDetailsData = \App\Models\OrderDishOptionDetails::where('order_detail_id', $orderDetailsId)->pluck('dish_option_id');
+        $dishOptionCategoryTotalAmount = getDishOptionCategoryTotalAmount($getOrderDetailsData);
         $deliveryCharges = 0.00;
 
         if ($zipcode) {
             $deliveryCharges = getDeliveryCharges($zipcode)->delivery_charge;
         }
-        $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartTotal : 0;
-
-        return number_format((float)(($cartTotal + $serviceCharge + $deliveryCharges) - $couponDiscount),2);
+//        $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * $cartTotal : 0;
+        $couponDiscount = isset($user->cart->coupon) ? ($user->cart->coupon->percentage_off / 100) * getCartTotalAmount() : 0;
+        return number_format((float)(($cartTotal + $serviceCharge + $deliveryCharges + $dishOptionCategoryTotalAmount) - $couponDiscount),2);
     }
 }
 
@@ -535,14 +545,44 @@ if (!function_exists('getDishOptionCategory')) {
 if (!function_exists('getDishOptionCategoryName')) {
     function getDishOptionCategoryName($optionIds)
     {
-        $optionName ='';
-        $option = DishCategoryOption::whereIn('id',$optionIds)->get();
-        if(count($option) > 0) {
-            $optionName = $option->pluck('name')->implode(', ');
+        $ingredients = '';
+        $optionData = DishCategoryOption::whereIn('id',$optionIds)->get();
+        if (count($optionData)>0) {
+
+            foreach ($optionData as $key => $optionCategory) {
+                $price = $optionCategory->price;
+                $ingredients .= "<li>+" .$optionCategory->name. "(€" .number_format($price, 2) . ")" . "</li>";
+            }
         }
-        return $optionName;
+        return trim($ingredients, ', ');
     }
 }
+
+if (!function_exists('getDishOptionCategoryName2')) {
+    function getDishOptionCategoryName2($optionIds)
+    {
+        $ingredients = '';
+        $optionData = DishCategoryOption::whereIn('id',$optionIds)->get();
+        if (count($optionData)>0) {
+            foreach ($optionData as $key => $optionCategory) {
+                $price = $optionCategory->price;
+                $ingredients .= "+" . $optionCategory->name . "(€" . number_format($price, 2) . ")" . "\n";
+            }
+        }
+        return trim($ingredients, ', ');
+    }
+}
+
+if (!function_exists('getDishOptionCategoryTotalAmount')) {
+    function getDishOptionCategoryTotalAmount($optionIds)
+    {
+        $dishOptionTotalAmount = '';
+        // Assuming $optionIds is an array of IDs for which you want to sum the prices
+        $dishOptionTotalAmount = DishCategoryOption::whereIn('id', $optionIds)->sum('price');
+        return $dishOptionTotalAmount ? $dishOptionTotalAmount : 0;
+    }
+}
+
 if (!function_exists('orderDishOptionDetails')) {
     function orderDishOptionDetails($optionIds)
     {

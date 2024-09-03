@@ -48,7 +48,7 @@ $(function () {
         $.ajax({
 
             type: "POST",
-            url: "dish-option/updateingredientRowOrder",
+            url: "dish-option/updateDishCategoryOptionRowOrder",
             cursor: 'move',
             data: {
 
@@ -125,6 +125,7 @@ $(function () {
         var category_id = $('#catId' + id).val()
         var name_en = $('#name_en' + id).val()
         var name_nl = $('#name_nl' + id).val()
+        var price = $('#price' + id).val()
         var addedDish = []
         var deletedDish = $('#deleted-dish' + id).val().substring(1);
 
@@ -136,6 +137,7 @@ $(function () {
         ingredientData.append('category_id', category_id)
         ingredientData.append('name_en', name_en)
         ingredientData.append('name_nl', name_nl)
+        ingredientData.append('price', price)
 
         if(name_en == ''){
             $('#name_en' + id).focus();

@@ -12,7 +12,7 @@ class DishCategoryOption extends Model
 
     protected $table = 'dish_categories_options';
 
-    protected $fillable = ['cat_id','dish_id','name_en','name_nl','status','sort_order'];
+    protected $fillable = ['cat_id','dish_id','name_en','name_nl','price','status','sort_order'];
     protected $appends = ['name'];
     public function getNameAttribute(){
         return $this->attributes['name_' . app()->getlocale()];

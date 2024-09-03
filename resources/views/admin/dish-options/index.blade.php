@@ -62,6 +62,14 @@
                                                     <input type="text" class="form-control" name="name_nl"/>
                                                 </div>
                                             </div>
+                                            <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="price"
+                                                           class="form-label">{{ trans('rest.menu.dish_option.price') }}
+                                                    </label>
+                                                    <input type="number" class="form-control" name="price"/>
+                                                </div>
+                                            </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="category_id"
@@ -104,6 +112,9 @@
                                                     <span class="text-custom-muted font-regularcustom">(Dutch)</span>
                                                 </th>
                                                 <th scope="col"
+                                                    class="text-center">{{ trans('rest.menu.dish_option.price') }}
+                                                </th>
+                                                <th scope="col"
                                                     class="text-center">{{ trans('rest.menu.dish_option.dish_option_category') }}
                                                 </th>
                                                 <th scope="col" class="text-center"
@@ -129,7 +140,14 @@
                                                     <td class="text-center">
                                                         <input type="text" class="form-control text-center w-10r m-auto"
                                                                id="name_nl{{ $ingredient->id }}"
-                                                               value="{{ $ingredient->name_nl }}" readonly/></td>
+                                                               value="{{ $ingredient->name_nl }}" readonly/>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <input type="text" class="form-control text-center w-10r m-auto"
+                                                               id="price{{ $ingredient->id }}"
+                                                               value="{{ $ingredient->price }}" readonly/>
+                                                    </td>
                                                     <td>
                                                         <div class="dropdown buttondropdown category-dropdown">
                                                             <select class="form-control w-100 sm read-only" disabled
@@ -300,7 +318,7 @@
                     <input type="hidden" value="" id="ingredientId">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.ingred.delete_message') }}</h4>
+                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.dish_option.delete_message') }}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -326,7 +344,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.ingred.alert_message') }}</h4>
+                            <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.dish_option.alert_message') }}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

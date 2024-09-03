@@ -147,32 +147,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="language-selector">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @if(App::isLocale('en'))
-                                            <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28"/>
-                                            <span class="">English</span>
-                                        @else
-                                            <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" alt="country-flag" width="28" height="28"/>
-                                            <span class="">Dutch</span>
-                                        @endif
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item {{ (App::isLocale('en')) ? 'active': '' }}" href="{{ route('app.setLocal', 'en') }}">
-                                                <img src="{{ asset('images/english-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag"/>English
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item {{ (App::isLocale('nl')) ? 'active': '' }}" href="{{ route('app.setLocal', 'nl') }}">
-                                                <img src="{{ asset('images/dutch-flag.svg') }}" class="img-fluid" width="28" height="28" alt="country-flag"/>Dutch
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

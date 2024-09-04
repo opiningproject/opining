@@ -117,7 +117,7 @@
 {{--                                                    </button>--}}
                                                     <button
                                                         onclick="location.href='{{ route('user.order-location-new', ['order_id' => $order->id]) }}'">
-                                                        <img src="{{ asset('images/trackorder-icon.svg') }}"
+                                                        <img src="{{ asset('images/trackorder-icon-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="35"
                                                             height="32">
                                                         {{ trans('user.my_orders.track_order') }}

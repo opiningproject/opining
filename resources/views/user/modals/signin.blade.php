@@ -10,14 +10,14 @@
         <form id="sign-in-form" method="POST">
           <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
-              <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12"  class="svg">
+              <img src="{{ asset('images/mail-icon2-up.svg') }}" alt="" width="18" height="12"  class="svg">
             </span>
             <input type="email" class="form-control custom-control-with-icon ps-5" placeholder="{{ trans('modal.auth.email') }}" name="email" id="email" required>
             <label id="email-error" class="error" for="email" style="display: none"></label>
           </div>
           <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
             <span class="input-group-icon">
-               <img src="{{ asset('images/password.svg') }}" alt="" width="15" height="20"  class="svg">
+               <img src="{{ asset('images/password-up.svg') }}" alt="" width="15" height="20"  class="svg">
             </span>
             <input type="password" class="form-control login-pwd-icon custom-control-with-icon ps-5 pe-5" placeholder="{{ trans('modal.auth.password') }}" id="password" name="password" required>
             <label id="password-error" class="error" for="password" style="display: none"></label>
@@ -39,7 +39,7 @@
             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-0" id="sign-in-btn">{{ trans('modal.button.sign_in') }}</button>
           </div>
           <div class="form-group">
-            <p class="mb-0 singleline-text text-center text-custom-muted">{{ trans('modal.auth.no_account') }} 
+            <p class="mb-0 singleline-text text-center text-custom-muted">{{ trans('modal.auth.no_account') }}
               <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" class="text-yellow-2">{{ trans('modal.button.sign_up') }}</a>
               <br />
               <br /> {{ trans('modal.auth.or') }}

@@ -727,7 +727,7 @@ a {
   .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
     fill: #828282;
   }
-  
+
   .category-section .category-slider .category-element .card:hover svg path,
   .category-swiper-slider .swiper-slide.selected-cart-active .card svg path {
     fill: #151515;
@@ -1053,8 +1053,9 @@ footer .footer-copyright-text {
   min-height: 100%;
   border-radius: 0px 28px 28px 0px;
   padding: 0 44px;
-  background: linear-gradient(0deg, rgba(248, 182, 2, 0.95), rgba(248, 182, 2, 0.95)), url("../images/delivery-img.svg");
+  background: linear-gradient(0deg, rgb(94 94 94 / 95%), rgb(131 127 117 / 95%)), url(../images/delivery-img.svg);
   background-size: cover;
+    border: 0px;
 }
 
 .delivery-card .staring-delivery-screen h2 {
@@ -3032,6 +3033,7 @@ input[type=number] {
   font-style: normal;
   line-height: normal;
   text-transform: capitalize;
+  font-family: "Poppins", sans-serif !important;
 }
 
 .ordersdetails .orderdetails-main .orderdetails-desc .orderdetails-desc-main .orderdetails-desc-card .text-grp small {

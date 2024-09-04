@@ -48,7 +48,7 @@
                 @if(!Auth::user())
                     <div class="menu-signsignup-link">
                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
-                            <img src="{{ asset('images/user-icon.svg') }}" class="svg" width="22" height="22">
+                            <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22" height="22">
                             <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
                         </a>
                     </div>

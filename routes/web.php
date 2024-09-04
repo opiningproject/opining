@@ -191,6 +191,11 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
 
+    // Archive Order Route
+    Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');
+    Route::get('/archive/order-detail/{order_id}', [OrdersController::class, 'archiveOrderDetail'])->name('archive-order-detail');
+    Route::post('/archive/searchOrder', [OrdersController::class, 'archiveSearchOrder'])->name('archiveSearchOrder');
+
     Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
     Route::post('/orders/searchOrder', [OrdersController::class, 'searchOrder'])->name('searchOrder');
     Route::post('/orders/getRealTimeOrder', [OrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');

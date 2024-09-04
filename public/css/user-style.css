@@ -142,7 +142,7 @@
   --theme-white3: #d9d9d9;
   --theme-white4: #F2F2F2;
   --theme-white5: #FFFAEC;
-  --theme-yellow1: #F8B602;
+  --theme-yellow1: #191919;
   --theme-yellow2: #e7e7e7;
   --theme-yellow3: #f0c868;
   --theme-yellow4: #af8e40;
@@ -1827,8 +1827,8 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
 
 .checkout-form-item .form-step-icon .icon-form {
   background-color: var(--theme-yellow2);
-  filter: drop-shadow(2px 2px 20px rgba(255, 192, 11, 0.3));
-  border-radius: 22px;
+  /* filter: drop-shadow(2px 2px 20px rgba(255, 192, 11, 0.3)); */
+  border-radius: 10px;
   padding: 17px;
 }
 
@@ -2911,7 +2911,7 @@ input[type=number] {
 }
 
 .ordersdetails .ordersdetails-header .btn-grp {
-  gap: 30px;
+  gap: 15px;
 }
 
 .ordersdetails .ordersdetails-header .btn-grp button {
@@ -3335,11 +3335,9 @@ input[type=number] {
   }
 
   .ordersdetails .orderdetails-main .orderdetails-maintop button {
-    padding: 15px 32px;
+    padding: 14px 22px;
     border-radius: 10px;
-    background-color: var(--theme-lightyellow);
-    color: var(--theme-dark2);
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     line-height: normal;
     text-transform: capitalize;
@@ -7064,7 +7062,7 @@ form .form-select {
 }
 
 .trackOrderBox .progress-steps .step.active .icon {
-  background: #e7e7e7;
+  background: #727272;
 }
 
 .trackOrderBox .progress-steps .step.active .icon:after {
@@ -8267,7 +8265,7 @@ form .form-select {
   }
 
   .mobile-order-page .order-details-block .order-details-options .accordion-button {
-    color: #F8B602;
+    color: #191919;
   }
 
   .mobile-order-page .order-details-block .order-details-accordion .accordion-item {
@@ -8357,7 +8355,7 @@ form .form-select {
   }
 
   .order-details-block .order-wise-details .items .order-items .details-row ul li {
-    font-size: 10px;
+    font-size: 11px;
     list-style: none;
     color: var(--theme-dark2);
   }
@@ -8388,11 +8386,11 @@ form .form-select {
     width: 100%;
     justify-content: center;
     align-items: center;
-    border: 1px solid #F8B602;
+    border: 1px solid #191919;
     border-radius: 10px;
     text-align: center;
     font-size: 16px !important;
-    color: #F8B602 !important;
+    color: #191919 !important;
     background: #ffffff;
     padding: 11px 5px;
   }
@@ -8497,7 +8495,7 @@ form .form-select {
 
   .order-details-block .progress-steps .step h3 {
     font-size: 13px;
-    color: #C1C1C1;
+    color: #151515;
   }
 
   .order-details-block .progress-steps .step.active h3 {

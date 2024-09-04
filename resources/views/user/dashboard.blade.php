@@ -36,8 +36,8 @@
                                         id="closeSearch"></button>
                                 <div class="position-relative w-100">
                                     <span class="form-control-feedback">
-                                        <img class="svg" src="{{ asset('images/search.svg') }}" alt=""
-                                             height="32" width="32">
+                                        <img class="svg" src="{{ asset('images/search-icon-up.svg') }}" alt=""
+                                             height="18" width="18">
                                     </span>
                                     <input type="text" class="form-control text-transform-none form-control-icon ps-5"
                                            placeholder="{{ trans('user.dashboard.search') }}" id="search-dish"/>
@@ -97,7 +97,7 @@
                                     <div class="swiper-button-next"></div>
                                 </div>
                                 <div class="swiper category-swiper-slider">
-                                    <div class="category-slider swiper-wrapper">
+                                    <div class="category-slider swiper-wrapper pt-0">
                                         @foreach ($categories as $key => $cat)
                                             <?php
                                             $selected = '';
@@ -176,7 +176,7 @@
                                                 <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '' : 'd-none' }}"
                                                    onclick="unFavorite({{ $dish->id }})"
                                                    id="favorite-icon-{{ $dish->id }}">
-                                                    <img src="{{ asset('images/favorite-after-icon.svg') }}"
+                                                    <img src="{{ asset('images/favorite-after-icon-up.svg') }}"
                                                          alt="" class="svg" height="20" width="22">
                                                 </p>
 
@@ -330,7 +330,7 @@
                                                         <div class="cart-address-row w-100" style="cursor: pointer;"
                                                              data-bs-toggle="modal"
                                                              data-bs-target="#addressChangeModal">
-                                                            <img src="{{ asset('images/delivery-address.svg') }}"
+                                                            <img src="{{ asset('images/location-yellowicon-up.svg') }}"
                                                                  alt="" class="svg" height="20"
                                                                  width="20"/>
                                                             <p id="zip_address" class="mb-0">
@@ -389,7 +389,7 @@
                                                         <div
                                                             class="d-flex align-items-center justify-content-center flex-full">
                                                             <div class="d-flex align-items-start address-field">
-                                                                <img src="{{ asset('images/rest-address.svg') }}"
+                                                                <img src="{{ asset('images/house-icon-up.svg') }}"
                                                                      alt="" class="svg" height="16"
                                                                      width="16">
                                                                 <p class="mb-0 d-inline-block mt-0 ms-2">
@@ -446,11 +446,11 @@
                                                                                 <div class="d-flex cart-item-row">
 
                                                                                     <div
-                                                                                        class="cart-custom-w-col-img cart-name-price">
+                                                                                        class="cart-custom-w-col-img cart-name-price px-0">
                                                                                         <div
                                                                                             class="d-flex align-items-start">
                                                                                             <p id="quantity-{{ $dish->id }}"
-                                                                                               class="item-name pe-2 mb-0">
+                                                                                               class="item-name pe-2 mb-0 item-order">
                                                                                                 {{ $dish->qty }}</p>
                                                                                             <p class="d-inline-block item-name mb-0 text-decoration-underline"
                                                                                                onclick="customizeDish({{ $dish->dish->id }}, {{ $dish->id }});">
@@ -627,7 +627,7 @@
                                                                 <div
                                                                     class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
                                                                     <span class="input-group-icon">
-                                                                        <img src="{{ asset('images/coupon-gray.svg') }}"
+                                                                        <img src="{{ asset('images/coupons-menu-up.svg') }}"
                                                                              alt="" class="svg img-fluid"
                                                                              height="18" width="29">
                                                                     </span>

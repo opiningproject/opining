@@ -544,8 +544,8 @@ use App\Enums\RefundStatus;
                 </button>
             @endif
             <button onclick="location.href='{{ route('user.chat') }}'">
-                <img src="{{ asset('images/needhelp-icon.svg') }}" class="img-fluid svg" alt=""
-                    width="27" height="25">{{ trans('user.my_orders.need_help') }}
+                <img src="{{ asset('images/needhelp-icon-up.svg') }}" class="img-fluid svg" alt=""
+                    width="22" height="22">{{ trans('user.my_orders.need_help') }}
             </button>
         </div>
     </div>
@@ -558,27 +558,27 @@ use App\Enums\RefundStatus;
             </div>
             <button class="border-none outline-none">
                 @if ($order->order_status == OrderStatus::Accepted)
-                    <img src="{{ asset('images/order-accepted.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/order-accepted-up.svg') }}" class="img-fluid svg" alt=""
                         width="20" height="20">
                     {{ trans('user.order_status.accepted') }}
                 @elseif($order->order_status == OrderStatus::InKitchen)
-                    <img src="{{ asset('images/orderinkitchen-icon.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/orderinkitchen-icon-up.svg') }}" class="img-fluid svg" alt=""
                         width="26" height="20">
                     {{ trans('user.order_status.in_kitchen') }}
                 @elseif($order->order_status == OrderStatus::Ready)
-                    <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""
                         width="16" height="20">
                     {{ trans('user.order_status.ready') }}
                 @elseif($order->order_status == OrderStatus::ReadyForPickup)
-                    <img src="{{ asset('images/readytopickup-icon.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""
                         width="16" height="20">
                     {{ trans('user.order_status.ready_for_pickup') }}
                 @elseif($order->order_status == OrderStatus::OutForDelivery)
-                    <img src="{{ asset('images/outfordelivery-icon.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/outfordelivery-icon-up.svg') }}" class="img-fluid svg" alt=""
                         width="31" height="20">
                     {{ trans('user.order_status.out_for_delivery') }}
                 @else
-                    <img src="{{ asset('images/delivered-icon.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/order-accepted-up.svg') }}" class="img-fluid svg" alt=""
                         width="21" height="20">
                     {{ trans('user.order_status.delivered') }}
                 @endif
@@ -596,7 +596,7 @@ use App\Enums\RefundStatus;
                 <div class="textgrp">
                     <div class="title">{{ trans('user.my_orders.delivery_address') }}</div>
                     <div class="text">
-                        <img src="{{ asset('images/location-yellowicon.svg') }}" class="img-fluid svg"
+                        <img src="{{ asset('images/location-yellowicon-up.svg') }}" class="img-fluid svg"
                             alt="" width="12" height="16">
                         <?php
                         $address = $order->orderUserDetails;
@@ -609,7 +609,7 @@ use App\Enums\RefundStatus;
                 <div class="textgrp">
                     <div class="title">{{ trans('user.my_orders.restaurant_address') }}</div>
                     <div class="text">
-                        <img src="{{ asset('images/house-icon.svg') }}" class="img-fluid svg me-2" alt=""
+                        <img src="{{ asset('images/house-icon-up.svg') }}" class="img-fluid svg me-2" alt=""
                             width="18" height="18">{{ getRestaurantDetail()->rest_address }}
                     </div>
                 </div>

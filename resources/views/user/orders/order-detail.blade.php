@@ -414,18 +414,7 @@ use App\Enums\RefundStatus;
 
             @if ($order->order_type == '1')
             <a href="{{ route('user.order-location-new', ['order_id' => $order->id]) }}"  class="track-order-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 32" fill="#292929" class="svg inlined-svg"
-                    height="20" width="20" role="img" aria-labelledby="_edjx9teli">
-                    <title id="_edjx9teli"></title>
-                    <mask id="path-1-inside-1_2446_6934" fill="white">
-                        <path
-                            d="M11.5196 0C17.302 0.0399707 22.2227 4.60787 22.9177 10.5348C23.2665 13.5126 22.4671 16.2081 21.2627 18.8225C19.5298 22.5822 17.127 25.8661 14.4821 28.9675C13.6744 29.9156 12.8079 30.8087 11.9738 31.733C11.6682 32.0715 11.3902 32.099 11.0618 31.753C7.39106 27.8983 4.08463 23.7576 1.76689 18.8474C0.691909 16.5716 -0.0391248 14.2021 0.00162135 11.619C0.0938994 5.91067 4.57957 0.768187 10.0336 0.152388C10.5285 0.0961796 11.0247 0.0512125 11.5196 0ZM11.4932 17.5247C14.3766 17.5359 16.7735 15.0677 16.783 12.0749C16.7926 9.02089 14.4353 6.53521 11.5244 6.53022C8.63262 6.52522 6.24896 8.98092 6.23458 11.98C6.2202 15.0277 8.57629 17.5122 11.4944 17.5247H11.4932Z">
-                        </path>
-                    </mask>
-                    <path
-                        d="M11.5196 0C17.302 0.0399707 22.2227 4.60787 22.9177 10.5348C23.2665 13.5126 22.4671 16.2081 21.2627 18.8225C19.5298 22.5822 17.127 25.8661 14.4821 28.9675C13.6744 29.9156 12.8079 30.8087 11.9738 31.733C11.6682 32.0715 11.3902 32.099 11.0618 31.753C7.39106 27.8983 4.08463 23.7576 1.76689 18.8474C0.691909 16.5716 -0.0391248 14.2021 0.00162135 11.619C0.0938994 5.91067 4.57957 0.768187 10.0336 0.152388C10.5285 0.0961796 11.0247 0.0512125 11.5196 0ZM11.4932 17.5247C14.3766 17.5359 16.7735 15.0677 16.783 12.0749C16.7926 9.02089 14.4353 6.53521 11.5244 6.53022C8.63262 6.52522 6.24896 8.98092 6.23458 11.98C6.2202 15.0277 8.57629 17.5122 11.4944 17.5247H11.4932Z"
-                        stroke="#FFC00B" stroke-width="4" mask="url(#path-1-inside-1_2446_6934)"></path>
-                </svg>
+                <img src="{{ asset('images/location-yellowicon-up.svg') }}" alt=""/>
                 {{ trans('user.my_orders.track_your_order') }}
             </a>
             @endif
@@ -538,7 +527,7 @@ use App\Enums\RefundStatus;
         <div class="btn-grp d-flex flex-wrap">
             @if ($order->order_type == '1')
                 <button onclick="location.href='{{ route('user.order-location-new', ['order_id' => $order->id]) }}'">
-                    <img src="{{ asset('images/trackorder-icon.svg') }}" class="img-fluid svg" alt=""
+                    <img src="{{ asset('images/trackorder-icon-up.svg') }}" class="img-fluid svg" alt=""
                         width="35" height="32">
                     {{ trans('user.my_orders.track_order') }}
                 </button>

@@ -45,7 +45,7 @@
                             <label for="ownername" class="form-label">{{ trans('user.profile.dob') }}</label>
                             <div class="input-group dateselect-group date">
                               <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('images/calender-icon.svg') }}" alt="" width="20" height="20" class="svg">
+                                <img src="{{ asset('images/calender-icon-up.svg') }}" alt="" width="20" height="20" class="svg">
                               </span>
                               <input type="text" class="form-control" id="dob" aria-label="dob" aria-describedby="basic-addon1" value="{{ $user->dob }}" name="dob" required readonly>
                             </div>

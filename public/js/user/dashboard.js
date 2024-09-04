@@ -139,19 +139,19 @@ $(document).ready(function () {
             },
             1700: {
                 slidesPerView: 6,
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
             1800: {
                 slidesPerView: 6,
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
             1920: {
                 slidesPerView: 6,
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
             2560: {
                 slidesPerView: 6,
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
         },
     });

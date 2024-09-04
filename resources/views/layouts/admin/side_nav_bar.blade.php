@@ -38,6 +38,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('archives') }}" class="nav-link {{ activeMenu('archive') }} align-middle">
+                                    <img class="svg p-2" src="{{ asset('images/archive-icon-up.svg') }}" alt="" height="34" width="34">
+                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.archive_order') }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('payments') }}" class="nav-link {{ activeMenu('payments') }} align-middle">
                                     <img class="svg" src="{{ asset('images/finance-menu.svg') }}" alt="" height="34" width="34">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.my_finance') }}</span>

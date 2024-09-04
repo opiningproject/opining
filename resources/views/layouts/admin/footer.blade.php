@@ -20,6 +20,7 @@
 <script type="text/javascript" src="{{ asset('js/settings-payment.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/orders.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/inline-svg.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/archive-orders.js')}}"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
 

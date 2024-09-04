@@ -164,6 +164,7 @@ class OrdersController extends Controller
     public function searchOrder(Request $request)
     {
         try {
+            $pageNumber = request()->input('page', 1);
             $orderExist = false;
             $orders = Order::orderBy('id', 'desc');
             if ($request->has('search')) {
@@ -180,8 +181,8 @@ class OrdersController extends Controller
             if (isset($request->activeId)) {
                 $orderExist = in_array($request->activeId, $orderListIds);
             }
-
-            return view('admin.orders.orders-list', ['orders' => $orders->get(), 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
+            $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
+            return view('admin.orders.orders-list', ['orders' => $orders, 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
 
         } catch (Exception $exception) {
             return response::json(['status' => 400, 'message' => $exception->getMessage()]);
@@ -241,4 +242,96 @@ class OrdersController extends Controller
             return response::json(['status' => 400, 'message' => '']);
         }
     }
+
+
+    public function archiveOrders(Request $request, $id = null)
+    {
+        $orders = Order::where('order_status', '6')
+            ->where('updated_at', '<=', Carbon::now()->subHours(12))
+            ->orderBy('id', 'desc');
+
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+
+        $pageNumber = request()->input('page', 1);
+
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
+
+        if (!empty($start_date) && !empty($end_date)) {
+
+            $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+            $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
+
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        } else if (!empty($start_date) && empty($end_date)) {
+            $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+            $end_date = date('Y-m-d') . ' 23:59:59';
+
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        } else if (empty($start_date) && !empty($end_date)) {
+            $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
+            $start_date = '2024-01-01 00:00:00';
+
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        }
+
+        $order = '';
+        $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
+//        $orders = $orders->get();
+        if (count($orders) > 0) {
+            if ($id) {
+                $order = Order::find($id);
+            } else {
+                $order = $orders[0];
+            }
+        }
+        if ($request->ajax()) {
+            return view('admin.archive.orders-list', ['orders' => $orders, 'activeId' => $request->activeId ?? 0]);
+        }
+        return view('admin.archive.orders', ['openOrders' => $openOrders, 'allOrders' => $orders,'order' => $order,'lastPage' => $orders->lastPage()]);
+    }
+
+
+
+    public function archiveOrderDetail(Request $request)
+    {
+        $order = Order::find($request->order_id);
+
+        return view('admin.archive.order-detail', ['order' => $order]);
+    }
+
+    public function archiveSearchOrder(Request $request)
+    {
+        try {
+            $pageNumber = request()->input('page', 1);
+            $orderExist = false;
+            $orders = Order::where('order_status', '6')
+                ->where('updated_at', '<=', Carbon::now()->subHours(12))
+                ->orderBy('id', 'desc');
+            if ($request->has('search')) {
+
+                $orders->where(function ($query) use ($request) {
+                    $query->whereHas('orderUserDetails', function ($query) use ($request) {
+                        $query->where('order_name', 'like', '%' . $request->search . '%')
+                            ->orWhere('house_no', 'like', '%' . $request->search . '%')
+                            ->orWhere('street_name', 'like', '%' . $request->search . '%')
+                            ->orWhere('city', 'like', '%' . $request->search . '%');
+                    })
+                        ->orWhere('id', 'like', '%' . $request->search . '%');
+                });
+            }
+
+            $orderListIds = $orders->pluck('id')->toArray();
+            if (isset($request->activeId)) {
+                $orderExist = in_array($request->activeId, $orderListIds);
+            }
+            $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
+            return view('admin.archive.orders-list', ['orders' => $orders, 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
+
+        } catch (Exception $exception) {
+            return response::json(['status' => 400, 'message' => $exception->getMessage()]);
+        }
+    }
+
+
 }

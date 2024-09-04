@@ -5,7 +5,7 @@
         <div class="modal-content border-radius">
             <div class="modal-header border-0 align-items-stretch">
                 <div>
-                    <h1 class="modal-title mb-0 font-sebinomedium">{{ trans('modal.address.title') }} </h1>
+                    <h1 class="modal-title mb-0">{{ trans('modal.address.title') }} </h1>
                     <p class="text-muted-lead-1 mb-0">{{ trans('modal.address.sub_title') }}</p>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -16,7 +16,7 @@
                         <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12">
                             <div class="form-group prev-input-group custom-icon-input-group">
                                 <span class="input-group-icon">
-                                    <img src="{{ asset('images/zipcode-svg.svg') }}" alt="zipcode"
+                                    <img src="{{ asset('images/zipcode-svg-up.svg') }}" alt="zipcode"
                                         class="img-fluid svg" width="22" height="16" />
                                 </span>
                                 <input type="text" class="form-control form-control-icon ps-5" maxlength="10"
@@ -28,7 +28,7 @@
                         <div class="col-xx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12">
                             <div class="form-group prev-input-group custom-icon-input-group">
                                 <span class="input-group-icon">
-                                    <img src="{{ asset('images/home-icon-svg.svg') }}" alt="home address"
+                                    <img src="{{ asset('images/home-icon-svg-up.svg') }}" alt="home address"
                                         class="img-fluid svg" width="19" height="18" />
                                 </span>
                                 <input type="text" class="form-control form-control-icon ps-5" maxlength="10"

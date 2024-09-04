@@ -20,7 +20,7 @@
 
         <!-- Just show in dahboard - Condition will added by Jamal -->
         <button class="navbar-toggler p-0 searchMobileIcon d-md-none {{ (request()->segment(count(request()->segments())) != 'dashboard' &&  request()->segment(count(request()->segments())-1) != 'dashboard') ? 'd-none' : '' }} " id="mobilesearchToggle" type="button">
-        <img class="svg" src="{{ asset('images/search.svg') }}" alt="" height="32" width="32">
+        <img class="svg" src="{{ asset('images/search-icon-up.svg') }}" alt="" height="18" width="18">
         </button>
 
         @if(Route::currentRouteName() == 'user.dashboard')
@@ -29,7 +29,7 @@
                 <svg width="22px" height="22px" viewBox="-4 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><defs></defs>
                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                        <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-572.000000, -723.000000)" fill="#FFC00B">
+                        <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-572.000000, -723.000000)" fill="#191919">
                             <path
                                 d="M594,747 L574,747 L574,731 C574,729.896 574.896,729 576,729 L578,729 L578,735 L580,735 L580,729 L588,729 L588,735 L590,735 L590,729 L592,729 C593.104,729 594,729.896 594,731 L594,747 L594,747 Z M594,751 C594,752.104 593.104,753 592,753 L576,753 C574.896,753 574,752.104 574,751 L574,749 L594,749 L594,751 L594,751 Z M584,725 C586.209,725 588,725.619 588,727 L580,727 C580,725.619 581.791,725 584,725 L584,725 Z M592,727 L590,727 C590,724.791 587.313,723 584,723 C580.687,723 578,724.791 578,727 L576,727 C573.791,727 572,728.791 572,731 L572,751 C572,753.209 573.791,755 576,755 L592,755 C594.209,755 596,753.209 596,751 L596,731 C596,728.791 594.209,727 592,727 L592,727 Z"
                                 id="bag" sketch:type="MSShapeGroup"></path>
@@ -48,7 +48,7 @@
                 @if(!Auth::user())
                     <div class="menu-signsignup-link">
                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
-                            <img src="{{ asset('images/user-icon.svg') }}" class="svg" width="25" height="26">
+                            <img src="{{ asset('images/user-icon.svg') }}" class="svg" width="22" height="22">
                             <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
                         </a>
                     </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="text-start">
                             <div class="dropdown">
-                                <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown" style="color: #FFC00A;text-wrap: wrap;">
+                                <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown" style="color: #191919;text-wrap: wrap;">
                                     {{ Auth::user()->full_name }}
                                 </div>
                                 <ul class="dropdown-menu py-0">
@@ -89,37 +89,37 @@
                         <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                             <li class="nav-item">
                                 <a href="{{ route('user.dashboard') }}" class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
-                                    <img src="{{ asset('images/dashboard-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.dashboard') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.orders') }}" class="nav-link {{ activeMenu('user.orders') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/myorder-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/myorder-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_order') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.favorite') }}" class="nav-link {{ activeMenu('user.favorite') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/favorite-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/favorite-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.favorite') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.chat') }}" class="nav-link {{ activeMenu('user.chat') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/user-chat-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/user-chat-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.chat') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.points') }}" class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/collected-points-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/collected-points-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
                                 </a>
                             </li>
                             {{-- <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
                                 </a>
                             </li> --}}
@@ -127,13 +127,13 @@
                             {{-- New Coupons menu --}}
                             <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/coupons-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons')}}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('user.settings') }}" class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/settings-menu.svg') }}" class="svg" height="34" width="34">
+                                    <img src="{{ asset('images/settings-menu-up.svg') }}" class="svg" height="30" width="30">
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
                                 </a>
                             </li>

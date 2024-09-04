@@ -21,7 +21,7 @@
 {{--                        </svg>--}}
                     </p>
                     <p class="mb-0 food-favorite-icon {{ isset($dish->favorite) ? '':'d-none' }}" onclick="unFavorite({{ $dish->id }})" id="favorite-icon-{{ $dish->id }}">
-                        <img src="{{ asset('images/favorite-after-icon.svg') }}" alt="" class="svg" height="20" width="22">
+                        <img src="{{ asset('images/favorite-after-icon-up.svg') }}" alt="" class="svg" height="20" width="22">
                     </p>
                     <div class="food-image">
                         <img src="{{ $dish->image }}" alt="burger imag" class="img-fluid" width="100" height="100"/>

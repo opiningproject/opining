@@ -235,7 +235,7 @@
                                             <div class="address-row active">
                                                 <div class="addess-list">
                                                     <span class="ico">
-                                                        <img src="{{ asset('images/map-icon.svg') }}" alt=""
+                                                        <img src="{{ asset('images/location-yellowicon-up.svg') }}" alt=""
                                                             height="19" width="19" />
                                                     </span>
                                                     <div class="details">
@@ -247,10 +247,10 @@
                                                 <div class="circle"></div>
                                             </div>
 
-                                            <div class="address-row {{ $delivered_status_date ?'active' :''}}" id="delivered_order_{{$orderId}}"}}>
+                                            <div class="address-row {{ $delivered_status_date ?'active' :''}}" id="delivered_order_{{$orderId}}">
                                                 <div class="addess-list">
                                                     <span class="ico">
-                                                        <img src="{{ asset('images/flag-icon.svg') }}" alt=""
+                                                        <img src="{{ asset('images/house-icon-up.svg') }}" alt=""
                                                             height="19" width="19" />
                                                     </span>
                                                     @php

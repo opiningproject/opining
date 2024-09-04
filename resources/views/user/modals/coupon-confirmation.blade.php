@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h5 id="coupon-code-text">{{ trans('modal.coupon.content') }}</h5>
+        <p id="coupon-code-text">{{ trans('modal.coupon.content') }}</p>
         <div class="text-center">
           <div class="coupon-code-box d-none">
            {{ trans('modal.coupon.coupon') }} : <span id="coupon-code-name"></span>

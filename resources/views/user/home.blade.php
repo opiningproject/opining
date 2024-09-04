@@ -32,7 +32,7 @@
                                             <div class="mb-3">
                                                 <div class="form-group prev-input-group custom-icon-input-group mb-0">
                                                     <span class="input-group-icon">
-                                                        <img src="{{ asset('images/zipcode-svg.svg') }}" alt="" class="svg" height="16" width="24">
+                                                        <img src="{{ asset('images/zipcode-svg-up.svg') }}" alt="" class="svg" height="16" width="24">
                                                     </span>
                                                     <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="{{ trans('user.home.zip_code') }}" name="zipcode" id="zipcode" required />
                                                 </div>

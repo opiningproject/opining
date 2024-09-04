@@ -19,8 +19,8 @@
                                                 <div
                                                     class="d-flex align-items-center form-control bg-white border-0 h-100 new-searchbar">
                                                     <div class="image">
-                                                        <img src="{{ asset('images/search.svg') }}" alt="" class="svg"
-                                                             height="32" width="32">
+                                                        <img src="{{ asset('images/search-icon-up.svg') }}" alt="" class="svg"
+                                                             height="18" width="18">
                                                     </div>
                                                     <input type="text" id="search-dish"
                                                            class="form-control border-0 outline-0 text-truncate bg-transparent"

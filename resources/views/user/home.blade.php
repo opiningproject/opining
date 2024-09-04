@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="form-group prev-input-group custom-icon-input-group">
                                                 <span class="input-group-icon">
-                                                    <img src="{{ asset('images/home-icon-update.svg') }}" alt="home address" class="img-fluid" width="17" height="" />
+                                                    <img src="{{ asset('images/home-icon-svg-up.svg') }}" alt="home address" class="img-fluid" width="17" height="" />
                                                 </span>
                                                 <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="{{ trans('user.home.house_no') }}" name="house_no" id="house_no" required />
                                             </div>
@@ -58,7 +58,7 @@
                                         <form id="take-away-add-form">
                                             <div class="form-group prev-input-group custom-icon-input-group">
                                                 <span class="input-group-icon">
-                                                    <img src="{{ asset('images/call-icon.svg') }}" alt="call" class="img-fluid svg" width="22" height="22" />
+                                                    <img src="{{ asset('images/call-icon-up.svg') }}" alt="call" class="img-fluid svg" width="22" height="22" />
                                                 </span>
                                                 <input type="number" class="form-control form-control-icon ps-5" placeholder="{{ trans('user.home.phone_no') }}" name="phone_no" maxlength="10" min="1" minlength="10" id="phone_no" required/>
                                             </div>

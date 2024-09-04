@@ -36,9 +36,9 @@
                                 {{-- for mobile view --}}
                                 <div class="orders d-flex order-mobile">
                                     <div class="orders-type">
-                                        <div class="orders-title mb-1">{{ trans('user.my_orders.active_orders') }}</div>
+                                        <div class="orders-title mb-3">{{ trans('user.my_orders.active_orders') }}</div>
                                         @if (count($active_orders))
-                                            <div class="orders-list py-3 px-0 pb-0">
+                                            <div class="orders-list py-3 px-0 pb-0 pt-0">
                                                 @foreach ($active_orders as $key => $a_order)
                                                     <div onclick="orderDetail({{ $a_order->id }})" style="cursor: pointer;"
                                                         class="{{ $a_order->id == $order->id ? 'active' : '' }} orders-item d-flex align-items-center justify-content-between gap-2"
@@ -66,9 +66,9 @@
 
                                     @if (count($orders))
                                         <div class="orders-type">
-                                            <div class="orders-title mb-1">{{ trans('user.my_orders.overview') }}</div>
+                                            <div class="orders-title mb-3">{{ trans('user.my_orders.overview') }}</div>
                                             <span class="lastPage" style="display: none"> {{ $lastPage }}</span>
-                                            <div class="orders-list overview-orders py-3 px-1">
+                                            <div class="orders-list overview-orders py-3 pt-0 px-1">
                                                 @foreach ($orders as $key => $ord)
                                                     <div onclick="orderDetail({{ $ord->id }})"
                                                         style="cursor: pointer;"
@@ -124,7 +124,7 @@
                                                     </button>
                                                 @endif
                                                 <button onclick="location.href='{{ route('user.chat') }}'">
-                                                    <img src="{{ asset('images/needhelp-icon.svg') }}"
+                                                    <img src="{{ asset('images/needhelp-icon-up.svg') }}"
                                                         class="img-fluid svg" alt="" width="27" height="25">
                                                     {{ trans('user.my_orders.need_help') }}
                                                 </button>
@@ -141,32 +141,32 @@
                                                 </div>
                                                 <button class="border-none outline-none">
                                                     @if ($order->order_status == OrderStatus::Accepted)
-                                                        <img src="{{ asset('images/order-accepted.svg') }}"
+                                                        <img src="{{ asset('images/order-accepted-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="20"
                                                             height="20">
                                                         {{ trans('user.order_status.accepted') }}
                                                     @elseif($order->order_status == OrderStatus::InKitchen)
-                                                        <img src="{{ asset('images/orderinkitchen-icon.svg') }}"
+                                                        <img src="{{ asset('images/orderinkitchen-icon-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="26"
                                                             height="20">
                                                         {{ trans('user.order_status.in_kitchen') }}
                                                     @elseif($order->order_status == OrderStatus::Ready)
-                                                        <img src="{{ asset('images/readytopickup-icon.svg') }}"
+                                                        <img src="{{ asset('images/readytopickup-icon-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="16"
                                                             height="20">
                                                         {{ trans('user.order_status.ready') }}
                                                     @elseif($order->order_status == OrderStatus::ReadyForPickup)
-                                                        <img src="{{ asset('images/readytopickup-icon.svg') }}"
+                                                        <img src="{{ asset('images/readytopickup-icon-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="16"
                                                             height="20">
                                                         {{ trans('user.order_status.ready_for_pickup') }}
                                                     @elseif($order->order_status == OrderStatus::OutForDelivery)
-                                                        <img src="{{ asset('images/outfordelivery-icon.svg') }}"
+                                                        <img src="{{ asset('images/outfordelivery-icon-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="31"
                                                             height="20">
                                                         {{ trans('user.order_status.out_for_delivery') }}
                                                     @else
-                                                        <img src="{{ asset('images/delivered-icon.svg') }}"
+                                                        <img src="{{ asset('images/order-accepted-up.svg') }}"
                                                             class="img-fluid svg" alt="" width="21"
                                                             height="20">
                                                         {{ trans('user.order_status.delivered') }}
@@ -187,7 +187,7 @@
                                                         <div class="title">{{ trans('user.my_orders.delivery_address') }}
                                                         </div>
                                                         <div class="text">
-                                                            <img src="{{ asset('images/location-yellowicon.svg') }}"
+                                                            <img src="{{ asset('images/location-yellowicon-up.svg') }}"
                                                                 class="img-fluid svg me-2" alt="" width="12"
                                                                 height="16">
                                                             <?php
@@ -202,7 +202,7 @@
                                                         <div class="title">
                                                             {{ trans('user.my_orders.restaurant_address') }}</div>
                                                         <div class="text">
-                                                            <img src="{{ asset('images/house-icon.svg') }}"
+                                                            <img src="{{ asset('images/house-icon-up.svg') }}"
                                                                 class="img-fluid svg me-2" alt="" width="18"
                                                                 height="18">
                                                             {{ getRestaurantDetail()->rest_address }}

@@ -226,7 +226,7 @@
                                                                     <li>{{ trans('user.coupons.valid_till') }}
                                                                         {{ $coupon->end_expiry_date }}</li>
                                                                 </ul>
-                                                                <a class="btn btn-custom-yellow btn-default d-block d-md-inline-block text-white {{ $lockedCoupon }}"
+                                                                <a class="btn btn-custom-yellow btn-default d-block d-md-inline-block {{ $lockedCoupon }}"
                                                                     id="coupon-code-{{ $coupon->id }}"
                                                                     data-code="{{ $coupon->promo_code }}"
                                                                     onclick='showCouponPopup({{ $coupon->id }})'>

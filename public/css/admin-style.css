@@ -761,6 +761,7 @@ max-height: none !important;
 
 @media screen and (min-width: 1600px) {
     .foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 320px) !important;}
+    .foodorder-box .foodorder-box-details .archive-footer-box-main {max-height: calc(100vh - 221px) !important;}
     .foodorder-box .foodorder-box-list-wrp .foodorder-box-list {max-height: calc(100vh - 170px) !important;}
 }
 /* Order page update UI css ends */

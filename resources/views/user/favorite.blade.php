@@ -31,7 +31,7 @@
                                         ?>
                                     <div class="card food-detail-card shadow-mobile" id="dish-box-{{ $dish->dish->id }}">
                                         <a href="#" class="mb-0 food-favorite-icon" onclick="unFavorite({{ $dish->dish->id }})">
-                                            <img src="{{ asset('images/favorite-after-icon.svg') }}" alt="" class="svg" height="20" width="22">
+                                            <img src="{{ asset('images/favorite-after-icon-up.svg') }}" alt="" class="svg" height="20" width="22">
                                         </a>
                                         <div class="food-image">
                                             <img src="{{ $dish->dish->image }}" class="img-fluid" width="100" height="100"/>

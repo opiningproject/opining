@@ -24,9 +24,9 @@
                                                 <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <rect x="0.5" y="0.5" width="10" height="12" rx="1.5"
-                                                        stroke="#F8B602" />
+                                                        stroke="#151515" />
                                                     <rect x="3.5" y="3.5" width="10" height="12" rx="1.5"
-                                                        fill="white" stroke="#F8B602" />
+                                                        fill="white" stroke="#151515" />
                                                 </svg>
                                                 {{ $coupon->promo_code }}</a>
                                         </div>

@@ -45,7 +45,7 @@
               <br /> {{ trans('modal.auth.or') }}
             </p>
           </div>
-          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular font-18" href="{{ url('google/auth') }}">
+          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular" href="{{ url('google/auth') }}">
             <img src="{{ asset('images/google.svg') }}" alt="" height="19" width="19" class="svg">
             <span class="align-middle ms-3">{{ trans('modal.button.sign_in_google') }}</span>
           </a>

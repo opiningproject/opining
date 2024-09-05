@@ -23,7 +23,7 @@
                                     <div
                                         class="form-group prev-input-group mb-0 @error('email') is-invalid @enderror">
                                     <span class="input-group-icon">
-                                        <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
+                                        <img src="{{ asset('images/mail-icon2-up.svg') }}" class="svg" width="18" height="12">
 
                                     </span>
                                         <input type="text" class="form-control ps-5 text-indent-initial" autocomplete="off" name="email" placeholder="{{ trans('rest.auth.email') }}" value="{{ old('email') }}">
@@ -37,7 +37,7 @@
                                 <div class="mb-3">
                                     <div class="form-group mb-0 prev-input-group @error('password') is-invalid @enderror">
                                         <span class="input-group-icon">
-                                            <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20">
+                                            <img src="{{ asset('images/password-icon-up.svg') }}" class="svg" width="15" height="20">
                                         </span>
 
                                         <input type="password" class="form-control ps-5 text-indent-initial" name="password" placeholder="{{ trans('rest.auth.password') }}" id="password"  value="{{ old('password') }}" autocomplete="off">
@@ -85,7 +85,7 @@
                         <h3 class="authenticationform-title">{{ trans('rest.auth.reset_password') }}</h3>
                         <div class="form-group prev-input-group mb-0">
                         <span class="input-group-icon">
-                            <img src="{{ asset('images/mail-icon2.svg') }}" class="svg" width="18" height="12">
+                            <img src="{{ asset('images/mail-icon2-up.svg') }}" class="svg" width="18" height="12">
                         </span>
                             <input type="text" name="forgot-pwd-email" id="forgot-pwd-email" class="form-control text-indent-initial ps-5" placeholder="{{ trans('modal.auth.email') }}" value="" autocomplete="email" autofocus>
                         </div>

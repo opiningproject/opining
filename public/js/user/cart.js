@@ -141,7 +141,7 @@ $(function () {
                             scrollableContainer.animate({
                                 scrollTop: scrollableContainer.scrollTop() + scrollableContainer.offset().top - scrollableContainer.offset().top
                             }, 500);
-                            $('.cart-sidebar .cart-address-row').css('box-shadow', '0px 0px 7px 1px #d7a209');
+                            $('.cart-sidebar .cart-address-row').css('box-shadow', 'rgba(0, 0, 0, 0.15) 1px 2px 10px 8px');
 
                             // Remove the shake class after the animation completes (0.5s)
                             setTimeout(function() {

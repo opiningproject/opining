@@ -10,7 +10,7 @@ use App\Enums\RefundStatus;
 
 <div class="tab-pane fade" id="paymentHistory-tab-pane" role="tabpanel" aria-labelledby="paymentHistory-tab" tabindex="0">
   <div class="card-body">
-    <div class="paymentHistory-card-body rounded-custom-12 border-custom-1 py-3 ">
+    <div class="paymentHistory-card-body border-custom-1 py-3 pt-0">
       <div class="paymentHistory-table custom-table">
         <table class="table mb-3">
           <thead>
@@ -37,7 +37,7 @@ use App\Enums\RefundStatus;
               </td>
               <td class="text-center">
                 <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="{{ asset('images/location-icon.svg') }}" alt="" class="svg" height="18" width="13">
+                  <img src="{{ asset('images/location-yellowicon-up.svg') }}" alt="" class="svg" height="18" width="13">
                   <div class="text">
                     <?php
                       if($order->order_type == OrderType::Delivery)

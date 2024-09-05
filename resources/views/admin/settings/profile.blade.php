@@ -206,7 +206,7 @@
         <div class="card-footer bg-white border-0">
             <div class="row">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                    <button type="submit" id="profile-save-btn" class="btn btn-custom-yellow fw-400 font-sebibold w-100 mt-30px font-18">
+                    <button type="submit" id="profile-save-btn" class="btn btn-custom-yellow fw-400 font-sebibold w-100 mt-3 font-18">
                         {{ trans('rest.button.save') }}
                     </button>
                 </div>

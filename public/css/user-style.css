@@ -279,7 +279,7 @@ a {
 }
 
 .text-yellow-2 {
-  color: var(--theme-yellow2);
+  color: var(--theme-dark2);
 }
 
 .text-custom-muted {
@@ -344,10 +344,13 @@ a {
 .btn {
   color: var(--theme-dark2);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 12px 16px;
   border-radius: 10px;
   text-transform: capitalize;
+}
+.btn.btn-custom-yello {
+  color: #ffffff;
 }
 
 .btn-xs-sm {
@@ -759,19 +762,22 @@ a {
 }
 
 .btn-custom-yellow {
-  background-color: var(--theme-yellow2);
-  border-color: var(--theme-yellow2);
+  background-color: var(--theme-dark2);
+  border-color: var(--theme-dark2);
+  color: #ffffff;
 }
 
 .btn-custom-yellow:hover,
 .btn-custom-yellow:active {
-  background-color: var(--theme-yellow5);
-  border-color: var(--theme-yellow5);
+  color: #ffffff;
+  background-color: var(--theme-dark1);
+  border-color: var(--theme-dark1);
 }
 
 .btn-custom-yellow.btn:active {
-  background-color: var(--theme-yellow5);
-  border-color: var(--theme-yellow5);
+  color: #ffffff;
+  background-color: var(--theme-dark1);
+  border-color: var(--theme-dark1);
 }
 
 .btn-outline-secondary {
@@ -919,7 +925,7 @@ a {
 
 .food-detail-card .btn {
   margin-top: 17px;
-  color: var(--theme-dark2);
+  color: #ffffff;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
@@ -2102,12 +2108,12 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .form-group .singleline-text {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 input::-webkit-outer-spin-button,
@@ -6365,9 +6371,9 @@ form .prev-input-group .input-group-icon svg {
 
 .coupons-tab .nav-tabs .nav-item .nav-link.active,
 .coupons-tab .nav-tabs .nav-item .nav-link:hover {
-  background: #e7e7e7;
-  color: var(--theme-dark2);
-  border-color: #e7e7e7;
+  background: var(--theme-dark2);
+  color: #ffffff;
+  border-color: var(--theme-dark2);
 }
 
 .coupons-tab .coupons-tab-content .tab-pane .custom-card {

@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="col text-end">
                                     <a class="btn btn-custom-yellow" href="{{ route('ingred.category.index') }}">
-                                        <img src="{{ asset('images/add.svg')}}" alt="" class="svg" height="20"
+                                        <img src="{{ asset('images/add-up.svg')}}" alt="" class="svg" height="20"
                                              width="20">
                                         <span
                                             class="align-middle ms-3">{{ trans('rest.menu.ingredients.add_category') }}</span>

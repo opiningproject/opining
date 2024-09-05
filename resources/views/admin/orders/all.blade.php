@@ -34,7 +34,7 @@
                 <div
                     class="time d-flex flex-column align-items-center justify-content-center text-center gap-1 order-status-{{ $ord->id }}">
                     <img
-                        src="{{ $ord->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-yellow.svg') }}"
+                        src="{{ $ord->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-gray.svg') }}"
                         alt="time"
                         class="img-fluid svg" width="29" height="29">
                     <div class="text">{{ $ord->delivery_time }}</div>

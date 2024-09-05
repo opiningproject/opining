@@ -14,8 +14,9 @@
 
                     <!-- start Setting section -->
                     <section class="custom-section">
-                        <div class="customize-tab setting-tab">
-                            <ul class="nav nav-tabs flex-nowrap" id="myTab" role="tablist">
+                        <div class="customize-tab setting-tab horizontal_tab_setting">
+                            <ul class="nav nav-tabs flex-wrap" id="myTab" role="tablist">
+                                <li class="empty_space"></li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="restaurantProfile-tab" data-bs-toggle="tab" data-bs-target="#restaurantProfile-tab-pane" type="button" role="tab" aria-controls="restaurantProfile-tab-pane" aria-selected="false">
                                         {{ trans('rest.settings.profile.title') }}

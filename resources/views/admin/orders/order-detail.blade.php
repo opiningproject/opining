@@ -22,14 +22,14 @@ $userDetails = $order->orderUserDetails;
     <ul class="d-inline-flex flex-wrap gap-3 contact-list mb-0 p-0 justify-content-end">
         <li class="list-inline-item">
             <a href="#" class="d-flex align-items-center gap-2">
-                <img src="{{ asset('images/user-yellow.svg') }}" alt="user" class="img-fluid svg" width="17"
+                <img src="{{ asset('images/user-icon-up.svg') }}" alt="user" class="img-fluid svg" width="17"
                      height="18">
                 {{ $userDetails->order_name }}
             </a>
         </li>
         <li class="list-inline-item">
             <a href="#" class="d-flex align-items-center gap-2">
-                <img src="{{ asset('images/call-yellow.svg') }}" alt="call" class="img-fluid svg" width="19"
+                <img src="{{ asset('images/call-icon-up.svg') }}" alt="call" class="img-fluid svg" width="19"
                      height="19">
                 +31 {{ $userDetails->order_contact_number }}
             </a>
@@ -39,7 +39,7 @@ $userDetails = $order->orderUserDetails;
 <div class="footer-box-main">
     <div class="footer-box-main-orderdetails d-flex justify-content-between   ">
         <div class="footer-box-main-orderdetails-item d-flex align-items-start gap-2">
-            <img src="{{ asset('images/location-icon.svg') }}" alt="" class="img-fluid svg" width="13" height="18"
+            <img src="{{ asset('images/location-yellowicon-up.svg') }}" alt="" class="img-fluid svg" width="13" height="18"
                  style="margin-top: 1px;">
             <div class="text-grp ms-0">
                 @if($order->order_type == OrderType::Delivery)

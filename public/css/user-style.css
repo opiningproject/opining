@@ -1599,14 +1599,19 @@ svg>g[class^=raphael-group-] g.raphael-group-9-plots text {
 
 .custom-tabs .nav .nav-link.active,
 .custom-tabs .nav .nav-link:hover {
-  background-color: var(--theme-yellow2);
-  color: var(--theme-dark2);
+  background-color: var(--theme-dark2);
+  color: #ffffff;
+}
+
+.custom-tabs .nav .nav-link.active *,
+.custom-tabs .nav .nav-link:hover *{
+  color: #ffffff;
 }
 
 .custom-tabs .nav .nav-link.active svg path,
 .custom-tabs .nav .nav-link:hover svg path {
-  fill: var(--theme-dark2);
-  stroke: var(--theme-dark2);
+  fill: #ffffff;
+  stroke: #ffffff;
 }
 
 .address-card {

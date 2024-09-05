@@ -31,7 +31,7 @@
                                             <div class="flex-shrink-0">
                                                 <a class="btn btn-custom-yellow"
                                                    href="{{ route('dish-option.index') }}">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.dish_options') }}</span>
@@ -41,7 +41,7 @@
                                             <div class="flex-shrink-0">
                                                 <a class="btn btn-custom-yellow" data-bs-toggle="modal"
                                                    data-bs-target="#addCategoryModal">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_category') }}</span>
@@ -50,7 +50,7 @@
                                             <div class="flex-shrink-0">
                                                 <a class="btn btn-custom-yellow"
                                                    href="{{ route('ingredients.index') }}">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_ingred') }}</span>
@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="flex-shrink-0">
                                                 <a class="btn btn-custom-yellow" href="{{ route('addDish') }}">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_dish') }}</span>
@@ -72,7 +72,7 @@
                                                              alt="user image" class="img-fluid">
                                                         <div class="d-inline-block text-start userdp-text">
                                                             <a href="javascript:void(0);"
-                                                               class="d-block">{{ Auth::user()->name }}</a>
+                                                               class="text-yellow-2 d-block">{{ Auth::user()->name }}</a>
                                                             <span>{{ Auth::user()->email }}</span>
                                                         </div>
                                                     </button>

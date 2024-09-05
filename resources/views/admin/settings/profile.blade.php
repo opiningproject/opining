@@ -2,16 +2,6 @@
     <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="card-body">
-            <nav class="page-breadcrumb" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="#">{{ trans('rest.settings.title') }}</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="#">{{ trans('rest.settings.profile.title') }}</a>
-                    </li>
-                </ol>
-            </nav>
             <div class="card-custom-body">
                 <div class="row">
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">

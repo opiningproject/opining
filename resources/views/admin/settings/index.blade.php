@@ -14,8 +14,9 @@
 
                     <!-- start Setting section -->
                     <section class="custom-section">
-                        <div class="customize-tab setting-tab">
-                            <ul class="nav nav-tabs flex-nowrap" id="myTab" role="tablist">
+                        <div class="customize-tab setting-tab horizontal_tab_setting">
+                            <ul class="nav nav-tabs flex-wrap" id="myTab" role="tablist">
+                                <li class="empty_space"></li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="restaurantProfile-tab" data-bs-toggle="tab" data-bs-target="#restaurantProfile-tab-pane" type="button" role="tab" aria-controls="restaurantProfile-tab-pane" aria-selected="false">
                                         {{ trans('rest.settings.profile.title') }}
@@ -46,6 +47,26 @@
                                             aria-controls="zipCode-tab-pane" aria-selected="false">{{ trans('rest.settings.zipcode.title') }}
                                     </button>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="domainSetting-tab" data-bs-toggle="tab" data-bs-target="#domainSetting-tab-pane" type="button" role="tab"
+                                            aria-controls="domainSetting-tab-pane" aria-selected="false">{{ trans('rest.settings.domain_setting.title') }}
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="apiSetting-tab" data-bs-toggle="tab" data-bs-target="#apiSetting-tab-pane" type="button" role="tab"
+                                            aria-controls="apiSetting-tab-pane" aria-selected="false">{{ trans('rest.settings.api_setting.title') }}
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="paymentSetting-tab" data-bs-toggle="tab" data-bs-target="#paymentSetting-tab-pane" type="button" role="tab"
+                                            aria-controls="paymentSetting-tab-pane" aria-selected="false">{{ trans('rest.settings.payment_setting.title') }}
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="checkoutSetting-tab" data-bs-toggle="tab" data-bs-target="#checkoutSetting-tab-pane" type="button" role="tab"
+                                            aria-controls="checkoutSetting-tab-pane" aria-selected="false">{{ trans('rest.settings.checkout_setting.title') }}
+                                    </button>
+                                </li>
                             </ul>
 
                             <div class="tab-content card editdish-card setting-tab-content" id="myTabContent">
@@ -55,6 +76,10 @@
                                 @include('admin.settings.cms-nl')
                                 @include('admin.settings.refund-history')
                                 @include('admin.settings.zipcode')
+                                @include('admin.settings.domain-setting')
+                                @include('admin.settings.api-setting')
+                                @include('admin.settings.payment-setting')
+                                @include('admin.settings.checkout-setting')
                             </div>
                         </div>
                     </section>

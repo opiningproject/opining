@@ -12,13 +12,13 @@
                         <h1 class="page-title">{{ trans('rest.coupons.title') }}</h1>
                         <div class="col text-end">
                             <div class="form-group mb-0">
-                                <a class="btn btn-outline-secondary border-light btn-default me-4 btn-box-shadow"
+                                <a class="btn btn-outline-secondary border-light btn-default me-4"
                                    href="{{ route('claimHistoryLog') }}">
                                     <img class="svg" src="{{ asset('images/claim-history.svg') }}" alt="" height="20" width="20">
                                     <span class="align-middle ms-3">{{ trans('rest.coupons.claim_history') }}</span>
                                 </a>
                                 <a class="btn btn-custom-yellow btn-default btn-box-shadow" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addCouponModal">
-                                    <img src="{{ asset('images/add.svg') }}" alt="" height="20" width="20" class="svg">
+                                    <img src="{{ asset('images/add-up.svg') }}" alt="" height="20" width="20" class="svg">
                                     <span class="align-middle ms-3">{{ trans('rest.coupons.add') }}</span>
                                 </a>
                             </div>

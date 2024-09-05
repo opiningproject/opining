@@ -211,7 +211,7 @@ class OrdersController extends Controller
                         </div>
                     </div>
                     <div class="time d-flex flex-column align-items-center justify-content-center text-center gap-1 order-status-' . $orders->id . '">
-                        <img src="' . ($orders->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-yellow.svg')) . '"
+                        <img src="' . ($orders->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-gray.svg')) . '"
                             alt="time" class="img-fluid svg" width="29" height="29">
                         <div class="text">' . $orders->delivery_time . '</div>
                     </div>

@@ -22,7 +22,7 @@
           </div>
           <div class="form-group prev-input-group custom-icon-input-group">
             <span class="input-group-icon">
-              <img src="{{ asset('images/mail-icon2.svg') }}" alt="" width="18" height="12" class="svg">
+              <img src="{{ asset('images/mail-icon2-up.svg') }}" alt="" width="18" height="12" class="svg">
             </span>
             <input type="email" class="form-control custom-control-with-icon ps-5" placeholder="{{ trans('modal.auth.email') }}" name="email" id="email" required>
             <label id="email-error" class="error" for="email" style="display: none"></label>
@@ -53,7 +53,7 @@
               <br /> {{ trans('modal.auth.or') }}
             </p>
           </div>
-          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular font-18" href="{{ url('google/auth') }}">
+          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular" href="{{ url('google/auth') }}">
             <img src="{{ asset('images/google.svg') }}" alt="" height="19" width="19" class="svg">
             <span class="align-middle ms-3">{{ trans('modal.button.sign_in_google') }}</span>
           </a>

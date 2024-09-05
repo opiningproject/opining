@@ -194,7 +194,7 @@
                                                     @if ($dish->out_of_stock == '1')
                                                         {{ trans('user.dashboard.out_of_stock') }}
                                                     @else
-                                                        <img src="{{ asset('images/plus.svg') }}" class="svg"
+                                                        <img src="{{ asset('images/plus-up.svg') }}" class="svg"
                                                              height="9"
                                                              width="9">€{{ number_format($dish->price, 2) }}
                                                     @endif

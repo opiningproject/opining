@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-/*font-family: "Poppins", sans-serif;*/
-
 .text-indent-initial {
     text-indent: initial !important;
 }
@@ -165,19 +162,19 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .finance_auth_section .finance_auth_form .form-control::-webkit-input-placeholder {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .finance_auth_section .finance_auth_form .form-control::-moz-placeholder {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .finance_auth_section .finance_auth_form .form-control:-ms-input-placeholder {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .finance_auth_section .finance_auth_form .form-control:-moz-placeholder {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .category-section .category-slider .category-element .card {
@@ -219,7 +216,7 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .category-section .category-slider .category-element.swiper-slide-active .card {
-    /*border-color: #FFC00B;*/
+    /*border-color: var(--theme-dark1);*/
 }
 
 .foodorder-box-list-top {
@@ -248,7 +245,7 @@ form .prev-input-group .input-group-icon svg {
     text-align: center;
     font-size: 14px;
     text-transform: uppercase;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     height: 40px;
     padding: 5px;
@@ -260,7 +257,7 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .foodorder-box-list-top .fixed-tab-buttons .btn-tap.active {
-    background: #FFC00B;
+    background: var(--theme-dark1);
     color: #ffffff;
 }
 
@@ -268,10 +265,10 @@ form .prev-input-group .input-group-icon svg {
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link .order-count {
     white-space: nowrap;
     font-size: 12px;
-    background: #FFC00B;
+    background: var(--theme-yellow2);
+    color: var(--theme-dark2);
     border-radius: 9999px;
     padding: 9px 7px 9px;
-    color: #292929;
     position: relative;
     top: 0px;
     display: inline-flex !important;
@@ -319,7 +316,7 @@ form .prev-input-group .input-group-icon svg {
 
     .inline-imageupload-box .upload-file {
         min-height: 40px;
-        border-radius: 8px;
+        border-radius: 10px;
     }
 
     /* .swiper-container {width: 100%;} */
@@ -337,7 +334,7 @@ form .prev-input-group .input-group-icon svg {
         font-size: 16px;
         letter-spacing: 0.19px;
         padding: 10px 18px;
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     .bd-layout {
@@ -361,7 +358,7 @@ form .prev-input-group .input-group-icon svg {
     .page-control .form-control {
         height: 40px !important;
         min-height: 40px !important;
-        border-radius: 8px !important;
+        border-radius: 10px !important;
         font-size: 12px;
     }
 
@@ -415,7 +412,7 @@ form .prev-input-group .input-group-icon svg {
     .form-select {
         min-height: 40px;
         max-height: 40px;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 14px;
     }
 
@@ -431,12 +428,12 @@ form .prev-input-group .input-group-icon svg {
     }
 
     .foodorder-box .foodorder-box-list-wrp {
-        border-radius: 12px;
+        border-radius: 10px;
         padding: 20px 20px 20px 20px;
     }
 
     .foodorder-box .foodorder-box-details {
-        border-radius: 12px;
+        border-radius: 10px;
         padding: 20px 20px 20px 20px;
     }
 
@@ -467,7 +464,7 @@ form .prev-input-group .input-group-icon svg {
     }
 
     .hero-incomebox {
-        border-radius: 12px;
+        border-radius: 10px;
         padding: 20px;
         margin: 20px 0 0;
     }
@@ -486,7 +483,7 @@ form .prev-input-group .input-group-icon svg {
 
     .income-diagrams .income-diagrams-item:nth-of-type(1) {
         padding: 20px;
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     .income-diagrams {
@@ -505,7 +502,7 @@ form .prev-input-group .input-group-icon svg {
 
     .ChatDiv {
         padding: 20px;
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     .chatbox .chatbox-header {
@@ -523,7 +520,7 @@ form .prev-input-group .input-group-icon svg {
     .chatbox .chatbox-footer .form-group .btn-custom-yellow {
         height: 40px;
         padding: 8px 20px;
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     .chatbox .chatbox-main .chats-grp {
@@ -584,13 +581,13 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .category-section .category-slider .category-element.swiper-slide-admin-cart-active .card {
-    border-color: #FFC00B;
-    /*background: #FFC00B;*/
+    border-color: var(--theme-dark1);
+    /*background: var(--theme-dark1);*/
 }
 
 .category-section .category-slider .category-element .card:hover .btn-custom-yellow,
 .category-section .category-slider .category-element .card.active .btn-custom-yellow {
-    background: #FFC00B !important;
+    background: var(--theme-dark1) !important;
 }
 
 
@@ -598,11 +595,18 @@ form .prev-input-group .input-group-icon svg {
 .category-section .category-slider .category-element .card.active .btn-custom-yellow i {
     color: #292929 !important;
 }
+.category-section .category-slider .category-element .card:hover .btn-custom-yellow i {
+    color: #ffffff !important;
+}
+.category-section .category-slider .category-element .card:hover .category-slide-btns .btn-custom-yellow i {
+    color: #292929 !important;
+}
+
 
 .category-section .category-slider .category-element .card:hover .btn-custom-yellow,
 .category-section .category-slider .category-element .card.active .btn-custom-yellow {
-    background: #FFC00B !important;
-    border-color: #FFC00B !important;
+    background: var(--theme-dark1) !important;
+    border-color: var(--theme-dark1) !important;
 }
 
 .category-section .category-slider .category-element .card:hover .category-slide-btns .btn-custom-yellow,
@@ -615,20 +619,20 @@ form .prev-input-group .input-group-icon svg {
 
 .category-section .category-element .card .categoryfood-detail-card-btn .btn-custom-yellow:hover {
     background: #ffffff !important;
-    border-color: #FFC00B !important;
+    border-color: var(--theme-dark1) !important;
 }
 
 .category-section .category-element .card .categoryfood-detail-card-btn .btn-custom-yellow:hover i {
-    color: #FFC00B !important;
+    color: var(--theme-dark1) !important;
 }
 
 .main-content .category-section .category-element .card .category-slide-btns .btn-custom-yellow:hover {
     background: #ffffff !important;
-    border-color: #FFC00B !important;
+    border-color: var(--theme-dark1) !important;
 }
 
 .category-section .category-element .card .category-slide-btns .btn-custom-yellow:hover i {
-    color: #FFC00B !important;
+    color: var(--theme-dark1) !important;
 }
 
 .header-filter-order {
@@ -672,11 +676,16 @@ form .prev-input-group .input-group-icon svg {
     align-items: center;
     /*border: 1px solid #dcdcdc;*/
     padding: 5px 0px;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 12px;
     line-height: normal;
 }
 
+.section-page-title .page-control .btn-custom-yellow {
+    background: var(--theme-yellow2);
+    color: var(--theme-dark2) !important;
+    border-color: var(--theme-yellow2);
+}
 
 
 /* Chat Screen UI update css */
@@ -698,8 +707,8 @@ form .prev-input-group .input-group-icon svg {
 .chat-main-screen .chatbox .chatbox-header {padding: 10px 20px;height: 60px;}
 .chat-main-screen .chatbox .chatbox-header .profile-item .profile-img {max-width: 40px;}
 .chat-main-screen .chatbox .chatbox-header {border-bottom: 1px solid var(--theme-white3);}
-.chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item {padding: 10px 15px;border-radius: 8px;border: 0px !important;box-shadow: none !important;filter: none !important;}
-.chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item.active, .chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item:hover {background: rgb(255 249 233) !important;}
+.chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item {padding: 10px 15px;border-radius: 10px;border: 0px !important;box-shadow: none !important;filter: none !important;}
+.chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item.active, .chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item:hover {background: var(--theme-yellow2) !important;}
 .chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .userimage {width: 40px;}
 .chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .text-grp .title {font-size: 14px;}
 .chat-main-screen .ChatDiv .ChatDiv-type .ChatDiv-list .ChatDiv-item .text-grp .text {font-size: 10px;line-height: normal;}
@@ -710,12 +719,12 @@ form .prev-input-group .input-group-icon svg {
 .chatbox .chatbox-header .profile-item .profile-textgrp .profile-text .inactivicon {width: 12px;height: 12px;border-radius: 9999px;}
 .chat-main-screen .chatbox .chatbox-footer {padding: 20px 20px 20px;border-top: 1px solid #dcdcdc;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;}
 .chat-main-screen .chatbox .chatbox-footer .custom-file-upload {display: flex;align-items: center;cursor: pointer;justify-content: center;}
-.chat-main-screen .chatbox .chatbox-footer .form-group .btn-custom-yellow {height: 40px;padding: 9px 19px;border-radius: 8px;font-size: 16px;cursor: pointer;width: 80px;display: flex;align-items: center;font-family: "Poppins", sans-serif;line-height: 1.4;font-weight: 500;}
-.chat-main-screen .chatbox .chatbox-footer .form-group {border-radius: 8px;padding: 5px 10px;}
+.chat-main-screen .chatbox .chatbox-footer .form-group .btn-custom-yellow {height: 40px;padding: 9px 19px;border-radius: 10px;font-size: 16px;cursor: pointer;width: 80px;display: flex;align-items: center;font-family: "Poppins", sans-serif;line-height: 1.4;font-weight: 500;}
+.chat-main-screen .chatbox .chatbox-footer .form-group {border-radius: 10px;padding: 5px 10px;}
 .chat-main-screen .chatbox .chatbox-main .chats-grp {padding: 32px 20px 56px 20px;width: calc(100% + 4px);}
 .chat-main-screen .chatbox .chatbox-main .chats-grp::-webkit-scrollbar {width: 5px;}
 .chat-main-screen .chatbox .chatbox-main .chats-grp .chat-item>.img-fluid {width: 40px;}
-.chat-main-screen .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p {padding: 10px 15px 10px 15px;border-radius: 8px;font-size: 14px;margin-bottom: 2px;}
+.chat-main-screen .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp p {padding: 10px 15px 10px 15px;border-radius: 10px;font-size: 14px;margin-bottom: 2px;}
 .chat-main-screen .chatbox .chatbox-main .chats-grp .chat-item .chat-item-textgrp small {font-size: 12px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .form-control {font-size: 14px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .form-control::-webkit-input-placeholder {font-size: 14px;}
@@ -723,7 +732,7 @@ form .prev-input-group .input-group-icon svg {
 .chat-main-screen .chatbox .chatbox-footer .form-group .form-control:-ms-input-placeholder {font-size: 14px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .form-control:-moz-placeholder {font-size: 14px;}
 .chat-main-screen .chatbox .chatbox-footer .image-holder .attachImage {object-fit: contain;width: 70px !important;height: 70px !important;object-position: center;background: #ffffff;padding: 5px;margin-right: 0px;}
-.chat-main-screen .chatbox .chatbox-footer .form-group #image-holder {position: absolute;background: whitesmoke;width: 100%;left: 0px;right: 0px;padding: 10px 10px 10px;top: -89px;border-radius: 8px 8px 0px 0px;border-bottom: 1px solid #dcdcdc;gap: 10px;}
+.chat-main-screen .chatbox .chatbox-footer .form-group #image-holder {position: absolute;background: whitesmoke;width: 100%;left: 0px;right: 0px;padding: 10px 10px 10px;top: -89px;border-radius: 10px 8px 0px 0px;border-bottom: 1px solid #dcdcdc;gap: 10px;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder:empty {display: none !important;}
 .chat-main-screen .chatbox .chatbox-footer .form-group #image-holder .image-group {position: relative;}
 .chat-main-screen .chatbox .chatbox-footer .form-group .image-holder .image-group:empty {display: none !important;}
@@ -733,6 +742,19 @@ form .prev-input-group .input-group-icon svg {
     display: none !important;
 }
 
+.chat-main-screen .chatbox .chatbox-footer .btn-custom-yellow {
+    background-color: var(--theme-dark2) !important;
+    border-color: var(--theme-dark2) !important;
+    color: #ffffff !important;
+}
+
+.category-swiper-slider .swiper-slide .card svg path {
+  fill: #828282 !important;
+}
+
+.category-swiper-slider .swiper-slide.swiper-slide-admin-cart-active .card svg path {
+    fill: #151515 !important;
+  }
 
 /* Order page update UI css starts */
 
@@ -758,6 +780,15 @@ max-height: none !important;
 .category-section .swiper-container {
     width: 100%;
 }
+.page-link {
+    color: var(--theme-dark2) !important;
+}
+.active>.page-link, .page-link.active {
+    background: var(--theme-dark2) !important;
+    color: #ffffff !important;
+    border-color: var(--theme-dark2) !important;
+}
+
 
 @media screen and (min-width: 1600px) {
     .foodorder-box .foodorder-box-details .footer-box-main {max-height: calc(100vh - 320px) !important;}
@@ -775,7 +806,7 @@ max-height: none !important;
     gap: 15px;
 }
 .footer-box-main-orderlist-main-item .orderRead-more .content-for-orders {
-    padding-top: 3px;
+    padding-top: 0px;
 }
 
 @media screen and (max-width: 1440px) {
@@ -875,4 +906,49 @@ max-height: none !important;
         flex: 0 0 20%;
         max-width: 20%;
     }
+}
+
+.horizontal_tab_setting {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 60px;
+}
+.horizontal_tab_setting .nav-tabs {
+    flex: 0 0 260px;
+    max-width: 260px;
+    border: 0px;
+    column-gap: 0px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.horizontal_tab_setting .tab-content {
+    flex: auto;
+    border: 0px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: none;
+}
+.customize-tab.horizontal_tab_setting  .nav-tabs .nav-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.customize-tab.horizontal_tab_setting .nav-tabs .nav-item .nav-link {
+    border-radius: 0px !important;
+    padding: 10px 30px;
+    text-align: left;
+    font-size: 16px;
+    color: #727272;
+    border-right: 5px solid transparent;
+}
+.customize-tab.horizontal_tab_setting .nav-tabs .nav-item .nav-link:hover, .customize-tab.horizontal_tab_setting .nav-tabs .nav-item .nav-link.active {
+    background: #F2F2F2 !important;
+    border-right-color: #151515;
+    color: #151515;
 }

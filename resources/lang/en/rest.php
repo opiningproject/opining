@@ -215,6 +215,18 @@ return [
 
 	'settings' => [
 		'title' => 'Settings',
+        'domain_setting' => [
+            'title' => 'Domain Settings',
+        ],
+        'api_setting' => [
+            'title' => 'API Settings',
+        ],
+        'payment_setting' => [
+            'title' => 'Payment Settings',
+        ],
+        'checkout_setting' => [
+            'title' => 'Checkout',
+        ],
 		'profile' => [
 			'title' => 'Restaurant Profile',
 			'name' => 'Restaurant Name',

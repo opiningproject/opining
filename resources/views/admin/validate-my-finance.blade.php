@@ -12,7 +12,7 @@
                                 <div class="mb-3">
                                     <div class="form-group mb-0 position-relative">
                                         <span class="input-group-icon">
-                                            <img src="{{ asset('images/Password-icon.svg') }}" class="svg" width="15" height="20"/>
+                                            <img src="{{ asset('images/password-icon-up.svg') }}" class="svg" width="15" height="20"/>
                                         </span>
                                         <input type="password" class="form-control ps-5 text-indent-initial" name="password" placeholder="Enter Password" id="password" autocomplete="off"/>
                                     </div>

@@ -35,7 +35,7 @@
 
                                             </div>
 
-                                            {{-- <a class="btn btn-custom-yellow track-order-btn mt-4"  href="{{ route('user.dashboard') }}">
+                                            {{-- <a class="btn btn-site-theme track-order-btn mt-4"  href="{{ route('user.dashboard') }}">
                     <span class="align-middle">{{ trans('user.collected_points.order_now') }} </span>
                   </a> --}}
                                         </div>
@@ -226,7 +226,7 @@
                                                                     <li>{{ trans('user.coupons.valid_till') }}
                                                                         {{ $coupon->end_expiry_date }}</li>
                                                                 </ul>
-                                                                <a class="btn btn-custom-yellow btn-default d-block d-md-inline-block {{ $lockedCoupon }}"
+                                                                <a class="btn btn-site-theme btn-default d-block d-md-inline-block {{ $lockedCoupon }}"
                                                                     id="coupon-code-{{ $coupon->id }}"
                                                                     data-code="{{ $coupon->promo_code }}"
                                                                     onclick='showCouponPopup({{ $coupon->id }})'>
@@ -266,7 +266,7 @@
                                                                 <li>Valid for 2 weeks after redeem.</li>
                                                             </ul>
                                                             <a
-                                                                class="btn btn-custom-yellow btn-default d-block d-md-inline-block text-white">
+                                                                class="btn btn-site-theme btn-default d-block d-md-inline-block text-white">
                                                                 Redeem my points
                                                             </a>
                                                         </div>
@@ -299,7 +299,7 @@
                                                                 <li>Valid for 2 weeks after redeem.</li>
                                                             </ul>
                                                             <a
-                                                                class="btn btn-custom-yellow btn-default d-block d-md-inline-block text-white">
+                                                                class="btn btn-site-theme btn-default d-block d-md-inline-block text-white">
                                                                 Redeem my points
                                                             </a>
                                                         </div>
@@ -332,7 +332,7 @@
                                                                 <li>Valid for 2 weeks after redeem.</li>
                                                             </ul>
                                                             <a
-                                                                class="btn btn-custom-yellow btn-default d-block d-md-inline-block text-white">
+                                                                class="btn btn-site-theme btn-default d-block d-md-inline-block text-white">
                                                                 Redeem my points
                                                             </a>
                                                         </div>

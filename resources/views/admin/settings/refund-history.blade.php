@@ -52,10 +52,10 @@ use App\Enums\RefundStatus;
               <td class="text-center">
                 <div class="d-flex align-items-center gap-3 flex-lg-wrap flex-xl-nowrap justify-content-center refund_status_box_{{ $order->id }}">
                   @if($order->refund_status == RefundStatus::Pending)
-                  <a class="btn btn-custom-yellow btn-default d-block px-2 py-1 rounded-2" onclick="changeRefundStatus({{ $order->id }},'2')">
+                  <a class="btn btn-site-theme btn-default d-block px-2 py-1 rounded-2" onclick="changeRefundStatus({{ $order->id }},'2')">
                     <span class="align-middle" style="font-size: 11px;">{{ trans('rest.settings.payment.reject') }}</span>
                   </a>
-                  <a class="btn btn-custom-yellow btn-default d-block px-2 py-1 rounded-2" onclick="changeRefundStatus({{ $order->id }},'1')">
+                  <a class="btn btn-site-theme btn-default d-block px-2 py-1 rounded-2" onclick="changeRefundStatus({{ $order->id }},'1')">
                     <span class="align-middle" style="font-size: 11px;">{{ trans('rest.settings.payment.accept') }}</span>
                   </a>
                   @else

@@ -48,7 +48,7 @@
                                                     <div class="text-start flex-fill">
                                                         <h4 class="food-name-text text-start text-truncate w-100">{{ $dish->name }}</h4>
                                                         <p class="food-price d-inline-block">€{{ $dish->price }}</p>
-                                                        <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
+                                                        <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center">
                                                             @if($order['percentage'] < 0)
                                                                 {{ $order['percentage'] }}%
                                                                 <img src="{{ asset('images/down-arrow.svg') }}" alt=""

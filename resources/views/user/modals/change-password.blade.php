@@ -22,7 +22,7 @@
                         <label for="cnewpassword" class="form-label">{{ trans('modal.change_password.c_new_password') }}</label>
                         <input type="password" class="form-control" name="c_password" id="c_password">
                     </div>
-                    <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="change-password-btn">
+                    <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px" id="change-password-btn">
                         {{ trans('modal.button.save') }}
                     </button>
                 </form>

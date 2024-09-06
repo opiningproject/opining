@@ -9,7 +9,7 @@
         <p> {{ trans('user.my_orders.details_on_my_orders_page') }} </p>
 
         <div class="success-footer mt-5">
-            <a href="{{ route('user.orders') }}" class="btn btn-custom-yellow btn-default d-block">{{ trans('user.my_orders.my_order') }}</a>
+            <a href="{{ route('user.orders') }}" class="btn btn-site-theme btn-default d-block">{{ trans('user.my_orders.my_order') }}</a>
             <div class="text-center mt-4">
                 <a href="{{ route('user.dashboard') }}" class="back-link">{{ trans('user.my_orders.back_to_home') }}</a>
             </div>
@@ -34,7 +34,7 @@
                         <p> {{ trans('user.my_orders.details_on_my_orders_page') }} </p>
 
                         <div class="success-footer mt-5">
-                            <a href="{{ route('user.orders') }}" class="btn btn-custom-yellow btn-default d-block">{{ trans('user.my_orders.my_order') }}</a>
+                            <a href="{{ route('user.orders') }}" class="btn btn-site-theme btn-default d-block">{{ trans('user.my_orders.my_order') }}</a>
                             <div class="text-center mt-4">
                                 <a href="{{ route('user.dashboard') }}" class="back-link">{{ trans('user.my_orders.back_to_home') }}</a>
                             </div>

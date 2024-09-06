@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="btn-grp">
-              <a class="btn btn-custom-yellow track-order-btn"  href="{{ route('user.orders',['order_id' => $order->order->id]) }}">
+              <a class="btn btn-site-theme track-order-btn"  href="{{ route('user.orders',['order_id' => $order->order->id]) }}">
                 <span class="align-middle">{{ trans('user.my_orders.my_order') }}</span>
               </a>
             </div>

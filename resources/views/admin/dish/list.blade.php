@@ -76,7 +76,7 @@
                     <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">
                         {{ trans('rest.button.cancel') }}
                     </button>
-                    <button type="button" id="delete-dish-btn" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">
+                    <button type="button" id="delete-dish-btn" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">
                         {{ trans('rest.button.delete') }}
                     </button>
                 </div>

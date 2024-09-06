@@ -156,7 +156,7 @@
 {{--                                                        <input type="text" class="form-control" name="option_name_en"--}}
 {{--                                                               id="option_name_en">--}}
 {{--                                                        <button--}}
-{{--                                                            class="input-group-btn btn btn-custom-yellow btn-icon h-50px"--}}
+{{--                                                            class="input-group-btn btn btn-site-theme btn-icon h-50px"--}}
 {{--                                                            type="button" id="addOptionBtn">--}}
 {{--                                                            <i class="fa-solid fa-plus"></i>--}}
 {{--                                                        </button>--}}
@@ -219,7 +219,7 @@
                                         <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
                                                 <button type="submit"
-                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                        class="btn btn-site-theme btn-default d-block w-130px mt-3">
                                                     <span class="align-middle">{{ trans('rest.button.update') }}</span>
                                                 </button>
                                             </div>
@@ -289,7 +289,7 @@
                                                                 <label for="discountpercentage"
                                                                        class="form-label"></label>
                                                                 <button type="submit"
-                                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                                        class="btn btn-site-theme btn-default d-block w-130px mt-3">
                                                                     <span
                                                                         class="align-middle">{{ trans('rest.button.add') }}</span>
                                                                 </button>
@@ -334,7 +334,7 @@
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="">
-                                                                    <a class="btn btn-custom-yellow btn-icon free-ingredient-btn del-dish-ingredient"
+                                                                    <a class="btn btn-site-theme btn-icon free-ingredient-btn del-dish-ingredient"
                                                                        data-bs-toggle="modal"
                                                                        data-id="{{ $freeIngredient->id }}"
                                                                        data-bs-target="#deleteAlertModal">
@@ -427,7 +427,7 @@
                                                                 <label for="discountpercentage"
                                                                        class="form-label"></label>
                                                                 <button type="submit"
-                                                                        class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                                        class="btn btn-site-theme btn-default d-block w-130px mt-3">
                                                                     <span
                                                                         class="align-middle">{{ trans('rest.button.add') }}</span>
                                                                 </button>
@@ -486,20 +486,20 @@
                                                             <td class="text-center">
                                                                 <div
                                                                     class="d-flex align-items-center justify-content-center">
-                                                                    <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"
+                                                                    <a class="btn btn-site-theme btn-icon me-4 paid-ingredient-edit-btn"
                                                                        id="paid-ingredient-edit{{ $paidIngredient->id }}"
                                                                        data-id="{{ $paidIngredient->id }}" tabindex="0"
                                                                        href="javascript:void(0);">
                                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                                     </a>
-                                                                    <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient"
+                                                                    <a class="btn btn-site-theme btn-icon paid-ingredient-del-btn del-dish-ingredient"
                                                                        id="paid-ingredient-delete{{ $paidIngredient->id }}"
                                                                        data-bs-toggle="modal"
                                                                        data-id="{{ $paidIngredient->id }}"
                                                                        data-bs-target="#deleteAlertModal">
                                                                         <i class="fa-regular fa-trash-can"></i>
                                                                     </a>
-                                                                    <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn"
+                                                                    <a class="btn btn-site-theme btn-default d-block paid-ingredient-save-btn"
                                                                        style="display: none !important;"
                                                                        id="paid-ingredient-save{{ $paidIngredient->id }}"
                                                                        data-id="{{ $paidIngredient->id }}">
@@ -548,7 +548,7 @@
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">{{ trans('rest.button.cancel') }} </button>
                         <button type="button" id="delete-dish-ingredient-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }} </button>
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }} </button>
                     </div>
                 </div>
             </div>

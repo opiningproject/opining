@@ -412,7 +412,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                             </div>
                                                             <div class="textCon">
                                                                 <h3>{{ trans('user.checkout.payment_method') }}</h3>
-                                                                <p class="mb-0" id="mobile-payment-type-text">iDEAL</p>
+                                                                <p class="mb-0 mobile-payment-type-name" id="mobile-payment-type-text"> </p>
                                                                 <p class="without-check-error mb-0"
                                                                     id="payment-method-error"></p>
                                                             </div>
@@ -457,7 +457,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                             <div class="radio">
                                                                                 <input id="ideal-radio"
                                                                                     name="del_radio_new" type="radio"
-                                                                                    class="radio-ideal" checked=""
+                                                                                    class="radio-ideal" {{ !$firstSelected ? 'checked' : '' }}
                                                                                     value="asap">
                                                                                 <label for="radio-1"
                                                                                     class="radio-label radio-ideal"
@@ -488,7 +488,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
                                                                                 <input id="cc-radio" name="del_radio_new"
-                                                                                    type="radio" class="radio-cc"
+                                                                                    type="radio" class="radio-cc" {{ !$firstSelected ? 'checked' : '' }}
                                                                                     value="asap">
                                                                                 <label for="radio-1"
                                                                                     class="radio-label radio-cc"
@@ -517,7 +517,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
                                                                                 <input id="cod-radio" name="del_radio_new"
-                                                                                    type="radio" class="radio-cod"
+                                                                                    type="radio" class="radio-cod" {{ !$firstSelected ? 'checked' : '' }}
                                                                                     value="asap">
                                                                                 <label for="radio-1"
                                                                                     class="radio-label radio-cod"
@@ -906,6 +906,9 @@ if($user->cart && $user->cart->order_type == 2) {
 
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
     <script>
+        // mobile-payment-type-name
+        console.log("total-amt-pay-btn", $('#total-amt-pay-btn').text())
+        $('.mobile-payment-type-name').text($('#total-amt-pay-btn').text())
         function isDesktopView() {
             return $(window).width() >= 768;
         }

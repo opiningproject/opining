@@ -38,7 +38,7 @@ class OrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
-        $orders = Order::where('is_cart', '0')->orderBy('id', 'desc');
+        $orders = Order::where('is_cart', '0')->orderBy('id', 'desc')->where('updated_at', '>=', Carbon::now()->subHours(12));
 
         $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 
@@ -169,15 +169,18 @@ class OrdersController extends Controller
             $orders = Order::orderBy('id', 'desc');
             if ($request->has('search')) {
 
-                $orders->whereHas('orderUserDetails', function ($query) use ($request) {
-                    $query->where('order_name', 'like', '%' . $request->search . '%')
-                        ->orWhere('house_no', 'like', '%' . $request->search . '%')
-                        ->orWhere('street_name', 'like', '%' . $request->search . '%')
-                        ->orWhere('city', 'like ', '%' . $request->search . '%');
-                })->orWhere('id', 'like', '%' . $request->search . '%')->where('is_cart', '0');
+                $orders->where(function ($query) use ($request) {
+                    $query->whereHas('orderUserDetails', function ($query) use ($request) {
+                        $query->where('order_name', 'like', '%' . $request->search . '%')
+                            ->orWhere('house_no', 'like', '%' . $request->search . '%')
+                            ->orWhere('street_name', 'like', '%' . $request->search . '%')
+                            ->orWhere('city', 'like', '%' . $request->search . '%');
+                    })
+                        ->orWhere('id', 'like', '%' . $request->search . '%');
+                });
             }
 
-            $orderListIds = $orders->pluck('id')->toArray();
+            $orderListIds = $orders->where('updated_at', '>=', Carbon::now()->subHours(12))->pluck('id')->toArray();
             if (isset($request->activeId)) {
                 $orderExist = in_array($request->activeId, $orderListIds);
             }

@@ -39,16 +39,21 @@
             <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-0" id="sign-in-btn">{{ trans('modal.button.sign_in') }}</button>
           </div>
           <div class="form-group">
-            <p class="mb-0 singleline-text text-center text-custom-muted">{{ trans('modal.auth.no_account') }}
-              <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" class="text-yellow-2">{{ trans('modal.button.sign_up') }}</a>
-              <br />
-              <br /> {{ trans('modal.auth.or') }}
+            <p class="singleline-text text-center text-custom-muted">
+              {{ trans('modal.auth.or') }}
             </p>
           </div>
-          <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular" href="{{ url('google/auth') }}">
-            <img src="{{ asset('images/google.svg') }}" alt="" height="19" width="19" class="svg">
-            <span class="align-middle ms-3">{{ trans('modal.button.sign_in_google') }}</span>
-          </a>
+            <a class="btn btn-outline-secondary btn-default w-100 text-capitalize font-sebiregular" href="{{ url('google/auth') }}">
+                <img src="{{ asset('images/google.svg') }}" alt="" height="19" width="19" class="svg">
+                <span class="align-middle ms-3">{{ trans('modal.button.sign_in_google') }}</span>
+            </a>
+            <br />
+            <br />
+            <div class="form-group">
+            <p class="mb-0 singleline-text text-center text-custom-muted">{{ trans('modal.auth.no_account') }}
+              <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" class="text-yellow-2">{{ trans('modal.button.sign_up') }}</a>
+            </p>
+          </div>
         </form>
       </div>
     </div>

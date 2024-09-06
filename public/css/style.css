@@ -493,15 +493,15 @@ a {
     }
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover {
-    background: var(--theme-yellow2);
-    color: var(--theme-dark2);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(77, 77, 77, 0.8));
+    color: #ffffff;
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
-    /* fill: var(--theme-dark2); */
+    fill: #ffffff;
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover svg path,
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active svg path {
-    /* fill: var(--theme-dark2); */
+    fill: #ffffff;
 }
 .menu-sidebar .offcanvas-footer {
     text-align: center;

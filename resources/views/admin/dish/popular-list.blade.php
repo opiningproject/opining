@@ -33,7 +33,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bestselling-item-grid">
+                                <div class="bestselling-item-grid px-4 py-2 pb-5">
                                     @if(count($popularDishes) > 0)
                                         @foreach ($popularDishes as $dish_id => $order)
                                             @php

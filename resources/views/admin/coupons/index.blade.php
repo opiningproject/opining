@@ -18,8 +18,8 @@
                                     <span class="align-middle ms-3">{{ trans('rest.coupons.claim_history') }}</span>
                                 </a>
                                 <a class="btn btn-site-theme btn-default btn-box-shadow" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addCouponModal">
-                                    <img src="{{ asset('images/add-up.svg') }}" alt="" height="20" width="20" class="svg">
-                                    <span class="align-middle ms-3">{{ trans('rest.coupons.add') }}</span>
+                                    <img src="{{ asset('images/add-up-white.svg') }}" alt="" height="20" width="20" class="svg">
+                                    <span class="align-middle ms-2">{{ trans('rest.coupons.add') }}</span>
                                 </a>
                             </div>
                         </div>

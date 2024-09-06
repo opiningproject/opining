@@ -54,7 +54,7 @@
                             <label for="password" class="form-label">{{ trans('rest.settings.profile.password') }}</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" value="12345678" readonly />
-                                <button class="input-group-btn btn btn-custom-yellow btn-icon h-50px" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                <button class="input-group-btn btn btn-site-theme btn-icon h-50px" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                             </div>
@@ -196,7 +196,7 @@
         <div class="card-footer bg-white border-0">
             <div class="row">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                    <button type="submit" id="profile-save-btn" class="btn btn-custom-yellow fw-400 font-sebibold w-100 mt-3 font-18">
+                    <button type="submit" id="profile-save-btn" class="btn btn-site-theme fw-400 font-sebibold w-100 mt-3 font-18">
                         {{ trans('rest.button.save') }}
                     </button>
                 </div>
@@ -227,7 +227,7 @@
                         <label for="cnewpassword" class="form-label">{{ trans('rest.modal.change_password.c_password') }}</label>
                         <input type="password" class="form-control" name="c_password" id="c_password">
                     </div>
-                    <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="change-password-btn">
+                    <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px" id="change-password-btn">
                         {{ trans('rest.button.save') }}
                     </button>
                 </form>

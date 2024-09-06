@@ -412,7 +412,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                             </div>
                                                             <div class="textCon">
                                                                 <h3>{{ trans('user.checkout.payment_method') }}</h3>
-                                                                <p class="mb-0" id="mobile-payment-type-text">iDEAL</p>
+                                                                <p class="mb-0 mobile-payment-type-name" id="mobile-payment-type-text"> </p>
                                                                 <p class="without-check-error mb-0"
                                                                     id="payment-method-error"></p>
                                                             </div>
@@ -433,8 +433,16 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                 <div class="nav flex-column nav-pills custom-radio-place overflow-initial"
                                                                     id="v-pills-tab" role="tablist"
                                                                     aria-orientation="vertical">
+                                                                    @php
+                                                                        $params = json_decode(getRestaurantDetail()->params,true);
+                                                                        $payment_settings = $params['payment_settings'];
+                                                                        $firstSelected = false;
+                                                                        $selectedPaymentType = null;
+                                                                        $paymentMethodName = null;
+                                                                    @endphp
+                                                                    @if(isset($payment_settings['ideal']) && $payment_settings['ideal'] == 1)
                                                                     <button
-                                                                        class="nav-link active payment-type-tab radio-del-time1"
+                                                                        class="nav-link {{ !$firstSelected ? 'active' : '' }} payment-type-tab radio-del-time1"
                                                                         id="v-pills-ideal-tab" data-type="3"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-ideal" type="button"
@@ -449,7 +457,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                             <div class="radio">
                                                                                 <input id="ideal-radio"
                                                                                     name="del_radio_new" type="radio"
-                                                                                    class="radio-ideal" checked=""
+                                                                                    class="radio-ideal" {{ !$firstSelected ? 'checked' : '' }}
                                                                                     value="asap">
                                                                                 <label for="radio-1"
                                                                                     class="radio-label radio-ideal"
@@ -458,8 +466,14 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                         </div>
 
                                                                     </button>
+                                                                        @php
+                                                                            $firstSelected = true; // Mark the first option as selected
+                                                                            if ($selectedPaymentType == null) { $selectedPaymentType = "3"; $paymentMethodName = "IDEAL"; }
+                                                                        @endphp
+                                                                    @endif
+                                                                    @if(isset($payment_settings['card']) && $payment_settings['card'] == 1)
                                                                     <button
-                                                                        class="nav-link payment-type-tab radio-del-time1"
+                                                                        class="nav-link {{ !$firstSelected ? 'active' : '' }} payment-type-tab radio-del-time1"
                                                                         data-type="1" id="v-pills-creditanddebitcard-tab"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-creditanddebitcard"
@@ -474,7 +488,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
                                                                                 <input id="cc-radio" name="del_radio_new"
-                                                                                    type="radio" class="radio-cc"
+                                                                                    type="radio" class="radio-cc" {{ !$firstSelected ? 'checked' : '' }}
                                                                                     value="asap">
                                                                                 <label for="radio-1"
                                                                                     class="radio-label radio-cc"
@@ -482,8 +496,14 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                             </div>
                                                                         </div>
                                                                     </button>
+                                                                        @php
+                                                                            $firstSelected = true; // Mark the first option as selected
+                                                                            if ($selectedPaymentType == null) { $selectedPaymentType = "1"; $paymentMethodName = "Card";}
+                                                                        @endphp
+                                                                    @endif
+                                                                    @if(isset($payment_settings['cod']) && $payment_settings['cod'] == 1)
                                                                     <button
-                                                                        class="nav-link payment-type-tab radio-del-time1"
+                                                                        class="nav-link {{ !$firstSelected ? 'active' : '' }} payment-type-tab radio-del-time1"
                                                                         id="v-pills-cashondelivery-tab" data-type="2"
                                                                         data-bs-toggle="pill"
                                                                         data-bs-target="#v-pills-cashondelivery"
@@ -497,7 +517,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                         <div class="custom-radio">
                                                                             <div class="radio">
                                                                                 <input id="cod-radio" name="del_radio_new"
-                                                                                    type="radio" class="radio-cod"
+                                                                                    type="radio" class="radio-cod" {{ !$firstSelected ? 'checked' : '' }}
                                                                                     value="asap">
                                                                                 <label for="radio-1"
                                                                                     class="radio-label radio-cod"
@@ -505,90 +525,93 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                             </div>
                                                                         </div>
                                                                     </button>
+                                                                        @php
+                                                                            $firstSelected = true; // Mark the first option as selected
+                                                                            if ($selectedPaymentType == null) { $selectedPaymentType = "2"; $paymentMethodName = "Cash"; }
+                                                                        @endphp
+                                                                     @endif
                                                                 </div>
                                                             </div>
                                                             <div class="w-100">
                                                                 <div class="tab-content w-100" id="v-pills-tabContent">
-                                                                    <div class="tab-pane fade show active"
-                                                                        id="v-pills-ideal" role="tabpanel"
-                                                                        aria-labelledby="v-pills-ideal-tab"
-                                                                        tabindex="0">
-                                                                        <main class="bd-main order-1">
-                                                                            <div class="d-flex flex-column p-0 w-100">
-                                                                                <div
-                                                                                    class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
-                                                                                    <div class="col-12">
-                                                                                        <h4
-                                                                                            class="custom-card-title-1 form-group mobile-hide">
-                                                                                            {{ trans('user.checkout.order_payment') }}
-                                                                                        </h4>
+                                                                    {{-- iDEAL Tab Content --}}
+                                                                    @php
+                                                                        $firstSelected = false; // Initialize to false for tracking the first selection
+                                                                        $firstTabActive = false; // To control the active tab-pane
+                                                                    @endphp
+                                                                    @if(isset($payment_settings['ideal']) && $payment_settings['ideal'] == 1)
+                                                                        <div class="tab-pane fade show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-ideal" role="tabpanel"
+                                                                             aria-labelledby="v-pills-ideal-tab" tabindex="0">
+                                                                            <main class="bd-main order-1">
+                                                                                <div class="d-flex flex-column p-0 w-100">
+                                                                                    <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
+                                                                                        <div class="col-12">
+                                                                                            <h4 class="custom-card-title-1 form-group mobile-hide">
+                                                                                                {{ trans('user.checkout.order_payment') }}
+                                                                                            </h4>
+                                                                                        </div>
                                                                                     </div>
+                                                                                    <form id="payment-form">
+                                                                                        <label for="ideal-bank-element" class="mb-2">
+                                                                                            <strong>{{ trans('user.checkout.banks') }}</strong>
+                                                                                        </label>
+                                                                                        <div id="ideal-bank-element" class="custom_select">
+                                                                                            <!-- A Stripe Element will be inserted here. -->
+                                                                                        </div>
+                                                                                        <div id="error-message" role="alert"></div>
+                                                                                    </form>
+                                                                                    <div id="messages" role="alert" style="display: none;"></div>
                                                                                 </div>
-                                                                                <form id="payment-form">
-                                                                                    <label for="ideal-bank-element"
-                                                                                        class="mb-2">
-                                                                                        <strong>{{ trans('user.checkout.banks') }}</strong>
-                                                                                    </label>
-                                                                                    <div id="ideal-bank-element"
-                                                                                        class="custom_select">
-                                                                                        <!-- A Stripe Element will be inserted here. -->
-                                                                                    </div>
-                                                                                    {{-- <button type="submit">Pay</button> --}}
-                                                                                    <!-- Used to display form errors. -->
-                                                                                    <div id="error-message"
-                                                                                        role="alert"></div>
-                                                                                </form>
-                                                                                <div id="messages" role="alert"
-                                                                                    style="display: none;"></div>
-                                                                            </div>
-                                                                        </main>
-                                                                    </div>
-                                                                    <div class="tab-pane fade"
-                                                                        id="v-pills-creditanddebitcard" role="tabpanel"
-                                                                        aria-labelledby="v-pills-creditanddebitcard-tab"
-                                                                        tabindex="0">
-                                                                        <h4
-                                                                            class="custom-card-title-1 form-group mobile-hide">
-                                                                            {{ trans('user.checkout.add_card') }}</h4>
-                                                                        <div class="payment-form-card">
-                                                                            <input type="text"
-                                                                                class="form-control cardNumber card-validate"
-                                                                                name="card_number" readonly required
-                                                                                placeholder="{{ trans('user.checkout.card_no') }}">
-                                                                            <div class="row g-0">
-                                                                                <div
-                                                                                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                                                    <input type="text" name="exp_date"
-                                                                                        required id="exp_date"
-                                                                                        class="form-control expireYear card-validate"
-                                                                                        readonly
-                                                                                        placeholder="{{ trans('user.checkout.valid_till') }} (MM/YY)">
-                                                                                </div>
-                                                                                <div
-                                                                                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                                                    <input type="number" name="cvv"
-                                                                                        required
-                                                                                        class="form-control form-control-br-left card-validate"
-                                                                                        id="cvv" readonly
-                                                                                        placeholder="CVV" minlength="3"
-                                                                                        maxlength="3">
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="text"
-                                                                                class="form-control border-0 card-validate"
-                                                                                name="card_name" required readonly
-                                                                                id="card_name"
-                                                                                placeholder="{{ trans('user.checkout.card_name') }}">
+                                                                            </main>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="tab-pane fade" id="v-pills-cashondelivery"
-                                                                        role="tabpanel"
-                                                                        aria-labelledby="v-pills-cashondelivery-tab"
-                                                                        tabindex="0"></div>
+                                                                        @php
+                                                                            $firstTabActive = true; // Mark the first tab as active
+                                                                        @endphp
+                                                                    @endif
+
+                                                                    {{-- Credit/Debit Card Tab Content --}}
+                                                                    @if(isset($payment_settings['card']) && $payment_settings['card'] == 1)
+                                                                        <div class="tab-pane fade show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-creditanddebitcard"
+                                                                             role="tabpanel" aria-labelledby="v-pills-creditanddebitcard-tab" tabindex="0">
+                                                                            <h4 class="custom-card-title-1 form-group mobile-hide">
+                                                                                {{ trans('user.checkout.add_card') }}
+                                                                            </h4>
+                                                                            <div class="payment-form-card">
+                                                                                <input type="text" class="form-control cardNumber card-validate" name="card_number" {{ !$firstTabActive ? '' : 'readonly' }} required
+                                                                                       placeholder="{{ trans('user.checkout.card_no') }}">
+                                                                                <div class="row g-0">
+                                                                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                                                        <input type="text" name="exp_date" required id="exp_date" class="form-control expireYear card-validate"
+                                                                                               {{ !$firstTabActive ? '' : 'readonly' }} placeholder="{{ trans('user.checkout.valid_till') }} (MM/YY)">
+                                                                                    </div>
+                                                                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                                                        <input type="number" name="cvv" required class="form-control form-control-br-left card-validate"
+                                                                                               id="cvv" {{ !$firstTabActive ? 'readonly' : '' }} placeholder="CVV" minlength="3" maxlength="3">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <input type="text" class="form-control border-0 card-validate" name="card_name" required {{ !$firstTabActive ? '' : 'readonly' }}
+                                                                                       id="card_name" placeholder="{{ trans('user.checkout.card_name') }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        @php
+                                                                            $firstTabActive = true; // If not already active, this will be the active tab
+                                                                        @endphp
+                                                                    @endif
+
+                                                                    {{-- Cash on Delivery Tab Content --}}
+                                                                    @if(isset($payment_settings['cod']) && $payment_settings['cod'] == 1)
+                                                                        <div class="tab-pane fade show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-cashondelivery" role="tabpanel"
+                                                                             aria-labelledby="v-pills-cashondelivery-tab" tabindex="0">
+                                                                            <!-- Add your Cash on Delivery content here -->
+                                                                        </div>
+                                                                        @php
+                                                                            $firstTabActive = true;
+                                                                        @endphp
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <input type="hidden" value="3" id="payment_type"
-                                                                name="payment_type">
+                                                            <input type="hidden" value="{{ $selectedPaymentType }}" id="payment_type" name="payment_type">
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -605,9 +628,9 @@ if($user->cart && $user->cart->order_type == 2) {
                                                 <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12">
                                                     <div class="form-group">
                                                         <button type="submit"
-                                                            class="align-middle btn btn-custom-yellow btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
+                                                            class="align-middle btn btn-site-theme btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
                                                             €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}
-                                                            <span>&nbsp;<span id="total-amt-pay-btn">iDEAL</span></span>
+                                                            <span>&nbsp;<span id="total-amt-pay-btn">{{ $paymentMethodName != null ? $paymentMethodName : '' }}</span></span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -832,7 +855,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="align-middle btn btn-custom-yellow btn-default d-block w-100 add-more-btn-sticky mt-3 d-none"
+                                                        <a class="align-middle btn btn-site-theme btn-default d-block w-100 add-more-btn-sticky mt-3 d-none"
                                                         href="{{ route('user.dashboard') }}">
                                                         <span class="align-middle">
                                                             {{ trans('user.cart.add_more') }}
@@ -883,6 +906,9 @@ if($user->cart && $user->cart->order_type == 2) {
 
     <script type="text/javascript" src="{{ asset('js/user/check-out.js') }}"></script>
     <script>
+        // mobile-payment-type-name
+        console.log("total-amt-pay-btn", $('#total-amt-pay-btn').text())
+        $('.mobile-payment-type-name').text($('#total-amt-pay-btn').text())
         function isDesktopView() {
             return $(window).width() >= 768;
         }

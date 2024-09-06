@@ -30,14 +30,12 @@
                                     <form class="form col" action="" method="#">
                                         <div class="input-group order-filters-search">
                                             <input type="text" placeholder="Select Date For Filter" class="form-control"
-                                                   id="expiry_date" aria-label="expiry_date" name="expiry_date"
+                                                   id="archive_expiry_date" aria-label="archive_expiry_date" name="archive_expiry_date"
                                                    required>
                                         </div>
                                     </form>
                                 </div>
-                                <button type="button" name="clear" value="all" id="archive-clear"
-                                        style="background-color: var(--theme-yellow2);"
-                                        class="btn clear-button order-filters-search">Clear
+                                <button type="button" name="clear" value="all" id="archive-clear" class="btn btn-site-theme clear-button order-filters-search">Clear
                                 </button>
                             </div>
                         </div>

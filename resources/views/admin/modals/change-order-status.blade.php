@@ -9,7 +9,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">{{ trans('rest.button.no') }}</button>
-                    <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px" id="change-order-status-btn">{{ trans('rest.button.yes') }}</button>
+                    <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px" id="change-order-status-btn">{{ trans('rest.button.yes') }}</button>
                 </div>
             </div>
         </div>

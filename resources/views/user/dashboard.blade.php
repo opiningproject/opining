@@ -187,7 +187,7 @@
                                                 <h4 class="food-name-text">{{ $dish->name }}</h4>
                                                 {{-- <p class="food-price">€{{ number_format($dish->price, 2) }}</p> --}}
 
-                                                <button type="button" class="btn btn-xs-sm btn-custom-yellow"
+                                                <button type="button" class="btn btn-xs-sm btn-site-theme"
                                                         onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
                                                         id="dish-cart-lbl-{{ $dish->id }}">
                                                     {{--                                                @if ($dish->qty == 0 || $dish->out_of_stock == '1') --}}
@@ -359,7 +359,7 @@
                                                             @if ($user && $user->id)
                                                                 <a href="javascript:void(0);" data-bs-toggle="modal"
                                                                     data-bs-target="#addressChangeModal"
-                                                                    class="btn btn-xs-sm btn-custom-yellow text-capitalize address-change-btn">
+                                                                    class="btn btn-xs-sm btn-site-theme text-capitalize address-change-btn">
                                                                     <span
                                                                         class="d-none d-md-block">{{ trans('user.cart.change') }}</span>
                                                                     <i
@@ -368,7 +368,7 @@
                                                             @else
                                                                 <a href="javascript:void(0);" data-bs-toggle="modal"
                                                                     data-bs-target="#signInModal"
-                                                                    class="btn btn-xs-sm btn-custom-yellow text-capitalize address-change-btn">
+                                                                    class="btn btn-xs-sm btn-site-theme text-capitalize address-change-btn">
                                                                     <span
                                                                         class="d-none d-md-block">{{ trans('user.cart.change') }}</span>
                                                                     <i
@@ -639,13 +639,13 @@
                                                                            {{ !empty($couponCode) ? 'readonly' : '' }}
                                                                            id="coupon_code">
                                                                     <div class="coupon-apply-btn">
-                                                                        <button class="btn btn-xs-sm btn-custom-yellow"
+                                                                        <button class="btn btn-xs-sm btn-site-theme"
                                                                                 onclick="applyCoupon()"
                                                                                 id="coupon_code_apply_btn"
                                                                             {{ !empty($couponCode) ? 'style=display:none' : '' }}>
                                                                             <span>{{ trans('user.cart.apply') }}
                                                                         </button>
-                                                                        <button class="btn btn-xs-sm btn-custom-yellow"
+                                                                        <button class="btn btn-xs-sm btn-site-theme"
                                                                                 onclick="removeCoupon()"
                                                                                 id="coupon_code_remove_btn"
                                                                             {{ !empty($couponCode) ? '' : 'style=display:none' }}>
@@ -769,7 +769,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
+                            <a class="btn btn-site-theme btn-default d-block checkout-sticky-btn show-hide-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
                                     {{ trans('user.cart.checkout') }}
@@ -778,7 +778,7 @@
                                 </span>
                             </a>
 
-                            {{-- <a class="btn btn-custom-yellow btn-default d-block checkout-sticky-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
+                            {{-- <a class="btn btn-site-theme btn-default d-block checkout-sticky-btn {{ count($cart) == 0 ? 'd-none' : '' }}"
                                 id="checkout-cart" href="javascript:void(0)">
                                 <span class="align-middle">
                                     <span class="count_cart">

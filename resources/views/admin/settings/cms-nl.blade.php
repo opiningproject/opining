@@ -28,7 +28,7 @@
     <div class="card-footer bg-white border-0">
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                <a class="btn btn-custom-yellow btn-default" onclick="saveContent('nl');">
+                <a class="btn btn-site-theme btn-default" onclick="saveContent('nl');">
                     <span class="align-middle">{{ trans('rest.button.save') }}</span>
                 </a>
             </div>

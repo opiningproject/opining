@@ -10,7 +10,7 @@
                 <p id="coupon-code-text">{{ trans('modal.redeem.confirmed') }}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-custom-yellow"   data-target="/user/coupons"
+                <button type="button" class="btn btn-site-theme"   data-target="/user/coupons"
                     id="redeem-confirmed-btn">{{ trans('modal.button.see_my_coupons') }}</button>
             </div>
         </div>

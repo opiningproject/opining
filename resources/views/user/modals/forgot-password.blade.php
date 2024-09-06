@@ -21,7 +21,7 @@
             <label id="email-error" class="error" for="email" style="display: none"></label>
             <label id="success-msg" for="email" style="display: none;color: green;"></label>
           </div>
-          <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-xxl-2" id="forgot-pwd-btn">{{ trans('modal.button.send_password_link') }}</button>
+          <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-xxl-2" id="forgot-pwd-btn">{{ trans('modal.button.send_password_link') }}</button>
         </form>
       </div>
     </div>

@@ -148,14 +148,14 @@ class SettingController extends Controller
                       </div>
                     </td>
                     <td class='text-center'>
-                      <a class='btn btn-custom-yellow btn-icon me-2' tabindex='0' href='javascript:void(0);' id='zipcode-edit-btn-$id' onclick='editZipcode($id)'>
+                      <a class='btn btn-site-theme btn-icon me-2' tabindex='0' href='javascript:void(0);' id='zipcode-edit-btn-$id' onclick='editZipcode($id)'>
                         <i class='fa-solid fa-pen-to-square'></i>
                       </a>
-                      <a class='btn btn-custom-yellow btn-icon' id='zipcode-remove-btn-$id' onclick='deleteZipcode($id)'>
+                      <a class='btn btn-site-theme btn-icon' id='zipcode-remove-btn-$id' onclick='deleteZipcode($id)'>
                         <i class='fa-regular fa-trash-can'></i>
                       </a>
 
-                      <button type='button' class='btn btn-custom-yellow text-uppercase font-sebibold w-100' id='zipcode-save-btn-$id' style='display: none;' onclick='saveZipcode($id)'>
+                      <button type='button' class='btn btn-site-theme text-uppercase font-sebibold w-100' id='zipcode-save-btn-$id' style='display: none;' onclick='saveZipcode($id)'>
                       ".trans('rest.button.save')."</button>
                     </td>
                   </tr>";
@@ -323,5 +323,21 @@ class SettingController extends Controller
         return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);
     }
 
+    public function updatePaymentSetting(Request $request)
+    {
+        $restaurant = RestaurantDetail::findOrFail(1); // Assuming a single restaurant row or based on user access
+        $settings = json_decode($restaurant->params, true); // Assume this is an array already, if not decode it
+        $settings = $settings['payment_settings'];
+        // Update the specific setting
+        $settings[$request->type] = $request->value;
+
+        if (count(array_filter($settings)) < 1) {
+            return response()->json(['status' => 'error', 'message' => trans('rest.settings.checkout_setting.one_payment_active')]);
+        }
+        $restaurant->params = ['payment_settings' => $settings];
+        $restaurant->save();
+
+        return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
 
 }

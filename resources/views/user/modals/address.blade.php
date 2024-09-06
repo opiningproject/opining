@@ -38,7 +38,7 @@
                         </div>
                         <div class="colxx-6 col-xl-6 col-lg-col-md-12 col-sm-12 col-12 form-group mb-0">
                             <button type="submit"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">{{ trans('modal.button.save') }}</button>
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100">{{ trans('modal.button.save') }}</button>
                         </div>
                     </div>
                 </form>
@@ -72,7 +72,7 @@
                                             <p class="mb-0 ps-3">{{ $add->company_name }} {{ $add->house_no }},
                                                 {{ $add->street_name }} <br/>{{ $add->city }} {{ $add->zipcode }}</p>
                                             <div class="d-flex align-items-center justify-content-end ps-3 align-items-center ms-auto">
-                                                {{-- <a href="javascript:void(0);" class="btn btn-xs-sm btn-custom-yellow text-capitalize select-address-btn" {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a> --}}
+                                                {{-- <a href="javascript:void(0);" class="btn btn-xs-sm btn-site-theme text-capitalize select-address-btn" {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a> --}}
                                          
 
                                                 @if(count($addresses) > 1)

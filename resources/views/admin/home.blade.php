@@ -29,9 +29,9 @@
                                             </div>
                                             {{-- cr aug --}}
                                             <div class="flex-shrink-0">
-                                                <a class="btn btn-custom-yellow"
+                                                <a class="btn btn-site-theme"
                                                    href="{{ route('dish-option.index') }}">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add-up-white.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.dish_options') }}</span>
@@ -39,26 +39,26 @@
                                             </div>
                                             {{-- cr aug --}}
                                             <div class="flex-shrink-0">
-                                                <a class="btn btn-custom-yellow" data-bs-toggle="modal"
+                                                <a class="btn btn-site-theme" data-bs-toggle="modal"
                                                    data-bs-target="#addCategoryModal">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add-up-white.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_category') }}</span>
                                                 </a>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <a class="btn btn-custom-yellow"
+                                                <a class="btn btn-site-theme"
                                                    href="{{ route('ingredients.index') }}">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                    <img src="{{ asset('images/add-up-white.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_ingred') }}</span>
                                                 </a>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <a class="btn btn-custom-yellow" href="{{ route('addDish') }}">
-                                                    <img src="{{ asset('images/add-up.svg') }}" alt="" class="svg"
+                                                <a class="btn btn-site-theme" href="{{ route('addDish') }}">
+                                                    <img src="{{ asset('images/add-up-white.svg') }}" alt="" class="svg"
                                                          height="20" width="20">
                                                     <span
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_dish') }}</span>
@@ -119,10 +119,10 @@
                                                      data-sort-order="{{ $category->sort_order }}">
                                                     <div class="card">
                                                         <div class="category-slide-btns">
-                                                            <a class="btn btn-custom-yellow btn-icon" id="prev-cat">
+                                                            <a class="btn btn-site-theme btn-icon" id="prev-cat">
                                                                 <i class="fa fa-arrow-left"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-icon" id="next-cat">
+                                                            <a class="btn btn-site-theme btn-icon" id="next-cat">
                                                                 <i class="fa fa-arrow-right"></i>
                                                             </a>
                                                         </div>
@@ -133,12 +133,12 @@
                                                         <p class="mb-0 category-item-name text-truncate w-100"
                                                            title="{{ $category->name }}">{{ $category->name }}</p>
                                                         <div class="categoryfood-detail-card-btn">
-                                                            <a class="btn btn-custom-yellow btn-icon category-edit-btn"
+                                                            <a class="btn btn-site-theme btn-icon category-edit-btn"
                                                                data-id="{{ $category->id }}" data-bs-toggle="modal"
                                                                data-bs-target="#editCategoryModel">
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-icon del-cat-icon"
+                                                            <a class="btn btn-site-theme btn-icon del-cat-icon"
                                                                data-id="{{ $category->id }}">
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
@@ -190,11 +190,11 @@
                                                     <p class="food-price">€{{ $dish->price }}</p>
                                                     <div class="food-detail-card-btn">
                                                         <a href="{{ route('editDish', $dish->id) }}"
-                                                           class="btn btn-custom-yellow btn-icon"
+                                                           class="btn btn-site-theme btn-icon"
                                                            data-id="{{ $dish->id }}">
                                                             <i class="fa-solid fa-pen-to-square"></i>
                                                         </a>
-                                                        <a class="btn btn-custom-yellow btn-icon del-dish-btn"
+                                                        <a class="btn btn-site-theme btn-icon del-dish-btn"
                                                            data-bs-toggle="modal" data-bs-target="#deleteDishAlertModal"
                                                            data-id="{{ $dish->id }}">
                                                             <i class="fa-regular fa-trash-can"></i>
@@ -236,7 +236,7 @@
                                                 <div class="text-start flex-fill">
                                                     <h4 class="food-name-text text-start text-truncate w-100">{{ $dish->name }}</h4>
                                                     <p class="food-price d-inline-block">€{{ $dish->price }}</p>
-                                                    <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center text-yellow-2">
+                                                    <p class="mb-0 sellingpercantage-count d-inline-flex align-items-center">
                                                         @if($order['percentage'] < 0)
                                                             {{ $order['percentage'] }}%
                                                             <img src="{{ asset('images/down-arrow.svg') }}" alt=""
@@ -335,7 +335,7 @@
                             <input type="text" name="name_nl" id="name_nl" class="form-control" maxlength="250">
                         </div>
                         <button type="submit"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">{{ trans('rest.button.save') }}
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">{{ trans('rest.button.save') }}
                         </button>
                     </form>
                 </div>
@@ -377,7 +377,7 @@
                                    maxlength="250">
                         </div>
                         <button type="submit"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">{{ trans('rest.button.update') }}
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px font-18">{{ trans('rest.button.update') }}
                         </button>
                     </form>
                 </div>
@@ -402,7 +402,7 @@
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">{{ trans('rest.button.cancel') }}</button>
                         <button type="button" id="delete-category-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}</button>
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}</button>
                     </div>
                 </div>
             </div>
@@ -426,7 +426,7 @@
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">{{ trans('rest.button.cancel') }}</button>
                         <button type="button" id="delete-dish-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}</button>
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}</button>
                     </div>
                 </div>
             </div>
@@ -445,7 +445,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                        <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">{{ trans('rest.button.ok') }}</button>
                     </div>
                 </div>

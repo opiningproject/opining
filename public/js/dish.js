@@ -355,18 +355,18 @@ function addIngredient(type) {
                         '</td>' +
                         '<td class="text-center">' +
                         '    <div class="">' +
-                        '        <a class="btn btn-custom-yellow btn-icon me-4 paid-ingredient-edit-btn"' +
+                        '        <a class="btn btn-site-theme btn-icon me-4 paid-ingredient-edit-btn"' +
                         '           id="paid-ingredient-edit' + id + '" data-id="' + id + '"' +
                         '           tabindex="0" href="javascript:void(0);">' +
                         '            <i class="fa-solid fa-pen-to-square"></i>' +
                         '        </a>' +
-                        '        <a class="btn btn-custom-yellow btn-icon paid-ingredient-del-btn del-dish-ingredient"' +
+                        '        <a class="btn btn-site-theme btn-icon paid-ingredient-del-btn del-dish-ingredient"' +
                         '           id="paid-ingredient-delete' + id + '"' +
                         '           data-bs-toggle="modal" data-id="' + id + '"' +
                         '           data-bs-target="#deleteAlertModal">' +
                         '            <i class="fa-regular fa-trash-can"></i>' +
                         '        </a>' +
-                        '        <a class="btn btn-custom-yellow btn-default d-block paid-ingredient-save-btn" style="display: none !important;"' +
+                        '        <a class="btn btn-site-theme btn-default d-block paid-ingredient-save-btn" style="display: none !important;"' +
                         '           id="paid-ingredient-save' + id + '" data-id="' + id + '">' +
                         '            <span class="align-middle">'+ dishValidation.save_btn +'</span>' +
                         '        </a>' +
@@ -393,7 +393,7 @@ function addIngredient(type) {
                         "</td>" +
                         "<td class='text-center'>" +
                         "    <div class=''>" +
-                        "        <a class='btn btn-custom-yellow btn-icon free-ingredient-delete-btn del-dish-ingredient'" +
+                        "        <a class='btn btn-site-theme btn-icon free-ingredient-delete-btn del-dish-ingredient'" +
                         "           data-bs-toggle='modal'" +
                         "           data-bs-target='#deleteAlertModal' data-id='" + id + "' id='free-ingredient-delete" + id + "'>" +
                         "            <i class='fa-regular fa-trash-can'></i>" +

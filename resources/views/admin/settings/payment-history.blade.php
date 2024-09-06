@@ -18,7 +18,7 @@ use App\Enums\RefundStatus;
               <th scope="col" class="text-center">{{ trans('rest.settings.payment.order_id') }}</th>
               <th scope="col" class="text-center">{{ trans('rest.settings.payment.type') }}</th>
               <th scope="col" class="text-center">{{ trans('rest.settings.payment.trans_id') }}</th>
-              <th scope="col" class="text-center">{{ trans('rest.settings.payment.delivery_add') }} </th>
+              <th scope="col" class="text-left">{{ trans('rest.settings.payment.delivery_add') }} </th>
               <th scope="col" class="text-center">{{ trans('rest.settings.payment.date_and_time') }} </th>
               <th scope="col" class="text-center">{{ trans('rest.settings.payment.total') }} </th>
             </tr>
@@ -35,9 +35,9 @@ use App\Enums\RefundStatus;
               <td class="text-center">
                 <div>{{ $order->transaction_id ? $order->transaction_id : '-' }}</div>
               </td>
-              <td class="text-center">
-                <div class="d-flex align-items-center gap-2 justify-content-center">
-                  <img src="{{ asset('images/location-yellowicon-up.svg') }}" alt="" class="svg" height="18" width="13">
+              <td class="text-left">
+                <div class="d-flex align-items-start gap-2 justify-content-start">
+                  <img src="{{ asset('images/location-yellowicon-up.svg') }}" alt="" class="svg" height="18" width="13" style="flex: 0 0 18px">
                   <div class="text">
                     <?php
                       if($order->order_type == OrderType::Delivery)

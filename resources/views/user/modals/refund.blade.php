@@ -14,7 +14,7 @@
                                 <textarea class="form-control" name="description" id="description" required></textarea>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">{{ trans('modal.button.send') }}</button>
+                            <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100">{{ trans('modal.button.send') }}</button>
                         </div>
                     </div>
                 </form>

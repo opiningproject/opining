@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-custom-yellow btn-default d-block w-130px mt-3">
+                                                <button type="submit" class="btn btn-site-theme btn-default d-block w-130px mt-3">
                                                     <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                 </button>
                                             </div>

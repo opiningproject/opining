@@ -10,9 +10,9 @@
                 <p id="coupon-code-text">{{ trans('modal.redeem.content') }}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-custom-yellow"
+                <button type="button" class="btn btn-site-theme"
                     data-bs-dismiss="modal">{{ trans('modal.button.close') }}</button>
-                <button type="button" class="btn btn-custom-yellow" onclick="couponCodeConfirmation();"
+                <button type="button" class="btn btn-site-theme" onclick="couponCodeConfirmation();"
                     id="submit-btn">{{ trans('modal.button.want_coupon') }}</button>
             </div>
         </div>

@@ -74,7 +74,7 @@
                             <label for="password" class="form-label">{{ trans('user.profile.password') }}</label>
                             <div class="input-group">
                               <input type="password" class="form-control" value="12345678" readonly />
-                              <button class="input-group-btn btn btn-custom-yellow btn-icon h-50px" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                              <button class="input-group-btn btn btn-site-theme btn-icon h-50px" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                 <i class="fa-solid fa-pen-to-square"></i>
                               </button>
                             </div>
@@ -129,7 +129,7 @@
                       </div>
                       <div class="row">
                         <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                          <button type="submit" class="align-middle btn btn-custom-yellow btn-default d-block w-100" id="profile-save-btn">{{ trans('user.button.save') }}</button>
+                          <button type="submit" class="align-middle btn btn-site-theme btn-default d-block w-100" id="profile-save-btn">{{ trans('user.button.save') }}</button>
                         </div>
                       </div>
                     </div>

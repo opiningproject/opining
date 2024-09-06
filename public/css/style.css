@@ -760,10 +760,10 @@ a {
 .category-section .category-slider .category-element .card:hover .dish-item-icon img, .category-section .category-slider .category-element .card.active .dish-item-icon img {
     filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(102%) contrast(102%);
 }
-.category-section .category-slider .category-element .card:hover .btn-custom-yellow, .category-section .category-slider .category-element .card.active .btn-custom-yellow {
+.category-section .category-slider .category-element .card:hover .btn-site-theme, .category-section .category-slider .category-element .card.active .btn-site-theme {
     background-color: var(--theme-bg-white);
 }
-.category-section .category-slider .category-element .card:hover .btn-custom-yellow i, .category-section .category-slider .category-element .card.active .btn-custom-yellow i {
+.category-section .category-slider .category-element .card:hover .btn-site-theme i, .category-section .category-slider .category-element .card.active .btn-site-theme i {
     color: var(--theme-yellow2);
 }
 .category-section .category-slider .category-element .card .dish-item-icon {
@@ -930,16 +930,16 @@ a {
     box-shadow: none;
 }
 
-.btn-custom-yellow {
+.btn-site-theme {
     background-color: var(--theme-dark2);
     border-color: var(--theme-dark2);
     color: #ffffff !important;
 }
-.btn-custom-yellow:hover, .btn-custom-yellow:active {
+.btn-site-theme:hover, .btn-site-theme:active {
     background-color: var(--theme-dark1);
     border-color: var(--theme-dark1);
 }
-.btn-custom-yellow.btn:active {
+.btn-site-theme.btn:active {
     background-color: var(--theme-dark1);
     border-color: var(--theme-dark1);
 }
@@ -1289,7 +1289,7 @@ textarea.form-control {
     border-color: var(--theme-gray2);
 }
 .form-switch .form-check-input:checked {
-    background-color: var(--theme-yellow2);
+    background-color: #151515;
     background-image: url("../images/toggle-circle-svg.svg");
     border-color: var(--theme-yellow2);
 }
@@ -1612,9 +1612,9 @@ textarea.form-control {
 }
 .coupons-card .card-body .inner-card {
     margin: 20px 0;
-    background-color: var(--theme-lightyellow);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(77, 77, 77, 0.8));
     padding: 20px;
-    color: var(--theme-darkyellow);
+    color: #ffffff;
     text-align: center;
     position: relative;
     border-radius: 10px;
@@ -1628,37 +1628,37 @@ textarea.form-control {
     position: relative;
 }
 .coupons-card .card-body .inner-card .inner-card-body h3 {
-    color: var(--theme-darkyellow);
+    color: #ffffff;
     font-size: 61.445px;
     font-weight: 500;
     letter-spacing: -3.687px;
 }
 .coupons-card .card-body .inner-card .inner-card-body h3 sup {
-    color: var(--theme-darkyellow);
+    color: #ffffff;
     font-size: 34px;
     font-weight: 500;
 }
 .coupons-card .card-body .inner-card .inner-card-body h3 sub {
-    color: var(--theme-darkyellow);
+    color: #ffffff;
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 1px;
     left: -23px;
 }
 .coupons-card .card-body .inner-card .inner-card-body h6 {
-    color: var(--theme-darkyellow);
+    color: #ffffff;
     text-align: center;
     font-size: 18px;
     line-height: 25.989px;
     letter-spacing: 0.182px;
 }
 .coupons-card .card-body .inner-card .inner-card-body .dotted-divider {
-    border-bottom: 1.5px dashed var(--theme-darkyellow);
+    border-bottom: 1.5px dashed #ffffff;
     width: 265px;
     margin: 7px auto;
 }
 .coupons-card .card-body .inner-card .inner-card-body .valid-date {
-    color: var(--theme-darkyellow);
+    color: #ffffff;
     font-size: 14px;
     letter-spacing: 0.936px;
 }
@@ -2122,7 +2122,7 @@ table .input-group-text {
 .paymentHistory-table .table tbody,
 .paymentHistory-table .table tr,
 .paymentHistory-table .table td {
-    padding: 30px;
+    padding: 30px 16px;
 }
 
 .ChatDiv-main {
@@ -2381,7 +2381,7 @@ table .input-group-text {
 .chatbox .chatbox-footer .form-group .form-control::placeholder {
     color: var(--theme-gray3);
 }
-.chatbox .chatbox-footer .form-group .btn-custom-yellow {
+.chatbox .chatbox-footer .form-group .btn-site-theme {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3300,7 +3300,7 @@ nav .pagination {
     display: inline-block;
 }
 .chart-indicates .indicate.low label {
-    background: #FFE9A8;
+    background: #828282;
 }
 
 /* Rekha Sharma */
@@ -3541,7 +3541,7 @@ nav .pagination {
     display: inline-block;
 }
 .chart-indicates .indicate.low label {
-    background: #FFE9A8;
+    background: #828282;
 }
 .table-add-dish-bar .table-dish-badge-wrap {
     flex-wrap: wrap !important;

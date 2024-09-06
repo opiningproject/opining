@@ -23,7 +23,7 @@ document.write(`<div class="modal fade loginscreen-modal custom-modal" id="resen
                             <input type="text" class="form-control" placeholder="Email">
                         </div>
                         <a href="forgot-password.html"
-                            class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">Send
+                            class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px">Send
                             Password Resent Link</a>
                     </form>
                 </div>

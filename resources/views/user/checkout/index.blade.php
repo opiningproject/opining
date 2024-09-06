@@ -628,7 +628,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                 <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12">
                                                     <div class="form-group">
                                                         <button type="submit"
-                                                            class="align-middle btn btn-custom-yellow btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
+                                                            class="align-middle btn btn-site-theme btn-default d-block w-100 checkout-btn-sticky">{{ trans('user.checkout.pay') }}
                                                             €{{ orderTotalPayAmount() }} {{ trans('user.checkout.with') }}
                                                             <span>&nbsp;<span id="total-amt-pay-btn">{{ $paymentMethodName != null ? $paymentMethodName : '' }}</span></span>
                                                         </button>
@@ -855,7 +855,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <a class="align-middle btn btn-custom-yellow btn-default d-block w-100 add-more-btn-sticky mt-3 d-none"
+                                                        <a class="align-middle btn btn-site-theme btn-default d-block w-100 add-more-btn-sticky mt-3 d-none"
                                                         href="{{ route('user.dashboard') }}">
                                                         <span class="align-middle">
                                                             {{ trans('user.cart.add_more') }}

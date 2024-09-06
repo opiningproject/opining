@@ -39,7 +39,7 @@
                                         <h4 class="food-name-text">{{ $dish->dish->name_en }}</h4>
                                         {{-- <p class="food-price">€ {{ number_format($dish->dish->price, 2) }}</p> --}}
 
-                                        <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="customizeDish({{ $dish->dish->id }});" id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $disableBtn }}>
+                                        <button type="button" class="btn btn-xs-sm btn-site-theme" onclick="customizeDish({{ $dish->dish->id }});" id="dish-cart-lbl-{{ $dish->dish->id }}" {{ $disableBtn }}>
 {{--                                            @if($dish->dish->qty == 0 || $dish->dish->out_of_stock == '1')--}}
                                            <span> @if($dish->dish->out_of_stock == '1')
                                             {{ trans('user.dashboard.out_of_stock') }}

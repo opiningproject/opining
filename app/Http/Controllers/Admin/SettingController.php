@@ -148,14 +148,14 @@ class SettingController extends Controller
                       </div>
                     </td>
                     <td class='text-center'>
-                      <a class='btn btn-custom-yellow btn-icon me-2' tabindex='0' href='javascript:void(0);' id='zipcode-edit-btn-$id' onclick='editZipcode($id)'>
+                      <a class='btn btn-site-theme btn-icon me-2' tabindex='0' href='javascript:void(0);' id='zipcode-edit-btn-$id' onclick='editZipcode($id)'>
                         <i class='fa-solid fa-pen-to-square'></i>
                       </a>
-                      <a class='btn btn-custom-yellow btn-icon' id='zipcode-remove-btn-$id' onclick='deleteZipcode($id)'>
+                      <a class='btn btn-site-theme btn-icon' id='zipcode-remove-btn-$id' onclick='deleteZipcode($id)'>
                         <i class='fa-regular fa-trash-can'></i>
                       </a>
 
-                      <button type='button' class='btn btn-custom-yellow text-uppercase font-sebibold w-100' id='zipcode-save-btn-$id' style='display: none;' onclick='saveZipcode($id)'>
+                      <button type='button' class='btn btn-site-theme text-uppercase font-sebibold w-100' id='zipcode-save-btn-$id' style='display: none;' onclick='saveZipcode($id)'>
                       ".trans('rest.button.save')."</button>
                     </td>
                   </tr>";

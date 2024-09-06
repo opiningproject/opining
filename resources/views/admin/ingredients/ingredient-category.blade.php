@@ -64,7 +64,7 @@
                                                 <div class="form-group">
                                                     <label for="discountpercentage" class="form-label"></label>
                                                     <button type="submit"
-                                                            class="btn btn-custom-yellow btn-default d-block w-130px mt-3 save-ing-cat-div">
+                                                            class="btn btn-site-theme btn-default d-block w-130px mt-3 save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                     </button>
                                                 </div>
@@ -108,17 +108,17 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon edit-cat-icon"
+                                                            <a class="btn btn-site-theme btn-icon edit-cat-icon"
                                                                id="edit-btn{{ $category->id }}"
                                                                data-id="{{ $category->id }}" tabindex="0">
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-icon del-cat-icon"
+                                                            <a class="btn btn-site-theme btn-icon del-cat-icon"
                                                                id="del-btn{{ $category->id }}"
                                                                data-id="{{ $category->id }}">
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
+                                                            <a class="btn btn-site-theme btn-default save-edit-btn d-block"
                                                                id="save-edit-btn{{ $category->id }}"
                                                                style="width: 50%;margin-left: 25%; display: none!important;"
                                                                data-id="{{ $category->id }}">
@@ -179,7 +179,7 @@
                             {{ trans('rest.button.cancel') }}
                         </button>
                         <button type="button" id="delete-category-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">
                             {{ trans('rest.button.delete') }}
                         </button>
                     </div>
@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                        <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">
                             {{ trans('rest.button.ok') }}
                         </button>

@@ -17,7 +17,7 @@
                                     <img class="svg" src="{{ asset('images/claim-history.svg') }}" alt="" height="20" width="20">
                                     <span class="align-middle ms-3">{{ trans('rest.coupons.claim_history') }}</span>
                                 </a>
-                                <a class="btn btn-custom-yellow btn-default btn-box-shadow" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addCouponModal">
+                                <a class="btn btn-site-theme btn-default btn-box-shadow" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addCouponModal">
                                     <img src="{{ asset('images/add-up.svg') }}" alt="" height="20" width="20" class="svg">
                                     <span class="align-middle ms-3">{{ trans('rest.coupons.add') }}</span>
                                 </a>
@@ -37,10 +37,10 @@
                                             <input class="form-check-input" type="checkbox" role="switch" {{ $coupon->status ? 'checked':'' }}>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <a class="btn btn-custom-yellow btn-icon me-2" tabindex="0" href="javascript:void(0);" id="coupon-edit-btn" onclick="editCoupon({{ $coupon->id }})">
+                                            <a class="btn btn-site-theme btn-icon me-2" tabindex="0" href="javascript:void(0);" id="coupon-edit-btn" onclick="editCoupon({{ $coupon->id }})">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
-                                            <a class="btn btn-custom-yellow btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCouponModal" onclick="deleteCoupon({{ $coupon->id }})">
+                                            <a class="btn btn-site-theme btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCouponModal" onclick="deleteCoupon({{ $coupon->id }})">
                                                 <i class="fa-regular fa-trash-can"></i>
                                             </a>
                                         </div>
@@ -122,7 +122,7 @@
                                 <label for="percentageofoff" class="form-label">{{ trans('rest.coupons.validity_date') }}</label>
                                 <div class="input-group dateselect-group date">
                                     <span class="input-group-text" id="basic-addon1">
-                                         <img class="svg" src="{{ asset('images/calendar.svg') }}" height="20" width="20">
+                                         <img class="svg" src="{{ asset('images/calender-icon-up.svg') }}" height="20" width="20">
                                     </span>
                                     <input type="text" class="form-control" id="expiry_date" aria-label="dateofbirth" aria-describedby="basic-addon1" name="expiry_date" required>
                                 </div>
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <input type="hidden" id="id" value="">
-                    <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px" id="coupon-save-btn">{{ trans('rest.button.save') }}
+                    <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px" id="coupon-save-btn">{{ trans('rest.button.save') }}
                     </button>
                 </form>
             </div>
@@ -157,7 +157,7 @@
                 <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px" data-bs-dismiss="modal">
                     {{ trans('rest.button.cancel') }}</button>
-                    <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px" id="coupon-delete-btn">{{ trans('rest.button.delete') }}
+                    <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px" id="coupon-delete-btn">{{ trans('rest.button.delete') }}
                     </button>
                 </div>
             </div>

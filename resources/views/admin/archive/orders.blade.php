@@ -35,9 +35,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <button type="button" name="clear" value="all" id="archive-clear"
-                                        style="background-color: var(--theme-yellow2);"
-                                        class="btn clear-button order-filters-search">Clear
+                                <button type="button" name="clear" value="all" id="archive-clear" class="btn btn-site-theme clear-button order-filters-search">Clear
                                 </button>
                             </div>
                         </div>

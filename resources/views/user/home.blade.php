@@ -45,8 +45,8 @@
                                                 <input type="text" class="form-control form-control-icon ps-5" maxlength="10" placeholder="{{ trans('user.home.house_no') }}" name="house_no" id="house_no" required />
                                             </div>
 
-                                            <!-- <a href="{{ route('user.dashboard') }}" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100">Save</a> -->
-                                            <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
+                                            <!-- <a href="{{ route('user.dashboard') }}" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100">Save</a> -->
+                                            <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
 
                                             <a class="mt-30px text-uppercase d-inline-block text-decoration-underline d-none" style="font-size: 11px !important;" href="{{ route('login') }}">
 {{--                                                <img src="{{ asset('images/restaurant-icon-svg.svg') }}" alt="restaurant" class="img-fluid svg" width="22" height="22" />--}}
@@ -62,7 +62,7 @@
                                                 </span>
                                                 <input type="number" class="form-control form-control-icon ps-5" placeholder="{{ trans('user.home.phone_no') }}" name="phone_no" maxlength="10" min="1" minlength="10" id="phone_no" required/>
                                             </div>
-                                            <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
+                                            <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
                                         </form>
                                     </div>
                                 </div>

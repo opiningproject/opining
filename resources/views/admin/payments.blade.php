@@ -37,11 +37,11 @@
                 <input type="hidden" id="yearlyIncomeChart" value="{{ $yearlyAmount }}">
               <div class="hero-incomebox bg-white">
                 <div class="hero-incomebox-item d-flex align-items-center">
-                  <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
+                  <img src="{{ asset('images/totalincome-icon-up.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
                   <div class="text-grp d-flex flex-column gap-2">
                     <div class="title">{{ trans('rest.my_finance.total_income') }}</div>
                     <div class="number">
-                      <span class="fw-600">€</span>{{ number_format($totalIncome, 2) }}
+                      <span class="fw-400">€</span>{{ number_format($totalIncome, 2) }}
                     </div>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                               "numberPrefix"=> "€",
                               "theme" => "fusion",
                               "yAxisMaxValue" => "100",
-                              'paletteColors' => '#FFC00B',
+                              'paletteColors' => '#151515',
                               "xAxisValuesPadding" => "200"
                           )
                       );
@@ -144,7 +144,7 @@
                               "decimals"=> "0",
                               "theme"=> "fusion",
                               "valuePosition"=> "inside",
-                              "palettecolors"=> "#FFC00B,#FFE9A8",
+                              "palettecolors"=> "#151515,#828282",
                               "numberPrefix"=> "€",
                           )
                       );
@@ -224,13 +224,13 @@
                                   "numdivlines" => "3",
                                   "numberPrefix"=> "€",
                                   "theme"=>"fusion",
-                                  "palettecolors"=> "#FFC00B,#FFE9A8",
+                                  "palettecolors"=> "#151515,#828282",
                                   "legendPosition"=>"top-left",
                                   "legendIconSides"=>"4",
                                   "showplotBorder"=> "1",
-                                  "legendIconBgColor"=>"#FF8300",
+                                  "legendIconBgColor"=>"#151515",
                                   "drawAnchors"=>"0",
-                                  "legendBorderColor"=>"#FBC490",
+                                  "legendBorderColor"=>"#151515",
                             ),
                         );
 

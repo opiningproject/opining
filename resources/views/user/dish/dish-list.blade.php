@@ -28,7 +28,7 @@
                     </div>
                     <h4 class="food-name-text">{{ $dish->name }}</h4>
                     {{-- <p class="food-price">€{{ number_format($dish->price, 2) }}</p> --}}
-                    <button type="button" class="btn btn-xs-sm btn-custom-yellow" onclick="customizeDish({{ $dish->id }})" id="dish-cart-lbl-{{ $dish->id }}" {{ $disableBtn }}>
+                    <button type="button" class="btn btn-xs-sm btn-site-theme" onclick="customizeDish({{ $dish->id }})" id="dish-cart-lbl-{{ $dish->id }}" {{ $disableBtn }}>
 {{--                        @if($dish->qty == 0 || $dish->out_of_stock == '1')--}}
                         @if($dish->out_of_stock == '1')
                             {{ trans('user.dashboard.out_of_stock') }}

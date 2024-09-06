@@ -65,8 +65,7 @@
                                     </li>
                                 </ul> --}}
                                 {{-- <div> --}}
-                                <button type="button" name="clear" value="all" id="clear"
-                                    style="background-color: var(--theme-yellow2);" class="btn clear-button order-filters-search">Clear</button>
+                                <button type="button" name="clear" value="all" id="clear" class="btn btn-site-theme clear-button order-filters-search">Clear</button>
                                 {{-- </div> --}}
 
                             </div>

@@ -47,7 +47,7 @@ var start = moment().subtract(10, 'days');
 var end = moment();
 
 var dateRange =''
-$('#expiry_date').daterangepicker({
+$('#archive_expiry_date').daterangepicker({
     startDate: start,
     endDate: end,
     maxDate: moment(),
@@ -61,10 +61,10 @@ $('#expiry_date').daterangepicker({
     }
 });
 
-$('#expiry_date').val('')
-$('#expiry_date').attr('placeholder','Select Date Range')
+$('#archive_expiry_date').val('')
+$('#archive_expiry_date').attr('placeholder','Select Date Range')
 
-$('#expiry_date').on('apply.daterangepicker', function(ev, picker) {
+$('#archive_expiry_date').on('apply.daterangepicker', function(ev, picker) {
 
     dateRange = $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
 
@@ -76,7 +76,7 @@ $('#expiry_date').on('apply.daterangepicker', function(ev, picker) {
     window.location.href = `${baseURL}/archive?${value}`;
 });
 
-$('#expiry_date').on('cancel.daterangepicker', function(ev, picker) {
+$('#archive_expiry_date').on('cancel.daterangepicker', function(ev, picker) {
     $(this).val('');
 });
 
@@ -86,17 +86,17 @@ $('#archive-clear').on("click",function()
 });
 
  // Get start and end dates from URL parameters
- var startDate = getUrlParameter('start_date');
- var endDate = getUrlParameter('end_date');
+ var startDates = getUrlParameterArchive('start_date');
+ var endDates = getUrlParameterArchive('end_date');
 
-if (startDate && endDate) {
-    $('#expiry_date').data('daterangepicker').setStartDate(moment(startDate, 'DD-MM-YYYY'));
-    $('#expiry_date').data('daterangepicker').setEndDate(moment(endDate, 'DD-MM-YYYY'));
-    $('#expiry_date').val(startDate + ' - ' + endDate);
+if (startDates && endDates) {
+    $('#archive_expiry_date').data('daterangepicker').setStartDate(moment(startDates, 'DD-MM-YYYY'));
+    $('#archive_expiry_date').data('daterangepicker').setEndDate(moment(endDates, 'DD-MM-YYYY'));
+    $('#archive_expiry_date').val(startDates + ' - ' + endDates);
 }
 
 
-function getUrlParameter(name) {
+function getUrlParameterArchive(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(location.search);

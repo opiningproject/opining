@@ -28,7 +28,7 @@ if(isDesktopView()) {
     $('#delivery-user-mobile-content').toggle()
     $('#delivery-type-mobile-content').toggle()
     $("#final-checkout-form").validate({
-        // ignore: '[readonly]',    //comment on 06-09-2024
+        ignore: '[readonly]',    //comment on 06-09-2024
         errorPlacement: function(error, element) {
 
             if(element[0].id == 'street_name' || element[0].id == 'house_no' || element[0].id == 'city' || element[0].id == 'first_name' || element[0].id == 'last_name' || element[0].id == 'email' || element[0].id == 'phone_no') {

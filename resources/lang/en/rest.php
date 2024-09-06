@@ -24,6 +24,8 @@ return [
 		'user_chat' => 'User Chat',
 		'open' => 'Open',
         'all' => 'All',
+        'sales_channels' => 'Sales Channels',
+        'my_website' => 'My Website',
 	],
 
 	'menu' => [

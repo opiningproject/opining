@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="income-diagrams-item-img h-100">
-                                    <img src="images/take-graph-1-min.png" alt="img" class="img-fluid">
+                                    <img src="images/take-graph-1-min-up.png" alt="img" class="img-fluid" />
                                 </div>
                             </div>
                         </div>

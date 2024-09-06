@@ -225,7 +225,12 @@ return [
             'title' => 'Payment Settings',
         ],
         'checkout_setting' => [
-            'title' => 'Checkout',
+            'title' => 'Checkout Settings',
+            'ideal_payment' => 'Ideal payment',
+            'card_payment' => 'Card payment',
+            'cod_payment' => 'Cash on delivery payment',
+            'one_payment_active' => 'At least one payment method must be active.',
+            'payment_setting_updated' => 'Payment setting updated successfully.',
         ],
 		'profile' => [
 			'title' => 'Restaurant Profile',

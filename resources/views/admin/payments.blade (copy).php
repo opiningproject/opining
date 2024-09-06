@@ -9,11 +9,11 @@
               </div>
               <div class="hero-incomebox bg-white">
                 <div class="hero-incomebox-item d-flex align-items-center">
-                  <img src="{{ asset('images/totalincome-icon.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
+                  <img src="{{ asset('images/totalincome-icon-up.svg') }}" alt="img" class="img-fluid svg" width="90" height="90">
                   <div class="text-grp d-flex flex-column gap-2">
                     <div class="title">Total Income</div>
                     <div class="number">
-                      <span class="fw-600">€</span>12,890,00
+                      <span class="fw-400">€</span>12,890,00
                     </div>
                   </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="text-grp d-flex flex-column gap-1">
                       <div class="title">Total Income</div>
                       <div class="number">
-                        <span class="fw-600">€</span>12,890,00
+                        <span class="fw-400">€</span>12,890,00
                       </div>
                     </div>
                     <div class="btn-grp d-flex flex-wrap align-items-center">

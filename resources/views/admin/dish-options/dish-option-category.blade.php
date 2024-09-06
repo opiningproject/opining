@@ -40,7 +40,7 @@
                                 <div class="card-body py-0">
                                     <form method="POST" name="dishOptionCategoryForm" id="dishOptionCategoryForm">
                                         @csrf
-                                        <div class="row dishOptionRow">
+                                        <div class="row dishOptionRow align-items-end">
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishOptionCol">
                                                 <div class="form-group">
                                                     <label for="ingredientsnameenglish"
@@ -82,7 +82,7 @@
                                                 <div class="form-group">
                                                     <label for="discountpercentage" class="form-label">&nbsp;</label>
                                                     <button type="submit"
-                                                            class="btn btn-custom-yellow btn-default d-block w-130px mt-0 save-ing-cat-div">
+                                                            class="btn btn-site-theme btn-default d-block w-130px mt-0 save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                     </button>
                                                 </div>
@@ -145,18 +145,18 @@
                                                                id="name_nl{{ $category->id }}" readonly/>
                                                     </td>
                                                     <td class="text-center">
-                                                        <div class="">
-                                                            <a class="btn btn-custom-yellow btn-icon edit-cat-icon"
+                                                        <div class="d-flex flex-nowrap gap-2">
+                                                            <a class="btn btn-site-theme btn-icon edit-cat-icon"
                                                                id="edit-btn{{ $category->id }}"
                                                                data-id="{{ $category->id }}" tabindex="0">
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-icon del-cat-icon"
+                                                            <a class="btn btn-site-theme btn-icon del-cat-icon"
                                                                id="del-btn{{ $category->id }}"
                                                                data-id="{{ $category->id }}">
                                                                 <i class="fa-regular fa-trash-can"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
+                                                            <a class="btn btn-site-theme btn-default save-edit-btn d-block"
                                                                id="save-edit-btn{{ $category->id }}"
                                                                style="width: auto;margin-left: 0px; display: none!important;"
                                                                data-id="{{ $category->id }}">
@@ -217,7 +217,7 @@
                             {{ trans('rest.button.cancel') }}
                         </button>
                         <button type="button" id="delete-category-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">
                             {{ trans('rest.button.delete') }}
                         </button>
                     </div>
@@ -239,7 +239,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                        <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">
                             {{ trans('rest.button.ok') }}
                         </button>

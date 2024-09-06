@@ -180,18 +180,18 @@ function saveIngredientCategory() {
                     '</td>' +
                     '<td class="text-center">' +
                     '    <div class="">' +
-                    '        <a class="btn btn-custom-yellow btn-icon edit-cat-icon"' +
+                    '        <a class="btn btn-site-theme btn-icon edit-cat-icon"' +
                     '           id="edit-btn' + id + '"' +
                     '           data-id="' + id + '" tabindex="0">' +
                     '            <i class="fa-solid fa-pen-to-square"></i>' +
                     '        </a>' +
-                    '        <a class="btn btn-custom-yellow btn-icon del-cat-icon"' +
+                    '        <a class="btn btn-site-theme btn-icon del-cat-icon"' +
                     '           id="del-btn' + id + '"' +
                     '           data-bs-toggle="modal" data-id="' + id + '"' +
                     '           data-bs-target="#deleteAlertModal">' +
                     '            <i class="fa-regular fa-trash-can"></i>' +
                     '        </a>' +
-                    '        <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"' +
+                    '        <a class="btn btn-site-theme btn-default save-edit-btn d-block"' +
                     '           id="save-edit-btn' + id + '"' +
                     '           style="width: 50%;margin-left: 25%; display: none!important;"' +
                     '           data-id="' + id + '">' +

@@ -36,7 +36,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-custom-yellow text-uppercase font-sebibold w-100" id="zipcode-save-btn-0" onclick="saveZipcode(0)">
+                                <button type="button" class="btn btn-site-theme text-uppercase font-sebibold w-100" id="zipcode-save-btn-0" onclick="saveZipcode(0)">
                                     {{ trans('rest.button.save') }}
                                 </button>
                                 <input type="hidden" id="id" value="">
@@ -67,15 +67,15 @@
                                 </td>
                                 <td class="">
                                     <div class="d-flex justify-content-center gap-2">
-                                        <a class="btn btn-custom-yellow btn-icon" tabindex="0" href="javascript:void(0);" id="zipcode-edit-btn-{{ $zipcode['id'] }}"
+                                        <a class="btn btn-site-theme btn-icon" tabindex="0" href="javascript:void(0);" id="zipcode-edit-btn-{{ $zipcode['id'] }}"
                                            onclick="editZipcode({{ $zipcode['id'] }})">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a class="btn btn-custom-yellow btn-icon" id="zipcode-remove-btn-{{ $zipcode['id'] }}" onclick="deleteZipcode({{ $zipcode['id'] }})">
+                                        <a class="btn btn-site-theme btn-icon" id="zipcode-remove-btn-{{ $zipcode['id'] }}" onclick="deleteZipcode({{ $zipcode['id'] }})">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </a>
 
-                                        <button type="button" class="btn btn-custom-yellow text-uppercase font-sebibold w-100" id="zipcode-save-btn-{{ $zipcode['id'] }}" style="display: none;"
+                                        <button type="button" class="btn btn-site-theme text-uppercase font-sebibold w-100" id="zipcode-save-btn-{{ $zipcode['id'] }}" style="display: none;"
                                                 onclick="saveZipcode({{ $zipcode['id'] }})">{{ trans('rest.button.save') }}
                                         </button>
                                     </div>
@@ -118,7 +118,7 @@
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">{{ trans('rest.button.cancel') }}
                         </button>
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                        <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
                                 id="zipcode-delete-btn">{{ trans('rest.button.delete') }}
                         </button>
                     </div>

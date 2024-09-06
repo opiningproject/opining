@@ -14,7 +14,7 @@
                                     <h1 class="page-title">{{ trans('rest.menu.ingredients.title') }}</h1>
                                 </div>
                                 <div class="col text-end">
-                                    <a class="btn btn-custom-yellow" href="{{ route('ingred.category.index') }}">
+                                    <a class="btn btn-site-theme" href="{{ route('ingred.category.index') }}">
                                         <img src="{{ asset('images/add-up.svg')}}" alt="" class="svg" height="20"
                                              width="20">
                                         <span
@@ -98,7 +98,7 @@
                                                     <label for="discountpercentage"
                                                            class="form-label invisible">{{ trans('rest.menu.ingredients.ingred_category') }}</label>
                                                     <button type="submit"
-                                                            class="btn btn-custom-yellow btn-default d-block w-130px">
+                                                            class="btn btn-site-theme btn-default d-block w-130px">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                     </button>
                                                 </div>
@@ -269,12 +269,12 @@
                                                     <td class="text-center">
                                                         <div
                                                             class="d-flex align-items-center justify-content-between gap-1">
-                                                            <a class="btn btn-custom-yellow btn-icon edit-ing-btn"
+                                                            <a class="btn btn-site-theme btn-icon edit-ing-btn"
                                                                tabindex="0" data-id="{{ $ingredient->id }}"
                                                                id="edit-btn{{ $ingredient->id }}">
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
-                                                            <a class="btn btn-custom-yellow btn-icon del-ing-btn"
+                                                            <a class="btn btn-site-theme btn-icon del-ing-btn"
                                                                data-id="{{ $ingredient->id }}"
                                                                id="del-btn{{ $ingredient->id }}">
                                                                 <i class="fa-regular fa-trash-can"></i>
@@ -282,7 +282,7 @@
                                                             <input type="hidden" id="deleted-dish{{ $ingredient->id }}">
                                                             <input type="hidden" id="is_edited{{ $ingredient->id }}"
                                                                    value="0">
-                                                            <a class="btn btn-custom-yellow btn-default save-edit-btn d-block"
+                                                            <a class="btn btn-site-theme btn-default save-edit-btn d-block"
                                                                id="save-btn{{ $ingredient->id }}"
                                                                style="display:none !important;"
                                                                data-id="{{ $ingredient->id }}">
@@ -342,7 +342,7 @@
                                 data-bs-dismiss="modal">{{ trans('rest.button.cancel') }}
                         </button>
                         <button type="button" id="delete-ingredient-btn"
-                                class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px">{{ trans('rest.button.delete') }}
                         </button>
                     </div>
                 </div>
@@ -363,7 +363,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-160px"
+                        <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">
                             {{ trans('rest.button.ok') }}
                         </button>

@@ -273,3 +273,27 @@ function hideReadMore(id) {
 
     $("#order-ingredient-" + id).addClass('line-clamp-2');
 }
+
+function changePaymentSetting(paymentType) {
+    var value = $('input[name="' + paymentType + '"]').is(':checked') ? 1 : 0;
+
+    $.ajax({
+        url: '/settings/update-checkout-setting', // Adjust URL as needed
+        type: 'POST',
+        data: {
+            type: paymentType,
+            value: value,
+        },
+        success: function(response) {
+            if (response.status == 'error') {
+                toastr.error(response.message)
+                $('input[name="' + paymentType + '"]').prop('checked', true);
+            } else {
+                toastr.success(response.message)
+            }
+        },
+        error: function(xhr) {
+            console.log('Error:', xhr.responseText);
+        }
+    });
+}

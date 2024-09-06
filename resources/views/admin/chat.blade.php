@@ -51,7 +51,7 @@
                                         <!-- Messages will be displayed here -->
                                     </div>
                                 </div>
-                                <div class="chatbox-footer" style="display: none">
+                                <div class="chatbox-footer mt-auto" style="display: none">
 
                                     <div class="form-group mb-0 position-relative d-flex gap-2 bg-gray align-items-center">
                                         <div id="image-holder" class="image-holder"></div>
@@ -65,7 +65,7 @@
                                             </label>
                                             <input id="admin_chat_attachment" class="admin_chat_attachment" accept="image/*"
                                                 name="admin_chat_attachment" type="file" style="display: none" />
-                                            <button class="btn btn-xs-sm btn-custom-yellow send-btn" id="send-btn"
+                                            <button class="btn btn-xs-sm btn-site-theme send-btn" id="send-btn"
                                                 disabled>
                                                 {{ trans('rest.user_chat.send') }}</button>
                                         </div>

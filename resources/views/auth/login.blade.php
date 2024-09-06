@@ -62,7 +62,7 @@
                                 </div>
 
                                 <button type="submit"
-                                        class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 signin-btn">
+                                        class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 signin-btn">
                                     {{ trans('rest.button.login') }}
                                 </button>
                             </form>
@@ -98,7 +98,7 @@
                             <strong id="forgot-pwd-success-msg"></strong>
                         </span>
 
-                        <button type="submit" id="forgot-pwd--submit-btn" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">
+                        <button type="submit" id="forgot-pwd--submit-btn" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px">
                             {{ trans('rest.button.send_password_link') }}
                         </button>
                     </form>

@@ -46,7 +46,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-custom-yellow fw-400 text-uppercase font-sebibold w-100 mt-30px">
+                                <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px">
                                     {{ trans('rest.button.save') }}
                                 </button>
                             </form>

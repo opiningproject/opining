@@ -61,7 +61,7 @@
                                                        class="chat_attachment" style="display: none"/>
                                             </label>
                                             <button
-                                                class="btn btn-xs-sm btn-custom-yellow send-user-btn send-btn-user_{{ \Auth::user()->id }}" disabled>
+                                                class="btn btn-xs-sm btn-site-theme send-user-btn send-btn-user_{{ \Auth::user()->id }}" disabled>
                                                 {{ trans('user.chat.send') }}
                                             </button>
                                         </div>

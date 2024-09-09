@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Dish;
@@ -85,7 +86,7 @@ class HomeController extends Controller
                     $couponPercent = $user->cart->coupon->percentage_off/100;
             }
         }
-
+        $bannerData = Banner::orderBy('sort_order', 'desc')->where('status', '1')->get();
         return view('user.dashboard', [
             'categories' => $categories,
             'category' => $category,
@@ -99,7 +100,8 @@ class HomeController extends Controller
             'couponCode' => $couponCode,
             'couponDiscount' => $couponDiscount,
             'couponDiscountPercent' => $couponPercent,
-            'cat_id' => $request->cat_id ?? ''
+            'cat_id' => $request->cat_id ?? '',
+            'bannerData' => $bannerData ?? []
         ]);
     }
 }

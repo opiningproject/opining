@@ -61,6 +61,13 @@
                                     <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.user_chat') }}</span>
                                 </a>
                             </li>
+                            <label>{{ trans('rest.sidebar.sales_channels') }}</label>
+                            <li class="nav-item">
+                                <a href="{{ route('myWebsite') }}" class="nav-link {{ activeMenu('my-website') }} align-middle">
+                                    <img class="svg" src="{{ asset('images/my_website.svg') }}" alt="" height="26" width="26" />
+                                    <span class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.my_website') }}</span>
+                                </a>
+                            </li>
                             <li class="nav-item fixed_bottom">
                                 <a href="{{ route('settings') }}" class="nav-link {{ activeMenu('settings') }} align-middle">
                                     <img class="svg" src="{{ asset('images/settings-menu-up.svg') }}" alt="" height="26" width="26" />

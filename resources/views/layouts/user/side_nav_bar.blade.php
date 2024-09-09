@@ -239,7 +239,7 @@
                         {{ Auth::user()->full_name }}
                         <ul class="dropdown-menu py-0">
                             <li>
-                                <a class="dropdown-item log-out-item" href="#">
+                                <a class="dropdown-item log-out-item" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <img src="{{ asset('images/log-out.svg') }}" class="svg" width="25"
                                         height="26">
                                     {{ trans('user.sidebar.logout') }}
@@ -254,7 +254,7 @@
                 </div>
 
                 <div class="ms-auto">
-                    <a class="dropdown-item log-out-item" href="#">
+                    <a class="dropdown-item log-out-item" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <img src="{{ asset('images/log-out-up.svg') }}" class="svg" width="20"
                             height="20" />
                         {{-- {{ trans('user.sidebar.logout') }} --}}

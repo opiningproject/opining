@@ -133,7 +133,7 @@
                         </section>
                         <!-- end category section -->
                         <!-- start category list section -->
-                        <section class="custom-section category-list-section pb-0 scrollable-tap dashboard-custom">
+                        <section class="custom-section category-list-section pb-0 scrollable-tap dashboard-custom pt-3 pt-lg-4">
                             <div class="section-page-title">
                                 <h1 class="section-title dish-list">{{ $category ? $category->name : '' }}</h1>
                             <!--                            <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">{{ trans('user.button.view_all') }}

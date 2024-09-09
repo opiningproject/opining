@@ -35,7 +35,7 @@
                                 <div class="chatbox-header d-flex gap-3">
                                     <div class="profile-item d-flex gap-2 align-items-center">
                                         <div class="profile-img">
-                                            <img src="{{ asset('images/user-profile-img.svg') }}"
+                                            <img src="{{ asset('images/user-profile-img-up.svg') }}"
                                                 class="img-fluid chat-profile" alt="gomel" width="60" height="60">
                                         </div>
                                         <div class="profile-textgrp">

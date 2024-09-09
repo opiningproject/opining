@@ -77,3 +77,23 @@ $(document).ready(function () {
 
 
 
+var bannerSwiper = '';
+$(document).ready(function () {
+
+  bannerSwiper = new Swiper(".banner-swiper-slider", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      bulletClass: 'swiper-pagination-bullet',
+      bulletActiveClass: 'swiper-pagination-bullet-active',
+      renderBullet: function (index, className) {
+        return `<span class="${className}"></span>`;
+      },
+    },
+
+  });
+});

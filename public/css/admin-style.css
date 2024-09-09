@@ -47,8 +47,8 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .food-detail-card .food-detail-card-btn {
-    -moz-column-gap: 20px;
-    column-gap: 20px;
+    -moz-column-gap: 10px;
+    column-gap: 10px;
 }
 
 .category-section .category-slider .category-element .card:hover,
@@ -108,11 +108,25 @@ form .prev-input-group .input-group-icon svg {
     bottom: -2.5px;
 }
 
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(77, 77, 77, 0.8));
+    border-color: transparent;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active * {
+    color: #ffffff !important;
+}
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .time svg circle {
-    fill: #000000;
+    fill: #ffffff;
 }
 
 .foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .time svg path {
+    stroke: #000000;
+}
+
+.foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .icontext-item svg, .foodorder-box .foodorder-box-list-wrp .foodorder-box-list .foodorder-box-list-item.active .icontext-item svg path {
+    fill: #ffffff;
     stroke: #ffffff;
 }
 
@@ -283,8 +297,8 @@ form .prev-input-group .input-group-icon svg {
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active .order-count,
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover .order-count {
-    background: #ffffff;
-    color: #292929;
+    background: #828282;
+    color: #ffffff;
 }
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
@@ -982,3 +996,9 @@ max-height: none !important;
   .paymentHistory-table .custom-switch .form-check-label {
     font-size: 16px;
   }
+
+  .menu-sidebar .offcanvas-body {
+    padding-bottom: 80px !important;
+  }
+
+  .search-has .form-control-feedback::before {color: var(--theme-dark2);}

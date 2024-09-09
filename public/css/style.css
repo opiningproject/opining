@@ -493,15 +493,15 @@ a {
     }
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(77, 77, 77, 0.8));
-    color: #ffffff;
+    background: #ededed;
+    color: var(--theme-dark2);
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
-    fill: #ffffff;
+    /* fill: #ffffff; */
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover svg path,
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active svg path {
-    fill: #ffffff;
+    /* fill: #ffffff; */
 }
 .menu-sidebar .offcanvas-footer {
     text-align: center;
@@ -2712,7 +2712,11 @@ table .input-group-text {
     line-height: normal;
 }
 .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-progressbar .footer-box-main-progressbar-item.active .img {
-    background-color: var(--theme-yellow2);
+    background-color: var(--theme-dark2);
+}
+
+.foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-progressbar .footer-box-main-progressbar-item.active svg, .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-progressbar .footer-box-main-progressbar-item.active svg path {
+    fill: #ffffff;
 }
 .foodorder-box .foodorder-box-details .footer-box-main .footer-box-main-orderlist {
     border: 1px solid var(--theme-white3);
@@ -2913,7 +2917,7 @@ table .input-group-text {
     line-height: normal;
 }
 .foodorder-box .foodorder-box-details .footer-box-main .footer-main-total .footer-main-total-main .text-grp .text.active .key {
-    color: var(--theme-success3);
+    color: var(--theme-success1);
 }
 .foodorder-box .foodorder-box-details .footer-box-main .footer-main-total .footer-main-total-main .text-grp .text.active .value {
     color: var(--theme-success3);
@@ -3667,7 +3671,12 @@ nav .pagination {
   .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link {
       margin: 0px 15px 0px 40px;
       max-width: 251px;
+      background: #ededed;
   }
+
+  .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link {
+    background: #ededed;
+}
 
   .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link svg, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item.fixed_bottom .nav-link svg path {
     /*fill: rgb(255, 192, 11);*/

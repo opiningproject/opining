@@ -489,7 +489,7 @@ if (!function_exists('uploadImageToLocal')) {
 if (!function_exists('getOpenOrders')) {
     function getOpenOrders()
     {
-        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->where('updated_at', '>=', Carbon::now()->subHours(12))->orderBy('id', 'desc')->get();
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orWhere('updated_at', '>=', Carbon::now()->subHours(12))->orderBy('id', 'desc')->get();
         return count($openOrders);
     }
 }
@@ -613,5 +613,23 @@ if (!function_exists('getOrderDishIngredientsTotal')) {
             }
         }
         return $ingredientTotalAmount;
+    }
+}
+
+if (!function_exists('svg')) {
+    function svg($path, $width = null, $height = null) {
+        $svgContent = file_get_contents(public_path('images/' . $path));
+
+        // Add dynamic width and height if provided
+        if ($width && $height) {
+            // Replace or add width and height attributes in the SVG tag
+            $svgContent = preg_replace(
+                '/<svg /',
+                '<svg width="' . $width . '" height="' . $height . '" ',
+                $svgContent
+            );
+        }
+
+        return $svgContent;
     }
 }

@@ -30,7 +30,7 @@
                                     </div>
                                     @error('email')
                                     <div class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        {{ $message }}
                                     </div>
                                     @enderror
                                 </div>
@@ -49,7 +49,7 @@
                                     </div>
                                     @error('password')
                                     <div class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        {{ $message }}
                                     </div>
                                     @enderror
                                 </div>
@@ -91,11 +91,11 @@
                         </div>
 
                         <span class="invalid-feedback" role="alert" style="display:block">
-                            <strong id="forgot-pwd-error-msg"></strong>
+                            <p class="mb-0" id="forgot-pwd-error-msg"></p>
                         </span>
 
                         <span class="invalid-feedback" role="alert" style="display:block; color: #0f5132">
-                            <strong id="forgot-pwd-success-msg"></strong>
+                            <p class="mb-0" id="forgot-pwd-success-msg"></p>
                         </span>
 
                         <button type="submit" id="forgot-pwd--submit-btn" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100 mt-30px">

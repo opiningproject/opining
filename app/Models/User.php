@@ -90,7 +90,7 @@ class User extends Authenticatable implements JWTSubject
             $s3 = Storage::disk('s3');
             return $s3->url('/user/thumb/'.$value);
         }
-        return asset('images/user-profile-img.svg');
+        return asset('images/user-profile-img-up.svg');
     }
 
     public function coupons(){

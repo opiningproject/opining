@@ -25,7 +25,7 @@
                                     <div class="profile-item d-flex gap-2 align-items-center">
                                         <div class="profile-img">
                                             <img
-                                                src="{{ getAdminUser()->image ? getAdminUser()->image : asset('images/user-profile-img.svg') }}"
+                                                src="{{ getAdminUser()->image ? getAdminUser()->image : asset('images/user-profile-img-up.svg') }}"
                                                 class="img-fluid" alt="gomel" width="60" height="60">
                                         </div>
                                         <div class="profile-textgrp">

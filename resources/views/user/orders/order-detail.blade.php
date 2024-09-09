@@ -547,28 +547,30 @@ use App\Enums\RefundStatus;
             </div>
             <button class="border-none outline-none">
                 @if ($order->order_status == OrderStatus::Accepted)
-                    <img src="{{ asset('images/order-accepted-up.svg') }}" class="img-fluid svg" alt=""
-                        width="20" height="20">
+                     {!! svg('order-accepted-up.svg', 20, 20) !!}
                     {{ trans('user.order_status.accepted') }}
                 @elseif($order->order_status == OrderStatus::InKitchen)
-                    <img src="{{ asset('images/orderinkitchen-icon-up.svg') }}" class="img-fluid svg" alt=""
-                        width="26" height="20">
+{{--                    <img src="{{ asset('images/orderinkitchen-icon-up.svg') }}" class="img-fluid svg" alt=""--}}
+{{--                        width="26" height="20">--}}
+                    {!! svg('orderinkitchen-icon-up.svg', 26, 20) !!}
                     {{ trans('user.order_status.in_kitchen') }}
                 @elseif($order->order_status == OrderStatus::Ready)
-                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""
-                        width="16" height="20">
+{{--                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""--}}
+{{--                        width="16" height="20">--}}
+                    {!! svg('readytopickup-icon-up.svg', 26, 20) !!}
                     {{ trans('user.order_status.ready') }}
                 @elseif($order->order_status == OrderStatus::ReadyForPickup)
-                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""
-                        width="16" height="20">
+{{--                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""--}}
+{{--                        width="16" height="20">--}}
+                    {!! svg('readytopickup-icon-up.svg', 16, 20) !!}
                     {{ trans('user.order_status.ready_for_pickup') }}
                 @elseif($order->order_status == OrderStatus::OutForDelivery)
-                    <img src="{{ asset('images/outfordelivery-icon-up.svg') }}" class="img-fluid svg" alt=""
-                        width="31" height="20">
+{{--                    <img src="{{ asset('images/outfordelivery-icon-up.svg') }}" class="img-fluid svg" alt=""--}}
+{{--                        width="31" height="20">--}}
+                    {!! svg('outfordelivery-icon-up.svg', 31, 20) !!}
                     {{ trans('user.order_status.out_for_delivery') }}
                 @else
-                    <img src="{{ asset('images/order-accepted-up.svg') }}" class="img-fluid svg" alt=""
-                        width="21" height="20">
+                    {!! svg('order-accepted-up.svg', 21, 20) !!}
                     {{ trans('user.order_status.delivered') }}
                 @endif
             </button>
@@ -729,8 +731,9 @@ use App\Enums\RefundStatus;
         <div class="btn-grp d-flex flex-wrap">
             <a href="{{ route('user.orders.printLabel', ['order_id' => $order->id]) }}" target="_blank"
                 class="customize-foodlink button active">
-                <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg" alt=""
-                    width="14" height="14">
+{{--                <img src="{{ asset('images/download-icon.svg') }}" class="img-fluid svg" alt="" width="14" height="14">--}}
+                {!! svg('download-icon.svg', 14, 14) !!}
+
                 <div class="text-truncate">
                     {{ trans('user.my_orders.download_invoice') }}
                 </div>

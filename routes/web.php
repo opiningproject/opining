@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DishController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Admin\DishOptionCategoryController;
 use App\Http\Controllers\Admin\DishOptionsController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
+use App\Http\Controllers\Admin\MyWebsiteController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OrdersController;
@@ -162,6 +164,23 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
         Route::post('/save-profile', [SettingController::class, 'saveProfile'])->name('settings.save-profile');
         Route::post('/update-checkout-setting', [SettingController::class, 'updatePaymentSetting'])->name('settings.update-checkout-setting');
         Route::post('/change-refund-status', [SettingController::class, 'changeRefundStatus'])->name('settings.change-refund-status');
+    });
+
+    Route::resource('/banners', BannerController::class);
+    Route::group(['prefix' => '/banners'], function () {
+        Route::get('/checkAttachedDish/{bannerId}', [BannerController::class, 'checkAttachedDish']);
+        Route::post('/update-status/{bannerId}', [BannerController::class, 'updateBannerStatus']);
+        Route::post('/update/{bannerId}', [BannerController::class, 'updateBanner']);
+        Route::post('/ing-cat-wise/{bannerId}', [BannerController::class => 'ingredientCategoryWise']);
+        Route::post('/updateingredientRowOrder', [BannerController::class, 'updateingredientRowOrder']);
+        Route::post('/updateBannerRowOrder', [BannerController::class, 'updateBannerRowOrder']);
+    });
+
+
+
+
+    Route::group(['prefix' => '/my-website'], function () {
+        Route::get('/', [MyWebsiteController::class, 'index'])->name('myWebsite');
     });
     // Restaurant Setting Routes
 

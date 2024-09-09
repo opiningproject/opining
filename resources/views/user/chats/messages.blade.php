@@ -14,7 +14,7 @@
     @foreach($msg as $message)
         @if($message->receiver_id)
             @php
-                $image = asset('images/user-profile-img.svg');
+                $image = asset('images/user-profile-img-up.svg');
                 if ($message->sender->id != 1 && $message->receiver->id) {
                     $image = $message->sender->image ? $message->sender->image : $message->receiver->image;
                 }

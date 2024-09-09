@@ -286,6 +286,18 @@ return [
 		]
 	],
 
+
+    'my_website' => [
+		'title' => 'My Website',
+        'banners' => [
+            'title' => 'Banners',
+            'image' => 'Image',
+            'content' => 'Content',
+            'click_to_update' => 'Click to update',
+            'item_image' => 'Upload Image of Item',
+        ],
+	],
+
 	'my_finance' => [
 		'title' => 'My Finance',
 		'total_income' => 'Total Income',
@@ -383,7 +395,11 @@ return [
 			'new_password' => 'New Password',
 			'c_password' => 'Confirm New Password',
 			'incorrect_password' => 'Old Password is not correct',
-		]
+		],
+        'banner' => [
+            'delete_message' => 'Are you sure you want to delete this banner?',
+            'alert_message' => 'There are dishes added to this ingredients. Please remove them to delete this ingredient.',
+        ],
 	],
 
 	'button'=> [
@@ -452,6 +468,12 @@ return [
 		'password_error' => 'Password must have atleast 1 capital character, 1 small character, 1 digit and 1 symbol',
 
         'quantity_max' => 'You can not add more quantity.',
+
+        'banner_add_success' => 'Banner Added Successfully',
+        'banner_update_success' => 'Banner Updated Successfully',
+        'banner_delete_success' => 'Banner Deleted Successfully',
+        'banner_updated_success' => 'Banner Updated Successfully',
+        'banner_status_success' => 'Banner Status Updated Successfully',
 	],
 
 ];

@@ -86,7 +86,7 @@ class HomeController extends Controller
                     $couponPercent = $user->cart->coupon->percentage_off/100;
             }
         }
-        $bannerData = Banner::orderBy('sort_order', 'desc')->where('status', '1')->get();
+        $bannerData = Banner::orderBy('sort_order', 'asc')->where('status', '1')->get();
         return view('user.dashboard', [
             'categories' => $categories,
             'category' => $category,

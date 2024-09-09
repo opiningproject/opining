@@ -4,34 +4,30 @@
         <div class="card-custom-body">
             <!-- start edit dish card section -->
             <section class="">
-                <div class="card editdish-card ingredients-card">
-                    <div class="card-header border-0 bg-white border-bottom-0">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                    <div class="card-body py-0">
+                <div class="ingredients-card">
+                   
+                    <div class="position-relative">
                         <form method="POST" name="add-banner-form" action="{{ route('banners.store') }}"
                               id="add-banner-form"
                               enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                                    <div class="imageupload-box inline-imageupload-box">
+                            <div class="row align-items-end">
+                                <div class="col-xl-3 col-lg-6">
+                                    <div class="imageupload-box inline-imageupload-box form-group">
                                         <label for="ingredientsnameenglish"
                                                class="form-label">{{ trans('rest.my_website.banners.image') }}
                                         </label>
                                         <label for="input-file"
                                                class="upload-file justify-content-center gap-2">
                                             <img src="{{ asset('images/blank-img.svg')}}" id="img-preview"
-                                                 class="img-fluid" height="35" width="27">
+                                                 class="img-fluid" height="30" width="20">
                                             <p class="mb-0"
-                                               id="img-label">{{ trans('rest.my_website.banners.item_image') }}</p>
+                                               id="img-label" style="font-size: 10px">{{ trans('rest.my_website.banners.item_image') }}</p>
                                         </label>
                                         <input type="file" id="input-file" class="d-none" name="image">
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                                <div class="col-xl-3 col-lg-6">
                                     <div class="form-group">
                                         <label for="contentenglish"
                                                class="form-label">{{ trans('rest.my_website.banners.content') }}
@@ -39,7 +35,7 @@
                                         <input type="text" class="form-control" name="content_en"/>
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                                <div class="col-xl-3 col-lg-6">
                                     <div class="form-group">
                                         <label for="contentdutch"
                                                class="form-label">{{ trans('rest.my_website.banners.content') }}

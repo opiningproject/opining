@@ -45,8 +45,20 @@ class BannerController extends Controller
     public function destroy(string $id)
     {
         try {
-            Banner::find($id)->delete();
-            return response::json(['status' => 200, 'message' => trans('rest.message.banner_delete_success')]);
+            $getBannerData = Banner::find($id);
+            if ($getBannerData->status != 0) {
+                $activeBannersCount = Banner::where('status', "1")->count();
+                // Ensure at least one active banner remains
+                if ($activeBannersCount <= 1) {
+                    return response()->json(['status' => 400, 'message' => trans('rest.message.one_banner_active')]);
+                } else {
+                    Banner::find($id)->delete();
+                    return response::json(['status' => 200, 'message' => trans('rest.message.banner_delete_success')]);
+                }
+            } else {
+                Banner::find($id)->delete();
+                return response::json(['status' => 200, 'message' => trans('rest.message.banner_delete_success')]);
+            }
 
         } catch (Exception $e) {
             return response::json(['status' => 400, 'message' => $e->getMessage()]);
@@ -61,6 +73,14 @@ class BannerController extends Controller
     public function updateBannerStatus(Request $request, string $id)
     {
         try {
+            if ($request->status == 0) {
+                $activeBannersCount = Banner::where('status', "1")->count();
+
+                if ($activeBannersCount <= 1) {
+                    return response()->json(['status' => 400, 'message' => trans('rest.message.one_banner_active')]);
+                }
+            }
+
             $banner = Banner::find($id);
             if ($banner) {
                 $banner->status = $request->status;

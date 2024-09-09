@@ -72,6 +72,7 @@ $(function () {
                     $('#deleteAlertModal').modal('hide')
                     toastr.success(response.message)
                 } else {
+                    $('#deleteAlertModal').modal('hide')
                     toastr.error(response.message)
                 }
             },
@@ -166,7 +167,13 @@ $(function () {
                 status
             },
             success: function (response) {
-                toastr.success(response.message)
+                if (response.status == 400) {
+                    toastr.error(response.message)
+                    console.log("id", id)
+                    $('.update-banner-status-'+ id).prop('checked', true);
+                } else {
+                    toastr.success(response.message)
+                }
             },
             error: function (response) {
                 var errorMessage = JSON.parse(response.responseText).message

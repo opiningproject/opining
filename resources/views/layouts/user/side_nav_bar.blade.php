@@ -166,11 +166,12 @@
                 </nav>
             </div>
 
-            <div class="sidebar-menu-top-box">
+            <div class="sidebar-menu-top-box d-lg-none">
                 @if (!Auth::user())
                     <div class="menu-signsignup-link">
                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
-                            <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22" height="22">
+                            <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22"
+                                height="22">
                             <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
                         </a>
                     </div>
@@ -182,16 +183,16 @@
                         </div>
                         <div class="text-start">
                             <div class="dropdown">
-                                <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown"
+                                {{-- <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown"
                                     style="color: #191919;text-wrap: wrap;">
                                     {{ Auth::user()->full_name }}
-                                </div>
+                                </div> --}}
                                 <ul class="dropdown-menu py-0">
                                     <li>
                                         <a class="dropdown-item log-out-item" href="#"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <img src="{{ asset('images/log-out.svg') }}" class="svg" width="25"
-                                                height="26">
+                                            <img src="{{ asset('images/log-out.svg') }}" class="svg"
+                                                width="25" height="26">
                                             {{ trans('user.sidebar.logout') }}
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -209,7 +210,7 @@
         </div>
     </div>
 
-    <div class="sidebar-menu-top-box d-none d-lg-block">
+    <div class="sidebar-menu-top-box d-none d-lg-block position-relative">
         @if (!Auth::user())
             <div class="menu-signsignup-link">
                 <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
@@ -225,14 +226,10 @@
                 </div>
                 <div class="text-start">
                     <div class="dropdown">
-                        <div class="dropdown-toggle custom-arrow" type="button" data-bs-toggle="dropdown"
-                            style="color: #191919;text-wrap: wrap;">
-                            {{ Auth::user()->full_name }}
-                        </div>
+                        {{ Auth::user()->full_name }}
                         <ul class="dropdown-menu py-0">
                             <li>
-                                <a class="dropdown-item log-out-item" href="#"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item log-out-item" href="#">
                                     <img src="{{ asset('images/log-out.svg') }}" class="svg" width="25"
                                         height="26">
                                     {{ trans('user.sidebar.logout') }}
@@ -245,6 +242,18 @@
                     <div class="text-truncate" style="color: var(--theme-dark1);">{{ Auth::user()->email }}
                     </div>
                 </div>
+
+                <div class="ms-auto">
+                    <a class="dropdown-item log-out-item" href="#">
+                        <img src="{{ asset('images/log-out-up.svg') }}" class="svg" width="20"
+                            height="20" />
+                        {{-- {{ trans('user.sidebar.logout') }} --}}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf
+                    </form>
+                </div>
+
+
             </div>
         @endif
     </div>

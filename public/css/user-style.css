@@ -399,16 +399,21 @@ a {
   width: 100%;
   text-align: center;
   padding: 20px 40px;
-  position: absolute;
+  position: absolute !important;
   z-index: 2;
   bottom: 0px;
   background: #ffffff;
 }
 
+
+.menu-sidebar .sidebar-menu-top-box .dropdown {
+  font-size: 14px;
+}
+
 .menu-sidebar .sidebar-menu-top-box .menu-signsignup-link>a {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   gap: 10px;
 }
 
@@ -426,7 +431,7 @@ a {
   color: var(--theme-gray5);
   font-size: 16px;
   letter-spacing: 0.19px;
-  padding: 6px 14px;
+  padding: 8px 14px;
   border-radius: 10px;
   line-height: initial;
 }
@@ -3513,8 +3518,8 @@ input[type=number] {
     position: sticky;
     top: 0;
     display: block !important;
-    padding-left: 0.25rem;
-    margin-left: -0.25rem;
+    /* padding-left: 0.25rem; */
+    /* margin-left: -0.25rem; */
 }
 
   .bd-main {
@@ -4614,6 +4619,7 @@ justify-content: space-between;
 /* Rekha Sharma*/
 label.error {
   color: red;
+  font-size: 12px;
 }
 
 #phone_no-error {
@@ -4676,12 +4682,12 @@ label.error {
 
 /* Updated CSS from 08/03/2024 */
 .sidebar-menu-top-box .dropdown .dropdown-toggle {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .sidebar-menu-top-box .text-truncate {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .delivery-card .prev-input-group .form-control {
@@ -4793,12 +4799,12 @@ footer .footer-link li a>img {
 }
 
 .sidebar-menu-top-box .userPhoto {
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
-  width: 55px;
-  flex: 0 0 55px;
-  max-width: 55px;
-  height: 55px;
+  width: 34px;
+  flex: 0 0 34px;
+  max-width: 34px;
+  height: 34px;
 }
 
 .sidebar-menu-top-box .userPhoto img {
@@ -5785,7 +5791,7 @@ form .prev-input-group .input-group-icon svg {
   }
 
   .category-section .category-slider .category-element .card {
-    padding: 6px 6px;
+    padding: 10px 6px;
   }
 
   .swiper-container-mobile .category-swiper-slider .swiper-slide.selected-cart-active .card {
@@ -9482,6 +9488,12 @@ input.form-control.dish-notes {
 
 .ingredientslist-dp .dish-option-select {
   max-width: 100% !important;
+}
+
+@media (max-width: 991px) {
+.menu-sidebar .sidebar-menu-top-box {
+  bottom: 0px;
+}
 }
 
 @media (max-width: 767px) {

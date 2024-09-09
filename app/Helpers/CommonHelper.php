@@ -617,7 +617,19 @@ if (!function_exists('getOrderDishIngredientsTotal')) {
 }
 
 if (!function_exists('svg')) {
-    function svg($path) {
-        return file_get_contents(public_path('images/' . $path));
+    function svg($path, $width = null, $height = null) {
+        $svgContent = file_get_contents(public_path('images/' . $path));
+
+        // Add dynamic width and height if provided
+        if ($width && $height) {
+            // Replace or add width and height attributes in the SVG tag
+            $svgContent = preg_replace(
+                '/<svg /',
+                '<svg width="' . $width . '" height="' . $height . '" ',
+                $svgContent
+            );
+        }
+
+        return $svgContent;
     }
 }

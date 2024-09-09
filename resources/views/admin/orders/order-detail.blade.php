@@ -76,7 +76,8 @@ $userDetails = $order->orderUserDetails;
         <div
             class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
             <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                <img src="{{ asset('images/order-accept.svg') }}" class="img-fluid svg" width="18" height="18">
+{{--                <img src="{{ asset('images/order-accept.svg') }}" class="img-fluid svg" width="18" height="18">--}}
+                {!! svg('order-accept.svg',18, 18) !!}
             </div>
             <div class="text">{{ trans('rest.order_status.accepted') }}</div>
         </div>
@@ -86,8 +87,8 @@ $userDetails = $order->orderUserDetails;
             <div
                 class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                 <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                    <img src="{{ asset('images/orderinkitchen-black.svg') }}" class="img-fluid svg" width="25"
-                         height="19">
+{{--                    <img src="{{ asset('images/orderinkitchen-black.svg') }}" class="img-fluid svg" width="25" height="19">--}}
+                    {!! svg('orderinkitchen-black.svg',25, 19) !!}
                 </div>
                 <div class="text">{{ $order_status }}</div>
             </div>
@@ -95,8 +96,8 @@ $userDetails = $order->orderUserDetails;
             <div
                 class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                 <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                    <img src="{{ asset('images/orderinkitchen-white.svg') }}" class="img-fluid svg" width="25"
-                         height="19">
+{{--                    <img src="{{ asset('images/orderinkitchen-white.svg') }}" class="img-fluid svg" width="25" height="19">--}}
+                    {!! svg('orderinkitchen-white.svg',25, 19) !!}
                 </div>
                 <div class="text">{{ $order_status }}</div>
             </div>
@@ -108,7 +109,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/pickup-black.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/pickup-black.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('pickup-black.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -116,7 +118,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/pickup-white.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/pickup-white.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('pickup-white.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -127,8 +130,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/out-for-delivery-black.svg') }}" class="img-fluid svg" width="27"
-                             height="20">
+{{--                        <img src="{{ asset('images/out-for-delivery-black.svg') }}" class="img-fluid svg" width="27" height="20">--}}
+                        {!! svg('out-for-delivery-black.svg',27, 20) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -136,8 +139,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/out-for-delivery.svg') }}" class="img-fluid svg" width="27"
-                             height="20">
+{{--                        <img src="{{ asset('images/out-for-delivery.svg') }}" class="img-fluid svg" width="27" height="20">--}}
+                        {!! svg('out-for-delivery.svg',27, 20) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -148,7 +151,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/order-accept.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/order-accept.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('order-accept.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -156,7 +160,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/delivered.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/delivered.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('delivered.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -167,7 +172,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/pickup-black.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/pickup-black.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('pickup-black.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -175,7 +181,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/pickup-white.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/pickup-white.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('pickup-white.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -186,7 +193,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/order-accept.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/order-accept.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('order-accept.svg',19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>
@@ -194,7 +202,8 @@ $userDetails = $order->orderUserDetails;
                 <div
                     class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
                     <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-                        <img src="{{ asset('images/delivered.svg') }}" class="img-fluid svg" width="19" height="19">
+{{--                        <img src="{{ asset('images/delivered.svg') }}" class="img-fluid svg" width="19" height="19">--}}
+                        {!! svg('delivered.svg', 19, 19) !!}
                     </div>
                     <div class="text">{{ $order_status }}</div>
                 </div>

@@ -489,7 +489,7 @@ if (!function_exists('uploadImageToLocal')) {
 if (!function_exists('getOpenOrders')) {
     function getOpenOrders()
     {
-        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->where('updated_at', '>=', Carbon::now()->subHours(12))->orderBy('id', 'desc')->get();
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orWhere('updated_at', '>=', Carbon::now()->subHours(12))->orderBy('id', 'desc')->get();
         return count($openOrders);
     }
 }
@@ -613,5 +613,11 @@ if (!function_exists('getOrderDishIngredientsTotal')) {
             }
         }
         return $ingredientTotalAmount;
+    }
+}
+
+if (!function_exists('svg')) {
+    function svg($path) {
+        return file_get_contents(public_path('images/' . $path));
     }
 }

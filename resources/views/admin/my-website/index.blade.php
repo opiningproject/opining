@@ -18,7 +18,7 @@
                             <ul class="nav nav-tabs flex-wrap" id="myTab" role="tablist">
                                 <li class="empty_space"></li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="restaurantProfile-tab" data-bs-toggle="tab" data-bs-target="#restaurantProfile-tab-pane" type="button" role="tab" aria-controls="restaurantProfile-tab-pane" aria-selected="false">
+                                    <button class="nav-link" id="banner-tab" data-bs-toggle="tab" data-bs-target="#banner-tab-pane" type="button" role="tab" aria-controls="banner-tab-pane" aria-selected="false">
                                         {{ trans('rest.my_website.banners.title') }}
                                     </button>
                                 </li>

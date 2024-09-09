@@ -295,6 +295,7 @@ return [
             'content' => 'Content',
             'click_to_update' => 'Click to update',
             'item_image' => 'Upload Image of Item',
+            'one_banner_active' => 'At least one banner must be active.',
         ],
 	],
 
@@ -474,6 +475,8 @@ return [
         'banner_delete_success' => 'Banner Deleted Successfully',
         'banner_updated_success' => 'Banner Updated Successfully',
         'banner_status_success' => 'Banner Status Updated Successfully',
+        'one_banner_active' => 'At least one banner must be active.',
+        'one_banner_added' => 'at least one banner must be exist.',
 	],
 
 ];

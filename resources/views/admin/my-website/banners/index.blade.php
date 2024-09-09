@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab"
+<div class="tab-pane fade" id="banner-tab-pane" role="tabpanel" aria-labelledby="banner-tab"
      tabindex="0">
     <div class="card-body">
         <div class="card-custom-body">
@@ -115,7 +115,7 @@
                                                 <div
                                                     class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
                                                     <input
-                                                        class="form-check-input green-check-input update-ing-status"
+                                                        class="form-check-input green-check-input update-ing-status update-banner-status-{{$bannerData->id}} "
                                                         value="{{ $bannerData->id }}"
                                                         type="checkbox" role="switch"
                                                         id="action" {{ ($bannerData->status == 1) ? 'checked' : ''  }}>

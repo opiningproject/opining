@@ -38,7 +38,7 @@ class OrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
-        $orders = Order::where('is_cart', '0')->orderBy('id', 'desc')->where('updated_at', '>=', Carbon::now()->subHours(12));
+        $orders = Order::where('is_cart', '0')->orderBy('id', 'desc')->where('order_status','<>',OrderStatus::Delivered)->orWhere('created_at', '>=', Carbon::now()->subHours(12));
 
         $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 

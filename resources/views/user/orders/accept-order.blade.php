@@ -2,7 +2,7 @@
 <div class="order-success-note order-success-note-mobile mobile-accept-order text-center d-none">
     <div class="order-succes-box">
         <div class="icon mb-4">
-            <img src="{{ asset('images/checkmark-icon.svg') }}"  alt=""  />
+            <img src="{{ asset('images/checkmark-icon-up.svg') }}"  alt=""  />
         </div>
 
         <h1> {{ trans('user.my_orders.order_accepted') }} </h1>
@@ -27,7 +27,7 @@
                 <div class="order-success-note text-center">
                     <div class="order-succes-box">
                         <div class="icon mb-3">
-                            <img src="{{ asset('images/checkmark-icon.svg') }}" alt=""/>
+                            <img src="{{ asset('images/checkmark-icon-up.svg') }}" alt=""/>
                         </div>
 
                         <h1> {{ trans('user.my_orders.order_accepted') }} </h1>

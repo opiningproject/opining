@@ -557,12 +557,12 @@ use App\Enums\RefundStatus;
                 @elseif($order->order_status == OrderStatus::Ready)
 {{--                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""--}}
 {{--                        width="16" height="20">--}}
-                    {!! svg('readytopickup-icon-up') !!}
+                    {!! svg('readytopickup-icon-up.svg') !!}
                     {{ trans('user.order_status.ready') }}
                 @elseif($order->order_status == OrderStatus::ReadyForPickup)
 {{--                    <img src="{{ asset('images/readytopickup-icon-up.svg') }}" class="img-fluid svg" alt=""--}}
 {{--                        width="16" height="20">--}}
-                    {!! svg('readytopickup-icon-up') !!}
+                    {!! svg('readytopickup-icon-up.svg') !!}
                     {{ trans('user.order_status.ready_for_pickup') }}
                 @elseif($order->order_status == OrderStatus::OutForDelivery)
 {{--                    <img src="{{ asset('images/outfordelivery-icon-up.svg') }}" class="img-fluid svg" alt=""--}}

@@ -567,7 +567,7 @@ if($user->cart && $user->cart->order_type == 2) {
 
                                                                     {{-- Credit/Debit Card Tab Content --}}
                                                                     @if(isset($payment_settings['card']) && $payment_settings['card'] == 1)
-                                                                        <div class="tab-pane fade show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-creditanddebitcard"
+                                                                        <div class="tab-pane fade cc_card_form show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-creditanddebitcard"
                                                                              role="tabpanel" aria-labelledby="v-pills-creditanddebitcard-tab" tabindex="0">
                                                                             <h4 class="custom-card-title-1 form-group mobile-hide">
                                                                                 {{ trans('user.checkout.add_card') }}
@@ -582,7 +582,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                     </div>
                                                                                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                                                                         <input type="number" name="cvv" required class="form-control form-control-br-left card-validate"
-                                                                                               id="cvv" {{ !$firstTabActive ? 'readonly' : '' }} placeholder="CVV" minlength="3" maxlength="3">
+                                                                                               id="cvv" {{ !$firstTabActive ? '' : 'readonly' }} placeholder="CVV" minlength="3" maxlength="3">
                                                                                     </div>
                                                                                 </div>
                                                                                 <input type="text" class="form-control border-0 card-validate" name="card_name" required {{ !$firstTabActive ? '' : 'readonly' }}

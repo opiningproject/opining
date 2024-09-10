@@ -46,7 +46,7 @@
                                 <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                     <div class="form-group">
                                         <button type="submit"
-                                                class="btn btn-site-theme btn-default d-block w-130px">
+                                                class="btn btn-site-theme btn-default d-block w-130px" style="min-height: 50px">
                                             <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                         </button>
                                     </div>
@@ -109,7 +109,7 @@
                                         <td class="text-center">
                                             <div class="form-group mb-0">
                                                 <div
-                                                    class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
+                                                    class="form-check form-switch custom-switch justify-content-center ps-0">
                                                     <input
                                                         class="form-check-input green-check-input update-ing-status update-banner-status-{{$bannerData->id}} "
                                                         value="{{ $bannerData->id }}"

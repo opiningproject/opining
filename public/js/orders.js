@@ -182,49 +182,46 @@ $(document).on('click','.order_details_button', function() {
 var page = 2;
 var isLoading = false;
 var endOfData = false;
-var lastPage = $('.last_page').html(); // Adjust according to the last page number
-$(".all-orders").scroll(function () {
-    var url = `${baseURL}/orders`;
+var lastPage = parseInt($('.last_page').html().trim()); // Adjust according to the last page number
+$(".all-orders-new").scroll(function () {
     if (endOfData || isLoading) return;
 
     var scrollTop = $(this).scrollTop();
     var containerHeight = $(this).height();
     var contentHeight = $(this).get(0).scrollHeight;
 
-    // Check if the scroll position reaches near the bottom of the container
-    if (scrollTop + containerHeight >= contentHeight - 10) {
-       isLoading = true; // Set loading state before making the request
-        loadMoreData(page, url);
+
+    if (scrollTop + containerHeight >= contentHeight - 10 && page <= lastPage) {
+        isLoading = true; // Prevent further calls until current is processed
+        loadMoreData(page, `${baseURL}/orders`);
     }
 });
-//
 
 function loadMoreData(currentPage, url) {
     $.ajax({
-        url: url +'?page=' + currentPage,
-        type: "get",
+        url: url + '?page=' + currentPage,
+        type: "GET",
         beforeSend: function() {
             $('#loader').show();
         }
     })
         .done(function(data) {
-            if (data.trim().length === 0 || currentPage >= lastPage) {
+            if (!data || data.trim().length === 0) {
                 $('#loader').hide();
                 $('#end-of-data').show();
-                endOfData = true;
+                endOfData = true; // No more data to load
                 return;
             }
 
-            $(".all-orders").append(data);
-            if (parseInt(id)) {
-                orderDetail(id)
-            }
-            $('#loader').hide();
-            page = currentPage + 1; // Increment page number after successful data load
+            $(".all-orders-new").append(data);
+
+            page++; // Increment page number after successful append
             isLoading = false; // Reset loading state
+            $('#loader').hide();
         })
-        .fail(function(jqXHR, ajaxOptions, thrownError) {
-            // alert('Server not responding...');
-            isLoading = false; // Reset loading state even if the request fails
+        .fail(function(jqXHR, textStatus) {
+            console.error('Failed to load data:', textStatus);
+            isLoading = false;
+            $('#loader').hide();
         });
 }

@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="all-orders" role="tabpanel" aria-labelledby="all-orders-tab">
-    <div class="foodorder-box-list d-flex flex-column mt-2 order-list-data-div1 all-orders" id="order-list-data-div1">
+    <div class="foodorder-box-list d-flex flex-column mt-2 order-list-data-div1 all-orders all-orders-new" id="order-list-data-div1">
     <?php
 
     use App\Enums\OrderStatus;

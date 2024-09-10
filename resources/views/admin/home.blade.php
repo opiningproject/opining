@@ -64,7 +64,7 @@
                                                         class="align-middle ms-1">{{ trans('rest.menu.add_dish') }}</span>
                                                 </a>
                                             </div>
-                                            <div class="flex-shrink-0">
+                                            <div class="flex-shrink-0 d-none">
                                                 <div class="dropdown userlogin-dropdown custom-default-dropdown">
                                                     <button class="btn btn-light dropdown-toggle" type="button"
                                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -100,7 +100,7 @@
                             </div>
                             <div class="swiper-container">
                                 <div class="swiper category-swiper-slider categoryslide-setion">
-                                    <div class="category-slider swiper-wrapper">
+                                    <div class="category-slider swiper-wrapper pt-0">
                                         @if (count($categories) > 0)
                                             @foreach ($categories as $key => $category)
                                                     <?php

@@ -163,7 +163,7 @@
                                                     <td class="text-center">
                                                         <div class="form-group mb-0">
                                                             <div
-                                                                class="form-check form-switch form-switch-sm custom-switch justify-content-center ps-0">
+                                                                class="form-check form-switch custom-switch justify-content-center ps-0">
                                                                 <input
                                                                     class="form-check-input green-check-input update-ing-status"
                                                                     value="{{ $ingredient->id }}"

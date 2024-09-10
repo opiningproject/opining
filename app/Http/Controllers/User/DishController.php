@@ -208,7 +208,7 @@ class DishController extends Controller
                       <table class='w-100'>
                         <thead>
                           <tr>
-                            <th colspan='3'>".trans('modal.dish.ingredients')."</th>
+                            <th colspan='3' class='py-2'>".trans('modal.dish.ingredients')."</th>
                           </tr>
                         </thead>
                         <tbody>";

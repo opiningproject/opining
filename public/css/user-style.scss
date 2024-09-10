@@ -256,7 +256,7 @@ a {
     .menu-sidebar-content {
         .side-bar-menu {
             // padding: 59px 39px 40px 39px;
-            padding: 29px 39px 15px 39px;
+            padding: 20px 20px 15px 20px;
             width: 100%;
 
             .nav-item {
@@ -460,7 +460,7 @@ a {
     .has-search {
         .form-control {
             border-color: $text-white;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 2px 2px 20px 0px $shadow;
             color: $text-black;
             font-family: "Sebino-Medium", sans-serif;
@@ -2794,7 +2794,7 @@ input[type="number"] {
 .orders {
     background-color: $bg-white;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 10px;
     width: 100%;
     max-width: 480px;
     display: flex;
@@ -2824,7 +2824,7 @@ input[type="number"] {
             .orders-item {
                 border: 1px solid $gray2;
                 padding: 22px 30px;
-                border-radius: 15px;
+                border-radius: 10px;
 
                 .text-grp {
 
@@ -2897,7 +2897,7 @@ input[type="number"] {
 .ordersdetails {
     background-color: $bg-white;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 10px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -2942,7 +2942,7 @@ input[type="number"] {
     .orderdetails-main {
         border: 1px solid $gray2;
         padding: 30px 30px 0;
-        border-radius: 15px;
+        border-radius: 10px;
 
         .orderdetails-maintop {
             .textgrp {
@@ -2969,7 +2969,7 @@ input[type="number"] {
 
             button {
                 padding: 15px 32px;
-                border-radius: 15px;
+                border-radius: 10px;
                 background-color: $lightyellow;
                 color: $dark2;
                 font-family: "SebinoRegular", sans-serif;
@@ -3369,7 +3369,7 @@ input[type="number"] {
         .orderdetails-main {
             border: 1px solid $gray2;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 10px;
 
             .orderdetails-maintop {
                 .textgrp {
@@ -3396,7 +3396,7 @@ input[type="number"] {
 
                 button {
                     padding: 15px 32px;
-                    border-radius: 15px;
+                    border-radius: 10px;
                     background-color: $lightyellow;
                     color: $dark2;
                     font-family: "SebinoRegular", sans-serif;

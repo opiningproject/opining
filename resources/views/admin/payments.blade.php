@@ -71,7 +71,7 @@
                               "numberPrefix"=> "€",
                               "theme" => "fusion",
                               "yAxisMaxValue" => "100",
-                              'paletteColors' => '#151515',
+                              'paletteColors' => '#292929',
                               "xAxisValuesPadding" => "200"
                           )
                       );
@@ -144,7 +144,7 @@
                               "decimals"=> "0",
                               "theme"=> "fusion",
                               "valuePosition"=> "inside",
-                              "palettecolors"=> "#151515,#828282",
+                              "palettecolors"=> "#292929,#828282",
                               "numberPrefix"=> "€",
                           )
                       );
@@ -224,13 +224,13 @@
                                   "numdivlines" => "3",
                                   "numberPrefix"=> "€",
                                   "theme"=>"fusion",
-                                  "palettecolors"=> "#151515,#828282",
+                                  "palettecolors"=> "#292929,#828282",
                                   "legendPosition"=>"top-left",
                                   "legendIconSides"=>"4",
                                   "showplotBorder"=> "1",
-                                  "legendIconBgColor"=>"#151515",
+                                  "legendIconBgColor"=>"#292929",
                                   "drawAnchors"=>"0",
-                                  "legendBorderColor"=>"#151515",
+                                  "legendBorderColor"=>"#292929",
                             ),
                         );
 

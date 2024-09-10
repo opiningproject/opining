@@ -13,7 +13,7 @@
       <div class="modal-body signin-form">
         <form id="forgot-pwd-form" method="POST">
           <h3 class="authenticationform-title mb-2">{{ trans('modal.auth.forgot_password') }}</h3>
-          <div class="form-group prev-input-group custom-icon-input-group mb-0">
+          <div class="form-group prev-input-group custom-icon-input-group mb-2">
             <span class="input-group-icon">
               <img src="{{ asset('images/mail-icon2-up.svg') }}" alt="" width="18" height="12"  class="svg" />
             </span>

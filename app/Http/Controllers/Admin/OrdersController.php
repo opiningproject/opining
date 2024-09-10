@@ -43,7 +43,7 @@ class OrdersController extends Controller
             ->where(function($query) {
                 $query->where('order_status', '<>', OrderStatus::Delivered)
                     ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
-            });
+            })->orderBy('id', 'desc');
 
         $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
 
@@ -171,12 +171,12 @@ class OrdersController extends Controller
         try {
             $pageNumber = request()->input('page', 1);
             $orderExist = false;
-//            $orders = Order::orderBy('id', 'desc');
-            $orders = Order::where('is_cart', '0')
-                ->where(function($query) {
-                    $query->where('order_status', '<>', OrderStatus::Delivered)
-                        ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
-                });
+            $orders = Order::orderBy('id', 'desc');
+//            $orders = Order::where('is_cart', '0')
+//                ->where(function($query) {
+//                    $query->where('order_status', '<>', OrderStatus::Delivered)
+//                        ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
+//                });
             if ($request->has('search')) {
 
                 $orders->where(function ($query) use ($request) {

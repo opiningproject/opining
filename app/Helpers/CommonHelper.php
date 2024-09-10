@@ -489,7 +489,8 @@ if (!function_exists('uploadImageToLocal')) {
 if (!function_exists('getOpenOrders')) {
     function getOpenOrders()
     {
-        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orWhere('updated_at', '>=', Carbon::now()->subHours(12))->orderBy('id', 'desc')->get();
+        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->get();
+
         return count($openOrders);
     }
 }

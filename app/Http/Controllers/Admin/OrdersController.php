@@ -171,7 +171,12 @@ class OrdersController extends Controller
         try {
             $pageNumber = request()->input('page', 1);
             $orderExist = false;
-            $orders = Order::orderBy('id', 'desc');
+//            $orders = Order::orderBy('id', 'desc');
+            $orders = Order::where('is_cart', '0')
+                ->where(function($query) {
+                    $query->where('order_status', '<>', OrderStatus::Delivered)
+                        ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
+                });
             if ($request->has('search')) {
 
                 $orders->where(function ($query) use ($request) {
@@ -185,7 +190,7 @@ class OrdersController extends Controller
                 });
             }
 
-            $orderListIds = $orders->where('updated_at', '>=', Carbon::now()->subHours(12))->pluck('id')->toArray();
+            $orderListIds = $orders->pluck('id')->toArray();
             if (isset($request->activeId)) {
                 $orderExist = in_array($request->activeId, $orderListIds);
             }

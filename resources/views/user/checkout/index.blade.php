@@ -582,7 +582,7 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                                     </div>
                                                                                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                                                                         <input type="number" name="cvv" required class="form-control form-control-br-left card-validate"
-                                                                                               id="cvv" {{ !$firstTabActive ? 'readonly' : '' }} placeholder="CVV" minlength="3" maxlength="3">
+                                                                                               id="cvv" {{ !$firstTabActive ? '' : 'readonly' }} placeholder="CVV" minlength="3" maxlength="3">
                                                                                     </div>
                                                                                 </div>
                                                                                 <input type="text" class="form-control border-0 card-validate" name="card_name" required {{ !$firstTabActive ? '' : 'readonly' }}

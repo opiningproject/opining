@@ -567,7 +567,7 @@ if($user->cart && $user->cart->order_type == 2) {
 
                                                                     {{-- Credit/Debit Card Tab Content --}}
                                                                     @if(isset($payment_settings['card']) && $payment_settings['card'] == 1)
-                                                                        <div class="tab-pane fade show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-creditanddebitcard"
+                                                                        <div class="tab-pane fade cc_card_form show {{ !$firstTabActive ? 'active' : '' }}" id="v-pills-creditanddebitcard"
                                                                              role="tabpanel" aria-labelledby="v-pills-creditanddebitcard-tab" tabindex="0">
                                                                             <h4 class="custom-card-title-1 form-group mobile-hide">
                                                                                 {{ trans('user.checkout.add_card') }}

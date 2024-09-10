@@ -72,8 +72,8 @@
                 </div>
             </div>
 
-            <div class="offcanvas-body pb-5 pb-lg-0">
-                <nav class="">
+            <div class="offcanvas-body pb-5 pb-lg-0 pt-2">
+                <nav class="w-100">
                     <div class="menu-sidebar-content d-flex flex-column align-items-center align-items-sm-start">
                         <div class="navbar-collapse menunavbar-collapse w-100" id="navbarSupportedContent">
                             <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -176,7 +176,7 @@
                         </a>
                     </div>
                 @else
-                    <div class="d-flex gap-3 align-items-center">
+                    <div class="d-flex gap-2 align-items-center">
                         <div class="userPhoto">
                             <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
                                 height="50" />
@@ -229,7 +229,7 @@
                 </a>
             </div>
         @else
-            <div class="d-flex gap-3 align-items-center">
+            <div class="d-flex gap-2 align-items-center">
                 <div class="userPhoto">
                     <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
                         height="50" />

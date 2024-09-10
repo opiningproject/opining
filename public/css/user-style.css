@@ -8404,7 +8404,7 @@ form .form-select {
 
   .mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body * {
     font-size: 13px;
-    color: #636363;
+    color: var(--theme-gray5);
   }
 
   .mobile-order-page .order-details-block .order-details-accordion .accordion-item .accordion-body .cart-address-row svg {
@@ -8515,7 +8515,7 @@ form .form-select {
   }
 
   .order-details-block .accordion p {
-    color: #ACACAC !important;
+    color: var(--theme-gray5) !important;
     font-size: 14px !important;
     line-height: initial;
   }
@@ -8629,7 +8629,7 @@ form .form-select {
     height: 54px;
     text-align: center;
     font-size: 15px;
-    background: #e7e7e7;
+    background: #ededed;
     color: var(--theme-dark2);
     position: absolute;
     left: 0px;

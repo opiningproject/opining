@@ -171,7 +171,9 @@
 
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal"
                                 class="btn">Log In</a>
-                            <a href="#" class="btn btn-site-theme">Sign Up</a>
+<!--                            <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal"
+                               class="text-yellow-2">{{ trans('modal.button.sign_up') }}</a>-->
+                            <a href="#" class="btn btn-site-theme" data-bs-toggle="modal" data-bs-target="#signUpModal" >Sign Up</a>
 
                         </div>
                         <div class="menu-signsignup-link d-none">

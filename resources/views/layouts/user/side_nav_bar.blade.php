@@ -67,7 +67,7 @@
 
                     <button type="button" class="btn-close d-block drawer-close d-lg-none" id="menu-sidebar-close"
                         data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar">
-                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="25" width="25" />
+                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="24" width="24" />
                     </button>
                 </div>
             </div>
@@ -81,8 +81,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.dashboard') }}"
                                         class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
-                                        <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg"
-                                            height="25" width="25">
+                                        <div class="icon-span">
+                                            <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg"
+                                                 height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.dashboard') }}</span>
                                     </a>
@@ -90,8 +92,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.orders') }}"
                                         class="nav-link {{ activeMenu('user.orders') }} align-middle auth-link-check">
+                                        <div class="icon-span">
                                         <img src="{{ asset('images/myorder-menu-up.svg') }}" class="svg"
-                                            height="20" width="20">
+                                            height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_order') }}</span>
                                     </a>
@@ -99,8 +103,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.favorite') }}"
                                         class="nav-link {{ activeMenu('user.favorite') }} align-middle auth-link-check">
+                                        <div class="icon-span">
                                         <img src="{{ asset('images/favorite-menu-up.svg') }}" class="svg"
-                                            height="25" width="25">
+                                            height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.favorite') }}</span>
                                     </a>
@@ -108,8 +114,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.chat') }}"
                                         class="nav-link {{ activeMenu('user.chat') }} align-middle auth-link-check">
+                                        <div class="icon-span">
                                         <img src="{{ asset('images/user-chat-menu-up.svg') }}" class="svg"
-                                            height="25" width="25">
+                                            height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.chat') }}</span>
                                     </a>
@@ -117,15 +125,17 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.points') }}"
                                         class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
+                                        <div class="icon-span">
                                         <img src="{{ asset('images/collected-points-menu-up.svg') }}" class="svg"
-                                            height="25" width="25">
+                                            height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="25" width="25">
+                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="24" width="24">
                                     <span class="ms-1 d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
                                 </a>
                             </li> --}}
@@ -134,8 +144,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.coupons') }}"
                                         class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
+                                        <div class="icon-span">
                                         <img src="{{ asset('images/coupons-menu-up.svg') }}" class="svg"
-                                            height="25" width="25">
+                                            height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
                                     </a>
@@ -143,8 +155,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('user.settings') }}"
                                         class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
+                                        <div class="icon-span">
                                         <img src="{{ asset('images/settings-menu-up.svg') }}" class="svg"
-                                            height="25" width="25">
+                                            height="24" width="24">
+                                        </div>
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
                                     </a>

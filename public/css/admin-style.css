@@ -919,6 +919,18 @@ max-height: none !important;
     max-width: 12%;
 }
 .dishOptionRow .dishBtnAddCol button {width: 100%;}
+
+
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link .icon-span {
+    width: 22px !important;
+    display: inline-block !important;
+    max-width: 22px !important;
+}
+
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
+    width: 22px !important;
+}
+
 @media screen and (max-width: 1440px) {
     .dishOptionRow .dishOptionCol {
         flex: 0 0 20%;

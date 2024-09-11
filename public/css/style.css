@@ -3685,8 +3685,8 @@ nav .pagination {
 
   body .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
     padding: 8px 14px !important;
-    font-size: 16px !important;
-    font-weight: 300;
+    font-size: 14px !important;
+    /*font-weight: 300;*/
 }
 
 .offcanvas-footer .multi-language-div {

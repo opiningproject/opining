@@ -471,11 +471,11 @@ a {
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 @media (max-width: 1536px) {
     .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
@@ -498,7 +498,7 @@ a {
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
     /* fill: #ffffff; */
-    width: 30px;
+    width: 34px;
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover svg path,
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active svg path {
@@ -3005,7 +3005,7 @@ table .input-group-text {
         overflow-y: auto;
     }
     .menu-sidebar .offcanvas-body {
-        padding: 59px 39px 40px 39px;
+        padding: 59px 20px 40px 20px;
         display: block;
         /*height: 100%;*/
     }

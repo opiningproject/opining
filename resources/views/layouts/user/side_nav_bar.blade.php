@@ -67,7 +67,7 @@
 
                     <button type="button" class="btn-close d-block drawer-close d-lg-none" id="menu-sidebar-close"
                         data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar">
-                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="30" width="30" />
+                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="25" width="25" />
                     </button>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                     <a href="{{ route('user.dashboard') }}"
                                         class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
                                         <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.dashboard') }}</span>
                                     </a>
@@ -91,7 +91,7 @@
                                     <a href="{{ route('user.orders') }}"
                                         class="nav-link {{ activeMenu('user.orders') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/myorder-menu-up.svg') }}" class="svg"
-                                            height="26" width="26">
+                                            height="20" width="20">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_order') }}</span>
                                     </a>
@@ -100,7 +100,7 @@
                                     <a href="{{ route('user.favorite') }}"
                                         class="nav-link {{ activeMenu('user.favorite') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/favorite-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.favorite') }}</span>
                                     </a>
@@ -109,7 +109,7 @@
                                     <a href="{{ route('user.chat') }}"
                                         class="nav-link {{ activeMenu('user.chat') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/user-chat-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.chat') }}</span>
                                     </a>
@@ -118,14 +118,14 @@
                                     <a href="{{ route('user.points') }}"
                                         class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/collected-points-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="30" width="30">
+                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="25" width="25">
                                     <span class="ms-1 d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
                                 </a>
                             </li> --}}
@@ -135,7 +135,7 @@
                                     <a href="{{ route('user.coupons') }}"
                                         class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/coupons-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
                                     </a>
@@ -144,7 +144,7 @@
                                     <a href="{{ route('user.settings') }}"
                                         class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/settings-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
                                     </a>
@@ -206,7 +206,7 @@
 
                         <div class="ms-auto">
                             <a class="dropdown-item log-out-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <img src="{{ asset('images/log-out-up.svg') }}" class="" width="20"
+                                <img src="{{ asset('images/sign-out-up') }}" class="" width="20"
                                     height="20" />
                                 {{-- {{ trans('user.sidebar.logout') }} --}}
                             </a>
@@ -255,7 +255,7 @@
 
                 <div class="ms-auto">
                     <a class="dropdown-item log-out-item" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <img src="{{ asset('images/log-out-up.svg') }}" class="svg" width="20"
+                        <img src="{{ asset('images/sign-out-up') }}" class="svg" width="20"
                             height="20" />
                         {{-- {{ trans('user.sidebar.logout') }} --}}
                     </a>

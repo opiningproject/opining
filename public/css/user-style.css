@@ -433,7 +433,7 @@ a {
   color: var(--theme-gray5);
   font-size: 16px;
   letter-spacing: 0.19px;
-  padding: 8px 14px;
+  padding: 10px 20px;
   border-radius: 10px;
   line-height: initial;
 }
@@ -450,6 +450,10 @@ a {
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active svg {
   /* fill: #ffffff; */
+}
+
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {
+  width: 30px;
 }
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover svg path,

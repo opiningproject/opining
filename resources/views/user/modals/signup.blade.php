@@ -10,7 +10,7 @@
                 <form id="sign-up-form" method="POST">
                     <div class="form-group prev-input-group custom-icon-input-group">
                         <span class="input-group-icon">
-                            <img src="{{ asset('images/user-icon.svg') }}" alt="" width="16" height="16"
+                            <img src="{{ asset('images/user-icon-up.svg') }}" alt="" width="16" height="16"
                                 class="svg">
                         </span>
                         <input type="text" class="form-control form-control-icon ps-5"
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group">
                         <span class="input-group-icon">
-                            <img src="{{ asset('images/user-icon.svg') }}" alt="" width="16" height="16"
+                            <img src="{{ asset('images/user-icon-up.svg') }}" alt="" width="16" height="16"
                                 class="svg">
                         </span>
                         <input type="text" class="form-control form-control-icon ps-5"
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
                         <span class="input-group-icon">
-                            <img src="{{ asset('images/password.svg') }}" alt="" width="15" height="20"
+                            <img src="{{ asset('images/password-up.svg') }}" alt="" width="15" height="20"
                                 class="svg">
                         </span>
                         <input type="password" class="form-control login-pwd-icon custom-control-with-icon ps-5 pe-5"
@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group prev-input-group custom-icon-input-group password-input-icon mb-3">
                         <span class="input-group-icon">
-                            <img src="{{ asset('images/password.svg') }}" alt="" width="15" height="20"
+                            <img src="{{ asset('images/password-up.svg') }}" alt="" width="15" height="20"
                                 class="svg">
                         </span>
                         <input type="password" class="form-control custom-control-with-icon ps-5"

@@ -278,22 +278,21 @@ form .prev-input-group .input-group-icon svg {
 
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link .order-count {
     white-space: nowrap;
-    font-size: 12px;
-    background: var(--theme-yellow2);
+    font-size: 14px;
+    background: #f6f6f6;
     color: var(--theme-dark2);
-    border-radius: 9999px;
-    padding: 9px 7px 9px;
+    border-radius: 5px;
+    padding: 8px 7px 8px;
     position: relative;
     top: 0px;
     display: inline-flex !important;
     width: 32px;
     height: 32px;
+    font-weight: 300;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    font-family: "Poppins", sans-serif !important;
-    line-height: 1.5;
-    font-weight: 500;
+    font-weight: 400;
 }
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active .order-count,
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover .order-count {
@@ -1009,19 +1008,17 @@ max-height: none !important;
   .menu-sidebar .sidebar-menu-top-box {
     width: 100%;
     text-align: center;
-    padding: 20px 5px 20px 25px;
-    position: absolute !important;
+    padding: 24px 0px;
+    position: relative !important;
     z-index: 2;
     bottom: 0px;
     background: #ffffff;
-    border-top: 1px solid #dbdbdb;
     left: 0px;
     right: 0px;
-    max-width: calc(100% - 40px);
     margin: 0px auto;
 }
   .menu-sidebar .menu-sidebar-inner {
-    height: calc(100vh - 90px);
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     position: sticky;
@@ -1031,9 +1028,16 @@ max-height: none !important;
     /* margin-left: -0.25rem; */
 }
   .menu-sidebar .sidebar-menu-top-box .dropdown {
-    font-size: 14px;
+    font-size: 15px;
   }
 
+  .sidebar-menu-top-box .text-truncate {
+    font-size: 12px;
+    color: #a4a4a4;
+    max-width: 160px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
   .menu-sidebar .sidebar-menu-top-box .menu-signsignup-link>a {
     display: flex;
     align-items: center;
@@ -1043,10 +1047,10 @@ max-height: none !important;
   .menu-sidebar .sidebar-menu-top-box .userPhoto {
     border-radius: 6px;
     overflow: hidden;
-    width: 34px;
-    flex: 0 0 34px;
-    max-width: 34px;
-    height: 34px;
+    width: 45px;
+    flex: 0 0 45px;
+    max-width: 45px;
+    height: 45px;
   }
 
   .menu-sidebar .sidebar-menu-top-box .userPhoto img {
@@ -1090,6 +1094,6 @@ max-height: none !important;
     text-align: left;
     padding: 0px 10px 20px 10px;
     border-bottom: 1px solid #dee2e6;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
 }

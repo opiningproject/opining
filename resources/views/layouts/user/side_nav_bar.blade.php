@@ -67,12 +67,12 @@
 
                     <button type="button" class="btn-close d-block drawer-close d-lg-none" id="menu-sidebar-close"
                         data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar">
-                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="30" width="30" />
+                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="25" width="25" />
                     </button>
                 </div>
             </div>
 
-            <div class="offcanvas-body pb-5 pb-lg-0 pt-2">
+            <div class="offcanvas-body pb-0 pt-2">
                 <nav class="w-100">
                     <div class="menu-sidebar-content d-flex flex-column align-items-center align-items-sm-start">
                         <div class="navbar-collapse menunavbar-collapse w-100" id="navbarSupportedContent">
@@ -82,7 +82,7 @@
                                     <a href="{{ route('user.dashboard') }}"
                                         class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
                                         <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.dashboard') }}</span>
                                     </a>
@@ -91,7 +91,7 @@
                                     <a href="{{ route('user.orders') }}"
                                         class="nav-link {{ activeMenu('user.orders') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/myorder-menu-up.svg') }}" class="svg"
-                                            height="26" width="26">
+                                            height="20" width="20">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_order') }}</span>
                                     </a>
@@ -100,7 +100,7 @@
                                     <a href="{{ route('user.favorite') }}"
                                         class="nav-link {{ activeMenu('user.favorite') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/favorite-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.favorite') }}</span>
                                     </a>
@@ -109,7 +109,7 @@
                                     <a href="{{ route('user.chat') }}"
                                         class="nav-link {{ activeMenu('user.chat') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/user-chat-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.chat') }}</span>
                                     </a>
@@ -118,14 +118,14 @@
                                     <a href="{{ route('user.points') }}"
                                         class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/collected-points-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="30" width="30">
+                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="25" width="25">
                                     <span class="ms-1 d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
                                 </a>
                             </li> --}}
@@ -135,7 +135,7 @@
                                     <a href="{{ route('user.coupons') }}"
                                         class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/coupons-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
                                     </a>
@@ -144,7 +144,7 @@
                                     <a href="{{ route('user.settings') }}"
                                         class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
                                         <img src="{{ asset('images/settings-menu-up.svg') }}" class="svg"
-                                            height="30" width="30">
+                                            height="25" width="25">
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
                                     </a>
@@ -164,11 +164,75 @@
                         </div>
                     </div>
                 </nav>
+
+                <div class="sidebar-menu-top-box  position-relative border-top">
+                    @if (!Auth::user())
+                        <div class="auth_enter_btns">
+
+                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal"
+                                class="btn">Log In</a>
+<!--                            <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal"
+                               class="text-yellow-2">{{ trans('modal.button.sign_up') }}</a>-->
+                            <a href="#" class="btn btn-site-theme" data-bs-toggle="modal" data-bs-target="#signUpModal" >Sign Up</a>
+
+                        </div>
+                        <div class="menu-signsignup-link d-none">
+                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
+                                <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22"
+                                    height="22">
+                                <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
+                            </a>
+                        </div>
+                    @else
+                        <div class="d-flex gap-3 align-items-center">
+                            <div class="userPhoto">
+                                <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
+                                    height="50" />
+                            </div>
+                            <div class="text-start">
+                                <div class="dropdown">
+                                    {{ Auth::user()->full_name }}
+                                    <ul class="dropdown-menu py-0">
+                                        <li>
+                                            <a class="dropdown-item log-out-item" href="#"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <img src="{{ asset('images/log-out.svg') }}" class="svg"
+                                                    width="25" height="26">
+                                                {{ trans('user.sidebar.logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none"> @csrf </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="text-truncate" style="color: #a4a4a4;">{{ Auth::user()->email }}
+                                </div>
+                            </div>
+
+                            <div class="ms-auto">
+                                <a class="dropdown-item log-out-item" href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg" width="20"
+                                        height="20" />
+                                    {{-- {{ trans('user.sidebar.logout') }} --}}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none"> @csrf
+                                </form>
+                            </div>
+
+
+                        </div>
+                    @endif
+                </div>
             </div>
 
-            <div class="sidebar-menu-top-box d-lg-none">
+            <div class="sidebar-menu-top-box d-none">
                 @if (!Auth::user())
-                    <div class="menu-signsignup-link">
+                    <div class="auth_enter_btns">
+
+                    </div>
+                    <div class="menu-signsignup-link d-none">
                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
                             <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22"
                                 height="22">
@@ -176,7 +240,7 @@
                         </a>
                     </div>
                 @else
-                    <div class="d-flex gap-2 align-items-center">
+                    <div class="d-flex gap-3 align-items-center">
                         <div class="userPhoto">
                             <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
                                 height="50" />
@@ -205,66 +269,26 @@
                         </div>
 
                         <div class="ms-auto">
-                            <a class="dropdown-item log-out-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <img src="{{ asset('images/log-out-up.svg') }}" class="" width="20"
+                            <a class="dropdown-item log-out-item" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <img src="{{ asset('images/sign-out-up.svg') }}" class="" width="20"
                                     height="20" />
                                 {{-- {{ trans('user.sidebar.logout') }} --}}
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
                             </form>
                         </div>
                     </div>
                 @endif
             </div>
 
+
+
         </div>
+
+
     </div>
 
-    <div class="sidebar-menu-top-box d-none d-lg-block position-relative">
-        @if (!Auth::user())
-            <div class="menu-signsignup-link">
-                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
-                    <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22" height="22">
-                    <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
-                </a>
-            </div>
-        @else
-            <div class="d-flex gap-2 align-items-center">
-                <div class="userPhoto">
-                    <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
-                        height="50" />
-                </div>
-                <div class="text-start">
-                    <div class="dropdown">
-                        {{ Auth::user()->full_name }}
-                        <ul class="dropdown-menu py-0">
-                            <li>
-                                <a class="dropdown-item log-out-item" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <img src="{{ asset('images/log-out.svg') }}" class="svg" width="25"
-                                        height="26">
-                                    {{ trans('user.sidebar.logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    class="d-none"> @csrf </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="text-truncate" style="color: var(--theme-dark1);">{{ Auth::user()->email }}
-                    </div>
-                </div>
 
-                <div class="ms-auto">
-                    <a class="dropdown-item log-out-item" href="#"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <img src="{{ asset('images/log-out-up.svg') }}" class="svg" width="20"
-                            height="20" />
-                        {{-- {{ trans('user.sidebar.logout') }} --}}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf
-                    </form>
-                </div>
-
-
-            </div>
-        @endif
-    </div>
 </aside>

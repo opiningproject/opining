@@ -36,7 +36,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('orders') }}"
-                                        class="d-flex align-items-center nav-link {{ activeMenu('orders') }} align-middle">
+                                        class="align-items-center nav-link {{ activeMenu('orders') }} align-middle">
                                         <img class="svg" src="{{ asset('images/myorder-menu-up.svg') }}"
                                             alt="" height="22" width="22" />
                                         <span
@@ -67,7 +67,7 @@
                                     <a href="{{ route('coupons.index') }}"
                                         class="nav-link {{ activeMenu('coupons') }} align-middle">
                                         <img class="svg" src="{{ asset('images/coupons-menu-up.svg') }}"
-                                            alt="" height="22" width="22" />
+                                            alt="" height="18" width="22" />
                                         <span
                                             class="ms-1 d-sm-inline align-middle">{{ trans('rest.sidebar.coupons') }}</span>
                                     </a>

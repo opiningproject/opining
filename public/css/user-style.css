@@ -1014,6 +1014,7 @@ body.sidebar-open .overlay-custom {display: block;}
 
 @media (max-width: 991px) {
   .menu-sidebar .offcanvas-lg .offcanvas-header {padding: 15px 20px !important;margin: 0px 20px;}
+    .menu-sidebar .sidebar-menu-top-box {width: 100%}
 .menu-sidebar .menu-sidebar-content .side-bar-menu {padding: 10px 0px 15px 0px !important;}
 .menu-sidebar .bag-count {display: flex !important;}
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item:last-child {margin-bottom: 0px;}
@@ -1131,7 +1132,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .prev-input-group .input-group-icon {top: 16px !important;display: flex;align-items: center;justify-content: center;}
 .menu-sidebar .offcanvas-lg .offcanvas-header {padding: 20px;}
 .menu-sidebar .menu-sidebar-content .side-bar-menu {padding: 20px 20px 15px 20px;}
-.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {width: 30px;height: 30px;}
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link svg {width: 22px;height: 22px;}
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item {margin-bottom: 8px;}
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {font-size: 14px;padding: 8px 16px;border-radius: 10px;}
 .menu-sidebar .sidebar-offer-card p {font-size: 16px;}

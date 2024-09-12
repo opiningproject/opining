@@ -302,6 +302,7 @@ return [
 
 	'my_finance' => [
 		'title' => 'My Finance',
+        'analytics' => 'Analytics',
 		'total_income' => 'Total Income',
 		'income' => 'Income',
 		'total_revenue' => 'Total Revenue',

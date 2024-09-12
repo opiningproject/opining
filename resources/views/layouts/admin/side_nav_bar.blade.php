@@ -25,7 +25,7 @@
                         <div class="navbar-collapse menunavbar-collapse w-100 d-block" id="navbarSupportedContent">
                             <ul class="nav nav-pills side-bar-menu flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                                 id="menu">
-                                
+
                                 <label class="menu-label pt-0">Main</label>
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard') }}"
@@ -96,7 +96,7 @@
                                                 class="svg hoverable" height="22" width="22" />
                                         </div>
                                         <span
-                                            class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.my_finance') }}</span>
+                                            class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.analytics') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -129,7 +129,7 @@
                                 </li>
 
                                 <label class="menu-label">{{ trans('rest.sidebar.sales_channels') }}</label>
-                                
+
                                 <li class="nav-item">
                                     <a href="{{ route('myWebsite') }}"
                                         class="nav-link {{ activeMenu('my-website') }} align-middle">
@@ -196,7 +196,7 @@
                     </div>
                 </nav>
 
-                
+
             </div>
 
         </div>

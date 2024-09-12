@@ -1,14 +1,4 @@
-<?php
-
-use App\Enums\OrderStatus;
-use App\Enums\OrderType;
-use App\Enums\PaymentStatus;
-use App\Enums\PaymentType;
-use App\Enums\RefundStatus;
-
-?>
-
-<div class="tab-pane fade" id="domainSetting-tab-pane" role="tabpanel" aria-labelledby="domainSetting-tab" tabindex="0">
+<div class="tab-pane" id="domainSetting-tab-pane" role="tabpanel" aria-labelledby="domainSetting-tab" tabindex="0">
   <div class="card-body">
     <div class="paymentHistory-card-body  py-3 pt-0">
         <p> Domain Setting </p>

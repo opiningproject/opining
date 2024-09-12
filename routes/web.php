@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\DishOptionCategoryController;
 use App\Http\Controllers\Admin\DishOptionsController;
+use App\Http\Controllers\Admin\DomainSettingController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\MyWebsiteController;
@@ -99,7 +100,9 @@ Route::get('change-theme/{theme}', function ($currency) {
 });
 
 Route::middleware(['auth', 'guest', 'localization'])->group(function () {
-
+    // dashboard route
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    
     // Restaurant Menu Routes
     Route::group(['prefix' => '/menu'], function () {
 
@@ -153,6 +156,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
     // Restaurant Menu Routes
 
+    
+
     // Restaurant Setting Routes
     Route::group(['prefix' => '/settings'], function () {
         Route::get('/', [SettingController::class, 'index'])->name('settings');
@@ -165,6 +170,10 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
         Route::post('/update-checkout-setting', [SettingController::class, 'updatePaymentSetting'])->name('settings.update-checkout-setting');
         Route::post('/change-refund-status', [SettingController::class, 'changeRefundStatus'])->name('settings.change-refund-status');
     });
+
+    // Domain Setting route
+    Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index');
+    // Domain Setting route
 
     Route::resource('/banners', BannerController::class);
     Route::group(['prefix' => '/banners'], function () {

@@ -20,6 +20,7 @@ return [
 		'archive_order' => 'Archive Order',
 		'settings' => 'Settings',
 		'my_finance' => 'My Finance',
+		'analytics' => 'Analytics',
 		'coupons' => 'Coupons',
 		'user_chat' => 'User Chat',
 		'open' => 'Open',

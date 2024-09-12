@@ -307,3 +307,166 @@
 .menu-sidebar .sidebar-menu-top-box .dropdown-menu .log-out-item:hover {background: #f3f3f3;}
 .menu-sidebar {padding-left: 0 !important;margin-left: 0 !important;overflow-y: initial !important;}
 .menu-sidebar .siderbarmenu-brand {text-align: left;padding: 0px 10px 20px 10px;border-bottom: 1px solid #dee2e6;margin-left: 20px;margin-right: 20px;}
+
+/* Dashboard css */
+.dashboard-container {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0px auto;
+}
+
+.dashboard-container .domain-details {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.dashboard-container .domain-details a {
+color: #4F4F4F;
+font-size: 16px;
+font-weight: 300;
+line-height: initial;
+text-decoration: underline;
+}
+
+.dashboard-container .domain-details a.m-url {
+    color: #242424;
+font-size: 24px;
+font-weight: 300;
+line-height: initial;
+text-decoration: none;
+}
+
+.dashboard-container .logo-details .res-det h1 {
+font-size: 24px;
+font-weight: 300;
+}
+
+.dashboard-container .logo-details .res-det p {
+    font-size: 16px;
+    font-weight: 300;
+    }
+
+    .dashboard-action-head .dropdown .btn{
+background-color: transparent;
+border: 0px !important;
+box-shadow: none !important;
+outline: 0 !important;
+padding: 0px !important;
+font-size: 20px;
+color: #000000;
+    }
+    .dashboard-action-head .dropdown .btn::after {
+        background-image: url(../images/dropdown-angle.png);
+        content: "";
+        width: 9px;
+        height: 9px;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-left: 10px;
+    }
+    .dashboard-action-head .dropdown * {
+        font-size: 14px;
+    }
+
+    .dashboard-action-head h2 {
+        font-size: 24px;
+        font-weight: 300;
+        color: #000000;
+        margin-bottom: 0px;
+    }
+
+    .dashboard-inn-box .row {
+        margin: 0px -5px;
+    }
+
+    .dashboard-inn-box .row .col{
+        padding: 0px 5px;
+    }
+
+    .dashboard-inn-box .row .col .dt-box {
+border-radius: 15px;
+background: #ffffff;
+padding: 12px;
+    }
+
+    .dashboard-inn-box .dt-box h3{
+font-size: 20px;
+text-transform: capitalize;
+margin-bottom: 15px; 
+font-weight: 400;   
+}
+
+    .dashboard-inn-box .dt-box h4{
+font-size: 32px;
+font-weight: 500;
+margin-bottom: 0px;
+    }
+
+    .dashboard-inn-box .dt-box .roi{
+font-size: 13px;
+color: #3BCE62;
+font-weight: 500;
+margin-bottom: 0px;
+    }
+
+    .dashboard-inn-box .dt-box .roi.danger{
+color: #E41A1A;
+    }
+
+    .see-more {
+        font-weight: 300;
+        color: #000000;
+        text-transform: capitalize;
+    }
+    .see-more:hover, .see-more:focus {
+        text-decoration: underline;
+    }
+
+    .plans-section .card-box {
+        padding: 10px 15px;
+        background: #ffffff;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .plans-section .card-box h3 {
+        font-size: 20px;
+        font-weight: 300;
+        color: #000000;
+    }
+
+    .plans-section .card-box .btn {
+        padding: 6px 34px;
+        font-size: 20px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .plans-section .card-box .btn.btn-outline-success {
+        color: #3BCE62;
+        border: 1px solid #3BCE62;
+        border-radius: 10px;
+    }
+    .plans-section .card-box .btn.btn-outline-success:hover, .plans-section .card-box .btn.btn-outline-success:focus {
+        background: #3BCE62;
+        color: #ffffff;
+    }
+
+    .plans-section .card-box .btn.btn-outline-secondary {
+        color: #383838;
+        border: 1px solid #383838;
+    }
+
+    .plans-section .card-box .btn.btn-outline-secondary:hover, .plans-section .card-box .btn.btn-outline-secondary:hover:focus {
+        color: #ffffff;
+        background: #383838;
+    }
+
+    @media screen and (max-width: 1440px) {
+    .dashboard-inn-box .dt-box h3 {
+        font-size: 18px;
+       }
+}

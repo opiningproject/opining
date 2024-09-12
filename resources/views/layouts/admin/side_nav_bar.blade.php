@@ -27,7 +27,20 @@
                                 id="menu">
                                 
                                 <label class="menu-label pt-0">Main</label>
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard') }}"
+                                        class="nav-link {{ activeMenu('dashboard') }} align-middle">
+                                        <div class="icon-span">
+                                            <img src="{{ asset('images/admin-menu-icons/dashboard-gray.svg') }}"
+                                                class="svg actual" height="18" width="20" />
 
+                                            <img src="{{ asset('images/admin-menu-icons/dashboard-black.svg') }}"
+                                                class="svg hoverable" height="18" width="20" />
+                                        </div>
+                                        <span
+                                            class="ms-0 d-sm-inline align-middle">Dashboard</span>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="{{ route('orders') }}"
                                         class="align-items-center nav-link {{ activeMenu('orders') }} align-middle">

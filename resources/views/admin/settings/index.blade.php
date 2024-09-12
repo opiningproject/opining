@@ -49,7 +49,8 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="domainSetting-tab" data-bs-toggle="tab" data-bs-target="#domainSetting-tab-pane" type="button" role="tab"
-                                            aria-controls="domainSetting-tab-pane" aria-selected="false">{{ trans('rest.settings.domain_setting.title') }}
+                                            aria-controls="domainSetting-tab-pane" aria-selected="false">
+                                        {{ trans('rest.settings.domain_setting.title') }}
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
@@ -70,13 +71,18 @@
                             </ul>
 
                             <div class="tab-content card editdish-card setting-tab-content" id="myTabContent">
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade" id="domainSetting-tab-pane" role="tabpanel" aria-labelledby="domainSetting-tab">
+                                        <!-- Content will be loaded here -->
+                                    </div>
+                                </div>
                                 @include('admin.settings.profile')
                                 @include('admin.settings.payment-history')
                                 @include('admin.settings.cms-en')
                                 @include('admin.settings.cms-nl')
                                 @include('admin.settings.refund-history')
                                 @include('admin.settings.zipcode')
-                                @include('admin.settings.domain-setting')
+{{--                                @include('admin.settings.domain-setting')--}}
                                 @include('admin.settings.api-setting')
                                 @include('admin.settings.payment-setting')
                                 @include('admin.settings.checkout-setting')

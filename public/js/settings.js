@@ -297,3 +297,20 @@ function changePaymentSetting(paymentType) {
         }
     });
 }
+//
+$(document).ready(function() {
+    $('#domainSetting-tab').on('click', function () {
+        $.ajax({
+            url: "/domain-setting", // The route to load content
+            method: 'GET',
+            success: function (response) {
+                // Inject the content into the tab pane
+                $('#domainSetting-tab-pane').html(response);
+            },
+            error: function (xhr) {
+                console.error('Error loading domain settings:', xhr);
+                $('#domainSetting-tab-pane').html('<p>Error loading content.</p>');
+            }
+        });
+    });
+});

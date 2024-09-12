@@ -3,7 +3,7 @@
         <div class="bd-navbar-toggle">
             <button class="navbar-toggler p-2" id="menu-sidebar" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
-                <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="24" height="21">
+                <img src="{{ asset('images/toggle-icon.svg') }}" class="svg actual" width="24" height="21">
                 <span class="d-none fs-6 pe-1">Browse</span>
             </button>
         </div>
@@ -16,7 +16,7 @@
 
         <div class="bd-navbar-toggle cartsidebar-icon ms-auto align-items-center">
             <button class="navbar-toggler p-2 searcheatboxbtn d-none" type="button">
-                <img src="{{ asset('images/toggle-icon.svg') }}" class="svg" width="18" height="18">
+                <img src="{{ asset('images/toggle-icon.svg') }}" class="svg actual" width="18" height="18">
             </button>
 
 
@@ -24,7 +24,7 @@
             <button
                 class="navbar-toggler p-0 searchMobileIcon d-md-none {{ request()->segment(count(request()->segments())) != 'dashboard' && request()->segment(count(request()->segments()) - 1) != 'dashboard' ? 'd-none' : '' }} "
                 id="mobilesearchToggle" type="button">
-                <img class="svg" src="{{ asset('images/search-icon-up.svg') }}" alt="" height="18"
+                <img class="svg actual" src="{{ asset('images/search-icon-up.svg') }}" alt="" height="18"
                     width="18">
             </button>
 
@@ -67,7 +67,7 @@
 
                     <button type="button" class="btn-close d-block drawer-close d-lg-none" id="menu-sidebar-close"
                         data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar">
-                        <img src="{{ asset('images/menu-back.svg') }}" class="svg" height="24" width="24" />
+                        <img src="{{ asset('images/menu-back.svg') }}" class="svg actual" height="24" width="24" />
                     </button>
                 </div>
             </div>
@@ -82,61 +82,76 @@
                                     <a href="{{ route('user.dashboard') }}"
                                         class="nav-link {{ activeMenu('user.dashboard') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/dashboard-menu-up.svg') }}" class="svg"
-                                                 height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/dashboard-gray.svg') }}"
+                                                class="svg actual" height="20" width="20" />
+
+                                            <img src="{{ asset('images/menu-icons/dashboard-black.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.dashboard') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.dashboard') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('user.orders') }}"
                                         class="nav-link {{ activeMenu('user.orders') }} align-middle auth-link-check">
                                         <div class="icon-span">
-                                        <img src="{{ asset('images/myorder-menu-up.svg') }}" class="svg"
-                                            height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/myorder-gray.svg') }}"
+                                                class="svg actual" height="20" width="20" />
+
+                                            <img src="{{ asset('images/menu-icons/myorder-black.svg') }}"
+                                                class="svg hoverable" height="20" width="20"  />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_order') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.my_order') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('user.favorite') }}"
                                         class="nav-link {{ activeMenu('user.favorite') }} align-middle auth-link-check">
                                         <div class="icon-span">
-                                        <img src="{{ asset('images/favorite-menu-up.svg') }}" class="svg"
-                                            height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/favourite-gray.svg') }}" class="svg actual"
+                                            height="20" width="20" />
+
+                                        <img src="{{ asset('images/menu-icons/favourite-black.svg') }}" class="svg hoverable"
+                                            height="20" width="20"  />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.favorite') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.favorite') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('user.chat') }}"
                                         class="nav-link {{ activeMenu('user.chat') }} align-middle auth-link-check">
                                         <div class="icon-span">
-                                        <img src="{{ asset('images/user-chat-menu-up.svg') }}" class="svg"
-                                            height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/chat-gray.svg') }}" class="svg actual"
+                                            height="20" width="20" />
+
+                                        <img src="{{ asset('images/menu-icons/chat-black.svg') }}" class="svg hoverable"
+                                            height="20" width="20" />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.chat') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.chat') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('user.points') }}"
                                         class="nav-link {{ activeMenu('user.points') }} align-middle auth-link-check">
                                         <div class="icon-span">
-                                        <img src="{{ asset('images/collected-points-menu-up.svg') }}" class="svg"
-                                            height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/points-gray.svg') }}" class="svg actual"
+                                            height="20" width="20" />
+
+                                        <img src="{{ asset('images/menu-icons/points-black.svg') }}" class="svg hoverable"
+                                            height="20" width="20"  />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.collected_points') }}</span>
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
                                 <a href="{{ route('user.coupons') }}" class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
-                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg" height="24" width="24">
-                                    <span class="ms-1 d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
+                                    <img src="{{ asset('images/coupons-menu.svg') }}" class="svg actual" height="20" width="20">
+                                    <span class="d-sm-inline align-middle"> trans('user.sidebar.my_coupons')</span>
                                 </a>
                             </li> --}}
 
@@ -145,22 +160,28 @@
                                     <a href="{{ route('user.coupons') }}"
                                         class="nav-link {{ activeMenu('user.coupons') }} align-middle auth-link-check">
                                         <div class="icon-span">
-                                        <img src="{{ asset('images/coupons-menu-up.svg') }}" class="svg"
-                                            height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/coupons-gray.svg') }}" class="svg actual"
+                                            height="20" width="20" />
+
+                                        <img src="{{ asset('images/menu-icons/coupons-black.svg') }}" class="svg hoverable"
+                                            height="20" width="20"  />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.my_coupons') }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('user.settings') }}"
                                         class="nav-link {{ activeMenu('user.settings') }} align-middle auth-link-check">
                                         <div class="icon-span">
-                                        <img src="{{ asset('images/settings-menu-up.svg') }}" class="svg"
-                                            height="24" width="24">
+                                            <img src="{{ asset('images/menu-icons/setting-gray.svg') }}" class="svg actual"
+                                            height="20" width="20" />
+
+                                        <img src="{{ asset('images/menu-icons/setting-black.svg') }}" class="svg hoverable"
+                                            height="20" width="20"  />
                                         </div>
                                         <span
-                                            class="ms-1 d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
+                                            class="d-sm-inline align-middle">{{ trans('user.sidebar.settings') }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -169,7 +190,7 @@
                                     <div class="card-body">
                                         <p class="mb-0">{{ trans('user.sidebar.content') }}</p>
                                         <div class="circle-bg-shape">
-                                            <img src="{{ asset('images/nav-grade.svg') }}" class="svg"
+                                            <img src="{{ asset('images/nav-grade.svg') }}" class="svg actual"
                                                 width="90" height="95">
                                         </div>
                                     </div>
@@ -185,14 +206,15 @@
 
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal"
                                 class="btn">Log In</a>
-<!--                            <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal"
+                            <!--                            <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal"
                                class="text-yellow-2">{{ trans('modal.button.sign_up') }}</a>-->
-                            <a href="#" class="btn btn-site-theme" data-bs-toggle="modal" data-bs-target="#signUpModal" >Sign Up</a>
+                            <a href="#" class="btn btn-site-theme" data-bs-toggle="modal"
+                                data-bs-target="#signUpModal">Sign Up</a>
 
                         </div>
                         <div class="menu-signsignup-link d-none">
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
-                                <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22"
+                                <img src="{{ asset('images/user-icon-up.svg') }}" class="svg actual" width="22"
                                     height="22">
                                 <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
                             </a>
@@ -200,7 +222,7 @@
                     @else
                         <div class="d-flex gap-3 align-items-center">
                             <div class="userPhoto">
-                                <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
+                                <img src="{{ Auth::user()->image }}" alt=""  width="50"
                                     height="50" />
                             </div>
                             <div class="text-start">
@@ -210,7 +232,7 @@
                                         <li>
                                             <a class="dropdown-item log-out-item" href="#"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                <img src="{{ asset('images/log-out.svg') }}" class="svg"
+                                                <img src="{{ asset('images/log-out.svg') }}" class="svg actual"
                                                     width="25" height="26">
                                                 {{ trans('user.sidebar.logout') }}
                                             </a>
@@ -226,7 +248,7 @@
                             <div class="ms-auto">
                                 <a class="dropdown-item log-out-item" href="#"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg" width="20"
+                                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg actual" width="20"
                                         height="20" />
                                     {{-- {{ trans('user.sidebar.logout') }} --}}
                                 </a>
@@ -248,7 +270,7 @@
                     </div>
                     <div class="menu-signsignup-link d-none">
                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signInModal">
-                            <img src="{{ asset('images/user-icon-up.svg') }}" class="svg" width="22"
+                            <img src="{{ asset('images/user-icon-up.svg') }}" class="svg actual" width="22"
                                 height="22">
                             <p class="mb-0 d-inline-block align-middle">{{ trans('user.sidebar.sign_in') }} </p>
                         </a>
@@ -256,7 +278,7 @@
                 @else
                     <div class="d-flex gap-3 align-items-center">
                         <div class="userPhoto">
-                            <img src="{{ Auth::user()->image }}" alt="" class="" width="50"
+                            <img src="{{ Auth::user()->image }}" alt=""  width="50"
                                 height="50" />
                         </div>
                         <div class="text-start">
@@ -269,7 +291,7 @@
                                     <li>
                                         <a class="dropdown-item log-out-item" href="#"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <img src="{{ asset('images/log-out.svg') }}" class="svg"
+                                            <img src="{{ asset('images/log-out.svg') }}" class="svg actual"
                                                 width="25" height="26">
                                             {{ trans('user.sidebar.logout') }}
                                         </a>
@@ -285,7 +307,7 @@
                         <div class="ms-auto">
                             <a class="dropdown-item log-out-item" href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <img src="{{ asset('images/sign-out-up.svg') }}" class="" width="20"
+                                <img src="{{ asset('images/sign-out-up.svg') }}"  width="20"
                                     height="20" />
                                 {{-- {{ trans('user.sidebar.logout') }} --}}
                             </a>

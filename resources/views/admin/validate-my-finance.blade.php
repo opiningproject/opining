@@ -21,7 +21,7 @@
                                     @endif
                                 </div>
                                 <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100">
-                                    Go to My Finance
+                                    Go to Analytics
                                 </button>
                             </div>
                         </div>

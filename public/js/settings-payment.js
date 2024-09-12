@@ -30,10 +30,46 @@ function changeRefundStatus(order_id,status)
 
 function changeOrderStatus(order_id,order_status)
 {
+    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+
+    var id = order_id;
+    $.ajax({
+        url: baseURL+'/orders/change-status/'+ id,
+        type: 'GET',
+        success: function (response) {
+
+            // Add gray-clock icon without refresh
+            if(response.clok_gray_svg) {
+                $('.order-status-' + id).empty();
+                $('.order-status-' + id).html(response.clok_gray_svg);
+            }
+            if (response.orderStatus == "6") {
+                $('#order-list-data-div .order-' + id).remove();
+                var currentOrderCount = $('.order-count').text();
+                $('.order-count').html(currentOrderCount - 1);
+            }
+            $('.foodorder-box-details').html(response.data);
+
+            $(".foodorder-box-list div").removeClass("active");
+            $('.order-' + id).addClass('active');
+            window.history.pushState('','', baseURL + '/orders/'+id+'#order-'+id);
+            $('#changeStatusModal').modal('hide');
+            socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+// comment on 12-09-2024
+/*function changeOrderStatus(order_id,order_status)
+{
     $('#id').val(order_id);
     $('#changeStatusModal').modal('show');
     $('#order_status_name').text("'"+order_status+"'");
-}
+}*/
 
 
 $(document).on('click', '#change-order-status-btn', function ()

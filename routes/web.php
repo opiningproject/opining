@@ -99,7 +99,9 @@ Route::get('change-theme/{theme}', function ($currency) {
 });
 
 Route::middleware(['auth', 'guest', 'localization'])->group(function () {
-
+    // dashboard route
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    
     // Restaurant Menu Routes
     Route::group(['prefix' => '/menu'], function () {
 
@@ -152,6 +154,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
         Route::get('/dish-options/category/checkItems/{category}', [DishOptionCategoryController::class, 'checkAttachedItems']);
     });
     // Restaurant Menu Routes
+
+    
 
     // Restaurant Setting Routes
     Route::group(['prefix' => '/settings'], function () {

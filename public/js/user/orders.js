@@ -121,7 +121,7 @@ function checkScreenSize1() {
         });
 
         $('.mobile-accept-order').removeClass('d-none');
-
+        $('.orders-item').removeClass('active');
         //get url with query parameter.
             var url = window.location.href;
             var queryString = url.split('?')[1];
@@ -132,8 +132,13 @@ function checkScreenSize1() {
             $('.menu-sidebar').addClass('d-none');
             $('body').css('overflow', 'hidden');
         }
+        $('.orders-item').removeClass('active');
         //mobile screen
     } else {
+        var firstOrderId = $('.firstOrderId').val();
+        if (firstOrderId) {
+            $('#order-'+ firstOrderId).addClass('active')
+        }
         $('.mobile-accept-order').addClass('d-none');
         $('.order-position-relative').removeClass('d-none');
         $('.menu-sidebar').removeClass('d-none');
@@ -147,22 +152,5 @@ function checkScreenSize1() {
 
 checkScreenSize1()
 $(window).on('resize', checkScreenSize1);
-
-    // on track order page to back button code.
-    /*function getPathSegment(index) {
-        // Get the pathname from the URL
-        const path = window.location.pathname.split('/');
-        return path[index] || '';
-    }
-
-    // Extract the order_id from the path
-    const orderId = getPathSegment(3); // Adjust the index based on your URL structure
- if (parseInt(orderId)) {
-        $(document).ready(function() {
-            orderDetail(orderId);
-        });
-    } else {
-        console.log('No Order ID found in the URL.');
-    }*/
 
 

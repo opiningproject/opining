@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'Restuarant Name',
             'last_name' => '',
             'email' => 'admin@admin.com',
+            'user_role' => '1',
             'password' => Hash::make('Inx@!123'),
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s'),

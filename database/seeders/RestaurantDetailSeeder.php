@@ -21,6 +21,13 @@ class RestaurantDetailSeeder extends Seeder
             'rest_address' => '123',
             'online_order_accept' => '1',
             'service_charge' => '0',
+            'params' => json_encode([
+                "payment_settings" => [
+                    "ideal" => 1,
+                    "card" => 1,
+                    "cod" => 1
+                ]
+            ]),
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s'),
         ]);

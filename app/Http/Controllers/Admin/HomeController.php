@@ -69,7 +69,7 @@ class HomeController extends Controller
         if (isset($request->cat_id)) {
             $dishes = $dishes->whereCategoryId($request->cat_id)->get();
         } else {
-            if(!empty($categories)){
+            if(!empty($categories) && count($categories) > 0){
                 $dishes = $dishes->whereCategoryId($categories[0]->id)->get();
             }else{
                 $dishes = $dishes->get();

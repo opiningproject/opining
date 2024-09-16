@@ -273,7 +273,8 @@ use App\Enums\RefundStatus;
                 </div>
 
                 @if ($order->order_type == OrderType::Delivery)
-                    <div class="{{ $order->order_status >= OrderStatus::Ready ? 'step active' : 'step' }}">
+                    <!--  sept cr 16-09-2024      -->
+                    {{--<div class="{{ $order->order_status >= OrderStatus::Ready ? 'step active' : 'step' }}">
                         <div class="icon">
                             <svg width="21" height="16" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="Layer_1" clip-path="url(#clip0_476_41052)">
@@ -297,7 +298,7 @@ use App\Enums\RefundStatus;
                                 </svg>
                         </div>
                         <h3 class="mb-0">{{ trans('rest.order_status.ready') }}</h3>
-                    </div>
+                    </div>--}}
                     <div class="{{ $order->order_status >= OrderStatus::OutForDelivery ? 'step active' : 'step' }}">
                         <div class="icon">
 

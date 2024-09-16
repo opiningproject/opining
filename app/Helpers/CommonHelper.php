@@ -411,7 +411,15 @@ if (!function_exists('getOrderStatus')) {
     {
         if($order->order_type == OrderType::Delivery)
         {
-            if($order->order_status == OrderStatus::Accepted)
+            if ($order->order_status == OrderStatus::Accepted) {
+                $order->order_status = OrderStatus::InKitchen;
+            } else if ($order->order_status == OrderStatus::InKitchen) {
+                $order->order_status = OrderStatus::OutForDelivery;
+            } else {
+                $order->order_status = OrderStatus::Delivered;
+            }
+//  comment on sept cr 16-09-2024
+            /*if($order->order_status == OrderStatus::Accepted)
             {
                 $order->order_status = OrderStatus::InKitchen;
             }
@@ -426,7 +434,7 @@ if (!function_exists('getOrderStatus')) {
             else
             {
                 $order->order_status = OrderStatus::Delivered;
-            }
+            }*/
         }
         else
         {

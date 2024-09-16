@@ -1,0 +1,40 @@
+<?php
+
+return [
+	'profile_img_error' => 'Unable to upload your profile image.',
+	'signup_success' => 'You have been successfully signup.',
+	'login_success' => 'You have been successfully login.',
+	'logout_success' => 'You have been successfully logout.',
+	'login_error' => 'These credentials do not match our records.',
+	'logout_error' => 'You have not been successfully logout.',
+	'profile_update_success' => 'Your profile has been updated successfully.',
+	'something_wrong' => 'Something went wrong, please try again.',
+	'current_password_wrong' => 'Your current password does not match.',
+	'account_inactive' => 'Your account is inactive please contact '. config('app.name') .' to activate your account.',
+	'forgot_pass_user_not_exists' => 'We can\'t find a user with that username or e-mail address.',
+	'token_error' => 'Something went wrong with token.',
+	'password_update_success' => 'Your password has been updated successfully.',
+	'user_delete_success' => 'User has been deleted successfully.',
+	'user_update_success' => 'User has been updated successfully.',
+	'user_add_success' => 'User has been updated successfully.',
+
+	'admin_exists_atleast_one' => 'You can\'t delete this admin because system need at least one admin.',
+	'admin_active_atleast_one' => 'You can\'t update this admin with inactive status because system need at least one admin with active status.',
+	'cms_update_success' => 'CMS has been updated successfully.',
+	'signin_msg' => 'Sign in to start your session',
+	'forgot_pass_msg' => 'I forgot my password',
+	'reset_pass_msg' => 'Reset Password',
+	'reset_pass_success' => 'Password has been reset successfully.',
+	'success' => 'Success',
+	'version_add_success' => 'Version added successfully.',
+    'version_must_greater' => 'New Version must greater then existing version',
+	'contact_us_add_success' => 'Your request has been sent to the admin successfully.',
+    'contact_us_delete_success' => 'Contact us request has been deleted successfully.',
+    'close_inquiry_success' => 'Inquiry has been closed successfully.',
+    'settings_update_success'=>'Settings has been updated successfully.',
+    'work_package_delete_success'=>'Work Packages has been deleted successfully.',
+	'contractor_add_success'=>'Contractor has been created successfully',
+    'contractor_update_success'=>'Contractor has been updated successfully',
+
+];
+

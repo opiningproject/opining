@@ -45,7 +45,7 @@
                                                                value="{{ $a_order->id }}">
                                                     @endif
                                                     <div onclick="orderDetail({{ $a_order->id }})" style="cursor: pointer;"
-                                                        class="{{ $a_order->id == $order->id ? 'active' : '' }} orders-item d-flex align-items-center justify-content-between gap-2"
+                                                        class="{{ $a_order->id == $order->id ? '' : '' }} orders-item d-flex align-items-center justify-content-between gap-2"
                                                         id="order-{{ $a_order->id }}">
                                                         <div class="text-grp">
                                                             <div class="title">{{ trans('user.my_orders.order') }}

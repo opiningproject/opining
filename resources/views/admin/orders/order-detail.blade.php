@@ -105,25 +105,24 @@ $userDetails = $order->orderUserDetails;
 
         @if($order->order_type == OrderType::Delivery)
                 <?php $order_status = trans('rest.order_status.ready'); ?>
-            @if($order->order_status >= OrderStatus::Ready)
-                <div
-                    class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                    <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-{{--                        <img src="{{ asset('images/pickup-black.svg') }}" class="img-fluid svg" width="19" height="19">--}}
-                        {!! svg('pickup-black.svg',19, 19) !!}
-                    </div>
-                    <div class="text">{{ $order_status }}</div>
-                </div>
-            @else
-                <div
-                    class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">
-                    <div class="img d-flex align-items-center justify-content-center cursor-pointer">
-{{--                        <img src="{{ asset('images/pickup-white.svg') }}" class="img-fluid svg" width="19" height="19">--}}
-                        {!! svg('pickup-white.svg',19, 19) !!}
-                    </div>
-                    <div class="text">{{ $order_status }}</div>
-                </div>
-            @endif
+<!--  sept cr 16-09-2024      -->
+{{--            @if($order->order_status >= OrderStatus::Ready)--}}
+{{--                <div--}}
+{{--                    class="active footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">--}}
+{{--                    <div class="img d-flex align-items-center justify-content-center cursor-pointer">--}}
+{{--                        {!! svg('pickup-black.svg',19, 19) !!}--}}
+{{--                    </div>--}}
+{{--                    <div class="text">{{ $order_status }}</div>--}}
+{{--                </div>--}}
+{{--            @else--}}
+{{--                <div--}}
+{{--                    class="footer-box-main-progressbar-item d-flex flex-column align-items-center justify-content-center text-center gap-2">--}}
+{{--                    <div class="img d-flex align-items-center justify-content-center cursor-pointer">--}}
+{{--                        {!! svg('pickup-white.svg',19, 19) !!}--}}
+{{--                    </div>--}}
+{{--                    <div class="text">{{ $order_status }}</div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
 
                 <?php $order_status = trans('rest.order_status.out_for_delivery'); ?>
             @if($order->order_status >= OrderStatus::OutForDelivery)

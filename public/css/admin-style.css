@@ -470,3 +470,88 @@ color: #E41A1A;
         font-size: 18px;
        }
 }
+
+
+.order-page .order-page-bar {position: relative;margin-bottom: 20px !important;}
+.order-page-bar .page-title {font-size: 34px;font-weight: normal;color: #292929;display: flex;gap: 10px;line-height: inherit;}
+.order-page-bar .page-title .count {display: inline-flex;align-items: center;justify-content: center;text-align: center;background: #D9D9D9;border-radius: 5px;color: #000000;font-size: 24px;height: 48px;min-width: 48px;}
+.order-page-bar .drop_with_search {display: flex;background: #ffffff;border-radius: 10px;overflow: hidden;}
+.order-page-bar .drop_with_search .form-control {border: 0px;min-height: 47px;max-height: 47px;border-radius: 0px;}
+.order-page-bar .drop_with_search .select-options {min-width: 120px;border-right: 1px solid #d7d7d7;padding-right: 10px;}
+.order-page-bar .drop_with_search .select-options .form-control {padding-left: 20px;}
+.order-page-bar .filter-options {min-width: 200px;}
+.order-page-bar .filter-options .form-control {background-color: #ffffff;height: 47px;max-height: 47px;border: 0px;}
+.order-page-bar .form-control::-webkit-input-placeholder {font-size: 14px;color: #3d3d3d;font-weight: 300;}
+.order-page-bar .form-control::-moz-placeholder {font-size: 14px;color: #3d3d3d;font-weight: 300;}
+.order-page-bar .form-control:-ms-input-placeholder {font-size: 14px;color: #3d3d3d;font-weight: 300;}
+.order-page-bar .finance_auth_form .form-control:-moz-placeholder {font-size: 14px;color: #3d3d3d;font-weight: 300;}
+.filter-options .form-control {padding-left: 20px;color: #3d3d3d;font-weight: 300;}
+.order-page-bar .btn {font-size: 12px;font-weight: 300;border: 0px;min-height: 47px;min-width: 250px;}
+.order-listing-container {position: relative;}
+.order-listing-container .order-row {margin: 0px -5px;display: flex;flex-wrap: wrap;}
+.order-listing-container .order-row .order-col {padding: 0px 5px;flex: 0 0 50%;max-width: 50%;margin-bottom: 10px;}
+.order-listing-container .order-col .order-box {overflow: hidden;border: 1px solid #DBDBDB;background: #ffffff;border-radius: 16px;padding: 15px 15px;display: flex;}
+.order-listing-container .order-col .order-box * {font-size: 14px;font-weight: 300;color: #292929;}
+.order-listing-container .order-col .order-box .actions {margin-left: auto;display: flex;align-items: center;padding-left: 30px;}
+.order-listing-container .order-col .order-box .actions .btn {width: 150px;border-radius: 10px;border: 1px solid #000000;text-align: center;color: #727272;font-weight: 500;font-size: 16px;display: flex;align-items: center;justify-content: center;margin-left: 40px;flex: 0 0 150px;max-width: 150px;}
+.order-listing-container .order-col .order-box .actions .btn:hover {background: #000000;color: #ffffff;}
+.order-listing-container .order-col .order-box .actions .btn.outline-danger {border-color: #B73A3A;color: #B73A3A;}
+.order-listing-container .order-col .order-box .actions .btn.outline-danger:hover {color: #ffffff;background: #B73A3A;}
+.order-listing-container .order-col .order-box .actions .btn.outline-warning {border-color: #FFC00B;color: #FFC00B;}
+.order-listing-container .order-col .order-box .actions .btn.outline-warning:hover {background: #FFC00B;color: #ffffff;}
+.order-listing-container .order-col .order-box .actions .btn.outline-success {border-color: #3BCE62;color: #3BCE62;}
+.order-listing-container .order-col .order-box .actions .btn.outline-success:hover {background: #3BCE62;color: #ffffff;}
+.order-box .actions h5, .order-box .actions a {white-space: nowrap;}
+.order-listing-container .order-col .order-box .details{display: flex;align-items: center;justify-content: space-between;border-right: 1px solid #D6D6D6;padding-right: 15px;border-left: 1px solid #D6D6D6;padding-left: 15px;flex: auto;padding-top: 10px;padding-bottom: 10px;}
+.order-listing-container .order-col .order-box .timing {flex: 0 0 80px;max-width: 80px;display: flex;align-items: center;justify-content: center;flex-direction: column;}
+.price_status b {font-weight: 500 !important;}
+.price_status {flex: 0 0 108px;max-width: 108px;width: 108px;display: flex;align-items: center;justify-content: center;}
+.order-col .order-box .details .left h4 {font-weight: 500;margin-bottom: 5px;}
+.order-listing-container .order-col .order-box .timing h3 {font-size: 20px;margin-bottom: 2px;}
+.order-listing-container .order-col .order-box .timing label {display: flex;align-items: center;min-width: 50px;text-align: center;justify-content: center;font-size: 8px;border-radius: 9999px;height: 14px;color: #ffffff;background: #949494;padding: 1px 2px;text-transform: uppercase;}
+.order-listing-container .order-col .order-box .timing label.success {background: #3BCE62;}
+.order-listing-container .order-col .order-box .timing label.danger {background: #FF3355;}
+.order-listing-container .order-col .order-box .details .right p:first-child{white-space: nowrap;}
+
+@media screen and (max-width: 1750px) {
+    .order-page-bar .page-title {font-size: 24px;}
+    .order-page-bar .page-title .count {font-size: 18px;height: 40px;min-width: 40px;}
+    .order-page-bar .btn {min-width: 200px;}
+    .order-listing-container .order-col .order-box {padding: 10px 10px;}
+    .order-listing-container .order-col .order-box * {font-size: 13px;}
+    .order-listing-container .order-col .order-box .actions {padding-left: 10px;}
+    .order-listing-container .order-col .order-box .actions .btn {width: 100px;font-size: 10px !important;margin-left: 10px;flex: 0 0 100px;max-width: 100px;}
+    .order-listing-container .order-col .order-box .details{padding-right: 10px;padding-left: 10px;padding-bottom: 5px;padding-top: 5px;}
+    .order-listing-container .order-col .order-box .timing {flex: 0 0 50px;max-width: 50px;}
+    .order-listing-container .order-col .order-box .timing h3 {font-size: 14px;}
+    .order-listing-container .order-col .order-box .timing label {min-width: 40px;}
+    .order-listing-container .order-col .order-box .details  * {font-size: 12px;}
+}
+
+@media screen and (max-width: 1440px) {
+.order-listing-container .order-col .order-box .details * {
+    font-size: 11px;
+}
+}
+
+
+@media screen and (min-width: 1921px) {
+    .order-listing-container .order-row .order-col {
+        flex: 0 0 33.33% !important;
+        max-width: 33.33% !important;
+    }
+    .order-listing-container .order-col .order-box .actions {
+        display: block !important;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    
+    .order-listing-container .order-col .order-box .actions .btn {
+        width: 130px;
+        font-size: 12px;
+        margin-left: 0px;
+        margin-top: 10px;
+        flex: 0 0 130px;
+        max-width: 130px;
+    }
+    }

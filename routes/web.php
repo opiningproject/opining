@@ -102,7 +102,7 @@ Route::get('change-theme/{theme}', function ($currency) {
 Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // dashboard route
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    
+
     // Restaurant Menu Routes
     Route::group(['prefix' => '/menu'], function () {
 
@@ -156,7 +156,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
     // Restaurant Menu Routes
 
-    
+
 
     // Restaurant Setting Routes
     Route::group(['prefix' => '/settings'], function () {
@@ -219,6 +219,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/print-label/{order_id}', [OrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
+    Route::get('/orders-new/{date_filter?}', [OrdersController::class, 'newOrderPage'])->name('newOrderPage');
 
     // Archive Order Route
     Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');

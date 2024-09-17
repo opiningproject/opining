@@ -346,5 +346,13 @@ class OrdersController extends Controller
         }
     }
 
-
+    /**
+     * @param Request $request
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
+    public function newOrderPage(Request $request, $id = null)
+    {
+        return view('admin.orders.orders-new');
+    }
 }

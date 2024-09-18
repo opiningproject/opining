@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dish;
+use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
@@ -21,8 +23,50 @@ class HomeController extends Controller
     {
     }
 
-    public function dashboard() {
-        return view('admin.dashboard');
+    public function dashboard(Request $request) {
+        $startDate = Carbon::today();
+        $totalUser = User::where('created_at', '>=', $startDate)->count();
+        $newUsers = User::where('created_at', '>=', $startDate)->count();
+        $totalOrders = Order::where('created_at', '>=', $startDate)->count();
+        return view('admin.dashboard',['totalUser' => $totalUser, 'totalOrders' => $totalOrders, 'newUsers' => $newUsers]);
+    }
+
+    public function getDashboardStatistics(Request $request) {
+        $dateRange = $request->input('date_range');
+
+        switch($dateRange) {
+            case 'Today':
+                $startDate = Carbon::today();
+                break;
+            case 'Yesterday':
+                $startDate = Carbon::yesterday();
+                break;
+            case 'Last 7 days':
+                $startDate = Carbon::today()->subDays(6); // Includes today
+                break;
+            case 'Last 30 days':
+                $startDate = Carbon::today()->subDays(29); // Includes today
+                break;
+            default:
+                $startDate = null;
+        }
+
+        // Query users and orders based on the start date
+        if ($startDate) {
+            $totalUser = User::where('created_at', '>=', $startDate)->count();
+            $totalOrders = Order::where('created_at', '>=', $startDate)->count();
+            $newUsers = user::where('created_at', '>=', $startDate)->count();
+        } else {
+            $totalUser = User::count();
+            $newUsers = User::count();
+            $totalOrders = Order::count();
+        }
+
+        return response()->json([
+            'totalUser' => $totalUser,
+            'totalOrders' => $totalOrders,
+            'newUsers' => $newUsers
+        ]);
     }
 
     /**

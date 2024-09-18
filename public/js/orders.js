@@ -182,7 +182,12 @@ $(document).on('click','.order_details_button', function() {
 var page = 2;
 var isLoading = false;
 var endOfData = false;
-var lastPage = parseInt($('.last_page').html().trim()); // Adjust according to the last page number
+var lastPage = $('.last_page').html(); // Adjust according to the last page number
+
+if (lastPage) {
+    parseInt(lastPage.trim())
+}
+
 $(".all-orders-new").scroll(function () {
     if (endOfData || isLoading) return;
 

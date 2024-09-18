@@ -527,6 +527,52 @@ use App\Enums\RefundStatus;
                             </div>
                         </div>
                     </div>
+
+                    <div class="d-flex justify-content-end align-items-center pt-3">
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pagination-custom">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&gt;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <!-- Filter buttons -->
+                        <div class="filter-btn-group">
+                            <button type="button" class="btn">
+                                <img src="{{ asset(path: 'images/bike-white.svg') }}" 
+                                    alt="Bike"  />
+                            </button>
+
+                            <button type="button" class="btn">
+                            <img src="{{ asset(path: 'images/map-white.svg') }}" 
+                            alt="Bike"  />
+                            </button>
+
+                            <button type="button" class="btn">
+                            <img src="{{ asset(path: 'images/setting-white.svg') }}" 
+                            alt="Bike"  />
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </main>
         </div>

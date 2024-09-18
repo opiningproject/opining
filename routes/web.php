@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DomainSettingController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\MyWebsiteController;
+use App\Http\Controllers\Admin\NewOrdersController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OrdersController;
@@ -220,7 +221,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/print-label/{order_id}', [OrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
-    Route::get('/orders-new/{date_filter?}', [OrdersController::class, 'newOrderPage'])->name('newOrderPage');
+    Route::get('/orders-new/{date_filter?}', [NewOrdersController::class, 'index'])->name('newOrderPage');
 
     // Archive Order Route
     Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');

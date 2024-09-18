@@ -3,13 +3,12 @@
 
 <?php
 
-use App\Enums\OrderStatus;
-use App\Enums\OrderType;
-use App\Enums\PaymentStatus;
-use App\Enums\PaymentType;
-use App\Enums\RefundStatus;
-
-    ?>
+    use App\Enums\OrderStatus;
+    use App\Enums\OrderType;
+    use App\Enums\PaymentStatus;
+    use App\Enums\PaymentType;
+    use App\Enums\RefundStatus;
+?>
 <div class="main">
     <div class="main-view">
         <div class="container-fluid bd-gutter bd-layout">
@@ -18,7 +17,7 @@ use App\Enums\RefundStatus;
                 <div class="main-content food-order-main-content d-flex flex-column h-100 order-page">
                     <div
                         class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 order-page-bar">
-                        <h1 class="page-title me-auto">Orders <span class="count">14</span></h1>
+                        <h1 class="page-title me-auto">Orders <span class="count">{{ getOpenOrders() }}</span></h1>
                         <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                             <div class="header-filter-order d-flex align-items-center flex-wrap">
 
@@ -36,13 +35,6 @@ use App\Enums\RefundStatus;
                                     </div>
                                 </div>
 
-                                <!-- <form class="form col" action="" method="#">
-                                    <div class="input-group order-filters-search">
-                                        <input type="text" placeholder="Select Date For Filter" class="form-control"
-                                            id="expiry_date" aria-label="expiry_date" name="expiry_date" required>
-                                    </div>
-                                </form> -->
-
                                 <div class="select-options filter-options">
                                     <select class="form-control" id="filter-order-dropdown">
                                         <option value="" selected>Filter Orders</option>
@@ -58,516 +50,67 @@ use App\Enums\RefundStatus;
 
                     <div class="order-listing-container">
                         <div class="order-row">
-                            <div class="order-col">
+                            @foreach($allOrders as $key => $ord)
+                                <?php $userDetails = $ord->orderUserDetails; ?>
+                            <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
                                 <div class="order-box">
                                     <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
+                                        <h3>{{ date('H:i',strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes(45))) }}</h3>
+                                        <label class="success">{{ $ord->delivery_time }}</label>
                                     </div>
 
                                     <div class="details">
                                         <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
+                                            <h4>{{ $userDetails->order_name }}</h4>
+                                            @if ($ord->order_type == OrderType::Delivery)
+                                            <p class="mb-0">
+                                                <?php
+                                                echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                                                ?>
+                                            </p>
+                                                @else
+                                                <p class="mb-0">
+                                                {{ getRestaurantDetail()->rest_address }}
+                                                </p>
+                                                @endif
                                         </div>
 
                                         <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
+                                            <p class="mb-0">{{ date('d-m-y H:i',strtotime($ord->created_at)) }}</p>
+                                            <p class="mb-0">web #{{$ord->id}}</p>
                                         </div>
                                     </div>
-
+{{--                                    @dump($ord->status)--}}
                                     <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn btn-danger-outline">New Order</a>
+                                        <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
+                                        <a href="#" class="btn {{orderStatusBox($ord)->color }}">{{ orderStatusBox($ord)->text }}</a>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-danger">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="danger">TIME</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-warning">In Kitchen</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-success">Out for Delivery</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn btn-danger-outline">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-danger">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn btn-danger-outline">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-danger">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="danger">TIME</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-warning">In Kitchen</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-success">Out for Delivery</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn btn-danger-outline">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-danger">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn btn-danger-outline">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-danger">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="danger">TIME</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-warning">In Kitchen</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-success">Out for Delivery</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn btn-danger-outline">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-col">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3>23:10</h3>
-                                        <label class="success">ASAP</label>
-                                    </div>
-
-                                    <div class="details">
-                                        <div class="left">
-                                            <h4>Serdar Orman</h4>
-                                            <p class="mb-0">Tochtstraat 40, 3036sk</p>
-                                        </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">12-09-2024, 22:38</p>
-                                            <p class="mb-0">web #1022</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€15.59</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn outline-danger">New Order</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-end align-items-center pt-3">
                         <!-- Pagination -->
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination pagination-custom">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&lt;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&gt;</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            {{ $allOrders->links() }}
                         </nav>
 
                         <!-- Filter buttons -->
                         <div class="filter-btn-group">
                             <button type="button" class="btn">
-                                <img src="{{ asset(path: 'images/bike-white.svg') }}" 
+                                <img src="{{ asset(path: 'images/bike-white.svg') }}"
                                     alt="Bike"  />
                             </button>
 
                             <button type="button" class="btn">
-                            <img src="{{ asset(path: 'images/map-white.svg') }}" 
+                            <img src="{{ asset(path: 'images/map-white.svg') }}"
                             alt="Bike"  />
                             </button>
 
                             <button type="button" class="btn">
-                            <img src="{{ asset(path: 'images/setting-white.svg') }}" 
+                            <img src="{{ asset(path: 'images/setting-white.svg') }}"
                             alt="Bike"  />
                             </button>
                         </div>

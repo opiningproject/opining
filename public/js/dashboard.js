@@ -17,7 +17,7 @@ $(function () {
             },
             success: function(response) {
                 // Update the counts on the page with the returned data
-                $('#totalUser').text(response.totalUser);
+                // $('#totalUser').text(response.totalUser);
                 $('#totalOrders').text(response.totalOrders);
                 $('#newUsers').text(response.newUsers);
             }

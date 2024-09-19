@@ -230,3 +230,11 @@ function loadMoreData(currentPage, url) {
             $('#loader').hide();
         });
 }
+
+
+// new order page js code start
+$(document).on('click','.orderDetails', function() {
+    console.log("in");
+    $('.order-detail-popup').modal('show')
+})
+// orderDetails

@@ -491,7 +491,7 @@ color: #E41A1A;
 .order-listing-container {position: relative;}
 .order-listing-container .order-row {margin: 0px -5px;display: flex;flex-wrap: wrap;}
 .order-listing-container .order-row .order-col {padding: 0px 5px;flex: 0 0 50%;max-width: 50%;margin-bottom: 10px;}
-.order-listing-container .order-col .order-box {overflow: hidden;border: 1px solid #DBDBDB;background: #ffffff;border-radius: 16px;padding: 15px 15px;display: flex;}
+.order-listing-container .order-col .order-box {height: 100%;overflow: hidden;border: 1px solid #DBDBDB;background: #ffffff;border-radius: 16px;padding: 15px 15px;display: flex;}
 .order-listing-container .order-col .order-box * {font-size: 14px;font-weight: 300;color: #292929;}
 .order-listing-container .order-col .order-box .actions {margin-left: auto;display: flex;align-items: center;padding-left: 30px;}
 .order-listing-container .order-col .order-box .actions .btn {width: 150px;border-radius: 10px;border: 1px solid #000000;text-align: center;color: #727272;font-weight: 500;font-size: 16px;display: flex;align-items: center;justify-content: center;margin-left: 40px;flex: 0 0 150px;max-width: 150px;}
@@ -513,11 +513,11 @@ color: #E41A1A;
 .order-listing-container .order-col .order-box .timing label.success {background: #3BCE62;}
 .order-listing-container .order-col .order-box .timing label.danger {background: #FF3355;}
 .order-listing-container .order-col .order-box .details .right p:first-child{white-space: nowrap;}
-
-.order-page .pagination-custom {display: flex;gap: 5px;}
-.order-page .pagination-custom .page-item .page-link {border-radius: 10px;padding: 0px 5px;width: 50px;height: 50px;display: flex;align-items: center;justify-content: center;text-align: center;flex: 0 0 50px;max-width: 50px;background: #ffffff;border: 0px !important;box-shadow: none;font-size: 20px;outline: none;}
-.order-page .pagination-custom .page-item.active .page-link {background-color: #646464 !important;color: #ffffff !important;border: none;}
-.order-page .pagination-custom .page-item .page-link:hover {background-color: #646464 !important;color: #ffffff !important;}
+.order-listing-container .order-col .order-box .details .left p {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
+.order-page .pagination-custom, .order-page .pagination {display: flex;gap: 5px;padding: 0px;}
+.order-page .pagination-custom .page-item .page-link, .order-page .pagination .page-item .page-link {border-radius: 10px;padding: 0px 5px;width: 50px;height: 50px;display: flex;align-items: center;justify-content: center;text-align: center;flex: 0 0 50px;max-width: 50px;background: #ffffff;border: 0px !important;box-shadow: none;font-size: 20px;outline: none;}
+.order-page .pagination-custom .page-item.active .page-link, .order-page .pagination .page-item.active .page-link {background-color: #646464 !important;color: #ffffff !important;border: none;}
+.order-page .pagination-custom .page-item .page-link:hover, .order-page .pagination .page-item .page-link:hover {background-color: #646464 !important;color: #ffffff !important;}
 .order-page .filter-btn-group {display: flex;gap: 10px;padding-left: 24px;}
 .order-page .filter-btn-group button{border-radius: 10px;margin-left: 0px;padding: 0px;background-color: #646464;color: white;width: 50px;height: 50px;display: flex;align-items: center;justify-content: center;border: 0px;}
 .order-page .filter-btn-group button:hover {background-color: #555;}
@@ -539,7 +539,7 @@ color: #E41A1A;
 
 @media screen and (max-width: 1440px) {
    .order-listing-container .order-col .order-box .details * {font-size: 11px;}
-   .order-page .pagination-custom .page-item .page-link {width: 40px;height: 40px;flex: 0 0 40px;max-width: 40px;font-size: 16px;}
+   .order-page .pagination-custom .page-item .page-link, .order-page .pagination .page-item .page-link {width: 40px;height: 40px;flex: 0 0 40px;max-width: 40px;font-size: 16px;}
    .order-page .filter-btn-group {padding-left: 20px;}
    .order-page .filter-btn-group button{width: 40px;height: 40px;}
 }

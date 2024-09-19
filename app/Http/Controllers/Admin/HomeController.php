@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dish;
@@ -25,7 +26,8 @@ class HomeController extends Controller
 
     public function dashboard(Request $request) {
         $startDate = Carbon::today();
-        $totalUser = User::where('created_at', '>=', $startDate)->count();
+//        $totalUser = User::where('created_at', '>=', $startDate)->count();
+        $totalUser = User::where('user_role', UserType::User)->count();
         $newUsers = User::where('created_at', '>=', $startDate)->count();
         $totalOrders = Order::where('created_at', '>=', $startDate)->count();
         return view('admin.dashboard',['totalUser' => $totalUser, 'totalOrders' => $totalOrders, 'newUsers' => $newUsers]);

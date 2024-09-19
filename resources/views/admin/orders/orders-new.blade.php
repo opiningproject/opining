@@ -83,7 +83,7 @@
 {{--                                    @dump($ord->status)--}}
                                     <div class="actions">
                                         <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="btn {{orderStatusBox($ord)->color }}">{{ orderStatusBox($ord)->text }}</a>
+                                        <button class="orderDetails btn {{orderStatusBox($ord)->color }}">{{ orderStatusBox($ord)->text }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +121,7 @@
         </div>
     </div>
     <!-- start footer -->
+    @include('admin.orders.order-detail-popup')
     @include('layouts.admin.footer_design')
     @include('admin.modals.change-order-status')
     <!-- end footer -->

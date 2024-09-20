@@ -16,9 +16,7 @@ class CheckMyFinanceValidate
      */
     public function handle(Request $request, Closure $next)
     {
-//        dd($request->get('myFinanceIsValidate'));
         if (Session::get('myFinanceIsValidate') == 1) {
-//            return redirect('payments');
             return $next($request);
 
         } else {

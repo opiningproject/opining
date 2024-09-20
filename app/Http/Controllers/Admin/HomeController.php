@@ -24,6 +24,10 @@ class HomeController extends Controller
     {
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function dashboard(Request $request) {
         $startDate = Carbon::today();
 //        $totalUser = User::where('created_at', '>=', $startDate)->count();
@@ -33,6 +37,10 @@ class HomeController extends Controller
         return view('admin.dashboard',['totalUser' => $totalUser, 'totalOrders' => $totalOrders, 'newUsers' => $newUsers]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getDashboardStatistics(Request $request) {
         $dateRange = $request->input('date_range');
 
@@ -55,15 +63,15 @@ class HomeController extends Controller
 
         // Query users and orders based on the start date
         if ($startDate) {
-            $totalUser = User::where('created_at', '>=', $startDate)->count();
-            $totalOrders = Order::where('created_at', '>=', $startDate)->count();
-            $newUsers = user::where('created_at', '>=', $startDate)->count();
+            $totalUser = User::where('user_role', UserType::User)->whereDate('created_at', $startDate)->count();
+            $totalOrders = Order::whereDate('created_at', $startDate)->count();
+            $newUsers = user::where('user_role', UserType::User)->whereDate('created_at',$startDate)->count();
+
         } else {
-            $totalUser = User::count();
-            $newUsers = User::count();
+            $totalUser = User::where('user_role', UserType::User)->count();
+            $newUsers = User::where('user_role', UserType::User)->count();
             $totalOrders = Order::count();
         }
-
         return response()->json([
             'totalUser' => $totalUser,
             'totalOrders' => $totalOrders,

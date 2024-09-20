@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Str;
 use Response;
 use Mail;
 use Carbon\Carbon;
@@ -38,14 +39,13 @@ class NewOrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
-        $orderDeliveryTime = 45;
-        $orders = Order::where('is_cart', '0')
+        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+       /* $orders = Order::where('is_cart', '0')
             ->where(function($query) {
                 $query->where('order_status', '<>', OrderStatus::Delivered)
                     ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
-            })->orderBy('id', 'desc');
-
-        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->orderBy('id', 'desc')->get();
+            })->orderBy('id', 'desc');*/
+        $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
 
@@ -70,19 +70,18 @@ class NewOrdersController extends Controller
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
 
-        $order = '';
-        $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
-        if (count($orders) > 0) {
-            if ($id) {
-                $order = Order::find($id);
+        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        if ($request->ajax()) {
+            $filters = $request->get('filters');
+            if ($request->has('search') && $request->search != null || !empty($filters)) {
+                $data = $this->orderSearchFilter($request);
             } else {
-                $order = $orders[0];
+                $data['orders'] = $orders;
+                $data['orderDeliveryTime'] = $orderDeliveryTime;
             }
+            return view('admin.orders.search-orders', ['orders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
         }
-//        if ($request->ajax()) {
-//            return view('admin.orders.orders-list', ['orders' => $orders, 'activeId' => $request->activeId ?? 0]);
-//        }
-        return view('admin.orders.orders-new', ['openOrders' => $openOrders, 'allOrders' => $orders,'order' => $order,'lastPage' => $orders->lastPage()]);
+        return view('admin.orders.orders-new', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
     }
 
     public function orderDetail(Request $request)
@@ -166,69 +165,203 @@ class NewOrdersController extends Controller
         return view('admin.orders.orders-print-label', ['order' => $order]);
     }
 
-    public function searchOrder(Request $request)
-    {
-        try {
-            $pageNumber = request()->input('page', 1);
-            $orderExist = false;
-            $orders = Order::orderBy('id', 'desc');
-//            $orders = Order::where('is_cart', '0')
-//                ->where(function($query) {
-//                    $query->where('order_status', '<>', OrderStatus::Delivered)
-//                        ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
-//                });
-            if ($request->has('search')) {
+//    public function searchOrder(Request $request)
+//    {
+//       try {
+//            $data = $this->orderSearch($request);
+//           $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+//            return view('admin.orders.search-orders', ['orders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
+//
+//        } catch (Exception $exception) {
+//            return response::json(['status' => 400, 'message' => $exception->getMessage()]);
+//        }
+//    }
+    public function orderSearchFilter(Request $request) {
+        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        $pageNumber = request()->input('page', 1);
+        $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
+        // Check if the search term and search option are present
+        if ($request->has('search') && $request->has('searchOption')) {
+            $searchType = $request->input('searchOption');
+            $searchTerm = $request->input('search');
+            // Handle different search types
+            switch ($searchType) {
+                case 'name':
+                    // Search by order user name
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('order_name', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
 
-                $orders->where(function ($query) use ($request) {
-                    $query->whereHas('orderUserDetails', function ($query) use ($request) {
-                        $query->where('order_name', 'like', '%' . $request->search . '%')
-                            ->orWhere('house_no', 'like', '%' . $request->search . '%')
-                            ->orWhere('street_name', 'like', '%' . $request->search . '%')
-                            ->orWhere('city', 'like', '%' . $request->search . '%');
-                    })
-                        ->orWhere('id', 'like', '%' . $request->search . '%');
-                });
+                case 'phone_number':
+                    // Search by phone number
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('order_contact_number', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
+
+                case 'order_number':
+                    // Search by order ID (number)
+                    $orders->where('id', 'like', '%' . $searchTerm . '%');
+                    break;
+
+                case 'address':
+                    // Search by address fields
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('house_no', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('city', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('zipcode', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
+
+                case 'zip_code':
+                    // Search by zip code
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('zipcode', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
+
+                case 'dish':
+                    // Search by product (assuming orders have a relation to products)
+                    $orders->whereHas('dishDetails', function ($query) use ($searchTerm) {
+                        $query->whereHas('dish', function ($subQuery) use ($searchTerm) {
+                            $subQuery->where('name_en', 'like', '%' . $searchTerm . '%');
+                            $subQuery->orWhere('name_nl', 'like', '%' . $searchTerm . '%');
+                        });
+                    });
+                    break;
+
+                default:
+                    // Default case for 'all' or when no valid search type is selected
+                    $orders->where(function ($query) use ($searchTerm) {
+                        $query->where('id', 'like', '%' . $searchTerm . '%')
+                            ->orWhereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                                $query->where('order_name', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('house_no', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('city', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('zipcode', 'like', '%' . $searchTerm . '%');
+                            });
+                    });
+                    break;
             }
-
-            $orderListIds = $orders->pluck('id')->toArray();
-            if (isset($request->activeId)) {
-                $orderExist = in_array($request->activeId, $orderListIds);
-            }
-            $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
-            return view('admin.orders.orders-list', ['orders' => $orders, 'activeId' => $request->activeId ?? 0, 'orderExist' => $orderExist]);
-
-        } catch (Exception $exception) {
-            return response::json(['status' => 400, 'message' => $exception->getMessage()]);
         }
+        $filters = $request->filters;
+
+        if (!empty($filters)) {
+            $orders->where(function($query) use ($filters) {
+                // Apply filters based on the selected checkboxes within a group
+//                if (in_array('online', $filters)) {
+//                    $query->orWhere('order_type', 'online');
+//                }
+//
+//                if (in_array('manual', $filters)) {
+//                    $query->orWhere('order_type', 'manual');
+//                }
+
+                if (in_array('delivery', $filters)) {
+                    $query->orWhere('order_type', OrderType::Delivery);
+                }
+
+                if (in_array('takeaway', $filters)) {
+                    $query->orWhere('order_type', OrderType::TakeAway);
+                }
+
+                if (in_array('open', $filters)) {
+                    $query->orWhere('order_status', '!=', OrderStatus::Delivered);
+                }
+
+                if (in_array('delivered', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::Delivered);
+                }
+            });
+        }
+        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+
+        return [
+            'orders' => $orders
+        ];
     }
+
+    public function filterOrders($request)
+    {
+        $pageNumber = request()->input('page', 1);
+        $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
+        $filters = $request->filters;
+
+        if (!empty($filters)) {
+            $orders->where(function($query) use ($filters) {
+                // Apply filters based on the selected checkboxes within a group
+//                if (in_array('online', $filters)) {
+//                    $query->orWhere('order_type', 'online');
+//                }
+//
+//                if (in_array('manual', $filters)) {
+//                    $query->orWhere('order_type', 'manual');
+//                }
+
+                if (in_array('delivery', $filters)) {
+                    $query->orWhere('order_type', OrderType::Delivery);
+                }
+
+                if (in_array('takeaway', $filters)) {
+                    $query->orWhere('order_type', OrderType::TakeAway);
+                }
+
+                if (in_array('open', $filters)) {
+                    $query->orWhere('order_status', '!=', OrderStatus::Delivered);
+                }
+
+                if (in_array('delivered', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::Delivered);
+                }
+            });
+        }
+
+        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        return [
+            'orders' => $orders,
+        ];
+    }
+
+
 
     public function getRealTimeOrder(Request $request)
     {
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
-            $html = '<div class="foodorder-box-list-item d-flex order-' . $orders->id . '"
-                     onclick="orderDetail(' . $orders->id . ')" id="order-' . $orders->id . '" data-id="' . $orders->id . '">
-                    <div class="details w-100 d-flex flex-column gap-3">
-                        <div class="title">' . trans('rest.food_order.order') . ' #'. $orders->id .' | ' . $orders->created_at . '</div>
-                        <div class="icontext-grp d-flex align-items-center justify-content-between">
-                            <div class="icontext-item d-flex align-items-center gap-1">
-                                <img src="' . asset('images/fork-knife-icon.svg') . '"
-                                     class="img-fluid svg" alt="" height="22" width="22">
-                                <div class="text">' . ($orders->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup')) . '</div>
-                            </div>
-                            <div class="icontext-item d-flex align-items-center gap-1">
-                                <img src="' . asset('images/hand-money-icon.svg') . '" alt=""
-                                     class="img-fluid svg" width="30" height="29">
-                                <div class="text total_amount">€' . number_format($orders->total_amount, 2) . '</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="time d-flex flex-column align-items-center justify-content-center text-center gap-1 order-status-' . $orders->id . '">
-                        <img src="' . ($orders->order_status >= OrderStatus::Delivered ? asset('images/clock-gray.svg') : asset('images/clock-gray.svg')) . '"
-                            alt="time" class="img-fluid svg" width="29" height="29">
-                        <div class="text">' . $orders->delivery_time . '</div>
-                    </div>
-                </div>';
+            $userDetails = $orders->orderUserDetails;
+            $address = getRestaurantDetail()->rest_address;
+            if ($orders->order_type == OrderType::Delivery) {
+                $address = $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+            }
+            $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+            $html = '<div class="order-col">
+                                <div class="order-box">
+                                    <div class="timing">
+                                        <h3>'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->created_at)->addMinutes($orderDeliveryTime)))  .'</h3>
+                                        <label class="success">'. $orders->delivery_time .'</label>
+                                    </div>
+
+                                    <div class="details">
+                                        <div class="left">
+                                            <h4>'. $userDetails->order_name .'</h4>
+                                            <p class="mb-0">'. $address .'</p>
+                                        </div>
+
+                                        <div class="right text-end ps-2">
+                                            <p class="mb-0">'. date('d-m-y H:i',strtotime($orders->created_at)) .'</p>
+                                            <p class="mb-0">Web #'. $orders->id .'</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="actions">
+                                        <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
+                                        <a href="#" class="orderDetails btn '. orderStatusBox($orders)->color .'">'. orderStatusBox($orders)->text .'</a>
+                                    </div>
+                                </div>
+                            </div>';
             return response()->json(['data' => $html]);
 
         } catch (Exception $exception) {
@@ -254,14 +387,5 @@ class NewOrdersController extends Controller
         }catch (Exception $exception){
             return response::json(['status' => 400, 'message' => '']);
         }
-    }
-    /**
-     * @param Request $request
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
-    public function newOrderPage(Request $request, $id = null)
-    {
-        return view('admin.orders.orders-new');
     }
 }

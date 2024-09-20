@@ -182,6 +182,7 @@ return [
         'delivered_orders' => 'Delivered Orders',
         'filter_orders' => 'Filter Orders',
         'create_order' => 'Create Order',
+        'orders' => 'Orders',
 	],
 
     'archive_order' => [

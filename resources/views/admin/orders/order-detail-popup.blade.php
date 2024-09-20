@@ -1,4 +1,4 @@
-<div class="modal fade custom-modal order-detail-popup" style="display: block !important;opacity: 1"
+<div class="modal fade custom-modal order-detail-popup"
     id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

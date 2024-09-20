@@ -15,7 +15,24 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+
+/* Route::domain('gomeal.urtestsite.com')->group(function () {
+    dd('gomeal.urtestsite.com');
+});
+
+Route::domain('opining.urtestsite.com')->group(function () {
+    dd('opining.urtestsite.com');
+});
+ */
+
+/*  Route::get('/her', function () {
+    dd(\App\Models\User::all());
+    return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+}); */
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +55,18 @@ Route::get('/_debugbar/assets/javascript', [
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@js'
 ]);
 
-Route::get('/clear-all', function () {
+Route::middleware(['identifyTenant'])->group(function () {
+
+Route::get('/clear-all', function (Request $request) {
+
+    /* App\Models\Tenant::all()->runForEach(function () {
+        App\Models\User::factory()->create();
+    }); */
+
+/*     $getHost = $request->getHost();
+    print_r($getHost);
+    print_r(tenant('id'));
+    dd('here'); */
     Artisan::call('cache:clear');
 
     Artisan::call('config:clear');
@@ -50,9 +78,17 @@ Route::get('/clear-all', function () {
     echo "All cache/config/view/route cleared...";
 });
 
+});
+
 Route::get('/', function () {
     return redirect()->route('home');
 });
+
+
+Route::get('/panel-registration', [MainController::class, 'panelRegistration'])->name('panelRegistration');
+Route::post('/storePanelRegistration', [MainController::class, 'storePanelRegistration'])->name('storePanelRegistration');
+
+
 
 Route::post('/paymentCallback', [App\Http\Controllers\User\WebhookController::class, 'paymentCallback']);
 
@@ -76,6 +112,8 @@ Route::middleware(['localization'])->group(function () {
     });
 
     Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
+
+
 
     Route::get('email/verify/{id}', [App\Http\Controllers\User\VerificationController::class, 'verify'])->name('verification.verify');
     Route::post('/favorite', [App\Http\Controllers\User\DishController::class, 'favorite']);
@@ -172,7 +210,10 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
 
     // Domain Setting route
-    Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index');
+    /* Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index'); */
+ 
+    Route::resource('/domain-setting', DomainSettingController::class);
+
     // Domain Setting route
 
     Route::resource('/banners', BannerController::class);

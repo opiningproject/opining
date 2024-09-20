@@ -22,13 +22,44 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
+
+
+     protected function mapWebRoutes()
+{
+    foreach ($this->centralDomains() as $domain) {
+        Route::middleware('web')
+            ->domain($domain)
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+}
+protected function mapApiRoutes()
+{
+    foreach ($this->centralDomains() as $domain) {
+        Route::prefix('api')
+            ->domain($domain)
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+}
+protected function centralDomains(): array
+{
+    return config('tenancy.central_domains');
+}
+
+
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
-
+/*         $this->configureRateLimiting(); */
         $this->routes(function () {
+
+            $this->mapApiRoutes();
+            $this->mapWebRoutes();
+
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
@@ -36,5 +67,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+    
+
     }
 }

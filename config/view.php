@@ -28,6 +28,7 @@ return [
     |
     */
 
+<<<<<<< HEAD
   /*   'compiled' => env(
         'VIEW_COMPILED_PATH',
         realpath(storage_path('framework/views'))
@@ -35,4 +36,12 @@ return [
 
     'compiled' => storage_path('framework/views')
 
+=======
+/*     'compiled' => env(
+        'VIEW_COMPILED_PATH',
+        realpath(storage_path('framework/views'))
+    ),
+ */
+    'compiled' => storage_path('framework/views')
+>>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
 ];

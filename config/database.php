@@ -42,7 +42,11 @@ return [
             'host' => 'localhost',
             'port' => '3306',
             'username' => 'root',
+<<<<<<< HEAD
             'password' => 'inx@!123',
+=======
+            'password' => 'Dell@1234',
+>>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

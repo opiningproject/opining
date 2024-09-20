@@ -48,48 +48,47 @@ function orderDetail(id) {
 var start = moment().subtract(10, 'days');
 var end = moment();
 
-var dateRange =''
+var dateRange = ''
 $('#expiry_date').daterangepicker({
     startDate: start,
     endDate: end,
     maxDate: moment(),
     ranges: {
-       'Today': [moment(), moment()],
-       'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-       'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-       'This Month': [moment().startOf('month'), moment().endOf('month')],
-       'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
     }
 });
 
 $('#expiry_date').val('')
-$('#expiry_date').attr('placeholder','Select Date Range')
+$('#expiry_date').attr('placeholder', 'Select Date Range')
 
-$('#expiry_date').on('apply.daterangepicker', function(ev, picker) {
+$('#expiry_date').on('apply.daterangepicker', function (ev, picker) {
 
     dateRange = $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
 
     var start_date = picker.startDate.format('DD-MM-YYYY');
     var end_date = picker.endDate.format('DD-MM-YYYY');
 
-    value = "start_date="+ start_date + "&end_date=" + end_date;
+    value = "start_date=" + start_date + "&end_date=" + end_date;
 
     window.location.href = `${baseURL}/orders?${value}`;
 });
 
-$('#expiry_date').on('cancel.daterangepicker', function(ev, picker) {
+$('#expiry_date').on('cancel.daterangepicker', function (ev, picker) {
     $(this).val('');
 });
 
-$('#clear').on("click",function()
-{
+$('#clear').on("click", function () {
     window.location.href = `${baseURL}/orders`;
 });
 
- // Get start and end dates from URL parameters
- var startDate = getUrlParameter('start_date');
- var endDate = getUrlParameter('end_date');
+// Get start and end dates from URL parameters
+var startDate = getUrlParameter('start_date');
+var endDate = getUrlParameter('end_date');
 
 if (startDate && endDate) {
     $('#expiry_date').data('daterangepicker').setStartDate(moment(startDate, 'DD-MM-YYYY'));
@@ -115,9 +114,9 @@ $(document).on('click', '#toggleOrderList', function () {
     if (upArrow.style.display === 'none') {
         upArrow.style.display = 'block';
         downArrow.style.display = 'none';
-        $('.footer-box-main-orderlist-header').css({'border-bottom':'1px solid var(--theme-gray2)','padding':'0 0 15px'})
+        $('.footer-box-main-orderlist-header').css({ 'border-bottom': '1px solid var(--theme-gray2)', 'padding': '0 0 15px' })
     } else {
-        $('.footer-box-main-orderlist-header').css({'border-bottom':'0','padding':'0'})
+        $('.footer-box-main-orderlist-header').css({ 'border-bottom': '0', 'padding': '0' })
         upArrow.style.display = 'none';
         downArrow.style.display = 'block';
     }
@@ -134,12 +133,12 @@ $(document).on('click', '#toggleTotal', function () {
     if (upArrow.style.display === 'none') {
         upArrow.style.display = 'block';
         downArrow.style.display = 'none';
-        $('.footer-main-total-header').css({'border-bottom':'1px solid var(--theme-gray2)','padding':'0 0 15px'})
-        $('.footer-main-total-footer').css({'display':'block'})
+        $('.footer-main-total-header').css({ 'border-bottom': '1px solid var(--theme-gray2)', 'padding': '0 0 15px' })
+        $('.footer-main-total-footer').css({ 'display': 'block' })
 
     } else {
-        $('.footer-main-total-header').css({'border-bottom':'0','padding':'0'})
-        $('.footer-main-total-footer').css({'display':'none'})
+        $('.footer-main-total-header').css({ 'border-bottom': '0', 'padding': '0' })
+        $('.footer-main-total-footer').css({ 'display': 'none' })
         upArrow.style.display = 'none';
         downArrow.style.display = 'block';
     }
@@ -167,7 +166,7 @@ $('#order-tabs-dropdown').on('change', function () {
 // })
 
 // notification popup click event code.
-$(document).on('click','.order_details_button', function() {
+$(document).on('click', '.order_details_button', function () {
     var urlLastElement = document.location.pathname
     if (urlLastElement == '/orders') {
         let id = $(this).attr("data-id");
@@ -206,11 +205,11 @@ function loadMoreData(currentPage, url) {
     $.ajax({
         url: url + '?page=' + currentPage,
         type: "GET",
-        beforeSend: function() {
+        beforeSend: function () {
             $('#loader').show();
         }
     })
-        .done(function(data) {
+        .done(function (data) {
             if (!data || data.trim().length === 0) {
                 $('#loader').hide();
                 $('#end-of-data').show();
@@ -224,9 +223,28 @@ function loadMoreData(currentPage, url) {
             isLoading = false; // Reset loading state
             $('#loader').hide();
         })
-        .fail(function(jqXHR, textStatus) {
+        .fail(function (jqXHR, textStatus) {
             console.error('Failed to load data:', textStatus);
             isLoading = false;
             $('#loader').hide();
         });
 }
+
+
+// new order page js code start
+$(document).on('click', '.orderDetails', function () {
+    console.log("in");
+    $('.order-detail-popup').modal('show')
+})
+// orderDetails
+
+$(document).ready(function () {
+    // On click of a radio button label
+    $('.status-option input[type="radio"]').change(function () {
+        // Remove 'active' class from all status options
+        $('.status-option').removeClass('active');
+
+        // Add 'active' class to the parent of the clicked radio button
+        $(this).closest('.status-option').addClass('active');
+    });
+});

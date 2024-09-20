@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         browner12\helpers\HelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        App\Providers\TenancyServiceProvider::class,
 
     ])->toArray(),
 

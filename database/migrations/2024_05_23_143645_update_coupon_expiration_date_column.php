@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('coupons', function (Blueprint $table) {
+   /*      Schema::table('coupons', function (Blueprint $table) {
             $table->renameColumn('expiry_date', 'start_expiry_date');
         });
         Schema::table('coupons', function (Blueprint $table) {
             $table->date('end_expiry_date')->after('start_expiry_date')->nullable();
+        }); */
+
+        Schema::table('coupons', function (Blueprint $table) {
+            $table->renameColumn('expiry_date', 'start_expiry_date');
+            $table->date('end_expiry_date')->after('start_expiry_date')->nullable();
         });
+
     }
 
     /**

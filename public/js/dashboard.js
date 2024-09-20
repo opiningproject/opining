@@ -1,13 +1,15 @@
 $(function () {
     $('.dropdown-menu a').on('click', function(e) {
-        // console.log("innn");
-        e.preventDefault(); // Prevent the default link behavior
+        e.preventDefault();
 
+        var currentText = $('.dropdown-toggle').text().trim();
         var selectedText = $(this).text().trim();
+
         $('.dropdown-toggle').text(selectedText);
 
+        $(this).text(currentText);
+
         // Send the selected date range to the backend via AJAX
-        // dashboard/data
         console.log("baseURL + 'dashboard/data'", baseURL + '/dashboard/data')
         $.ajax({
             url: baseURL + '/dashboard/statistics', // Route to fetch data
@@ -19,7 +21,7 @@ $(function () {
                 // Update the counts on the page with the returned data
                 // $('#totalUser').text(response.totalUser);
                 $('#totalOrders').text(response.totalOrders);
-                $('#newUsers').text(response.newUsers);
+                $('.newUsers').text(response.newUsers);
             }
         });
     });

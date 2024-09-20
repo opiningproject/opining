@@ -393,8 +393,8 @@ padding: 12px;
     .dashboard-inn-box .dt-box h3{
 font-size: 20px;
 text-transform: capitalize;
-margin-bottom: 15px; 
-font-weight: 400;   
+margin-bottom: 15px;
+font-weight: 400;
 }
 
     .dashboard-inn-box .dt-box h4{
@@ -548,4 +548,18 @@ color: #E41A1A;
     .order-listing-container .order-row .order-col {flex: 0 0 33.33% !important;max-width: 33.33% !important;}
     .order-listing-container .order-col .order-box .actions {display: block !important;padding-left: 20px;padding-top: 10px;}
     .order-listing-container .order-col .order-box .actions .btn {width: 130px;font-size: 12px;margin-left: 0px;margin-top: 10px;flex: 0 0 130px;max-width: 130px;}
+}
+
+.dropdown-menu {
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: none;
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu li input[type="checkbox"] {
+    margin-right: 5px;
 }

@@ -222,6 +222,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
     Route::get('/orders-new/{date_filter?}', [NewOrdersController::class, 'index'])->name('newOrderPage');
+    Route::post('/orders/getNewRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
+    Route::post('/orders-new/search-order', [NewOrdersController::class, 'searchOrder']);
 
     // Archive Order Route
     Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');

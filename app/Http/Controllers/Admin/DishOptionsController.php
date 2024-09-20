@@ -159,7 +159,6 @@ class DishOptionsController extends Controller
         try {
             $optionCategory = DishCategoryOption::find($id);
             if($optionCategory){
-//                dd($ingredient);
 
                 $optionCategory->name_en = $request->name_en;
                 $optionCategory->name_nl = $request->name_nl;

@@ -5,7 +5,6 @@ use App\Enums\OrderType;
 
 ?>
 
-{{--@dd($orders)--}}
 @if(count($orders))
     @foreach($orders as $key => $order)
             <?php

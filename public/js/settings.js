@@ -314,3 +314,13 @@ $(document).ready(function() {
         });
     });
 });
+
+$(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var openTab = urlParams.get('openTab');
+
+    if (openTab === 'domainSetting') {
+        $('#domainSetting-tab').tab('show');
+        $('.domainSetting-tab').click();
+    }
+});

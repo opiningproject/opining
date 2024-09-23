@@ -10,7 +10,7 @@
                 </div>
             </div>
 
-            <div class="modal-body pt-1">
+            <div class="modal-body pt-1 pb-0">
                 <div class="border-0 d-flex align-items-center justify-content-between mb-0">
 
                     <div class="order-status">
@@ -72,11 +72,81 @@
                     </ul>
 
                     <!-- Tab Content -->
-                    <div class="tab-content px-0">
+                    <div class="tab-content px-0 pb-0">
                         <!-- Content for Tab 1 -->
                         <div class="tab-pane fade show active" id="content-1" role="tabpanel" aria-labelledby="tab-1">
-                            <h4>Tab 1 Content</h4>
-                            <p>This is the content for Tab 1.</p>
+                            <div class="row">
+                                <div class="col-lg-5 mb-3">
+                                    <div class="table-content">
+                                        <table>
+                                            <tr>
+                                                <th>Name</th>
+                                                <td>Serdar Orman</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Adress</th>
+                                                <td>Tochtstraat 40
+                                                    3036sk Rotterdam</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Phone</th>
+                                                <td>0614522453</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>E-mail</th>
+                                                <td>serdarorman74@gmail.com</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Order</th>
+                                                <td>Total €73.59 <br />Cash on Delivery</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Promo Code</th>
+                                                <td>
+                                                    <p class="text-uppercase">DISCOUNT10</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>NOTE</th>
+                                                <td>
+                                                    <p class="text-underline">Please Use the green doorbell.</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 mb-3">
+                                    <div class="timing-details mb-3">
+                                        <div class="timing-row">
+                                            <label>Wished Time</label>
+                                            <div class="timing-col">
+                                                <div class="t-box bg-transperent"></div>
+                                                <div class="text-uppercase">ASAP</div>
+                                                <div class="t-box bg-transperent"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="timing-row">
+                                            <label>Wished Time</label>
+                                            <div class="timing-col">
+                                                <div class="t-box">-5</div>
+                                                <div class="text-uppercase">ASAP</div>
+                                                <div class="t-box">+5</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-map">
+                                        <img src="images/tab-map.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Content for Tab 2 -->
                         <div class="tab-pane fade" id="content-2" role="tabpanel" aria-labelledby="tab-2">

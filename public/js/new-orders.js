@@ -100,7 +100,6 @@ $(function () {
                 datatype: 'json',
                 success: function (response) {
                     $('.orderList').html(response);
-                    $('.foodorder-box-details').html('');
                 },
                 error: function (response) {
                     var errorMessage = JSON.parse(response.responseText).message;

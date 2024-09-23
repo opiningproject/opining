@@ -21,7 +21,7 @@
                                         <div class="text-right d-flex align-items-center justify-content-end gap-3">
                                             <div class="domain-details">
                                                 <a href="#" class="m-url">www.salerno.nl</a>
-                                                <a href="#">domain settings</a>
+                                                <a href="{{ route('settings', ['openTab' => 'domainSetting']) }}">domain settings</a>
                                             </div>
 
                                             <div class="icon-link">

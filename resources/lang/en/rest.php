@@ -27,6 +27,7 @@ return [
         'all' => 'All',
         'sales_channels' => 'Sales Channels',
         'my_website' => 'My Website',
+        'deliverers' => 'Deliverers',
 	],
 
 	'menu' => [
@@ -419,6 +420,11 @@ return [
             'delete_message' => 'Are you sure you want to delete this banner?',
             'alert_message' => 'There are dishes added to this ingredients. Please remove them to delete this ingredient.',
         ],
+
+        'deliverer' => [
+            'delete_message' => 'Are you sure you want to delete this deliverer?',
+            'alert_message' => 'There are orders added to this deliverer.',
+        ],
 	],
 
 	'button'=> [
@@ -495,6 +501,19 @@ return [
         'banner_status_success' => 'Banner Status Updated Successfully',
         'one_banner_active' => 'At least one banner must be active.',
         'one_banner_added' => 'at least one banner must be exist.',
-	],
 
+        'deliverer_add_success' => 'Deliverer Added Successfully',
+        'deliverer_update_success' => 'Deliverer Updated Successfully',
+        'deliverer_status_success' => 'Deliverer status updated successfully',
+        'deliverer_delete_success' => 'Deliverer Deleted Successfully',
+
+    ],
+    'deliverers' => [
+        'title' => 'Deliverers',
+        'first_name' => 'First Name',
+        'last_name' => 'Last Name',
+        'email' => 'Email',
+        'phone' => 'Phone Number',
+        'status' => 'Status',
+    ],
 ];

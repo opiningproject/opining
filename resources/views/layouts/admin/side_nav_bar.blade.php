@@ -127,6 +127,20 @@
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.user_chat') }}</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('deliverers.index') }}"
+                                        class="nav-link {{ activeMenu('deliverers') }} align-middle">
+                                        <div class="icon-span">
+                                            <img src="{{ asset('images/admin-menu-icons/chat-gray.svg') }}"
+                                                class="svg actual" height="22" width="22" />
+
+                                            <img src="{{ asset('images/admin-menu-icons/chat-black.svg') }}"
+                                                class="svg hoverable" height="22" width="22" />
+                                        </div>
+                                        <span
+                                            class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.deliverers') }}</span>
+                                    </a>
+                                </li>
 
                                 <label class="menu-label">{{ trans('rest.sidebar.sales_channels') }}</label>
 

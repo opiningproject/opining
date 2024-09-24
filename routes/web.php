@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DeliverersController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\DishOptionCategoryController;
 use App\Http\Controllers\Admin\DishOptionsController;
@@ -228,6 +229,12 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::post('/orders-new/search-order', [NewOrdersController::class, 'searchOrder']);
     Route::get('/orders/order-detail-new/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
     Route::get('/orders/change-status-new/{id}', [NewOrdersController::class, 'changeStatusNew']);
+
+//    Route::get('/deliverers', [DeliverersController::class, 'Index'])->name('deliverers');
+//    Route::post('/save-deliverers', [DeliverersController::class, 'store'])->name('saveDeliverers');
+    Route::resource('deliverers', DeliverersController::class);
+    Route::post('deliverers/status-change', [DeliverersController::class, 'changeStatus']);
+
 
     // Archive Order Route
     Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');

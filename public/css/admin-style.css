@@ -1237,6 +1237,20 @@ form .prev-input-group .input-group-icon svg {
     width: 100%;
 }
 
+.delivery-row .delivery-col {
+    flex: 0 0 22%;
+    max-width: 22%;
+}
+
+.delivery-row .delivery-btnCol {
+    flex: 0 0 12%;
+    max-width: 12%;
+}
+
+.delivery-row .delivery-btnCol button {
+    width: 100%;
+}
+
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link .icon-span {
     width: 22px !important;
     flex: 0 0 22px;
@@ -1275,6 +1289,18 @@ form .prev-input-group .input-group-icon svg {
         flex: 0 0 20%;
         max-width: 20%;
     }
+
+    .delivery-row .delivery-col {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    .delivery-row .delivery-btnCol {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+
 }
 
 .horizontal_tab_setting {

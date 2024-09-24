@@ -561,7 +561,7 @@ if (!function_exists('getDishOptionCategoryName')) {
 
             foreach ($optionData as $key => $optionCategory) {
                 $price = $optionCategory->price;
-                $ingredients .= "<li>+" .$optionCategory->name. "(€" .number_format($price, 2) . ")" . "</li>";
+                $ingredients .= "<li><span class='plus'>+</span>" .$optionCategory->name. "(€" .number_format($price, 2) . ")" . "</li>";
             }
         }
         return trim($ingredients, ', ');

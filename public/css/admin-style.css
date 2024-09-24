@@ -1806,19 +1806,19 @@ form .prev-input-group .input-group-icon svg {
 }
 
 .order-listing-container .order-col .order-box .actions .btn {
-    width: 150px;
+    width: 160px;
     border-radius: 10px;
     border: 1px solid #000000;
     text-align: center;
     color: #727272;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 40px;
-    flex: 0 0 150px;
-    max-width: 150px;
+    flex: 0 0 160px;
+    max-width: 160px;
 }
 
 .order-listing-container .order-col .order-box .actions .btn:hover {
@@ -2271,10 +2271,43 @@ form .prev-input-group .input-group-icon svg {
     font-weight: 500;
 }
 
+.dish-ing {
+    font-weight: 400 !important;
+}
+
 .items-in-row .price {
     font-weight: 600;
     font-size: 15px;
     min-width: 150px;
+}
+.items-in-row .item-option h5 {
+    font-size: 16px;
+}
+.items-in-row .item-option h6 {
+    font-size: 14px;
+    font-weight: 600;
+}
+.items-in-row .item-option ul li {
+    font-weight: 400;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.dish-details-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px -20px;
+}
+.dish-details-row  .ord_listing {
+flex: 0 0 50%;
+max-width: 50%;
+margin-bottom: 40px !important;
+}
+
+.items-in-row .item-option ul li span {
+flex: 0 0 20px;
+max-width: 20px;
 }
 
 .order-detail-popup .tab-pane {
@@ -2307,6 +2340,7 @@ form .prev-input-group .input-group-icon svg {
 .order-detail-popup .table-content table th,
 .order-detail-popup .table-content table td {
     padding: 10px 4px;
+    vertical-align: top;
 }
 
 .order-detail-popup .table-content table th {
@@ -2349,6 +2383,9 @@ form .prev-input-group .input-group-icon svg {
     color: #000000;
     font-weight: 500;
     height: 30px;
+    border: 0px;
+    box-shadow: none;
+    outline: none;
 }
 
 .timing-details .timing-row .timing-col .t-box.bg-transperent {

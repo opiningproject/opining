@@ -2518,13 +2518,13 @@ form .prev-input-group .input-group-icon svg {
     padding-left: 30px;
     cursor: pointer;
   }
-  
+
   .header-filter-order .order-filter .checkbox-label input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
-  
+
   .header-filter-order .order-filter .checkmark {
     position: absolute;
     top: 0;
@@ -2535,21 +2535,21 @@ form .prev-input-group .input-group-icon svg {
     border: 1px solid #000000;
     border-radius: 4px;
   }
-  
+
   .header-filter-order .order-filter .checkbox-label input:checked ~ .checkmark {
     background-color: #000000;
   }
-  
+
   .header-filter-order .order-filter .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   .header-filter-order .order-filter .checkbox-label input:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   .header-filter-order .order-filter .checkbox-label .checkmark:after {
     left: 7px;
     top: 3px;

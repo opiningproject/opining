@@ -25,7 +25,7 @@
                                             </div>
 
                                             <div class="icon-link">
-                                                <img src="images/link-icon.svg" alt="" width="47"
+                                                <img src="{{asset('images/link-icon.svg')}}" alt="" width="47"
                                                      height="47" />
                                             </div>
                                         </div>

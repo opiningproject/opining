@@ -221,9 +221,13 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/print-label/{order_id}', [OrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
+
+    // New Orders Controller
     Route::get('/orders-new/{date_filter?}', [NewOrdersController::class, 'index'])->name('newOrderPage');
     Route::post('/orders/getNewRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
     Route::post('/orders-new/search-order', [NewOrdersController::class, 'searchOrder']);
+    Route::get('/orders/order-detail-new/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
+    Route::get('/orders/change-status-new/{id}', [NewOrdersController::class, 'changeStatusNew']);
 
     // Archive Order Route
     Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');

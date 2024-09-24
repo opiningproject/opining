@@ -87,33 +87,22 @@ class NewOrdersController extends Controller
     public function orderDetail(Request $request)
     {
         $order = Order::find($request->order_id);
+        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
 
-        return view('admin.orders.order-detail', ['order' => $order]);
+//        return view('admin.orders.order-detail-popup', ['order' => $order]);
+        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime ])->render();
+
+        return response()->json(['status' => 1, 'data' =>  $orderDetailHTML, 'order' => $order]);
     }
 
-    public function changeStatus(Request $request)
+    public function changeStatusNew(Request $request)
     {
         $order = Order::find($request->id);
-
         $order = getOrderStatus($order);
         $orderStatus = 0;
-        $clok_gray_svg = '';
         if ($order->save()) {
             $order->user->notify(new DeliveryTypeUpdate($order));
 //            $this->sendMail($order);
-
-            if($order->order_status == OrderStatus::Delivered) {
-
-                $delivery_time = $order->delivery_time ?? 'ASAP';
-                $clok_gray_svg = '<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="Group 3113">
-                <circle id="Ellipse 91" cx="14.5" cy="14.5" r="14.5" fill="#949494"/>
-                <path id="Line 85" d="M15 9V15" stroke="#292929" stroke-width="2" stroke-linecap="round"/>
-                <path id="Line 86" d="M19.0859 18.6406L15.0017 14.9959" stroke="#292929" stroke-width="2" stroke-linecap="round"/>
-                </g>
-                </svg><div class="text">'.$delivery_time.'</div>';
-                $orderStatus = OrderStatus::Delivered;
-            }
         }
         if ($order->order_type == "1") {
             $addTrackOrder = TrackOrder::create([
@@ -123,8 +112,9 @@ class NewOrdersController extends Controller
         }
         $orderData = Order::find($request->id);
         $trackOrderData = TrackOrder::where('order_id', $orderData->id)->where('order_status', $orderData->order_status)->first();
-        $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
-        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData ? $trackOrderData->created_at :'', 'updatedStatus' =>  $orderData->order_status, 'clok_gray_svg' => $clok_gray_svg]);
+//        $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
+//        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData ? $trackOrderData->created_at :'', 'updatedStatus' =>  $orderData->order_status, 'clok_gray_svg' => $clok_gray_svg]);
+        return response()->json(['status' => 1, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData ? $trackOrderData->created_at :'', 'updatedStatus' =>  $orderData->order_status]);
     }
 
     public function sendMail($order)

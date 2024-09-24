@@ -231,20 +231,3 @@ function loadMoreData(currentPage, url) {
 }
 
 
-// new order page js code start
-$(document).on('click', '.orderDetails', function () {
-    console.log("in");
-    $('.order-detail-popup').modal('show')
-})
-// orderDetails
-
-$(document).ready(function () {
-    // On click of a radio button label
-    $('.status-option input[type="radio"]').change(function () {
-        // Remove 'active' class from all status options
-        $('.status-option').removeClass('active');
-
-        // Add 'active' class to the parent of the clicked radio button
-        $(this).closest('.status-option').addClass('active');
-    });
-});

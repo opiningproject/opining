@@ -2,6 +2,7 @@
 
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
+use App\Enums\PaymentType;
 
 ?>
 
@@ -40,10 +41,9 @@ use App\Enums\OrderType;
                                 <p class="mb-0">Web #{{$ord->id}}</p>
                             </div>
                         </div>
-                        {{--                                    @dump($ord->status)--}}
                         <div class="actions">
-                            <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                            <button class="orderDetails btn {{orderStatusBox($ord)->color }}">{{ orderStatusBox($ord)->text }}</button>
+                            <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}</h5>
+                            <button class="orderDetails btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})" >{{ orderStatusBox($ord)->text }}</button>
                         </div>
                     </div>
                 </div>

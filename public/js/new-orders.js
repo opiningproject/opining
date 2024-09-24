@@ -1,7 +1,19 @@
-// new order page js code start
-$(document).on('click', '.orderDetails', function () {
-    $('.order-detail-popup').modal('show')
-})
+// status-option-deliverers active inactive
+$(document).ready(function () {
+    // On click of a radio button label
+    $('.status-option-deliverers input[type="radio"]').change(function () {
+        $('.status-option-deliverers').removeClass('active');
+        $(this).closest('.status-option-deliverers').addClass('active');
+    });
+});
+
+// order-status-option active inactive
+$(document).ready(function () {
+    $(document).on('change', '.order-status-option input[type="radio"]', function () {
+        $('.order-status-option').removeClass('active');
+        $(this).closest('.order-status-option').addClass('active');
+    });
+});
 
 //show order setting popup
 $(document).on('click', '.order-setting', function () {
@@ -25,57 +37,6 @@ $(function () {
         search = $(this).val();
         searchOption = $('#order-tabs-dropdown').val();
         searchFilterAjax(search, searchOption, filters)
-        // if (search.length > 0) {
-        /*$.ajax({
-            url: baseURL + '/orders-new/search-order',
-            type: 'POST',
-            data: {
-                search,
-                searchOption,
-            },
-            datatype: 'json',
-            success: function (response) {
-                $('.orderList').html(response);
-                $('.foodorder-box-details').html('');
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message;
-                alert(errorMessage);
-            }
-        });*/
-        console.log("filters", filters)
-        /*$.ajax({
-            url: baseURL + '/orders-new', // Ensure this matches your route
-            type: 'GET',
-            data: {
-                search,
-                searchOption,
-                filters: filters.length > 0 ? filters : [],
-            },
-            success: function (response) {
-                $('.orderList').html(response); // Replace order list with filtered data
-            },
-            error: function (error) {
-                console.log('Error:', error);
-            }
-        });*/
-
-        /*}*/ /*else {
-            // If search is empty, load all orders
-            $.ajax({
-                url: baseURL + '/orders-new',
-                type: 'GET',
-                datatype: 'json',
-                success: function (response) {
-                    $('.orderList').html(response);
-                    $('.foodorder-box-details').html('');
-                },
-                error: function (response) {
-                    var errorMessage = JSON.parse(response.responseText).message;
-                    alert(errorMessage);
-                }
-            });
-        }*/
     });
 
     // Bind pagination link click event only once
@@ -115,10 +76,10 @@ $(function () {
             $('.order-filter input[type="checkbox"]:checked').each(function () {
                 filters.push($(this).attr('id')); // Get the ID of the checkbox (e.g., 'online', 'manual')
             });
-            // Send filters via AJAX
         } else {
             filters = []
         }
+        // Send filters via AJAX
         searchFilterAjax(search, searchOption, filters)
     });
 
@@ -141,5 +102,61 @@ $(function () {
         });
     }
 });
+
+function orderDetailNew(id) {
+    $.ajax({
+        url: baseURL + '/orders/order-detail-new/' + id,
+        type: 'GET',
+        success: function (response) {
+            if (response.status == 1) {
+                $('.order-detail-popup').html(response.data);
+                $('.order-detail-popup').modal('show')
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+function changeOrderStatusNew(order_id,order_status)
+{
+    console.log("123123",order_id,order_status)
+    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+
+    var orderId = order_id;
+    $.ajax({
+        url: baseURL+'/orders/change-status-new/'+ orderId,
+        type: 'GET',
+        success: function (response) {
+            console.log("response", response)
+            if (response.status == 1) {
+                $('.order-detail-popup').modal('hide')
+            }
+            // Add gray-clock icon without refresh
+            // if(response.clok_gray_svg) {
+            //     $('.order-status-' + id).empty();
+            //     $('.order-status-' + id).html(response.clok_gray_svg);
+            // }
+            if (response.orderStatus == "6") {
+                var currentOrderCount = $('.order-count').text();
+                console.log(currentOrderCount)
+                $('.order-count').html(currentOrderCount - 1);
+            }
+            // $('.foodorder-box-details').html(response.data);
+            //
+            // $(".foodorder-box-list div").removeClass("active");
+            // $('.order-' + id).addClass('active');
+            // window.history.pushState('','', baseURL + '/orders/'+id+'#order-'+id);
+            // $('#changeStatusModal').modal('hide');
+            socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
 
 

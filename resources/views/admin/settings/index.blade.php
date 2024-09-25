@@ -48,7 +48,7 @@
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="domainSetting-tab" data-bs-toggle="tab" data-bs-target="#domainSetting-tab-pane" type="button" role="tab"
+                                    <button class="nav-link domainSetting-tab" id="domainSetting-tab" data-bs-toggle="tab" data-bs-target="#domainSetting-tab-pane" type="button" role="tab"
                                             aria-controls="domainSetting-tab-pane" aria-selected="false">
                                         {{ trans('rest.settings.domain_setting.title') }}
                                     </button>

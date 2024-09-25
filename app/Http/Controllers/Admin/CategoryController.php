@@ -99,7 +99,6 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            dd($request->all());
             $category = Category::find($id);
         } catch (Exception $e) {
             return response::json(['status' => 0, 'message' => trans('rest.message.went_wrong')]);

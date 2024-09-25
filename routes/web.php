@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DeliverersController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\DishOptionCategoryController;
 use App\Http\Controllers\Admin\DishOptionsController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\DomainSettingController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\MyWebsiteController;
+use App\Http\Controllers\Admin\NewOrdersController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OrdersController;
@@ -102,7 +104,8 @@ Route::get('change-theme/{theme}', function ($currency) {
 Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // dashboard route
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    
+    Route::get('dashboard/statistics', [HomeController::class, 'getDashboardStatistics'])->name('dashboard.statistics');
+
     // Restaurant Menu Routes
     Route::group(['prefix' => '/menu'], function () {
 
@@ -156,7 +159,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
     // Restaurant Menu Routes
 
-    
+
 
     // Restaurant Setting Routes
     Route::group(['prefix' => '/settings'], function () {
@@ -219,6 +222,21 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/print-label/{order_id}', [OrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
+
+    // New Orders Controller
+    Route::get('/orders-new/{date_filter?}', [NewOrdersController::class, 'index'])->name('newOrderPage');
+    Route::post('/orders/getNewRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
+    Route::post('/orders-new/search-order', [NewOrdersController::class, 'searchOrder']);
+    Route::get('/orders/order-detail-new/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
+    Route::get('/orders/change-status-new/{id}', [NewOrdersController::class, 'changeStatusNew']);
+    Route::get('/add-deliverer/{order_id}/{deliverer_id}', [NewOrdersController::class, 'addDeliverer']);
+    Route::post('/save-order-setting', [NewOrdersController::class, 'updateOrderSetting'])->name('updateOrderSetting');
+
+//    Route::get('/deliverers', [DeliverersController::class, 'Index'])->name('deliverers');
+//    Route::post('/save-deliverers', [DeliverersController::class, 'store'])->name('saveDeliverers');
+    Route::resource('deliverers', DeliverersController::class);
+    Route::post('deliverers/status-change', [DeliverersController::class, 'changeStatus']);
+
 
     // Archive Order Route
     Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');

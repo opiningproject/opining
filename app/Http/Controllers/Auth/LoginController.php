@@ -43,10 +43,27 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+    protected function authenticated(Request $request, $user)
+    {   
+        $rediection = "dashboard";
+        if(!empty($user) && $user->user_role == UserType::SuperAdmin){
+            $rediection = "/super-admin/dashboard";
+        }
+        return redirect()->intended($rediection); // Adjust the route as needed
+    }
+
     protected function attemptLogin(Request $request)
     {
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        $userType = UserType::Admin;
+        if(!empty($user) && $user->user_role == UserType::SuperAdmin){
+            $userType =  UserType::SuperAdmin;
+        }
+
         return $this->guard()->attempt(
-            ['email' => $request->input('email'), 'password' => $request->input('password'), 'user_role' => [UserType::Admin]], $request->has('remember')
+            ['email' => $request->input('email'), 'password' => $request->input('password'), 'user_role' => [$userType]], $request->has('remember')
         );
     }
 

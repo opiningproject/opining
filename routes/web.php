@@ -15,10 +15,11 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\SuperAdmin\DashboardController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /* Route::domain('gomeal.urtestsite.com')->group(function () {
     dd('gomeal.urtestsite.com');
@@ -80,10 +81,18 @@ Route::get('/clear-all', function (Request $request) {
 
 });
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    $domain = $request->getHost();
+    $main_domain = config('app.main_domain');
+    if($domain == $main_domain){
+        return redirect()->route('panelRegistration');
+    }    
     return redirect()->route('home');
 });
 
+Route::group(['prefix' => '/super-admin'], function () {
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('super-admin.dashboard');
+});
 
 Route::get('/panel-registration', [MainController::class, 'panelRegistration'])->name('panelRegistration');
 Route::post('/storePanelRegistration', [MainController::class, 'storePanelRegistration'])->name('storePanelRegistration');

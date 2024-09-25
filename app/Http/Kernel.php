@@ -71,4 +71,6 @@ class Kernel extends HttpKernel
         'CheckMyFinanceValidate' => \App\Http\Middleware\CheckMyFinanceValidate::class,
         'identifyTenant' => \App\Http\Middleware\IdentifyTenant::class,
     ];
+
+
 }

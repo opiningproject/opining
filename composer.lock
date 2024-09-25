@@ -62,7 +62,6 @@
         },
         {
             "name": "aws/aws-sdk-php",
-<<<<<<< HEAD
             "version": "3.322.1",
             "source": {
                 "type": "git",
@@ -73,18 +72,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1426256e7a10da135dbac91a233983a73328f078",
                 "reference": "1426256e7a10da135dbac91a233983a73328f078",
-=======
-            "version": "3.321.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "bbd357d246350ffcd0dd8df30951d2d46c5ddadb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bbd357d246350ffcd0dd8df30951d2d46c5ddadb",
-                "reference": "bbd357d246350ffcd0dd8df30951d2d46c5ddadb",
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
                 "shasum": ""
             },
             "require": {
@@ -167,15 +154,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.322.1"
             },
             "time": "2024-09-19T18:07:30+00:00"
-=======
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.11"
-            },
-            "time": "2024-09-13T18:05:10+00:00"
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
         },
         {
             "name": "bensampo/laravel-enum",
@@ -1166,25 +1147,6 @@
             "time": "2023-08-08T05:53:35+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "firebase/php-jwt",
-            "version": "v6.10.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "500501c2ce893c824c801da135d02661199f60c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/500501c2ce893c824c801da135d02661199f60c5",
-                "reference": "500501c2ce893c824c801da135d02661199f60c5",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "require-dev": {
-=======
             "name": "facade/ignition-contracts",
             "version": "1.0.2",
             "source": {
@@ -1255,7 +1217,6 @@
                 "php": "^8.0"
             },
             "require-dev": {
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
                 "guzzlehttp/guzzle": "^7.4",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5",
@@ -6079,8 +6040,6 @@
                 }
             ],
             "time": "2024-09-02T10:17:15+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "stancl/jobpipeline",
@@ -6254,7 +6213,6 @@
                 "source": "https://github.com/archtechx/virtualcolumn/tree/v1.4.1"
             },
             "time": "2024-04-07T18:26:29+00:00"
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
         },
         {
             "name": "stripe/stripe-php",
@@ -9266,7 +9224,6 @@
         },
         {
             "name": "maximebf/debugbar",
-<<<<<<< HEAD
             "version": "v1.22.6",
             "source": {
                 "type": "git",
@@ -9277,18 +9234,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/d7881b498f9e649610bf6ae91cdd6353859f75d2",
                 "reference": "d7881b498f9e649610bf6ae91cdd6353859f75d2",
-=======
-            "version": "v1.22.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "1b5cabe0ce013134cf595bfa427bbf2f6abcd989"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/1b5cabe0ce013134cf595bfa427bbf2f6abcd989",
-                "reference": "1b5cabe0ce013134cf595bfa427bbf2f6abcd989",
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
                 "shasum": ""
             },
             "require": {
@@ -9341,15 +9286,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/maximebf/php-debugbar/tree/v1.22.6"
             },
             "time": "2024-09-16T11:47:59+00:00"
-=======
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.22.5"
-            },
-            "time": "2024-09-09T08:05:55+00:00"
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
         },
         {
             "name": "mockery/mockery",
@@ -9971,7 +9910,6 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
             "version": "10.5.35",
             "source": {
                 "type": "git",
@@ -9982,18 +9920,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7ac8b4e63f456046dcb4c9787da9382831a1874b",
                 "reference": "7ac8b4e63f456046dcb4c9787da9382831a1874b",
-=======
-            "version": "10.5.34",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3c69d315bdf79080c8e115b69d1961c6905b0e18"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3c69d315bdf79080c8e115b69d1961c6905b0e18",
-                "reference": "3c69d315bdf79080c8e115b69d1961c6905b0e18",
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
                 "shasum": ""
             },
             "require": {
@@ -10065,11 +9991,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.35"
-=======
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.34"
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
             },
             "funding": [
                 {
@@ -10085,11 +10007,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2024-09-19T10:52:21+00:00"
-=======
-            "time": "2024-09-13T05:19:38+00:00"
->>>>>>> 5a5f9d4215f2add456cbc2586b3dfadbeb1b9366
         },
         {
             "name": "sebastian/cli-parser",

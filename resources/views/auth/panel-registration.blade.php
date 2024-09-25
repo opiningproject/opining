@@ -18,16 +18,7 @@
                         </div>
                         <div class="card-body signin-form">
                             <form method="POST" action="{{ route('storePanelRegistration') }}">
-                                @csrf
-                                <div class="row mb-3">
-                                    <input id="domain" type="text" class="form-control @error('domain') is-invalid @enderror" name="domain" {{-- value="{{ old('domain') }}" --}} required autocomplete="domain" autofocus placeholder="Sub Domain" value="gomeal.urtestsite.com">
-                                    @error('domain')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                
+                                @csrf           
                                 <div class="row mb-3">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
                                     @error('name')
@@ -38,8 +29,18 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
-                                    @error('email')
+                                    <input id="email" type="email" class="form-control @error('user_email') is-invalid @enderror" name="user_email" value="{{ old('user_email') }}" required autocomplete="email" placeholder="Email">
+                                    @error('user_email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                
+                                <div class="row mb-3">
+                                    <input id="restaurant_name" type="text" class="form-control @error('restaurant_name') is-invalid @enderror" name="restaurant_name" value="{{ old('restaurant_name') }}" required autocomplete="off" placeholder="Restaurant Name">
+                                    @error('restaurant_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

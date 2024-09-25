@@ -634,3 +634,53 @@ if (!function_exists('svg')) {
         return $svgContent;
     }
 }
+
+
+function generateRandomNumberFromDateTime() {
+
+        // Get the current date and time
+        $currentDateTime = new DateTime();
+
+        // Format the components
+        $year = $currentDateTime->format('Y');
+        $month = $currentDateTime->format('m');
+        $day = $currentDateTime->format('d');
+        $hour = $currentDateTime->format('H');
+        $minute = $currentDateTime->format('i');
+        $second = $currentDateTime->format('s');
+    
+        // Create an array of the components
+        $components = [$year, $month, $day, $hour, $minute, $second];
+    
+        // Shuffle the components randomly
+        shuffle($components);
+    
+        // Join the shuffled components into a single string
+        $formattedDateTime = implode('', $components);
+    
+        return $formattedDateTime;
+
+}
+
+
+function formatUrl($randomString) {
+    // Remove any leading or trailing spaces
+    $randomString = trim($randomString);
+    
+    // Check if the random string starts with a scheme; if not, prepend 'https://'
+    if (!preg_match('/^http[s]?:\/\//', $randomString)) {
+        $randomString = 'https://' . $randomString;
+    }
+
+    // Validate the URL format
+    if (filter_var($randomString, FILTER_VALIDATE_URL) === false) {
+        return "Invalid URL";
+    }
+
+    // Return the formatted URL
+    return $randomString;
+}
+
+
+?>
+

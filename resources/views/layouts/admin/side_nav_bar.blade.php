@@ -1,5 +1,7 @@
 <aside class="menu-sidebar">
 
+    <a href="javascript:void(0)" id="sidebar-toggle-btn" class="sidebar-toggle"><img src="images/sidebar-arrow.svg" alt="" /></a>
+
     <div class="menu-sidebar-inner">
         <div class="bd-navbar-toggle">
             <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
@@ -10,9 +12,10 @@
         </div>
         <div class="siderbarmenu-brand">
             <a href="{{ route('home') }}" class="navbar-brand sidebar-logo">
-                <div class="">
-                    <img src="{{ asset('images/logo-admin.png') }}" class="web-logo">
-
+                <div class="admin-logo">
+                    <img src="{{ asset('images/opening-icon.svg') }}" class="icon-logo" />
+                    <img src="{{ asset('images/opining-text-logo.svg') }}" class="text-logo" />
+                    {{-- <img src="{{ asset('images/logo-admin.png') }}" class="web-logo" /> --}}
                 </div>
             </a>
         </div>
@@ -37,8 +40,7 @@
                                             <img src="{{ asset('images/admin-menu-icons/dashboard-black.svg') }}"
                                                 class="svg hoverable" height="18" width="20" />
                                         </div>
-                                        <span
-                                            class="ms-0 d-sm-inline align-middle">Dashboard</span>
+                                        <span class="ms-0 d-sm-inline align-middle">Dashboard</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -160,8 +162,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#"
-                                        class="nav-link align-middle">
+                                    <a href="#" class="nav-link align-middle">
                                         <div class="icon-span">
                                             <img src="{{ asset('images/admin-menu-icons/points-gray.svg') }}"
                                                 class="svg actual" height="22" width="22" />
@@ -169,16 +170,14 @@
                                             <img src="{{ asset('images/admin-menu-icons/points-black.svg') }}"
                                                 class="svg hoverable" height="22" width="22" />
                                         </div>
-                                        <span
-                                            class="ms-0 d-sm-inline align-middle">Point of Sale</span>
+                                        <span class="ms-0 d-sm-inline align-middle">Point of Sale</span>
                                     </a>
                                 </li>
 
                                 <label class="menu-label">SETTINGS</label>
 
                                 <li class="nav-item">
-                                    <a href="#"
-                                        class="nav-link align-middle">
+                                    <a href="#" class="nav-link align-middle">
                                         <div class="icon-span">
                                             <img src="{{ asset('images/admin-menu-icons/chat-gray.svg') }}"
                                                 class="svg actual" height="22" width="22" />
@@ -186,8 +185,7 @@
                                             <img src="{{ asset('images/admin-menu-icons/chat-black.svg') }}"
                                                 class="svg hoverable" height="22" width="22" />
                                         </div>
-                                        <span
-                                            class="ms-0 d-sm-inline align-middle">Support</span>
+                                        <span class="ms-0 d-sm-inline align-middle">Support</span>
                                     </a>
                                 </li>
 
@@ -219,8 +217,8 @@
     <div class="sidebar-menu-top-box position-relative border-top mt-3">
         <div class="d-flex gap-2 align-items-center">
             <div class="userPhoto">
-                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image"
-                    class="img-fluid" width="50" height="50">
+                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid"
+                    width="50" height="50">
             </div>
             <div class="text-start">
                 <div class="dropdown">

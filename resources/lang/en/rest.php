@@ -252,6 +252,9 @@ return [
             'one_payment_active' => 'At least one payment method must be active.',
             'payment_setting_updated' => 'Payment setting updated successfully.',
         ],
+        'plans_bill' => [
+            'title' => 'Plans and Bills',
+        ],
 		'profile' => [
 			'title' => 'Restaurant Profile',
 			'name' => 'Restaurant Name',

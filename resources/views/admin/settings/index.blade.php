@@ -68,6 +68,11 @@
                                             aria-controls="checkoutSetting-tab-pane" aria-selected="false">{{ trans('rest.settings.checkout_setting.title') }}
                                     </button>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="plansBills-tab" data-bs-toggle="tab" data-bs-target="#plansBills-tab-pane" type="button" role="tab"
+                                            aria-controls="plansBills-tab-pane" aria-selected="false">{{ trans('rest.settings.plans_bill.title') }}
+                                    </button>
+                                </li>
                             </ul>
 
                             <div class="tab-content card editdish-card setting-tab-content" id="myTabContent">
@@ -82,7 +87,7 @@
                                 @include('admin.settings.cms-nl')
                                 @include('admin.settings.refund-history')
                                 @include('admin.settings.zipcode')
-{{--                                @include('admin.settings.domain-setting')--}}
+                                @include('admin.settings.plans-bills')
                                 @include('admin.settings.api-setting')
                                 @include('admin.settings.payment-setting')
                                 @include('admin.settings.checkout-setting')

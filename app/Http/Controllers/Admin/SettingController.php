@@ -325,16 +325,22 @@ class SettingController extends Controller
 
     public function updatePaymentSetting(Request $request)
     {
-        $restaurant = RestaurantDetail::findOrFail(1); // Assuming a single restaurant row or based on user access
-        $settings = json_decode($restaurant->params, true); // Assume this is an array already, if not decode it
-        $settings = $settings['payment_settings'];
-        // Update the specific setting
-        $settings[$request->type] = $request->value;
+        $restaurant = RestaurantDetail::findOrFail(1);
+        $settings = json_decode($restaurant->params, true) ?? [];
 
-        if (count(array_filter($settings)) < 1) {
-            return response()->json(['status' => 'error', 'message' => trans('rest.settings.checkout_setting.one_payment_active')]);
+        $paymentSettings = $settings['payment_settings'] ?? [];
+        $paymentSettings[$request->type] = $request->value;
+
+        // Check that there is at least one payment method active
+        if (count(array_filter($paymentSettings)) < 1) {
+            return response()->json([
+                'status' => 'error',
+                'message' => trans('rest.settings.checkout_setting.one_payment_active')
+            ]);
         }
-        $restaurant->params = ['payment_settings' => $settings];
+
+        $settings['payment_settings'] = $paymentSettings;
+        $restaurant->params = json_encode($settings);
         $restaurant->save();
 
         return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);

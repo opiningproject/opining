@@ -25,7 +25,7 @@ use App\Enums\PaymentType;
                             $hasOrders = strpos($currentUrl, '/orders') !== false;
                         @endphp
                         @if($hasOrders)
-                            <button class="btn btn-site-theme fw-400 text-uppercase font-sebibold px-5 mt-2 font-18 order_details_button" data-id="{{ $order->id }}" onclick="orderDetail({{ $order->id }})" >{{ trans('rest.food_order.order_details') }}</button>
+                            <button class="btn btn-site-theme fw-400 text-uppercase font-sebibold px-5 mt-2 font-18 order_details_button" data-id="{{ $order->id }}" onclick="orderDetailNew({{ $order->id }})" >{{ trans('rest.food_order.order_details') }}</button>
                         @else
                             <a href="{{ route('orders', ['date_filter' => $order->id]) }}" target="_blank"
                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold px-5 mt-2 font-18 order_details_button">{{ trans('rest.food_order.order_details') }}</a>

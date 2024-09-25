@@ -3,73 +3,72 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header pb-1">
-                Order screen settings
+                {{ trans('rest.order_screen_settings.title') }}
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-                <h3 class="mb-2 text-uppercase">SHOW ORDERS</h3>
+                <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.show_orders') }}</h3>
 
                 <div class="radio-tabs">
-                    <label class="status-option active">
-                        <input id="test1" type="radio" name="orderStatus" checked />
-                        <span for="test1"></span>
-                        <label class="text-uppercase">SPECIFIC TIMEZONE</label>
+                    <label class="status-option specific-timezone active">
+                        <input id="order-setting-timezone" type="radio" name="orderSetting" checked />
+                        <span for="order-setting-timezone"></span>
+                        <label class="text-uppercase">{{ trans('rest.order_screen_settings.specific_timezone') }}</label>
                     </label>
 
-                    <label class="status-option">
-                        <input id="test2" type="radio" name="orderStatus" />
-                        <span for="test2"></span>
-                        <label class="text-uppercase">SPECIFIC DAY</label>
+                    <label class="status-option specific-day">
+                        <input id="order-setting-date" type="radio" name="orderSetting" />
+                        <span for="order-setting-date"></span>
+                        <label class="text-uppercase">{{ trans('rest.order_screen_settings.specific_day') }}</label>
                     </label>
                 </div>
+                <form class="order-setting-form" id="order-setting-form">
+                    <input type="hidden" name="order_setting_type" class="order_setting_type" value="1">
+                    <div class="order-setting-content pt-4 pb-4" id="timezone-setting">
 
-                <div class="order-setting-content pt-4 pb-4" id="timezone-setting">
-                    <form>
-                        <select class="form-control">
-                            <option>Past 6 Hours</option>
-                            <option>Past 7 Hours</option>
-                            <option>Past 8 Hours</option>
-                            <option>Past 9 Hours</option>
-                            <option>Past 10 Hours</option>
-                            <option>Past 11 Hours</option>
-                            <option>Past 12 Hours</option>
-                            <option>Past 13 Hours</option>
-                            <option>Past 14 Hours</option>
-                            <option>Past 15 Hours</option>
-                            <option>Past 16 Hours</option>
-                            <option>Past 17 Hours</option>
-                            <option>Past 18 Hours</option>
-                            <option>Past 19 Hours</option>
-                            <option>Past 20 Hours</option>
-                            <option>Past 21 Hours</option>
-                            <option>Past 22 Hours</option>
-                            <option>Past 23 Hours</option>
-                            <option>Past 24 Hours</option>
-                        </select>
-                    </form>
-                </div>
+                            <select class="form-control timezone-setting" name="timezone_setting">
+                                <option disabled selected>{{ trans('rest.order_screen_settings.select_date') }}</option>
+                                <option value="6">{{ trans('rest.order_screen_settings.past_6_hours') }}</option>
+                                <option value="7">{{ trans('rest.order_screen_settings.past_7_hours') }}</option>
+                                <option value="8">{{ trans('rest.order_screen_settings.past_8_hours') }}</option>
+                                <option value="9">{{ trans('rest.order_screen_settings.past_9_hours') }}</option>
+                                <option value="10">{{ trans('rest.order_screen_settings.past_10_hours') }}</option>
+                                <option value="11">{{ trans('rest.order_screen_settings.past_11_hours') }}</option>
+                                <option value="12">{{ trans('rest.order_screen_settings.past_12_hours') }}</option>
+                                <option value="13">{{ trans('rest.order_screen_settings.past_13_hours') }}</option>
+                                <option value="14">{{ trans('rest.order_screen_settings.past_14_hours') }}</option>
+                                <option value="15">{{ trans('rest.order_screen_settings.past_15_hours') }}</option>
+                                <option value="16">{{ trans('rest.order_screen_settings.past_16_hours') }}</option>
+                                <option value="17">{{ trans('rest.order_screen_settings.past_17_hours') }}</option>
+                                <option value="18">{{ trans('rest.order_screen_settings.past_18_hours') }}</option>
+                                <option value="19">{{ trans('rest.order_screen_settings.past_19_hours') }}</option>
+                                <option value="20">{{ trans('rest.order_screen_settings.past_20_hours') }}</option>
+                                <option value="21">{{ trans('rest.order_screen_settings.past_21_hours') }}</option>
+                                <option value="22">{{ trans('rest.order_screen_settings.past_22_hours') }}</option>
+                                <option value="23">{{ trans('rest.order_screen_settings.past_23_hours') }}</option>
+                                <option value="24">{{ trans('rest.order_screen_settings.past_24_hours') }}</option>
+                            </select>
 
-                <div class="date-range-section" id="date-range">
-                    <h3 class="mb-2 text-uppercase">CUSTOM DATE</h3>
-                    <div class="row justify-content-center">
-                        <div class="col-sm-6">
-                            <input id="startDate" class="form-control" type="date" />
-                            <span id="startDateSelected"></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="endDate" class="form-control" type="date" />
-                            <span id="endDateSelected"></span>
+                    </div>
+
+                    <div class="date-range-section pt-4 pb-4 d-none" id="date-range">
+                        <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.custom_date') }}</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Select Date For Filter" class="form-control"
+                                       id="order-setting-custom-time" aria-label="expiry_date" name="expiry_date" required>
+                                <span id="startDateSelected"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <p class="note py-3 pb-1">NOTE: Open orders will be shown allways, even if it is older then the choosen
-                    timezone.</p>
+                    <p class="note py-3 pb-1"> NOTE: {{ trans('rest.order_screen_settings.note') }}</p>
 
-                <div class="d-flex justify-content-end">
-                    <button type="submit" data-bs-dismiss="modal" aria-label="Close"
-                        class="btn btn-site-theme text-uppercase px-5">SAVE CHANGES</button>
-                </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" aria-label="Close"
+                            class="btn btn-site-theme text-uppercase px-5">{{ trans('rest.order_screen_settings.save_changes') }}</button>
+                    </div>
+                </form>
 
             </div>
         </div>

@@ -156,7 +156,7 @@
                                                         <b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}
                                                     </h5>
                                                     <button
-                                                        class="orderDetails btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})">
+                                                        class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})">
                                                         {{ orderStatusBox($ord)->text }}</button>
                                                 </div>
                                             </div>

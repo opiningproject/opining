@@ -30,9 +30,9 @@ $userDetails = $order->orderUserDetails;
                     <div class="order-col">
                         <label
                             class="status-option order-status-option {{ $order->order_status == OrderStatus::Accepted ? 'active' : '' }}">
-                            <input id="test1" type="radio" name="orderStatus"
+                            <input id="accepted-order" type="radio" class="order-status-radio" name="orderStatus"
                                 {{ $order->order_status == OrderStatus::Accepted ? 'checked' : '' }} />
-                            <span for="test1"></span>
+                            <span for="accepted-order"></span>
                             <label>{{ trans('modal.order_detail.new_order') }}</label>
                         </label>
                     </div>
@@ -40,10 +40,10 @@ $userDetails = $order->orderUserDetails;
                     <div class="order-col">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::InKitchen ? 'active' : '' }}">
-                            <input id="test2" type="radio" name="order-status-option"
+                            <input id="inKitchen-order" type="radio" class="order-status-radio" name="order-status-option"
                                 {{ $order->order_status == OrderStatus::InKitchen ? 'checked' : '' }}
                                 onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::InKitchen }}')" />
-                            <span for="test2"></span>
+                            <span for="inKitchen-order"></span>
                             <label>{{ trans('modal.order_detail.in_kitchen') }}</label>
                         </label>
                     </div>
@@ -51,10 +51,10 @@ $userDetails = $order->orderUserDetails;
                         <div class="order-col">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::OutForDelivery ? 'active' : '' }}">
-                                <input id="test3" type="radio" name="order-status-option"
+                                <input id="outForDelivery-order" type="radio" class="order-status-radio" name="order-status-option"
                                     {{ $order->order_status == OrderStatus::OutForDelivery ? 'checked' : '' }}
                                     onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::OutForDelivery }}')" />
-                                <span for="test3"></span>
+                                <span for="outForDelivery-order"></span>
                                 <label>{{ trans('modal.order_detail.out_for_delivery') }}</label>
                             </label>
                         </div>
@@ -62,10 +62,10 @@ $userDetails = $order->orderUserDetails;
                         <div class="order-col">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::ReadyForPickup ? 'active' : '' }}">
-                                <input id="test3" type="radio" name="order-status-option"
+                                <input id="outForDelivery-order" type="radio" class="order-status-radio" name="order-status-option"
                                     {{ $order->order_status == OrderStatus::ReadyForPickup ? 'checked' : '' }}
                                     onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::ReadyForPickup }}')" />
-                                <span for="test3"></span>
+                                <span for="outForDelivery-order"></span>
                                 <label>{{ trans('modal.order_detail.ready_for_pickup') }}</label>
                             </label>
                         </div>
@@ -74,10 +74,10 @@ $userDetails = $order->orderUserDetails;
                     <div class="order-col">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::Delivered ? 'active' : '' }}">
-                            <input id="test4" type="radio" name="order-status-option"
+                            <input id="delivered-order" type="radio" class="order-status-radio" name="order-status-option"
                                 {{ $order->order_status == OrderStatus::Delivered ? 'checked' : '' }}
                                 onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::Delivered }}')" />
-                            <span for="test4"></span>
+                            <span for="delivered-order"></span>
                             <label>{{ trans('modal.order_detail.delivered') }}</label>
                         </label>
                     </div>
@@ -257,80 +257,18 @@ $userDetails = $order->orderUserDetails;
                     <div class="tab-pane fade" id="content-3" role="tabpanel" aria-labelledby="tab-3">
 
                         <div class="order-status order-delivered">
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test5" type="radio" name="status-option-deliverers" />
-                                    <span for="test5"></span>
-                                    <label>Serdar</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option active status-option-deliverers">
-                                    <input id="test6" type="radio" name="status-option-deliverers" checked />
-                                    <span for="test6"></span>
-                                    <label>Jamal</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test7" type="radio" name="status-option-deliverers" />
-                                    <span for="test7"></span>
-                                    <label>Krish</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test8" type="radio" name="status-option-deliverers" />
-                                    <span for="test8"></span>
-                                    <label>Daman</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test8" type="radio" name="status-option-deliverers" />
-                                    <span for="test8"></span>
-                                    <label>Jack</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test8" type="radio" name="status-option-deliverers" />
-                                    <span for="test8"></span>
-                                    <label>Peter</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test8" type="radio" name="status-option-deliverers" />
-                                    <span for="test8"></span>
-                                    <label>Muhammad</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test8" type="radio" name="status-option-deliverers" />
-                                    <span for="test8"></span>
-                                    <label>Youssef</label>
-                                </label>
-                            </div>
-
-                            <div class="order-col">
-                                <label class="status-option status-option-deliverers">
-                                    <input id="test8" type="radio" name="status-option-deliverers" />
-                                    <span for="test8"></span>
-                                    <label>Sam</label>
-                                </label>
-                            </div>
+                            @if(count($delivererUser) > 0)
+                                @foreach($delivererUser as $delivererUsers)
+                                    <div class="order-col col-order-{{$delivererUsers->id}}">
+                                        <label class="status-option status-option-deliverers">
+                                            <input id="test{{$delivererUsers->id}}" type="radio" class="delivererUsers" name="status-option-deliverers" value="{{ $delivererUsers->id }}" {{ $order->deliverer_id == $delivererUsers->id ? 'checked' : ''  }} onclick="assignDeliverer({{ $order->id }}, {{$delivererUsers->id}})"/>
+                                            <span for="test{{$delivererUsers->id}}"></span>
+                                            <label>{{ $delivererUsers->full_name }}</label>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\DelivererUser;
 use App\Models\Dish;
 use App\Models\Order;
+use App\Models\RestaurantDetail;
 use App\Models\TrackOrder;
 use App\Models\User;
 use App\Notifications\Admin\DeliveryTypeUpdate;
@@ -87,10 +89,9 @@ class NewOrdersController extends Controller
     public function orderDetail(Request $request)
     {
         $order = Order::find($request->order_id);
+        $delivererUser = DelivererUser::get();
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-
-//        return view('admin.orders.order-detail-popup', ['order' => $order]);
-        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime ])->render();
+        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser ])->render();
 
         return response()->json(['status' => 1, 'data' =>  $orderDetailHTML, 'order' => $order]);
     }
@@ -110,11 +111,22 @@ class NewOrdersController extends Controller
                 'order_status' => $order->order_status
             ]);
         }
+        if($order->order_status == OrderStatus::Delivered) {
+            $orderStatus = OrderStatus::Delivered;
+        }
         $orderData = Order::find($request->id);
         $trackOrderData = TrackOrder::where('order_id', $orderData->id)->where('order_status', $orderData->order_status)->first();
-//        $dishesHTML = view('admin.orders.order-detail', ['order' => $order,'clok_gray_svg' => $clok_gray_svg])->render();
-//        return response()->json(['status' => 1, 'data' =>  $dishesHTML, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData ? $trackOrderData->created_at :'', 'updatedStatus' =>  $orderData->order_status, 'clok_gray_svg' => $clok_gray_svg]);
-        return response()->json(['status' => 1, 'orderStatus' =>  $orderStatus, 'orderId' =>  $orderData->id, 'orderDate' =>  $trackOrderData ? $trackOrderData->created_at :'', 'updatedStatus' =>  $orderData->order_status]);
+        $color = orderStatusBox($order)->color;
+        $text = orderStatusBox($order)->text;
+        return response()->json([
+            'status' => 1,
+            'orderStatus' => $orderStatus,
+            'orderId' =>$orderData->id,
+            'orderDate' => $trackOrderData ? $trackOrderData->created_at :'',
+            'updatedStatus' =>$orderData->order_status,
+            'text' =>$text,
+            'color' =>$color
+        ]);
     }
 
     public function sendMail($order)
@@ -155,17 +167,6 @@ class NewOrdersController extends Controller
         return view('admin.orders.orders-print-label', ['order' => $order]);
     }
 
-//    public function searchOrder(Request $request)
-//    {
-//       try {
-//            $data = $this->orderSearch($request);
-//           $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-//            return view('admin.orders.search-orders', ['orders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
-//
-//        } catch (Exception $exception) {
-//            return response::json(['status' => 400, 'message' => $exception->getMessage()]);
-//        }
-//    }
     public function orderSearchFilter(Request $request) {
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
@@ -274,6 +275,10 @@ class NewOrdersController extends Controller
         ];
     }
 
+    /**
+     * @param $request
+     * @return array
+     */
     public function filterOrders($request)
     {
         $pageNumber = request()->input('page', 1);
@@ -316,15 +321,20 @@ class NewOrdersController extends Controller
     }
 
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getRealTimeOrder(Request $request)
     {
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
             $address = getRestaurantDetail()->rest_address;
+            $order_type = trans('rest.food_order.pickup');
             if ($orders->order_type == OrderType::Delivery) {
                 $address = $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                $order_type = trans('rest.food_order.delivery');
             }
             $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
             $html = '<div class="order-col">
@@ -332,6 +342,7 @@ class NewOrdersController extends Controller
                                     <div class="timing">
                                         <h3>'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->created_at)->addMinutes($orderDeliveryTime)))  .'</h3>
                                         <label class="success">'. $orders->delivery_time .'</label>
+                                        <h4 class="mt-2">'. $order_type .'</h4>
                                     </div>
 
                                     <div class="details">
@@ -359,6 +370,9 @@ class NewOrdersController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function getNotNotifiedOrders(){
         try{
             $orderIds = Order::where([
@@ -377,5 +391,43 @@ class NewOrdersController extends Controller
         }catch (Exception $exception){
             return response::json(['status' => 400, 'message' => '']);
         }
+    }
+
+    /**
+     * @param $order_id
+     * @param $deliverer_id
+     * @return mixed
+     */
+    public function addDeliverer($order_id, $deliverer_id)
+    {
+        try {
+            // Perform the update
+            Order::where('id', $order_id)->update(['deliverer_id' => $deliverer_id]);
+            return response::json(['status' => 1, 'message' => 'Deliverer added successfully']);
+
+        } catch (Exception $exception) {
+            return response::json(['status' => 400, 'message' => '']);
+        }
+    }
+
+    public function updateOrderSetting(Request $request)
+    {
+        $value = [
+            'expiry_date' => $request->expiry_date,
+            'timezone_setting' => $request->timezone_setting ? $request->timezone_setting : null,
+            'order_setting_type' => $request->order_setting_type,
+        ];
+        $restaurant = RestaurantDetail::findOrFail(1); // Fetch the restaurant detail
+
+        $params = json_decode($restaurant->params, true);
+
+        if (is_null($params)) {
+            $params = [];
+        }
+        $params['order_settings'] = $value; // Store all request data under 'order_settings'
+        $restaurant->params = json_encode($params);
+        $restaurant->save();
+
+        return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 }

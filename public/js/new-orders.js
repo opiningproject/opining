@@ -20,13 +20,6 @@ $(document).on('click', '.order-setting', function () {
     $('.order-setting-popup').modal('show')
 })
 
-// on click order-notification-popup hide and show order details popup
-$(document).on('click', '.order_details_button', function () {
-    $('.order-notification-popup').modal('hide')
-    $('.order-detail-popup').modal('show')
-
-})
-
 
 $(function () {
     var filters = [];
@@ -109,8 +102,10 @@ function orderDetailNew(id) {
         type: 'GET',
         success: function (response) {
             if (response.status == 1) {
+                $('.order-notification-popup').modal('hide')
                 $('.order-detail-popup').html(response.data);
                 $('.order-detail-popup').modal('show')
+                disabledOldOrderStatus()
             }
         },
         error: function (response) {
@@ -120,9 +115,7 @@ function orderDetailNew(id) {
     })
 }
 
-function changeOrderStatusNew(order_id,order_status)
-{
-    console.log("123123",order_id,order_status)
+function changeOrderStatusNew(order_id,order_status) {
     var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
 
     var orderId = order_id;
@@ -133,23 +126,14 @@ function changeOrderStatusNew(order_id,order_status)
             console.log("response", response)
             if (response.status == 1) {
                 $('.order-detail-popup').modal('hide')
+                $('.order-status-' + response.orderId).addClass(response.color);
+                $('.order-status-' + response.orderId).text(response.text);
             }
-            // Add gray-clock icon without refresh
-            // if(response.clok_gray_svg) {
-            //     $('.order-status-' + id).empty();
-            //     $('.order-status-' + id).html(response.clok_gray_svg);
-            // }
             if (response.orderStatus == "6") {
                 var currentOrderCount = $('.order-count').text();
-                console.log(currentOrderCount)
                 $('.order-count').html(currentOrderCount - 1);
+                $('.count-order').html(currentOrderCount - 1);
             }
-            // $('.foodorder-box-details').html(response.data);
-            //
-            // $(".foodorder-box-list div").removeClass("active");
-            // $('.order-' + id).addClass('active');
-            // window.history.pushState('','', baseURL + '/orders/'+id+'#order-'+id);
-            // $('#changeStatusModal').modal('hide');
             socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
         },
         error: function (response) {
@@ -158,5 +142,188 @@ function changeOrderStatusNew(order_id,order_status)
         }
     })
 }
+
+function assignDeliverer(order_id, deliverer_id) {
+    var orderId = order_id;
+    var delivererId = deliverer_id;
+    $.ajax({
+        url: baseURL+'/add-deliverer/'+ orderId + '/' + deliverer_id,
+        type: 'GET',
+        success: function (response) {
+            console.log("response", response)
+            if (response.status == 1) {
+                $('.order-detail-popup').modal('hide')
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+function disabledOldOrderStatus() {
+    const radios = document.querySelectorAll('.order-status-radio');
+    const orderStatusMap = {
+        'accepted-order': ['inKitchen-order', 'outForDelivery-order', 'delivered-order'], // Assuming 'accepted-order' is New Order
+        'inKitchen-order': ['accepted-order', 'outForDelivery-order', 'delivered-order'], // Assuming 'inKitchen-order' is In Kitchen
+        'outForDelivery-order': ['accepted-order', 'inKitchen-order', 'delivered-order'], // Assuming 'outForDelivery-order' is Ready For Pickup or Out For Delivery
+        'delivered-order': ['accepted-order', 'inKitchen-order', 'outForDelivery-order']  // Assuming 'delivered-order' is Delivered
+    };
+
+    function updateRadioStatus() {
+        radios.forEach(radio => {
+            if (radio.checked) {
+                orderStatusMap[radio.id].forEach(id => {
+                    document.getElementById(id).disabled = true;
+                });
+            } else {
+                radio.disabled = false;
+            }
+        });
+    }
+
+    // Initialize radio buttons on page load
+    updateRadioStatus();
+
+    // Add change event listener to radio buttons
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Log the change for debugging
+            console.log(this.id + ' is checked');
+
+            // Update radio statuses based on the current selection
+            radios.forEach(r => r.disabled = false); // Enable all radios first
+            updateRadioStatus();
+        });
+    });
+}
+
+
+//order setting js code start
+// order-setting-form
+$(".order-setting-form").validate({
+    rules: {
+        timezone_setting:{
+            required: true
+        },
+        expiry_date:{
+            required: true
+        }
+    },
+    highlight: function(element) {
+        $(element).closest('.form-group').addClass('has-error');
+        $(element).addClass('border-red-500'); // Tailwind CSS class for red border
+    },
+    unhighlight: function(element) {
+        $(element).closest('.form-group').removeClass('has-error');
+        $(element).removeClass('border-red-500');
+        $(element).addClass('border-green-500'); // Tailwind CSS class for green border
+    },
+    errorPlacement: function(error, element) {
+      error.insertAfter(element); // Default placement for other fields
+        return false;
+    },
+    submitHandler: function(form) { // <- pass 'form' argument in
+        $(".submit").attr("disabled", true);
+        saveOrderSetting(); // <- use 'form' argument here.
+    }
+});
+
+// Add deliverers
+function saveOrderSetting() {
+    var delivererData = new FormData(document.getElementById('order-setting-form'));
+    $.ajax({
+        url: baseURL + '/save-order-setting',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: delivererData,
+        success: function (response) {
+            if (response.status == 'success') {
+                $('.order-setting-popup').modal('hide');
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            toastr.error(errorMessage)
+            // alert(errorMessage);
+        }
+    })
+}
+// Show date picker code
+var start = moment().subtract(10, 'days');
+var end = moment();
+
+var dateRange = ''
+$('#order-setting-custom-time').daterangepicker({
+    startDate: start,
+    endDate: end,
+    maxDate: moment(),
+    ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    }
+});
+
+$('#order-setting-custom-time').val('')
+$('#order-setting-custom-time').attr('placeholder', 'Select Date Range')
+
+$('#order-setting-custom-time').on('apply.daterangepicker', function (ev, picker) {
+
+    dateRange = $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
+
+    var start_date = picker.startDate.format('DD-MM-YYYY');
+    var end_date = picker.endDate.format('DD-MM-YYYY');
+
+    value = "start_date=" + start_date + "&end_date=" + end_date;
+
+    // window.location.href = `${baseURL}/orders?${value}`;
+});
+
+$('#order-setting-custom-time').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+});
+
+// show hide specific timezone specific day
+document.addEventListener('DOMContentLoaded', function() {
+    const timezoneRadio = document.getElementById('order-setting-timezone');
+    const dateRadio = document.getElementById('order-setting-date');
+    const timezoneSetting = document.getElementById('timezone-setting');
+    const dateRange = document.getElementById('date-range');
+
+    function toggleSettings() {
+        //timezone
+        // 1 is use for timezon and 2 is use for specific-day
+        if (timezoneRadio.checked) {
+            timezoneSetting.classList.remove('d-none');
+            dateRange.classList.add('d-none');
+            $('.specific-timezone').addClass('active')
+            $('.specific-day').removeClass('active')
+            $('#order-setting-custom-time').val('');
+            $('.order_setting_type').val("1");
+        } else if (dateRadio.checked) {
+            timezoneSetting.classList.add('d-none');
+            dateRange.classList.remove('d-none');
+            $('.specific-timezone').removeClass('active')
+            $('.specific-day').addClass('active')
+            $('.timezone-setting').prop('selectedIndex',0);
+            $('.order_setting_type').val("2");
+
+            $(this).closest('.status-option').addClass('active')
+        }
+    }
+
+    // Add event listeners
+    timezoneRadio.addEventListener('change', toggleSettings);
+    dateRadio.addEventListener('change', toggleSettings);
+
+    // Initial check in case of pre-selected values when modal loads
+    toggleSettings();
+});
 
 

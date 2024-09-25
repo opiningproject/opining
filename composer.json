@@ -1,4 +1,4 @@
-{
+ {
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
@@ -81,3 +81,4 @@
     "minimum-stability": "stable",
     "prefer-stable": true
 }
+

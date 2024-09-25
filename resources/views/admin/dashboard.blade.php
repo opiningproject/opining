@@ -10,10 +10,10 @@
                                 <div class="row mb-4 align-items-center">
                                     <div class="col-md-6 mb-2">
                                         <div class="logo-details d-flex align-items-center gap-3">
-                                            <img src="images/dash-logo.png" alt="" />
+                                            <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="" class="web-logo" />
                                             <div class="res-det">
-                                                <h1 class="mb-0">Restaurant name</h1>
-                                                <p class="mb-0">E-mail account</p>
+                                                <h1 class="mb-0">{{ getRestaurantDetail()->restaurant_name }}</h1>
+                                                <p class="mb-0">{{ auth()->user()->email }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -21,12 +21,12 @@
                                         <div class="text-right d-flex align-items-center justify-content-end gap-3">
                                             <div class="domain-details">
                                                 <a href="#" class="m-url">www.salerno.nl</a>
-                                                <a href="#">domain settings</a>
+                                                <a href="{{ route('settings', ['openTab' => 'domainSetting']) }}">domain settings</a>
                                             </div>
 
                                             <div class="icon-link">
-                                                <img src="images/link-icon.svg" alt="" width="47"
-                                                    height="47" />
+                                                <img src="{{asset('images/link-icon.svg')}}" alt="" width="47"
+                                                     height="47" />
                                             </div>
                                         </div>
                                     </div>
@@ -39,14 +39,13 @@
                                         </div>
                                         <div class="col ml-auto text-end mb-2">
                                             <div class="dropdown">
-                                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
+                                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     Today
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    <li><a class="dropdown-item" href="#">Yesterday</a></li>
+                                                    <li><a class="dropdown-item" href="#">Last 7 days</a></li>
+                                                    <li><a class="dropdown-item" href="#">Last 30 days</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -59,7 +58,7 @@
                                             <div class="dt-box">
                                                 <h3>Total visitors</h3>
                                                 <div class="text-center">
-                                                    <h4>1000</h4>
+                                                    <h4 id="totalUser" >{{ $totalUser }}</h4>
                                                     <h3 class="roi">+12%</h3>
                                                 </div>
                                             </div>
@@ -69,7 +68,7 @@
                                             <div class="dt-box">
                                                 <h3>total Orders</h3>
                                                 <div class="text-center">
-                                                    <h4>100</h4>
+                                                    <h4 id="totalOrders">{{ $totalOrders }}</h4>
                                                     <h3 class="roi">+9%</h3>
                                                 </div>
                                             </div>
@@ -89,14 +88,14 @@
                                             <div class="dt-box">
                                                 <h3>New Customers</h3>
                                                 <div class="text-center">
-                                                    <h4>9</h4>
+                                                    <h4 class="newUsers">{{ $newUsers }}</h4>
                                                     <h3 class="roi">+0%</h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <p class="text-end"><a href="#" class="see-more">See more </a></p>
+                                    <p class="text-end"><a href="{{ route('payments') }}" class="see-more">See more </a></p>
                                 </div>
 
                                 <div class="plans-section mb-4">
@@ -135,6 +134,9 @@
             </div>
         </div>
         <!-- start footer --> @include('layouts.admin.footer_design')
-        <!-- end footer -->
+    <!-- end footer -->
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="{{ asset('js/dashboard.js')}}"></script>
 @endsection

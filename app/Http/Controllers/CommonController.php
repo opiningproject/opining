@@ -10,7 +10,6 @@ class CommonController extends Controller
         $limit = $request->limit;
         $pageNo = $request->pageNo;
         $startLimit = 1;
-        dd($request->all());
         $pageNo -= 1;
         $startLimit = $limit * $pageNo;
 

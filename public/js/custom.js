@@ -97,3 +97,9 @@ $(document).ready(function () {
 
   });
 });
+
+$(document).ready(function () {
+  $('#sidebar-toggle-btn').on('click', function () {
+    $('body').toggleClass('sidebar-toggle-body');
+  });
+});

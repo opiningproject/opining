@@ -525,6 +525,7 @@ return [
         'specific_day' => 'Specific Day',
         'specific_timezone' => 'Specific Timezone',
         'select_date' => 'Select Date',
+        'select_time' => 'Select Time',
         'past_6_hours' => 'Past 6 Hours',
         'past_7_hours' => 'Past 7 Hours',
         'past_8_hours' => 'Past 8 Hours',
@@ -547,5 +548,6 @@ return [
         'custom_date' => 'Custom Date',
         'note' => 'Open orders will be shown always, even if it is older then the chosen timezone.',
         'save_changes' => 'Save Changes',
+        'reset_save' => 'Reset & Save',
     ],
 ];

@@ -256,21 +256,31 @@ var start = moment().subtract(10, 'days');
 var end = moment();
 
 var dateRange = ''
-$('#order-setting-custom-time').daterangepicker({
-    startDate: start,
-    endDate: end,
-    maxDate: moment(),
-    ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-    }
-});
-
-$('#order-setting-custom-time').val('')
+console.log("dddd", $('.order-setting-custom-time').val())
+var existingDate = $('.order-setting-custom-time').val() ?? null;
+    $('#order-setting-custom-time').daterangepicker({
+        startDate: start,
+        endDate: end,
+        maxDate: moment(),
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    });
+if (existingDate) {
+    var dates = existingDate.split(' - ');
+    var start_date = dates[0];
+    var end_date = dates[1];
+    $('#order-setting-custom-time').data('daterangepicker').setStartDate(moment(start_date, 'DD-MM-YYYY'));
+    $('#order-setting-custom-time').data('daterangepicker').setEndDate(moment(end_date, 'DD-MM-YYYY'));
+    $('#order-setting-custom-time').val(start_date + ' - ' + end_date);
+} else {
+    $('#order-setting-custom-time').val('')
+}
 $('#order-setting-custom-time').attr('placeholder', 'Select Date Range')
 
 $('#order-setting-custom-time').on('apply.daterangepicker', function (ev, picker) {

@@ -663,6 +663,39 @@ function generateRandomNumberFromDateTime() {
 }
 
 
+function generateUniqueFourDigitNumber() {
+    // Define the file to store generated numbers
+    $filePath = 'generated_numbers.txt';
+    
+    // Create the file if it doesn't exist
+    if (!file_exists($filePath)) {
+        file_put_contents($filePath, '');
+    }
+
+    // Read existing numbers from the file
+    $existingNumbers = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    
+    // Create an array to hold available numbers
+    $availableNumbers = range(1000, 9999);
+    
+    // Remove already generated numbers
+    $availableNumbers = array_diff($availableNumbers, $existingNumbers);
+    
+    // Check if we have any available numbers left
+    if (empty($availableNumbers)) {
+        return 'No more unique numbers available';
+    }
+
+    // Get a random number from the available pool
+    $randomNumber = $availableNumbers[array_rand($availableNumbers)];
+
+    // Store the generated number in the file
+    file_put_contents($filePath, $randomNumber . PHP_EOL, FILE_APPEND);
+    
+    return $randomNumber;
+}
+
+
 function formatUrl($randomString) {
     // Remove any leading or trailing spaces
     $randomString = trim($randomString);

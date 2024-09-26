@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
-    'main_domain' => 'gomeal.impinge.us',
+    'main_domain' => 'store.opiningstore.com',
 
     /*
     |--------------------------------------------------------------------------

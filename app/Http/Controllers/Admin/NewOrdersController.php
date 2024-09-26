@@ -444,4 +444,18 @@ class NewOrdersController extends Controller
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
         return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOrderSetting(Request $request)
+    {
+        $getOrderData = Order::find($request->orderId);
+        $updatedDeliveryTime = \Carbon\Carbon::parse($getOrderData->expected_delivery_time)->addMinutes($request->getMinute);
+        $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
+        $getOrderData->save();
+        $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
+        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
 }

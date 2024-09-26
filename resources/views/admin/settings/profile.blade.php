@@ -1,8 +1,11 @@
 <div class="tab-pane fade" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
+    
+    <h2 class="content-title">Restaurant Profile</h2>
+
     <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
-        <div class="card-body">
-            <div class="card-custom-body">
+        <div class="card-body bg-white">
+            <div class="card-custom-body pt-0">
                 <div class="row">
                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                         <div class="form-group">

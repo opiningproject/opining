@@ -1,13 +1,21 @@
-<div class="tab-pane fade cmsPagesen" id="cmsPagesen-tab-pane" role="tabpanel" aria-labelledby="cmsPagesen-tab" tabindex="0">
-    <div class="card-body">
+<div class="tab-pane fade cmsPagesen" id="cmsPagesen-tab-pane" role="tabpanel" aria-labelledby="cmsPagesen-tab"
+    tabindex="0">
+
+    <h2 class="content-title">CMS Pages(English)</h2>
+
+    <div class="card-body bg-white">
         <div class="d-flex align-items-center justify-content-between">
             <h3 class="text-custom-muted mb-0 tab-title"></h3>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="content_en" id="btnradio1" autocomplete="off" checked onchange="changeContent('privacy-en');" />
-                <label class="btn btn-sm btn-outline-custom-yellow text-muted-default" for="btnradio1" name="privacy_policy">{{ trans('rest.settings.cms.privacy') }}</label>
+                <input type="radio" class="btn-check" name="content_en" id="btnradio1" autocomplete="off" checked
+                    onchange="changeContent('privacy-en');" />
+                <label class="btn btn-sm btn-outline-custom-yellow text-muted-default" for="btnradio1"
+                    name="privacy_policy">{{ trans('rest.settings.cms.privacy') }}</label>
 
-                <input type="radio" class="btn-check" name="content_en" id="btnradio2" autocomplete="off" onchange="changeContent('terms-en');" />
-                <label class="btn btn-sm btn-outline-custom-yellow text-muted-default" for="btnradio2" name="terms">{{ trans('rest.settings.cms.terms') }}</label>
+                <input type="radio" class="btn-check" name="content_en" id="btnradio2" autocomplete="off"
+                    onchange="changeContent('terms-en');" />
+                <label class="btn btn-sm btn-outline-custom-yellow text-muted-default" for="btnradio2"
+                    name="terms">{{ trans('rest.settings.cms.terms') }}</label>
             </div>
         </div>
 

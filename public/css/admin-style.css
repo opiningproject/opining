@@ -1309,9 +1309,12 @@ form .prev-input-group .input-group-icon svg {
     column-gap: 60px;
 }
 
-.horizontal_tab_setting .nav-tabs {
+.horizontal_tab_setting .left-sidebar-ul  {
     flex: 0 0 260px;
     max-width: 260px;
+    }
+
+.horizontal_tab_setting .left-sidebar-ul .nav-tabs {
     border: 0px;
     column-gap: 0px;
     border-radius: 10px;
@@ -1324,7 +1327,7 @@ form .prev-input-group .input-group-icon svg {
 .horizontal_tab_setting .tab-content {
     flex: auto;
     border: 0px;
-    border-radius: 10px;
+    border-radius: 0px;
     overflow: hidden;
     box-shadow: none;
 }
@@ -1333,7 +1336,7 @@ form .prev-input-group .input-group-icon svg {
     flex: 0 0 100%;
     max-width: 100%;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 
 .customize-tab.horizontal_tab_setting .nav-tabs .nav-item .nav-link {
@@ -1341,6 +1344,7 @@ form .prev-input-group .input-group-icon svg {
     padding: 10px 30px;
     text-align: left;
     font-size: 16px;
+    font-weight: 400;
     color: #727272;
     border-right: 5px solid transparent;
 }
@@ -2764,6 +2768,34 @@ form .prev-input-group .input-group-icon svg {
     margin-right: 5px;
 }
 
+/* Plan and bills tab css */
+.bg-transparent {background: transparent !important;}
+.plan-bill-tab {border: 0px;border-radius: 0px;background: transparent !important;}
+.setting-tab-content .content-title {font-size: 24px;font-weight: 400;margin-bottom: 24px !important;}
+.left-sidebar-ul .section-page-title h1 {font-size: 24px;font-weight: 400;margin-bottom: 24px !important;}
+.editdish-card .card-body {border-radius: 10px !important;}
+.plan-bills-section .card {border-radius: 10px;border: none;padding: 25px;border: 0.5px solid #9E9E9E;overflow: hidden;}
+.plan-bills-section .table-responsive {border-top: 0px;}
+.plan-bills-section .table-borderless th, .plan-bills-section .table-borderless td {padding: 1rem;}
+.plan-bills-section .table th {font-size: 14px;white-space: nowrap;}
+.plan-bills-section .table td {font-size: 0.875rem;font-size: 14px;color: #000000;white-space: nowrap;}
+.plan-bills-section .badge {font-size: 15px;font-weight: 400;color: #62D84E;background: rgb(98 216 78 / 50%) !important;border: 1px solid #62D84E;border-radius: 10px;height: 36px;display: inline-flex;align-items: center;justify-content: center;min-width: 82px;}
+.plan-bills-section .bi-three-dots-vertical {font-size: 1.25rem;cursor: pointer;}
+.plan-bills-section .card .btn {font-size: 12px;font-weight: 400;padding: 4px 16px;border-radius: 5px;}
+.plan-bills-section .card .card-head {margin: -15px -25px 0px;border-bottom: 1px solid #9E9E9E;padding: 8px 24px;background: #F5F5F5;}
+.plan-bills-section .card .details-row {max-width: 80%;}
+.plan-bills-section .text-muted span {color: #000000;}
+.details-row p {font-size: 20px;font-weight: 500;}
+.payment-method-box {border: 1px solid #E2E2E2;border-radius: 10px;overflow: hidden;padding: 12px;}
+.payment-method-box .payment-icon {border: 1px solid #E2E2E2;border-radius: 10px;overflow: hidden;padding: 4px 10px;}
+.payment-method-box .payment-icon img {width: 30px;object-fit: contain;}
+.details-row p label{font-weight: 300;font-size: 11px;color: #6B6B6B;text-transform: uppercase;display: block;margin-bottom: 0px;}
+.plan-bills-section .card .table-header {border-bottom: 1px solid #9E9E9E;padding: 14px 24px;background: #F5F5F5;display: flex;align-items: center;justify-content: space-between;}
+.plan-bills-section .btn-dots {border: 0px;outline: none;background-color: transparent !important;}
+.plan-bills-section .card .table-light {background: #F5F5F5;color: #6B6B6B;font-size: 13px;font-weight: 300;text-transform: uppercase;border: 0px;}
+.plan-bills-section .dropdown-menu .dropdown-item{font-size: 14px;padding: 10px 16px;}
+.plan-bills-section .table-card .table-header {border: 0px !important;}
+.plan-bills-section .card .table-light th {border: 0px !important;background: #F5F5F5;border: 0px;font-weight: 300;}
 
 /* New sidebar css */
 .menu-sidebar {transition: width 0.3s ease;}
@@ -2786,4 +2818,8 @@ form .prev-input-group .input-group-icon svg {
 
 @media screen and (max-width: 1600px) {
 .menu-sidebar .sidebar-toggle {top: 30px;}
+.horizontal_tab_setting {column-gap: 30px;}
+.plan-bills-section .card .details-row {max-width: 100%;}
+.details-row p {font-size: 16px;}
+.plan-bills-section .text-muted {font-size: 14px;}
 }

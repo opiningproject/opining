@@ -326,4 +326,25 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleSettings();
 });
 
-
+$(document).on('click', '.update-delivery-time', function () {
+    var getMinute = $(this).text();
+    var orderId = $('.order_id').val();
+    $.ajax({
+        url: baseURL + '/update-delivery-time',
+        type: 'POST',
+        data: {
+            orderId: orderId,
+            getMinute: getMinute
+        },
+        success: function (response) {
+            if (response.status == 'success') {
+                $('.expected_time_order').text(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            toastr.error(errorMessage)
+        }
+    })
+})

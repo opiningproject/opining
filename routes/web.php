@@ -231,6 +231,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/change-status-new/{id}', [NewOrdersController::class, 'changeStatusNew']);
     Route::get('/add-deliverer/{order_id}/{deliverer_id}', [NewOrdersController::class, 'addDeliverer']);
     Route::post('/save-order-setting', [NewOrdersController::class, 'updateOrderSetting'])->name('updateOrderSetting');
+    Route::post('/update-delivery-time', [NewOrdersController::class, 'updateDeliveryTime'])->name('updateDeliveryTime');
 
 //    Route::get('/deliverers', [DeliverersController::class, 'Index'])->name('deliverers');
 //    Route::post('/save-deliverers', [DeliverersController::class, 'store'])->name('saveDeliverers');

@@ -15,7 +15,7 @@ use App\Enums\PaymentType;
                 <div class="order-col" id="order">
                     <div class="order-box">
                         <div class="timing">
-                            <h3>{{ date('H:i',strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
+                            <h3>{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i',strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
                             <label class="success">{{ $ord->delivery_time }}</label>
                             <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}</h4>
                         </div>

@@ -61,12 +61,17 @@ Route::get('/', function (Request $request) {
     $domain = $request->getHost();
     $main_domain = config('app.main_domain');
     if($domain == $main_domain){
-        return redirect()->route('panelRegistration');
+        /* return redirect()->route('panelRegistration'); */
     }    
-    return redirect()->route('home');
+    return redirect()->route('login');
 });
 
-Route::get('/panel-registration', [MainController::class, 'panelRegistration'])->name('panelRegistration');
+Route::group(['prefix' => '/super-admin'], function () {
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('super-admin.dashboard');
+});
+
+/* Route::get('/', [MainController::class, 'panelRegistration'])->name('panelRegistration'); */
+Route::get('/restaurant-registration', [MainController::class, 'panelRegistration'])->name('panelRegistration');
 Route::post('/storePanelRegistration', [MainController::class, 'storePanelRegistration'])->name('storePanelRegistration');
 
 

@@ -39,7 +39,7 @@ class MainController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $randomNumberString = generateRandomNumberFromDateTime();
+        $randomNumberString = generateUniqueFourDigitNumber();
         $main_domain = config('app.main_domain');
         $randomSubDomain = $randomNumberString . '.' . $main_domain;
         
@@ -124,22 +124,26 @@ class MainController extends Controller
                 if(!empty($tenant)){
                     tenancy()->initialize($tenant);
                 }
-/*                 dd($restaurant_user); */
-                $redirectUrl = 'http://' . $newDomain;
+                $redirectUrl = 'http://' . $newDomain . '/dashboard';
                 /* $redirectUrl = formatUrl($redirectUrl); */
+
+         // Find the user by the provided user_email
+            $user = User::where('email', $request->input('user_email'))->first();
+
+            // Check if the user exists and the password matches
+            if ($user && Auth::attempt(['email' => $user->email, 'password' => $request->input('password')])) {
+          /*   return redirect()->intended('/dashboard'); */
+        /*   dd($user); */
+          return redirect()->to($redirectUrl);
+            }
+                
                 return redirect()->to($redirectUrl);
-
-
- /*                if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
-                {
-
-                } */
             }
 
         
         } catch (\Exception $e) {
             // Handle exceptions such as database errors
-            dd($e);
+           /*  dd($e); */
             return redirect()->back()
                                 ->with('error', 'Registration failed. Please try again later.')
                                 ->withInput();

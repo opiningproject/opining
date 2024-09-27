@@ -103,7 +103,7 @@ $userDetails = $order->orderUserDetails;
                     <li class="nav-item" role="presentation" style="width: 33%;">
                         <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3"
                             type="button" role="tab" aria-controls="content-3"
-                            aria-selected="false">{{ trans('modal.order_detail.delivery') }}</button>
+                            aria-selected="false">{{ trans('modal.order_detail.deliverer') }}</button>
                     </li>
                 </ul>
 

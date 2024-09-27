@@ -69,17 +69,33 @@ $(function () {
         });
     }
 
+    if (filters.length > 0) {
+        $('.count-filter').removeClass('d-none');
+        $('.count-filter').text(filters.length);
+    } else {
+        $('.count-filter').addClass('d-none');
+    }
+
     $('.order-filter input[type="checkbox"]').on('change', function () {
-        // Get selected checkboxes
+        // Clear the filters array before adding new ones
+        filters = [];
+
         if ($('.order-filter input[type="checkbox"]:checked').length > 0) {
             $('.order-filter input[type="checkbox"]:checked').each(function () {
                 filters.push($(this).attr('id')); // Get the ID of the checkbox (e.g., 'online', 'manual')
             });
+
+            var uniqueValues = new Set(filters);
+            var uniqueCount = uniqueValues.size;
+
+            $('.count-filter').removeClass('d-none');
+            $('.count-filter').text(uniqueCount);
         } else {
-            filters = []
+            $('.count-filter').addClass('d-none');
+            filters = [];
         }
         // Send filters via AJAX
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters);
     });
 
 
@@ -263,7 +279,7 @@ var start = moment().subtract(10, 'days');
 var end = moment();
 
 var dateRange = ''
-console.log("dddd", $('.order-setting-custom-time').val())
+
 var existingDate = $('.order-setting-custom-time').val() ?? null;
     $('#order-setting-custom-time').daterangepicker({
         startDate: start,
@@ -382,12 +398,10 @@ $(document).on('click', '.update-delivery-time', function () {
 
 $(document).ready(function () {
     var currentUrl = window.location.href;
-// Split the URL by '/' and get the last element
     var lastElement = currentUrl.split('/').pop();
 // Check if lastElement is a number, and then call a function
     if (!isNaN(lastElement)) {
         orderDetailNew(lastElement)
-        // console.log("lastElement", lastElement); // Call your function here
     } else {
         console.log("The last element is not a number.");
     }

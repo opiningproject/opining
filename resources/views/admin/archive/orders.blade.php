@@ -476,3 +476,4 @@
     @include('admin.modals.change-order-status')
     <!-- end footer -->
     </div>
+@endsection

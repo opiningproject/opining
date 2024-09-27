@@ -9,7 +9,9 @@
     <img src="{{ asset('images/loader.gif') }}" style="height: 250px">
 </div>
 
-@yield('content')
+<div class="body-main">
+    @yield('content')
+</div>
 
 {{--@if($theme == 'dark')
 <a href="{{ url('/change-theme/light') }}">

@@ -17,8 +17,9 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OldOrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,24 @@ Route::get('/clear-all', function () {
 Route::get('/', function () {
     return redirect()->route('home');
 });
+
+Route::get('/', function (Request $request) {
+    $domain = $request->getHost();
+    $main_domain = config('app.main_domain');
+    if($domain == $main_domain){
+        /* return redirect()->route('panelRegistration'); */
+    }    
+    return redirect()->route('login');
+});
+
+Route::group(['prefix' => '/super-admin'], function () {
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('super-admin.dashboard');
+});
+
+/* Route::get('/', [MainController::class, 'panelRegistration'])->name('panelRegistration'); */
+Route::get('/restaurant-registration', [MainController::class, 'panelRegistration'])->name('panelRegistration');
+Route::post('/storePanelRegistration', [MainController::class, 'storePanelRegistration'])->name('storePanelRegistration');
+
 
 Route::post('/paymentCallback', [App\Http\Controllers\User\WebhookController::class, 'paymentCallback']);
 
@@ -160,7 +179,6 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // Restaurant Menu Routes
 
 
-
     // Restaurant Setting Routes
     Route::group(['prefix' => '/settings'], function () {
         Route::get('/', [SettingController::class, 'index'])->name('settings');
@@ -175,7 +193,10 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
 
     // Domain Setting route
-    Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index');
+    /* Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index'); */
+ 
+    Route::resource('/domain-setting', DomainSettingController::class);
+
     // Domain Setting route
 
     Route::resource('/banners', BannerController::class);

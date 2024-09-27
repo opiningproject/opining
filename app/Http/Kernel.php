@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\IdentifyTenant::class,
         ],
 
         'api' => [
@@ -68,5 +69,8 @@ class Kernel extends HttpKernel
         'localization' => \App\Http\Middleware\WebLocalization::class,
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
         'CheckMyFinanceValidate' => \App\Http\Middleware\CheckMyFinanceValidate::class,
+        'identifyTenant' => \App\Http\Middleware\IdentifyTenant::class,
     ];
+
+
 }

@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "d9de652499ae5e6149123f0d8106d646",
-=======
     "content-hash": "33ac3c087fdecdf06f36504efa850175",
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -66,7 +62,6 @@
         },
         {
             "name": "aws/aws-sdk-php",
-<<<<<<< HEAD
             "version": "3.322.6",
             "source": {
                 "type": "git",
@@ -77,18 +72,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ae7b0edab466c3440fe007c07cb62ae32a4dbfca",
                 "reference": "ae7b0edab466c3440fe007c07cb62ae32a4dbfca",
-=======
-            "version": "3.322.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f6d2c64cb87d9e70ad99aeaffcd879a412d2ccb5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f6d2c64cb87d9e70ad99aeaffcd879a412d2ccb5",
-                "reference": "f6d2c64cb87d9e70ad99aeaffcd879a412d2ccb5",
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
                 "shasum": ""
             },
             "require": {
@@ -171,15 +154,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.322.6"
             },
             "time": "2024-09-26T18:12:45+00:00"
-=======
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.322.4"
-            },
-            "time": "2024-09-24T18:10:10+00:00"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
         },
         {
             "name": "bensampo/laravel-enum",
@@ -1170,8 +1147,6 @@
             "time": "2023-08-08T05:53:35+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "facade/ignition-contracts",
             "version": "1.0.2",
             "source": {
@@ -1225,7 +1200,6 @@
             "time": "2020-10-16T08:27:54+00:00"
         },
         {
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
             "name": "firebase/php-jwt",
             "version": "v6.10.1",
             "source": {
@@ -2707,7 +2681,6 @@
             "time": "2024-05-08T18:07:10+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "lcobucci/clock",
             "version": "2.2.0",
             "source": {
@@ -2807,43 +2780,6 @@
                     "dev-master": "4.0-dev"
                 }
             },
-=======
-            "name": "lcobucci/jwt",
-            "version": "5.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "08071d8d2c7f4b00222cc4b1fb6aa46990a80f83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/08071d8d2c7f4b00222cc4b1fb6aa46990a80f83",
-                "reference": "08071d8d2c7f4b00222cc4b1fb6aa46990a80f83",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "ext-sodium": "*",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
-                "psr/clock": "^1.0"
-            },
-            "require-dev": {
-                "infection/infection": "^0.27.0",
-                "lcobucci/clock": "^3.0",
-                "lcobucci/coding-standard": "^11.0",
-                "phpbench/phpbench": "^1.2.9",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10.7",
-                "phpstan/phpstan-deprecation-rules": "^1.1.3",
-                "phpstan/phpstan-phpunit": "^1.3.10",
-                "phpstan/phpstan-strict-rules": "^1.5.0",
-                "phpunit/phpunit": "^10.2.6"
-            },
-            "suggest": {
-                "lcobucci/clock": ">= 3.0"
-            },
-            "type": "library",
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
@@ -2867,11 +2803,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/lcobucci/jwt/tree/4.0.4"
-=======
-                "source": "https://github.com/lcobucci/jwt/tree/5.3.0"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
             },
             "funding": [
                 {
@@ -2883,11 +2815,7 @@
                     "type": "patreon"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-09-28T19:18:28+00:00"
-=======
-            "time": "2024-04-11T23:07:54+00:00"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
         },
         {
             "name": "league/commonmark",
@@ -4467,7 +4395,6 @@
         },
         {
             "name": "php-open-source-saver/jwt-auth",
-<<<<<<< HEAD
             "version": "2.3.0",
             "source": {
                 "type": "git",
@@ -4478,18 +4405,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/a4fadedab4b89ea05b28801557c7ca9c1db408bd",
                 "reference": "a4fadedab4b89ea05b28801557c7ca9c1db408bd",
-=======
-            "version": "2.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "c2b0aa7968918c19c2d3d6bacf404bfd78cb178f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/c2b0aa7968918c19c2d3d6bacf404bfd78cb178f",
-                "reference": "c2b0aa7968918c19c2d3d6bacf404bfd78cb178f",
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
                 "shasum": ""
             },
             "require": {
@@ -4498,11 +4413,7 @@
                 "illuminate/contracts": "^10|^11",
                 "illuminate/http": "^10|^11",
                 "illuminate/support": "^10|^11",
-<<<<<<< HEAD
                 "lcobucci/jwt": "^4.0",
-=======
-                "lcobucci/jwt": "^5.0",
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
                 "namshi/jose": "^7.0",
                 "nesbot/carbon": "^2.0|^3.0",
                 "php": "^8.1"
@@ -4571,11 +4482,7 @@
                 "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
-<<<<<<< HEAD
             "time": "2024-04-08T11:22:39+00:00"
-=======
-            "time": "2024-07-25T06:42:08+00:00"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
         },
         {
             "name": "phpoption/phpoption",
@@ -6199,24 +6106,6 @@
             "time": "2024-09-02T10:17:15+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "stella-maris/clock",
-            "version": "0.1.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stella-maris-solutions/clock.git",
-                "reference": "fa23ce16019289a18bb3446fdecd45befcdd94f8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stella-maris-solutions/clock/zipball/fa23ce16019289a18bb3446fdecd45befcdd94f8",
-                "reference": "fa23ce16019289a18bb3446fdecd45befcdd94f8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0|^8.0",
-                "psr/clock": "^1.0"
-=======
             "name": "stancl/jobpipeline",
             "version": "v1.7.0",
             "source": {
@@ -6238,16 +6127,11 @@
                 "ext-redis": "*",
                 "orchestra/testbench": "^7.0|^8.0|^9.0",
                 "spatie/valuestore": "^1.2"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
-                    "StellaMaris\\Clock\\": "src"
-=======
                     "Stancl\\JobPipeline\\": "src/"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6256,24 +6140,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
-                    "name": "Andreas Heigl",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "A pre-release of the proposed PSR-20 Clock-Interface",
-            "homepage": "https://gitlab.com/stella-maris/clock",
-            "keywords": [
-                "clock",
-                "datetime",
-                "point in time",
-                "psr20"
-            ],
-            "support": {
-                "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.7"
-            },
-            "time": "2022-11-25T16:15:06+00:00"
-=======
                     "name": "Samuel Štancl",
                     "email": "samuel.stancl@gmail.com"
                 }
@@ -6411,7 +6277,53 @@
                 "source": "https://github.com/archtechx/virtualcolumn/tree/v1.4.1"
             },
             "time": "2024-04-07T18:26:29+00:00"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
+        },
+        {
+            "name": "stella-maris/clock",
+            "version": "0.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stella-maris-solutions/clock.git",
+                "reference": "fa23ce16019289a18bb3446fdecd45befcdd94f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stella-maris-solutions/clock/zipball/fa23ce16019289a18bb3446fdecd45befcdd94f8",
+                "reference": "fa23ce16019289a18bb3446fdecd45befcdd94f8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0|^8.0",
+                "psr/clock": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "StellaMaris\\Clock\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Heigl",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A pre-release of the proposed PSR-20 Clock-Interface",
+            "homepage": "https://gitlab.com/stella-maris/clock",
+            "keywords": [
+                "clock",
+                "datetime",
+                "point in time",
+                "psr20"
+            ],
+            "support": {
+                "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.7"
+            },
+            "time": "2022-11-25T16:15:06+00:00"
         },
         {
             "name": "stripe/stripe-php",
@@ -9172,7 +9084,6 @@
         },
         {
             "name": "filp/whoops",
-<<<<<<< HEAD
             "version": "2.16.0",
             "source": {
                 "type": "git",
@@ -9193,28 +9104,6 @@
                 "mockery/mockery": "^1.0",
                 "phpunit/phpunit": "^7.5.20 || ^8.5.8 || ^9.3.3",
                 "symfony/var-dumper": "^4.0 || ^5.0"
-=======
-            "version": "2.15.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filp/whoops.git",
-                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/a139776fa3f5985a50b509f2a02ff0f709d2a546",
-                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9 || ^7.0 || ^8.0",
-                "psr/log": "^1.0.1 || ^2.0 || ^3.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^0.9 || ^1.0",
-                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.3",
-                "symfony/var-dumper": "^2.6 || ^3.0 || ^4.0 || ^5.0"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
             },
             "suggest": {
                 "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
@@ -9254,11 +9143,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/filp/whoops/tree/2.16.0"
-=======
-                "source": "https://github.com/filp/whoops/tree/2.15.4"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
             },
             "funding": [
                 {
@@ -9266,11 +9151,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
             "time": "2024-09-25T12:00:00+00:00"
-=======
-            "time": "2023-11-03T12:00:00+00:00"
->>>>>>> 9e5df49fc60fcf9258bfb870624d71d04859e855
         },
         {
             "name": "hamcrest/hamcrest-php",

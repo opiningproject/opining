@@ -1266,7 +1266,7 @@ form .prev-input-group .input-group-icon svg {
 .order-page-bar .drop_with_search {display: flex;background: #ffffff;border-radius: 10px;overflow: hidden;}
 .order-page-bar .drop_with_search .form-control {border: 0px;min-height: 47px;max-height: 47px;border-radius: 0px;}
 .order-page-bar .drop_with_search .select-options {min-width: 120px;border-right: 1px solid #d7d7d7;padding-right: 10px;}
-.order-page-bar .drop_with_search .select-options .form-control {padding-left: 20px;}
+.order-page-bar .drop_with_search .select-options .form-control {padding-left: 20px;width: 146px;}
 .order-page-bar .filter-options {min-width: 200px;}
 .order-page-bar .filter-options .form-control {background-color: #ffffff;height: 47px;max-height: 47px;border: 0px;}
 .order-page-bar .form-control::-webkit-input-placeholder {font-size: 14px;color: #3d3d3d;font-weight: 300;}
@@ -1309,6 +1309,7 @@ form .prev-input-group .input-group-icon svg {
 .order-page .filter-btn-group button {border-radius: 10px;margin-left: 0px;padding: 0px;background-color: #646464;color: white;width: 36px;height: 36px;display: flex;align-items: center;justify-content: center;border: 0px;}
 .order-page .filter-btn-group button img {max-width: 20px;margin: 0px auto;}
 .order-page .filter-btn-group button:hover {background-color: #555;}
+.count-filter{background-color: black;color: white;padding-top: 0px;padding-left: 5px;height: 18px;width: 19px;border-radius: 50%;display: inline-block;position: absolute;left: 114px;top: -8px;font-size: 13px;}
 
 
 /* Order Details popup css */

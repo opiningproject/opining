@@ -45,6 +45,7 @@
                                         </div>
                                     </div>
                                     <div class="dropdown custom-dropdown">
+                                        <span class="count count-filter d-none"> </span>
                                         <button class="form-control dropdown-toggle" type="button"
                                                 id="dropdownMenuButton"
                                                 data-bs-toggle="dropdown" aria-expanded="false">

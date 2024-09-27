@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OldOrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,19 @@ Route::get('/clear-all', function () {
 Route::get('/', function () {
     return redirect()->route('home');
 });
+
+Route::get('/', function (Request $request) {
+    $domain = $request->getHost();
+    $main_domain = config('app.main_domain');
+    if($domain == $main_domain){
+        return redirect()->route('panelRegistration');
+    }    
+    return redirect()->route('home');
+});
+
+Route::get('/panel-registration', [MainController::class, 'panelRegistration'])->name('panelRegistration');
+Route::post('/storePanelRegistration', [MainController::class, 'storePanelRegistration'])->name('storePanelRegistration');
+
 
 Route::post('/paymentCallback', [App\Http\Controllers\User\WebhookController::class, 'paymentCallback']);
 

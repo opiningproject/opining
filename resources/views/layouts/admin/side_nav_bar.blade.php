@@ -1,6 +1,7 @@
 <aside class="menu-sidebar">
 
-    <a href="javascript:void(0)" id="sidebar-toggle-btn" class="sidebar-toggle"><img src="images/sidebar-arrow.svg" alt="" /></a>
+    <a href="javascript:void(0)" id="sidebar-toggle-back" class="sidebar-toggle"><img
+            src="{{ asset('images/sidebar-arrow.svg') }}" alt="" /></a>
 
     <div class="menu-sidebar-inner">
         <div class="bd-navbar-toggle">
@@ -133,10 +134,10 @@
                                     <a href="{{ route('deliverers.index') }}"
                                         class="nav-link {{ activeMenu('deliverers') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/chat-gray.svg') }}"
+                                            <img src="{{ asset('images/admin-menu-icons/deliverer-gray.svg') }}"
                                                 class="svg actual" height="22" width="22" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/chat-black.svg') }}"
+                                            <img src="{{ asset('images/admin-menu-icons/deliverer-black.svg') }}"
                                                 class="svg hoverable" height="22" width="22" />
                                         </div>
                                         <span
@@ -217,8 +218,8 @@
     <div class="sidebar-menu-top-box position-relative border-top mt-3">
         <div class="d-flex gap-2 align-items-center">
             <div class="userPhoto">
-                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid"
-                    width="50" height="50">
+                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid" width="50"
+                    height="50">
             </div>
             <div class="text-start">
                 <div class="dropdown">
@@ -232,8 +233,7 @@
             <div class="ms-auto">
                 <a class="dropdown-item log-out-item" href="javascript:void(0)"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg" width="20"
-                        height="20" />
+                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg" width="20" height="20" />
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf </form>

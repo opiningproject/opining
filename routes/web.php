@@ -160,7 +160,6 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // Restaurant Menu Routes
 
 
-
     // Restaurant Setting Routes
     Route::group(['prefix' => '/settings'], function () {
         Route::get('/', [SettingController::class, 'index'])->name('settings');
@@ -175,7 +174,10 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
 
     // Domain Setting route
-    Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index');
+    /* Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index'); */
+ 
+    Route::resource('/domain-setting', DomainSettingController::class);
+
     // Domain Setting route
 
     Route::resource('/banners', BannerController::class);

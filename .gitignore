@@ -22,3 +22,5 @@ composer.lock
 /config/view.php
 storage/framework
 package-lock.json
+/config/services.php
+/config/filesystems.php

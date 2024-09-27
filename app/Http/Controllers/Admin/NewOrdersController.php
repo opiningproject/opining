@@ -89,7 +89,7 @@ class NewOrdersController extends Controller
     public function orderDetail(Request $request)
     {
         $order = Order::find($request->order_id);
-        $delivererUser = DelivererUser::get();
+        $delivererUser = DelivererUser::where('status', '1')->get();
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser ])->render();
 

@@ -15,7 +15,7 @@ $payment_settings = $params['order_settings'];
 
                 <div class="radio-tabs">
                     <label class="status-option specific-timezone active">
-                        <input id="order-setting-timezone" type="radio" name="orderSetting" {{$payment_settings['order_setting_type'] == "1" ? 'checked' : ''}} />
+                        <input id="order-setting-timezone" type="radio" name="orderSetting" checked {{$payment_settings['order_setting_type'] == "1" ? 'checked' : ''}} />
                         <span for="order-setting-timezone"></span>
                         <label class="text-uppercase">{{ trans('rest.order_screen_settings.specific_timezone') }}</label>
                     </label>

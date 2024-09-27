@@ -26,6 +26,12 @@ $(function () {
     var search = '';
     var searchOption = '';
     // Keyup search handler
+    $(document).on('change', '#order-tabs-dropdown', function () {
+        search = $('#search-order-new').val();
+        searchOption = $('#order-tabs-dropdown').val();
+        searchFilterAjax(search, searchOption, filters)
+    });
+
     $(document).on('keyup', '#search-order-new', function () {
         search = $(this).val();
         searchOption = $('#order-tabs-dropdown').val();
@@ -340,12 +346,14 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).on('click', '.update-delivery-time', function () {
     var getMinute = $(this).text();
     var orderId = $('.order_id').val();
+    var curruntTime = $('.expected_time_order').text();
     $.ajax({
         url: baseURL + '/update-delivery-time',
         type: 'POST',
         data: {
             orderId: orderId,
-            getMinute: getMinute
+            getMinute: getMinute,
+            curruntTime: curruntTime
         },
         success: function (response) {
             if (response.status == 'success') {

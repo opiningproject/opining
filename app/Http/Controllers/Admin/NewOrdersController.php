@@ -438,7 +438,7 @@ class NewOrdersController extends Controller
     public function updateDeliveryTime(Request $request)
     {
         $getOrderData = Order::find($request->orderId);
-        $updatedDeliveryTime = \Carbon\Carbon::parse($getOrderData->expected_delivery_time)->addMinutes($request->getMinute);
+        $updatedDeliveryTime = \Carbon\Carbon::parse($request->curruntTime)->addMinutes($request->getMinute);
         $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
         $getOrderData->save();
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));

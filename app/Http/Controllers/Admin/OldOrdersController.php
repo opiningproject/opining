@@ -19,7 +19,7 @@ use Response;
 use Mail;
 use Carbon\Carbon;
 
-class OrdersController extends Controller
+class OldOrdersController extends Controller
 {
     /**
      * Create a new controller instance.

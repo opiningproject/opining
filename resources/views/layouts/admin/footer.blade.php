@@ -115,11 +115,19 @@
             if(data) {
                 $('#order-modal-div').html(data)
                 $('.order-notification-popup').modal('show')
+                // Check if there are more than 10 orders displayed
+                if ($('.order-col').length == 12) {
+                    // Remove the last order element
+                    $('.order-col:last').remove();
+                }
                 @if(getRestaurantDetail()->order_notif_sound)
                 // $('.myaudio').play();
                 document.getElementById('myaudio').play();
                 @endif
+                // setInterval(function() {
+                    // Call the function to add a new order
                     getLiveOrderList();
+                // }, 10000);
             }
         },
         error: function (data) {
@@ -138,10 +146,11 @@ function getLiveOrderList() {
         datatype: 'json',
         success: function (data) {
             if(data) {
-                $('.order-list-data-div1').prepend(data.data)
+                $('.order-row').prepend(data.data)
                 $('.order-notification-popup').modal('show')
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);
+                $('.count-order').html(currentOrderCount + 1);
             }
         },
         error: function (data) {

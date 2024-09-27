@@ -80,7 +80,7 @@ function saveDeliverer() {
                     '        </a>' +
                     '        <a class="btn btn-site-theme btn-default save-edit-btn d-block"' +
                     '           id="save-edit-btn' + id + '"' +
-                    '           style="width: auto;margin-left: 0%; display: none!important;"' +
+                    '           style="width: auto;margin-left: 0px; display: none!important;"' +
                     '           data-id="' + id + '">' +
                     '            <span class="align-middle">'+ dishValidation.save_btn +'</span>' +
                     '        </a>' +
@@ -161,7 +161,6 @@ $(document).on('click', '.save-edit-btn', function () {
             email,
         },
         success: function (response) {
-            console.log(response.data)
             if (response.status == 200) {
                 $('#first_name'+id).prop('readonly', true)
                 $('#last_name'+id).prop('readonly', true)
@@ -169,7 +168,7 @@ $(document).on('click', '.save-edit-btn', function () {
                 $('#email'+id).prop('readonly', true)
                 $('#edit-btn'+id).show()
                 $('#del-btn'+id).show()
-                $('#save-edit-btn'+id).attr('style','width: 50%;margin-left: 25%; display: none!important; !important')
+                $('#save-edit-btn'+id).attr('style','width: auto;margin-left: 0px; display: none!important; !important')
                 toastr.success(response.message)
             } else {
                 toastr.error(response.message)

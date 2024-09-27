@@ -187,7 +187,7 @@ class NewOrdersController extends Controller
                 case 'phone_number':
                     // Search by phone number
                     $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
-                        $query->where('order_contact_number', 'like', '%' . $searchTerm . '%');
+                        $query->where('order_contact_number', $searchTerm);
                     });
                     break;
 
@@ -226,15 +226,25 @@ class NewOrdersController extends Controller
                 default:
                     // Default case for 'all' or when no valid search type is selected
                     $orders->where(function ($query) use ($searchTerm) {
-                        $query->where('id', 'like', '%' . $searchTerm . '%')
+                        // Search within the orders table for 'id'
+                        $query->where('id', $searchTerm)
+                            // Search within the 'orderUserDetails' relationship
                             ->orWhereHas('orderUserDetails', function ($query) use ($searchTerm) {
                                 $query->where('order_name', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('house_no', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('city', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('zipcode', 'like', '%' . $searchTerm . '%');
+                            })
+                            // Search within the 'dishDetails' and the related 'dish' relationship
+                            ->orWhereHas('dishDetails', function ($query) use ($searchTerm) {
+                                $query->whereHas('dish', function ($subQuery) use ($searchTerm) {
+                                    $subQuery->where('name_en', 'like', '%' . $searchTerm . '%')
+                                        ->orWhere('name_nl', 'like', '%' . $searchTerm . '%');
+                                });
                             });
                     });
+
                     break;
             }
         }
@@ -359,7 +369,7 @@ class NewOrdersController extends Controller
 
                                     <div class="actions">
                                         <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
-                                        <a href="#" class="orderDetails btn '. orderStatusBox($orders)->color .'">'. orderStatusBox($orders)->text .'</a>
+                                        <button href="#" class="orderDetails order-status-'.$orders->id.' btn '. orderStatusBox($orders)->color .'" onclick="orderDetailNew('.$orders->id.')">'. orderStatusBox($orders)->text .'</button>
                                     </div>
                                 </div>
                             </div>';

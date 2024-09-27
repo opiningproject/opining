@@ -18,6 +18,7 @@ yarn-error.log
 /.idea
 /.vscode
 composer.lock
-config/database.php
+/config/database.php
+/config/view.php
 storage/framework
 package-lock.json

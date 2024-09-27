@@ -174,7 +174,9 @@
                                 <!-- Filter buttons -->
                                 <div class="filter-btn-group">
                                     <button type="button" class="btn">
-                                        <img src="{{ asset(path: 'images/bike-white.svg') }}" alt="Bike"/>
+                                        <a target="_blank" href="{{ route('deliverers.index') }}">
+                                            <img src="{{ asset(path: 'images/bike-white.svg') }}" alt="Bike"/>
+                                        </a>
                                     </button>
 
                                     <button type="button" class="btn">

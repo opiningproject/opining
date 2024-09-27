@@ -20,7 +20,9 @@ class MainController extends Controller
     {
         $domain = $request->getHost();
         $main_domain = config('app.main_domain');
+        /* dd($domain); */
         if($domain == $main_domain){
+           
             return view('auth.panel-registration', [
             ]);
         }

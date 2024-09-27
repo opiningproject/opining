@@ -18,7 +18,7 @@
                                         <img src="{{ asset('images/add-up.svg')}}" alt="" class="svg" height="20"
                                              width="20">
                                         <span
-                                            class="align-middle ms-3">{{ trans('rest.menu.dish_option.add_option_category') }}</span>
+                                            class="align-middle ms-1">{{ trans('rest.menu.dish_option.add_option_category') }}</span>
                                     </a>
                                 </div>
                             </div>

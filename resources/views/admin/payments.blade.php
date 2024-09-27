@@ -257,6 +257,7 @@
   @include('layouts.admin.footer_design')
   <!-- end footer -->
 </div>
+@endsection
 
 @section('script')
 <script>

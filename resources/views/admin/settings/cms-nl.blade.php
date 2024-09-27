@@ -1,5 +1,8 @@
 <div class="tab-pane fade cmsPagesdutch" id="cmsPagesdutch-tab-pane" role="tabpanel" aria-labelledby="cmsPagesdutch-tab" tabindex="0">
-    <div class="card-body">
+
+    <h2 class="content-title">CMS Pages(Dutch)</h2>
+
+    <div class="card-body bg-white">
         <div class="d-flex align-items-center justify-content-between">
             <h3 class="text-custom-muted mb-0 tab-title"></h3>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">

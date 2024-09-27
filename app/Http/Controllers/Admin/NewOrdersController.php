@@ -89,7 +89,7 @@ class NewOrdersController extends Controller
     public function orderDetail(Request $request)
     {
         $order = Order::find($request->order_id);
-        $delivererUser = DelivererUser::get();
+        $delivererUser = DelivererUser::where('status', '1')->get();
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser ])->render();
 
@@ -429,5 +429,33 @@ class NewOrdersController extends Controller
         $restaurant->save();
 
         return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateDeliveryTime(Request $request)
+    {
+        $getOrderData = Order::find($request->orderId);
+        $updatedDeliveryTime = \Carbon\Carbon::parse($request->curruntTime)->addMinutes($request->getMinute);
+        $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
+        $getOrderData->save();
+        $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
+        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOrderSetting(Request $request)
+    {
+        $getOrderData = Order::find($request->orderId);
+        $updatedDeliveryTime = \Carbon\Carbon::parse($getOrderData->expected_delivery_time)->addMinutes($request->getMinute);
+        $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
+        $getOrderData->save();
+        $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
+        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 }

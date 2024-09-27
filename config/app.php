@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
-    'main_domain' => 'store.opiningstore.com',
+    'main_domain' => 'localhost',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,7 +171,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         browner12\helpers\HelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        App\Providers\TenancyServiceProvider::class,
 
     ])->toArray(),
 

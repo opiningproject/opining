@@ -1442,7 +1442,7 @@ form .prev-input-group .input-group-icon svg {
 /* Plan and bills tab css */
 .bg-transparent {background: transparent !important;}
 .plan-bill-tab {border: 0px;border-radius: 0px;background: transparent !important;}
-.setting-tab-content .content-title {font-size: 24px;font-weight: 400;margin-bottom: 24px !important;}
+.setting-tab-content .content-title {font-size: 26px;font-weight: 400;margin-bottom: 24px !important;}
 .left-sidebar-ul .section-page-title h1 {font-size: 24px;font-weight: 400;margin-bottom: 24px !important;}
 .editdish-card .card-body {border-radius: 10px !important;}
 .plan-bills-section .card {border-radius: 10px;border: none;padding: 25px;border: 0.5px solid #9E9E9E;overflow: hidden;}
@@ -1500,4 +1500,8 @@ form .prev-input-group .input-group-icon svg {
 .plan-bills-section .card .details-row {max-width: 100%;}
 .details-row p {font-size: 16px;}
 .plan-bills-section .text-muted {font-size: 14px;}
+}
+
+.section-page-title .page-title {
+    font-size: 26px !important;
 }

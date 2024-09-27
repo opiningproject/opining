@@ -1718,6 +1718,7 @@ form .prev-input-group .input-group-icon svg {
 
 .order-page-bar .drop_with_search .select-options .form-control {
     padding-left: 20px;
+    width: 146px;
 }
 
 .order-page-bar .filter-options {

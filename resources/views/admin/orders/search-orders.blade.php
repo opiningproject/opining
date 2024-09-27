@@ -37,7 +37,7 @@ use App\Enums\PaymentType;
                             </div>
 
                             <div class="right text-end ps-2">
-                                <p class="mb-0">{{ date('d-m-y H:i',strtotime($ord->created_at)) }}</p>
+                                <p class="mb-0">{{ date('d-m-Y H:i',strtotime($ord->created_at)) }}</p>
                                 <p class="mb-0">Web #{{$ord->id}}</p>
                             </div>
                         </div>
@@ -54,7 +54,6 @@ use App\Enums\PaymentType;
     <div class="d-flex justify-content-end align-items-center pt-3">
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
-{{--            {{ $orders->links() }}--}}
             {{ $orders->appends(['search' => request()->input('search')])->links() }}
         </nav>
 

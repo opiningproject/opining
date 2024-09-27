@@ -9,7 +9,6 @@ $payment_settings = $params['order_settings'];
         <div class="modal-content">
             <div class="modal-header pb-1">
                 {{ trans('rest.order_screen_settings.title') }}
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
                 <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.show_orders') }}</h3>

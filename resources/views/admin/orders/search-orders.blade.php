@@ -12,10 +12,10 @@ use App\Enums\PaymentType;
             @foreach($orders as $key => $ord)
                 <?php $userDetails = $ord->orderUserDetails; ?>
 
-                <div class="order-col" id="order">
+                  <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
                     <div class="order-box">
                         <div class="timing">
-                            <h3>{{ date('H:i',strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
+                            <h3 class="expectedDeliveryTime-{{$ord->id}}">{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
                             <label class="success">{{ $ord->delivery_time }}</label>
                             <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}</h4>
                         </div>
@@ -37,13 +37,13 @@ use App\Enums\PaymentType;
                             </div>
 
                             <div class="right text-end ps-2">
-                                <p class="mb-0">{{ date('d-m-y H:i',strtotime($ord->created_at)) }}</p>
+                                <p class="mb-0">{{ date('d-m-Y H:i',strtotime($ord->created_at)) }}</p>
                                 <p class="mb-0">Web #{{$ord->id}}</p>
                             </div>
                         </div>
                         <div class="actions">
                             <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}</h5>
-                            <button class="orderDetails btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})" >{{ orderStatusBox($ord)->text }}</button>
+                            <button class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})" >{{ orderStatusBox($ord)->text }}</button>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,6 @@ use App\Enums\PaymentType;
     <div class="d-flex justify-content-end align-items-center pt-3">
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
-{{--            {{ $orders->links() }}--}}
             {{ $orders->appends(['search' => request()->input('search')])->links() }}
         </nav>
 
@@ -70,7 +69,7 @@ use App\Enums\PaymentType;
                      alt="Bike"  />
             </button>
 
-            <button type="button" class="btn">
+            <button type="button" class="btn order-setting">
                 <img src="{{ asset(path: 'images/setting-white.svg') }}"
                      alt="Bike"  />
             </button>

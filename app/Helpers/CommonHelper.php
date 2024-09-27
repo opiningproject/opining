@@ -673,37 +673,3 @@ if (!function_exists('orderStatusBox')) {
         return $order;
     }
 }
-
-
-//if (!function_exists('orderStatusNameColor')) {
-//    function orderStatusNameColor($order_status)
-//    {
-//            // Define status-color mappings
-//            $statusColors = [
-//                1 => 'outline-danger',        // New Order
-//                2 => 'outline-warning',       // In Kitchen
-//                4 => 'outline-success',       // Ready For Pickup
-//                5 => 'outline-success',       // Out For Delivery
-//                6 => 'btn-danger-outline'     // Delivered
-//            ];
-//
-//            // Default to 'New Order' if no matching status
-//            $orderText = [
-//                1 => 'New Order',
-//                2 => 'In Kitchen',
-//                4 => 'Ready For Pickup',
-//                5 => 'Out For Delivery',
-//                6 => 'Delivered'
-//            ];
-//
-//            // Get the color and text based on the status
-//            $color = $statusColors[$order_status] ?? 'outline-secondary'; // Fallback color
-//            $text = $orderText[$order_status] ?? 'Unknown Status';        // Fallback text
-//
-//            // Return the color and text in an array
-//            return [
-//                'color' => $color,
-//                'text' => $text
-//            ];
-//    }
-//}

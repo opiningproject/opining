@@ -21,7 +21,7 @@ $userDetails = $order->orderUserDetails;
                 <h3 class="mb-0">{{ date('d-m-Y H:i', strtotime($order->created_at)) }}</h3>
             </div>
         </div>
-
+        <input type="hidden" class="order_id" value="{{$order->id}}">
         <div class="modal-body pt-1 pb-0">
             <div class="border-0 d-flex align-items-center justify-content-between mb-0">
 
@@ -183,11 +183,13 @@ $userDetails = $order->orderUserDetails;
                                     <div class="timing-row">
                                         <label>{{ trans('modal.order_detail.wished_time') }}</label>
                                         <div class="timing-col">
-                                            <button class="t-box">-5</button>
+                                            <button class="t-box update-delivery-time">-5</button>
                                             <div class="text-uppercase">
-                                                {{ date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                <span class="expected_time_order">
+                                                {{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                </span>
                                             </div>
-                                            <button class="t-box">+5</button>
+                                            <button class="t-box update-delivery-time">+5</button>
                                         </div>
                                     </div>
                                 </div>

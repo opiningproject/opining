@@ -15,7 +15,7 @@
                                 <a class="btn btn-outline-secondary border-light btn-default me-4"
                                    href="{{ route('claimHistoryLog') }}">
                                     <img class="svg" src="{{ asset('images/claim-history.svg') }}" alt="" height="20" width="20">
-                                    <span class="align-middle ms-3">{{ trans('rest.coupons.claim_history') }}</span>
+                                    <span class="align-middle ms-1">{{ trans('rest.coupons.claim_history') }}</span>
                                 </a>
                                 <a class="btn btn-site-theme btn-default btn-box-shadow" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#addCouponModal">
                                     <img src="{{ asset('images/add-up-white.svg') }}" alt="" height="20" width="20" class="svg">

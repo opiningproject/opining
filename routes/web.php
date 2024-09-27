@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\MyWebsiteController;
 use App\Http\Controllers\Admin\NewOrdersController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ChatController;
-use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\OldOrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -217,35 +217,40 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/chat/search-chat', [ChatController::class, 'searchChat']);
     Route::post('/chat/store', [ChatController::class, 'storeMessage']);
 
-    Route::get('/orders/not-notified-orders', [OrdersController::class, 'getNotNotifiedOrders'])->name('notNotifiedOrder');
-    Route::get('/orders/{date_filter?}', [OrdersController::class, 'index'])->name('orders');
-    Route::get('/orders/print-label/{order_id}', [OrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
-    Route::get('/orders/change-status/{id}', [OrdersController::class, 'changeStatus']);
+    // old order pages route
+    Route::get('/orders/not-notified-orders', [OldOrdersController::class, 'getNotNotifiedOrders'])->name('notNotifiedOrder');
+    Route::get('/orders-old/{date_filter?}', [OldOrdersController::class, 'index'])->name('ordersOld');
+    Route::get('/orders/print-label-old/{order_id}', [OldOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
+    Route::get('/orders/change-status-old/{id}', [OldOrdersController::class, 'changeStatus']);
+    Route::get('/orders/order-detail-old/{order_id}', [OldOrdersController::class, 'orderDetail'])->name('order-detail');
+    Route::post('/orders/searchOrder', [OldOrdersController::class, 'searchOrder'])->name('searchOrder');
+    Route::post('/orders/getRealTimeOrderOld', [OldOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrderOld');
+
+
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments')->middleware('CheckMyFinanceValidate');
 
     // New Orders Controller
-    Route::get('/orders-new/{date_filter?}', [NewOrdersController::class, 'index'])->name('newOrderPage');
-    Route::post('/orders/getNewRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
-    Route::post('/orders-new/search-order', [NewOrdersController::class, 'searchOrder']);
-    Route::get('/orders/order-detail-new/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
-    Route::get('/orders/change-status-new/{id}', [NewOrdersController::class, 'changeStatusNew']);
+    Route::get('/orders/{date_filter?}', [NewOrdersController::class, 'index'])->name('orders');
+    Route::post('/orders/getRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
+    Route::get('/orders/order-detail/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
+    Route::get('/orders/change-status/{id}', [NewOrdersController::class, 'changeStatusNew']);
     Route::get('/add-deliverer/{order_id}/{deliverer_id}', [NewOrdersController::class, 'addDeliverer']);
     Route::post('/save-order-setting', [NewOrdersController::class, 'updateOrderSetting'])->name('updateOrderSetting');
+    Route::post('/update-delivery-time', [NewOrdersController::class, 'updateDeliveryTime'])->name('updateDeliveryTime');
+    Route::get('/get-order-setting', [NewOrdersController::class, 'getOrderSetting'])->name('getOrderSetting');
+    Route::get('/orders/print-label/{order_id}', [NewOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
 
-//    Route::get('/deliverers', [DeliverersController::class, 'Index'])->name('deliverers');
-//    Route::post('/save-deliverers', [DeliverersController::class, 'store'])->name('saveDeliverers');
+    //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);
     Route::post('deliverers/status-change', [DeliverersController::class, 'changeStatus']);
 
 
     // Archive Order Route
-    Route::get('/archive/{date_filter?}', [OrdersController::class, 'archiveOrders'])->name('archives');
-    Route::get('/archive/order-detail/{order_id}', [OrdersController::class, 'archiveOrderDetail'])->name('archive-order-detail');
-    Route::post('/archive/searchOrder', [OrdersController::class, 'archiveSearchOrder'])->name('archiveSearchOrder');
+    Route::get('/archive/{date_filter?}', [OldOrdersController::class, 'archiveOrders'])->name('archives');
+    Route::get('/archive/order-detail/{order_id}', [OldOrdersController::class, 'archiveOrderDetail'])->name('archive-order-detail');
+    Route::post('/archive/searchOrder', [OldOrdersController::class, 'archiveSearchOrder'])->name('archiveSearchOrder');
 
-    Route::get('/orders/order-detail/{order_id}', [OrdersController::class, 'orderDetail'])->name('order-detail');
-    Route::post('/orders/searchOrder', [OrdersController::class, 'searchOrder'])->name('searchOrder');
-    Route::post('/orders/getRealTimeOrder', [OrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
+
 
     Route::get('/ingredients/category/checkItems/{category}', [IngredientCategoryController::class, 'checkAttachedItems']);
 

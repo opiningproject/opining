@@ -26,8 +26,15 @@ class RestaurantDetailSeeder extends Seeder
                     "ideal" => 1,
                     "card" => 1,
                     "cod" => 1
+                ],
+                "order_settings" => [
+                    "expiry_date" => null,
+                    "timezone_setting" => null,
+                    "order_setting_type" => null
                 ]
             ]),
+            'delivery_time' => '20-45 Min',
+            'take_away_time' => '10-15 Min',
             'created_at' => date('Y-m-d h:i:s'),
             'updated_at' => date('Y-m-d h:i:s'),
         ]);

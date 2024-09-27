@@ -26,6 +26,12 @@ $(function () {
     var search = '';
     var searchOption = '';
     // Keyup search handler
+    $(document).on('change', '#order-tabs-dropdown', function () {
+        search = $('#search-order-new').val();
+        searchOption = $('#order-tabs-dropdown').val();
+        searchFilterAjax(search, searchOption, filters)
+    });
+
     $(document).on('keyup', '#search-order-new', function () {
         search = $(this).val();
         searchOption = $('#order-tabs-dropdown').val();
@@ -79,7 +85,7 @@ $(function () {
 
     function searchFilterAjax(search, searchOption, filters) {
         $.ajax({
-            url: baseURL + '/orders-new', // Ensure this matches your route
+            url: baseURL + '/orders', // Ensure this matches your route
             type: 'GET',
             data: {
                 search,
@@ -98,7 +104,7 @@ $(function () {
 
 function orderDetailNew(id) {
     $.ajax({
-        url: baseURL + '/orders/order-detail-new/' + id,
+        url: baseURL + '/orders/order-detail/' + id,
         type: 'GET',
         success: function (response) {
             if (response.status == 1) {
@@ -120,11 +126,12 @@ function changeOrderStatusNew(order_id,order_status) {
 
     var orderId = order_id;
     $.ajax({
-        url: baseURL+'/orders/change-status-new/'+ orderId,
+        url: baseURL+'/orders/change-status/'+ orderId,
         type: 'GET',
         success: function (response) {
             console.log("response", response)
             if (response.status == 1) {
+                $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
                 $('.order-detail-popup').modal('hide')
                 $('.order-status-' + response.orderId).addClass(response.color);
                 $('.order-status-' + response.orderId).text(response.text);
@@ -256,21 +263,31 @@ var start = moment().subtract(10, 'days');
 var end = moment();
 
 var dateRange = ''
-$('#order-setting-custom-time').daterangepicker({
-    startDate: start,
-    endDate: end,
-    maxDate: moment(),
-    ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-    }
-});
-
-$('#order-setting-custom-time').val('')
+console.log("dddd", $('.order-setting-custom-time').val())
+var existingDate = $('.order-setting-custom-time').val() ?? null;
+    $('#order-setting-custom-time').daterangepicker({
+        startDate: start,
+        endDate: end,
+        maxDate: moment(),
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    });
+if (existingDate) {
+    var dates = existingDate.split(' - ');
+    var start_date = dates[0];
+    var end_date = dates[1];
+    $('#order-setting-custom-time').data('daterangepicker').setStartDate(moment(start_date, 'DD-MM-YYYY'));
+    $('#order-setting-custom-time').data('daterangepicker').setEndDate(moment(end_date, 'DD-MM-YYYY'));
+    $('#order-setting-custom-time').val(start_date + ' - ' + end_date);
+} else {
+    $('#order-setting-custom-time').val('')
+}
 $('#order-setting-custom-time').attr('placeholder', 'Select Date Range')
 
 $('#order-setting-custom-time').on('apply.daterangepicker', function (ev, picker) {
@@ -326,4 +343,52 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleSettings();
 });
 
+$(document).on('click', '.update-delivery-time', function () {
+    var getMinute = $(this).text();
+    var orderId = $('.order_id').val();
+    var curruntTime = $('.expected_time_order').text();
+    $.ajax({
+        url: baseURL + '/update-delivery-time',
+        type: 'POST',
+        data: {
+            orderId: orderId,
+            getMinute: getMinute,
+            curruntTime: curruntTime
+        },
+        success: function (response) {
+            if (response.status == 'success') {
+                $('.expected_time_order').text(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            toastr.error(errorMessage)
+        }
+    })
+})
 
+/*$(document).on('click', '.order_details_button', function () {
+    var urlLastElement = document.location.pathname
+    if (urlLastElement == '/orders') {
+        let id = $(this).attr("data-id");
+        $('.order-' + id).addClass('active');
+        $('.order-notification-popup').modal('hide')
+    } else {
+        $('.order-notification-popup').modal('hide')
+    }
+
+})*/
+
+$(document).ready(function () {
+    var currentUrl = window.location.href;
+// Split the URL by '/' and get the last element
+    var lastElement = currentUrl.split('/').pop();
+// Check if lastElement is a number, and then call a function
+    if (!isNaN(lastElement)) {
+        orderDetailNew(lastElement)
+        // console.log("lastElement", lastElement); // Call your function here
+    } else {
+        console.log("The last element is not a number.");
+    }
+});

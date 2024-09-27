@@ -102,4 +102,10 @@ $(document).ready(function () {
   $('#sidebar-toggle-btn').on('click', function () {
     $('body').toggleClass('sidebar-toggle-body');
   });
+
+  $('#sidebar-toggle-back').on('click', function () {
+    $('body').removeClass('sidebar-toggle-body');
+  });
+
+  
 });

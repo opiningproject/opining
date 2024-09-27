@@ -10,7 +10,7 @@
                     <div class="main-content">
 
                         <!-- start Setting section -->
-                        <section class="custom-section">
+                        <section class="custom-section pt-0">
                             <div class="customize-tab setting-tab horizontal_tab_setting">
 
                                 <div class="left-sidebar-ul">

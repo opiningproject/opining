@@ -50,7 +50,7 @@ class NewOrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 12);
+        $perPage = request()->input('per_page', default: 10);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -171,7 +171,7 @@ class NewOrdersController extends Controller
     public function orderSearchFilter(Request $request) {
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 12);
+        $perPage = request()->input('per_page', default: 10);
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {

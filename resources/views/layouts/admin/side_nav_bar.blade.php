@@ -1,8 +1,5 @@
 <aside class="menu-sidebar">
 
-    <a href="javascript:void(0)" id="sidebar-toggle-back" class="sidebar-toggle"><img
-            src="{{ asset('images/sidebar-arrow.svg') }}" alt="" /></a>
-
     <div class="menu-sidebar-inner">
         <div class="bd-navbar-toggle">
             <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar"
@@ -18,6 +15,17 @@
                     <img src="{{ asset('images/opining-text-logo.svg') }}" class="text-logo" />
                     {{-- <img src="{{ asset('images/logo-admin.png') }}" class="web-logo" /> --}}
                 </div>
+            </a>
+
+            <a href="javascript:void(0)" id="sidebar-toggle-back" class="sidebar-toggle">
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <line y1="1.25" x2="18" y2="1.25" stroke="black" stroke-width="1.5" />
+                    <line x1="-6.55671e-08" y1="7.25" x2="18" y2="7.25" stroke="black"
+                        stroke-width="1.5" />
+                    <line x1="-6.55671e-08" y1="13.25" x2="18" y2="13.25" stroke="black"
+                        stroke-width="1.5" />
+                </svg>
             </a>
         </div>
 
@@ -218,8 +226,8 @@
     <div class="sidebar-menu-top-box position-relative border-top mt-3">
         <div class="d-flex gap-2 align-items-center">
             <div class="userPhoto">
-                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid" width="50"
-                    height="50">
+                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid"
+                    width="50" height="50">
             </div>
             <div class="text-start">
                 <div class="dropdown">
@@ -233,7 +241,8 @@
             <div class="ms-auto">
                 <a class="dropdown-item log-out-item" href="javascript:void(0)"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg" width="20" height="20" />
+                    <img src="{{ asset('images/sign-out-up.svg') }}" class="svg" width="20"
+                        height="20" />
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf </form>

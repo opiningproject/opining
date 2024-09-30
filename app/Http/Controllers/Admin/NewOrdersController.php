@@ -478,7 +478,6 @@ class NewOrdersController extends Controller
      */
     public function cancelOrder(Request $request)
     {
-//        dd($request->order_id, $request->status);
         $getOrderData = Order::find($request->order_id);
         $getOrderData->order_status = $request->status;
         if ($getOrderData->save()) {
@@ -492,6 +491,5 @@ class NewOrdersController extends Controller
                 'color' =>$color
             ]);
         }
-//        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 }

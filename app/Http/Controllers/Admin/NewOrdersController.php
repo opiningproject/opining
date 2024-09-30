@@ -50,7 +50,7 @@ class NewOrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 12);
+        $perPage = request()->input('per_page', 10);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -171,7 +171,7 @@ class NewOrdersController extends Controller
     public function orderSearchFilter(Request $request) {
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 12);
+        $perPage = request()->input('per_page', 10);
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
@@ -256,13 +256,13 @@ class NewOrdersController extends Controller
         if (!empty($filters)) {
             $orders->where(function($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
-//                if (in_array('online', $filters)) {
-//                    $query->orWhere('order_type', 'online');
-//                }
-//
-//                if (in_array('manual', $filters)) {
-//                    $query->orWhere('order_type', 'manual');
-//                }
+                if (in_array('online', $filters)) {
+                    $query->orWhere('is_online_order', '1');
+                }
+
+                if (in_array('manual', $filters)) {
+                    $query->orWhere('is_online_order', '0');
+                }
 
                 if (in_array('delivery', $filters)) {
                     $query->orWhere('order_type', OrderType::Delivery);
@@ -327,7 +327,7 @@ class NewOrdersController extends Controller
             });
         }
 
-        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
         return [
             'orders' => $orders,
         ];
@@ -470,5 +470,28 @@ class NewOrdersController extends Controller
         $getOrderData->save();
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
         return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function cancelOrder(Request $request)
+    {
+//        dd($request->order_id, $request->status);
+        $getOrderData = Order::find($request->order_id);
+        $getOrderData->order_status = $request->status;
+        if ($getOrderData->save()) {
+            $color = orderStatusBox($getOrderData)->color;
+            $text = orderStatusBox($getOrderData)->text;
+            return response()->json([
+                'status' => 1,
+                'orderId' =>$getOrderData->id,
+                'updatedStatus' =>$getOrderData->order_status,
+                'text' =>$text,
+                'color' =>$color
+            ]);
+        }
+//        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 }

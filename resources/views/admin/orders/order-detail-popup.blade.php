@@ -23,7 +23,7 @@ $userDetails = $order->orderUserDetails;
         </div>
         <input type="hidden" class="order_id" value="{{$order->id}}">
         <div class="modal-body pt-1 pb-0">
-            <div class="border-0 d-flex align-items-center justify-content-between mb-0">
+            <div class="border-0 d-flex align-items-center justify-content-between mb-0 {{ $order->order_status == OrderStatus::Cancelled ? 'd-none' : '' }}">
 
                 <div class="order-status">
 
@@ -278,8 +278,9 @@ $userDetails = $order->orderUserDetails;
 
         <div class="modal-footer d-flex align-items-center justify-content-between">
             <div class="clearfix">
-                <button type="button" class="btn btn-outline-danger text-danger"
-                    data-bs-dismiss="modal">{{ trans('modal.order_detail.cancel') }}</button>
+                @if($order->order_status != OrderStatus::Cancelled)
+                    <button type="button" class="btn btn-outline-danger text-danger" onclick="cancelOrder({{$order->delivery_note}})">{{ trans('modal.order_detail.cancel') }}</button>
+                @endif
                 <a class="btn btn-outline-secondary ms-2 text-secondary d-inline-flex align-items-center gap-3"
                     target="_blank"
                     href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">{{ trans('rest.food_order.print') }}</a>
@@ -299,4 +300,33 @@ $userDetails = $order->orderUserDetails;
             </div>
         </div>
     </div>
+    {{-- cancel order model--}}
+
+    <div class="modal fade custom-modal" id="cancelOrderModal" tabindex="-1" aria-labelledby="dleteAlertModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-w-441px modal-dialog-centered justify-content-center">
+            <div>
+                <input  type="hidden" class="cancel_order" name="status" value="7">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.cancel_order.cancel_message') }}</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button"
+                                    class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
+                                    data-bs-dismiss="modal">{{ trans('rest.button.no') }}
+                            </button>
+                            <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
+                                    data-bs-dismiss="modal" id="cancel-order-btn">{{ trans('rest.button.yes') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -175,6 +175,7 @@ return [
 		'order_accepted' => 'Your order has been accepted',
 		'details_on_my_orders_page' => 'You can see your order details on my orders page',
 		'back_to_home' => 'Back to Home',
+        'take_away' => 'Take Away',
 	],
 
 	'chat' => [

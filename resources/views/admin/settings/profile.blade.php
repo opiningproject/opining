@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="restaurantProfile-tab-pane" role="tabpanel" aria-labelledby="restaurantProfile-tab" tabindex="0">
-    
+
     <h2 class="content-title">Restaurant Profile</h2>
 
     <form method="POST" id="rest-profile-form" action="{{ route('settings.save-profile') }}" enctype="multipart/form-data">
@@ -242,7 +242,7 @@
 
 @section('script')
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK9hxj_YCu51y0dBZfRz2jHkUOb8sY3cw&libraries=places&callback=initMap" async defer></script>
 
     <script type="text/javascript">
 

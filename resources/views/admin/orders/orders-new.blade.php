@@ -119,13 +119,13 @@
                                 <div class="order-row">
                                     @foreach($allOrders as $key => $ord)
                                         <?php    $userDetails = $ord->orderUserDetails; ?>
-                                        <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
+                                        <div class="order-col cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                                             <div class="order-box">
                                                 <div class="timing">
                                                     <h3 class="expectedDeliveryTime-{{$ord->id}}">{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
                                                     <label class="success">{{ $ord->delivery_time }}</label>
                                                     <h4 class="mt-2">
-                                                        {{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                                                        {{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}
                                                     </h4>
                                                 </div>
 
@@ -135,7 +135,7 @@
                                                         @if ($ord->order_type == OrderType::Delivery)
                                                             <p class="mb-0">
                                                                 <?php
-                                                                echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                                                                echo $userDetails->house_no . ', ' . $userDetails->street_name;
                                                                 ?>
                                                             </p>
                                                         @else
@@ -156,7 +156,7 @@
                                                         <b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}
                                                     </h5>
                                                     <button
-                                                        class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})">
+                                                        class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}">
                                                         {{ orderStatusBox($ord)->text }}</button>
                                                 </div>
                                             </div>
@@ -173,12 +173,6 @@
 
                                 <!-- Filter buttons -->
                                 <div class="filter-btn-group">
-                                    <button type="button" class="btn">
-                                        <a target="_blank" href="{{ route('deliverers.index') }}">
-                                            <img src="{{ asset(path: 'images/bike-white.svg') }}" alt="Bike"/>
-                                        </a>
-                                    </button>
-
                                     <button type="button" class="btn">
                                         <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike"/>
                                     </button>

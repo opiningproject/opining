@@ -20,7 +20,7 @@
                             <img src="{{ asset('images/fork-knife-icon.svg') }}"
                                  class="img-fluid svg" alt="" height="22" width="22">
                             <div
-                                class="text">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }} </div>
+                                class="text">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }} </div>
                         </div>
                         <div class="icontext-item d-flex align-items-center gap-1">
                             <img src="{{ asset('images/hand-money-icon.svg') }}" alt=""

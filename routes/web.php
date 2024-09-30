@@ -239,6 +239,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::post('/update-delivery-time', [NewOrdersController::class, 'updateDeliveryTime'])->name('updateDeliveryTime');
     Route::get('/get-order-setting', [NewOrdersController::class, 'getOrderSetting'])->name('getOrderSetting');
     Route::get('/orders/print-label/{order_id}', [NewOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
+    Route::get('/cancel-order/{order_id}/{status}', [NewOrdersController::class, 'cancelOrder'])->name('orders.cancelOrder');
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

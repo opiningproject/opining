@@ -67,15 +67,15 @@ class CheckoutController extends Controller
     public function placeOrderData(Request $request)
     {
         try {
-            $expectedDeliveryTime = null;
+            $getDeliveryMinute = null;
             $user = Auth::user();
             $admin = User::whereUserRole('1')->first();
             $orderId = $user->cart->id;
             $textBody = trans('email.text.order_placed', ['order_no' => $orderId]);;
             if($user->cart->order_type == OrderType::Delivery) {
-                $expectedDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+                $getDeliveryMinute = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
             } if($user->cart->order_type == OrderType::TakeAway){
-                $expectedDeliveryTime = (int) Str::between(getRestaurantDetail()->take_away_time, '-', ' Min');
+                $getDeliveryMinute = (int) Str::between(getRestaurantDetail()->take_away_time, '-', ' Min');
             }
 
             $serviceCharges = getRestaurantDetail()->service_charge;
@@ -166,7 +166,8 @@ class CheckoutController extends Controller
                 'coupon_discount' => $couponDiscount,
                 'points_claimed' => $pointClaimed,
                 'payment_status' => '0',
-                'expected_delivery_time' => \Carbon\Carbon::now()->addMinutes($expectedDeliveryTime)->format('H:i:s'),
+                'expected_delivery_time' => RoundUpEstimatedTime(\Carbon\Carbon::now(), $getDeliveryMinute),
+                'created_at' => \Carbon\Carbon::now(),
             ]);
 
             // added data in track order table

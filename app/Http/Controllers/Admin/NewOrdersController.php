@@ -50,6 +50,7 @@ class NewOrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
+        $perPage = request()->input('per_page', 10);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -72,7 +73,7 @@ class NewOrdersController extends Controller
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
 
-        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
         if ($request->ajax()) {
             $filters = $request->get('filters');
             if ($request->has('search') && $request->search != null || !empty($filters)) {
@@ -170,6 +171,7 @@ class NewOrdersController extends Controller
     public function orderSearchFilter(Request $request) {
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
+        $perPage = request()->input('per_page', 10);
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
@@ -234,7 +236,8 @@ class NewOrdersController extends Controller
                                     ->orWhere('house_no', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('city', 'like', '%' . $searchTerm . '%')
-                                    ->orWhere('zipcode', 'like', '%' . $searchTerm . '%');
+                                    ->orWhere('zipcode', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('order_contact_number', $searchTerm);
                             })
                             // Search within the 'dishDetails' and the related 'dish' relationship
                             ->orWhereHas('dishDetails', function ($query) use ($searchTerm) {
@@ -253,24 +256,24 @@ class NewOrdersController extends Controller
         if (!empty($filters)) {
             $orders->where(function($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
-//                if (in_array('online', $filters)) {
-//                    $query->orWhere('order_type', 'online');
-//                }
-//
-//                if (in_array('manual', $filters)) {
-//                    $query->orWhere('order_type', 'manual');
-//                }
+                if (in_array('online', $filters)) {
+                    $query->orWhere('is_online_order', '1');
+                }
+
+                if (in_array('manual', $filters)) {
+                    $query->orWhere('is_online_order', '0');
+                }
 
                 if (in_array('delivery', $filters)) {
                     $query->orWhere('order_type', OrderType::Delivery);
                 }
 
                 if (in_array('takeaway', $filters)) {
-                    $query->orWhere('order_type', OrderType::TakeAway);
+                    $query->orWhere('order_type', OrderType::TakeAway)->where('order_status', '!=', OrderStatus::Delivered);
                 }
 
                 if (in_array('open', $filters)) {
-                    $query->orWhere('order_status', '!=', OrderStatus::Delivered);
+                    $query->orWhere('order_status', '!=', OrderStatus::Delivered)->where('order_status', '!=', OrderStatus::Delivered);
                 }
 
                 if (in_array('delivered', $filters)) {
@@ -278,7 +281,7 @@ class NewOrdersController extends Controller
                 }
             });
         }
-        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
 
         return [
             'orders' => $orders
@@ -324,7 +327,7 @@ class NewOrdersController extends Controller
             });
         }
 
-        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
         return [
             'orders' => $orders,
         ];
@@ -341,7 +344,7 @@ class NewOrdersController extends Controller
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
             $address = getRestaurantDetail()->rest_address;
-            $order_type = trans('rest.food_order.pickup');
+            $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
                 $address = $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
                 $order_type = trans('rest.food_order.delivery');
@@ -467,5 +470,26 @@ class NewOrdersController extends Controller
         $getOrderData->save();
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
         return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function cancelOrder(Request $request)
+    {
+        $getOrderData = Order::find($request->order_id);
+        $getOrderData->order_status = $request->status;
+        if ($getOrderData->save()) {
+            $color = orderStatusBox($getOrderData)->color;
+            $text = orderStatusBox($getOrderData)->text;
+            return response()->json([
+                'status' => 1,
+                'orderId' =>$getOrderData->id,
+                'updatedStatus' =>$getOrderData->order_status,
+                'text' =>$text,
+                'color' =>$color
+            ]);
+        }
     }
 }

@@ -103,7 +103,7 @@
             <p><strong>{{ trans('rest.food_order.order') }}:</strong> #{{$order->id }}</p>
             <p><strong>{{trans('rest.food_order.order_time')}}:</strong> {{ $order->created_at }}</p>
             <p><strong>{{ trans('rest.food_order.delivery_mode') }}:</strong> {{ $order->delivery_time }}</p>
-            <p><strong>{{ trans('rest.food_order.type') }}:</strong> {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}</p>
+            <p><strong>{{ trans('rest.food_order.type') }}:</strong> {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }}</p>
         </div>
 
         <div class="section">

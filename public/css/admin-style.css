@@ -1228,7 +1228,7 @@ form .prev-input-group .input-group-icon svg {
 .menu-sidebar .sidebar-menu-top-box .dropdown-menu .log-out-item {display: inline-flex;width: auto;background: #ffffff;border-radius: 4px;overflow: hidden;align-items: center;justify-content: center;border: 1px solid #dcdcdc;padding: 10px 15px;color: #727272 !important;column-gap: 10px;}
 .menu-sidebar .sidebar-menu-top-box .dropdown-menu .log-out-item:hover {background: #f3f3f3;}
 .menu-sidebar {padding-left: 0 !important;margin-left: 0 !important;overflow-y: initial !important;}
-.menu-sidebar .siderbarmenu-brand {text-align: left;padding: 0px 10px 20px 10px;border-bottom: 1px solid #dee2e6;margin-left: 20px;margin-right: 20px;}
+.menu-sidebar .siderbarmenu-brand {text-align: left;padding: 0px 10px 20px 10px;border-bottom: 1px solid #dee2e6;margin-left: 20px;margin-right: 20px;display: flex;align-items: center;justify-content: space-between;margin-top: 24px;}
 
 /* Dashboard css */
  .dashboard-container {width: 100%;max-width: 1080px;margin: 0px auto;}
@@ -1265,6 +1265,17 @@ form .prev-input-group .input-group-icon svg {
 }
 
 
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link {
+    color: #626262 !important;
+}
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link.active, .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item .nav-link:hover {
+    color: #000000 !important;
+}
+
+.menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item {
+    margin-bottom: 0px !important;
+}
+
 /* New order page css */
  .order-page .order-page-bar {position: relative;margin-bottom: 20px !important;}
 .order-page-bar .page-title {font-size: 34px;font-weight: normal;color: #292929;display: flex;gap: 10px;line-height: inherit;}
@@ -1281,9 +1292,37 @@ form .prev-input-group .input-group-icon svg {
 .order-page-bar .finance_auth_form .form-control:-moz-placeholder {font-size: 14px;color: #3d3d3d;font-weight: 300;}
 .filter-options .form-control {padding-left: 20px;color: #3d3d3d;font-weight: 300;}
 .order-page-bar .btn {font-size: 12px;font-weight: 300;border: 0px;min-height: 47px;min-width: 250px;}
-.order-listing-container {position: relative;}
-.order-listing-container .order-row {margin: 0px -5px;display: flex;flex-wrap: wrap;}
-.order-listing-container .order-row .order-col {padding: 0px 5px;flex: 0 0 50%;max-width: 50%;margin-bottom: 10px;}
+
+.order-listing-container {
+    position: relative;
+    overflow: auto;
+    min-height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
+}
+
+/* .order-listing-container .order-row {margin: 0px -5px;display: flex;flex-wrap: wrap;} */
+.order-listing-container .order-row {
+    /* margin: 0px -5px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-auto-flow: column;
+      gap: 10px;
+}
+
+/* .order-listing-container .order-row .order-col {padding: 0px 5px;flex: 0 0 50%;max-width: 50%;margin-bottom: 10px;} */
+
+/* Order itsms listing five six */
+.order-listing-container .order-row .order-col {
+    margin-bottom: 0px;
+}
+.order-listing-container .order-row .order-col:nth-child(-n+5) {
+    grid-column: 1;
+  } 
+  .order-listing-container .order-row .order-col:nth-child(n+6) {
+    grid-column: 2;
+    grid-row: span 1;
+  }
+
 .order-listing-container .order-col .order-box {height: 100%;overflow: hidden;border: 1px solid #DBDBDB;background: #ffffff;border-radius: 16px;padding: 15px 15px;display: flex;}
 .order-listing-container .order-col .order-box * {font-size: 14px;font-weight: 300;color: #292929;}
 .order-listing-container .order-col .order-box .actions {margin-left: auto;display: flex;align-items: center;padding-left: 30px;}
@@ -1434,10 +1473,29 @@ form .prev-input-group .input-group-icon svg {
 .order-page .pagination-custom .page-item .page-link, .order-page .pagination .page-item .page-link {width: 40px;height: 40px;flex: 0 0 40px;max-width: 40px;font-size: 16px;}
 .order-page .filter-btn-group {padding-left: 20px;}
 .order-page .filter-btn-group button {width: 40px;height: 40px;}
+
+/* Order itsms listing five six */
+
+/* .order-listing-container .order-row .order-col:nth-child(-n+5) {
+    grid-column: 1;
+  }
+
+  .order-listing-container .order-row .order-col:nth-child(n+6) {
+    grid-column: 2;
+    grid-row: span 1;
+  } 
+  */
 }
 
 @media screen and (min-width: 1921px) {
-    .order-listing-container .order-row .order-col {flex: 0 0 33.33% !important;max-width: 33.33% !important;}
+    /* .order-listing-container .order-row .order-col {flex: 0 0 33.33% !important;max-width: 33.33% !important;} */
+
+    .order-listing-container .order-row {
+        columns: 3;
+        -webkit-columns: 3;
+        -moz-columns: 3;
+        column-count: 3;
+    }
 .order-listing-container .order-col .order-box .actions {display: block !important;padding-left: 20px;padding-top: 10px;}
 .order-listing-container .order-col .order-box .actions .btn {width: 130px;font-size: 12px;margin-left: 0px;margin-top: 10px;flex: 0 0 130px;max-width: 130px;}
 }
@@ -1484,8 +1542,15 @@ form .prev-input-group .input-group-icon svg {
 .overlay-sidebar {position: fixed;top: 0px;left: 0px;right: 0px;width: 100%;height: 100%;background: #000000;opacity: 0.5;z-index: 9;display: none;transition: all 0.3s ease-in-out;}
 .sidebar-toggle-body .overlay-sidebar {display: block;transition: all 0.3s ease-in-out;}
 
-.menu-sidebar .sidebar-toggle {position: absolute;top: 45px;right: -12px;z-index: 2;border: 1px solid #dcdcdc;border-radius: 5px;overflow: hidden;}
-.sidebar-toggle-body .menu-sidebar .sidebar-toggle {transform: rotateY(180deg);}
+.menu-sidebar .sidebar-toggle {
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    border: 0px;
+    border-radius: 0px;
+    overflow: hidden;}
+/* .sidebar-toggle-body .menu-sidebar .sidebar-toggle {transform: rotateY(180deg);} */
 /* .menu-sidebar .siderbarmenu-brand .admin-logo {display: flex;align-items: center;column-gap: 10px;}
 .menu-sidebar .siderbarmenu-brand .admin-logo .icon-logo {width: 40px;object-fit: contain;}
 .menu-sidebar .siderbarmenu-brand .admin-logo .text-logo {height: 25px;object-fit: contain;}

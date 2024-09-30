@@ -265,7 +265,7 @@ class NewOrdersController extends Controller
                 }
 
                 if (in_array('delivery', $filters)) {
-                    $query->orWhere('order_type', OrderType::Delivery);
+                    $query->orWhere('order_type', OrderType::Delivery)->where('order_status', '!=', OrderStatus::Delivered);
                 }
 
                 if (in_array('takeaway', $filters)) {

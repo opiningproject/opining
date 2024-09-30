@@ -7,6 +7,66 @@ $(document).ready(function () {
     });
 });
 
+function cancelOrder(id) {
+    $('#cancelOrderModal').modal('show');
+}
+
+$(document).on('click', '#cancel-order-btn', function () {
+
+    //$('#zipcode-delete-btn').prop('disabled',true);
+
+    var id = $('.order_id').val();
+    var status = $('.cancel_order').val();
+
+    $.ajax({
+        url: baseURL+'/cancel-order/'+ id + '/' + status,
+        type: 'GET',
+        success: function (response) {
+          /*  $('#deleteZipcodeModal').modal('toggle');
+            $('.zipcode-row-' + id).remove();
+            toastr.success(response.message)*/
+            if (response.status == 1) {
+                $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
+                $('.order-detail-popup').modal('hide')
+                $('.order-status-' + response.orderId).addClass(response.color);
+                $('.order-status-' + response.orderId).text(response.text);
+                var currentOrderCount = $('.order-count').text();
+                $('.order-count').html(currentOrderCount - 1);
+                $('.count-order').html(currentOrderCount - 1);
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+})
+
+
+// screen wise show pagination code
+/*document.addEventListener('DOMContentLoaded', function() {
+    let screenWidth = window.innerWidth;
+    let screenHeight = window.innerHeight; // Get screen height
+    let perPage = 12; // Default value
+
+    // Adjust perPage based on both screen width and height
+    if (screenWidth >= 1200 && screenHeight >= 800) {
+        perPage = 20; // Large screen
+    } else if (screenWidth >= 768 && screenHeight >= 600) {
+        perPage = 15; // Medium screen
+    } else {
+        perPage = 10; // Small screen
+    }
+
+    // Ensure the URL only gets updated once on initial load
+    const currentUrl = new URL(window.location.href);
+    if (!currentUrl.searchParams.has('per_page')) {
+        currentUrl.searchParams.set('per_page', perPage); // Set the per_page parameter
+        window.location.href = currentUrl.toString(); // Redirect with updated per_page value
+    }
+});*/
+
+
 // order-status-option active inactive
 $(document).ready(function () {
     $(document).on('change', '.order-status-option input[type="radio"]', function () {
@@ -198,6 +258,18 @@ function disabledOldOrderStatus() {
 
     // Function to update the status of radio buttons
     function updateRadioStatus() {
+        // Find how many radios are checked
+        const checkedRadios = document.querySelectorAll('.order-status-radio:checked');
+
+        // If no radio button is checked, disable all radio buttons
+        if (checkedRadios.length === 0) {
+            radios.forEach(radio => {
+                radio.disabled = true;
+            });
+            return; // Exit early if no radio buttons are checked
+        }
+
+        // If a radio is checked, enable/disable the relevant radios
         radios.forEach(radio => {
             if (radio.checked) {
                 const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
@@ -219,15 +291,77 @@ function disabledOldOrderStatus() {
     // Add change event listener to radio buttons
     radios.forEach(radio => {
         radio.addEventListener('change', function() {
-            // Log the change for debugging
-            console.log(this.id + ' is checked');
-
             // Enable all radios first, then re-apply the disabling logic
             radios.forEach(r => r.disabled = false); // Enable all radios first
             updateRadioStatus(); // Apply disabling logic based on the new selection
         });
     });
 }
+
+// Example usage
+disabledOldOrderStatus();
+
+/*function disabledOldOrderStatus() {
+    const radios = document.querySelectorAll('.order-status-radio');
+
+    // Define the allowed transitions between statuses
+    const orderStatusMap = {
+        'accepted-order': ['inKitchen-order'], // Only In Kitchen can be enabled from New Order
+        'inKitchen-order': ['outForDelivery-order'], // Only Out For Delivery can be enabled from In Kitchen
+        'outForDelivery-order': ['delivered-order'], // Only Delivered can be enabled from Out For Delivery
+        'delivered-order': [] // No further status transitions from Delivered, so everything else is disabled
+    };
+
+    // Function to update the status of radio buttons
+    function updateRadioStatus() {
+        radios.forEach(radio => {
+            if (radio.checked) {
+                const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
+                radios.forEach(r => {
+                    // Enable only the radios in the allowed transition map, disable others
+                    if (enabledRadios.includes(r.id)) {
+                        r.disabled = false; // Enable the valid next step
+                    } else if (r.id !== radio.id) {
+                        r.disabled = true; // Disable all other radios except the current one
+                    }
+                });
+            }
+        });
+    }
+
+    // Initialize radio buttons on page load
+    updateRadioStatus();
+
+    // Add change event listener to radio buttons
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Enable all radios first, then re-apply the disabling logic
+            radios.forEach(r => r.disabled = false); // Enable all radios first
+            updateRadioStatus(); // Apply disabling logic based on the new selection
+        });
+    });
+}*/
+
+
+// checked all checkboxs on click all checkbox.
+$('#all').on('change', function() {
+    // Check or uncheck all checkboxes based on 'all' checkbox state
+    $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
+});
+
+// If any individual checkbox is unchecked, also uncheck 'all'
+$('.order-filter .checkbox').not('#all').on('change', function() {
+    if (!$(this).is(':checked')) {
+        $('#all').prop('checked', false);
+    }
+});
+
+// Check if all checkboxes are selected, and if so, check 'all'
+$('.order-filter .checkbox').not('#all').on('change', function() {
+    if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
+        $('#all').prop('checked', true);
+    }
+});
 
 
 

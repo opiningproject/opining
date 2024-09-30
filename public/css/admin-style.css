@@ -643,7 +643,13 @@ form .prev-input-group .input-group-icon svg {
 .header-filter-order {
     gap: 10px;
 }
-
+.header-filter-order .count-filter {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}
 .btn-grp-gap-10 {
     gap: 10px !important;
 }
@@ -1406,7 +1412,7 @@ form .prev-input-group .input-group-icon svg {
 .header-filter-order .order-filter .checkbox-label input:checked~.checkmark {background-color: #000000;}
 .header-filter-order .order-filter .checkmark:after {content: "";position: absolute;display: none;}
 .header-filter-order .order-filter .checkbox-label input:checked~.checkmark:after {display: block;}
-.header-filter-order .order-filter .checkbox-label .checkmark:after {left: 7px;top: 3px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;transform: rotate(45deg);}
+.header-filter-order .order-filter .checkbox-label .checkmark:after {left: 6px;top: 2px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;transform: rotate(45deg);}
 
 @media screen and (max-width: 1750px) {
     .order-page-bar .page-title {font-size: 24px;}

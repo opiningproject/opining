@@ -278,7 +278,7 @@ $userDetails = $order->orderUserDetails;
 
         <div class="modal-footer d-flex align-items-center justify-content-between">
             <div class="clearfix">
-                @if($order->order_status != OrderStatus::Cancelled)
+                @if($order->order_status != OrderStatus::Cancelled && $order->order_status != OrderStatus::Delivered)
                     <button type="button" class="btn btn-outline-danger text-danger" onclick="cancelOrder({{$order->delivery_note}})">{{ trans('modal.order_detail.cancel') }}</button>
                 @endif
                 <a class="btn btn-outline-secondary ms-2 text-secondary d-inline-flex align-items-center gap-3"

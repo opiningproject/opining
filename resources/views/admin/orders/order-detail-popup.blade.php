@@ -15,7 +15,7 @@ $userDetails = $order->orderUserDetails;
         <div class="modal-header border-0">
             <div class="head-flex">
                 <h3 class="mb-0">
-                    {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                    {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}
                     ORDER #{{ $order->id }}</h3>
                 <h3 class="mb-0">{{ trans('modal.order_detail.website_order') }}</h3>
                 <h3 class="mb-0">{{ date('d-m-Y H:i', strtotime($order->created_at)) }}</h3>

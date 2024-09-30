@@ -50,6 +50,7 @@ class NewOrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
+        $perPage = request()->input('per_page', 12);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -72,7 +73,7 @@ class NewOrdersController extends Controller
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
 
-        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
         if ($request->ajax()) {
             $filters = $request->get('filters');
             if ($request->has('search') && $request->search != null || !empty($filters)) {
@@ -170,6 +171,7 @@ class NewOrdersController extends Controller
     public function orderSearchFilter(Request $request) {
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
+        $perPage = request()->input('per_page', 12);
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
@@ -234,7 +236,8 @@ class NewOrdersController extends Controller
                                     ->orWhere('house_no', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
                                     ->orWhere('city', 'like', '%' . $searchTerm . '%')
-                                    ->orWhere('zipcode', 'like', '%' . $searchTerm . '%');
+                                    ->orWhere('zipcode', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('order_contact_number', $searchTerm);
                             })
                             // Search within the 'dishDetails' and the related 'dish' relationship
                             ->orWhereHas('dishDetails', function ($query) use ($searchTerm) {
@@ -266,11 +269,11 @@ class NewOrdersController extends Controller
                 }
 
                 if (in_array('takeaway', $filters)) {
-                    $query->orWhere('order_type', OrderType::TakeAway);
+                    $query->orWhere('order_type', OrderType::TakeAway)->where('order_status', '!=', OrderStatus::Delivered);
                 }
 
                 if (in_array('open', $filters)) {
-                    $query->orWhere('order_status', '!=', OrderStatus::Delivered);
+                    $query->orWhere('order_status', '!=', OrderStatus::Delivered)->where('order_status', '!=', OrderStatus::Delivered);
                 }
 
                 if (in_array('delivered', $filters)) {
@@ -278,7 +281,7 @@ class NewOrdersController extends Controller
                 }
             });
         }
-        $orders = $orders->paginate(12, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
 
         return [
             'orders' => $orders
@@ -341,7 +344,7 @@ class NewOrdersController extends Controller
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
             $address = getRestaurantDetail()->rest_address;
-            $order_type = trans('rest.food_order.pickup');
+            $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
                 $address = $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
                 $order_type = trans('rest.food_order.delivery');

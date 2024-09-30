@@ -673,3 +673,27 @@ if (!function_exists('orderStatusBox')) {
         return $order;
     }
 }
+
+if (!function_exists('RoundUpEstimatedTime')) {
+    function RoundUpEstimatedTime($expectedDeliveryTime, $addMinutes)
+    {
+        //$expectedDeliveryTime = $expectedDeliveryTime; // Replace this with your actual time value
+        $timeParts = explode(':', $expectedDeliveryTime); // Split into hours and minutes
+        $hours = $timeParts[0];
+        $minutes = $timeParts[1];
+        // Round up the minutes to the nearest multiple of 5
+        $roundedMinutes = ceil($minutes / 5) * 5;
+
+        // Handle overflow if minutes become 60
+        if ($roundedMinutes == 60) {
+            $roundedMinutes = '00';
+            $hours = str_pad($hours + 1, 2, '0', STR_PAD_LEFT);
+        }
+
+        $expectedDeliveryTime = $hours . ':' . str_pad($roundedMinutes, 2, '0', STR_PAD_LEFT);
+        $expectedDeliveryTime =  \Carbon\Carbon::parse($expectedDeliveryTime)->addMinutes($addMinutes)->format('H:i:s');
+        return $expectedDeliveryTime;
+
+
+    }
+}

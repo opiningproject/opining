@@ -399,6 +399,9 @@ return [
 		'zipcode' => [
 			'delete_message' => 'Are you sure you want to delete this zipcode?',
 		],
+        'cancel_order' => [
+			'cancel_message' => 'Are you sure you want to cancel this order?',
+		],
 
 		'coupon' => [
 			'delete_message' => 'Are you sure you want to delete this coupon?',

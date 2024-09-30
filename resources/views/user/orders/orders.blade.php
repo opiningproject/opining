@@ -182,7 +182,7 @@
                                                 <div class="textgrp">
                                                     <div class="title">{{ trans('user.my_orders.order_for') }}</div>
                                                     <div class="text">
-                                                        {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery') : trans('user.my_orders.pickup') }}
+                                                        {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery') : trans('user.my_orders.take_away') }}
                                                     </div>
                                                 </div>
 

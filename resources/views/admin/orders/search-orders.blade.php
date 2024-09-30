@@ -17,7 +17,7 @@ use App\Enums\PaymentType;
                         <div class="timing">
                             <h3 class="expectedDeliveryTime-{{$ord->id}}">{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
                             <label class="success">{{ $ord->delivery_time }}</label>
-                            <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }}</h4>
+                            <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }}</h4>
                         </div>
 
                         <div class="details">
@@ -26,7 +26,7 @@ use App\Enums\PaymentType;
                                 @if ($ord->order_type == OrderType::Delivery)
                                     <p class="mb-0">
                                         <?php
-                                        echo $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                                        echo $userDetails->house_no . ', ' . $userDetails->street_name;
                                         ?>
                                     </p>
                                 @else
@@ -59,11 +59,6 @@ use App\Enums\PaymentType;
 
         <!-- Filter buttons -->
         <div class="filter-btn-group">
-            <button type="button" class="btn">
-                <a target="_blank" href="{{ route('deliverers.index') }}">
-                    <img src="{{ asset(path: 'images/bike-white.svg') }}" alt="Bike"/>
-                </a>
-            </button>
 
             <button type="button" class="btn">
                 <img src="{{ asset(path: 'images/map-white.svg') }}"

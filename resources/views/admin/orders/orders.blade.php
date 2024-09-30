@@ -223,7 +223,7 @@
                                                     </div>
                                                     <div class="text">
                                                         <span>{{ trans('rest.food_order.type') }}:
-                                                        </span>{{ $order->order_type == OrderType::Delivery ?    trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                                                        </span>{{ $order->order_type == OrderType::Delivery ?    trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}
                                                     </div>
                                                 </div>
                                             </div>

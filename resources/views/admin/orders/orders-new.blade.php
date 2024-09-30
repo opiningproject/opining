@@ -119,7 +119,7 @@
                                 <div class="order-row">
                                     @foreach($allOrders as $key => $ord)
                                         <?php    $userDetails = $ord->orderUserDetails; ?>
-                                        <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
+                                        <div class="order-col cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                                             <div class="order-box">
                                                 <div class="timing">
                                                     <h3 class="expectedDeliveryTime-{{$ord->id}}">{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
@@ -156,7 +156,7 @@
                                                         <b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}
                                                     </h5>
                                                     <button
-                                                        class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})">
+                                                        class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}">
                                                         {{ orderStatusBox($ord)->text }}</button>
                                                 </div>
                                             </div>

@@ -72,7 +72,7 @@ use App\Enums\PaymentType;
         </nav>
 
         <!-- Filter buttons -->
-        <div class="filter-btn-group">
+        <div class="filter-btn-group d-none">
 
             <button type="button" class="btn">
                 <img src="{{ asset(path: 'images/map-white.svg') }}"

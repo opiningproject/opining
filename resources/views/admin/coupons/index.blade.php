@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('page_title', trans('rest.coupons.title'))
 @section('content')
 <div class="main">
     <div class="main-view">
@@ -9,7 +9,7 @@
             <main class=" order-1 w-100">
                 <div class="main-content">
                     <div class="section-page-title mb-0">
-                        <h1 class="page-title">{{ trans('rest.coupons.title') }}</h1>
+{{--                        <h1 class="page-title">{{ trans('rest.coupons.title') }}</h1>--}}
                         <div class="col text-end">
                             <div class="form-group mb-0">
                                 <a class="btn btn-outline-secondary border-light btn-default me-4"

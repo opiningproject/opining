@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('page_title', trans('rest.my_finance.analytics'))
 @section('content')
 
     <?php
@@ -30,7 +31,7 @@
         <main class="bd-main order-1 w-100 position-relative">
             <div class="main-content">
               <div class="section-page-title mb-0">
-                <h1 class="page-title">{{ trans('rest.my_finance.analytics') }}</h1>
+{{--                <h1 class="page-title">{{ trans('rest.my_finance.analytics') }}</h1>--}}
               </div>
                 <input type="hidden" id="weeklyIncomeChart" value="{{ $weeklyAmount }}">
                 <input type="hidden" id="monthlyIncomeChart" value="{{ $monthlyAmount }}">

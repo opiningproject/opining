@@ -42,7 +42,21 @@ use App\Enums\PaymentType;
                             </div> --}}
                         </div>
                         <div class="actions">
-                            <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}</h5>
+                            <h5 class="mb-0 price_status">
+                                <b>€{{ number_format($ord->total_amount, 2) }}</b>
+                                @if($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg"
+                                         height="20" width="20" />
+                                @endif
+                                @if($ord->payment_type == \App\Enums\PaymentType::Card)
+                                    <img src="{{ asset('images/purse.svg') }}" class="svg"
+                                         height="20" width="20" />
+                                @endif
+                                @if($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                    <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
+                                         height="20" width="20" />
+                                @endif
+                            </h5>
                             <button class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})" >{{ orderStatusBox($ord)->text }}</button>
                         </div>
                     </div>

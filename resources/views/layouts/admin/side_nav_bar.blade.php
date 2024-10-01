@@ -223,7 +223,7 @@
         </div>
     </div>
 
-    <div class="sidebar-menu-top-box position-relative border-top mt-3">
+<!--    <div class="sidebar-menu-top-box position-relative border-top mt-3">
         <div class="d-flex gap-2 align-items-center">
             <div class="userPhoto">
                 <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid"
@@ -250,6 +250,6 @@
 
 
         </div>
-    </div>
+    </div>-->
 
 </aside>

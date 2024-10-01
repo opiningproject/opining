@@ -17,7 +17,7 @@ use App\Enums\PaymentType;
                         <div class="timing">
                             <h3 class="expectedDeliveryTime-{{$ord->id}}">{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
                             <label class="success">{{ $ord->delivery_time }}</label>
-{{--                            <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }}</h4>--}}
+                            {{-- <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }}</h4> --}}
                         </div>
 
                         <div class="details">
@@ -36,10 +36,10 @@ use App\Enums\PaymentType;
                                 @endif
                             </div>
 
-{{--                            <div class="right text-end ps-2">--}}
-{{--                                <p class="mb-0">{{ date('d-m-Y H:i',strtotime($ord->created_at)) }}</p>--}}
-{{--                                <p class="mb-0">Web #{{$ord->id}}</p>--}}
-{{--                            </div>--}}
+                            {{-- <div class="right text-end ps-2">
+                                <p class="mb-0">{{ date('d-m-Y H:i',strtotime($ord->created_at)) }}</p>
+                                <p class="mb-0">Web #{{$ord->id}}</p>
+                            </div> --}}
                         </div>
                         <div class="actions">
                             <h5 class="mb-0 price_status"><b>€{{ number_format($ord->total_amount, 2) }}</b>&nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }}</h5>

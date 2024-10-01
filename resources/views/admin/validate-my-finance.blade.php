@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+@section('page_title', trans('rest.my_finance.analytics'))
+@section('content')
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
@@ -74,7 +76,7 @@
     @include('layouts.admin.footer_design')
     <!-- end footer -->
     </div>
-
+@endsection
 @section('script')
     <script>
         var financeValidationMsg = {

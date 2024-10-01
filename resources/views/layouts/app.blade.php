@@ -13,6 +13,7 @@
 
 
     <div class="body-main">
+        @if(auth()->user())
         <div class="header-top">
             <div class="header-container">
                 <div class="header-row">
@@ -68,6 +69,7 @@
                 </div>
             </div>
         </div>
+        @endif
         {{-- <div class="overlay-sidebar"></div> --}}
 
         @yield('content')

@@ -51,7 +51,7 @@ class NewOrdersController extends Controller
 
         $pageNumber = request()->input('page', 1);
 //        $perPage = request()->input('per_page', 24);
-        $perPage = session('per_page', 30);
+        $perPage = session('per_page', 24);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -173,7 +173,7 @@ class NewOrdersController extends Controller
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
 //        $perPage = request()->input('per_page', 24);
-        $perPage = session('per_page', 30);
+        $perPage = session('per_page', 24);
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
@@ -348,8 +348,15 @@ class NewOrdersController extends Controller
             $address = getRestaurantDetail()->rest_address;
             $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
-                $address = $userDetails->house_no . ', ' . $userDetails->street_name . ', ' . $userDetails->city . ', ' . $userDetails->zipcode;
+                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
                 $order_type = trans('rest.food_order.delivery');
+            }
+            $iconImage = asset('images/cod_icon.png');
+            if($ord->payment_type == \App\Enums\PaymentType::Card){
+                $iconImage = asset('images/paid-deal.svg');
+            }
+            if($ord->payment_type == \App\Enums\PaymentType::Ideal) {
+                $iconImage = asset('images/paid-deal.svg');
             }
             $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
             $html = '<div class="order-col">
@@ -357,7 +364,6 @@ class NewOrdersController extends Controller
                                     <div class="timing">
                                         <h3>'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->created_at)->addMinutes($orderDeliveryTime)))  .'</h3>
                                         <label class="success">'. $orders->delivery_time .'</label>
-                                        <h4 class="mt-2">'. $order_type .'</h4>
                                     </div>
 
                                     <div class="details">
@@ -365,15 +371,10 @@ class NewOrdersController extends Controller
                                             <h4>'. $userDetails->order_name .'</h4>
                                             <p class="mb-0">'. $address .'</p>
                                         </div>
-
-                                        <div class="right text-end ps-2">
-                                            <p class="mb-0">'. date('d-m-y H:i',strtotime($orders->created_at)) .'</p>
-                                            <p class="mb-0">Web #'. $orders->id .'</p>
-                                        </div>
                                     </div>
 
                                     <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b>&nbsp;&nbsp;|&nbsp;&nbsp;Paid</h5>
+                                        <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b>&nbsp;&nbsp;|<img src="'.$iconImage .'" class="svg" height="20" width="20"/></h5>
                                         <button href="#" class="orderDetails order-status-'.$orders->id.' btn '. orderStatusBox($orders)->color .'" onclick="orderDetailNew('.$orders->id.')">'. orderStatusBox($orders)->text .'</button>
                                     </div>
                                 </div>

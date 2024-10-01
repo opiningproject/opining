@@ -1234,7 +1234,7 @@ form .prev-input-group .input-group-icon svg {
 .menu-sidebar .sidebar-menu-top-box .dropdown-menu .log-out-item {display: inline-flex;width: auto;background: #ffffff;border-radius: 4px;overflow: hidden;align-items: center;justify-content: center;border: 1px solid #dcdcdc;padding: 10px 15px;color: #727272 !important;column-gap: 10px;}
 .menu-sidebar .sidebar-menu-top-box .dropdown-menu .log-out-item:hover {background: #f3f3f3;}
 .menu-sidebar {padding-left: 0 !important;margin-left: 0 !important;overflow-y: initial !important;}
-.menu-sidebar .siderbarmenu-brand {text-align: left;padding: 0px 10px 20px 10px;border-bottom: 1px solid #dee2e6;margin-left: 20px;margin-right: 20px;display: flex;align-items: center;justify-content: space-between;margin-top: 24px;}
+.menu-sidebar .siderbarmenu-brand {text-align: left;padding: 10px 10px 10px 10px;border-bottom: 1px solid #dee2e6;margin-left: 20px;margin-right: 20px;display: flex;align-items: center;justify-content: space-between;margin-top: 2px;}
 
 /* Dashboard css */
  .dashboard-container {width: 100%;max-width: 1080px;margin: 0px auto;}
@@ -1518,13 +1518,17 @@ form .prev-input-group .input-group-icon svg {
 .plan-bills-section .card .table-light th {border: 0px !important;background: #F5F5F5;border: 0px;font-weight: 300;}
 
 /* New sidebar css */
-.body-main {position: relative;}
+.body-main {position: relative;transition: all 0.2s ease-in-out;}
 .body-main .main-content {padding: 25px 40px !important;}
 .body-main>.sidebar-toggle {position: absolute;top: 45px;left: 24px;z-index: 9;}
 .menu-sidebar {position: fixed;top: 0;left: -100%;height: 100%;width: 100%;background: #ffffff;color: white;transition: all 0.2s ease-in-out;z-index: 99;}
 .sidebar-toggle-body .menu-sidebar {left: 0px;}
-.overlay-sidebar {position: fixed;top: 0px;left: 0px;right: 0px;width: 100%;height: 100%;background: #000000;opacity: 0.5;z-index: 9;display: none;transition: all 0.3s ease-in-out;}
+.overlay-sidebar {position: fixed;top: 0px;left: 0px;right: 0px;width: 100%;height: 100%;background: #000000;opacity: 0.5;z-index: 9;display: none !important;transition: all 0.3s ease-in-out;}
 .sidebar-toggle-body .overlay-sidebar {display: block;transition: all 0.3s ease-in-out;}
+
+.sidebar-toggle-body .header-top .header-container .header-row .left .sidebar-toggle {display: none;}
+
+.sidebar-toggle-body .body-main {padding-left: 285px;}
 
 .menu-sidebar .sidebar-toggle {position: relative;top: 0;right: 0;z-index: 2;border: 0px;border-radius: 0px;overflow: hidden;}
 /* .sidebar-toggle-body .menu-sidebar .sidebar-toggle {transform: rotateY(180deg);} */

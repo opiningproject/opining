@@ -50,7 +50,7 @@ class NewOrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 10);
+        $perPage = request()->input('per_page', 24);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');

@@ -311,7 +311,7 @@ $restaurantDetail = getRestaurantDetail();
          aria-hidden="true">
         <div class="modal-dialog custom-w-441px modal-dialog-centered justify-content-center">
             <div>
-                <input  type="hidden" class="cancel_order" name="status" value="">
+                <input  type="hidden" class="cancel_order" name="status" value="7">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">

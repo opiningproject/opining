@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('page_title', trans('rest.archive_order.title'))
 @section('content')
 
     <?php
@@ -19,7 +20,7 @@
                     <div class="main-content food-order-main-content d-flex flex-column h-100">
                         <div
                             class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 foodorder-page-title">
-                            <h1 class="page-title me-auto">{{ trans('rest.archive_order.title') }}</h1>
+{{--                            <h1 class="page-title me-auto">{{ trans('rest.archive_order.title') }}</h1>--}}
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
                                     <div class="search-has col order-filters-search">

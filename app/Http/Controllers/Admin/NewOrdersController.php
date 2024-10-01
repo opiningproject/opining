@@ -50,7 +50,8 @@ class NewOrdersController extends Controller
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
 
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 24);
+//        $perPage = request()->input('per_page', 24);
+        $perPage = session('per_page', 30);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -67,8 +68,8 @@ class NewOrdersController extends Controller
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             } else if (empty($start_date) && !empty($end_date)) {
+                $start_date = date('Y-m-d') . ' 00:00:00';
                 $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
-                $start_date = '2024-01-01 00:00:00';
 
                 $orders->whereBetween('orders.created_at', array($start_date, $end_date));
             }
@@ -171,7 +172,8 @@ class NewOrdersController extends Controller
     public function orderSearchFilter(Request $request) {
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 10);
+//        $perPage = request()->input('per_page', 24);
+        $perPage = session('per_page', 30);
         $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
@@ -327,7 +329,7 @@ class NewOrdersController extends Controller
             });
         }
 
-        $orders = $orders->paginate(10, ['*'], 'page', $pageNumber);
+        $orders = $orders->paginate(24, ['*'], 'page', $pageNumber);
         return [
             'orders' => $orders,
         ];

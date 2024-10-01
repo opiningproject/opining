@@ -1,7 +1,9 @@
 @extends('layouts.app')
+@section('page_title', 'Orders')
+@section('order_count', getOpenOrders())  <!-- Dynamically set the count -->
 @section('content')
     <?php
-    
+
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
@@ -122,7 +124,7 @@
                                     class="btn btn-site-theme clear-button order-filters-search">{{ trans('rest.food_order.create_order') }}</button>
 
                                 <button type="button"
-                                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
+                                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
                                     style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/header-settings.svg') }}" class="svg"
                                         height="20" width="20" /> Settings</button>
@@ -172,9 +174,18 @@
                                                 <div class="actions">
                                                     <h5 class="mb-0 price_status">
                                                         <b>€{{ number_format($ord->total_amount, 2) }}</b>
-                                                        {{-- &nbsp;&nbsp;|&nbsp;&nbsp;{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'Unpaid' : 'Paid' }} --}}
-                                                        <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
-                                                            height="20" width="20" />
+                                                        @if($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                                            <img src="{{ asset('images/cod_icon.png') }}" class="svg"
+                                                                 height="20" width="20" />
+                                                        @endif
+                                                        @if($ord->payment_type == \App\Enums\PaymentType::Card)
+                                                            <img src="{{ asset('images/purse.svg') }}" class="svg"
+                                                                 height="20" width="20" />
+                                                        @endif
+                                                        @if($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                                            <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
+                                                                 height="20" width="20" />
+                                                        @endif
                                                     </h5>
                                                     <button
                                                         class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}">

@@ -196,14 +196,12 @@ $restaurantDetail = getRestaurantDetail();
                                         </div>
                                     </div>
                                 </div>
+                                @if($order->order_type == OrderType::Delivery)
+                                    <div class="tab-map">
+                                        <div id="map" style="height: 500px; width: 100%;"></div>
+                                    </div>
+                                @endif
 
-                                <div class="tab-map">
-
-
-                                    <div id="map" style="height: 500px; width: 100%;"></div>
-
-<!--                                    <img src="{{ asset('images/tab-map.png') }}" alt="" />-->
-                                </div>
                             </div>
                         </div>
                     </div>

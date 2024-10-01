@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DishOptionsController;
 use App\Http\Controllers\Admin\DomainSettingController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
+use App\Http\Controllers\Admin\ManualOrdersController;
 use App\Http\Controllers\Admin\MyWebsiteController;
 use App\Http\Controllers\Admin\NewOrdersController;
 use App\Http\Controllers\Admin\SettingController;
@@ -246,6 +247,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
         $request->session()->put('per_page', $request->input('per_page'));
         return response()->json(['success' => true]);
     });
+
+    //    manual order routes
+    Route::get('/create-order', [ManualOrdersController::class, 'index']);
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

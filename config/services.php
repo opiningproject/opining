@@ -31,9 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'google' => [
-        'client_id'     => '124244909968-m58gunpfnjq4nqghfkq01ugfhk6vttv6.apps.googleusercontent.com',
-        'client_secret' => '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',
+        'client_id'     => '670256087857-ua1mvsd398897040v1t5llf7t1ttevhj.apps.googleusercontent.com',
+        'client_secret' => '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',
         'redirect'      => 'https://gomeal-qa.inheritxdev.in/google/auth/callback',
     ],
+    'google_place_key' => 'AIzaSyAK9hxj_YCu51y0dBZfRz2jHkUOb8sY3cw',
 
 ];

@@ -242,7 +242,7 @@
 
 @section('script')
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK9hxj_YCu51y0dBZfRz2jHkUOb8sY3cw&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&libraries=places&callback=initMap" async defer></script>
 
     <script type="text/javascript">
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OldOrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -240,6 +241,11 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/get-order-setting', [NewOrdersController::class, 'getOrderSetting'])->name('getOrderSetting');
     Route::get('/orders/print-label/{order_id}', [NewOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/cancel-order/{order_id}/{status}', [NewOrdersController::class, 'cancelOrder'])->name('orders.cancelOrder');
+
+    Route::post('/set-per-page', function (Request $request) {
+        $request->session()->put('per_page', $request->input('per_page'));
+        return response()->json(['success' => true]);
+    });
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

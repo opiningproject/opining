@@ -43,11 +43,11 @@
                                     <a href="{{ route('dashboard') }}"
                                         class="nav-link {{ activeMenu('dashboard') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/dashboard-gray.svg') }}"
-                                                class="svg actual" height="18" width="20" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/dashboard-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/dashboard-black.svg') }}"
-                                                class="svg hoverable" height="18" width="20" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/dashboard-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span class="ms-0 d-sm-inline align-middle">Dashboard</span>
                                     </a>
@@ -56,11 +56,11 @@
                                     <a href="{{ route('orders') }}"
                                         class="align-items-center nav-link {{ activeMenu('orders') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/order-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/order-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/order-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/order-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.food_order') }}</span>
@@ -72,11 +72,11 @@
                                     <a href="{{ route('home') }}"
                                         class="nav-link {{ activeMenu('menu') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/menu-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/menu-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/menu-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/menu-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.menu') }}</span>
@@ -86,10 +86,10 @@
                                     <a href="{{ route('archives') }}"
                                         class="nav-link {{ activeMenu('archive') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/archive-gray.svg') }}"
+                                            <img src="{{ asset('images/admin-icons-sidebar/archive-outline.svg') }}"
                                                 class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/archive-black.svg') }}"
+                                            <img src="{{ asset('images/admin-icons-sidebar/archive-fill.svg') }}"
                                                 class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
@@ -100,11 +100,11 @@
                                     <a href="{{ route('payments') }}"
                                         class="nav-link {{ activeMenu('payments') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/finance-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/analytics-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/finance-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/analytics-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.analytics') }}</span>
@@ -114,11 +114,11 @@
                                     <a href="{{ route('coupons.index') }}"
                                         class="nav-link {{ activeMenu('coupons') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/coupons-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/percent-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/coupons-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/percent-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.coupons') }}</span>
@@ -128,11 +128,11 @@
                                     <a href="{{ route('chat') }}"
                                         class="nav-link {{ activeMenu('chat') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/chat-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/user-chat-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/chat-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/user-chat-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.user_chat') }}</span>
@@ -142,11 +142,11 @@
                                     <a href="{{ route('deliverers.index') }}"
                                         class="nav-link {{ activeMenu('deliverers') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/deliverer-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/deliverers-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/deliverer-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/deliverers-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.deliverers') }}</span>
@@ -159,11 +159,11 @@
                                     <a href="{{ route('myWebsite') }}"
                                         class="nav-link {{ activeMenu('my-website') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/website-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/globe-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/website-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/globe-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.my_website') }}</span>
@@ -173,11 +173,11 @@
                                 <li class="nav-item">
                                     <a href="#" class="nav-link align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/points-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/point-of-sale-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/points-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/point-of-sale-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span class="ms-0 d-sm-inline align-middle">Point of Sale</span>
                                     </a>
@@ -188,11 +188,11 @@
                                 <li class="nav-item">
                                     <a href="#" class="nav-link align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/chat-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/comments-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/chat-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/comments-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span class="ms-0 d-sm-inline align-middle">Support</span>
                                     </a>
@@ -202,11 +202,11 @@
                                     <a href="{{ route('settings') }}"
                                         class="nav-link {{ activeMenu('settings') }} align-middle">
                                         <div class="icon-span">
-                                            <img src="{{ asset('images/admin-menu-icons/setting-gray.svg') }}"
-                                                class="svg actual" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/settings-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
 
-                                            <img src="{{ asset('images/admin-menu-icons/setting-black.svg') }}"
-                                                class="svg hoverable" height="22" width="22" />
+                                            <img src="{{ asset('images/admin-icons-sidebar/settings-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span
                                             class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.settings') }}</span>
@@ -223,7 +223,7 @@
         </div>
     </div>
 
-    <div class="sidebar-menu-top-box position-relative border-top mt-3">
+<!--    <div class="sidebar-menu-top-box position-relative border-top mt-3">
         <div class="d-flex gap-2 align-items-center">
             <div class="userPhoto">
                 <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image" class="img-fluid"
@@ -250,6 +250,6 @@
 
 
         </div>
-    </div>
+    </div>-->
 
 </aside>

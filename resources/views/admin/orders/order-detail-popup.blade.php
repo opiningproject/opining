@@ -7,7 +7,7 @@ use App\Enums\PaymentType;
 use App\Enums\RefundStatus;
 
 $userDetails = $order->orderUserDetails;
-
+$restaurantDetail = getRestaurantDetail();
 ?>
 
 <div class="modal-dialog modal-dialog-centered">
@@ -22,6 +22,9 @@ $userDetails = $order->orderUserDetails;
             </div>
         </div>
         <input type="hidden" class="order_id" value="{{$order->id}}">
+        {{--                $userDetails->latitude $userDetails->longitude --}}
+        <input  type="hidden" class="latitude" name="status" value="{{$userDetails->latitude}}">
+        <input  type="hidden" class="longitude" name="status" value="{{$userDetails->longitude}}">
         <div class="modal-body pt-1 pb-0">
             <div class="border-0 d-flex align-items-center justify-content-between mb-0 {{ $order->order_status == OrderStatus::Cancelled ? 'd-none' : '' }}">
 
@@ -193,10 +196,12 @@ $userDetails = $order->orderUserDetails;
                                         </div>
                                     </div>
                                 </div>
+                                @if($order->order_type == OrderType::Delivery)
+                                    <div class="tab-map">
+                                        <div id="map" style="height: 500px; width: 100%;"></div>
+                                    </div>
+                                @endif
 
-                                <div class="tab-map">
-                                    <img src="{{ asset('images/tab-map.png') }}" alt="" />
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -306,7 +311,7 @@ $userDetails = $order->orderUserDetails;
          aria-hidden="true">
         <div class="modal-dialog custom-w-441px modal-dialog-centered justify-content-center">
             <div>
-                <input  type="hidden" class="cancel_order" name="status" value="7">
+                <input  type="hidden" class="cancel_order" name="status" value="">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
@@ -329,4 +334,55 @@ $userDetails = $order->orderUserDetails;
         </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initMap" async defer></script>
+<script>
+    let map;
+    let directionsService;
+    let directionsRenderer;
+    var latitudeValue = $('.latitude').val();
+    var longitudeValue = $('.longitude').val();
+    // Initialize the Google Map
+    function initMap() {
+        // Create the map centered at the first location
+        map = new google.maps.Map(document.getElementById('map'), {
+            // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
+            zoom: 8
+        });
+
+        // Create Directions Service and Renderer instances
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+
+        // Set the map where the directions will be rendered
+        directionsRenderer.setMap(map);
+        latitudeValue = '';
+        longitudeValue ='';
+        // Calculate and display the route
+        calculateAndDisplayRoute();
+    }
+    function calculateAndDisplayRoute() {
+        latitudeValue = $('.latitude').val();
+        longitudeValue = $('.longitude').val();
+        const origin = {
+            lat: {!! $restaurantDetail->latitude; !!},
+            lng: {!! $restaurantDetail->longitude; !!}  };
+        const destination = { lat: parseFloat(latitudeValue), lng: parseFloat(longitudeValue) }; // location 2
+        directionsService.route(
+            {
+                origin: origin,
+                destination: destination,
+                travelMode: 'DRIVING' // You can change this to WALKING, BICYCLING, or TRANSIT
+            },
+            (response, status) => {
+                if (status === 'OK') {
+                    // Display the route on the map
+                    directionsRenderer.setDirections(response);
+                } else {
+                    // Handle the error if route calculation fails
+                    window.alert('Directions request failed due to ' + status);
+                }
+            }
+        );
+    }
+</script>
 

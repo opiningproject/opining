@@ -44,27 +44,48 @@ $(document).on('click', '#cancel-order-btn', function () {
 
 
 // screen wise show pagination code
-/*document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     let screenWidth = window.innerWidth;
     let screenHeight = window.innerHeight; // Get screen height
-    let perPage = 12; // Default value
+    let perPage = 24; // Default value
 
     // Adjust perPage based on both screen width and height
-    if (screenWidth >= 1200 && screenHeight >= 800) {
-        perPage = 20; // Large screen
-    } else if (screenWidth >= 768 && screenHeight >= 600) {
-        perPage = 15; // Medium screen
+    if (screenHeight < 768) {
+        perPage = 21; // Large screen
+    } else if (screenHeight < 900) {
+        perPage = 21; // Medium screen
     } else {
-        perPage = 10; // Small screen
+        perPage = 24; // Small screen
     }
+    // Get the currently stored per_page value from sessionStorage
+    const storedPerPage = sessionStorage.getItem('per_page_value');
+    // Check if per_page is already set in sessionStorage to avoid repeated reloads
+    if (storedPerPage !== perPage.toString()) {
+        // Send AJAX request to store perPage in session
+        sessionStorage.setItem('per_page_value', perPage.toString());
+        fetch('/set-per-page', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ per_page: perPage })
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            if (data.success) {
+                // Set a flag in sessionStorage so that we don't reload again
+                // sessionStorage.setItem('per_page_value', perPage.toString());
+                // Reload the page to apply pagination with the new per_page value
+                window.location.reload();
+            }
+        }).catch(error => {
+            console.error('Error setting per_page:', error);
+        });
+    }
+});
 
-    // Ensure the URL only gets updated once on initial load
-    const currentUrl = new URL(window.location.href);
-    if (!currentUrl.searchParams.has('per_page')) {
-        currentUrl.searchParams.set('per_page', perPage); // Set the per_page parameter
-        window.location.href = currentUrl.toString(); // Redirect with updated per_page value
-    }
-});*/
+
 
 
 // order-status-option active inactive
@@ -300,47 +321,6 @@ function disabledOldOrderStatus() {
 
 // Example usage
 disabledOldOrderStatus();
-
-/*function disabledOldOrderStatus() {
-    const radios = document.querySelectorAll('.order-status-radio');
-
-    // Define the allowed transitions between statuses
-    const orderStatusMap = {
-        'accepted-order': ['inKitchen-order'], // Only In Kitchen can be enabled from New Order
-        'inKitchen-order': ['outForDelivery-order'], // Only Out For Delivery can be enabled from In Kitchen
-        'outForDelivery-order': ['delivered-order'], // Only Delivered can be enabled from Out For Delivery
-        'delivered-order': [] // No further status transitions from Delivered, so everything else is disabled
-    };
-
-    // Function to update the status of radio buttons
-    function updateRadioStatus() {
-        radios.forEach(radio => {
-            if (radio.checked) {
-                const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
-                radios.forEach(r => {
-                    // Enable only the radios in the allowed transition map, disable others
-                    if (enabledRadios.includes(r.id)) {
-                        r.disabled = false; // Enable the valid next step
-                    } else if (r.id !== radio.id) {
-                        r.disabled = true; // Disable all other radios except the current one
-                    }
-                });
-            }
-        });
-    }
-
-    // Initialize radio buttons on page load
-    updateRadioStatus();
-
-    // Add change event listener to radio buttons
-    radios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            // Enable all radios first, then re-apply the disabling logic
-            radios.forEach(r => r.disabled = false); // Enable all radios first
-            updateRadioStatus(); // Apply disabling logic based on the new selection
-        });
-    });
-}*/
 
 
 // checked all checkboxs on click all checkbox.

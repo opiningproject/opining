@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('page_title', 'Orders')
-@section('order_count', getOpenOrders())  <!-- Dynamically set the count -->
+@section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
 @section('content')
     <?php
-
+    
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
@@ -131,6 +131,7 @@
 
                             </div>
                         </div>
+
                         <div class="orderList">
                             <div class="order-listing-container">
                                 <div class="order-row">
@@ -174,17 +175,17 @@
                                                 <div class="actions">
                                                     <h5 class="mb-0 price_status">
                                                         <b>€{{ number_format($ord->total_amount, 2) }}</b>
-                                                        @if($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
                                                             <img src="{{ asset('images/cod_icon.png') }}" class="svg"
-                                                                 height="20" width="20" />
+                                                                height="20" width="20" />
                                                         @endif
-                                                        @if($ord->payment_type == \App\Enums\PaymentType::Card)
+                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Card)
                                                             <img src="{{ asset('images/purse.svg') }}" class="svg"
-                                                                 height="20" width="20" />
+                                                                height="20" width="20" />
                                                         @endif
-                                                        @if($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
                                                             <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
-                                                                 height="20" width="20" />
+                                                                height="20" width="20" />
                                                         @endif
                                                     </h5>
                                                     <button
@@ -197,7 +198,7 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-end align-items-center pt-3">
+                            <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
                                 <!-- Pagination -->
                                 <nav aria-label="Page navigation example">
                                     {{ $allOrders->links() }}
@@ -232,4 +233,47 @@
 @endsection
 @section('script')
     <script type="text/javascript" src="{{ asset('js/new-orders.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            function arrangeOrderCols() {
+                var screenHeight = $(window).height();
+                var availableHeight = screenHeight - 230; // Space excluding 100px from bottom
+
+                var $orderCols = $('.order-col');
+                var $container = $('.order-listing-container');
+
+                // Clear any existing columns
+                $container.empty();
+
+                // Create new columns and append items
+                var colsPerColumn = 0; // Reset the count of items per column
+                var currentColumn = $('<div class="order-column"></div>'); // Start a new column
+                $container.append(currentColumn); // Append the new column to the container
+
+                for (var i = 0; i < $orderCols.length; i++) {
+                    // Add the item to the current column
+                    currentColumn.append($orderCols.eq(i)); // Append the item
+
+                    // Calculate current height of the column
+                    var currentHeight = currentColumn.outerHeight(true); // Include margin in height calculation
+
+                    // If the current column height exceeds the available height, start a new column
+                    if (currentHeight >= availableHeight) {
+                        currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                        $container.append(currentColumn); // Append the new column to the container
+                        currentColumn.append($orderCols.eq(i)); // Add the current item to the new column
+                    }
+                }
+
+                // Set the height of each order-column
+                $('.order-column').css('height', availableHeight + 'px');
+            }
+
+            // Initial arrangement
+            arrangeOrderCols();
+
+            // Update on window resize
+            $(window).resize(arrangeOrderCols);
+        });
+    </script>
 @endsection

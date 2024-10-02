@@ -21,12 +21,13 @@ $restaurantDetail = getRestaurantDetail();
                 <h3 class="mb-0">{{ date('d-m-Y H:i', strtotime($order->created_at)) }}</h3>
             </div>
         </div>
-        <input type="hidden" class="order_id" value="{{$order->id}}">
+        <input type="hidden" class="order_id" value="{{ $order->id }}">
         {{--                $userDetails->latitude $userDetails->longitude --}}
-        <input  type="hidden" class="latitude" name="status" value="{{$userDetails->latitude}}">
-        <input  type="hidden" class="longitude" name="status" value="{{$userDetails->longitude}}">
+        <input type="hidden" class="latitude" name="status" value="{{ $userDetails->latitude }}">
+        <input type="hidden" class="longitude" name="status" value="{{ $userDetails->longitude }}">
         <div class="modal-body pt-1 pb-0">
-            <div class="border-0 d-flex align-items-center justify-content-between mb-0 {{ $order->order_status == OrderStatus::Cancelled ? 'd-none' : '' }}">
+            <div
+                class="border-0 d-flex align-items-center justify-content-between mb-0 {{ $order->order_status == OrderStatus::Cancelled ? 'd-none' : '' }}">
 
                 <div class="order-status">
 
@@ -90,22 +91,28 @@ $restaurantDetail = getRestaurantDetail();
             <div class="clearfix">
                 <ul class="nav nav-tabs justify-content-between" id="myTab" role="tablist">
                     <!-- First Tab -->
-                    <li class="nav-item" role="presentation" style="width: 33%;">
+                    <li class="nav-item" role="presentation" style="width: 25%;">
                         <button class="nav-link active w-100" id="tab-1" data-bs-toggle="tab"
                             data-bs-target="#content-1" type="button" role="tab" aria-controls="content-1"
                             aria-selected="true">{{ trans('modal.order_detail.customer_data') }}</button>
                     </li>
                     <!-- Second Tab -->
-                    <li class="nav-item" role="presentation" style="width: 33%;">
+                    <li class="nav-item" role="presentation" style="width: 25%;">
                         <button class="nav-link w-100" id="tab-2" data-bs-toggle="tab" data-bs-target="#content-2"
                             type="button" role="tab" aria-controls="content-2" aria-selected="false">
                             {{ trans('modal.order_detail.order_item', ['number_of_dish' => count($order->dishDetails)]) }}
                         </button>
                     </li>
                     <!-- Third Tab -->
-                    <li class="nav-item" role="presentation" style="width: 33%;">
+                    <li class="nav-item" role="presentation" style="width: 25%;">
                         <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3"
                             type="button" role="tab" aria-controls="content-3"
+                            aria-selected="false">Routeplanner</button>
+                    </li>
+                    <!-- Fourth Tab -->
+                    <li class="nav-item" role="presentation" style="width: 25%;">
+                        <button class="nav-link w-100" id="tab-4" data-bs-toggle="tab"
+                            data-bs-target="#content-3" type="button" role="tab" aria-controls="content-4"
                             aria-selected="false">{{ trans('modal.order_detail.deliverer') }}</button>
                     </li>
                 </ul>
@@ -189,19 +196,13 @@ $restaurantDetail = getRestaurantDetail();
                                             <button class="t-box update-delivery-time">-5</button>
                                             <div class="text-uppercase">
                                                 <span class="expected_time_order">
-                                                {{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                    {{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}
                                                 </span>
                                             </div>
                                             <button class="t-box update-delivery-time">+5</button>
                                         </div>
                                     </div>
                                 </div>
-                                @if($order->order_type == OrderType::Delivery)
-                                    <div class="tab-map">
-                                        <div id="map" style="height: 500px; width: 100%;"></div>
-                                    </div>
-                                @endif
-
                             </div>
                         </div>
                     </div>
@@ -261,15 +262,29 @@ $restaurantDetail = getRestaurantDetail();
                     </div>
 
                     <!-- Content for Tab 3 -->
-                    <div class="tab-pane fade" id="content-3" role="tabpanel" aria-labelledby="tab-3">
+                    <div class="tab-pane fade px-0" id="content-3" role="tabpanel" aria-labelledby="tab-3">
+
+                        @if ($order->order_type == OrderType::Delivery)
+                            <div class="tab-map">
+                                <div id="map" style="height: 350px; width: 100%;"></div>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Content for Tab 4 -->
+                    <div class="tab-pane fade" id="content-4" role="tabpanel" aria-labelledby="tab-4">
 
                         <div class="order-status order-delivered">
-                            @if(count($delivererUser) > 0)
-                                @foreach($delivererUser as $delivererUsers)
-                                    <div class="order-col col-order-{{$delivererUsers->id}}">
+                            @if (count($delivererUser) > 0)
+                                @foreach ($delivererUser as $delivererUsers)
+                                    <div class="order-col col-order-{{ $delivererUsers->id }}">
                                         <label class="status-option status-option-deliverers">
-                                            <input id="test{{$delivererUsers->id}}" type="radio" class="delivererUsers" name="status-option-deliverers" value="{{ $delivererUsers->id }}" {{ $order->deliverer_id == $delivererUsers->id ? 'checked' : ''  }} onclick="assignDeliverer({{ $order->id }}, {{$delivererUsers->id}})"/>
-                                            <span for="test{{$delivererUsers->id}}"></span>
+                                            <input id="test{{ $delivererUsers->id }}" type="radio"
+                                                class="delivererUsers" name="status-option-deliverers"
+                                                value="{{ $delivererUsers->id }}"
+                                                {{ $order->deliverer_id == $delivererUsers->id ? 'checked' : '' }}
+                                                onclick="assignDeliverer({{ $order->id }}, {{ $delivererUsers->id }})" />
+                                            <span for="test{{ $delivererUsers->id }}"></span>
                                             <label>{{ $delivererUsers->full_name }}</label>
                                         </label>
                                     </div>
@@ -305,27 +320,29 @@ $restaurantDetail = getRestaurantDetail();
             </div>
         </div>
     </div>
-    {{-- cancel order model--}}
+    {{-- cancel order model --}}
 
     <div class="modal fade custom-modal" id="cancelOrderModal" tabindex="-1" aria-labelledby="dleteAlertModal"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog custom-w-441px modal-dialog-centered justify-content-center">
             <div>
-                <input  type="hidden" class="cancel_order" name="status" value="7">
+                <input type="hidden" class="cancel_order" name="status" value="7">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.cancel_order.cancel_message') }}</h4>
+                                <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.cancel_order.cancel_message') }}
+                                </h4>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">
                             <button type="button"
-                                    class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
-                                    data-bs-dismiss="modal">{{ trans('rest.button.no') }}
+                                class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
+                                data-bs-dismiss="modal">{{ trans('rest.button.no') }}
                             </button>
-                            <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
-                                    data-bs-dismiss="modal" id="cancel-order-btn">{{ trans('rest.button.yes') }}
+                            <button type="button"
+                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
+                                data-bs-dismiss="modal" id="cancel-order-btn">{{ trans('rest.button.yes') }}
                             </button>
                         </div>
                     </div>
@@ -334,7 +351,8 @@ $restaurantDetail = getRestaurantDetail();
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initMap"
+    async defer></script>
 <script>
     let map;
     let directionsService;

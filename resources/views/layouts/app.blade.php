@@ -44,7 +44,15 @@
                         <a href="#" class="chat-link">
                             <img src="{{ asset('images/admin-menu-icons/message-text.svg') }}" class="svg" height="20"
                                 width="20" />
+                                <span class="count">1</span>
                         </a>
+
+
+                        <a href="#" class="maximize-screen">
+                            <img src="{{ asset('images/maximize.svg') }}" class="svg" height="20"
+                                width="20" />
+                        </a>
+                        
 
                         @if(auth()->user())
                         <div class="dropdown profile-link custom-default-dropdown">

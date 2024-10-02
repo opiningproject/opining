@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         perPage = 36;
     }
     else if (screenHeight > 1000) {
-        perPage = 33;
+        perPage = 27;
     }
     else if (screenHeight > 900) {
         perPage = 24;
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         perPage = 21;
     }
     else {
-        perPage = 15; // Small screen
+        perPage = 27; // Small screen
     }
     // Get the currently stored per_page value from sessionStorage
     const storedPerPage = sessionStorage.getItem('per_page_value');

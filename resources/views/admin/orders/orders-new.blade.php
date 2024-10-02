@@ -3,7 +3,7 @@
 @section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
 @section('content')
     <?php
-    
+
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
@@ -120,14 +120,16 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <button type="button" name="clear" value="all" id="clear"
-                                    class="btn btn-site-theme clear-button order-filters-search">{{ trans('rest.food_order.create_order') }}</button>
+                                <a href="{{ route('create-order') }}"
+                                    class="btn btn-site-theme create-order-manual">
+                                    <span>{{ trans('rest.food_order.create_order') }}</span>
+                                </a>
 
                                 <button type="button"
                                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
                                     style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/header-settings.svg') }}" class="svg"
-                                        height="20" width="20" /> Settings</button>
+                                        height="20" width="20" /> {{ trans('rest.food_order.settings') }}</button>
 
                             </div>
                         </div>

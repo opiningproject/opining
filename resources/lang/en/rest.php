@@ -184,6 +184,7 @@ return [
         'filter_orders' => 'Filter Orders',
         'create_order' => 'Create Order',
         'orders' => 'Orders',
+        'settings' => 'Settings',
 	],
 
     'archive_order' => [

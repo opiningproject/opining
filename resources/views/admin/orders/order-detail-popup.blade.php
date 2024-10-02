@@ -91,13 +91,13 @@ $restaurantDetail = getRestaurantDetail();
             <div class="clearfix">
                 <ul class="nav nav-tabs justify-content-between" id="myTab" role="tablist">
                     <!-- First Tab -->
-                    <li class="nav-item" role="presentation" style="width: 25%;">
+                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
                         <button class="nav-link active w-100" id="tab-1" data-bs-toggle="tab"
                             data-bs-target="#content-1" type="button" role="tab" aria-controls="content-1"
                             aria-selected="true">{{ trans('modal.order_detail.customer_data') }}</button>
                     </li>
                     <!-- Second Tab -->
-                    <li class="nav-item" role="presentation" style="width: 25%;">
+                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
                         <button class="nav-link w-100" id="tab-2" data-bs-toggle="tab" data-bs-target="#content-2"
                             type="button" role="tab" aria-controls="content-2" aria-selected="false">
                             {{ trans('modal.order_detail.order_item', ['number_of_dish' => count($order->dishDetails)]) }}
@@ -105,14 +105,14 @@ $restaurantDetail = getRestaurantDetail();
                     </li>
                     @if ($order->order_type == OrderType::Delivery)
                     <!-- Third Tab -->
-                    <li class="nav-item" role="presentation" style="width: 25%;">
+                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
                         <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3"
                             type="button" role="tab" aria-controls="content-3"
                             aria-selected="false">Route Planner</button>
                     </li>
                     @endif
                     <!-- Fourth Tab -->
-                    <li class="nav-item" role="presentation" style="width: 25%;">
+                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
                         <button class="nav-link w-100" id="tab-4" data-bs-toggle="tab"
                             data-bs-target="#content-4" type="button" role="tab" aria-controls="content-4"
                             aria-selected="false">{{ trans('modal.order_detail.deliverer') }}</button>

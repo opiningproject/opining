@@ -249,7 +249,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
 
     //    manual order routes
-    Route::get('/create-order', [ManualOrdersController::class, 'index']);
+    Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

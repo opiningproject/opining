@@ -35,6 +35,6 @@ return [
         'client_secret' => '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',
         'redirect'      => 'https://gomeal-qa.inheritxdev.in/google/auth/callback',
     ],
-    'google_place_key' => 'AIzaSyAK9hxj_YCu51y0dBZfRz2jHkUOb8sY3cw',
+    'google_place_key' => env('GOOGLE_PLACE_KEY'),
 
 ];

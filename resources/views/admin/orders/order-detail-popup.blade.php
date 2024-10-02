@@ -7,7 +7,7 @@ use App\Enums\PaymentType;
 use App\Enums\RefundStatus;
 
 $userDetails = $order->orderUserDetails;
-
+$restaurantDetail = getRestaurantDetail();
 ?>
 
 <div class="modal-dialog modal-dialog-centered">
@@ -15,15 +15,18 @@ $userDetails = $order->orderUserDetails;
         <div class="modal-header border-0">
             <div class="head-flex">
                 <h3 class="mb-0">
-                    {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                    {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}
                     ORDER #{{ $order->id }}</h3>
                 <h3 class="mb-0">{{ trans('modal.order_detail.website_order') }}</h3>
                 <h3 class="mb-0">{{ date('d-m-Y H:i', strtotime($order->created_at)) }}</h3>
             </div>
         </div>
         <input type="hidden" class="order_id" value="{{$order->id}}">
+        {{--                $userDetails->latitude $userDetails->longitude --}}
+        <input  type="hidden" class="latitude" name="status" value="{{$userDetails->latitude}}">
+        <input  type="hidden" class="longitude" name="status" value="{{$userDetails->longitude}}">
         <div class="modal-body pt-1 pb-0">
-            <div class="border-0 d-flex align-items-center justify-content-between mb-0">
+            <div class="border-0 d-flex align-items-center justify-content-between mb-0 {{ $order->order_status == OrderStatus::Cancelled ? 'd-none' : '' }}">
 
                 <div class="order-status">
 
@@ -103,7 +106,7 @@ $userDetails = $order->orderUserDetails;
                     <li class="nav-item" role="presentation" style="width: 33%;">
                         <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3"
                             type="button" role="tab" aria-controls="content-3"
-                            aria-selected="false">{{ trans('modal.order_detail.delivery') }}</button>
+                            aria-selected="false">{{ trans('modal.order_detail.deliverer') }}</button>
                     </li>
                 </ul>
 
@@ -193,10 +196,12 @@ $userDetails = $order->orderUserDetails;
                                         </div>
                                     </div>
                                 </div>
+                                @if($order->order_type == OrderType::Delivery)
+                                    <div class="tab-map">
+                                        <div id="map" style="height: 500px; width: 100%;"></div>
+                                    </div>
+                                @endif
 
-                                <div class="tab-map">
-                                    <img src="{{ asset('images/tab-map.png') }}" alt="" />
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -278,8 +283,9 @@ $userDetails = $order->orderUserDetails;
 
         <div class="modal-footer d-flex align-items-center justify-content-between">
             <div class="clearfix">
-                <button type="button" class="btn btn-outline-danger text-danger"
-                    data-bs-dismiss="modal">{{ trans('modal.order_detail.cancel') }}</button>
+                @if($order->order_status != OrderStatus::Cancelled && $order->order_status != OrderStatus::Delivered)
+                    <button type="button" class="btn btn-outline-danger text-danger" onclick="cancelOrder({{$order->delivery_note}})">{{ trans('modal.order_detail.cancel') }}</button>
+                @endif
                 <a class="btn btn-outline-secondary ms-2 text-secondary d-inline-flex align-items-center gap-3"
                     target="_blank"
                     href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">{{ trans('rest.food_order.print') }}</a>
@@ -299,4 +305,84 @@ $userDetails = $order->orderUserDetails;
             </div>
         </div>
     </div>
+    {{-- cancel order model--}}
+
+    <div class="modal fade custom-modal" id="cancelOrderModal" tabindex="-1" aria-labelledby="dleteAlertModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-w-441px modal-dialog-centered justify-content-center">
+            <div>
+                <input  type="hidden" class="cancel_order" name="status" value="7">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="alert-text-1 mb-40px">{{ trans('rest.modal.cancel_order.cancel_message') }}</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button"
+                                    class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
+                                    data-bs-dismiss="modal">{{ trans('rest.button.no') }}
+                            </button>
+                            <button type="button" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-160px"
+                                    data-bs-dismiss="modal" id="cancel-order-btn">{{ trans('rest.button.yes') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initMap" async defer></script>
+<script>
+    let map;
+    let directionsService;
+    let directionsRenderer;
+    var latitudeValue = $('.latitude').val();
+    var longitudeValue = $('.longitude').val();
+    // Initialize the Google Map
+    function initMap() {
+        // Create the map centered at the first location
+        map = new google.maps.Map(document.getElementById('map'), {
+            // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
+            zoom: 8
+        });
+
+        // Create Directions Service and Renderer instances
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+
+        // Set the map where the directions will be rendered
+        directionsRenderer.setMap(map);
+        latitudeValue = '';
+        longitudeValue ='';
+        // Calculate and display the route
+        calculateAndDisplayRoute();
+    }
+    function calculateAndDisplayRoute() {
+        latitudeValue = $('.latitude').val();
+        longitudeValue = $('.longitude').val();
+        const origin = {
+            lat: {!! $restaurantDetail->latitude; !!},
+            lng: {!! $restaurantDetail->longitude; !!}  };
+        const destination = { lat: parseFloat(latitudeValue), lng: parseFloat(longitudeValue) }; // location 2
+        directionsService.route(
+            {
+                origin: origin,
+                destination: destination,
+                travelMode: 'DRIVING' // You can change this to WALKING, BICYCLING, or TRANSIT
+            },
+            (response, status) => {
+                if (status === 'OK') {
+                    // Display the route on the map
+                    directionsRenderer.setDirections(response);
+                } else {
+                    // Handle the error if route calculation fails
+                    window.alert('Directions request failed due to ' + status);
+                }
+            }
+        );
+    }
+</script>
+

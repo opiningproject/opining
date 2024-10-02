@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('page_title', trans('rest.archive_order.title'))
 @section('content')
 
     <?php
@@ -19,7 +20,7 @@
                     <div class="main-content food-order-main-content d-flex flex-column h-100">
                         <div
                             class="section-page-title mb-0 d-flex align-items-center justify-content-end gap-2 foodorder-page-title">
-                            <h1 class="page-title me-auto">{{ trans('rest.archive_order.title') }}</h1>
+{{--                            <h1 class="page-title me-auto">{{ trans('rest.archive_order.title') }}</h1>--}}
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
                                     <div class="search-has col order-filters-search">
@@ -68,7 +69,7 @@
                                                                             class="img-fluid svg" alt="" height="22"
                                                                             width="22">
                                                                         <div
-                                                                            class="text">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.pickup') }} </div>
+                                                                            class="text">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }} </div>
                                                                     </div>
                                                                     <div
                                                                         class="icontext-item d-flex align-items-center gap-1">
@@ -169,7 +170,7 @@
                                                     </div>
                                                     <div class="text">
                                                         <span>{{ trans('rest.food_order.type') }}:
-                                                        </span>{{ $order->order_type == OrderType::Delivery ?    trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                                                        </span>{{ $order->order_type == OrderType::Delivery ?    trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}
                                                     </div>
                                                 </div>
                                             </div>

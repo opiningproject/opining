@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('page_title', trans('rest.deliverers.title'))
 @section('content')
     <div class="main">
         <div class="main-view">
@@ -11,7 +11,7 @@
                         <div class="section-page-title main-page-title mb-0">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <h1 class="page-title">{{ trans('rest.deliverers.title') }}</h1>
+{{--                                    <h1 class="page-title">{{ trans('rest.deliverers.title') }}</h1>--}}
                                 </div>
                             </div>
                         </div>

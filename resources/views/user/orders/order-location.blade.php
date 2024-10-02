@@ -72,7 +72,7 @@
 
 @section('script')
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}"></script>
 <script>
       var order_type = "<?= $order->order->order_type ?>";
       var latitude = "<?= ($order->latitude == null) ? getRestaurantDetail()->latitude : $order->latitude ?>";

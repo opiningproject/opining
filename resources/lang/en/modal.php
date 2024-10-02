@@ -97,6 +97,7 @@ return [
         'close' => 'Close',
         'unpaid_order' => 'Unpaid order',
         'paid_order' => 'Paid order',
+        'deliverer' => 'Deliverer',
     ]
 
 ];

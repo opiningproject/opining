@@ -17,4 +17,5 @@ final class OrderStatus extends Enum
     const ReadyForPickup = '4';
     const OutForDelivery = '5';
     const Delivered = '6';
+    const Cancelled = '7';
 }

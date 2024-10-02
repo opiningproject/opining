@@ -562,7 +562,7 @@ footer .footer-copyright-text {color: rgba(255, 255, 255, 0.7);font-size: 12px;f
 .page-breadcrumb .breadcrumb-item.active {color: var(--theme-dark1);}input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}input[type=number] {-moz-appearance: textfield;}
 .main {height: 100%;display: table;width: 100%;table-layout: fixed;margin: 0 auto;}
 .main-view {height: 100%;display: table-row;}
-.main-view.signin-view {min-height: 100%;background-image: url("../images/bg-image.png");background-position: 100% 79%;background-size: cover;}
+.main-view.signin-view {min-height: 100%;background-image: url("../images/bg-image.png");background-position: 100% 79%;background-size: cover;z-index: 99;position: relative;}
 .resendpwdmodal {margin-top: 8vw;}
 .signin-layout {align-items: center;height: 100%;}
 .signin-layout .main-content {padding: 0;}

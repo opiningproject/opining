@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DishOptionsController;
 use App\Http\Controllers\Admin\DomainSettingController;
 use App\Http\Controllers\Admin\IngredientCategoryController;
 use App\Http\Controllers\Admin\IngredientController;
+use App\Http\Controllers\Admin\ManualOrdersController;
 use App\Http\Controllers\Admin\MyWebsiteController;
 use App\Http\Controllers\Admin\NewOrdersController;
 use App\Http\Controllers\Admin\SettingController;
@@ -53,17 +54,10 @@ Route::get('/clear-all', function () {
     echo "All cache/config/view/route cleared...";
 });
 
-Route::get('/', function (Request $request) {
-/*     $domain = $request->getHost();
-    $main_domain = config('app.main_domain');
-    if($domain == $main_domain){
 
-    }    
-    return redirect()->route('login'); */
-/*     dd('here'); */
-  /*   return redirect()->route('home'); */
+Route::get('/', function () {
+    return redirect()->route('home');
 });
-
 
 Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
 
@@ -117,7 +111,6 @@ Route::middleware(['localization'])->group(function () {
     Route::get('/get-dishes/{cat_id}', [App\Http\Controllers\User\DishController::class, 'getDishes']);
 
 });
-
 
 Route::get('change-lang/{lang}', function ($lang) {
     session(['Accept-Language' => $lang]);
@@ -269,6 +262,15 @@ Route::middleware(['auth', 'guest', 'localization','SwitchDatabase'])->group(fun
     Route::post('/update-delivery-time', [NewOrdersController::class, 'updateDeliveryTime'])->name('updateDeliveryTime');
     Route::get('/get-order-setting', [NewOrdersController::class, 'getOrderSetting'])->name('getOrderSetting');
     Route::get('/orders/print-label/{order_id}', [NewOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
+    Route::get('/cancel-order/{order_id}/{status}', [NewOrdersController::class, 'cancelOrder'])->name('orders.cancelOrder');
+
+    Route::post('/set-per-page', function (Request $request) {
+        $request->session()->put('per_page', $request->input('per_page'));
+        return response()->json(['success' => true]);
+    });
+
+    //    manual order routes
+    Route::get('/create-order', [ManualOrdersController::class, 'index']);
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

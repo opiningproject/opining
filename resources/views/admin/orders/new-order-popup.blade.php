@@ -18,7 +18,7 @@ use App\Enums\PaymentType;
                 </div>
                 <div class="modal-body pt-1">
                     <div class="text-center mb-4">
-                        <h1 class="mb-4 font-18 text-center">{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}</h1>
+                        <h1 class="mb-4 font-18 text-center">{{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}</h1>
                         <h3 class="mb-2 font-16 text-center">{{ $order->delivery_time }} </h3>
                         @php
                             $currentUrl = url()->previous(); // or you can use Request::url()
@@ -70,7 +70,7 @@ use App\Enums\PaymentType;
                                     {{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card'): ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod'):'Ideal') }}
                                 </h4>
                                 <h4 class="text-black-50 font-14"><span class="text-black">{{ trans('rest.food_order.order_type') }}:</span>
-                                    {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.pickup') }}
+                                    {{ $order->order_type == OrderType::Delivery ? trans('rest.food_order.delivery') : trans('rest.food_order.take_away') }}
                                 </h4>
                             </div>
                         </div>

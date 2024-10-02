@@ -894,7 +894,7 @@ if($user->cart && $user->cart->order_type == 2) {
         }
     </script>
     <script type="text/javascript" async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgn-yE-BywHdBacEmRH9IWEFbuaM4PWGw&loading=async"></script>
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&loading=async"></script>
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
         integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous">

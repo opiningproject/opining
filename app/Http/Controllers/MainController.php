@@ -12,10 +12,22 @@ use App\Models\RestaurantUser;
 use Illuminate\Support\Facades\Auth;
 use Redirect,Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+// Using the Session facade
+use Illuminate\Support\Facades\Session;
 
 
 class MainController extends Controller
 {
+    public function loginNotice(Request $request)
+    {
+       /*  dd('here'); */
+        /* abort(404, 'Please Login your admin panel.'); */
+        return view('errors.loginNotice', [
+        ]);
+    }
+
+
     public function panelRegistration(Request $request)
     {
         $domain = $request->getHost();
@@ -31,8 +43,112 @@ class MainController extends Controller
         }
     }
 
+
+    protected function extractDomainCode($request)
+    {
+        $path = $request->path();
+        // Split the path into segments
+        $segments = explode('/', trim($path, '/'));
+        // Get the first segment after the domain
+        return $domain_code = isset($segments[0]) ? $segments[0] : null;
+    }
+
+
+    protected function configureTenantDatabase($databaseName)
+{
+    // Update the tenant database connection details dynamically
+    config(['database.connections.mysql.database' => $databaseName]);
+
+    // Set the tenant connection as the default connection for the current session
+    DB::purge('mysql'); // Clears any cached database configuration
+    DB::reconnect('mysql'); // Reconnect to the tenant's database
+    // Optionally, set the default connection for all queries
+    DB::setDefaultConnection('mysql');
+}
+
+
+    public function restaurantAdminLogin(Request $request,$domain_code)
+    {
+        if (Auth::check()) {
+            return redirect('/dashboard'); // Adjust this path as needed
+        }
+        $host = $request->getHost();
+        $domain_code = $this->extractDomainCode($request);
+        $admin_domain = config('app.admin_domain');
+        $tenancy_db_name = '';
+        Log::info('Site Hosted Domain: ' . $host);
+        // Check if the request is to the admin domain
+       /*  if ($host == $admin_domain) { */
+            // Look for the domain record using the domain code
+            $domainRecord = Domain::where('domain_code', $domain_code)->first();
+            Log::info('Main Domain: ' . $domain_code);
+            if ($domainRecord) {
+                Log::info('Domain ID : ' . $domainRecord->id);
+                $tenant = $domainRecord->tenant;
+                $tenancy_db_name = $tenant->tenancy_db_name;
+                Log::info('tenancy_db_name ' . $tenancy_db_name);
+                $this->configureTenantDatabase($tenancy_db_name);
+                tenancy()->initialize($tenant);
+                // Optionally set the site URL
+                $siteUrl = 'http://' . $admin_domain . '/' . $domain_code;
+                Log::info('Site Url: ' . $siteUrl);
+            } else {
+                // Handle case when domain record is not found
+                Log::error('No tenant found for domain code: ' . $domain_code);
+          
+            }
+       /*  } else {
+            // Handle case when the domain does not match the admin domain
+            Log::warning('Request to non-admin domain: ' . $host);
+        } */
+  
+    if ($request->isMethod('post')) {
+         // Validate the login credentials
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $user = User::where('email', $request->email)->first();
+        Log::info('Login Email ' . $request->email);
+        if ($user) {
+            if (Auth::attempt(['email' => $user->email, 'password' => $request->input('password')])) {
+                Auth::login($user);
+                Session::put('tenancy_db_name', $tenancy_db_name);
+                Session::put('tenancy_domain_code', $domain_code);
+                return redirect()->intended('dashboard'); // Redirect to intended page
+            /*  $redirectUrl = 'http://' . $admin_domain . '/dashboard';
+                return redirect()->to($redirectUrl); */
+            } else {
+                return back()->withErrors(['password' => 'Invalid credentials']);
+                Log::info('Invalid credentials');
+            }
+        } else {
+            Log::info('User is not found');
+            return back()->withErrors(['email' => 'Either the email or password is incorrect.']);
+        }
+    }   
+        return view('auth.restaurant-admin-login', compact('domain_code'));
+    }
+
+
+/*     public function adminPanel(Request $request)
+    {
+        $domain = $request->getHost();
+        $admin_domain = config('app.admin_domain');
+      
+        if($domain == $admin_domain){
+           
+            return view('auth.panel-registration', [
+            ]);
+        }
+        else{
+            abort(404, 'Tenant not found for the given domain');
+        }
+    } */
+
     public function storePanelRegistration(Request $request)
     {
+        
         // Validation rules
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -41,7 +157,7 @@ class MainController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $randomNumberString = generateUniqueFourDigitNumber();
+        $domain_code = $randomNumberString = generateUniqueFourDigitNumber();
         $main_domain = config('app.main_domain');
         $randomSubDomain = $randomNumberString . '.' . $main_domain;
         
@@ -62,6 +178,9 @@ class MainController extends Controller
                 $domain = $request->getHost();
                 $domainRecord = Domain::where('domain', $newDomain)->first();
                 if ($domainRecord) {
+                    $domainRecord->update([
+                        'domain_code' => $domain_code
+                    ]);
                     $tenant = $domainRecord->tenant;
                     tenancy()->initialize($tenant);
                     $user = User::create([

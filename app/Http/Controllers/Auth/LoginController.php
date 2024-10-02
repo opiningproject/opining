@@ -50,22 +50,31 @@ class LoginController extends Controller
         );
     }
 
+
     public function logout(Request $request)
     {
         $user = Auth::user();
         if ($user) {
             User::where('id',$user->id)->update(['is_online'=>'0']);
         }
-        $this->guard()->logout();
-        Session::forget('myFinanceIsValidate');
-        $request->session()->invalidate();
 
+        $getSiteHost = getSiteHost($request);
+     /*    dd($getSiteHost); */
+        Session::forget('myFinanceIsValidate');
+        Session::forget('tenancy_domain_code');
+        Session::forget('tenancy_db_name');
+        $this->guard()->logout();
+   
         if($user->user_role == UserType::Admin)
         {
-            return redirect()->route('login');
+            $loginUrl = $getSiteHost . '/login';
+            $request->session()->invalidate();
+            return redirect($loginUrl);
+/*             return redirect()->route('login'); */
         }
         else
         {
+            $request->session()->invalidate();
             return redirect()->route('user.home');
         }
 

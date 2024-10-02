@@ -755,3 +755,25 @@ if (filter_var($randomString, FILTER_VALIDATE_URL) === false) {
 // Return the formatted URL
 return $randomString;
 }
+
+
+
+function getSiteHost($request){
+    
+     $tenancy_domain_code = session('tenancy_domain_code');
+    $host = $request->getHost();
+    $admin_domain = config('app.admin_domain');
+    $main_domain = config('app.main_domain');
+    $siteUrl = '';
+    if ($host == $admin_domain) { 
+        $siteUrl = 'https://' . $admin_domain . '/' . $tenancy_domain_code;
+    }
+    else if ($host == $main_domain){
+/*         $siteUrl = 'https://' . $main_domain . '/'; */
+        $siteUrl = 'https://' . $main_domain . '/' . $tenancy_domain_code;
+    }
+    else{
+        $siteUrl = 'https://' . $main_domain . '/';
+    }
+    return $siteUrl;
+}

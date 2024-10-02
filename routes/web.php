@@ -53,21 +53,31 @@ Route::get('/clear-all', function () {
     echo "All cache/config/view/route cleared...";
 });
 
-Route::get('/', function () {
-    return redirect()->route('home');
-});
-
 Route::get('/', function (Request $request) {
-    $domain = $request->getHost();
+/*     $domain = $request->getHost();
     $main_domain = config('app.main_domain');
     if($domain == $main_domain){
-        /* return redirect()->route('panelRegistration'); */
+
     }    
-    return redirect()->route('login');
+    return redirect()->route('login'); */
+/*     dd('here'); */
+  /*   return redirect()->route('home'); */
 });
 
+
+Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
+
+Route::match(['get', 'post'], '/{domain_code}/login', [App\Http\Controllers\MainController::class, 'restaurantAdminLogin'])->name('restaurantAdminLogin');
+
+Route::get('/login-notice', [App\Http\Controllers\MainController::class, 'loginNotice'])->name('loginNotice');
+
+Auth::routes(['register' => false]);
+
+
+
+
 Route::group(['prefix' => '/super-admin'], function () {
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('super-admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('super-admin.dashboard');
 });
 
 /* Route::get('/', [MainController::class, 'panelRegistration'])->name('panelRegistration'); */
@@ -108,7 +118,6 @@ Route::middleware(['localization'])->group(function () {
 
 });
 
-Auth::routes(['register' => false]);
 
 Route::get('change-lang/{lang}', function ($lang) {
     session(['Accept-Language' => $lang]);
@@ -120,7 +129,7 @@ Route::get('change-theme/{theme}', function ($currency) {
     return redirect()->back();
 });
 
-Route::middleware(['auth', 'guest', 'localization'])->group(function () {
+Route::middleware(['auth', 'guest', 'localization','SwitchDatabase'])->group(function () {
     // dashboard route
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('dashboard/statistics', [HomeController::class, 'getDashboardStatistics'])->name('dashboard.statistics');

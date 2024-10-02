@@ -45,7 +45,7 @@ use App\Enums\RefundStatus;
                                 </tr>
                                 <tr>
                                     <td>{{ trans('user.my_orders.order_for') }}</td>
-                                    <td class="text-end"> {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery') : trans('user.my_orders.pickup') }}</td>
+                                    <td class="text-end"> {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery') : trans('user.my_orders.take_away') }}</td>
                                 </tr>
                                 <tr>
                                     <td>{{ trans('user.my_orders.payment') }}</td>
@@ -580,7 +580,7 @@ use App\Enums\RefundStatus;
             <div class="textgrp">
                 <div class="title">{{ trans('user.my_orders.order_for') }}</div>
                 <div class="text">
-                    {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery') : trans('user.my_orders.pickup') }}
+                    {{ $order->order_type == OrderType::Delivery ? trans('user.my_orders.delivery') : trans('user.my_orders.take_away') }}
                 </div>
             </div>
 

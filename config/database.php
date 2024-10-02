@@ -39,10 +39,17 @@ return [
             'driver' => 'mysql',
             'database' => 'go-meal',
 //            'url' => ' localhost',
+<<<<<<< HEAD
             'host' => 'localhost',
             'port' => '3306',
             'username' => 'root',
             'password' => '',
+=======
+            'host' => '164.90.253.87',
+            'port' => '3306',
+            'username' => 'go-meal',
+            'password' => 'GgiJ-9j$ceDn6oF',
+>>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -149,4 +156,8 @@ return [
 
     ],
 
+<<<<<<< HEAD
 ];
+=======
+];
+>>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a

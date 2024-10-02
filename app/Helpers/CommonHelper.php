@@ -497,7 +497,11 @@ if (!function_exists('uploadImageToLocal')) {
 if (!function_exists('getOpenOrders')) {
     function getOpenOrders()
     {
+<<<<<<< HEAD
         $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->get();
+=======
+        $openOrders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->get();
+>>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
 
         return count($openOrders);
     }
@@ -652,7 +656,12 @@ if (!function_exists('orderStatusBox')) {
             2 => 'outline-warning',       // In Kitchen
             4 => 'outline-success',       // Ready For Pickup
             5 => 'outline-success',       // Out For Delivery
+<<<<<<< HEAD
             6 => 'btn-danger-outline'     // Delivered
+=======
+            6 => 'btn-danger-outline',     // Delivered
+            7 => 'outline-danger',        // New Order
+>>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
         ];
 
         // Define status-text mappings
@@ -661,7 +670,12 @@ if (!function_exists('orderStatusBox')) {
             2 => 'In Kitchen',
             4 => 'Ready For Pickup',
             5 => 'Out For Delivery',
+<<<<<<< HEAD
             6 => 'Delivered'
+=======
+            6 => 'Delivered',
+            7 => 'Cancelled'
+>>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
         ];
 
         // Get the color and text based on the status
@@ -672,6 +686,7 @@ if (!function_exists('orderStatusBox')) {
         // You could add more custom logic here if needed, based on the order type
         return $order;
     }
+<<<<<<< HEAD
 
 
 }
@@ -777,3 +792,30 @@ function getSiteHost($request){
     }
     return $siteUrl;
 }
+=======
+}
+
+if (!function_exists('RoundUpEstimatedTime')) {
+    function RoundUpEstimatedTime($expectedDeliveryTime, $addMinutes)
+    {
+        //$expectedDeliveryTime = $expectedDeliveryTime; // Replace this with your actual time value
+        $timeParts = explode(':', $expectedDeliveryTime); // Split into hours and minutes
+        $hours = $timeParts[0];
+        $minutes = $timeParts[1];
+        // Round up the minutes to the nearest multiple of 5
+        $roundedMinutes = ceil($minutes / 5) * 5;
+
+        // Handle overflow if minutes become 60
+        if ($roundedMinutes == 60) {
+            $roundedMinutes = '00';
+            $hours = str_pad($hours + 1, 2, '0', STR_PAD_LEFT);
+        }
+
+        $expectedDeliveryTime = $hours . ':' . str_pad($roundedMinutes, 2, '0', STR_PAD_LEFT);
+        $expectedDeliveryTime =  \Carbon\Carbon::parse($expectedDeliveryTime)->addMinutes($addMinutes)->format('H:i:s');
+        return $expectedDeliveryTime;
+
+
+    }
+}
+>>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a

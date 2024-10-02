@@ -22,7 +22,7 @@ class AddressController extends Controller
 
     public function validateZipcode(Request $request)
     {
-        session()->forget(['street_name', 'city']);
+        session()->forget(['street_name', 'city', 'longitude', 'latitude']);
         $zip =substr($request->zipcode, 0, 4);
         $zipcode = Zipcode::whereRaw("LEFT(zipcode,4) = '$zip'")->where('status','1')->first();
 
@@ -40,6 +40,8 @@ class AddressController extends Controller
                     $validAddress = json_decode($validAddress);
                     session(['street_name' => $validAddress->street]);
                     session(['city' => $validAddress->city]);
+                    session(['longitude' => $validAddress->location->coordinates[0]]);
+                    session(['latitude' => $validAddress->location->coordinates[1]]);
                 }
             }
             if ($checkUserAddress) {
@@ -53,7 +55,9 @@ class AddressController extends Controller
             session(['delivery_charge' => $zipcode->delivery_charge]);
             $street_name = session('street_name') ?? '';
             $city = session('city') ?? '';
-            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode, "street_name" => $street_name, "city" => $city, 'min_order_price' => $zipcode->min_order_price]);
+            $longitude = session('longitude') ?? '';
+            $latitude = session('latitude') ?? '';
+            return response::json(['status' => 1, 'message' => "","house_number" => $request->house_no, "zipcode" => $request->zipcode, "street_name" => $street_name, "city" => $city, "longitude" => $longitude,"latitude" => $latitude, 'min_order_price' => $zipcode->min_order_price]);
         }
 
         return response::json(['status' => 2, 'message' => trans('user.message.invalid_zipcode')]);

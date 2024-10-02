@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('page_title', trans('rest.user_chat.chat'))
 @section('content')
     <div class="main chat-main-screen">
         <div class="main-view">
@@ -10,7 +10,7 @@
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between d-none d-sm-block">
                             <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
-                                <h1 class="page-title">{{ trans('rest.user_chat.chat') }}</h1>
+{{--                                <h1 class="page-title">{{ trans('rest.user_chat.chat') }}</h1>--}}
                             </div>
                         </div>
                         <input type="hidden" value="{{ Auth::user()->id }}" id="auth-user-id">

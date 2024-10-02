@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+@section('page_title', trans('rest.menu.title'))
+@section('content')
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
@@ -9,7 +11,7 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <div class="pt-0">
-                                        <h1 class="page-title">{{ trans('rest.menu.title') }}</h1>
+                                        <h1 class="page-title"></h1>
                                     </div>
                                 </div>
                                 <div class="col text-end">

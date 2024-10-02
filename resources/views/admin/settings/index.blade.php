@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('page_title', trans('rest.settings.title'))
 @section('content')
     <div class="main">
         <div class="main-view">
@@ -17,7 +17,7 @@
 
 
                                     <div class="section-page-title mb-0">
-                                        <h1 class="page-title">{{ trans('rest.settings.title') }}</h1>
+{{--                                        <h1 class="page-title">{{ trans('rest.settings.title') }}</h1>--}}
                                     </div>
 
                                     <ul class="nav nav-tabs flex-wrap" id="myTab" role="tablist">

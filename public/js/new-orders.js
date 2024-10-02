@@ -7,6 +7,87 @@ $(document).ready(function () {
     });
 });
 
+function cancelOrder(id) {
+    $('#cancelOrderModal').modal('show');
+}
+
+$(document).on('click', '#cancel-order-btn', function () {
+
+    //$('#zipcode-delete-btn').prop('disabled',true);
+
+    var id = $('.order_id').val();
+    var status = $('.cancel_order').val();
+
+    $.ajax({
+        url: baseURL+'/cancel-order/'+ id + '/' + status,
+        type: 'GET',
+        success: function (response) {
+          /*  $('#deleteZipcodeModal').modal('toggle');
+            $('.zipcode-row-' + id).remove();
+            toastr.success(response.message)*/
+            if (response.status == 1) {
+                $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
+                $('.order-detail-popup').modal('hide')
+                $('.order-status-' + response.orderId).addClass(response.color);
+                $('.order-status-' + response.orderId).text(response.text);
+                var currentOrderCount = $('.order-count').text();
+                $('.order-count').html(currentOrderCount - 1);
+                $('.count-order').html(currentOrderCount - 1);
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+})
+
+
+// screen wise show pagination code
+document.addEventListener('DOMContentLoaded', function() {
+    let screenWidth = window.innerWidth;
+    let screenHeight = window.innerHeight; // Get screen height
+    let perPage = 24; // Default value
+
+    // Adjust perPage based on both screen width and height
+    if (screenHeight < 768) {
+        perPage = 21; // Large screen
+    } else if (screenHeight < 900) {
+        perPage = 21; // Medium screen
+    } else {
+        perPage = 24; // Small screen
+    }
+    // Get the currently stored per_page value from sessionStorage
+    const storedPerPage = sessionStorage.getItem('per_page_value');
+    // Check if per_page is already set in sessionStorage to avoid repeated reloads
+    if (storedPerPage !== perPage.toString()) {
+        // Send AJAX request to store perPage in session
+        sessionStorage.setItem('per_page_value', perPage.toString());
+        fetch('/set-per-page', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ per_page: perPage })
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            if (data.success) {
+                // Set a flag in sessionStorage so that we don't reload again
+                // sessionStorage.setItem('per_page_value', perPage.toString());
+                // Reload the page to apply pagination with the new per_page value
+                window.location.reload();
+            }
+        }).catch(error => {
+            console.error('Error setting per_page:', error);
+        });
+    }
+});
+
+
+
+
 // order-status-option active inactive
 $(document).ready(function () {
     $(document).on('change', '.order-status-option input[type="radio"]', function () {
@@ -69,17 +150,33 @@ $(function () {
         });
     }
 
+    if (filters.length > 0) {
+        $('.count-filter').removeClass('d-none');
+        $('.count-filter').text(filters.length);
+    } else {
+        $('.count-filter').addClass('d-none');
+    }
+
     $('.order-filter input[type="checkbox"]').on('change', function () {
-        // Get selected checkboxes
+        // Clear the filters array before adding new ones
+        filters = [];
+
         if ($('.order-filter input[type="checkbox"]:checked').length > 0) {
             $('.order-filter input[type="checkbox"]:checked').each(function () {
                 filters.push($(this).attr('id')); // Get the ID of the checkbox (e.g., 'online', 'manual')
             });
+
+            var uniqueValues = new Set(filters);
+            var uniqueCount = uniqueValues.size;
+
+            $('.count-filter').removeClass('d-none');
+            $('.count-filter').text(uniqueCount);
         } else {
-            filters = []
+            $('.count-filter').addClass('d-none');
+            filters = [];
         }
         // Send filters via AJAX
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters);
     });
 
 
@@ -171,21 +268,40 @@ function assignDeliverer(order_id, deliverer_id) {
 
 function disabledOldOrderStatus() {
     const radios = document.querySelectorAll('.order-status-radio');
+
+    // Define the allowed transitions between statuses
     const orderStatusMap = {
-        'accepted-order': ['inKitchen-order', 'outForDelivery-order', 'delivered-order'], // Assuming 'accepted-order' is New Order
-        'inKitchen-order': ['accepted-order', 'outForDelivery-order', 'delivered-order'], // Assuming 'inKitchen-order' is In Kitchen
-        'outForDelivery-order': ['accepted-order', 'inKitchen-order', 'delivered-order'], // Assuming 'outForDelivery-order' is Ready For Pickup or Out For Delivery
-        'delivered-order': ['accepted-order', 'inKitchen-order', 'outForDelivery-order']  // Assuming 'delivered-order' is Delivered
+        'accepted-order': ['inKitchen-order'], // Only In Kitchen can be enabled from New Order
+        'inKitchen-order': ['outForDelivery-order'], // Only Out For Delivery can be enabled from In Kitchen
+        'outForDelivery-order': ['delivered-order'], // Only Delivered can be enabled from Out For Delivery
+        'delivered-order': [] // No further status transitions from Delivered, so everything else is disabled
     };
 
+    // Function to update the status of radio buttons
     function updateRadioStatus() {
+        // Find how many radios are checked
+        const checkedRadios = document.querySelectorAll('.order-status-radio:checked');
+
+        // If no radio button is checked, disable all radio buttons
+        if (checkedRadios.length === 0) {
+            radios.forEach(radio => {
+                radio.disabled = true;
+            });
+            return; // Exit early if no radio buttons are checked
+        }
+
+        // If a radio is checked, enable/disable the relevant radios
         radios.forEach(radio => {
             if (radio.checked) {
-                orderStatusMap[radio.id].forEach(id => {
-                    document.getElementById(id).disabled = true;
+                const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
+                radios.forEach(r => {
+                    // Enable only the radios in the allowed transition map, disable others
+                    if (enabledRadios.includes(r.id)) {
+                        r.disabled = false; // Enable the valid next step
+                    } else if (r.id !== radio.id) {
+                        r.disabled = true; // Disable all other radios except the current one
+                    }
                 });
-            } else {
-                radio.disabled = false;
             }
         });
     }
@@ -196,15 +312,37 @@ function disabledOldOrderStatus() {
     // Add change event listener to radio buttons
     radios.forEach(radio => {
         radio.addEventListener('change', function() {
-            // Log the change for debugging
-            console.log(this.id + ' is checked');
-
-            // Update radio statuses based on the current selection
+            // Enable all radios first, then re-apply the disabling logic
             radios.forEach(r => r.disabled = false); // Enable all radios first
-            updateRadioStatus();
+            updateRadioStatus(); // Apply disabling logic based on the new selection
         });
     });
 }
+
+// Example usage
+disabledOldOrderStatus();
+
+
+// checked all checkboxs on click all checkbox.
+$('#all').on('change', function() {
+    // Check or uncheck all checkboxes based on 'all' checkbox state
+    $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
+});
+
+// If any individual checkbox is unchecked, also uncheck 'all'
+$('.order-filter .checkbox').not('#all').on('change', function() {
+    if (!$(this).is(':checked')) {
+        $('#all').prop('checked', false);
+    }
+});
+
+// Check if all checkboxes are selected, and if so, check 'all'
+$('.order-filter .checkbox').not('#all').on('change', function() {
+    if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
+        $('#all').prop('checked', true);
+    }
+});
+
 
 
 //order setting js code start
@@ -263,7 +401,6 @@ var start = moment().subtract(10, 'days');
 var end = moment();
 
 var dateRange = ''
-console.log("dddd", $('.order-setting-custom-time').val())
 var existingDate = $('.order-setting-custom-time').val() ?? null;
     $('#order-setting-custom-time').daterangepicker({
         startDate: start,
@@ -344,9 +481,42 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).on('click', '.update-delivery-time', function () {
-    var getMinute = $(this).text();
+    var getMinute = $(this).text(); // +5 or -5
     var orderId = $('.order_id').val();
     var curruntTime = $('.expected_time_order').text();
+
+    // Convert the current time (HH:mm) to minutes for easier comparison
+    var timeParts = curruntTime.split(':');
+    var hours = parseInt(timeParts[0]);
+    var minutes = parseInt(timeParts[1]);
+    var totalMinutes = hours * 60 + minutes;
+
+    // Update the time based on the button clicked
+    if (getMinute === '+5') {
+        totalMinutes += 5;
+    } else if (getMinute === '-5') {
+        totalMinutes -= 5;
+    }
+
+    // Convert total minutes back to HH:mm format
+    var newHours = Math.floor(totalMinutes / 60) % 24;
+    var newMinutes = totalMinutes % 60;
+    var newTime = ('0' + newHours).slice(-2) + ':' + ('0' + newMinutes).slice(-2);
+
+    // Disable +5 if time reaches 24:00 and -5 if time reaches 00:00
+    if (newHours === 0 && newMinutes === 0) {
+        $('.update-delivery-time:contains("-5")').prop('disabled', true);
+    } else {
+        $('.update-delivery-time:contains("-5")').prop('disabled', false);
+    }
+
+    if (newHours === 23 && newMinutes === 55) {
+        $('.update-delivery-time:contains("+5")').prop('disabled', true);
+    } else {
+        $('.update-delivery-time:contains("+5")').prop('disabled', false);
+    }
+
+    // Send updated data to the server via AJAX
     $.ajax({
         url: baseURL + '/update-delivery-time',
         type: 'POST',
@@ -362,11 +532,12 @@ $(document).on('click', '.update-delivery-time', function () {
             }
         },
         error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            toastr.error(errorMessage)
+            var errorMessage = JSON.parse(response.responseText).message;
+            toastr.error(errorMessage);
         }
-    })
-})
+    });
+});
+
 
 /*$(document).on('click', '.order_details_button', function () {
     var urlLastElement = document.location.pathname
@@ -382,12 +553,10 @@ $(document).on('click', '.update-delivery-time', function () {
 
 $(document).ready(function () {
     var currentUrl = window.location.href;
-// Split the URL by '/' and get the last element
     var lastElement = currentUrl.split('/').pop();
 // Check if lastElement is a number, and then call a function
     if (!isNaN(lastElement)) {
         orderDetailNew(lastElement)
-        // console.log("lastElement", lastElement); // Call your function here
     } else {
         console.log("The last element is not a number.");
     }

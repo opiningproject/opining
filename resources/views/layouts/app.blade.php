@@ -10,20 +10,72 @@
         <img src="{{ asset('images/loader.gif') }}" style="height: 250px">
     </div>
 
-    <div class="body-main">
 
-        <div class="overlay-sidebar"></div>
-        <a href="javascript:void(0)" id="sidebar-toggle-btn" class="sidebar-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="28"
-                height="28">
-                <path
-                    d="M0,4c0-.55,.45-1,1-1H18c.55,0,1,.45,1,1s-.45,1-1,1H1c-.55,0-1-.45-1-1Zm18,15H1c-.55,0-1,.45-1,1s.45,1,1,1H18c.55,0,1-.45,1-1s-.45-1-1-1Zm5-8H6c-.55,0-1,.45-1,1s.45,1,1,1H23c.55,0,1-.45,1-1s-.45-1-1-1Z" />
-            </svg>
-        </a>
+
+    <div class="body-main">
+        @if(auth()->user())
+        <div class="header-top">
+            <div class="header-container">
+                <div class="header-row">
+                    <div class="left">
+                        <a href="javascript:void(0)" id="sidebar-toggle-btn" class="sidebar-toggle">
+
+                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <line y1="1.25" x2="18" y2="1.25" stroke="black" stroke-width="1.5" />
+                                <line x1="-6.55671e-08" y1="7.25" x2="18" y2="7.25" stroke="black"
+                                    stroke-width="1.5" />
+                                <line x1="-6.55671e-08" y1="13.25" x2="18" y2="13.25" stroke="black"
+                                    stroke-width="1.5" />
+                            </svg>
+
+                        </a>
+
+{{--                        <h1 class="mb-0">Orders <label>15</label></h1>--}}
+                        <h1 class="mb-0 title">@yield('page_title', 'Dashboard')
+                            @hasSection('order_count')
+                                <label class="count count-order">@yield('order_count')</label>
+                            @endif
+                        </h1>
+                         <!-- Placeholder for count -->
+
+                    </div>
+                    <div class="right">
+                        <a href="#" class="chat-link">
+                            <img src="{{ asset('images/admin-menu-icons/message-text.svg') }}" class="svg" height="20"
+                                width="20" />
+                        </a>
+
+                        @if(auth()->user())
+                        <div class="dropdown profile-link custom-default-dropdown">
+                            <button class="btn" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ getRestaurantDetail()->restaurant_logo }}" alt="user image">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        {{ trans('rest.settings.profile.logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}"
+                                          method="POST" class="d-none"> @csrf </form>
+                                </li>
+                            </ul>
+                        </div>
+                            @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        {{-- <div class="overlay-sidebar"></div> --}}
+
         @yield('content')
     </div>
 
-    {{--@if($theme == 'dark')
+    {{-- @if ($theme == 'dark')
     <a href="{{ url('/change-theme/light') }}">
         <div class="dark-light-btn p-3 cursor-pointer">
             <img src="{{ asset('images/light-theme.svg') }}" alt="" height="240" width="240" class="svg">
@@ -35,11 +87,11 @@
             <img src="{{ asset('images/dark-theme.svg') }}" alt="" height="20" width="20" class="svg">
         </div>
     </a>
-    @endif--}}
+    @endif --}}
     <!-- start order category Modal -->
     <div class="order-modal-div" id="order-modal-div"></div>
     <!-- end order category  Modal -->
-    <audio id="myaudio" src="{{asset('/notificationSound/notification-sound.mp3')}}"> </audio>
+    <audio id="myaudio" src="{{ asset('/notificationSound/notification-sound.mp3') }}"> </audio>
 
     @include('layouts.admin.footer')
     @yield('script')

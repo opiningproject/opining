@@ -103,16 +103,18 @@ $restaurantDetail = getRestaurantDetail();
                             {{ trans('modal.order_detail.order_item', ['number_of_dish' => count($order->dishDetails)]) }}
                         </button>
                     </li>
+                    @if ($order->order_type == OrderType::Delivery)
                     <!-- Third Tab -->
                     <li class="nav-item" role="presentation" style="width: 25%;">
                         <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3"
                             type="button" role="tab" aria-controls="content-3"
-                            aria-selected="false">Routeplanner</button>
+                            aria-selected="false">Route Planner</button>
                     </li>
+                    @endif
                     <!-- Fourth Tab -->
                     <li class="nav-item" role="presentation" style="width: 25%;">
                         <button class="nav-link w-100" id="tab-4" data-bs-toggle="tab"
-                            data-bs-target="#content-3" type="button" role="tab" aria-controls="content-4"
+                            data-bs-target="#content-4" type="button" role="tab" aria-controls="content-4"
                             aria-selected="false">{{ trans('modal.order_detail.deliverer') }}</button>
                     </li>
                 </ul>
@@ -260,16 +262,17 @@ $restaurantDetail = getRestaurantDetail();
                             </div>
                         </div>
                     </div>
-
+{{--                @if ($order->order_type == OrderType::Delivery)--}}
                     <!-- Content for Tab 3 -->
                     <div class="tab-pane fade px-0" id="content-3" role="tabpanel" aria-labelledby="tab-3">
 
-                        @if ($order->order_type == OrderType::Delivery)
+{{--                        @if ($order->order_type == OrderType::Delivery)--}}
                             <div class="tab-map">
                                 <div id="map" style="height: 350px; width: 100%;"></div>
                             </div>
-                        @endif
+
                     </div>
+{{--                @endif--}}
 
                     <!-- Content for Tab 4 -->
                     <div class="tab-pane fade" id="content-4" role="tabpanel" aria-labelledby="tab-4">
@@ -397,7 +400,7 @@ $restaurantDetail = getRestaurantDetail();
                     directionsRenderer.setDirections(response);
                 } else {
                     // Handle the error if route calculation fails
-                    window.alert('Directions request failed due to ' + status);
+                    // window.alert('Directions request failed due to ' + status);
                 }
             }
         );

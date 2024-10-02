@@ -1,6 +1,7 @@
 @php
     $previousKey = null;
 @endphp
+<input type="hidden" class="unreadCount" value="{{ $unreadCount }}">
 @foreach($messages as $key => $msg)
     <p class="message-date text-center">
         <span class="date_hidden {date_new_{$key}}" style="display: none"> {{$key}} </span>
@@ -36,6 +37,13 @@
         </div>
     @endforeach
 @endforeach
+<script>
+    if ($('.unreadCount').val() > 0) {
+        $('.count').text($('.unreadCount').val())
+    } else {
+        $('.count').addClass('d-none');
+    }
+</script>
 
 
 

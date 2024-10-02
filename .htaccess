@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the request comes from admin.opiningstore.com
+    RewriteCond %{HTTP_HOST} ^admin\.opiningstore\.com$ [NC]
+    
+    # Rewrite to capture tenant identifier and pass it to Laravel
+    RewriteRule ^([0-9]+)/?(.*)$ index.php?q=$1/$2 [L,QSA]  # Capture the tenant ID and rest of the URL
+
+    # Handle Front Controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>

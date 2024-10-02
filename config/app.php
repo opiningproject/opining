@@ -5,6 +5,7 @@ use Illuminate\Support\ServiceProvider;
 
 return [
     'main_domain' => 'store.opiningstore.com',
+    'admin_domain' => 'admin.opiningstore.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,6 +173,7 @@ return [
         browner12\helpers\HelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
+        App\Providers\DomainSettingsProvider::class,
 
     ])->toArray(),
 

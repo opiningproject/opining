@@ -32,7 +32,6 @@ return new class extends Migration
             $table->integer('domain_id');
             $table->integer('new_restaurant_user_id')->comment("New restaurant user id")->nullable();
             $table->timestamps();
-            $table->foreign('domain_id')->references('id')->on('domains')->constrained()->cascadeOnDelete();
         });
     }
 

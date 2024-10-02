@@ -55,7 +55,7 @@ Route::get('/clear-all', function () {
 });
 
 Route::get('/', function () {
-    return redirect()->route('home');
+    return redirect()->route('dashboard');
 });
 
 Route::post('/paymentCallback', [App\Http\Controllers\User\WebhookController::class, 'paymentCallback']);

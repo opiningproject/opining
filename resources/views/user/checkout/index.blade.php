@@ -1069,7 +1069,8 @@ if($user->cart && $user->cart->order_type == 2) {
                 var streetName = $('#street_name').val()
                 var houseNo = $('#house_no').val()
                 var city = $('#city').val()
-                var address = houseNo + ' ' + streetName + ' ' + city
+                var zipcode = $('#zipcode').val()
+                var address = zipcode
 
                 try {
                     var geocoder = new google.maps.Geocoder();
@@ -1088,7 +1089,8 @@ if($user->cart && $user->cart->order_type == 2) {
                     //alert(err)
                 }
             }
-
+            // console.log('longitude', longitude, 'latitude', latitude)
+            // return false
             checkoutData.append('longitude', longitude)
             checkoutData.append('latitude', latitude)
 

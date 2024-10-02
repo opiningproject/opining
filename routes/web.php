@@ -55,7 +55,7 @@ Route::get('/clear-all', function () {
 });
 
 Route::get('/', function () {
-    return redirect()->route('home');
+    return redirect()->route('dashboard');
 });
 
 Route::post('/paymentCallback', [App\Http\Controllers\User\WebhookController::class, 'paymentCallback']);
@@ -249,7 +249,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     });
 
     //    manual order routes
-    Route::get('/create-order', [ManualOrdersController::class, 'index']);
+    Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

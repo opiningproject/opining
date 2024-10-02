@@ -5,9 +5,9 @@ $(function () {
     var currentAmount = $('.bill-count').html()
 
     // var currentAmount = $('.bill-total-count').html()
-    if(!zipcode) {
-        $('#delivery-charge-tab').hide()
-    }
+    // if(!zipcode) {
+    //     $('#delivery-charge-tab').hide()
+    // }
     if (currentAmount) {
         currentAmount = currentAmount.replace('€', '')
         if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
@@ -138,7 +138,7 @@ $(function () {
                         $('.delivery_charge_amount').html('<span class="bill-count delivery_charge_amount">€'+response.data.delivery_charge.toFixed(2) +'</span>')
                         $('#delivery-charge').val(response.data.delivery_charge.toFixed(2))
                         let amount = parseFloat(currentAmount)
-                       
+
                         amount += response.data.delivery_charge;
                         let serviceCharge = $('#service-charge').val()
                         if( serviceCharge) {

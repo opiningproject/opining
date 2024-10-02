@@ -70,6 +70,22 @@
             }
         });
 
+        function goFullscreen() {
+            // Check if the Fullscreen API is supported
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        // Add event listener to the button
+        document.getElementById("maximize-screen").addEventListener("click", goFullscreen);
+
     });
 
     /*jQuery(document).ajaxStart(function(){

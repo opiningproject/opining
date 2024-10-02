@@ -19,12 +19,12 @@ $(document).on('click', '#cancel-order-btn', function () {
     var status = $('.cancel_order').val();
 
     $.ajax({
-        url: baseURL+'/cancel-order/'+ id + '/' + status,
+        url: baseURL + '/cancel-order/' + id + '/' + status,
         type: 'GET',
         success: function (response) {
-          /*  $('#deleteZipcodeModal').modal('toggle');
-            $('.zipcode-row-' + id).remove();
-            toastr.success(response.message)*/
+            /*  $('#deleteZipcodeModal').modal('toggle');
+              $('.zipcode-row-' + id).remove();
+              toastr.success(response.message)*/
             if (response.status == 1) {
                 $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
                 $('.order-detail-popup').modal('hide')
@@ -44,18 +44,35 @@ $(document).on('click', '#cancel-order-btn', function () {
 
 
 // screen wise show pagination code
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let screenWidth = window.innerWidth;
     let screenHeight = window.innerHeight; // Get screen height
-    let perPage = 24; // Default value
+    let perPage = 15; // Default value
 
     // Adjust perPage based on both screen width and height
-    if (screenHeight < 768) {
-        perPage = 21; // Large screen
-    } else if (screenHeight < 900) {
-        perPage = 21; // Medium screen
-    } else {
-        perPage = 24; // Small screen
+    if (screenHeight == 1080) {
+        perPage = 36;
+    }
+    else if (screenHeight > 1040) {
+        perPage = 36;
+    }
+    else if (screenHeight > 1000) {
+        perPage = 27;
+    }
+    else if (screenHeight > 900) {
+        perPage = 24;
+    }
+    // else if (screenHeight > 880) {
+    //     perPage = 30;
+    // }
+    else if (screenHeight < 769) {
+        perPage = 15;
+    }
+    else if (screenHeight < 768) {
+        perPage = 21;
+    }
+    else {
+        perPage = 27; // Small screen
     }
     // Get the currently stored per_page value from sessionStorage
     const storedPerPage = sessionStorage.getItem('per_page_value');
@@ -218,12 +235,12 @@ function orderDetailNew(id) {
     })
 }
 
-function changeOrderStatusNew(order_id,order_status) {
-    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
+function changeOrderStatusNew(order_id, order_status) {
+    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", { transports: ['websocket', 'polling', 'flashsocket'] });
 
     var orderId = order_id;
     $.ajax({
-        url: baseURL+'/orders/change-status/'+ orderId,
+        url: baseURL + '/orders/change-status/' + orderId,
         type: 'GET',
         success: function (response) {
             console.log("response", response)
@@ -251,7 +268,7 @@ function assignDeliverer(order_id, deliverer_id) {
     var orderId = order_id;
     var delivererId = deliverer_id;
     $.ajax({
-        url: baseURL+'/add-deliverer/'+ orderId + '/' + deliverer_id,
+        url: baseURL + '/add-deliverer/' + orderId + '/' + deliverer_id,
         type: 'GET',
         success: function (response) {
             console.log("response", response)
@@ -311,7 +328,7 @@ function disabledOldOrderStatus() {
 
     // Add change event listener to radio buttons
     radios.forEach(radio => {
-        radio.addEventListener('change', function() {
+        radio.addEventListener('change', function () {
             // Enable all radios first, then re-apply the disabling logic
             radios.forEach(r => r.disabled = false); // Enable all radios first
             updateRadioStatus(); // Apply disabling logic based on the new selection
@@ -324,20 +341,20 @@ disabledOldOrderStatus();
 
 
 // checked all checkboxs on click all checkbox.
-$('#all').on('change', function() {
+$('#all').on('change', function () {
     // Check or uncheck all checkboxes based on 'all' checkbox state
     $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
 });
 
 // If any individual checkbox is unchecked, also uncheck 'all'
-$('.order-filter .checkbox').not('#all').on('change', function() {
+$('.order-filter .checkbox').not('#all').on('change', function () {
     if (!$(this).is(':checked')) {
         $('#all').prop('checked', false);
     }
 });
 
 // Check if all checkboxes are selected, and if so, check 'all'
-$('.order-filter .checkbox').not('#all').on('change', function() {
+$('.order-filter .checkbox').not('#all').on('change', function () {
     if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
         $('#all').prop('checked', true);
     }
@@ -349,27 +366,27 @@ $('.order-filter .checkbox').not('#all').on('change', function() {
 // order-setting-form
 $(".order-setting-form").validate({
     rules: {
-        timezone_setting:{
+        timezone_setting: {
             required: true
         },
-        expiry_date:{
+        expiry_date: {
             required: true
         }
     },
-    highlight: function(element) {
+    highlight: function (element) {
         $(element).closest('.form-group').addClass('has-error');
         $(element).addClass('border-red-500'); // Tailwind CSS class for red border
     },
-    unhighlight: function(element) {
+    unhighlight: function (element) {
         $(element).closest('.form-group').removeClass('has-error');
         $(element).removeClass('border-red-500');
         $(element).addClass('border-green-500'); // Tailwind CSS class for green border
     },
-    errorPlacement: function(error, element) {
-      error.insertAfter(element); // Default placement for other fields
+    errorPlacement: function (error, element) {
+        error.insertAfter(element); // Default placement for other fields
         return false;
     },
-    submitHandler: function(form) { // <- pass 'form' argument in
+    submitHandler: function (form) { // <- pass 'form' argument in
         $(".submit").attr("disabled", true);
         saveOrderSetting(); // <- use 'form' argument here.
     }
@@ -403,19 +420,19 @@ var end = moment();
 var dateRange = ''
 
 var existingDate = $('.order-setting-custom-time').val() ?? null;
-    $('#order-setting-custom-time').daterangepicker({
-        startDate: start,
-        endDate: end,
-        maxDate: moment(),
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    });
+$('#order-setting-custom-time').daterangepicker({
+    startDate: start,
+    endDate: end,
+    maxDate: moment(),
+    ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    }
+});
 if (existingDate) {
     var dates = existingDate.split(' - ');
     var start_date = dates[0];
@@ -445,7 +462,7 @@ $('#order-setting-custom-time').on('cancel.daterangepicker', function (ev, picke
 });
 
 // show hide specific timezone specific day
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const timezoneRadio = document.getElementById('order-setting-timezone');
     const dateRadio = document.getElementById('order-setting-date');
     const timezoneSetting = document.getElementById('timezone-setting');
@@ -466,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dateRange.classList.remove('d-none');
             $('.specific-timezone').removeClass('active')
             $('.specific-day').addClass('active')
-            $('.timezone-setting').prop('selectedIndex',0);
+            $('.timezone-setting').prop('selectedIndex', 0);
             $('.order_setting_type').val("2");
 
             $(this).closest('.status-option').addClass('active')
@@ -555,7 +572,7 @@ $(document).on('click', '.update-delivery-time', function () {
 $(document).ready(function () {
     var currentUrl = window.location.href;
     var lastElement = currentUrl.split('/').pop();
-// Check if lastElement is a number, and then call a function
+    // Check if lastElement is a number, and then call a function
     if (!isNaN(lastElement)) {
         orderDetailNew(lastElement)
     } else {

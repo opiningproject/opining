@@ -65,7 +65,7 @@ use App\Enums\PaymentType;
         </div>
     </div>
 
-    <div class="d-flex justify-content-end align-items-center pt-3">
+    <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
             {{ $orders->appends(['search' => request()->input('search')])->links() }}
@@ -88,3 +88,47 @@ use App\Enums\PaymentType;
 @else
     <span class="no-data">{{ trans('rest.food_order.no_order') }}</span>
 @endif
+
+<script>
+    $(document).ready(function() {
+        function arrangeOrderCols() {
+            var screenHeight = $(window).height();
+            var availableHeight = screenHeight - 230; // Space excluding 100px from bottom
+
+            var $orderCols = $('.order-col');
+            var $container = $('.order-listing-container');
+
+            // Clear any existing columns
+            $container.empty();
+
+            // Create new columns and append items
+            var colsPerColumn = 0; // Reset the count of items per column
+            var currentColumn = $('<div class="order-column"></div>'); // Start a new column
+            $container.append(currentColumn); // Append the new column to the container
+
+            for (var i = 0; i < $orderCols.length; i++) {
+                // Add the item to the current column
+                currentColumn.append($orderCols.eq(i)); // Append the item
+
+                // Calculate current height of the column
+                var currentHeight = currentColumn.outerHeight(true); // Include margin in height calculation
+
+                // If the current column height exceeds the available height, start a new column
+                if (currentHeight >= availableHeight) {
+                    currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                    $container.append(currentColumn); // Append the new column to the container
+                    currentColumn.append($orderCols.eq(i)); // Add the current item to the new column
+                }
+            }
+
+            // Set the height of each order-column
+            $('.order-column').css('height', availableHeight + 'px');
+        }
+
+        // Initial arrangement
+        arrangeOrderCols();
+
+        // Update on window resize
+        $(window).resize(arrangeOrderCols);
+    });
+</script>

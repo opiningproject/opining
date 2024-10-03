@@ -6,17 +6,19 @@ use App\Enums\PaymentType;
 
 ?>
 
-@if(count($orders))
+@if (count($orders))
     <div class="order-listing-container">
         <div class="order-row">
-            @foreach($orders as $key => $ord)
+            @foreach ($orders as $key => $ord)
                 <?php $userDetails = $ord->orderUserDetails; ?>
 
-                  <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
+                <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
                     <div class="order-box">
                         <div class="timing">
-                            <h3 class="expectedDeliveryTime-{{$ord->id}}">{{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}</h3>
-                            @if($ord->delivery_time != 'ASAP')
+                            <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                            </h3>
+                            @if ($ord->delivery_time != 'ASAP')
                                 <label class="success">{{ $ord->delivery_time }}</label>
                             @endif
                             {{-- <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }}</h4> --}}
@@ -24,7 +26,7 @@ use App\Enums\PaymentType;
 
                         <div class="details">
                             <div class="left">
-                                <h4>{{ $userDetails ? $userDetails->order_name : "no name" }}</h4>
+                                <h4>{{ $userDetails ? $userDetails->order_name : 'no name' }}</h4>
                                 @if ($ord->order_type == OrderType::Delivery)
                                     <p class="mb-0">
                                         <?php
@@ -46,20 +48,22 @@ use App\Enums\PaymentType;
                         <div class="actions">
                             <h5 class="mb-0 price_status">
                                 <b>€{{ number_format($ord->total_amount, 2) }}</b>
-                                @if($ord->payment_type == \App\Enums\PaymentType::Cash)
-                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg"
-                                         height="20" width="20" />
+                                @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="20"
+                                        width="20" />
                                 @endif
-                                @if($ord->payment_type == \App\Enums\PaymentType::Card)
-                                    <img src="{{ asset('images/purse.svg') }}" class="svg"
-                                         height="20" width="20" />
+                                @if ($ord->payment_type == \App\Enums\PaymentType::Card)
+                                    <img src="{{ asset('images/purse.svg') }}" class="svg" height="20"
+                                        width="20" />
                                 @endif
-                                @if($ord->payment_type == \App\Enums\PaymentType::Ideal)
-                                    <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
-                                         height="20" width="20" />
+                                @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                    <img src="{{ asset('images/paid-deal.svg') }}" class="svg" height="20"
+                                        width="20" />
                                 @endif
                             </h5>
-                            <button class="orderDetails order-status-{{ $ord->id }} btn {{orderStatusBox($ord)->color }}" onclick="orderDetailNew({{ $ord->id }})" >{{ orderStatusBox($ord)->text }}</button>
+                            <button
+                                class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}"
+                                onclick="orderDetailNew({{ $ord->id }})">{{ orderStatusBox($ord)->text }}</button>
                         </div>
                     </div>
                 </div>
@@ -77,13 +81,11 @@ use App\Enums\PaymentType;
         <div class="filter-btn-group d-none">
 
             <button type="button" class="btn">
-                <img src="{{ asset(path: 'images/map-white.svg') }}"
-                     alt="Bike"  />
+                <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />
             </button>
 
             <button type="button" class="btn order-setting">
-                <img src="{{ asset(path: 'images/setting-white.svg') }}"
-                     alt="Bike"  />
+                <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />
             </button>
         </div>
     </div>
@@ -95,7 +97,19 @@ use App\Enums\PaymentType;
     $(document).ready(function() {
         function arrangeOrderCols() {
             var screenHeight = $(window).height();
-            var availableHeight = screenHeight - 230; // Space excluding 100px from bottom
+            var availableHeight = screenHeight - 230; // Space for margins, headers, etc.
+            var columnGap = 10; // Space between columns and between items
+
+            // Determine the maximum number of items per column dynamically based on screen height
+            var maxItemsPerColumn = screenHeight > 1079 ?
+                Math.floor(availableHeight / (76 + columnGap)) :
+                8; // Above 1080px, the number of items per column is dynamic
+
+            // Determine itemMinHeight based on screen height
+            var itemMinHeight = screenHeight < 800 ? 58 : 76;
+
+            // Calculate the height of each item dynamically based on available space
+            var dynamicItemHeight = (availableHeight - (maxItemsPerColumn - 1) * columnGap) / maxItemsPerColumn;
 
             var $orderCols = $('.order-col');
             var $container = $('.order-listing-container');
@@ -103,28 +117,19 @@ use App\Enums\PaymentType;
             // Clear any existing columns
             $container.empty();
 
-            // Create new columns and append items
-            var colsPerColumn = 0; // Reset the count of items per column
-            var currentColumn = $('<div class="order-column"></div>'); // Start a new column
-            $container.append(currentColumn); // Append the new column to the container
+            // Create three columns
+            for (var col = 0; col < 3; col++) {
+                var currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                $container.append(currentColumn); // Append the new column to the container
 
-            for (var i = 0; i < $orderCols.length; i++) {
-                // Add the item to the current column
-                currentColumn.append($orderCols.eq(i)); // Append the item
-
-                // Calculate current height of the column
-                var currentHeight = currentColumn.outerHeight(true); // Include margin in height calculation
-
-                // If the current column height exceeds the available height, start a new column
-                if (currentHeight >= availableHeight) {
-                    currentColumn = $('<div class="order-column"></div>'); // Create a new column
-                    $container.append(currentColumn); // Append the new column to the container
-                    currentColumn.append($orderCols.eq(i)); // Add the current item to the new column
+                // Add items to each column, based on the dynamic number of items per column
+                for (var i = col * maxItemsPerColumn; i < (col + 1) * maxItemsPerColumn && i < $orderCols
+                    .length; i++) {
+                    var $item = $orderCols.eq(i);
+                    currentColumn.append($item); // Append the item to the current column
+                    $item.css('height', dynamicItemHeight + 'px'); // Set dynamic height for each item
                 }
             }
-
-            // Set the height of each order-column
-            $('.order-column').css('height', availableHeight + 'px');
         }
 
         // Initial arrangement

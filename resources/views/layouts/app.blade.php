@@ -80,7 +80,7 @@
             </div>
         </div>
         @endif
-        {{-- <div class="overlay-sidebar"></div> --}}
+        <div class="overlay-sidebar"></div>
 
         @yield('content')
     </div>

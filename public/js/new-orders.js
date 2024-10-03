@@ -28,6 +28,7 @@ $(document).on('click', '#cancel-order-btn', function () {
             if (response.status == 1) {
                 $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
                 $('.order-detail-popup').modal('hide')
+                $('#order-' + response.orderId).remove();
                 $('.order-status-' + response.orderId).addClass(response.color);
                 $('.order-status-' + response.orderId).text(response.text);
                 var currentOrderCount = $('.order-count').text();
@@ -252,6 +253,7 @@ function changeOrderStatusNew(order_id, order_status) {
                 $('.order-status-' + response.orderId).text(response.text);
             }
             if (response.orderStatus == "6") {
+                $('#order-' + response.orderId).remove();
                 var currentOrderCount = $('.order-count').text();
                 $('.order-count').html(currentOrderCount - 1);
                 $('.count-order').html(currentOrderCount - 1);

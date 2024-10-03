@@ -262,17 +262,12 @@ $restaurantDetail = getRestaurantDetail();
                             </div>
                         </div>
                     </div>
-{{--                @if ($order->order_type == OrderType::Delivery)--}}
                     <!-- Content for Tab 3 -->
                     <div class="tab-pane fade px-0" id="content-3" role="tabpanel" aria-labelledby="tab-3">
-
-{{--                        @if ($order->order_type == OrderType::Delivery)--}}
                             <div class="tab-map">
-                                <div id="map" style="height: 350px; width: 100%;"></div>
+                                <div id="map" style="height: 290px; width: 100%;"></div>
                             </div>
-
                     </div>
-{{--                @endif--}}
 
                     <!-- Content for Tab 4 -->
                     <div class="tab-pane fade" id="content-4" role="tabpanel" aria-labelledby="tab-4">
@@ -338,7 +333,7 @@ $restaurantDetail = getRestaurantDetail();
                                 </h4>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-end cancel-btn">
                             <button type="button"
                                 class="btn btn-outline-secondary fw-400 text-uppercase font-sebibold w-160px"
                                 data-bs-dismiss="modal">{{ trans('rest.button.no') }}
@@ -354,18 +349,18 @@ $restaurantDetail = getRestaurantDetail();
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initOrderMap"
     async defer></script>
 <script>
-    let map;
+    let orderMap;
     let directionsService;
     let directionsRenderer;
     var latitudeValue = $('.latitude').val();
     var longitudeValue = $('.longitude').val();
     // Initialize the Google Map
-    function initMap() {
+    function initOrderMap() {
         // Create the map centered at the first location
-        map = new google.maps.Map(document.getElementById('map'), {
+        orderMap = new google.maps.Map(document.getElementById('map'), {
             // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
             zoom: 8
         });
@@ -375,7 +370,7 @@ $restaurantDetail = getRestaurantDetail();
         directionsRenderer = new google.maps.DirectionsRenderer();
 
         // Set the map where the directions will be rendered
-        directionsRenderer.setMap(map);
+        directionsRenderer.setMap(orderMap);
         latitudeValue = '';
         longitudeValue ='';
         // Calculate and display the route

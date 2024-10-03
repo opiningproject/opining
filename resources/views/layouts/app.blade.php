@@ -54,6 +54,10 @@
                             <img src="{{ asset('images/maximize.svg') }}" class="svg" height="20"
                                 width="20" />
                         </button>
+                        <button class="minimize-screen d-none" style="border: none !important;background: transparent !important;" id="maximize-screen">
+                            <img src="{{ asset('images/minimize.svg') }}" class="svg" height="20"
+                                width="20" />
+                        </button>
 
 
                         @if(auth()->user())

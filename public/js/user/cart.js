@@ -128,6 +128,10 @@ $(function () {
                 } else if (response.status == 200) {
                     window.location.replace(baseURL + '/user/checkout')
                 } else {
+                    console.log("response", response.restaurant_closed == 'true')
+                    if (response.restaurant_closed == 'true') {
+                        toastr.error(response.message);
+                    }
                     // alert(response.message);
                     var errorOccurred = true; // Replace this with actual error detection logic
                     if (errorOccurred) {

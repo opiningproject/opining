@@ -420,7 +420,7 @@ body {background: #f1f1f1 !important;}
 .header-filter-order .order-filter .checkmark:after {content: "";position: absolute;display: none;}
 .header-filter-order .order-filter .checkbox-label input:checked~.checkmark:after {display: block;}
 .header-filter-order .order-filter .checkbox-label .checkmark:after {left: 6px;top: 2px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;transform: rotate(45deg);}
-
+.cancel-btn{gap: 2%;top: 19px;position: relative;}
 
 /* New header css */
 .header-top {position: sticky;background: #ffffff;padding: 15px 0px;z-index: 9;top: 0px;}

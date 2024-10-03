@@ -18,32 +18,32 @@ use App\Enums\PaymentType;
                             <h3 class="expectedDeliveryTime-{{ $ord->id }}">
                                 {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                             </h3>
-                            @if ($ord->delivery_time != 'ASAP')
+{{--                            @if ($ord->delivery_time != 'ASAP')--}}
                                 <label class="success">{{ $ord->delivery_time }}</label>
-                            @endif
-                            {{-- <h4 class="mt-2">{{ $ord->order_type == OrderType::Delivery ? trans('rest.food_order.delivery'):trans('rest.food_order.take_away') }}</h4> --}}
-                        </div>
+{{--                            @endif--}}
+                            </div>
 
                         <div class="details">
                             <div class="left">
-                                <h4>{{ $userDetails ? $userDetails->order_name : 'no name' }}</h4>
-                                @if ($ord->order_type == OrderType::Delivery)
-                                    <p class="mb-0">
-                                        <?php
-                                        echo $userDetails->house_no . ', ' . $userDetails->street_name;
-                                        ?>
-                                    </p>
-                                @else
-                                    <p class="mb-0">
-                                        {{ getRestaurantDetail()->rest_address }}
-                                    </p>
-                                @endif
+                                <div class="label-icon">
+                                    <img src="{{ asset('images/opening-label.svg') }}"
+                                         class="svg" />
+                                </div>
+                                <div class="text-label">
+                                    <h4>{{ $userDetails ? $userDetails->order_name : 'no name' }}</h4>
+                                    @if ($ord->order_type == OrderType::Delivery)
+                                        <p class="mb-0">
+                                            <?php
+                                            echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                            ?>
+                                        </p>
+                                        {{--                                @else--}}
+                                        {{--                                    <p class="mb-0">--}}
+                                        {{--                                        {{ getRestaurantDetail()->rest_address }}--}}
+                                        {{--                                    </p>--}}
+                                    @endif
+                                </div>
                             </div>
-
-                            {{-- <div class="right text-end ps-2">
-                                <p class="mb-0">{{ date('d-m-Y H:i',strtotime($ord->created_at)) }}</p>
-                                <p class="mb-0">Web #{{$ord->id}}</p>
-                            </div> --}}
                         </div>
                         <div class="actions">
                             <h5 class="mb-0 price_status">

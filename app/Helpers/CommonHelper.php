@@ -671,8 +671,8 @@ if (!function_exists('orderStatusBox')) {
         $orderText = [
             1 => 'New Order',
             2 => 'In Kitchen',
-            4 => 'Ready For Pickup',
-            5 => 'Out For Delivery',
+            4 => 'Ready',
+            5 => 'Delivery',
             6 => 'Delivered',
             7 => 'Cancelled'
         ];

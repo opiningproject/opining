@@ -47,33 +47,34 @@ $(document).on('click', '#cancel-order-btn', function () {
 document.addEventListener('DOMContentLoaded', function () {
     let screenWidth = window.innerWidth;
     let screenHeight = window.innerHeight; // Get screen height
-    let perPage = 15; // Default value
+    let perPage = 24;
 
     // Adjust perPage based on both screen width and height
-    if (screenHeight == 1080) {
-        perPage = 36;
+    if (screenHeight < 769) {
+        // perPage = 18;
     }
     else if (screenHeight > 1040) {
-        perPage = 36;
+        // perPage = 36;
     }
     else if (screenHeight > 1000) {
-        perPage = 27;
+        // perPage = 27;
     }
     else if (screenHeight > 900) {
-        perPage = 24;
+        // perPage = 24;
     }
     // else if (screenHeight > 880) {
     //     perPage = 30;
     // }
     else if (screenHeight < 769) {
-        perPage = 15;
+        // perPage = 24;
     }
     else if (screenHeight < 768) {
-        perPage = 21;
+        // perPage = 21;
     }
     else {
-        perPage = 27; // Small screen
+        // perPage = 24;
     }
+
     // Get the currently stored per_page value from sessionStorage
     const storedPerPage = sessionStorage.getItem('per_page_value');
     // Check if per_page is already set in sessionStorage to avoid repeated reloads

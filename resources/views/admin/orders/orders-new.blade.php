@@ -3,7 +3,7 @@
 @section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
 @section('content')
     <?php
-
+    
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
@@ -120,8 +120,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <a href="{{ route('create-order') }}"
-                                    class="btn btn-site-theme create-order-manual">
+                                <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
                                     <span>{{ trans('rest.food_order.create_order') }}</span>
                                 </a>
 
@@ -146,7 +145,7 @@
                                                     <h3 class="expectedDeliveryTime-{{ $ord->id }}">
                                                         {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                                                     </h3>
-                                                    @if($ord->delivery_time != 'ASAP')
+                                                    @if ($ord->delivery_time != 'ASAP')
                                                         <label class="success">{{ $ord->delivery_time }}</label>
                                                     @endif
                                                     {{--                                                    <h4 class="mt-2"> --}}
@@ -156,18 +155,25 @@
 
                                                 <div class="details">
                                                     <div class="left">
-                                                        <h4>{{ $userDetails->order_name }}</h4>
-                                                        @if ($ord->order_type == OrderType::Delivery)
-                                                            <p class="mb-0">
-                                                                <?php
-                                                                echo $userDetails->house_no . ', ' . $userDetails->street_name;
-                                                                ?>
-                                                            </p>
-                                                        @else
-                                                            <p class="mb-0">
-                                                                {{ getRestaurantDetail()->rest_address }}
-                                                            </p>
-                                                        @endif
+                                                        <div class="label-icon">
+                                                            <img src="{{ asset('images/opening-label.svg') }}"
+                                                                class="svg" />
+                                                        </div>
+
+                                                        <div class="text-label">
+                                                            <h4>{{ $userDetails->order_name }}</h4>
+                                                            @if ($ord->order_type == OrderType::Delivery)
+                                                                <p class="mb-0">
+                                                                    <?php
+                                                                    echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                                                    ?>
+                                                                </p>
+                                                            @else
+                                                                <p class="mb-0">
+                                                                    {{ getRestaurantDetail()->rest_address }}
+                                                                </p>
+                                                            @endif
+                                                        </div>
                                                     </div>
 
                                                     {{--                                                    <div class="right text-end ps-2"> --}}
@@ -241,7 +247,19 @@
         $(document).ready(function() {
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
-                var availableHeight = screenHeight - 230; // Space excluding 100px from bottom
+                var availableHeight = screenHeight - 230; // Space for margins, headers, etc.
+                var columnGap = 10; // Space between columns and between items
+
+                // Determine the maximum number of items per column dynamically based on screen height
+                var maxItemsPerColumn = screenHeight > 1079 ?
+                    Math.floor(availableHeight / (76 + columnGap)) :
+                    8; // Above 1080px, the number of items per column is dynamic
+
+                // Determine itemMinHeight based on screen height
+                var itemMinHeight = screenHeight < 800 ? 58 : 76;
+
+                // Calculate the height of each item dynamically based on available space
+                var dynamicItemHeight = (availableHeight - (maxItemsPerColumn - 1) * columnGap) / maxItemsPerColumn;
 
                 var $orderCols = $('.order-col');
                 var $container = $('.order-listing-container');
@@ -249,28 +267,19 @@
                 // Clear any existing columns
                 $container.empty();
 
-                // Create new columns and append items
-                var colsPerColumn = 0; // Reset the count of items per column
-                var currentColumn = $('<div class="order-column"></div>'); // Start a new column
-                $container.append(currentColumn); // Append the new column to the container
+                // Create three columns
+                for (var col = 0; col < 3; col++) {
+                    var currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                    $container.append(currentColumn); // Append the new column to the container
 
-                for (var i = 0; i < $orderCols.length; i++) {
-                    // Add the item to the current column
-                    currentColumn.append($orderCols.eq(i)); // Append the item
-
-                    // Calculate current height of the column
-                    var currentHeight = currentColumn.outerHeight(true); // Include margin in height calculation
-
-                    // If the current column height exceeds the available height, start a new column
-                    if (currentHeight >= availableHeight) {
-                        currentColumn = $('<div class="order-column"></div>'); // Create a new column
-                        $container.append(currentColumn); // Append the new column to the container
-                        currentColumn.append($orderCols.eq(i)); // Add the current item to the new column
+                    // Add items to each column, based on the dynamic number of items per column
+                    for (var i = col * maxItemsPerColumn; i < (col + 1) * maxItemsPerColumn && i < $orderCols
+                        .length; i++) {
+                        var $item = $orderCols.eq(i);
+                        currentColumn.append($item); // Append the item to the current column
+                        $item.css('height', dynamicItemHeight + 'px'); // Set dynamic height for each item
                     }
                 }
-
-                // Set the height of each order-column
-                $('.order-column').css('height', availableHeight + 'px');
             }
 
             // Initial arrangement

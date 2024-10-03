@@ -41,17 +41,20 @@ class NewOrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
+        $getResturentData = json_decode(getRestaurantDetail()->params,true);
+        $order_settings = $getResturentData['order_settings'];
+//        $timezoneSetting = (int)$order_settings['timezone_setting'];
+        $timezoneSetting = null;
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-       /* $orders = Order::where('is_cart', '0')
-            ->where(function($query) {
-                $query->where('order_status', '<>', OrderStatus::Delivered)
-                    ->orWhere('updated_at', '>=', Carbon::now()->subHours(12));
-            })->orderBy('id', 'desc');*/
-        $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
+        if ($timezoneSetting != null) {
+            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours($timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } else {
+            $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        }
 
         $pageNumber = request()->input('page', 1);
-//        $perPage = request()->input('per_page', 24);
-        $perPage = session('per_page', 24);
+        $perPage = request()->input('per_page', 24);
+//        $perPage = session('per_page', 24);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -170,11 +173,19 @@ class NewOrdersController extends Controller
     }
 
     public function orderSearchFilter(Request $request) {
+        $getResturentData = json_decode(getRestaurantDetail()->params,true);
+        $order_settings = $getResturentData['order_settings'];
+//        $timezoneSetting = (int)$order_settings['timezone_setting'];
+        $timezoneSetting = null;
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         $pageNumber = request()->input('page', 1);
-//        $perPage = request()->input('per_page', 24);
-        $perPage = session('per_page', 24);
-        $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
+        $perPage = request()->input('per_page', 24);
+//        $perPage = session('per_page', 24);
+        if ($timezoneSetting != null) {
+            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours($timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } else {
+            $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        }
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
             $searchType = $request->input('searchOption');
@@ -297,7 +308,7 @@ class NewOrdersController extends Controller
     public function filterOrders($request)
     {
         $pageNumber = request()->input('page', 1);
-        $orders = Order::where('is_cart', '0')->orderByRaw("(order_status = '6') ASC")->orderBy('created_at', 'desc');
+        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
         $filters = $request->filters;
 
         if (!empty($filters)) {
@@ -345,36 +356,41 @@ class NewOrdersController extends Controller
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
-            $address = getRestaurantDetail()->rest_address;
+            $address = $orders->order_type == OrderType::Delivery ?? $userDetails->house_no . ', ' . $userDetails->street_name;
             $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
-                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
+//                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
                 $order_type = trans('rest.food_order.delivery');
             }
             $iconImage = asset('images/cod_icon.png');
-            if($ord->payment_type == \App\Enums\PaymentType::Card){
+            if($orders->payment_type == \App\Enums\PaymentType::Card){
                 $iconImage = asset('images/paid-deal.svg');
             }
-            if($ord->payment_type == \App\Enums\PaymentType::Ideal) {
+            if($orders->payment_type == \App\Enums\PaymentType::Ideal) {
                 $iconImage = asset('images/paid-deal.svg');
             }
+            $lableIcon = asset('images/opening-label.svg');
             $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-            $html = '<div class="order-col">
+            $html = '<div class="order-col cursor-pointer" id="order-'.$orders->id.'" data-id="'.$orders->id.'" onclick="orderDetailNew('.$orders->id.')">
                                 <div class="order-box">
                                     <div class="timing">
-                                        <h3>'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->created_at)->addMinutes($orderDeliveryTime)))  .'</h3>
+                                        <h3 class="expectedDeliveryTime-'.$orders->id.'">'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->created_at)->addMinutes($orderDeliveryTime)))  .'</h3>
                                         <label class="success">'. $orders->delivery_time .'</label>
                                     </div>
-
                                     <div class="details">
                                         <div class="left">
-                                            <h4>'. $userDetails->order_name .'</h4>
-                                            <p class="mb-0">'. $address .'</p>
+                                            <div class="label-icon">
+                                                <img src="'.$lableIcon.'" class="svg" />
+                                            </div>
+                                            <div class="text-label">
+                                                <h4>'. $userDetails->order_name .'</h4>
+                                                <p class="mb-0">'. $address .'</p>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b>&nbsp;&nbsp;|<img src="'.$iconImage .'" class="svg" height="20" width="20"/></h5>
+                                        <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b> <img src="'.$iconImage .'" class="svg" height="20" width="20"/></h5>
                                         <button href="#" class="orderDetails order-status-'.$orders->id.' btn '. orderStatusBox($orders)->color .'" onclick="orderDetailNew('.$orders->id.')">'. orderStatusBox($orders)->text .'</button>
                                     </div>
                                 </div>

@@ -82,11 +82,46 @@
                 document.documentElement.msRequestFullscreen();
             }
         }
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+
+            // Remove fullscreen state from localStorage
+            localStorage.removeItem("fullscreen");
+        }
 
         // Add event listener to the button
-        document.getElementById("maximize-screen").addEventListener("click", goFullscreen);
+        // document.getElementById("maximize-screen").addEventListener("click", goFullscreen);
+        $('.maximize-screen').on('click', function(){
+            goFullscreen()
+            $('.minimize-screen').removeClass('d-none')
+            $('.maximize-screen').addClass('d-none')
+        });
+        $('.minimize-screen').on('click', function(){
+            exitFullscreen()
+            $('.maximize-screen').removeClass('d-none')
+            $('.minimize-screen').addClass('d-none')
+        });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    console.log('Escape key pressed'); // Should log to console when Escape key is pressed
+                    exitFullscreen();
+                    $('.maximize-screen').removeClass('d-none');
+                    $('.minimize-screen').addClass('d-none');
+                }
+            });
+        });
     });
+
 
     /*jQuery(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');
@@ -132,9 +167,15 @@
                 $('#order-modal-div').html(data)
                 $('.order-notification-popup').modal('show')
                 // Check if there are more than 10 orders displayed
-                if ($('.order-col').length == 12) {
+                console.log("length", $('.order-col').length)
+
+                /*if ($('.order-col').length == 24) {
                     // Remove the last order element
-                    $('.order-col:last').remove();
+                    $('.order-column:first .order-col:last').remove();
+                }*/
+                if ($('.order-column:first .order-col').length == 8) {
+                    // Remove the last order-col from the first order-column only
+                    $('.order-column:first .order-col:last').remove();
                 }
                 @if(getRestaurantDetail()->order_notif_sound)
                 // $('.myaudio').play();
@@ -162,7 +203,9 @@ function getLiveOrderList() {
         datatype: 'json',
         success: function (data) {
             if(data) {
-                $('.order-row').prepend(data.data)
+                var height = $('.order-col:last').height()
+                $('.order-column:first').prepend(data.data)
+                $('.order-col:first').css({ 'height': height})
                 $('.order-notification-popup').modal('show')
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);

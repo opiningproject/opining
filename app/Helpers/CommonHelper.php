@@ -664,15 +664,15 @@ if (!function_exists('orderStatusBox')) {
             4 => 'outline-success',       // Ready For Pickup
             5 => 'outline-success',       // Out For Delivery
             6 => 'btn-danger-outline',     // Delivered
-            7 => 'outline-danger',        // New Order
+            7 => 'btn-danger-outline',        // Cancelled
         ];
 
         // Define status-text mappings
         $orderText = [
             1 => 'New Order',
             2 => 'In Kitchen',
-            4 => 'Ready For Pickup',
-            5 => 'Out For Delivery',
+            4 => 'Ready',
+            5 => 'Delivery',
             6 => 'Delivered',
             7 => 'Cancelled'
         ];

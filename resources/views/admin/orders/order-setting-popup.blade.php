@@ -57,7 +57,7 @@ $payment_settings = $params['order_settings'];
 
                     <div class="d-flex gap-2 justify-content-end">
                         <button type="button" aria-label="Close"
-                                class="btn btn-site-theme text-uppercase px-5">{{ trans('rest.order_screen_settings.reset_save') }}</button>
+                                class="btn btn-site-theme text-uppercase px-5 saveReset" onclick="saveReset()">{{ trans('rest.order_screen_settings.reset_save') }}</button>
 
                         <button type="submit" aria-label="Close"
                             class="btn btn-site-theme text-uppercase px-5">{{ trans('rest.order_screen_settings.save_changes') }}</button>

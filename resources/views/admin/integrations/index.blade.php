@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('page_title', 'integrations')
+@section('page_title', 'Integrations')
 @section('content')
 
     <div class="main-content">

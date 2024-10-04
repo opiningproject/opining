@@ -406,7 +406,7 @@ body {background: #f1f1f1 !important;}
 .header-filter-order .order-filter .checkbox-label input:checked~.checkmark:after {display: block;}
 .header-filter-order .order-filter .checkbox-label .checkmark:after {left: 6px;top: 2px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;transform: rotate(45deg);}
 .cancel-btn{gap: 10px;top: 20px;position: relative;}
-
+.sound-check {background: transparent !important; border: none !important;}
 
 /* New header css */
 .header-top {position: sticky;background: #ffffff;padding: 15px 0px;z-index: 9;top: 0px;}
@@ -427,7 +427,6 @@ body {background: #f1f1f1 !important;}
 .header-belt .title {display: flex;align-items: center;column-gap: 24px;font-size: 34px;font-weight: 400;}
 .header-belt .btns-group {display: flex;gap: 16px;justify-content: space-between;align-items: center;}
 .header-belt .btns-group .search-box {min-width: 280px;}
-.header-belt .btns-group .search-box
 .header-belt .btns-group .search-box .form-group {position: relative;}
 .header-belt .btns-group .search-box .form-control {background: #ffffff;border: 0px;outline: none;box-shadow: none;font-size: 12px;color: #898989;padding: 5px 20px;height: 42px;border-radius: 10px;min-height: 42px;}
 .header-belt .btns-group .search-box .form-control::-webkit-input-placeholder {font-size: 12px;color: #898989;}

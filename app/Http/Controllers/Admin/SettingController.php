@@ -346,4 +346,11 @@ class SettingController extends Controller
         return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 
+    public function updateNotificationSound(Request $request)
+    {
+        $restaurant = RestaurantDetail::findOrFail(1);
+        $restaurant->order_notif_sound = $request->order_notif_sound ? '1' : '0';
+        $restaurant->save();
+        return response()->json(['status' => 'success']);
+    }
 }

@@ -177,6 +177,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
         Route::post('/update-checkout-setting', [SettingController::class, 'updatePaymentSetting'])->name('settings.update-checkout-setting');
         Route::post('/change-refund-status', [SettingController::class, 'changeRefundStatus'])->name('settings.change-refund-status');
     });
+    Route::post('/update-notification-sound', [SettingController::class, 'updateNotificationSound'])->name('updateNotificationSound');
 
     // Domain Setting route
     Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index');

@@ -169,8 +169,9 @@ class CheckoutController extends Controller
                     'points_claimed' => $pointClaimed,
                     'payment_status' => '0',
                     'expected_delivery_time' => RoundUpEstimatedTime(\Carbon\Carbon::now()->toTimeString(), $getDeliveryMinute),
-                    'created_at' => \Carbon\Carbon::now(),
+                    'created_at' => RoundCreatedAt(\Carbon\Carbon::now()),
                 ]);
+                Log::info('$th', [\Carbon\Carbon::now(), RoundCreatedAt(\Carbon\Carbon::now())]);
             } catch (Exception $th) {
                 Log::info('$th', [RoundUpEstimatedTime(\Carbon\Carbon::now(), $getDeliveryMinute)]);
             }

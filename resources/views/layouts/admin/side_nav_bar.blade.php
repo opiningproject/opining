@@ -125,6 +125,20 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('customers') }}"
+                                        class="nav-link {{ activeMenu('customers') }} align-middle">
+                                        <div class="icon-span">
+                                            <img src="{{ asset('images/admin-icons-sidebar/customers-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
+
+                                            <img src="{{ asset('images/admin-icons-sidebar/customers-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
+                                        </div>
+                                        <span
+                                            class="ms-0 d-sm-inline align-middle">{{ trans('rest.sidebar.customers') }}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('chat') }}"
                                         class="nav-link {{ activeMenu('chat') }} align-middle">
                                         <div class="icon-span">

@@ -184,7 +184,7 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                <li class="nav-item d-none">
                                     <a href="#" class="nav-link align-middle">
                                         <div class="icon-span">
                                             <img src="{{ asset('images/admin-icons-sidebar/point-of-sale-outline.svg') }}"
@@ -194,6 +194,20 @@
                                                 class="svg hoverable" height="20" width="20" />
                                         </div>
                                         <span class="ms-0 d-sm-inline align-middle">Point of Sale</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a href="{{ route('integrations') }}"
+                                        class="nav-link {{ activeMenu('integrations') }} align-middle">
+                                        <div class="icon-span">
+                                            <img src="{{ asset('images/admin-icons-sidebar/point-of-sale-outline.svg') }}"
+                                                class="svg actual" height="20" width="20" />
+
+                                            <img src="{{ asset('images/admin-icons-sidebar/point-of-sale-fill.svg') }}"
+                                                class="svg hoverable" height="20" width="20" />
+                                        </div>
+                                        <span class="ms-0 d-sm-inline align-middle">Integrations</span>
                                     </a>
                                 </li>
 

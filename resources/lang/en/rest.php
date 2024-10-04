@@ -29,6 +29,7 @@ return [
         'my_website' => 'My Website',
         'deliverers' => 'Deliverers',
         'customers' => 'Customers',
+		'integrations' => 'integrations',		
 	],
 
 	'menu' => [

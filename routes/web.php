@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\OldOrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\IntegrationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -252,6 +253,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     //    manual order routes
     Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
+
+    //    Integrations order routes
+    Route::get('/integrations', [IntegrationsController::class, 'index'])->name('integrations');
 
     // customer order routes
     Route::get('/customers', [CustomerController::class, 'index'])->name('customers');

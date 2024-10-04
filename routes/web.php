@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DeliverersController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\DishOptionCategoryController;
@@ -250,6 +251,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     //    manual order routes
     Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
+
+    // customer order routes
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

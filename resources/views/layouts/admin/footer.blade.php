@@ -167,12 +167,8 @@
                 $('#order-modal-div').html(data)
                 $('.order-notification-popup').modal('show')
                 // Check if there are more than 10 orders displayed
-                console.log("length", $('.order-col').length)
+                console.log("length", $('.order-column:first .order-col').length)
 
-                /*if ($('.order-col').length == 24) {
-                    // Remove the last order element
-                    $('.order-column:first .order-col:last').remove();
-                }*/
                 if ($('.order-column:first .order-col').length == 8) {
                     // Remove the last order-col from the first order-column only
                     $('.order-column:first .order-col:last').remove();

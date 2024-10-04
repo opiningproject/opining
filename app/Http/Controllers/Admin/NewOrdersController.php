@@ -356,7 +356,7 @@ class NewOrdersController extends Controller
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
-            $address = $orders->order_type == OrderType::Delivery ?? $userDetails->house_no . ', ' . $userDetails->street_name;
+            $address = $orders->order_type == OrderType::Delivery ? $userDetails->house_no . ', ' . $userDetails->street_name :'';
             $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
 //                $address = $userDetails->house_no . ', ' . $userDetails->street_name;

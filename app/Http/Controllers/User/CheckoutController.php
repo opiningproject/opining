@@ -17,6 +17,7 @@ use App\Models\CouponTransaction;
 use App\Models\Dish;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Session, Response;
 use Twilio\Rest\Client;
@@ -150,25 +151,30 @@ class CheckoutController extends Controller
                 'longitude' => $request->longitude ?? null
             ]);
 
-            $user->cart()->update([
-                'payment_type' => $request->payment_type,
-                'delivery_charge' => $deliveryCharges,
-                'platform_charge' => $serviceCharges,
-                'total_amount' => $totalAmtPaid,
-                'order_status' => '1',
-                'order_time' => date('H:i:s'),
-                'delivery_time' => $orderTime,
-                'order_type' => session('zipcode') ? OrderType::Delivery : OrderType::TakeAway,
-                'delivery_date' => date('Y/m/d'),
-                'delivery_note' => $request->instructions ?? null,
-                'receive_update_emails' => isset($request->receive_mail) ? '1' : '0',
-                'points_redeemed' => $pointsRedeemed,
-                'coupon_discount' => $couponDiscount,
-                'points_claimed' => $pointClaimed,
-                'payment_status' => '0',
-                'expected_delivery_time' => RoundUpEstimatedTime(\Carbon\Carbon::now(), $getDeliveryMinute),
-                'created_at' => \Carbon\Carbon::now(),
-            ]);
+            try {
+                $user->cart()->update([
+                    'payment_type' => $request->payment_type,
+                    'delivery_charge' => $deliveryCharges,
+                    'platform_charge' => $serviceCharges,
+                    'total_amount' => $totalAmtPaid,
+                    'order_status' => '1',
+                    'order_time' => date('H:i:s'),
+                    'delivery_time' => $orderTime,
+                    'order_type' => session('zipcode') ? OrderType::Delivery : OrderType::TakeAway,
+                    'delivery_date' => date('Y/m/d'),
+                    'delivery_note' => $request->instructions ?? null,
+                    'receive_update_emails' => isset($request->receive_mail) ? '1' : '0',
+                    'points_redeemed' => $pointsRedeemed,
+                    'coupon_discount' => $couponDiscount,
+                    'points_claimed' => $pointClaimed,
+                    'payment_status' => '0',
+                    'expected_delivery_time' => RoundUpEstimatedTime(\Carbon\Carbon::now()->toTimeString(), $getDeliveryMinute),
+                    'created_at' => \Carbon\Carbon::now(),
+                ]);
+            } catch (Exception $th) {
+                Log::info('$th', [RoundUpEstimatedTime(\Carbon\Carbon::now(), $getDeliveryMinute)]);
+            }
+
 
             // added data in track order table
             if (session('zipcode')) {
@@ -329,6 +335,8 @@ class CheckoutController extends Controller
 
             return response::json(['status' => 200, 'message' => $response]);
         } catch (Exception $e) {
+            Log::info('orderPlaceError', [$e]);
+            Log::info('orderPlaceError--------', [$e->getMessage()]);
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
         }
     }

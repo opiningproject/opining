@@ -28,6 +28,7 @@ return [
         'sales_channels' => 'Sales Channels',
         'my_website' => 'My Website',
         'deliverers' => 'Deliverers',
+        'customers' => 'Customers',
 	],
 
 	'menu' => [

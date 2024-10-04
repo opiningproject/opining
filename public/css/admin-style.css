@@ -448,7 +448,7 @@ body {background: #f1f1f1 !important;}
 .header-filter-order .order-filter .checkbox-label input:checked~.checkmark:after {display: block;}
 .header-filter-order .order-filter .checkbox-label .checkmark:after {left: 6px;top: 2px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;transform: rotate(45deg);}
 .cancel-btn{gap: 10px;top: 20px;position: relative;}
-
+.sound-check {background: transparent !important; border: none !important;}
 
 /* New header css */
 .header-top {position: sticky;background: #ffffff;padding: 15px 0px;z-index: 9;top: 0px;}
@@ -509,10 +509,10 @@ body {background: #f1f1f1 !important;}
 .order-content-box::-webkit-scrollbar {
     display: none;
   }
-  
+
   .order-content-box {
-    -ms-overflow-style: none; 
-    scrollbar-width: none;    
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 .order-content-row .order-content-box .manual-order-box {border-radius: 16px;padding: 16px 20px;background: #ffffff;}
 .order-content-row .manual-order-box .title-icon {display: flex;align-items: center;column-gap: 12px;font-size: 15px;color: #656565;font-weight: 300;text-transform: uppercase;margin-bottom: 18px;}
@@ -523,7 +523,7 @@ body {background: #f1f1f1 !important;}
     display: flex;
     justify-content: space-between;
   }
-  
+
   .ml-content .radio-group .radio-option {
     display: flex;
     align-items: center;
@@ -535,11 +535,11 @@ body {background: #f1f1f1 !important;}
     flex: 0 0 calc(50% - 3px);
     max-width: calc(50% - 3px);
   }
-  
+
   .ml-content .radio-group .radio-option input {
     display: none;
   }
-  
+
   .ml-content .radio-group .radio-option span {
     margin-left: 0px;
     font-size: 15px;
@@ -560,7 +560,7 @@ body {background: #f1f1f1 !important;}
     font-weight: 300;
     color: #000000;
   }
-  
+
   .ml-content .radio-group .radio-option input:not(:checked) + span::before {
     content: '';
     display: inline-block;
@@ -576,7 +576,7 @@ body {background: #f1f1f1 !important;}
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .ml-content .radio-group .radio-option input:checked + span::before {
     content: '';
     display: inline-block;
@@ -607,11 +607,11 @@ body {background: #f1f1f1 !important;}
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .ml-content .radio-group .radio-option input:checked + span {
-    border: 1px solid #D6D6D6; 
+    border: 1px solid #D6D6D6;
   }
-  
+
 .search-dropdown-option {
     position: relative;
 }
@@ -756,7 +756,7 @@ outline: none;
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   .percentage-input {
     border: none;
     font-size: 20px;
@@ -768,7 +768,7 @@ outline: none;
     outline: none;
     color: #373737;
   }
-  
+
   .percentage-symbol {
     font-size: 16px;
     color: #666;
@@ -780,15 +780,15 @@ outline: none;
     justify-content: center;
     border-left: 1px solid #D2D2D2;
   }
-  
+
   .input-container:hover, .input-container:focus-within {
     border-color: #aaa;
   }
-  
+
   .input-container input[readonly] {
     background-color: #fff;
   }
-  
+
   .manual-order-box .form-group .form-control {
     height: 50px;
     border: 1px solid #d9d9d9;
@@ -801,7 +801,7 @@ outline: none;
 
   .order-total .table tr td {
 padding: 5px;
-border: 0px;  
+border: 0px;
 }
   .order-total .table tbody tr td {
     font-size: 14px;
@@ -832,13 +832,13 @@ border: 0px;
   .search-dropdown-option .form-group {
     position: relative;
   }
-  
+
  .search-dropdown-option .form-control {
     padding: 10px;
     font-size: 16px;
     width: 200px;
   }
-  
+
   .search-dropdown-option .customer-dropdown {
     display: none;
     position: absolute;
@@ -871,7 +871,7 @@ border: 0px;
   .search-dropdown-option .customer-dropdown .add-btn svg {
     opacity: 0.6;
   }
-  
+
   .search-dropdown-option .customer-dropdown ul {
     list-style: none;
     padding: 0;
@@ -879,19 +879,19 @@ border: 0px;
     max-height: 250px;
     overflow: auto;
   }
-  
+
   .search-dropdown-option .customer-dropdown ul li {
     padding:6px 10px;
     cursor: pointer;
     color: #212121;
     font-size: 14px;
   }
-  
+
   .search-dropdown-option .customer-dropdown ul li:hover {
     background-color: transparent;
     color: #000000;
   }
-  
+
 
 @media screen and (max-width: 1750px) {
     .order-page-bar .page-title {font-size: 24px;}

@@ -107,5 +107,24 @@ $(document).ready(function () {
     $('body').removeClass('sidebar-toggle-body');
   });
 
-  
+
+});
+
+$(document).ready(function () {
+  // Show dropdown on focus or click
+  $('#createCustomerInput').on('focus click', function () {
+    $('#createCustomerDropdown').show();
+  });
+
+  // Hide dropdown when clicking outside
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.form-group').length) {
+      $('#createCustomerDropdown').hide();
+    }
+  });
+
+  // Prevent dropdown closing when clicking inside it
+  $('#createCustomerDropdown').on('click', function (e) {
+    e.stopPropagation();
+  });
 });

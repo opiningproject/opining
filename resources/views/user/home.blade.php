@@ -60,7 +60,7 @@
                                                 <span class="input-group-icon">
                                                     <img src="{{ asset('images/call-icon-up.svg') }}" alt="call" class="img-fluid svg" width="22" height="22" />
                                                 </span>
-                                                <input type="number" class="form-control form-control-icon ps-5" placeholder="{{ trans('user.home.phone_no') }}" name="phone_no" maxlength="10" min="1" minlength="10" id="phone_no" required/>
+                                                <input type="number" class="form-control form-control-icon ps-5" placeholder="{{ trans('user.home.phone_no') }}" name="phone_no" maxlength="9" min="1" minlength="9" id="phone_no" required/>
                                             </div>
                                             <button type="submit" class="btn btn-site-theme fw-400 text-uppercase font-sebibold w-100" id="save-btn">{{ trans('user.button.save') }}</button>
                                         </form>

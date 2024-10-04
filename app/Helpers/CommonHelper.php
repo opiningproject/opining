@@ -711,6 +711,23 @@ if (!function_exists('RoundUpEstimatedTime')) {
     }
 }
 
+if (!function_exists('RoundCreatedAt')) {
+    function RoundCreatedAt($createdAtDate)
+    {
+        $time = \Carbon\Carbon::createFromTimeString($createdAtDate);
+
+// If it's already a multiple of 5, keep it unchanged
+        if ($time->minute % 5 === 0) {
+            $roundedTime = $time; // Remains as is
+        } else {
+            // Otherwise, round up to the next multiple of 5
+            $roundedTime = $time->ceilMinute(5);
+        }
+
+        return $roundedTime;
+    }
+}
+
 //if (!function_exists('getLatLongFromZipcode')) {
 //    function getLatLongFromZipcode($zipcode)
 //    {

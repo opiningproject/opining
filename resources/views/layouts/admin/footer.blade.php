@@ -156,7 +156,7 @@
     });
     // code for open popup
     checkNotifiedOrdersPopup()
-
+    var orderColHeight = $('.order-col:last').height();
     function checkNotifiedOrdersPopup() {
 
     $.ajax({
@@ -171,6 +171,7 @@
 
                 if ($('.order-column:first .order-col').length == 8) {
                     // Remove the last order-col from the first order-column only
+                    orderColHeight = $('.order-col:first').height()
                     $('.order-column:first .order-col:last').remove();
                 }
                 @if(getRestaurantDetail()->order_notif_sound)
@@ -199,9 +200,9 @@ function getLiveOrderList() {
         datatype: 'json',
         success: function (data) {
             if(data) {
-                var height = $('.order-col:last').height()
+                // var height = $('.order-col:last').height();
                 $('.order-column:first').prepend(data.data)
-                $('.order-col:first').css({ 'height': height})
+                $('.order-col:first').css({ 'height': orderColHeight})
                 $('.order-notification-popup').modal('show')
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);

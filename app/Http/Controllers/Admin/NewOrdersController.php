@@ -374,7 +374,7 @@ class NewOrdersController extends Controller
             $html = '<div class="order-col cursor-pointer" id="order-'.$orders->id.'" data-id="'.$orders->id.'" onclick="orderDetailNew('.$orders->id.')">
                                 <div class="order-box">
                                     <div class="timing">
-                                        <h3 class="expectedDeliveryTime-'.$orders->id.'">'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->created_at)->addMinutes($orderDeliveryTime)))  .'</h3>
+                                        <h3 class="expectedDeliveryTime-'.$orders->id.'">'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) .'</h3>
                                         <label class="success">'. $orders->delivery_time .'</label>
                                     </div>
                                     <div class="details">

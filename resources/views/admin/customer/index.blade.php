@@ -80,7 +80,7 @@
                                     <th scope="col" class="text-center">{{ trans('rest.deliverers.email') }}</th>
                                     <th scope="col" class="text-center">Orders</th>
                                     <th scope="col" class="text-center">Total</th>
-                                    <th scope="col" class="text-center">{{ trans('rest.deliverers.status') }}</th>
+                                    <th scope="col" class="text-center">Block/Unblock</th>
                                     <th scope="col" class="text-center">{{ trans('rest.button.action') }}</th>
                                 </tr>
                                 </thead>
@@ -127,14 +127,10 @@
                                                id="email-1" readonly/>
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="15"
-                                               id="orders" readonly/>
+                                        <lable class="text-center m-auto"> 15 </lable>
                                     </td>
                                     <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="€722,06"
-                                               id="total" readonly/>
+                                        <lable class="text-center m-auto"> €722,06 </lable>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-check form-switch custom-switch justify-content-center ps-0">

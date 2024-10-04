@@ -42,12 +42,24 @@
 
                         </div>
                         <div class="right">
-                            <a href="#" class="sound-check">
-                                <img src="{{ asset('images/admin-menu-icons/volume.svg') }}" class="svg"
-                                    height="20" width="20" />
-                                {{-- <img src="{{ asset('images/admin-menu-icons/volume-slash.svg') }}" class="svg"
-                                    height="20" width="20" /> --}}
-                            </a>
+                            <button class="sound-check">
+                                @if(getRestaurantDetail()->order_notif_sound == 1)
+                                    <input type="hidden" value="1" class="orderNotifSound">
+                                    <img src="{{ asset('images/admin-menu-icons/volume.svg') }}" class="svg volumeOn"
+                                         height="20" width="20"/>
+                                    <img src="{{ asset('images/admin-menu-icons/volume-slash.svg') }}"
+                                         class="svg volumeOff d-none"
+                                         height="20" width="20"/>
+                                @else
+                                    <input type="hidden" value="0" class="orderNotifSound">
+                                    <img src="{{ asset('images/admin-menu-icons/volume-slash.svg') }}"
+                                         class="svg volumeOff"
+                                         height="20" width="20"/>
+                                    <img src="{{ asset('images/admin-menu-icons/volume.svg') }}"
+                                         class="svg volumeOn d-none"
+                                         height="20" width="20"/>
+                                @endif
+                            </button>
 
                             <a href="{{ route('chat') }}" class="chat-link">
                                 <img src="{{ asset('images/admin-menu-icons/message-text.svg') }}" class="svg"

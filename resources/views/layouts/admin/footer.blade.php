@@ -70,6 +70,32 @@
             }
         });
 
+        // notification sound update on click sound icon
+        $('.sound-check').on('click', function() {
+            var soundStatus = $(this).find('.orderNotifSound');
+            // Get the current value (either "0" or "1")
+            var currentValue = soundStatus.val();
+            if (currentValue == 1) {
+                soundStatus.val(0); // Set to "0"
+                // Hide the volume icon and show the volume-slash icon
+                $(this).find('.volumeOn').addClass('d-none');
+                $(this).find('.volumeOff').removeClass('d-none');
+            } else {
+                soundStatus.val(1); // Set to "1"
+                // Show the volume icon and hide the volume-slash icon
+                $(this).find('.volumeOff').addClass('d-none');
+                $(this).find('.volumeOn').removeClass('d-none');
+            }
+            $.ajax({
+                url: baseURL + '/update-notification-sound',
+                method: 'POST',
+                data: { order_notif_sound: soundStatus.val() },
+                success: function(response) {
+                    console.log('Sound status updated');
+                }
+            });
+        });
+
         function goFullscreen() {
             // Check if the Fullscreen API is supported
             if (document.documentElement.requestFullscreen) {

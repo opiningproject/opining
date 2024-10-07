@@ -84,32 +84,20 @@ $payment_settings = $params['order_settings'];
                         <div class="row g-2 time-date-controls custom-date-selector {{ $payment_settings['expiry_date'] == 'custom_date' ? '':'d-none' }}">
                             <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.custom_date') }}</h3>
                             <div class="col-md-6 mt-0">
-                                <div class="input-group">
+                                <div class="input-group start-date-input">
                                     <input type="text" placeholder="Select Start Date" class="form-control"
-                                           id="start-date" aria-label="start_date" name="start_date" value="{{ $payment_settings['start_date'] }}" required>
+                                           id="start-date" aria-label="start_date" name="start_date" readonly value="" required>
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-0">
-                                <div class="input-group">
+                                <div class="input-group end-date-input">
                                     <input type="text" placeholder="Select End Date" class="form-control"
-                                           id="end-date" aria-label="end_date" name="end_date" value="{{ $payment_settings['end_date'] }}" required>
+                                           id="end-date" aria-label="end_date" name="end_date" readonly value="" required>
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="row justify-content-center">
-                            <div class="col-sm-12">
-                                <input type="hidden" class="order-setting-custom-time"
-                                    value="{{ $payment_settings['expiry_date'] }}">
-                                <input type="text" placeholder="Select Date For Filter" class="form-control"
-                                    id="order-setting-custom-time" aria-label="expiry_date" name="expiry_date"
-                                    value="{{ $payment_settings['expiry_date'] }}" required>
-                                <span id="startDateSelected"></span>
-                            </div>
-                        </div> --}}
-
                     </div>
 
                     <p class="note py-3 pb-1"> NOTE: {{ trans('rest.order_screen_settings.note') }}</p>

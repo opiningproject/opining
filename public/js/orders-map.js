@@ -1,12 +1,3 @@
-// status-option-deliverers active inactive
-$(document).ready(function () {
-    // On click of a radio button label
-    $('.status-option-deliverers input[type="radio"]').change(function () {
-        $('.status-option-deliverers').removeClass('active');
-        $(this).closest('.status-option-deliverers').addClass('active');
-    });
-});
-
 function cancelOrder(id) {
     $('#cancelOrderModal').modal('show');
 }
@@ -43,70 +34,6 @@ $(document).on('click', '#cancel-order-btn', function () {
     })
 })
 
-
-// screen wise show pagination code
-document.addEventListener('DOMContentLoaded', function () {
-    let screenWidth = window.innerWidth;
-    let screenHeight = window.innerHeight; // Get screen height
-    let perPage = 24;
-
-    // Adjust perPage based on both screen width and height
-    if (screenHeight < 769) {
-        // perPage = 18;
-    }
-    else if (screenHeight > 1040) {
-        // perPage = 36;
-    }
-    else if (screenHeight > 1000) {
-        // perPage = 27;
-    }
-    else if (screenHeight > 900) {
-        // perPage = 24;
-    }
-    // else if (screenHeight > 880) {
-    //     perPage = 30;
-    // }
-    else if (screenHeight < 769) {
-        // perPage = 24;
-    }
-    else if (screenHeight < 768) {
-        // perPage = 21;
-    }
-    else {
-        // perPage = 24;
-    }
-
-    // Get the currently stored per_page value from sessionStorage
-    const storedPerPage = sessionStorage.getItem('per_page_value');
-    // Check if per_page is already set in sessionStorage to avoid repeated reloads
-    if (storedPerPage !== perPage.toString()) {
-        // Send AJAX request to store perPage in session
-        sessionStorage.setItem('per_page_value', perPage.toString());
-        fetch('/set-per-page', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({ per_page: perPage })
-        }).then(response => {
-            return response.json();
-        }).then(data => {
-            if (data.success) {
-                // Set a flag in sessionStorage so that we don't reload again
-                // sessionStorage.setItem('per_page_value', perPage.toString());
-                // Reload the page to apply pagination with the new per_page value
-                window.location.reload();
-            }
-        }).catch(error => {
-            console.error('Error setting per_page:', error);
-        });
-    }
-});
-
-
-
-
 // order-status-option active inactive
 $(document).ready(function () {
     $(document).on('change', '.order-status-option input[type="radio"]', function () {
@@ -117,9 +44,9 @@ $(document).ready(function () {
 
 //show order setting popup
 $(document).on('click', '.order-setting', function () {
-    $('.order-setting-popup').modal('show');
-    $('#radio-button-error').remove();
+    $('.order-setting-popup').modal('show')
 })
+
 
 $(function () {
     var filters = [];
@@ -201,7 +128,7 @@ $(function () {
 
     function searchFilterAjax(search, searchOption, filters) {
         $.ajax({
-            url: baseURL + '/orders', // Ensure this matches your route
+            url: baseURL + '/orders-map', // Ensure this matches your route
             type: 'GET',
             data: {
                 search,
@@ -225,8 +152,6 @@ $(function () {
                 console.log("response", response)
                 if (response.status == "success"){
                     $('.order-setting-popup').modal('hide')
-                    $('.timezone-setting').prop('selectedIndex', 0);
-                    $('input[name="date_type"]').prop('checked', false);
                     searchFilterAjax(search, searchOption, filters);
                 }
 
@@ -241,17 +166,7 @@ $(function () {
 
     //order setting js code start
 // order-setting-form
-   /* $('#order-setting-form').on('submit', function(e) {
-        // Check if any radio button is selected
-        if (!$('input[name="date_type"]:checked').length) {
-            // Prevent form submission
-            e.preventDefault();
-
-            // Show an alert or message indicating the error
-            alert("Please select at least one date option before saving.");
-        }
-    });*/
-    $(".order-setting-form").validate({
+    /*$(".order-setting-form").validate({
         rules: {
             timezone_setting: {
                 required: true
@@ -273,70 +188,36 @@ $(function () {
             $(element).addClass('border-green-500'); // Tailwind CSS class for green border
         },
         errorPlacement: function (error, element) {
-            if (element.attr("name") == "start_date") {
-                error.insertAfter(".start-date-input");
-            } else if (element.attr("name") == "end_date") {
-                error.insertAfter(".end-date-input");
-            } else {
-                error.insertAfter(element); // Default placement for other fields
-            }
+            error.insertAfter(element); // Default placement for other fields
             return false;
         },
         submitHandler: function (form) { // <- pass 'form' argument in
             $(".submit").attr("disabled", true);
             saveOrderSetting(); // <- use 'form' argument here.
         }
-    });
+    });*/
 
 // Add deliverers
     function saveOrderSetting() {
         var delivererData = new FormData(document.getElementById('order-setting-form'));
-        $('#radio-button-error').remove()
-        if ($('#order-setting-date').prop('checked') == true) {
-            if (!$('input[name="date_type"]:checked').length) {
-                    var errorMessage = '<label style="color: red" id="radio-button-error" className="error radio-button-error" htmlFor="timezone_setting">Please select at least one date option before saving.</label>';
-                    $('.date-range-section').append(errorMessage)
-                return false;
+        $.ajax({
+            url: baseURL + '/save-order-setting',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: delivererData,
+            success: function (response) {
+                if (response.status == 'success') {
+                    $('.order-setting-popup').modal('hide');
+                    searchFilterAjax(search, searchOption, filters);
                 }
-            $.ajax({
-                url: baseURL + '/save-order-setting',
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                data: delivererData,
-                success: function (response) {
-                    console.log("response", response)
-                    if (response.status == 'success') {
-                        $('.order-setting-popup').modal('hide');
-                        searchFilterAjax(search, searchOption, filters);
-                    }
-                },
-                error: function (response) {
-                    var errorMessage = JSON.parse(response.responseText).message
-                    toastr.error(errorMessage)
-                    // alert(errorMessage);
-                }
-            })
-        } else {
-            $.ajax({
-                url: baseURL + '/save-order-setting',
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                data: delivererData,
-                success: function (response) {
-                    if (response.status == 'success') {
-                        $('.order-setting-popup').modal('hide');
-                        searchFilterAjax(search, searchOption, filters);
-                    }
-                },
-                error: function (response) {
-                    var errorMessage = JSON.parse(response.responseText).message
-                    toastr.error(errorMessage)
-                    // alert(errorMessage);
-                }
-            })
-        }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                toastr.error(errorMessage)
+                // alert(errorMessage);
+            }
+        })
     }
 });
 
@@ -487,8 +368,8 @@ $('.order-filter .checkbox').not('#all').on('change', function () {
 });
 
 // Define the date range picker on the start date input
-// var start = moment();
-// var end = moment();
+var start = moment();
+var end = moment();
 
 $('#start-date, #end-date').daterangepicker({
     singleDatePicker: true, // Allow selecting a date range
@@ -496,8 +377,7 @@ $('#start-date, #end-date').daterangepicker({
     locale: {
         format: 'DD-MM-YYYY'
     },
-    maxDate: moment(), // Set the maximum date to today
-    autoUpdateInput: false
+    maxDate: moment() // Set the maximum date to today
 });
 
 // Handle apply event to update both start and end date inputs
@@ -537,7 +417,6 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.specific-day').removeClass('active')
             $('#order-setting-custom-time').val('');
             $('.order_setting_type').val("1");
-            $('#radio-button-error').remove();
         } else if (dateRadio.checked) {
             timezoneSetting.classList.add('d-none');
             dateRange.classList.remove('d-none');
@@ -545,7 +424,6 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.specific-day').addClass('active')
             $('.timezone-setting').prop('selectedIndex', 0);
             $('.order_setting_type').val("2");
-            $('#radio-button-error').remove();
 
             $(this).closest('.status-option').addClass('active')
         }
@@ -620,13 +498,11 @@ $(document).on('click', '.update-delivery-time', function () {
 
 $(document).on('click', '.custom_time_order_setting', function () {
     $('.custom-date-selector').removeClass('d-none')
-    $('#radio-button-error').remove();
 })
 
 $(document).on('click', '.date_type', function () {
     $('#start-date').val('');
     $('#end-date').val('');
-    $('#radio-button-error').remove();
     $('.custom-date-selector').addClass('d-none')
 })
 

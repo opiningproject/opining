@@ -5,7 +5,7 @@
     <div class="main-content">
         <div class="section-page-title mb-0 d-flex align-items-center justify-content-between gap-2 order-page-bar">
 
-            <div class="d-flex align-items-center btn-grp-gap-10">
+            <div class="d-flex align-items-center btn-grp-gap-10 btn-grp-tab">
                 <button type="button"
                         class="btn btn-site-theme d-flex align-items-center gap-3 justify-content-center"
                         style="min-width: auto"><img src="{{ asset('images/customer.svg') }}"

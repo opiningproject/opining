@@ -281,13 +281,17 @@
 
             orders.forEach(order => {
                 if (order.order_user_details.latitude && order.order_user_details.longitude) {
-                    const marker1 = new google.maps.Marker({
+                    const marker = new google.maps.Marker({
                         position: {
                             lat: parseFloat(order.order_user_details.latitude),
                             lng: parseFloat(order.order_user_details.longitude)
                         }, // Location from the order data
                         map: map,
                         icon: customIcon // Set the custom icon here
+                    });
+                    marker.addListener('click', function() {
+                        // Call the orderDetailNew function with the order ID when clicked
+                        orderDetailNew(order.id);
                     });
                 }
             });

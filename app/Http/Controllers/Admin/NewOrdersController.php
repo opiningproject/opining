@@ -54,8 +54,9 @@ class NewOrdersController extends Controller
         } elseif($specificDaySetting !=null){
             if ($specificDaySetting == 'custom_date') {
                 $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
             }
-            $orders = $this->orderSettingFilter($specificDaySetting, $orders);
         }
         $pageNumber = request()->input('page', 1);
         $perPage = request()->input('per_page', 24);
@@ -109,8 +110,9 @@ class NewOrdersController extends Controller
         } elseif($specificDaySetting !=null){
             if ($specificDaySetting == 'custom_date') {
                 $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
             }
-            $orders = $this->orderSettingFilter($specificDaySetting, $orders);
         }
         $pageNumber = request()->input('page', 1);
         $perPage = request()->input('per_page', 24);
@@ -596,8 +598,9 @@ function orderSettingFilter($expiryDate, $orders) {
         } elseif($specificDaySetting !=null){
             if ($specificDaySetting == 'custom_date') {
                 $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
             }
-            $orders = $this->orderSettingFilter($specificDaySetting, $orders);
         }
         $pageNumber = request()->input('page', 1);
         $perPage = request()->input('per_page', 8);

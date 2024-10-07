@@ -98,10 +98,12 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                 <h3>{{ session('zipcode') ? trans('user.checkout.delivery_address') : trans('user.checkout.takeaway_address') }}
                                                                 </h3>
                                                                 <p class="mb-0">
-                                                                    @if ($street_name)
-                                                                        {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
-                                                                    @elseif (session('zipcode') && !$street_name)
-                                                                        {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                                                    @if(session('zipcode'))
+                                                                        @if(!$street_name)
+                                                                            {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                                                        @else
+                                                                            {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
+                                                                        @endif
                                                                     @else
                                                                         {{ getRestaurantDetail()->rest_address }}
                                                                     @endif

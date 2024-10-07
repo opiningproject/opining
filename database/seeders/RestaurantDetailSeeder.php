@@ -28,6 +28,8 @@ class RestaurantDetailSeeder extends Seeder
                     "cod" => 1
                 ],
                 "order_settings" => [
+                    "end_date"=> null,
+                    "start_date"=> null,
                     "expiry_date" => null,
                     "timezone_setting" => null,
                     "order_setting_type" => null

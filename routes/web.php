@@ -245,6 +245,8 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/get-order-setting', [NewOrdersController::class, 'getOrderSetting'])->name('getOrderSetting');
     Route::get('/orders/print-label/{order_id}', [NewOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/cancel-order/{order_id}/{status}', [NewOrdersController::class, 'cancelOrder'])->name('orders.cancelOrder');
+    Route::get('/save-reset', [NewOrdersController::class, 'saveReset'])->name('saveReset');
+    Route::get('/orders-map', [NewOrdersController::class, 'ordersMap'])->name('ordersMap');
 
     Route::post('/set-per-page', function (Request $request) {
         $request->session()->put('per_page', $request->input('per_page'));

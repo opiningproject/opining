@@ -43,18 +43,23 @@ class NewOrdersController extends Controller
     {
         $getResturentData = json_decode(getRestaurantDetail()->params,true);
         $order_settings = $getResturentData['order_settings'];
-//        $timezoneSetting = (int)$order_settings['timezone_setting'];
-        $timezoneSetting = null;
+        $timezoneSetting = $order_settings['timezone_setting'];
+        $specificDaySetting = $order_settings['expiry_date'];
+        $startDate = $order_settings['start_date'];
+        $endDate = $order_settings['end_date'];
+        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
-            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours($timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        } else {
-            $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } elseif($specificDaySetting !=null){
+            if ($specificDaySetting == 'custom_date') {
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
+            }
         }
-
         $pageNumber = request()->input('page', 1);
         $perPage = request()->input('per_page', 24);
-//        $perPage = session('per_page', 24);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -91,101 +96,27 @@ class NewOrdersController extends Controller
         return view('admin.orders.orders-new', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
     }
 
-    public function orderDetail(Request $request)
-    {
-        $order = Order::find($request->order_id);
-        $delivererUser = DelivererUser::where('status', '1')->get();
-        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser ])->render();
-
-        return response()->json(['status' => 1, 'data' =>  $orderDetailHTML, 'order' => $order]);
-    }
-
-    public function changeStatusNew(Request $request)
-    {
-        $order = Order::find($request->id);
-        $order = getOrderStatus($order);
-        $orderStatus = 0;
-        if ($order->save()) {
-            $order->user->notify(new DeliveryTypeUpdate($order));
-//            $this->sendMail($order);
-        }
-        if ($order->order_type == "1") {
-            $addTrackOrder = TrackOrder::create([
-                'order_id' => $order->id,
-                'order_status' => $order->order_status
-            ]);
-        }
-        if($order->order_status == OrderStatus::Delivered) {
-            $orderStatus = OrderStatus::Delivered;
-        }
-        $orderData = Order::find($request->id);
-        $trackOrderData = TrackOrder::where('order_id', $orderData->id)->where('order_status', $orderData->order_status)->first();
-        $color = orderStatusBox($order)->color;
-        $text = orderStatusBox($order)->text;
-        return response()->json([
-            'status' => 1,
-            'orderStatus' => $orderStatus,
-            'orderId' =>$orderData->id,
-            'orderDate' => $trackOrderData ? $trackOrderData->created_at :'',
-            'updatedStatus' =>$orderData->order_status,
-            'text' =>$text,
-            'color' =>$color
-        ]);
-    }
-
-    public function sendMail($order)
-    {
-        $user = User::find($order->user_id);
-
-        $data['name'] = $user->full_name;
-        $data['order_id'] = $order->id;
-        $data['delivery_charge'] = '€' . $order->delivery_charge;
-        $data['platform_charge'] = '€' . $order->platform_charge;
-        $data['total_amount'] = '€' . $order->total_amount;
-        $data['sub_total'] = '€' . getOrderGrossAmount($order);
-        $data['order_items'] = $order->dishDetails;
-        $data['coupon_discount'] = '- €' . $order->coupon_discount;
-
-        $order_status_key = OrderStatus::getKey($order->order_status);
-        $order_status = strtolower(preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $order_status_key));
-
-        $subject = trans('email.order_status.subject', ['order_id' => $order->id, 'order_status' => $order_status]);
-
-        $data['mail_body'] = trans('email.order_status.content', ['order_id' => $order->id, 'order_status' => $order_status]);
-
-        Mail::send('user.emails.order', $data, function ($message) use ($user, $subject) {
-            $message->to($user->email, $user->full_name)->subject($subject);
-            $message->from(config('mail.from.address'), config('mail.from.name'));
-        });
-    }
-
-    public function orderPrintLabel(string $id)
-    {
-        $order = Order::find($id);
-
-        $taxedValue = 0.09 * (float)$order->total_amount;
-        $differenceValue = $order->total_amount - $taxedValue;
-
-        $order->sub_total = $differenceValue;
-        $order->tax_amount = $taxedValue;
-        return view('admin.orders.orders-print-label', ['order' => $order]);
-    }
-
     public function orderSearchFilter(Request $request) {
         $getResturentData = json_decode(getRestaurantDetail()->params,true);
         $order_settings = $getResturentData['order_settings'];
-//        $timezoneSetting = (int)$order_settings['timezone_setting'];
-        $timezoneSetting = null;
+        $timezoneSetting = $order_settings['timezone_setting'];
+        $specificDaySetting = $order_settings['expiry_date'];
+        $startDate = $order_settings['start_date'];
+        $endDate = $order_settings['end_date'];
+        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        if ($timezoneSetting != null) {
+            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } elseif($specificDaySetting !=null){
+            if ($specificDaySetting == 'custom_date') {
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
+            }
+        }
         $pageNumber = request()->input('page', 1);
         $perPage = request()->input('per_page', 24);
-//        $perPage = session('per_page', 24);
-        if ($timezoneSetting != null) {
-            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours($timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        } else {
-            $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        }
+
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
             $searchType = $request->input('searchOption');
@@ -299,6 +230,114 @@ class NewOrdersController extends Controller
         return [
             'orders' => $orders
         ];
+    }
+
+function orderSettingFilter($expiryDate, $orders) {
+    // Add expiry_date condition
+    switch ($expiryDate) {
+        case "1": // Today
+            $orders->whereDate('created_at', Carbon::today());
+            break;
+        case "-1": // Yesterday
+            $orders->whereDate('created_at', Carbon::yesterday());
+            break;
+        case "-2": // Today and Yesterday
+            $orders->whereBetween('created_at', [Carbon::yesterday(), Carbon::now()]);
+            break;
+        case "-7": // Last 7 days
+            $orders->where('created_at', '>=', Carbon::now()->subDays(7));
+            break;
+        case "-14": // Last 14 days
+            $orders->where('created_at', '>=', Carbon::now()->subDays(14));
+            break;
+        case "-30": // Last 30 days
+            $orders->where('created_at', '>=', Carbon::now()->subDays(30));
+            break;
+        default:
+            // If expiry_date is not recognized, default to today
+            $orders->whereDate('created_at', Carbon::today());
+    }
+    return $orders;
+}
+    public function orderDetail(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $delivererUser = DelivererUser::where('status', '1')->get();
+        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser ])->render();
+
+        return response()->json(['status' => 1, 'data' =>  $orderDetailHTML, 'order' => $order]);
+    }
+
+    public function changeStatusNew(Request $request)
+    {
+        $order = Order::find($request->id);
+        $order = getOrderStatus($order);
+        $orderStatus = 0;
+        if ($order->save()) {
+            $order->user->notify(new DeliveryTypeUpdate($order));
+//            $this->sendMail($order);
+        }
+        if ($order->order_type == "1") {
+            $addTrackOrder = TrackOrder::create([
+                'order_id' => $order->id,
+                'order_status' => $order->order_status
+            ]);
+        }
+        if($order->order_status == OrderStatus::Delivered) {
+            $orderStatus = OrderStatus::Delivered;
+        }
+        $orderData = Order::find($request->id);
+        $trackOrderData = TrackOrder::where('order_id', $orderData->id)->where('order_status', $orderData->order_status)->first();
+        $color = orderStatusBox($order)->color;
+        $text = orderStatusBox($order)->text;
+        return response()->json([
+            'status' => 1,
+            'orderStatus' => $orderStatus,
+            'orderId' =>$orderData->id,
+            'orderDate' => $trackOrderData ? $trackOrderData->created_at :'',
+            'updatedStatus' =>$orderData->order_status,
+            'text' =>$text,
+            'color' =>$color
+        ]);
+    }
+
+    public function sendMail($order)
+    {
+        $user = User::find($order->user_id);
+
+        $data['name'] = $user->full_name;
+        $data['order_id'] = $order->id;
+        $data['delivery_charge'] = '€' . $order->delivery_charge;
+        $data['platform_charge'] = '€' . $order->platform_charge;
+        $data['total_amount'] = '€' . $order->total_amount;
+        $data['sub_total'] = '€' . getOrderGrossAmount($order);
+        $data['order_items'] = $order->dishDetails;
+        $data['coupon_discount'] = '- €' . $order->coupon_discount;
+
+        $order_status_key = OrderStatus::getKey($order->order_status);
+        $order_status = strtolower(preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $order_status_key));
+
+        $subject = trans('email.order_status.subject', ['order_id' => $order->id, 'order_status' => $order_status]);
+
+        $data['mail_body'] = trans('email.order_status.content', ['order_id' => $order->id, 'order_status' => $order_status]);
+
+        Mail::send('user.emails.order', $data, function ($message) use ($user, $subject) {
+            $message->to($user->email, $user->full_name)->subject($subject);
+            $message->from(config('mail.from.address'), config('mail.from.name'));
+        });
+    }
+
+    public function orderPrintLabel(string $id)
+    {
+        $order = Order::find($id);
+
+        $taxedValue = 0.09 * (float)$order->total_amount;
+        $differenceValue = $order->total_amount - $taxedValue;
+
+        $order->sub_total = $differenceValue;
+        $order->tax_amount = $taxedValue;
+        return view('admin.orders.orders-print-label', ['order' => $order]);
     }
 
     /**
@@ -445,9 +484,11 @@ class NewOrdersController extends Controller
     public function updateOrderSetting(Request $request)
     {
         $value = [
-            'expiry_date' => $request->expiry_date,
+            'expiry_date' => $request->order_setting_type == "2" ? $request->date_type : null,
             'timezone_setting' => $request->timezone_setting ? $request->timezone_setting : null,
             'order_setting_type' => $request->order_setting_type,
+            'start_date' => $request->start_date ? $request->start_date : null,
+            'end_date' => $request->end_date ? $request->end_date : null,
         ];
         $restaurant = RestaurantDetail::findOrFail(1); // Fetch the restaurant detail
 
@@ -510,5 +551,92 @@ class NewOrdersController extends Controller
                 'color' =>$color
             ]);
         }
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function saveReset()
+    {
+        $value = [
+            'expiry_date' => null,
+            'timezone_setting' => null,
+            'order_setting_type' => null,
+            'start_date' => null,
+            'end_date' => null,
+        ];
+        $restaurant = RestaurantDetail::findOrFail(1); // Fetch the restaurant detail
+
+        $params = json_decode($restaurant->params, true);
+
+        if (is_null($params)) {
+            $params = [];
+        }
+        $params['order_settings'] = $value; // Store all request data under 'order_settings'
+        $restaurant->params = json_encode($params);
+        $restaurant->save();
+
+        return response()->json(['status' => 'success', 'message' => trans('rest.order_screen_settings.order_setting_updated')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
+    public function ordersMap(Request $request)
+    {
+        $getResturentData = json_decode(getRestaurantDetail()->params,true);
+        $order_settings = $getResturentData['order_settings'];
+        $timezoneSetting = $order_settings['timezone_setting'];
+        $specificDaySetting = $order_settings['expiry_date'];
+        $startDate = $order_settings['start_date'];
+        $endDate = $order_settings['end_date'];
+        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        if ($timezoneSetting != null) {
+            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } elseif($specificDaySetting !=null){
+            if ($specificDaySetting == 'custom_date') {
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
+            }
+        }
+        $pageNumber = request()->input('page', 1);
+        $perPage = request()->input('per_page', 24);
+
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
+
+        if (!empty($start_date) && !empty($end_date)) {
+
+            $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+            $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
+
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        } else if (!empty($start_date) && empty($end_date)) {
+            $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+            $end_date = date('Y-m-d') . ' 23:59:59';
+
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        } else if (empty($start_date) && !empty($end_date)) {
+            $start_date = date('Y-m-d') . ' 00:00:00';
+            $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
+
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        }
+
+        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
+        if ($request->ajax()) {
+            $filters = $request->get('filters');
+            if ($request->has('search') && $request->search != null || !empty($filters)) {
+                $data = $this->orderSearchFilter($request);
+            } else {
+                $data['orders'] = $orders;
+                $data['orderDeliveryTime'] = $orderDeliveryTime;
+            }
+            return view('admin.orders.orders-map', ['allOrders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
+        }
+        return view('admin.orders.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
     }
 }

@@ -95,57 +95,6 @@
                 }
             });
         });
-
-        function goFullscreen() {
-            // Check if the Fullscreen API is supported
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-                document.documentElement.msRequestFullscreen();
-            }
-        }
-        function exitFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) { // Firefox
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { // IE/Edge
-                document.msExitFullscreen();
-            }
-
-            // Remove fullscreen state from localStorage
-            localStorage.removeItem("fullscreen");
-        }
-
-        // Add event listener to the button
-        // document.getElementById("maximize-screen").addEventListener("click", goFullscreen);
-        $('.maximize-screen').on('click', function(){
-            goFullscreen()
-            $('.minimize-screen').removeClass('d-none')
-            $('.maximize-screen').addClass('d-none')
-        });
-        $('.minimize-screen').on('click', function(){
-            exitFullscreen()
-            $('.maximize-screen').removeClass('d-none')
-            $('.minimize-screen').addClass('d-none')
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            document.addEventListener('keydown', function(event) {
-                if (event.key === "Escape") {
-                    console.log('Escape key pressed'); // Should log to console when Escape key is pressed
-                    exitFullscreen();
-                    $('.maximize-screen').removeClass('d-none');
-                    $('.minimize-screen').addClass('d-none');
-                }
-            });
-        });
     });
 
 

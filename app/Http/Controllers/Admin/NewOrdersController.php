@@ -635,8 +635,8 @@ function orderSettingFilter($expiryDate, $orders) {
                 $data['orders'] = $orders;
                 $data['orderDeliveryTime'] = $orderDeliveryTime;
             }
-            return view('admin.orders.orders-map', ['allOrders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
+            return view('admin.orders.order-map.order-map-search', ['allOrders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
         }
-        return view('admin.orders.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
+        return view('admin.orders.order-map.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
     }
 }

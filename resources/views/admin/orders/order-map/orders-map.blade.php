@@ -33,9 +33,6 @@
                                 </button>
                             </div>
 
-                            {{-- <h1 class="page-title me-auto">{{ trans('rest.food_order.orders') }} <span
-                                    class="count count-order"> {{ getOpenOrders() }} </span></h1> --}}
-
 
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
@@ -135,10 +132,10 @@
                         </div>
 
                         <div class="row map-order-listing-row">
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <div id="orders-map-marker" style="height: calc(100vh - 230px);"></div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="orderList">
                                     <div class="order-listing-container">
                                         <div class="order-row">
@@ -160,11 +157,6 @@
 
                                                             <div class="details">
                                                                 <div class="left">
-                                                                    <div class="label-icon">
-                                                                        <img src="{{ asset('images/opening-label.svg') }}"
-                                                                            class="svg" />
-                                                                    </div>
-
                                                                     <div class="text-label">
                                                                         <h4>{{ $userDetails->order_name }}</h4>
                                                                         @if ($ord->order_type == OrderType::Delivery)
@@ -208,7 +200,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -249,7 +241,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{ asset('js/new-orders.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/orders-map.js') }}"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initOrderMapMarker"
         async defer></script>

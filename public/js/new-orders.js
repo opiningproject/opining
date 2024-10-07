@@ -216,6 +216,82 @@ $(function () {
             }
         });
     }
+
+    $(document).on('click', '.saveReset', function (e) {
+        $.ajax({
+            url: baseURL + '/save-reset',
+            type: 'GET',
+            success: function (response) {
+                console.log("response", response)
+                if (response.status == "success"){
+                    $('.order-setting-popup').modal('hide')
+                    searchFilterAjax(search, searchOption, filters);
+                }
+
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+
+
+    //order setting js code start
+// order-setting-form
+    $(".order-setting-form").validate({
+        rules: {
+            timezone_setting: {
+                required: true
+            },
+            start_date: {
+                required: true
+            },
+            end_date: {
+                required: true
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+            $(element).addClass('border-red-500'); // Tailwind CSS class for red border
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+            $(element).removeClass('border-red-500');
+            $(element).addClass('border-green-500'); // Tailwind CSS class for green border
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element); // Default placement for other fields
+            return false;
+        },
+        submitHandler: function (form) { // <- pass 'form' argument in
+            $(".submit").attr("disabled", true);
+            saveOrderSetting(); // <- use 'form' argument here.
+        }
+    });
+
+// Add deliverers
+    function saveOrderSetting() {
+        var delivererData = new FormData(document.getElementById('order-setting-form'));
+        $.ajax({
+            url: baseURL + '/save-order-setting',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: delivererData,
+            success: function (response) {
+                if (response.status == 'success') {
+                    $('.order-setting-popup').modal('hide');
+                    searchFilterAjax(search, searchOption, filters);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                toastr.error(errorMessage)
+                // alert(errorMessage);
+            }
+        })
+    }
 });
 
 function orderDetailNew(id) {
@@ -285,6 +361,7 @@ function assignDeliverer(order_id, deliverer_id) {
         }
     })
 }
+
 
 function disabledOldOrderStatus() {
     const radios = document.querySelectorAll('.order-status-radio');
@@ -363,106 +440,38 @@ $('.order-filter .checkbox').not('#all').on('change', function () {
     }
 });
 
-
-
-//order setting js code start
-// order-setting-form
-$(".order-setting-form").validate({
-    rules: {
-        timezone_setting: {
-            required: true
-        },
-        expiry_date: {
-            required: true
-        }
-    },
-    highlight: function (element) {
-        $(element).closest('.form-group').addClass('has-error');
-        $(element).addClass('border-red-500'); // Tailwind CSS class for red border
-    },
-    unhighlight: function (element) {
-        $(element).closest('.form-group').removeClass('has-error');
-        $(element).removeClass('border-red-500');
-        $(element).addClass('border-green-500'); // Tailwind CSS class for green border
-    },
-    errorPlacement: function (error, element) {
-        error.insertAfter(element); // Default placement for other fields
-        return false;
-    },
-    submitHandler: function (form) { // <- pass 'form' argument in
-        $(".submit").attr("disabled", true);
-        saveOrderSetting(); // <- use 'form' argument here.
-    }
-});
-
-// Add deliverers
-function saveOrderSetting() {
-    var delivererData = new FormData(document.getElementById('order-setting-form'));
-    $.ajax({
-        url: baseURL + '/save-order-setting',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: delivererData,
-        success: function (response) {
-            if (response.status == 'success') {
-                $('.order-setting-popup').modal('hide');
-            }
-        },
-        error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            toastr.error(errorMessage)
-            // alert(errorMessage);
-        }
-    })
-}
-// Show date picker code
-var start = moment().subtract(10, 'days');
+// Define the date range picker on the start date input
+var start = moment();
 var end = moment();
 
-var dateRange = ''
-
-var existingDate = $('.order-setting-custom-time').val() ?? null;
-$('#order-setting-custom-time').daterangepicker({
-    startDate: start,
-    endDate: end,
-    maxDate: moment(),
-    ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-    }
-});
-if (existingDate) {
-    var dates = existingDate.split(' - ');
-    var start_date = dates[0];
-    var end_date = dates[1];
-    $('#order-setting-custom-time').data('daterangepicker').setStartDate(moment(start_date, 'DD-MM-YYYY'));
-    $('#order-setting-custom-time').data('daterangepicker').setEndDate(moment(end_date, 'DD-MM-YYYY'));
-    $('#order-setting-custom-time').val(start_date + ' - ' + end_date);
-} else {
-    $('#order-setting-custom-time').val('')
-}
-$('#order-setting-custom-time').attr('placeholder', 'Select Date Range')
-
-$('#order-setting-custom-time').on('apply.daterangepicker', function (ev, picker) {
-
-    dateRange = $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-
-    var start_date = picker.startDate.format('DD-MM-YYYY');
-    var end_date = picker.endDate.format('DD-MM-YYYY');
-
-    value = "start_date=" + start_date + "&end_date=" + end_date;
-
-    // window.location.href = `${baseURL}/orders?${value}`;
+$('#start-date, #end-date').daterangepicker({
+    singleDatePicker: true, // Allow selecting a date range
+    showDropdowns: true,      // Show year and month dropdowns
+    locale: {
+        format: 'DD-MM-YYYY'
+    },
+    maxDate: moment() // Set the maximum date to today
 });
 
-$('#order-setting-custom-time').on('cancel.daterangepicker', function (ev, picker) {
-    $(this).val('');
+// Handle apply event to update both start and end date inputs
+$('#start-date').on('apply.daterangepicker', function (ev, picker) {
+    // Update start date field
+    $('#start-date').val(picker.startDate.format('DD-MM-YYYY'));
 });
+$('#end-date').on('apply.daterangepicker', function (ev, picker) {
+    // Update end date field
+    $('#end-date').val(picker.endDate.format('DD-MM-YYYY'));
+});
+
+// Optional: Clear the date inputs on cancel
+$('#start-date').on('cancel.daterangepicker', function (ev, picker) {
+    $('#start-date').val('');
+    $('#end-date').val('');
+});
+
+// Set placeholders for both inputs
+$('#start-date').attr('placeholder', 'Select Date Range');
+$('#end-date').attr('placeholder', 'Select Date Range');
 
 // show hide specific timezone specific day
 document.addEventListener('DOMContentLoaded', function () {
@@ -560,17 +569,15 @@ $(document).on('click', '.update-delivery-time', function () {
 });
 
 
-/*$(document).on('click', '.order_details_button', function () {
-    var urlLastElement = document.location.pathname
-    if (urlLastElement == '/orders') {
-        let id = $(this).attr("data-id");
-        $('.order-' + id).addClass('active');
-        $('.order-notification-popup').modal('hide')
-    } else {
-        $('.order-notification-popup').modal('hide')
-    }
+$(document).on('click', '.custom_time_order_setting', function () {
+    $('.custom-date-selector').removeClass('d-none')
+})
 
-})*/
+$(document).on('click', '.date_type', function () {
+    $('#start-date').val('');
+    $('#end-date').val('');
+    $('.custom-date-selector').addClass('d-none')
+})
 
 $(document).ready(function () {
     var currentUrl = window.location.href;

@@ -28,6 +28,7 @@ $payment_settings = $params['order_settings'];
                         <label class="text-uppercase">{{ trans('rest.order_screen_settings.specific_day') }}</label>
                     </label>
                 </div>
+
                 <form class="order-setting-form" id="order-setting-form">
                     <input type="hidden" name="order_setting_type" class="order_setting_type" value="1">
                     <div class="order-setting-content pt-4 pb-4" id="timezone-setting">
@@ -43,58 +44,56 @@ $payment_settings = $params['order_settings'];
                             @endfor
                         </select>
                     </div>
-
                     <div class="date-range-section pt-4 pb-4 d-none" id="date-range">
                         <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.custom_date') }}</h3>
 
                         <div class="ml-content">
 
                             <div class="radio-group date-options-row mb-3">
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type" checked="">
-                                    <span>TODAY</span>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="1" {{ $payment_settings['expiry_date'] == '1' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.today') }}</span>
                                 </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type">
-                                    <span>TODAY AND YESTERDAY</span>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="-2" {{ $payment_settings['expiry_date'] == '-2' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.today_yesterday') }}</span>
                                 </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type">
-                                    <span>YESTERDAY</span>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="-1" {{ $payment_settings['expiry_date'] == '-1' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.yesterday') }}</span>
                                 </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type">
-                                    <span>LAST 7 DAYS</span>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="-7" {{ $payment_settings['expiry_date'] == '-7' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.last_7_days') }}</span>
                                 </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type">
-                                    <span>LAST 14 DAYS</span>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="-14" {{ $payment_settings['expiry_date'] == '-14' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.last_14_days') }}</span>
                                 </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type">
-                                    <span>LAST 30 DAYS</span>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="-30" {{ $payment_settings['expiry_date'] == '-30' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.last_30_days') }}</span>
                                 </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="date-type">
-                                    <span>Custom</span>
+                                <label class="radio-option custom_time_order_setting">
+                                    <input type="radio" name="date_type" value="custom_date" {{ $payment_settings['expiry_date'] == 'custom_date' ? 'checked':'' }}>
+                                    <span>{{ trans('rest.order_screen_settings.custom') }}</span>
                                 </label>
                             </div>
 
                         </div>
-
-                        <div class="row g-2 time-date-controls"> 
-                            <h3 class="mb-2 text-uppercase">CUSTOM DATE</h3>
+                        <div class="row g-2 time-date-controls custom-date-selector {{ $payment_settings['expiry_date'] == 'custom_date' ? '':'d-none' }}">
+                            <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.custom_date') }}</h3>
                             <div class="col-md-6 mt-0">
                                 <div class="input-group">
-                                    <input type="text" id="start-date" class="form-control"
-                                        placeholder="Select start date">
+                                    <input type="text" placeholder="Select Start Date" class="form-control"
+                                           id="start-date" aria-label="start_date" name="start_date" value="{{ $payment_settings['start_date'] }}" required>
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-0">
                                 <div class="input-group">
-                                    <input type="text" id="end-date" class="form-control"
-                                        placeholder="Select end date">
+                                    <input type="text" placeholder="Select End Date" class="form-control"
+                                           id="end-date" aria-label="end_date" name="end_date" value="{{ $payment_settings['end_date'] }}" required>
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 </div>
                             </div>
@@ -117,8 +116,9 @@ $payment_settings = $params['order_settings'];
 
                     <div class="d-flex gap-2 justify-content-end">
                         <button type="button" aria-label="Close"
-                            class="btn btn-site-theme text-uppercase px-5 saveReset"
-                            onclick="saveReset()">{{ trans('rest.order_screen_settings.reset_save') }}</button>
+                            class="btn btn-site-theme text-uppercase px-5 saveReset">
+                            {{ trans('rest.order_screen_settings.reset_save') }}
+                        </button>
 
                         <button type="submit" aria-label="Close"
                             class="btn btn-site-theme text-uppercase px-5">{{ trans('rest.order_screen_settings.save_changes') }}</button>

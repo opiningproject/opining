@@ -12,7 +12,7 @@ use App\Enums\PaymentType;
             @foreach ($orders as $key => $ord)
                 <?php $userDetails = $ord->orderUserDetails; ?>
 
-                <div class="order-col" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}">
+                <div class="order-col cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                     <div class="order-box">
                         <div class="timing">
                             <h3 class="expectedDeliveryTime-{{ $ord->id }}">

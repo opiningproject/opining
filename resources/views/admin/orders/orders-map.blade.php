@@ -1,0 +1,289 @@
+@extends('layouts.app')
+@section('page_title', 'Orders')
+@section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
+@section('content')
+    <?php
+    use App\Enums\OrderStatus;
+    use App\Enums\OrderType;
+    use App\Enums\PaymentStatus;
+    use App\Enums\PaymentType;
+    use App\Enums\RefundStatus;
+    ?>
+    <div class="main">
+        <div class="main-view">
+            <div class="container-fluid bd-gutter bd-layout">
+                @include('layouts.admin.side_nav_bar')
+                <main class="bd-main updated_order order-1 w-100 position-relative">
+                    <div class="main-content food-order-main-content d-flex flex-column h-100 order-page">
+                        <div
+                            class="section-page-title mb-0 d-flex align-items-center justify-content-between gap-2 order-page-bar">
+
+                            <div class="d-flex align-items-center btn-grp-gap-10">
+                                <button type="button" name="clear" value="all" id="clear"
+                                        class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
+                                        style="min-width: auto"><img
+                                        src="{{ asset('images/admin-menu-icons/order-list.svg') }}"
+                                        class="svg" height="20" width="20"/> Order List
+                                </button>
+
+                                <button type="button"
+                                        class="btn btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
+                                        style="min-width: auto">
+                                    <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
+                                         width="20"/> Map
+                                </button>
+                            </div>
+
+                            {{-- <h1 class="page-title me-auto">{{ trans('rest.food_order.orders') }} <span
+                                    class="count count-order"> {{ getOpenOrders() }} </span></h1> --}}
+
+
+                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
+                                <div class="header-filter-order d-flex align-items-center flex-wrap">
+
+                                    <div class="drop_with_search">
+                                        <div class="select-options">
+                                            <select class="form-control" id="order-tabs-dropdown">
+                                                <option value="all" selected>{{ trans('rest.sidebar.all') }}
+                                                </option>
+                                                <option value="name">{{ trans('rest.food_order.name') }}</option>
+                                                <option value="phone_number">{{ trans('rest.food_order.phone_number') }}
+                                                </option>
+                                                <option value="order_number">{{ trans('rest.food_order.order_number') }}
+                                                </option>
+                                                <option value="address">{{ trans('rest.food_order.address') }}</option>
+                                                <option
+                                                    value="zip_code">{{ trans('rest.food_order.zip_code') }}</option>
+                                                <option value="dish">{{ trans('rest.food_order.dish') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="search-has col order-filters-search">
+                                            <span class="fa fa-search form-control-feedback"></span>
+                                            <input type="text" class="form-control" id="search-order-new"
+                                                   value="{{ request()->query('search', '') }}" placeholder="Search">
+                                        </div>
+                                    </div>
+                                    <div class="dropdown custom-dropdown customer-dropdown">
+                                        <span class="count count-filter d-none"> </span>
+                                        <button class="form-control dropdown-toggle" type="button"
+                                                id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ trans('rest.food_order.filter_orders') }}
+                                        </button>
+                                        <ul class="dropdown-menu order-filter" aria-labelledby="dropdownMenuButton">
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="all"
+                                                           name="all"><label for="all" class="checkmark"></label>
+                                                    {{ trans('rest.food_order.all') }}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="online"
+                                                           name="online"><label for="online" class="checkmark"></label>
+                                                    {{ trans('rest.food_order.online_orders') }}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="manual"
+                                                           name="manual"><label for="manual" class="checkmark"></label>
+                                                    {{ trans('rest.food_order.manual_orders') }}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="delivery"
+                                                           name="delivery"><label for="delivery"
+                                                                                  class="checkmark"></label>
+                                                    {{ trans('rest.food_order.delivery') }}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="takeaway"
+                                                           name="takeaway"><label for="takeaway"
+                                                                                  class="checkmark"></label>
+                                                    {{ trans('rest.food_order.take_away') }}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="open"
+                                                           name="open"><label for="open" class="checkmark"></label>
+                                                    {{ trans('rest.food_order.open_orders') }}
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="checkbox" id="delivered"
+                                                           name="delivered"><label for="delivered"
+                                                                                   class="checkmark"></label>
+                                                    {{ trans('rest.food_order.delivered_orders') }}
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
+                                    <span>{{ trans('rest.food_order.create_order') }}</span>
+                                </a>
+
+                                <button type="button"
+                                        class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
+                                        style="min-width: auto">
+                                    <img src="{{ asset('images/admin-menu-icons/header-settings.svg') }}" class="svg"
+                                         height="20" width="20"/> {{ trans('rest.food_order.settings') }}</button>
+
+                            </div>
+                        </div>
+
+                        <div class="orderList">
+                            <div class="order-listing-container">
+                                <div class="order-row">
+                                    <div class="col-md-8">
+                                        <div id="orders-map-marker" style="height: 631px; width: 1206px;"></div>
+                                        {{--                                        <img src="{{ asset('images/map.png') }}" class="svg" height="631px" width="1206px" />--}}
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        @foreach ($allOrders as $key => $ord)
+                                            <?php $userDetails = $ord->orderUserDetails; ?>
+                                            <div class="order-col cursor-pointer" id="order-{{ $ord->id }}"
+                                                 data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
+                                                <div class="order-box">
+                                                    <div class="timing">
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                            {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                        </h3>
+                                                        {{--                                                    @if ($ord->delivery_time != 'ASAP')--}}
+                                                        <label class="success">{{ $ord->delivery_time }}</label>
+                                                        {{--                                                    @endif--}}
+                                                    </div>
+
+                                                    <div class="details">
+                                                        <div class="left">
+                                                            <div class="label-icon">
+                                                                <img src="{{ asset('images/opening-label.svg') }}"
+                                                                     class="svg"/>
+                                                            </div>
+
+                                                            <div class="text-label">
+                                                                <h4>{{ $userDetails->order_name }}</h4>
+                                                                @if ($ord->order_type == OrderType::Delivery)
+                                                                    <p class="mb-0">
+                                                                        <?php
+                                                                        echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                                                        ?>
+                                                                    </p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="actions">
+                                                        <h5 class="mb-0 price_status">
+                                                            <b>€{{ number_format($ord->total_amount, 2) }}</b>
+                                                            @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                                                <img src="{{ asset('images/cod_icon.png') }}"
+                                                                     class="svg"
+                                                                     height="20" width="20"/>
+                                                            @endif
+                                                            @if ($ord->payment_type == \App\Enums\PaymentType::Card)
+                                                                <img src="{{ asset('images/purse.svg') }}" class="svg"
+                                                                     height="20" width="20"/>
+                                                            @endif
+                                                            @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                                                <img src="{{ asset('images/paid-deal.svg') }}"
+                                                                     class="svg"
+                                                                     height="20" width="20"/>
+                                                            @endif
+                                                        </h5>
+                                                        <button
+                                                            class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}">
+                                                            {{ orderStatusBox($ord)->text }}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
+                                <!-- Pagination -->
+                                <nav aria-label="Page navigation example">
+                                    {{ $allOrders->links() }}
+                                </nav>
+
+                                <!-- Filter buttons -->
+                                <div class="filter-btn-group d-none">
+                                    <button type="button" class="btn">
+                                        <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike"/>
+                                    </button>
+
+                                    <button type="button" class="btn order-setting">
+                                        <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- start footer -->
+        {{--    @include('admin.orders.order-detail-popup') --}}
+        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1"
+             aria-labelledby="orderDetailModal" aria-hidden="true">
+        </div>
+    @include('admin.orders.order-setting-popup')
+    @include('layouts.admin.footer_design')
+    @include('admin.modals.change-order-status')
+    <!-- end footer -->
+    </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="{{ asset('js/new-orders.js') }}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initOrderMapMarker"
+        async defer></script>
+    <script>
+        let map;
+
+        // Pass the PHP orders data to JavaScript
+        var order = @json($allOrders);
+        const orders = order.data;
+
+        // Initialize the Google Map
+        function initOrderMapMarker() {
+            // Create the map centered at the first location
+            map = new google.maps.Map(document.getElementById('orders-map-marker'), {
+                center: {lat: 51.8891026, lng: 4.4767527}, // location 1
+                zoom: 9
+            });
+
+            // Define custom marker icon (you can replace the URL with your custom icon image URL)
+            const customIcon = {
+                url: "{!! asset('images/opening-label.svg') !!}", // Replace with your own icon URL
+                scaledSize: new google.maps.Size(40, 40), // Scales the icon
+                origin: new google.maps.Point(0, 0), // The origin point (top-left)
+                anchor: new google.maps.Point(20, 40) // The anchor point (where the icon is anchored to the map)
+            };
+
+            orders.forEach(order => {
+                if (order.order_user_details.latitude && order.order_user_details.longitude) {
+                    const marker1 = new google.maps.Marker({
+                        position: {
+                            lat: parseFloat(order.order_user_details.latitude),
+                            lng: parseFloat(order.order_user_details.longitude)
+                        }, // Location from the order data
+                        map: map,
+                        icon: customIcon // Set the custom icon here
+                    });
+                }
+            });
+        }
+    </script>
+@endsection

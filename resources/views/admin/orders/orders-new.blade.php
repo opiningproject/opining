@@ -25,11 +25,11 @@
                                     style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}"
                                         class="svg" height="20" width="20" /> Order List</button>
 
-                                <button type="button"
+                                <a href="{{ route('ordersMap') }}"
                                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
                                     style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
-                                        width="20" /> Map</button>
+                                        width="20" /> Map</a>
                             </div>
 
                             {{-- <h1 class="page-title me-auto">{{ trans('rest.food_order.orders') }} <span

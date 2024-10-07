@@ -73,6 +73,14 @@ body {background: #f1f1f1 !important;}
 .section-page-title .page-control .btn-site-theme:hover {background: linear-gradient(to bottom, rgba(77, 77, 77, 0.8), rgba(0, 0, 0, 1));color: #ffffff !important;}
 .paymentHistory-card-body tr th {white-space: nowrap;}
 
+.section-page-title .btn-grp-tab .btn svg path{
+    stroke: #000000;
+    }
+    
+.section-page-title .btn-grp-tab .btn.btn-site-theme svg path{
+stroke: #ffffff;
+}
+
 /* Chat Screen UI update css */
  .chat-main-screen .section-page-title {margin-bottom: 20px;}
 .chat-main-screen .ChatDiv-main {gap: 0px;overflow-y: hidden;}
@@ -610,6 +618,20 @@ body {background: #f1f1f1 !important;}
 .order-listing-container .order-column .order-col {padding: 0px 5px 0px;margin-bottom: 10px;}
 .order-listing-container .order-column .order-col:last-child {margin-bottom: 0px !important;}
 .order-pagination {position: relative;top: 0px;}
+
+.map-order-listing-row .orderList .order-listing-container{
+width: 100%;
+}
+.map-order-listing-row .orderList .order-listing-container .order-row {
+    width: 100%;
+}
+
+.map-order-listing-row .orderList  .order-listing-container .order-column {
+    flex:  0 0 100%;
+    max-width: 100%;
+    width: 100%;
+}
+
 
 @media screen and (max-height: 800px) {
     .order-listing-container .order-col .order-box {height: 58px;}

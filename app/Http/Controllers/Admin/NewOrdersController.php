@@ -600,7 +600,7 @@ function orderSettingFilter($expiryDate, $orders) {
             $orders = $this->orderSettingFilter($specificDaySetting, $orders);
         }
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 24);
+        $perPage = request()->input('per_page', 8);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');

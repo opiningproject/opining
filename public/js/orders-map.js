@@ -1,3 +1,12 @@
+// status-option-deliverers active inactive
+$(document).ready(function () {
+    // On click of a radio button label
+    $('.status-option-deliverers input[type="radio"]').change(function () {
+        $('.status-option-deliverers').removeClass('active');
+        $(this).closest('.status-option-deliverers').addClass('active');
+    });
+});
+
 function cancelOrder(id) {
     $('#cancelOrderModal').modal('show');
 }
@@ -44,9 +53,10 @@ $(document).ready(function () {
 
 //show order setting popup
 $(document).on('click', '.order-setting', function () {
-    $('.order-setting-popup').modal('show')
+    $('.order-setting-popup').modal('show');
+    $('#radio-button-error').remove();
+    $('.error').remove();
 })
-
 
 $(function () {
     var filters = [];
@@ -125,6 +135,27 @@ $(function () {
         searchFilterAjax(search, searchOption, filters);
     });
 
+    $(document).on('click', '.saveReset', function (e) {
+        $.ajax({
+            url: baseURL + '/save-reset',
+            type: 'GET',
+            success: function (response) {
+                console.log("response", response)
+                if (response.status == "success"){
+                    $('.order-setting-popup').modal('hide')
+                    $('.timezone-setting').prop('selectedIndex', 0);
+                    $('input[name="date_type"]').removeAttr('checked');
+                    $('#order-setting-form').trigger("reset");
+                    searchFilterAjax(search, searchOption, filters);
+                }
+
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
 
     function searchFilterAjax(search, searchOption, filters) {
         $.ajax({
@@ -143,39 +174,50 @@ $(function () {
             }
         });
     }
-
-    $(document).on('click', '.saveReset', function (e) {
-        $.ajax({
-            url: baseURL + '/save-reset',
-            type: 'GET',
-            success: function (response) {
-                console.log("response", response)
-                if (response.status == "success"){
-                    $('.order-setting-popup').modal('hide')
-                    searchFilterAjax(search, searchOption, filters);
-                }
-
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
-            }
-        })
-    })
-
-
     //order setting js code start
 // order-setting-form
-    /*$(".order-setting-form").validate({
+    function parseDate(value) {
+        var parts = value.split('-');
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    }
+    $.validator.addMethod('validDate', function (value, element) {
+        return this.optional(element) || /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-[0-9]{4}$/.test(value);
+    }, 'Please provide a date in the dd-mm-yyyy format');
+
+    // Method to ensure start date is before end date
+    $.validator.addMethod('dateBefore', function (value, element, params) {
+        var endDate = $(params).val();
+        if (!endDate) return true; // Skip comparison if endDate is empty
+        var startDate = parseDate(value);
+        var endDateObj = parseDate(endDate);
+
+        return this.optional(element) || startDate <= endDateObj;
+    }, 'Must be before the end date.');
+
+    // Method to ensure end date is after start date
+    $.validator.addMethod('dateAfter', function (value, element, params) {
+        var startDate = $(params).val();
+        if (!startDate) return true; // Skip comparison if startDate is empty
+        var endDate = parseDate(value);
+        var startDateObj = parseDate(startDate);
+
+        return this.optional(element) || endDate >= startDateObj;
+    }, 'Must be after the start date.');
+
+    $(".order-setting-form").validate({
         rules: {
             timezone_setting: {
                 required: true
             },
             start_date: {
-                required: true
+                required: true,
+                validDate: true,
+                dateBefore: '#end-date'
             },
             end_date: {
-                required: true
+                required: true,
+                validDate: true,
+                dateAfter: '#start-date'
             }
         },
         highlight: function (element) {
@@ -188,18 +230,37 @@ $(function () {
             $(element).addClass('border-green-500'); // Tailwind CSS class for green border
         },
         errorPlacement: function (error, element) {
-            error.insertAfter(element); // Default placement for other fields
+            if (element.attr("name") == "start_date") {
+                error.insertAfter(".start-date-input");
+            } else if (element.attr("name") == "end_date") {
+                error.insertAfter(".end-date-input");
+            } else {
+                error.insertAfter(element); // Default placement for other fields
+            }
             return false;
         },
         submitHandler: function (form) { // <- pass 'form' argument in
             $(".submit").attr("disabled", true);
             saveOrderSetting(); // <- use 'form' argument here.
         }
-    });*/
+    });
 
 // Add deliverers
     function saveOrderSetting() {
         var delivererData = new FormData(document.getElementById('order-setting-form'));
+        $('#radio-button-error').remove()
+        if ($('#order-setting-date').prop('checked') == true) {
+            if (!$('input[name="date_type"]:checked').length) {
+                var errorMessage = '<label style="color: red" id="radio-button-error" className="error radio-button-error" htmlFor="timezone_setting">Please select at least one date option before saving.</label>';
+                $('.date-range-section').append(errorMessage)
+                return false;
+            }
+            saveOrderSettingAjaxCall(delivererData)
+        } else {
+            saveOrderSettingAjaxCall(delivererData)
+        }
+    }
+    function saveOrderSettingAjaxCall(delivererData) {
         $.ajax({
             url: baseURL + '/save-order-setting',
             type: 'POST',
@@ -368,8 +429,8 @@ $('.order-filter .checkbox').not('#all').on('change', function () {
 });
 
 // Define the date range picker on the start date input
-var start = moment();
-var end = moment();
+// var start = moment();
+// var end = moment();
 
 $('#start-date, #end-date').daterangepicker({
     singleDatePicker: true, // Allow selecting a date range
@@ -377,7 +438,8 @@ $('#start-date, #end-date').daterangepicker({
     locale: {
         format: 'DD-MM-YYYY'
     },
-    maxDate: moment() // Set the maximum date to today
+    maxDate: moment(), // Set the maximum date to today
+    autoclose: true,
 });
 
 // Handle apply event to update both start and end date inputs
@@ -392,6 +454,10 @@ $('#end-date').on('apply.daterangepicker', function (ev, picker) {
 
 // Optional: Clear the date inputs on cancel
 $('#start-date').on('cancel.daterangepicker', function (ev, picker) {
+    $('#start-date').val('');
+    $('#end-date').val('');
+});
+$('#end-date').on('cancel.daterangepicker', function (ev, picker) {
     $('#start-date').val('');
     $('#end-date').val('');
 });
@@ -417,6 +483,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.specific-day').removeClass('active')
             $('#order-setting-custom-time').val('');
             $('.order_setting_type').val("1");
+            $('#radio-button-error').remove();
         } else if (dateRadio.checked) {
             timezoneSetting.classList.add('d-none');
             dateRange.classList.remove('d-none');
@@ -424,6 +491,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.specific-day').addClass('active')
             $('.timezone-setting').prop('selectedIndex', 0);
             $('.order_setting_type').val("2");
+            $('#radio-button-error').remove();
 
             $(this).closest('.status-option').addClass('active')
         }
@@ -498,11 +566,13 @@ $(document).on('click', '.update-delivery-time', function () {
 
 $(document).on('click', '.custom_time_order_setting', function () {
     $('.custom-date-selector').removeClass('d-none')
+    $('#radio-button-error').remove();
 })
 
 $(document).on('click', '.date_type', function () {
     $('#start-date').val('');
     $('#end-date').val('');
+    $('#radio-button-error').remove();
     $('.custom-date-selector').addClass('d-none')
 })
 

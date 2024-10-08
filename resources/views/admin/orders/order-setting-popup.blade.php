@@ -85,14 +85,14 @@ $payment_settings = $params['order_settings'];
                             <h3 class="mb-2 text-uppercase">{{ trans('rest.order_screen_settings.custom_date') }}</h3>
                             <div class="col-md-6 mt-0">
                                 <div class="input-group start-date-input">
-                                    <input type="text" placeholder="Select Start Date" class="form-control"
+                                    <input type="text" placeholder="Select Start Date" class="form-control datepicker"
                                            id="start-date" aria-label="start_date" name="start_date" readonly value="" required>
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-0">
                                 <div class="input-group end-date-input">
-                                    <input type="text" placeholder="Select End Date" class="form-control"
+                                    <input type="text" placeholder="Select End Date" class="form-control datepicker"
                                            id="end-date" aria-label="end_date" name="end_date" readonly value="" required>
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 </div>

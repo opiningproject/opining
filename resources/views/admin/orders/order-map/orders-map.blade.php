@@ -20,20 +20,18 @@
 
                             <div class="d-flex align-items-center btn-grp-gap-10 btn-grp-tab">
                                 <button type="button" name="clear" value="all" id="clear"
-                                    class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
-                                    style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}"
-                                        class="svg" height="20" width="20" /> Order List
+                                        class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
+                                        style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}"
+                                                                     class="svg" height="20" width="20" /> Order List
                                 </button>
 
                                 <button type="button"
-                                    class="btn btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
-                                    style="min-width: auto">
+                                        class="btn btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
+                                        style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
-                                        width="20" /> Map
+                                         width="20" /> Map
                                 </button>
                             </div>
-
-
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
 
@@ -55,63 +53,63 @@
                                         <div class="search-has col order-filters-search">
                                             <span class="fa fa-search form-control-feedback"></span>
                                             <input type="text" class="form-control" id="search-order-new"
-                                                value="{{ request()->query('search', '') }}" placeholder="Search">
+                                                   value="{{ request()->query('search', '') }}" placeholder="Search">
                                         </div>
                                     </div>
                                     <div class="dropdown custom-dropdown customer-dropdown">
                                         <span class="count count-filter d-none"> </span>
                                         <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ trans('rest.food_order.filter_orders') }}
                                         </button>
                                         <ul class="dropdown-menu order-filter" aria-labelledby="dropdownMenuButton">
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="all"
-                                                        name="all"><label for="all" class="checkmark"></label>
+                                                           name="all"><label for="all" class="checkmark"></label>
                                                     {{ trans('rest.food_order.all') }}
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="online"
-                                                        name="online"><label for="online" class="checkmark"></label>
+                                                           name="online"><label for="online" class="checkmark"></label>
                                                     {{ trans('rest.food_order.online_orders') }}
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="manual"
-                                                        name="manual"><label for="manual" class="checkmark"></label>
+                                                           name="manual"><label for="manual" class="checkmark"></label>
                                                     {{ trans('rest.food_order.manual_orders') }}
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="delivery"
-                                                        name="delivery"><label for="delivery" class="checkmark"></label>
+                                                           name="delivery"><label for="delivery" class="checkmark"></label>
                                                     {{ trans('rest.food_order.delivery') }}
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="takeaway"
-                                                        name="takeaway"><label for="takeaway" class="checkmark"></label>
+                                                           name="takeaway"><label for="takeaway" class="checkmark"></label>
                                                     {{ trans('rest.food_order.take_away') }}
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="open"
-                                                        name="open"><label for="open" class="checkmark"></label>
+                                                           name="open"><label for="open" class="checkmark"></label>
                                                     {{ trans('rest.food_order.open_orders') }}
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="delivered"
-                                                        name="delivered"><label for="delivered"
-                                                        class="checkmark"></label>
+                                                           name="delivered"><label for="delivered"
+                                                                                   class="checkmark"></label>
                                                     {{ trans('rest.food_order.delivered_orders') }}
                                                 </label>
                                             </li>
@@ -123,108 +121,92 @@
                                 </a>
 
                                 <button type="button"
-                                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
-                                    style="min-width: auto">
+                                        class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
+                                        style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/header-settings.svg') }}" class="svg"
-                                        height="20" width="20" /> {{ trans('rest.food_order.settings') }}</button>
+                                         height="20" width="20" /> {{ trans('rest.food_order.settings') }}</button>
 
                             </div>
                         </div>
-
                         <div class="row map-order-listing-row">
-                            <div class="col-md-8">
-                                <div id="orders-map-marker" style="height: calc(100vh - 230px);"></div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="orderList">
-                                    <div class="order-listing-container">
-                                        <div class="order-row">
-                                            <div class="col-12">
-                                                @foreach ($allOrders as $key => $ord)
-                                                    <?php $userDetails = $ord->orderUserDetails; ?>
-                                                    <div class="order-col cursor-pointer" id="order-{{ $ord->id }}"
-                                                        data-id="{{ $ord->id }}"
-                                                        onclick="orderDetailNew({{ $ord->id }})">
-                                                        <div class="order-box">
-                                                            <div class="timing">
-                                                                <h3 class="expectedDeliveryTime-{{ $ord->id }}">
-                                                                    {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
-                                                                </h3>
-                                                                {{--                                                    @if ($ord->delivery_time != 'ASAP') --}}
-                                                                <label class="success">{{ $ord->delivery_time }}</label>
-                                                                {{--                                                    @endif --}}
-                                                            </div>
+                        <div class="col-md-8">
+                            <div id="orders-map-marker" style="height: calc(100vh - 230px);border-radius: 16px;overflow: hidden;"></div>
+                        </div>
+                        <div class="orderList col-md-4">
+                            <div class="order-listing-container">
+                                <div class="order-row">
+                                    @foreach ($allOrders as $key => $ord)
+                                        <?php $userDetails = $ord->orderUserDetails; ?>
+                                        <div class="order-col cursor-pointer" id="order-{{ $ord->id }}"
+                                             data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
+                                            <div class="order-box">
+                                                <div class="timing">
+                                                    <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                        {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                    </h3>
+                                                    <label class="success">{{ $ord->delivery_time }}</label>
+                                                </div>
 
-                                                            <div class="details">
-                                                                <div class="left">
-                                                                    <div class="text-label">
-                                                                        <h4>{{ $userDetails->order_name }}</h4>
-                                                                        @if ($ord->order_type == OrderType::Delivery)
-                                                                            <p class="mb-0">
-                                                                                <?php
-                                                                                echo $userDetails->house_no . ', ' . $userDetails->street_name;
-                                                                                ?>
-                                                                            </p>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="actions">
-                                                                <h5 class="mb-0 price_status">
-                                                                    <b>€{{ number_format($ord->total_amount, 2) }}</b>
-                                                                    @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
-                                                                        <img src="{{ asset('images/cod_icon.png') }}"
-                                                                            class="svg" height="20"
-                                                                            width="20" />
-                                                                    @endif
-                                                                    @if ($ord->payment_type == \App\Enums\PaymentType::Card)
-                                                                        <img src="{{ asset('images/purse.svg') }}"
-                                                                            class="svg" height="20"
-                                                                            width="20" />
-                                                                    @endif
-                                                                    @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
-                                                                        <img src="{{ asset('images/paid-deal.svg') }}"
-                                                                            class="svg" height="20"
-                                                                            width="20" />
-                                                                    @endif
-                                                                </h5>
-                                                                <button
-                                                                    class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}">
-                                                                    {{ orderStatusBox($ord)->text }}</button>
-                                                            </div>
+                                                <div class="details">
+                                                    <div class="left">
+                                                        <div class="text-label">
+                                                            <h4>{{ $userDetails->order_name }}</h4>
+                                                            @if ($ord->order_type == OrderType::Delivery)
+                                                                <p class="mb-0">
+                                                                    <?php
+                                                                    echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                                                    ?>
+                                                                </p>
+                                                            @endif
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                </div>
+
+                                                <div class="actions">
+                                                    <h5 class="mb-0 price_status">
+                                                        <b>€{{ number_format($ord->total_amount, 2) }}</b>
+                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                                            <img src="{{ asset('images/cod_icon.png') }}" class="svg"
+                                                                 height="20" width="20" />
+                                                        @endif
+                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Card)
+                                                            <img src="{{ asset('images/purse.svg') }}" class="svg"
+                                                                 height="20" width="20" />
+                                                        @endif
+                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                                            <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
+                                                                 height="20" width="20" />
+                                                        @endif
+                                                    </h5>
+                                                    <button
+                                                        class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}">
+                                                        {{ orderStatusBox($ord)->text }}</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
 
+                            <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
+                                <!-- Pagination -->
+                                <nav aria-label="Page navigation example">
+                                    {{ $allOrders->links() }}
+                                </nav>
 
+                                <!-- Filter buttons -->
+                                <div class="filter-btn-group d-none">
+                                    <button type="button" class="btn">
+                                        <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />
+                                    </button>
+
+                                    <button type="button" class="btn order-setting">
+                                        <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />
+                                    </button>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
-                            <!-- Pagination -->
-                            <nav aria-label="Page navigation example">
-                                {{ $allOrders->links() }}
-                            </nav>
-
-                            <!-- Filter buttons -->
-                            <div class="filter-btn-group d-none">
-                                <button type="button" class="btn">
-                                    <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />
-                                </button>
-
-                                <button type="button" class="btn order-setting">
-                                    <img src="{{ asset(path: 'images/setting-white.svg') }}"
-                                        alt="Bike" />
-                                </button>
-                            </div>
                         </div>
-
-
                     </div>
                 </main>
             </div>
@@ -249,8 +231,7 @@
         let map;
 
         // Pass the PHP orders data to JavaScript
-        var order = @json($allOrders);
-        const orders = order.data;
+        var orders = @json($allOpenOrder);
 
         // Initialize the Google Map
         function initOrderMapMarker() {
@@ -259,8 +240,9 @@
                 center: {
                     lat: 51.8891026,
                     lng: 4.4767527
-                }, // location 1
-                zoom: 9
+                },
+                zoom: 9,
+                mapTypeControl: false
             });
 
             // Define custom marker icon (you can replace the URL with your custom icon image URL)
@@ -313,7 +295,10 @@
 
                 // Create three columns
                 for (var col = 0; col < 3; col++) {
-                    var currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                    var currentColumn = $('<div class="order-column mt-2"></div>'); // Create a new column
+                    if (col === 0) {
+                        currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                    }
                     $container.append(currentColumn); // Append the new column to the container
 
                     // Add items to each column, based on the dynamic number of items per column

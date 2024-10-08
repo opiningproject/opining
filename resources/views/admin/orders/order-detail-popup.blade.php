@@ -31,7 +31,7 @@ $restaurantDetail = getRestaurantDetail();
 
                 <div class="order-status">
 
-                    <div class="order-col">
+                    <div class="order-cols-status">
                         <label
                             class="status-option order-status-option {{ $order->order_status == OrderStatus::Accepted ? 'active' : '' }}">
                             <input id="accepted-order" type="radio" class="order-status-radio" name="orderStatus"
@@ -41,7 +41,7 @@ $restaurantDetail = getRestaurantDetail();
                         </label>
                     </div>
 
-                    <div class="order-col">
+                    <div class="order-cols-status">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::InKitchen ? 'active' : '' }}">
                             <input id="inKitchen-order" type="radio" class="order-status-radio" name="order-status-option"
@@ -52,7 +52,7 @@ $restaurantDetail = getRestaurantDetail();
                         </label>
                     </div>
                     @if ($order->order_type == OrderType::Delivery)
-                        <div class="order-col">
+                        <div class="order-cols-status">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::OutForDelivery ? 'active' : '' }}">
                                 <input id="outForDelivery-order" type="radio" class="order-status-radio" name="order-status-option"
@@ -63,7 +63,7 @@ $restaurantDetail = getRestaurantDetail();
                             </label>
                         </div>
                     @else
-                        <div class="order-col">
+                        <div class="order-cols-status">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::ReadyForPickup ? 'active' : '' }}">
                                 <input id="outForDelivery-order" type="radio" class="order-status-radio" name="order-status-option"
@@ -75,7 +75,7 @@ $restaurantDetail = getRestaurantDetail();
                         </div>
                     @endif
 
-                    <div class="order-col">
+                    <div class="order-cols-status">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::Delivered ? 'active' : '' }}">
                             <input id="delivered-order" type="radio" class="order-status-radio" name="order-status-option"
@@ -275,7 +275,7 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="order-status order-delivered">
                             @if (count($delivererUser) > 0)
                                 @foreach ($delivererUser as $delivererUsers)
-                                    <div class="order-col col-order-{{ $delivererUsers->id }}">
+                                    <div class="order-cols-status col-order-{{ $delivererUsers->id }}">
                                         <label class="status-option status-option-deliverers">
                                             <input id="test{{ $delivererUsers->id }}" type="radio"
                                                 class="delivererUsers" name="status-option-deliverers"
@@ -362,7 +362,8 @@ $restaurantDetail = getRestaurantDetail();
         // Create the map centered at the first location
         orderMap = new google.maps.Map(document.getElementById('map'), {
             // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
-            zoom: 8
+            zoom: 8,
+            mapTypeControl: false
         });
 
         // Create Directions Service and Renderer instances

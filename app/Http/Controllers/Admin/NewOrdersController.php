@@ -41,19 +41,19 @@ class NewOrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
-        $getResturentData = json_decode(getRestaurantDetail()->params,true);
+        $getResturentData = json_decode(getRestaurantDetail()->params, true);
         $order_settings = $getResturentData['order_settings'];
         $timezoneSetting = $order_settings['timezone_setting'];
         $specificDaySetting = $order_settings['expiry_date'];
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
         $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
             $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        } elseif($specificDaySetting !=null){
+        } elseif ($specificDaySetting != null) {
             if ($specificDaySetting == 'custom_date') {
-                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
             } else {
                 $orders = $this->orderSettingFilter($specificDaySetting, $orders);
             }
@@ -64,23 +64,23 @@ class NewOrdersController extends Controller
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
 
-            if (!empty($start_date) && !empty($end_date)) {
+        if (!empty($start_date) && !empty($end_date)) {
 
-                $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
-                $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
+            $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+            $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
 
-                $orders->whereBetween('orders.created_at', array($start_date, $end_date));
-            } else if (!empty($start_date) && empty($end_date)) {
-                $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
-                $end_date = date('Y-m-d') . ' 23:59:59';
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        } else if (!empty($start_date) && empty($end_date)) {
+            $start_date = date('Y-m-d', strtotime($start_date)) . ' 00:00:00';
+            $end_date = date('Y-m-d') . ' 23:59:59';
 
-                $orders->whereBetween('orders.created_at', array($start_date, $end_date));
-            } else if (empty($start_date) && !empty($end_date)) {
-                $start_date = date('Y-m-d') . ' 00:00:00';
-                $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        } else if (empty($start_date) && !empty($end_date)) {
+            $start_date = date('Y-m-d') . ' 00:00:00';
+            $end_date = date('Y-m-d', strtotime($end_date)) . ' 23:59:59';
 
-                $orders->whereBetween('orders.created_at', array($start_date, $end_date));
-            }
+            $orders->whereBetween('orders.created_at', array($start_date, $end_date));
+        }
 
         $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
         if ($request->ajax()) {
@@ -93,23 +93,24 @@ class NewOrdersController extends Controller
             }
             return view('admin.orders.search-orders', ['orders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
         }
-        return view('admin.orders.orders-new', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
+        return view('admin.orders.orders-new', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders, 'lastPage' => $orders->lastPage()]);
     }
 
-    public function orderSearchFilter(Request $request) {
-        $getResturentData = json_decode(getRestaurantDetail()->params,true);
+    public function orderSearchFilter(Request $request)
+    {
+        $getResturentData = json_decode(getRestaurantDetail()->params, true);
         $order_settings = $getResturentData['order_settings'];
         $timezoneSetting = $order_settings['timezone_setting'];
         $specificDaySetting = $order_settings['expiry_date'];
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
         $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
             $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        } elseif($specificDaySetting !=null){
+        } elseif ($specificDaySetting != null) {
             if ($specificDaySetting == 'custom_date') {
-                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
             } else {
                 $orders = $this->orderSettingFilter($specificDaySetting, $orders);
             }
@@ -198,7 +199,7 @@ class NewOrdersController extends Controller
         $filters = $request->filters;
 
         if (!empty($filters)) {
-            $orders->where(function($query) use ($filters) {
+            $orders->where(function ($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
                 if (in_array('online', $filters)) {
                     $query->orWhere('is_online_order', '1')->where('order_status', '!=', OrderStatus::Delivered);
@@ -232,41 +233,43 @@ class NewOrdersController extends Controller
         ];
     }
 
-function orderSettingFilter($expiryDate, $orders) {
-    // Add expiry_date condition
-    switch ($expiryDate) {
-        case "1": // Today
-            $orders->whereDate('created_at', Carbon::today());
-            break;
-        case "-1": // Yesterday
-            $orders->whereDate('created_at', Carbon::yesterday());
-            break;
-        case "-2": // Today and Yesterday
-            $orders->whereBetween('created_at', [Carbon::yesterday(), Carbon::now()]);
-            break;
-        case "-7": // Last 7 days
-            $orders->where('created_at', '>=', Carbon::now()->subDays(7));
-            break;
-        case "-14": // Last 14 days
-            $orders->where('created_at', '>=', Carbon::now()->subDays(14));
-            break;
-        case "-30": // Last 30 days
-            $orders->where('created_at', '>=', Carbon::now()->subDays(30));
-            break;
-        default:
-            // If expiry_date is not recognized, default to today
-            $orders->whereDate('created_at', Carbon::today());
+    function orderSettingFilter($expiryDate, $orders)
+    {
+        // Add expiry_date condition
+        switch ($expiryDate) {
+            case "1": // Today
+                $orders->whereDate('created_at', Carbon::today());
+                break;
+            case "-1": // Yesterday
+                $orders->whereDate('created_at', Carbon::yesterday());
+                break;
+            case "-2": // Today and Yesterday
+                $orders->whereBetween('created_at', [Carbon::yesterday(), Carbon::now()]);
+                break;
+            case "-7": // Last 7 days
+                $orders->where('created_at', '>=', Carbon::now()->subDays(7));
+                break;
+            case "-14": // Last 14 days
+                $orders->where('created_at', '>=', Carbon::now()->subDays(14));
+                break;
+            case "-30": // Last 30 days
+                $orders->where('created_at', '>=', Carbon::now()->subDays(30));
+                break;
+            default:
+                // If expiry_date is not recognized, default to today
+                $orders->whereDate('created_at', Carbon::today());
+        }
+        return $orders;
     }
-    return $orders;
-}
+
     public function orderDetail(Request $request)
     {
         $order = Order::find($request->order_id);
         $delivererUser = DelivererUser::where('status', '1')->get();
-        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser ])->render();
+        $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        $orderDetailHTML = view('admin.orders.order-detail-popup', ['order' => $order, 'orderDeliveryTime' => $orderDeliveryTime, 'delivererUser' => $delivererUser])->render();
 
-        return response()->json(['status' => 1, 'data' =>  $orderDetailHTML, 'order' => $order]);
+        return response()->json(['status' => 1, 'data' => $orderDetailHTML, 'order' => $order]);
     }
 
     public function changeStatusNew(Request $request)
@@ -284,7 +287,7 @@ function orderSettingFilter($expiryDate, $orders) {
                 'order_status' => $order->order_status
             ]);
         }
-        if($order->order_status == OrderStatus::Delivered) {
+        if ($order->order_status == OrderStatus::Delivered) {
             $orderStatus = OrderStatus::Delivered;
         }
         $orderData = Order::find($request->id);
@@ -294,11 +297,11 @@ function orderSettingFilter($expiryDate, $orders) {
         return response()->json([
             'status' => 1,
             'orderStatus' => $orderStatus,
-            'orderId' =>$orderData->id,
-            'orderDate' => $trackOrderData ? $trackOrderData->created_at :'',
-            'updatedStatus' =>$orderData->order_status,
-            'text' =>$text,
-            'color' =>$color
+            'orderId' => $orderData->id,
+            'orderDate' => $trackOrderData ? $trackOrderData->created_at : '',
+            'updatedStatus' => $orderData->order_status,
+            'text' => $text,
+            'color' => $color
         ]);
     }
 
@@ -351,7 +354,7 @@ function orderSettingFilter($expiryDate, $orders) {
         $filters = $request->filters;
 
         if (!empty($filters)) {
-            $orders->where(function($query) use ($filters) {
+            $orders->where(function ($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
 //                if (in_array('online', $filters)) {
 //                    $query->orWhere('order_type', 'online');
@@ -395,42 +398,42 @@ function orderSettingFilter($expiryDate, $orders) {
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
-            $address = $orders->order_type == OrderType::Delivery ? $userDetails->house_no . ', ' . $userDetails->street_name :'';
+            $address = $orders->order_type == OrderType::Delivery ? $userDetails->house_no . ', ' . $userDetails->street_name : '';
             $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
 //                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
                 $order_type = trans('rest.food_order.delivery');
             }
             $iconImage = asset('images/cod_icon.png');
-            if($orders->payment_type == \App\Enums\PaymentType::Card){
+            if ($orders->payment_type == \App\Enums\PaymentType::Card) {
                 $iconImage = asset('images/paid-deal.svg');
             }
-            if($orders->payment_type == \App\Enums\PaymentType::Ideal) {
+            if ($orders->payment_type == \App\Enums\PaymentType::Ideal) {
                 $iconImage = asset('images/paid-deal.svg');
             }
             $lableIcon = asset('images/opening-label.svg');
-            $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-            $html = '<div class="order-col cursor-pointer" id="order-'.$orders->id.'" data-id="'.$orders->id.'" onclick="orderDetailNew('.$orders->id.')">
+            $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+            $html = '<div class="order-col cursor-pointer" id="order-' . $orders->id . '" data-id="' . $orders->id . '" onclick="orderDetailNew(' . $orders->id . ')">
                                 <div class="order-box">
                                     <div class="timing">
-                                        <h3 class="expectedDeliveryTime-'.$orders->id.'">'. date('H:i',strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) .'</h3>
-                                        <label class="success">'. $orders->delivery_time .'</label>
+                                        <h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>
+                                        <label class="success">' . $orders->delivery_time . '</label>
                                     </div>
                                     <div class="details">
                                         <div class="left">
                                             <div class="label-icon">
-                                                <img src="'.$lableIcon.'" class="svg" />
+                                                <img src="' . $lableIcon . '" class="svg" />
                                             </div>
                                             <div class="text-label">
-                                                <h4>'. $userDetails->order_name .'</h4>
-                                                <p class="mb-0">'. $address .'</p>
+                                                <h4>' . $userDetails->order_name . '</h4>
+                                                <p class="mb-0">' . $address . '</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€'. number_format($orders->total_amount, 2) .'</b> <img src="'.$iconImage .'" class="svg" height="20" width="20"/></h5>
-                                        <button href="#" class="orderDetails order-status-'.$orders->id.' btn '. orderStatusBox($orders)->color .'" onclick="orderDetailNew('.$orders->id.')">'. orderStatusBox($orders)->text .'</button>
+                                        <h5 class="mb-0 price_status"><b>€' . number_format($orders->total_amount, 2) . '</b> <img src="' . $iconImage . '" class="svg" height="20" width="20"/></h5>
+                                        <button href="#" class="orderDetails order-status-' . $orders->id . ' btn ' . orderStatusBox($orders)->color . '" onclick="orderDetailNew(' . $orders->id . ')">' . orderStatusBox($orders)->text . '</button>
                                     </div>
                                 </div>
                             </div>';
@@ -444,11 +447,12 @@ function orderSettingFilter($expiryDate, $orders) {
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
-    public function getNotNotifiedOrders(){
-        try{
+    public function getNotNotifiedOrders()
+    {
+        try {
             $orderIds = Order::where([
                 ['order_status', OrderStatus::Accepted],
-               ['is_admin_notified', '0']
+                ['is_admin_notified', '0']
             ])->pluck('id');
 
             // Perform the update
@@ -459,7 +463,7 @@ function orderSettingFilter($expiryDate, $orders) {
 
             return view('admin.orders.new-order-popup', ['orders' => $orders]);
 
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return response::json(['status' => 400, 'message' => '']);
         }
     }
@@ -515,7 +519,7 @@ function orderSettingFilter($expiryDate, $orders) {
         $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
         $getOrderData->save();
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
-        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 
     /**
@@ -529,7 +533,7 @@ function orderSettingFilter($expiryDate, $orders) {
         $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
         $getOrderData->save();
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
-        return response()->json(['status' => 'success', 'orderId'=>$getOrderData->id,'expected_time_order'=>$expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 
     /**
@@ -545,10 +549,10 @@ function orderSettingFilter($expiryDate, $orders) {
             $text = orderStatusBox($getOrderData)->text;
             return response()->json([
                 'status' => 1,
-                'orderId' =>$getOrderData->id,
-                'updatedStatus' =>$getOrderData->order_status,
-                'text' =>$text,
-                'color' =>$color
+                'orderId' => $getOrderData->id,
+                'updatedStatus' => $getOrderData->order_status,
+                'text' => $text,
+                'color' => $color
             ]);
         }
     }
@@ -585,25 +589,26 @@ function orderSettingFilter($expiryDate, $orders) {
      */
     public function ordersMap(Request $request)
     {
-        $getResturentData = json_decode(getRestaurantDetail()->params,true);
+        $getResturentData = json_decode(getRestaurantDetail()->params, true);
         $order_settings = $getResturentData['order_settings'];
         $timezoneSetting = $order_settings['timezone_setting'];
         $specificDaySetting = $order_settings['expiry_date'];
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
-        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        $allOpenOrder = Order::with('orderUserDetails')->where('is_cart', '0')->where('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->get();
+        $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
-            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        } elseif($specificDaySetting !=null){
+            $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } elseif ($specificDaySetting != null) {
             if ($specificDaySetting == 'custom_date') {
-                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
             } else {
                 $orders = $this->orderSettingFilter($specificDaySetting, $orders);
             }
         }
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 8);
+        $perPage = request()->input('per_page', 24);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -630,13 +635,150 @@ function orderSettingFilter($expiryDate, $orders) {
         if ($request->ajax()) {
             $filters = $request->get('filters');
             if ($request->has('search') && $request->search != null || !empty($filters)) {
-                $data = $this->orderSearchFilter($request);
+                $data = $this->orderSearchFilterMap($request);
             } else {
                 $data['orders'] = $orders;
                 $data['orderDeliveryTime'] = $orderDeliveryTime;
             }
-            return view('admin.orders.order-map.order-map-search', ['allOrders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
+            return view('admin.orders.order-map.order-map-search', ['allOrders' => $data['orders'], 'allOpenOrder' => $allOpenOrder, 'orderDeliveryTime' => $orderDeliveryTime]);
         }
-        return view('admin.orders.order-map.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
+        return view('admin.orders.order-map.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOpenOrder' => $allOpenOrder, 'allOrders' => $orders, 'lastPage' => $orders->lastPage()]);
+    }
+
+    public function orderSearchFilterMap(Request $request)
+    {
+        $getResturentData = json_decode(getRestaurantDetail()->params, true);
+        $order_settings = $getResturentData['order_settings'];
+        $timezoneSetting = $order_settings['timezone_setting'];
+        $specificDaySetting = $order_settings['expiry_date'];
+        $startDate = $order_settings['start_date'];
+        $endDate = $order_settings['end_date'];
+        $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
+        if ($timezoneSetting != null) {
+            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        } elseif ($specificDaySetting != null) {
+            if ($specificDaySetting == 'custom_date') {
+                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
+            } else {
+                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
+            }
+        }
+        $pageNumber = request()->input('page', 1);
+        $perPage = request()->input('per_page', 24);
+
+        // Check if the search term and search option are present
+        if ($request->has('search') && $request->has('searchOption')) {
+            $searchType = $request->input('searchOption');
+            $searchTerm = $request->input('search');
+            // Handle different search types
+            switch ($searchType) {
+                case 'name':
+                    // Search by order user name
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('order_name', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
+
+                case 'phone_number':
+                    // Search by phone number
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('order_contact_number', $searchTerm);
+                    });
+                    break;
+
+                case 'order_number':
+                    // Search by order ID (number)
+                    $orders->where('id', 'like', '%' . $searchTerm . '%');
+                    break;
+
+                case 'address':
+                    // Search by address fields
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('house_no', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('city', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('zipcode', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
+
+                case 'zip_code':
+                    // Search by zip code
+                    $orders->whereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                        $query->where('zipcode', 'like', '%' . $searchTerm . '%');
+                    });
+                    break;
+
+                case 'dish':
+                    // Search by product (assuming orders have a relation to products)
+                    $orders->whereHas('dishDetails', function ($query) use ($searchTerm) {
+                        $query->whereHas('dish', function ($subQuery) use ($searchTerm) {
+                            $subQuery->where('name_en', 'like', '%' . $searchTerm . '%');
+                            $subQuery->orWhere('name_nl', 'like', '%' . $searchTerm . '%');
+                        });
+                    });
+                    break;
+
+                default:
+                    // Default case for 'all' or when no valid search type is selected
+                    $orders->where(function ($query) use ($searchTerm) {
+                        // Search within the orders table for 'id'
+                        $query->where('id', $searchTerm)
+                            // Search within the 'orderUserDetails' relationship
+                            ->orWhereHas('orderUserDetails', function ($query) use ($searchTerm) {
+                                $query->where('order_name', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('house_no', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('street_name', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('city', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('zipcode', 'like', '%' . $searchTerm . '%')
+                                    ->orWhere('order_contact_number', $searchTerm);
+                            })
+                            // Search within the 'dishDetails' and the related 'dish' relationship
+                            ->orWhereHas('dishDetails', function ($query) use ($searchTerm) {
+                                $query->whereHas('dish', function ($subQuery) use ($searchTerm) {
+                                    $subQuery->where('name_en', 'like', '%' . $searchTerm . '%')
+                                        ->orWhere('name_nl', 'like', '%' . $searchTerm . '%');
+                                });
+                            });
+                    });
+
+                    break;
+            }
+        }
+        $filters = $request->filters;
+
+        if (!empty($filters)) {
+            $orders->where(function ($query) use ($filters) {
+                // Apply filters based on the selected checkboxes within a group
+                if (in_array('online', $filters)) {
+                    $query->orWhere('is_online_order', '1')->where('order_status', '!=', OrderStatus::Delivered);
+                }
+
+                if (in_array('manual', $filters)) {
+                    $query->orWhere('is_online_order', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                }
+
+                if (in_array('delivery', $filters)) {
+                    $query->orWhere('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                }
+
+                if (in_array('takeaway', $filters)) {
+                    $query->orWhere('order_type', OrderType::TakeAway)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                }
+
+                if (in_array('open', $filters)) {
+                    $query->orWhere('order_status', '!=', OrderStatus::Delivered)->where('order_status', '!=', OrderStatus::Cancelled);
+                }
+
+                if (in_array('delivered', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::Delivered);
+                }
+            });
+        }
+        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
+
+        return [
+            'orders' => $orders
+        ];
     }
 }

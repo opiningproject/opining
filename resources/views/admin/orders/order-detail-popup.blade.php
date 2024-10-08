@@ -362,7 +362,8 @@ $restaurantDetail = getRestaurantDetail();
         // Create the map centered at the first location
         orderMap = new google.maps.Map(document.getElementById('map'), {
             // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
-            zoom: 8
+            zoom: 8,
+            mapTypeControl: false
         });
 
         // Create Directions Service and Renderer instances

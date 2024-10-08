@@ -591,10 +591,11 @@ function orderSettingFilter($expiryDate, $orders) {
         $specificDaySetting = $order_settings['expiry_date'];
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
-        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $allOpenOrder = Order::with('orderUserDetails')->where('is_cart', '0')->where('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->get();
+        $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
         $orderDeliveryTime = (int) Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
-            $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+            $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
         } elseif($specificDaySetting !=null){
             if ($specificDaySetting == 'custom_date') {
                 $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(),Carbon::parse($endDate)->endOfDay()]);
@@ -603,7 +604,7 @@ function orderSettingFilter($expiryDate, $orders) {
             }
         }
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 8);
+        $perPage = request()->input('per_page', 10);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -635,8 +636,8 @@ function orderSettingFilter($expiryDate, $orders) {
                 $data['orders'] = $orders;
                 $data['orderDeliveryTime'] = $orderDeliveryTime;
             }
-            return view('admin.orders.order-map.order-map-search', ['allOrders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
+            return view('admin.orders.order-map.order-map-search', ['allOrders' => $data['orders'], 'allOpenOrder' => $allOpenOrder, 'orderDeliveryTime' => $orderDeliveryTime]);
         }
-        return view('admin.orders.order-map.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
+        return view('admin.orders.order-map.orders-map', ['orderDeliveryTime' => $orderDeliveryTime, 'allOpenOrder' => $allOpenOrder, 'allOrders' => $orders,'lastPage' => $orders->lastPage()]);
     }
 }

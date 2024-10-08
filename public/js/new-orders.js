@@ -119,6 +119,7 @@ $(document).ready(function () {
 $(document).on('click', '.order-setting', function () {
     $('.order-setting-popup').modal('show');
     $('#radio-button-error').remove();
+    $('.error').remove();
 })
 
 $(function () {
@@ -226,7 +227,9 @@ $(function () {
                 if (response.status == "success"){
                     $('.order-setting-popup').modal('hide')
                     $('.timezone-setting').prop('selectedIndex', 0);
-                    $('input[name="date_type"]').prop('checked', false);
+                    // $('input[name="date_type"]').prop('checked', false);
+                    $('.date_type').prop('checked', false);
+                    $('#order-setting-form').trigger("reset");
                     searchFilterAjax(search, searchOption, filters);
                 }
 
@@ -241,26 +244,48 @@ $(function () {
 
     //order setting js code start
 // order-setting-form
-   /* $('#order-setting-form').on('submit', function(e) {
-        // Check if any radio button is selected
-        if (!$('input[name="date_type"]:checked').length) {
-            // Prevent form submission
-            e.preventDefault();
+    function parseDate(value) {
+        var parts = value.split('-');
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    }
+    $.validator.addMethod('validDate', function (value, element) {
+        return this.optional(element) || /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-[0-9]{4}$/.test(value);
+    }, 'Please provide a date in the dd-mm-yyyy format');
 
-            // Show an alert or message indicating the error
-            alert("Please select at least one date option before saving.");
-        }
-    });*/
+    // Method to ensure start date is before end date
+    $.validator.addMethod('dateBefore', function (value, element, params) {
+        var endDate = $(params).val();
+        if (!endDate) return true; // Skip comparison if endDate is empty
+        var startDate = parseDate(value);
+        var endDateObj = parseDate(endDate);
+
+        return this.optional(element) || startDate <= endDateObj;
+    }, 'Must be before the end date.');
+
+    // Method to ensure end date is after start date
+    $.validator.addMethod('dateAfter', function (value, element, params) {
+        var startDate = $(params).val();
+        if (!startDate) return true; // Skip comparison if startDate is empty
+        var endDate = parseDate(value);
+        var startDateObj = parseDate(startDate);
+
+        return this.optional(element) || endDate >= startDateObj;
+    }, 'Must be after the start date.');
+
     $(".order-setting-form").validate({
         rules: {
             timezone_setting: {
                 required: true
             },
             start_date: {
-                required: true
+                required: true,
+                validDate: true,
+                dateBefore: '#end-date'
             },
             end_date: {
-                required: true
+                required: true,
+                validDate: true,
+                dateAfter: '#start-date'
             }
         },
         highlight: function (element) {
@@ -497,7 +522,7 @@ $('#start-date, #end-date').daterangepicker({
         format: 'DD-MM-YYYY'
     },
     maxDate: moment(), // Set the maximum date to today
-    autoUpdateInput: false
+    autoclose: true,
 });
 
 // Handle apply event to update both start and end date inputs
@@ -512,6 +537,10 @@ $('#end-date').on('apply.daterangepicker', function (ev, picker) {
 
 // Optional: Clear the date inputs on cancel
 $('#start-date').on('cancel.daterangepicker', function (ev, picker) {
+    $('#start-date').val('');
+    $('#end-date').val('');
+});
+$('#end-date').on('cancel.daterangepicker', function (ev, picker) {
     $('#start-date').val('');
     $('#end-date').val('');
 });

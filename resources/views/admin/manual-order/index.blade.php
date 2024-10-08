@@ -332,7 +332,7 @@
                                         </div>
 
                                         <div class="customer-dropdown" id="createCustomerDropdown">
-                                            <button class="add-btn" type="submit">
+                                            <button class="add-btn add-customer" type="button">
                                                 <svg id="Layer_1" height="20" viewBox="0 0 24 24" width="20"
                                                     data-name="Layer 1">
                                                     <path
@@ -584,4 +584,9 @@
             </div>
         </div>
     </div>
+    @include('admin.manual-order.create-customer-popup')
+@endsection
+{{--create-customer-popup--}}
+@section('script')
+<script type="text/javascript" src="{{ asset('js/manual-order.js') }}"></script>
 @endsection

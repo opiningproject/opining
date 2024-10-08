@@ -135,7 +135,7 @@
                         </div>
                         <div class="row map-order-listing-row">
                         <div class="col-md-8">
-                            <div id="orders-map-marker" style="height: calc(100vh - 230px);"></div>
+                            <div id="orders-map-marker" style="height: calc(100vh - 230px);border-radius: 16px;overflow: hidden;"></div>
                         </div>
                         <div class="orderList col-md-4">
                             <div class="order-listing-container">

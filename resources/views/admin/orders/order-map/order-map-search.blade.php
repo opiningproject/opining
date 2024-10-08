@@ -88,7 +88,7 @@ use App\Enums\PaymentType;
 @else
     <span class="no-data">{{ trans('rest.food_order.no_order') }}</span>
 @endif
-<script type="text/javascript" src="{{ asset('js/orders-map.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('js/orders-map.js') }}"></script>--}}
 <script>
     $(document).ready(function() {
         function arrangeOrderCols() {

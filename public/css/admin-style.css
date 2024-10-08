@@ -312,7 +312,7 @@ stroke: #ffffff;
 .order-detail-popup .modal-dialog .modal-header .head-flex {display: flex;align-items: center;justify-content: space-between;}
 .order-detail-popup .head-flex h3 {text-transform: uppercase;font-size: 18px;color: #444444;font-weight: normal;}
 .order-detail-popup .order-status {display: flex;gap: 0px;width: 100%;margin: 0px -10px;flex-wrap: wrap;}
-.order-detail-popup .order-status .order-col {flex: 0 0 25%;max-width: 25%;padding: 0px 10px;margin-bottom: 20px;}
+.order-detail-popup .order-status .order-cols-status {flex: 0 0 25%;max-width: 25%;padding: 0px 10px;margin-bottom: 20px;}
 .order-detail-popup .order-status .status-option {display: flex;align-items: center;border: 1px solid #DCDCDC;padding: 0px 0px;border-radius: 16px;background-color: white;cursor: pointer;position: relative;height: 48px;overflow: hidden;}
 .order-detail-popup .status-option span {color: #000000;height: 100%;font-size: 20px;font-weight: 300;flex: auto;display: flex;align-items: center;justify-content: center;border-left: 0px;background: #ffffff;}
 .order-detail-popup .status-option.active label {background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(94, 94, 94, 1));color: white;}
@@ -585,7 +585,7 @@ stroke: #ffffff;
 /* Order Details popup css */
 .order-detail-popup .modal-dialog .modal-header {padding: 15px 20px 15px 20px;}
 .order-detail-popup .head-flex h3 {font-size: 16px;}
-.order-detail-popup .order-status .order-col {margin-bottom: 15px;}
+.order-detail-popup .order-status .order-cols-status {margin-bottom: 15px;}
 .order-detail-popup .order-status .status-option {height: 40px;}
 .order-detail-popup .status-option span {font-size: 16px;}
 .order-detail-popup .nav-tabs .nav-link {padding: 8px 10px;font-size: 13px;}

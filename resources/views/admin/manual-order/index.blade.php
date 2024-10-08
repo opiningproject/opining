@@ -361,7 +361,6 @@
 
                         <div class="manual-order-box">
 
-
                             <button type="" class="close-ico">
                                 <svg width="12" height="14" viewBox="0 0 12 14" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -375,7 +374,6 @@
                                 <span><img src="{{ asset('images/user-ml.svg') }}" alt="" /></span> CUSTOMER
                                 DETAILS
                             </h3>
-
 
                             <div class="ml-content">
                                 <div class="content">

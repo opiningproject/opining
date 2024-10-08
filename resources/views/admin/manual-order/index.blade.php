@@ -360,6 +360,41 @@
                         </div>
 
                         <div class="manual-order-box">
+
+                            <button type="" class="close-ico">
+                                <svg width="12" height="14" viewBox="0 0 12 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="11.6637" y1="12.37" x2="0.663664" y2="2.36997" stroke="black">
+                                    </line>
+                                    <path d="M11 2L0.884616 12.4231" stroke="black"></path>
+                                </svg>
+                            </button>
+
+                            <h3 class="title-icon">
+                                <span><img src="{{ asset('images/user-ml.svg') }}" alt="" /></span> CUSTOMER
+                                DETAILS
+                            </h3>
+
+                            <div class="ml-content">
+                                <div class="content">
+                                    <p>Serdar Orman</p>
+
+                                    <p class="mb-0">Serdarorman74@Gmail.Com</p>
+                                    <p>+31614522453</p>
+
+                                    <h4><b>Shipping Address</b></h4>
+                                    <p class="mb-1">Tochtstraat 40<br>3036 SK Rotterdam</p>
+
+                                    <p><a href="#">View Map</a></p>
+
+                                    <h4><b>Billing Address</b></h4>
+                                    <p>Same As Shipping Adress</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="manual-order-box">
                             <h3 class="title-icon">
                                 <span><img src="{{ asset('images/order-ml.svg') }}" alt="" /></span> ORDER
                             </h3>
@@ -586,7 +621,7 @@
     </div>
     @include('admin.manual-order.create-customer-popup')
 @endsection
-{{--create-customer-popup--}}
+{{-- create-customer-popup --}}
 @section('script')
-<script type="text/javascript" src="{{ asset('js/manual-order.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/manual-order.js') }}"></script>
 @endsection

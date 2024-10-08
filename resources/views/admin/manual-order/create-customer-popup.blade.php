@@ -1,4 +1,4 @@
-<div class="modal fade custom-modal create-customer-popup" id="createCustomerModal" tabindex="-1" aria-labelledby="createCustomerModal"  aria-modal="true" role="dialog">
+<div class="modal fade create-customer-popup" id="createCustomerModal" tabindex="-1" aria-labelledby="createCustomerModal"  aria-modal="true" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

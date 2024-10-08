@@ -200,6 +200,31 @@ $(function () {
     });
 
 
+
+
+    $(document).on('click', '.saveReset', function (e) {
+        $.ajax({
+            url: baseURL + '/save-reset',
+            type: 'GET',
+            success: function (response) {
+                console.log("response", response)
+                if (response.status == "success"){
+                    $('.order-setting-popup').modal('hide')
+                    $('.timezone-setting').prop('selectedIndex', 0);
+                    $('input[name="date_type"]').removeAttr('checked');
+                    // $('.date_type').prop('checked', false);
+                    $('#order-setting-form').trigger("reset");
+                    searchFilterAjax(search, searchOption, filters);
+                }
+
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+
     function searchFilterAjax(search, searchOption, filters) {
         $.ajax({
             url: baseURL + '/orders', // Ensure this matches your route
@@ -217,31 +242,6 @@ $(function () {
             }
         });
     }
-
-    $(document).on('click', '.saveReset', function (e) {
-        $.ajax({
-            url: baseURL + '/save-reset',
-            type: 'GET',
-            success: function (response) {
-                console.log("response", response)
-                if (response.status == "success"){
-                    $('.order-setting-popup').modal('hide')
-                    $('.timezone-setting').prop('selectedIndex', 0);
-                    // $('input[name="date_type"]').prop('checked', false);
-                    $('.date_type').prop('checked', false);
-                    $('#order-setting-form').trigger("reset");
-                    searchFilterAjax(search, searchOption, filters);
-                }
-
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
-            }
-        })
-    })
-
-
     //order setting js code start
 // order-setting-form
     function parseDate(value) {
@@ -323,45 +323,29 @@ $(function () {
                     $('.date-range-section').append(errorMessage)
                 return false;
                 }
-            $.ajax({
-                url: baseURL + '/save-order-setting',
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                data: delivererData,
-                success: function (response) {
-                    console.log("response", response)
-                    if (response.status == 'success') {
-                        $('.order-setting-popup').modal('hide');
-                        searchFilterAjax(search, searchOption, filters);
-                    }
-                },
-                error: function (response) {
-                    var errorMessage = JSON.parse(response.responseText).message
-                    toastr.error(errorMessage)
-                    // alert(errorMessage);
-                }
-            })
+            saveOrderSettingAjaxCall(delivererData)
         } else {
-            $.ajax({
-                url: baseURL + '/save-order-setting',
-                type: 'POST',
-                processData: false,
-                contentType: false,
-                data: delivererData,
-                success: function (response) {
-                    if (response.status == 'success') {
-                        $('.order-setting-popup').modal('hide');
-                        searchFilterAjax(search, searchOption, filters);
-                    }
-                },
-                error: function (response) {
-                    var errorMessage = JSON.parse(response.responseText).message
-                    toastr.error(errorMessage)
-                    // alert(errorMessage);
-                }
-            })
+            saveOrderSettingAjaxCall(delivererData)
         }
+    }
+    function saveOrderSettingAjaxCall(delivererData) {
+        $.ajax({
+            url: baseURL + '/save-order-setting',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: delivererData,
+            success: function (response) {
+                if (response.status == 'success') {
+                    $('.order-setting-popup').modal('hide');
+                    searchFilterAjax(search, searchOption, filters);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                toastr.error(errorMessage)
+            }
+        })
     }
 });
 

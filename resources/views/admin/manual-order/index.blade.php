@@ -293,7 +293,7 @@
                                 <div class="radio-group">
                                     <label class="radio-option">
                                         <input type="radio" name="order-type" checked>
-                                        <span>Payment</span>
+                                        <span>Takeaway</span>
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="order-type">

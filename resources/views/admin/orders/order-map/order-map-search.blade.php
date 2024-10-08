@@ -18,9 +18,7 @@ use App\Enums\PaymentType;
                             <h3 class="expectedDeliveryTime-{{ $ord->id }}">
                                 {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                             </h3>
-                            {{--                            @if ($ord->delivery_time != 'ASAP')--}}
                             <label class="success">{{ $ord->delivery_time }}</label>
-                            {{--                            @endif--}}
                         </div>
 
                         <div class="details">
@@ -33,10 +31,6 @@ use App\Enums\PaymentType;
                                             echo $userDetails->house_no . ', ' . $userDetails->street_name;
                                             ?>
                                         </p>
-                                        {{--                                @else--}}
-                                        {{--                                    <p class="mb-0">--}}
-                                        {{--                                        {{ getRestaurantDetail()->rest_address }}--}}
-                                        {{--                                    </p>--}}
                                     @endif
                                 </div>
                             </div>
@@ -115,7 +109,10 @@ use App\Enums\PaymentType;
 
             // Create three columns
             for (var col = 0; col < 3; col++) {
-                var currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                var currentColumn = $('<div class="order-column mt-2"></div>'); // Create a new column
+                if (col === 0) {
+                    currentColumn = $('<div class="order-column"></div>'); // Create a new column
+                }
                 $container.append(currentColumn); // Append the new column to the container
 
                 // Add items to each column, based on the dynamic number of items per column

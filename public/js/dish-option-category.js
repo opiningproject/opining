@@ -157,7 +157,7 @@ $(function () {
                     $('#title_nl'+id).prop('readonly', true)
                     $('#edit-btn'+id).show()
                     $('#del-btn'+id).show()
-                    $('#save-edit-btn'+id).attr('style','width: 50%;margin-left: 25%; display: none!important; !important')
+                    $('#save-edit-btn'+id).attr('style','display: none!important; !important')
                     toastr.success(response.message)
                 } else {
                     toastr.error(response.message)

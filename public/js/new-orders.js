@@ -177,28 +177,31 @@ $(function () {
         $('.count-filter').addClass('d-none');
     }
 
-    $('.order-filter input[type="checkbox"]').on('change', function () {
-        // Clear the filters array before adding new ones
+    $('.order-type-label').on('click', function() {
+        // Find the corresponding checkbox
+        var checkbox = $(this).prev('.order-type-input'); // Assumes label is immediately after checkbox
+        // Toggle the checked state of the checkbox
+        checkbox.prop('checked', !checkbox.prop('checked'));
+
+        // Add or remove the 'checked' class based on the checkbox state
+        if (checkbox.prop('checked')) {
+            checkbox.addClass('checked'); // Add 'checked' class if checked
+        } else {
+            checkbox.removeClass('checked'); // Remove 'checked' class if unchecked
+        }
+        // Log the currently checked checkboxes
         filters = [];
-
-        if ($('.order-filter input[type="checkbox"]:checked').length > 0) {
-            $('.order-filter input[type="checkbox"]:checked').each(function () {
-                filters.push($(this).attr('id')); // Get the ID of the checkbox (e.g., 'online', 'manual')
-            });
-
-            var uniqueValues = new Set(filters);
-            var uniqueCount = uniqueValues.size;
-
+        $('.order-type-input:checked').each(function() {
+            filters.push($(this).attr('id'));
+        });
+        if (filters.length > 0) {
             $('.count-filter').removeClass('d-none');
-            $('.count-filter').text(uniqueCount);
+            $('.count-filter').text(filters.length);
         } else {
             $('.count-filter').addClass('d-none');
-            filters = [];
         }
-        // Send filters via AJAX
         searchFilterAjax(search, searchOption, filters);
     });
-
 
 
 
@@ -388,6 +391,7 @@ function changeOrderStatusNew(order_id, order_status) {
                 var currentOrderCount = $('.order-count').text();
                 $('.order-count').html(currentOrderCount - 1);
                 $('.count-order').html(currentOrderCount - 1);
+                window.location.reload()
             }
             socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
         },
@@ -516,7 +520,7 @@ disabledOldOrderStatus();*/
 
 
 // checked all checkboxs on click all checkbox.
-$('#all').on('change', function () {
+/*$('#all').on('change', function () {
     // Check or uncheck all checkboxes based on 'all' checkbox state
     $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
 });
@@ -533,7 +537,7 @@ $('.order-filter .checkbox').not('#all').on('change', function () {
     if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
         $('#all').prop('checked', true);
     }
-});
+});*/
 
 // Define the date range picker on the start date input
 // var start = moment();

@@ -120,7 +120,7 @@
                                                             </a>
                                                             <a class="btn btn-site-theme btn-default save-edit-btn d-block"
                                                                id="save-edit-btn{{ $category->id }}"
-                                                               style="width: 50%;margin-left: 25%; display: none!important;"
+                                                               style="width: 50%;margin-left: 0%; display: none!important;"
                                                                data-id="{{ $category->id }}">
                                                                 <span
                                                                     class="align-middle">{{ trans('rest.button.save') }}</span>

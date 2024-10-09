@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 delivery-btnCol">
                                                 <div class="form-group">
-                                                    <label for="discountpercentage" class="form-label">&nbsp;</label>
+                                                    <label for="discountpercentage" class="form-label  invisible">&nbsp;</label>
                                                     <button type="submit"
                                                             class="btn btn-site-theme btn-default d-block w-130px mt-0 save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>

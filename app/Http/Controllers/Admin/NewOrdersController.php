@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PaymentType;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\DelivererUser;
@@ -218,11 +219,32 @@ class NewOrdersController extends Controller
                 }
 
                 if (in_array('open', $filters)) {
-                    $query->orWhere('order_status', '!=', OrderStatus::Delivered)->where('order_status', '!=', OrderStatus::Cancelled);
+                    $query->orWhere('order_status', OrderStatus::Accepted);
+//                    $query->orWhere('order_status', '!=', OrderStatus::Delivered)->where('order_status', '!=', OrderStatus::Cancelled);
                 }
 
                 if (in_array('delivered', $filters)) {
                     $query->orWhere('order_status', OrderStatus::Delivered);
+                }
+
+                if (in_array('paid', $filters)) {
+                    $query->orWhereIn('payment_type', [PaymentType::Card, PaymentType::Ideal]);
+                }
+
+                if (in_array('cash', $filters)) {
+                    $query->orWhere('payment_type', PaymentType::Cash);
+                }
+
+                if (in_array('in_kitchen', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::InKitchen);
+                }
+
+                if (in_array('ready_delivery', $filters)) {
+                    $query->orWhereIn('order_status', [OrderStatus::OutForDelivery, OrderStatus::Ready, OrderStatus::ReadyForPickup]);
+                }
+
+                if (in_array('delivered', $filters)) {
+                    $query->orWhereIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
                 }
             });
         }
@@ -275,7 +297,7 @@ class NewOrdersController extends Controller
     public function changeStatusNew(Request $request)
     {
         $order = Order::find($request->id);
-        $order = getOrderStatus($order);
+        $order->order_status = $request->order_status;
         $orderStatus = 0;
         if ($order->save()) {
             $order->user->notify(new DeliveryTypeUpdate($order));
@@ -414,29 +436,39 @@ class NewOrdersController extends Controller
             $lableIcon = asset('images/opening-label.svg');
             $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
             $html = '<div class="order-col cursor-pointer" id="order-' . $orders->id . '" data-id="' . $orders->id . '" onclick="orderDetailNew(' . $orders->id . ')">
-                                <div class="order-box">
-                                    <div class="timing">
-                                        <h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>
-                                        <label class="success">' . $orders->delivery_time . '</label>
-                                    </div>
-                                    <div class="details">
-                                        <div class="left">
-                                            <div class="label-icon">
-                                                <img src="' . $lableIcon . '" class="svg" />
-                                            </div>
-                                            <div class="text-label">
-                                                <h4>' . $userDetails->order_name . '</h4>
-                                                <p class="mb-0">' . $address . '</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="order-box">
+                                <div class="timing">';
 
-                                    <div class="actions">
-                                        <h5 class="mb-0 price_status"><b>€' . number_format($orders->total_amount, 2) . '</b> <img src="' . $iconImage . '" class="svg" height="20" width="20"/></h5>
-                                        <button href="#" class="orderDetails order-status-' . $orders->id . ' btn ' . orderStatusBox($orders)->color . '" onclick="orderDetailNew(' . $orders->id . ')">' . orderStatusBox($orders)->text . '</button>
-                                    </div>
-                                </div>
-                            </div>';
+            // Add the condition using raw PHP
+            if ($orders->delivery_time == 'ASAP') {
+                $html .= '<h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>';
+            } else {
+                $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>';
+            }
+            if ($orders->delivery_time == 'ASAP') {
+                $html .= '<label class="success"> ' . $orders->delivery_time . ' </label>';
+            }
+
+            $html .= '</div>
+                <div class="details">
+                    <div class="left">
+                        <div class="label-icon">
+                            <img src="' . $lableIcon . '" class="svg" />
+                        </div>
+                        <div class="text-label">
+                            <h4>' . $userDetails->order_name . '</h4>
+                            <p class="mb-0">' . $address . '</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <h5 class="mb-0 price_status"><b>€' . number_format($orders->total_amount, 2) . '</b> <img src="' . $iconImage . '" class="svg" height="20" width="20"/></h5>
+                    <button href="#" class="orderDetails order-status-' . $orders->id . ' btn ' . orderStatusBox($orders)->color . '" onclick="orderDetailNew(' . $orders->id . ')">' . orderStatusBox($orders)->text . '</button>
+                </div>
+            </div>
+        </div>';
+
             return response()->json(['data' => $html]);
 
         } catch (Exception $exception) {

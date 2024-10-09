@@ -238,7 +238,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     Route::get('/orders/{date_filter?}', [NewOrdersController::class, 'index'])->name('orders');
     Route::post('/orders/getRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
     Route::get('/orders/order-detail/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
-    Route::get('/orders/change-status/{id}', [NewOrdersController::class, 'changeStatusNew']);
+    Route::get('/orders/change-status/{id}/{order_status}', [NewOrdersController::class, 'changeStatusNew']);
     Route::get('/add-deliverer/{order_id}/{deliverer_id}', [NewOrdersController::class, 'addDeliverer']);
     Route::post('/save-order-setting', [NewOrdersController::class, 'updateOrderSetting'])->name('updateOrderSetting');
     Route::post('/update-delivery-time', [NewOrdersController::class, 'updateDeliveryTime'])->name('updateDeliveryTime');
@@ -255,6 +255,7 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
 
     //    manual order routes
     Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
+    Route::get('/get-dish/{cat_id}', [ManualOrdersController::class, 'getDishes']);
 
     //    Integrations order routes
     Route::get('/integrations', [IntegrationsController::class, 'index'])->name('integrations');

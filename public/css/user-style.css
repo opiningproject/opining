@@ -723,6 +723,11 @@ footer .footer-copyright-text {color: rgba(255, 255, 255, 0.7);font-size: 12px;l
 .cart-section .cart-amount-cal-data .prev-input-group .form-control {min-height: 56px !important;height: 56px !important;line-height: 56px !important;}
 .cart-section .cart-amount-cal-data .prev-input-group .input-group-icon {top: 50% !important;transform: translateY(-50%) !important;}
 
+.category-swiper-slider .category-element {
+  width: auto !important;
+  min-width: 110px;
+}
+
 @media screen and (max-width: 1279px) {
   .orders-main {gap: 20px;}
 .orders {padding: 20px;gap: 30px;}
@@ -1255,7 +1260,7 @@ footer .footer-link li a>img {width: 16px;object-fit: contain;object-position: c
 .cartSidebarCustom .bill-detail-invoice .bill-count {font-size: 14px;}
 .bg-arrow-mobile>i {display: inline-block !important;color: var(--theme-dark2) !important;position: relative;top: 2px;}
 .category-section .category-slider-navigation {display: none;}
-.category-section .category-slider .category-element .card {padding: 10px 6px;}
+.category-section .category-slider .category-element .card {padding: 10px 16px;}
 .swiper-container-mobile .category-swiper-slider .swiper-slide.selected-cart-active .card {background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(94, 94, 94, 1)) !important;}
 .swiper-container-mobile .category-swiper-slider .swiper-slide.selected-cart-active .card * {color: #ffffff !important;}
 .cart-section .cart-items .foodqty .plus, .cart-section .cart-items .foodqty .minus {height: 30px !important;min-width: 30px !important;width: 30px !important;line-height: 26px;}

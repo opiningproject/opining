@@ -44,7 +44,8 @@ $restaurantDetail = getRestaurantDetail();
                     <div class="order-cols-status">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::InKitchen ? 'active' : '' }}">
-                            <input id="inKitchen-order" type="radio" class="order-status-radio" name="order-status-option"
+                            <input id="inKitchen-order" type="radio" class="order-status-radio"
+                                name="order-status-option"
                                 {{ $order->order_status == OrderStatus::InKitchen ? 'checked' : '' }}
                                 onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::InKitchen }}')" />
                             <span for="inKitchen-order"></span>
@@ -55,7 +56,8 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="order-cols-status">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::OutForDelivery ? 'active' : '' }}">
-                                <input id="outForDelivery-order" type="radio" class="order-status-radio" name="order-status-option"
+                                <input id="outForDelivery-order" type="radio" class="order-status-radio"
+                                    name="order-status-option"
                                     {{ $order->order_status == OrderStatus::OutForDelivery ? 'checked' : '' }}
                                     onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::OutForDelivery }}')" />
                                 <span for="outForDelivery-order"></span>
@@ -66,7 +68,8 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="order-cols-status">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::ReadyForPickup ? 'active' : '' }}">
-                                <input id="outForDelivery-order" type="radio" class="order-status-radio" name="order-status-option"
+                                <input id="outForDelivery-order" type="radio" class="order-status-radio"
+                                    name="order-status-option"
                                     {{ $order->order_status == OrderStatus::ReadyForPickup ? 'checked' : '' }}
                                     onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::ReadyForPickup }}')" />
                                 <span for="outForDelivery-order"></span>
@@ -78,7 +81,8 @@ $restaurantDetail = getRestaurantDetail();
                     <div class="order-cols-status">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::Delivered ? 'active' : '' }}">
-                            <input id="delivered-order" type="radio" class="order-status-radio" name="order-status-option"
+                            <input id="delivered-order" type="radio" class="order-status-radio"
+                                name="order-status-option"
                                 {{ $order->order_status == OrderStatus::Delivered ? 'checked' : '' }}
                                 onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::Delivered }}')" />
                             <span for="delivered-order"></span>
@@ -91,28 +95,32 @@ $restaurantDetail = getRestaurantDetail();
             <div class="clearfix">
                 <ul class="nav nav-tabs justify-content-between" id="myTab" role="tablist">
                     <!-- First Tab -->
-                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
+                    <li class="nav-item" role="presentation"
+                        style="width: {{ $order->order_type == OrderType::Delivery ? '25%' : '33.33%' }};">
                         <button class="nav-link active w-100" id="tab-1" data-bs-toggle="tab"
                             data-bs-target="#content-1" type="button" role="tab" aria-controls="content-1"
                             aria-selected="true">{{ trans('modal.order_detail.customer_data') }}</button>
                     </li>
                     <!-- Second Tab -->
-                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
+                    <li class="nav-item" role="presentation"
+                        style="width: {{ $order->order_type == OrderType::Delivery ? '25%' : '33.33%' }};">
                         <button class="nav-link w-100" id="tab-2" data-bs-toggle="tab" data-bs-target="#content-2"
                             type="button" role="tab" aria-controls="content-2" aria-selected="false">
                             {{ trans('modal.order_detail.order_item', ['number_of_dish' => count($order->dishDetails)]) }}
                         </button>
                     </li>
                     @if ($order->order_type == OrderType::Delivery)
-                    <!-- Third Tab -->
-                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
-                        <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3"
-                            type="button" role="tab" aria-controls="content-3"
-                            aria-selected="false">Route Planner</button>
-                    </li>
+                        <!-- Third Tab -->
+                        <li class="nav-item" role="presentation"
+                            style="width: {{ $order->order_type == OrderType::Delivery ? '25%' : '33.33%' }};">
+                            <button class="nav-link w-100" id="tab-3" data-bs-toggle="tab"
+                                data-bs-target="#content-3" type="button" role="tab" aria-controls="content-3"
+                                aria-selected="false">Route Planner</button>
+                        </li>
                     @endif
                     <!-- Fourth Tab -->
-                    <li class="nav-item" role="presentation" style="width: {{$order->order_type == OrderType::Delivery ? '25%' :'33.33%'}};">
+                    <li class="nav-item" role="presentation"
+                        style="width: {{ $order->order_type == OrderType::Delivery ? '25%' : '33.33%' }};">
                         <button class="nav-link w-100" id="tab-4" data-bs-toggle="tab"
                             data-bs-target="#content-4" type="button" role="tab" aria-controls="content-4"
                             aria-selected="false">{{ trans('modal.order_detail.deliverer') }}</button>
@@ -196,10 +204,9 @@ $restaurantDetail = getRestaurantDetail();
                                         <label>{{ trans('modal.order_detail.wished_time') }}</label>
                                         <div class="timing-col">
                                             <button class="t-box update-delivery-time">-5</button>
-                                            <div class="text-uppercase">
-                                                <span class="expected_time_order">
-                                                    {{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}
-                                                </span>
+                                            <div class="text-uppercase custom-timing">
+                                                <input type="text" class="expected_time_order" value="{{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}" />
+                                                </input>
                                             </div>
                                             <button class="t-box update-delivery-time">+5</button>
                                         </div>
@@ -214,7 +221,7 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="row items-in-row">
 
                             <div class="col-12 mb-3">
-                                <div class="dish-details-row">
+                                <div class="dish-details-row px-4">
                                     <?php $itemTotalPrice = 0;
                                     $dishIngredientsTotalAmount = 0; ?>
                                     @foreach ($order->dishDetails as $key => $dish)
@@ -264,9 +271,9 @@ $restaurantDetail = getRestaurantDetail();
                     </div>
                     <!-- Content for Tab 3 -->
                     <div class="tab-pane fade px-0" id="content-3" role="tabpanel" aria-labelledby="tab-3">
-                            <div class="tab-map">
-                                <div id="map" style="height: 290px; width: 100%;"></div>
-                            </div>
+                        <div class="tab-map">
+                            <div id="map" style="height: 290px; width: 100%;"></div>
+                        </div>
                     </div>
 
                     <!-- Content for Tab 4 -->
@@ -296,12 +303,20 @@ $restaurantDetail = getRestaurantDetail();
 
         <div class="modal-footer d-flex align-items-center justify-content-between">
             <div class="clearfix">
-                @if($order->order_status != OrderStatus::Cancelled && $order->order_status != OrderStatus::Delivered)
-                    <button type="button" class="btn btn-outline-danger text-danger" onclick="cancelOrder({{$order->id}})">{{ trans('modal.order_detail.cancel') }}</button>
+                @if ($order->order_status != OrderStatus::Cancelled && $order->order_status != OrderStatus::Delivered)
+                    <button type="button" class="btn btn-outline-danger text-danger"
+                        onclick="cancelOrder({{ $order->id }})">{{ trans('modal.order_detail.cancel') }}</button>
                 @endif
                 <a class="btn btn-outline-secondary ms-2 text-secondary d-inline-flex align-items-center gap-3"
-                    target="_blank"
-                    href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">{{ trans('rest.food_order.print') }}</a>
+                    target="_blank" href="{{ route('orders.printLabel', ['order_id' => $order->id]) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                        <g id="_01_align_center" data-name="01 align center">
+                            <path
+                                d="M24,9a3,3,0,0,0-3-3H19V0H5V6H3A3,3,0,0,0,0,9V21H5v3H19V21h5ZM7,2H17V6H7ZM17,22H7V16H17Zm5-3H19V14H5v5H2V9A1,1,0,0,1,3,8H21a1,1,0,0,1,1,1Z" />
+                            <rect x="15" y="10" width="4" height="2" />
+                        </g>
+                    </svg>
+                    {{ trans('rest.food_order.print') }}</a>
             </div>
 
             <div class="clearfix d-flex align-items-center">
@@ -349,7 +364,8 @@ $restaurantDetail = getRestaurantDetail();
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initOrderMap"
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initOrderMap"
     async defer></script>
 <script>
     let orderMap;
@@ -363,7 +379,18 @@ $restaurantDetail = getRestaurantDetail();
         orderMap = new google.maps.Map(document.getElementById('map'), {
             // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
             zoom: 8,
-            mapTypeControl: false
+            mapTypeControl: false,
+            styles: [
+                {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }] // Hide points of interest
+                },
+                {
+                    featureType: "transit.station",
+                    stylers: [{ visibility: "off" }] // Hide transit stations
+                }
+            ]
         });
 
         // Create Directions Service and Renderer instances
@@ -373,19 +400,23 @@ $restaurantDetail = getRestaurantDetail();
         // Set the map where the directions will be rendered
         directionsRenderer.setMap(orderMap);
         latitudeValue = '';
-        longitudeValue ='';
+        longitudeValue = '';
         // Calculate and display the route
         calculateAndDisplayRoute();
     }
+
     function calculateAndDisplayRoute() {
         latitudeValue = $('.latitude').val();
         longitudeValue = $('.longitude').val();
         const origin = {
-            lat: {!! $restaurantDetail->latitude; !!},
-            lng: {!! $restaurantDetail->longitude; !!}  };
-        const destination = { lat: parseFloat(latitudeValue), lng: parseFloat(longitudeValue) }; // location 2
-        directionsService.route(
-            {
+            lat: {!! $restaurantDetail->latitude !!},
+            lng: {!! $restaurantDetail->longitude !!}
+        };
+        const destination = {
+            lat: parseFloat(latitudeValue),
+            lng: parseFloat(longitudeValue)
+        }; // location 2
+        directionsService.route({
                 origin: origin,
                 destination: destination,
                 travelMode: 'DRIVING' // You can change this to WALKING, BICYCLING, or TRANSIT
@@ -402,4 +433,3 @@ $restaurantDetail = getRestaurantDetail();
         );
     }
 </script>
-

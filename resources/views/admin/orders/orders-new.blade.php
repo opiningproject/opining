@@ -66,7 +66,136 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ trans('rest.food_order.filter_orders') }}
                                         </button>
-                                        <ul class="dropdown-menu order-filter" aria-labelledby="dropdownMenuButton">
+
+                                        <div class="dropdown-menu order-filter  dropdown-menu-end"
+                                            aria-labelledby="dropdownMenuButton">
+
+                                            <h3 class="title-hr">Order Type</h3>
+                                            <div class="options">
+                                                <div class="order-type-group">
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="delivery"
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="delivery" />
+                                                        <label for="order-type-delivery"
+                                                            class="order-type-label order-type-delivery-label">Delivery</label>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="takeaway"
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="take_away" />
+                                                        <label for="order-type-delivery"
+                                                            class="order-type-label order-type-delivery-label">Take
+                                                            Away</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <h3 class="title-hr">Order received from</h3>
+                                            <div class="options">
+                                                <div class="order-type-group">
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="online"
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="website" />
+                                                        <label for="order-type-delivery"
+                                                            class="order-type-label order-type-delivery-label">Website</label>
+                                                    </div>
+
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="manual"
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="manual" />
+                                                        <label for="order-type-delivery"
+                                                            class="order-type-label order-type-delivery-label">Manual</label>
+                                                    </div>
+
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="takeaway_com"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="takeaway_com" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">Takeaway.com</label>
+                                                    </div>
+
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="uber_eats"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="uber_eats" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">UberEats</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <h3 class="title-hr">Payment</h3>
+                                            <div class="options">
+                                                <div class="order-type-group">
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="paid"
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="paid" />
+                                                        <label for="order-type-delivery"
+                                                            class="order-type-label order-type-delivery-label">Paid</label>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="cash"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="cash" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">Cash</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <h3 class="title-hr">Order Status</h3>
+                                            <div class="options">
+                                                <div class="order-type-group">
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="open"
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="new_order" />
+                                                        <label for="order-type-delivery"
+                                                            class="order-type-label order-type-delivery-label">New
+                                                            Order</label>
+                                                    </div>
+
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="in_kitchen"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="in_kitchen" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">In
+                                                            Kitchen</label>
+                                                    </div>
+
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="ready_delivery"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="ready_delivery" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">Ready |
+                                                            Delivery</label>
+                                                    </div>
+
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="delivered"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="delivered_canceled" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">Delivered |
+                                                            Canceled</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <ul class="dropdown-menu order-filter  dropdown-menu-end"
+                                            aria-labelledby="dropdownMenuButton">
                                             <li>
                                                 <label class="checkbox-label">
                                                     <input type="checkbox" class="checkbox" id="all"
@@ -142,12 +271,18 @@
                                             data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                                             <div class="order-box">
                                                 <div class="timing">
-                                                    <h3 class="expectedDeliveryTime-{{ $ord->id }}">
-                                                        {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
-                                                    </h3>
-{{--                                                    @if ($ord->delivery_time != 'ASAP')--}}
+                                                    @if ($ord->delivery_time == 'ASAP')
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                            {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                        </h3>
+                                                    @else
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                            {{ date('H:i', strtotime($ord->delivery_time)) }}
+                                                        </h3>
+                                                    @endif
+                                                    @if ($ord->delivery_time == 'ASAP')
                                                         <label class="success">{{ $ord->delivery_time }}</label>
-{{--                                                    @endif--}}
+                                                    @endif
                                                 </div>
 
                                                 <div class="details">

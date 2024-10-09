@@ -40,7 +40,7 @@
                                 <div class="card-body py-0">
                                     <form method="POST" name="dishOptionCategoryForm" id="dishOptionCategoryForm">
                                         @csrf
-                                        <div class="row dishOptionRow align-items-end">
+                                        <div class="row dishOptionRow align-items-start">
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishOptionCol">
                                                 <div class="form-group">
                                                     <label for="ingredientsnameenglish"
@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 dishBtnAddCol">
                                                 <div class="form-group">
-                                                    <label for="discountpercentage" class="form-label">&nbsp;</label>
+                                                    <label for="discountpercentage" class="form-label invisible">&nbsp;</label>
                                                     <button type="submit"
                                                             class="btn btn-site-theme btn-default d-block w-130px mt-0 save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
@@ -145,7 +145,7 @@
                                                                id="name_nl{{ $category->id }}" readonly/>
                                                     </td>
                                                     <td class="text-center">
-                                                        <div class="d-flex flex-nowrap gap-2">
+                                                        <div class="d-flex flex-nowrap gap-2 justify-content-center">
                                                             <a class="btn btn-site-theme btn-icon edit-cat-icon"
                                                                id="edit-btn{{ $category->id }}"
                                                                data-id="{{ $category->id }}" tabindex="0">

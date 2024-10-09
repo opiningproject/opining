@@ -253,7 +253,7 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div
-                                                            class="d-flex align-items-center justify-content-between gap-1">
+                                                            class="d-flex align-items-center justify-content-center gap-1">
                                                             <a class="btn btn-site-theme btn-icon edit-ing-btn"
                                                                tabindex="0" data-id="{{ $ingredient->id }}"
                                                                id="edit-btn{{ $ingredient->id }}">

@@ -363,7 +363,18 @@ $restaurantDetail = getRestaurantDetail();
         orderMap = new google.maps.Map(document.getElementById('map'), {
             // center: { lat: 23.0249769, lng: 72.5045738 }, // location 1
             zoom: 8,
-            mapTypeControl: false
+            mapTypeControl: false,
+            styles: [
+                {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }] // Hide points of interest
+                },
+                {
+                    featureType: "transit.station",
+                    stylers: [{ visibility: "off" }] // Hide transit stations
+                }
+            ]
         });
 
         // Create Directions Service and Renderer instances

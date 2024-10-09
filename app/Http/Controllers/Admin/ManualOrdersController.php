@@ -33,6 +33,47 @@ class ManualOrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
-        return view('admin.manual-order.index');
+        $categories = Category::orderBy('sort_order', 'asc')->get();
+        $category = '';
+
+        if ($request->cat_id) {
+            $dishes = Dish::with('favorite')->where('category_id', $request->cat_id);
+            $category = Category::find($request->cat_id);
+        } else if(!$request->all) {
+            $category = Category::orderBy('sort_order', 'asc')->first();
+            if(!empty($category)){
+                $dishes = Dish::with('favorite')->where('category_id', $category->id);
+            }else{
+                $dishes = Dish::with('favorite');
+            }
+
+        }else{
+            $dishes = Dish::with('favorite');
+        }
+
+        if(count($dishes->get()) > 0){
+            $dishes = ($request->all) ? $dishes->get() : $dishes->get();
+            // $dishes = ($request->all) ? $dishes->get() : $dishes->limit(12)->get();
+        }else{
+            $dishes = [];
+
+        }
+        return view('admin.manual-order.index', [
+            'categories' => $categories,
+            'dishes' => $dishes,
+            'category' => $category,
+            'cat_id' => $request->cat_id ?? '',
+        ]);
+    }
+
+    function getDishes(Request $request, $cat_id)
+    {
+        if ($cat_id) {
+            $category = Category::find($cat_id);
+            $dishes = Dish::with(['favorite', 'category'])->where('category_id', $cat_id);
+            $dishesHTML = view('admin.manual-order.dish.dish-list', ['dishes' => $dishes->get()])->render();
+            return response()->json(['status' => 1, 'data' => $dishesHTML, 'cat_name' => $category->name]);
+
+        }
     }
 }

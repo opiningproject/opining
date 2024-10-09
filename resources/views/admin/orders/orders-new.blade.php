@@ -142,11 +142,13 @@
                                             data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                                             <div class="order-box">
                                                 <div class="timing">
-                                                    <h3 class="expectedDeliveryTime-{{ $ord->id }}">
-                                                        {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
-                                                    </h3>
+                                                    @if ($ord->delivery_time == 'ASAP')
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                            {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                        </h3>
+                                                    @endif
 {{--                                                    @if ($ord->delivery_time != 'ASAP')--}}
-                                                        <label class="success">{{ $ord->delivery_time }}</label>
+                                                        <label class="success">{{ $ord->delivery_time == 'ASAP' ? $ord->delivery_time : date('H:i', strtotime($ord->delivery_time)) }}</label>
 {{--                                                    @endif--}}
                                                 </div>
 

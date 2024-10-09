@@ -373,13 +373,13 @@ function changeOrderStatusNew(order_id, order_status) {
 
     var orderId = order_id;
     $.ajax({
-        url: baseURL + '/orders/change-status/' + orderId,
+        url: baseURL + '/orders/change-status/' + orderId + '/' + order_status,
         type: 'GET',
         success: function (response) {
             console.log("response", response)
             if (response.status == 1) {
                 $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
-                $('.order-detail-popup').modal('hide')
+                // $('.order-detail-popup').modal('hide')
                 $('.order-status-' + response.orderId).addClass(response.color);
                 $('.order-status-' + response.orderId).text(response.text);
             }
@@ -417,8 +417,48 @@ function assignDeliverer(order_id, deliverer_id) {
     })
 }
 
-
 function disabledOldOrderStatus() {
+    const radios = document.querySelectorAll('.order-status-radio');
+
+    // Function to update the status of radio buttons
+    function updateRadioStatus() {
+        // Find the checked radio button
+        const checkedRadio = document.querySelector('.order-status-radio:checked');
+
+        if (checkedRadio) {
+            let disablePrevious = true; // Flag to disable previous radios
+            radios.forEach(radio => {
+                if (radio === checkedRadio) {
+                    disablePrevious = false; // Stop disabling after the checked radio
+                }
+                if (disablePrevious) {
+                    radio.disabled = true; // Disable previous radios
+                } else {
+                    radio.disabled = false; // Keep the current and future radios enabled
+                }
+            });
+        } else {
+            // If no radio is checked, enable all radios
+            radios.forEach(radio => {
+                radio.disabled = false;
+            });
+        }
+    }
+
+    // Initialize radio buttons on page load
+    updateRadioStatus();
+
+    // Add change event listener to radio buttons
+    radios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            updateRadioStatus(); // Apply the disabling logic based on the new selection
+        });
+    });
+}
+
+// Call the function to initialize it
+disabledOldOrderStatus();
+/*function disabledOldOrderStatus() {
     const radios = document.querySelectorAll('.order-status-radio');
 
     // Define the allowed transitions between statuses
@@ -472,7 +512,7 @@ function disabledOldOrderStatus() {
 }
 
 // Example usage
-disabledOldOrderStatus();
+disabledOldOrderStatus();*/
 
 
 // checked all checkboxs on click all checkbox.

@@ -24,261 +24,73 @@
             <div class="order-content-row">
                 <div class="order-content-col">
                     <ul class="tab-listing">
-                        <li><a href="javascript:void(0)">Burgers</a></li>
-                        <li><a href="javascript:void(0)">Pizza</a></li>
-                        <li><a href="javascript:void(0)">Pasta</a></li>
-                        <li><a href="javascript:void(0)">Fries</a></li>
-                        <li><a href="javascript:void(0)">Drinks</a></li>
-                        <li><a href="javascript:void(0)">Sides</a></li>
-                        <li><a href="javascript:void(0)">Milk</a></li>
-                        <li><a href="javascript:void(0)">Coffees</a></li>
-                        <li><a href="javascript:void(0)">Sushi</a></li>
-                        <li><a href="javascript:void(0)">Salads</a></li>
-                        <li><a href="javascript:void(0)">Supers</a></li>
-                    </ul>
+                        @foreach ($categories as $key => $cat)
+                            <?php
+                            $selected = '';
 
-                    <h2 class="sub-title">Burgers</h2>
+                            if (!isset($_GET['all']) && $cat_id == '') {
+                                if ($key == 0) {
+                                    $selected = 'active';
+                                }
+                            } else {
+                                if ($cat_id == $cat->id) {
+                                    $selected = 'active';
+                                }
+                            }
+                            ?>
+                            <li class="category-{{$cat->id}}">
+                                <a class="category {{$selected}}" onclick="getDishes({{ $cat->id }})" href="javascript:void(0)">{{$cat->name}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <h2 class="sub-title">{{$category->name}}</h2>
 
                     <div class="order-listing-row">
+                        @if (count($dishes) > 0)
+                            @foreach ($dishes as $dish)
+                                <?php
+                                $disableBtn = '';
+                                $customizeBtn = false;
+
+                                //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
+                                if ($dish->out_of_stock == '1') {
+                                    $disableBtn = 'disabled';
+                                    $customizeBtn = true;
+                                }
+
+                                if (count($dish->ingredientsWithoutTrash) == 0) {
+                                    $customizeBtn = true;
+                                }
+
+                                ?>
                         <div class="order-listing-col">
                             <div class="dish-box">
-                                <label class="discount">15%</label>
+                                @if ($dish->percentage_off > 0)
+                                    <label class="discount">{{ $dish->percentage_off }}%</label>
+                                @endif
                                 <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
+                                    <img src="{{ $dish->image }}" alt="" />
                                 </div>
 
                                 <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
+                                    <h3>{{ $dish->name }}</h3>
+                                    <button type="button" class="btn price-btn"
+                                            onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
+                                            id="dish-cart-lbl-{{ $dish->id }}">
+                                        @if ($dish->out_of_stock == '1')
+                                            {{ trans('user.dashboard.out_of_stock') }}
+                                        @else
+                                            <img src="{{ asset('images/plus-up.svg') }}" class="svg"
+                                                 height="9"
+                                                 width="9">€{{ number_format($dish->price, 2) }}
+                                        @endif
+                                    </button>
                                     <a href="#" class="customizable">Customizable</a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                <label class="discount">15%</label>
-                                <div class="image">
-                                    <img src="{{ asset('images/floating-burger.png') }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>big mac with Cheese</h3>
-                                    <a href="#" class="price-btn">+ €12,95</a>
-                                    <a href="#" class="customizable">Customizable</a>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="order-content-col sidebar-col">
@@ -293,11 +105,11 @@
                                 <div class="radio-group">
                                     <label class="radio-option">
                                         <input type="radio" name="order-type" checked>
-                                        <span>Takeaway</span>
+                                        <span>{{ trans('user.cart.take_away') }}</span>
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="order-type">
-                                        <span>Delivery</span>
+                                        <span>{{ trans('user.cart.delivery') }}</span>
                                     </label>
                                 </div>
 
@@ -619,9 +431,13 @@
             </div>
         </div>
     </div>
+    @include('user.modals.customize-dish')
     @include('admin.manual-order.create-customer-popup')
 @endsection
 {{-- create-customer-popup --}}
 @section('script')
     <script type="text/javascript" src="{{ asset('js/manual-order.js') }}"></script>
+    <script>
+        var app_name = '{!! env('APP_NAME') !!}'
+    </script>
 @endsection

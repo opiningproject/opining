@@ -241,13 +241,24 @@
                     lat: 51.8891026,
                     lng: 4.4767527
                 },
-                zoom: 9,
-                mapTypeControl: false
+                zoom: 10,
+                mapTypeControl: false,
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }] // Hide points of interest
+                    },
+                    {
+                        featureType: "transit.station",
+                        stylers: [{ visibility: "off" }] // Hide transit stations
+                    }
+                ]
             });
 
             // Define custom marker icon (you can replace the URL with your custom icon image URL)
             const customIcon = {
-                url: "{!! asset('images/opening-label.svg') !!}", // Replace with your own icon URL
+                url: "{!! asset('images/mapIcon.svg') !!}", // Replace with your own icon URL
                 scaledSize: new google.maps.Size(40, 40), // Scales the icon
                 origin: new google.maps.Point(0, 0), // The origin point (top-left)
                 anchor: new google.maps.Point(20, 40) // The anchor point (where the icon is anchored to the map)
@@ -269,7 +280,7 @@
                     });
                 }
             });
-
+        }
             $(document).ready(function() {
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
@@ -317,6 +328,5 @@
             // Update on window resize
             $(window).resize(arrangeOrderCols);
         });
-        }
     </script>
 @endsection

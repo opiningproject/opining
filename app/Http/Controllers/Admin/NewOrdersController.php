@@ -275,7 +275,7 @@ class NewOrdersController extends Controller
     public function changeStatusNew(Request $request)
     {
         $order = Order::find($request->id);
-        $order = getOrderStatus($order);
+        $order->order_status = $request->order_status;
         $orderStatus = 0;
         if ($order->save()) {
             $order->user->notify(new DeliveryTypeUpdate($order));

@@ -76,7 +76,7 @@ body {background: #f1f1f1 !important;}
 .section-page-title .btn-grp-tab .btn svg path{
     stroke: #000000;
     }
-    
+
 .section-page-title .btn-grp-tab .btn.btn-site-theme svg path{
 stroke: #ffffff;
 }
@@ -867,3 +867,21 @@ width: 100%;
 .finance_auth_section .finance_auth_form {flex: 0 0 100%;max-width: 100%;}
     .signin-card {max-width: 310px;}
 }
+/* dish details popup */
+.customisable-table .foodqty .minus, .customisable-table .foodqty .plus {width: 22px;height: 22px;line-height: 14px;}
+.foodqty .minus, .foodqty .plus {height: 35px !important;min-width: 35px !important;border-color: #d9d9d9 !important;width: 35px;flex: 0 0 35px !important;display: flex !important;align-items: center;justify-content: center;background: #d9d9d9 !important;cursor: pointer;vertical-align: top;text-align: center;border-radius: 50%;border: 2px solid;}
+.customisable-table table th {padding: 0;color: var(--theme-dark2);font-size: 16px;font-weight: 600;letter-spacing: 0.5px;text-transform: capitalize;}
+.paid_ingredients-list {color: var(--theme-dark2);font-size: 16px !important;letter-spacing: 0.5px;text-transform: capitalize;padding: 1rem 0;background-color: transparent;border-bottom: 1px solid #E0E0E0;padding-bottom: 10px !important;}
+.customisable-modal-body .customisable-table table td {padding: 2px 5px 0px 0px !important;font-size: 14px !important;color: var(--theme-dark2);letter-spacing: 0.815px;text-transform: capitalize;}
+.accordion-item table td {padding: 0;}
+.customisable-table table td { padding: 20px 0 0 0; color: var(--theme-dark2); font-size: 16px; letter-spacing: 0.815px; text-transform: capitalize;}
+.accordion-item table td {padding: 0;}
+.customisable-table table td {padding: 20px 0 0 0;color: var(--theme-dark2);font-size: 16px;letter-spacing: 0.815px;text-transform: capitalize;}
+.foodqty .count {width: 30px !important;}
+.foodqty .count {color: var(--theme-dark2);display: inline-block;vertical-align: top;font-size: 20px;line-height: 30px;padding: 0 2px;min-width: 35px;background-color: transparent;text-align: center;border: none;width: 55px;}
+.foodqty {display: flex;align-items: center;}
+.custom-modal .modal-body, .custom-modal .modal-footer {padding: 40px;}
+.customisable-item-detail .food-custom-price {font-weight: 700;}
+.food-custom-price {color: var(--theme-dark2);text-align: center;font-size: 20px;font-weight: 500;letter-spacing: 0.815px;margin: 10px 0;display: inline-block;text-transform: capitalize;}
+.custom-modal .modal-dialog .modal-content {border-radius: 30px;box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.06);}
+.customisable-item-detail p {margin: 7px 0;color: #727272;font-size: 16px;letter-spacing: 0.815px;text-transform: capitalize;line-height: 23px;margin-bottom: 10px !important;}

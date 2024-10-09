@@ -221,7 +221,7 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="row items-in-row">
 
                             <div class="col-12 mb-3">
-                                <div class="dish-details-row">
+                                <div class="dish-details-row px-4">
                                     <?php $itemTotalPrice = 0;
                                     $dishIngredientsTotalAmount = 0; ?>
                                     @foreach ($order->dishDetails as $key => $dish)

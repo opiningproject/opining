@@ -590,7 +590,6 @@ stroke: #ffffff;
 @media screen and (max-width: 1750px) {
     .order-page-bar .page-title {font-size: 24px;}
 .order-page-bar .page-title .count {font-size: 18px;height: 40px;min-width: 40px;}
-.order-page-bar .btn {min-width: 200px;}
 .order-listing-container .order-col .order-box .actions {padding-left: 10px;}
 .order-listing-container .order-col .order-box .actions .btn {width: 100px;font-size: 10px !important;margin-left: 10px;flex: 0 0 100px;max-width: 100px;}
 .order-listing-container .order-col .order-box .details {padding-right: 10px;padding-left: 10px;}
@@ -770,7 +769,6 @@ stroke: #ffffff;
 .header-belt .title {font-size: 20px;}
 
     .header-filter-order .col {max-width: 200px;}
-    .order-page-bar .btn {min-width: 150px;}
     .order-listing-container .order-col .order-box .actions .btn {width: 90px;font-size: 10px !important;flex: 0 0 90px;max-width: 90px;}
 
     .tab-listing li a {min-width: 90px;font-size: 14px;}

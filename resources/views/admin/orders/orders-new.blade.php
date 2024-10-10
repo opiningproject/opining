@@ -281,7 +281,7 @@
                                                         </h3>
                                                     @endif
                                                     @if ($ord->delivery_time == 'ASAP')
-                                                        <label class="success">{{ $ord->delivery_time }}</label>
+                                                        <label class="cursor-pointer success">{{ $ord->delivery_time }}</label>
                                                     @endif
                                                 </div>
 

@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).on('click', '.update-delivery-time', function () {
     var getMinute = $(this).text(); // +5 or -5
     var orderId = $('.order_id').val();
-    var curruntTime = $('.expected_time_order').text();
+    var curruntTime = $('.expected_time_order').val();
 
     // Convert the current time (HH:mm) to minutes for easier comparison
     var timeParts = curruntTime.split(':');
@@ -663,7 +663,7 @@ $(document).on('click', '.update-delivery-time', function () {
         },
         success: function (response) {
             if (response.status == 'success') {
-                $('.expected_time_order').text(response.expected_time_order);
+                $('.expected_time_order').val(response.expected_time_order);
                 $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
             }
         },
@@ -697,3 +697,52 @@ $(document).ready(function () {
         console.log("The last element is not a number.");
     }
 });
+
+
+$(document).on('focus', '.expected_time_order', function () {
+    // Store the original time value when the input gains focus
+    $(this).data('original-time', this.value);
+});
+
+$(document).on('change', '.expected_time_order', function () {
+    let newTime = this.value;
+    let originalTime = $(this).data('original-time');
+    let orderId = $('.order_id').val();
+    console.log("Original Time: ", originalTime);
+    console.log("New Time: ", newTime);
+
+    if (/^\d{2}:\d{2}$/.test(newTime)) {
+        if (newTime >= originalTime) {
+            $('.expected_time_order_error').addClass('d-none')
+            updateDeliveryTime(newTime, orderId,);
+        } else {
+            $('.expected_time_order').val(originalTime)
+            $('.expected_time_order_error').removeClass('d-none')
+        }
+    } else {
+        alert('Please enter a valid time in HH:MM format.');
+    }
+});
+
+function updateDeliveryTime(newTime,orderId) {
+    // Perform an AJAX call
+    $.ajax({
+        url: baseURL + '/update-wished-time', // Your Laravel route to handle the request
+        method: 'POST',
+        data: {
+            orderId: orderId,
+            expected_time: newTime
+        },
+        success: function (response) {
+            if (response.status == 'success') {
+                $('.expected_time_order').text(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
+            } else {
+                alert('Failed to update the expected delivery time.');
+            }
+        },
+        error: function () {
+            alert('Error updating the expected delivery time.');
+        }
+    });
+}

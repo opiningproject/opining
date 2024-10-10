@@ -1,11 +1,12 @@
 @extends('layouts.app')
-@section('page_title', 'Create Order')
+@section('page_title')
+    <a href="{{route('orders')}}">Orders</a> <span class="create-order-breadcrumb" > > </span> Create Order
+@endsection
 @section('content')
 
     <div class="main-content">
         <div class="header-belt">
-            <h1 class="title mb-0">
-            </h1>
+            <h1 class="title mb-0"></h1>
 
             <div class="btns-group">
                 <div class="search-box">

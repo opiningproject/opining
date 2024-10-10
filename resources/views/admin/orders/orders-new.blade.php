@@ -359,9 +359,11 @@
         </div>
         <!-- start footer -->
         {{--    @include('admin.orders.order-detail-popup') --}}
-        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1"
-            aria-labelledby="orderDetailModal" aria-hidden="true">
-        </div>
+{{--check on monday--}}
+    {{--        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1"--}}
+{{--            aria-labelledby="orderDetailModal" aria-hidden="true">--}}
+{{--        </div>--}}
+
         @include('admin.orders.order-setting-popup')
         @include('layouts.admin.footer_design')
         @include('admin.modals.change-order-status')

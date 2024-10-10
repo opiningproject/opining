@@ -179,7 +179,7 @@ function getLiveOrderList() {
                 $('.order-column:first').prepend(data.data)
                 $('.order-col:first').css({ 'height': orderColHeight})
                 // $('.order-notification-popup').modal('show')
-                orderDetailNew(data.orderId).click()
+                orderDetailsNew(data.orderId)
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);
                 $('.count-order').html(currentOrderCount + 1);

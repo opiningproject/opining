@@ -93,6 +93,10 @@
         <div class="overlay-sidebar"></div>
 
         @yield('content')
+
+            <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1"
+                 aria-labelledby="orderDetailModal" aria-hidden="true">
+            </div>
     </div>
 
     {{-- @if ($theme == 'dark')

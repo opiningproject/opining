@@ -233,13 +233,13 @@ function checkScreenSize() {
     if ($(window).width() <= 767) {
         $('body').addClass('body-bg-mobile');
         var invoiceHeight = $('.cartSidebarCustom .bill-detail-invoice').height();
-        var newHeight = invoiceHeight + 20;
+        var newHeight = invoiceHeight + 15;
         $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
 
         if ($('.pills-delivery-tab.active').data('type') == "1") {
             $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
         } else {
-            newHeight = invoiceHeight - 20
+            newHeight = invoiceHeight + 15
             $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
         }
     } else {

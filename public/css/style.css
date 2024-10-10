@@ -154,7 +154,7 @@
 
 body {background-color: var(--theme-gray1);color: var(--theme-dark1);font-family: "Poppins", sans-serif !important;min-height: 100vh;}
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 5px;
     height: 3px;
 }
@@ -167,7 +167,8 @@ body {background-color: var(--theme-gray1);color: var(--theme-dark1);font-family
 ::-webkit-scrollbar-thumb {
     background-color: var(--theme-gray4);
     border-radius: 5px;
-}
+} */
+
 
 ::-moz-placeholder {
     color: var(--theme-gray5) !important;

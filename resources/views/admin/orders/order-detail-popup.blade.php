@@ -131,7 +131,7 @@ $restaurantDetail = getRestaurantDetail();
                 <div class="tab-content px-0 pb-0">
                     <!-- Content for Tab 1 -->
                     <div class="tab-pane fade show active" id="content-1" role="tabpanel" aria-labelledby="tab-1">
-                        <div class="row">
+                        <div class="row"  style="position: relative;top: -10px;">
                             <div class="col-lg-5 mb-3">
                                 <div class="table-content">
                                     <table>
@@ -168,16 +168,17 @@ $restaurantDetail = getRestaurantDetail();
                                                 {{ $order->payment_type == PaymentType::Card ? trans('rest.food_order.card') : ($order->payment_type == PaymentType::Cash ? trans('rest.food_order.cod') : 'Ideal') }}
                                             </td>
                                         </tr>
-                                        @if ($order->coupon_code)
+                                        {{-- @if ($order->coupon_code) --}}
                                             <tr>
                                                 <th>{{ trans('modal.order_detail.promo_code') }}</th>
                                                 <td>
                                                     <p class="text-uppercase">
-                                                        {{ $order->coupon_code ? $order->coupon_code : '-' }}</p>
+                                                        DISCOUNT10    {{-- {{ $order->coupon_code ? $order->coupon_code : '-' }} --}}
+                                                    </p>
                                                 </td>
                                             </tr>
-                                        @endif
-                                        @if ($order->delivery_note)
+                                        {{-- @endif --}}
+                                        {{-- @if ($order->delivery_note)
                                             <tr>
                                                 <th>{{ trans('modal.order_detail.note') }}</th>
                                                 <td>
@@ -185,7 +186,7 @@ $restaurantDetail = getRestaurantDetail();
                                                         {{ $order->delivery_note ? $order->delivery_note : '-' }}</p>
                                                 </td>
                                             </tr>
-                                        @endif
+                                        @endif --}}
                                     </table>
                                 </div>
                             </div>
@@ -211,6 +212,20 @@ $restaurantDetail = getRestaurantDetail();
                                             <button class="t-box update-delivery-time">+5</button>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="table-content">
+                                    <table>
+                                        @if ($order->delivery_note)
+                                            <tr>
+                                                <th>{{ trans('modal.order_detail.note') }}</th>
+                                                <td>
+                                                    <p class="text-underline">
+                                                        {{ $order->delivery_note ? $order->delivery_note : '-' }}</p>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +287,7 @@ $restaurantDetail = getRestaurantDetail();
                     <!-- Content for Tab 3 -->
                     <div class="tab-pane fade px-0" id="content-3" role="tabpanel" aria-labelledby="tab-3">
                         <div class="tab-map">
-                            <div id="map" style="height: 290px; width: 100%;"></div>
+                            <div id="map" style="height: 345px; width: 100%;"></div>
                         </div>
                     </div>
 

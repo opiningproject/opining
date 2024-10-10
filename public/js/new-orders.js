@@ -371,36 +371,36 @@ function orderDetailNew(id) {
     })
 }
 
-function changeOrderStatusNew(order_id, order_status) {
-    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", { transports: ['websocket', 'polling', 'flashsocket'] });
-
-    var orderId = order_id;
-    $.ajax({
-        url: baseURL + '/orders/change-status/' + orderId + '/' + order_status,
-        type: 'GET',
-        success: function (response) {
-            console.log("response", response)
-            if (response.status == 1) {
-                $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
-                // $('.order-detail-popup').modal('hide')
-                $('.order-status-' + response.orderId).addClass(response.color);
-                $('.order-status-' + response.orderId).text(response.text);
-            }
-            if (response.orderStatus == "6") {
-                $('#order-' + response.orderId).remove();
-                var currentOrderCount = $('.order-count').text();
-                $('.order-count').html(currentOrderCount - 1);
-                $('.count-order').html(currentOrderCount - 1);
-                window.location.reload()
-            }
-            socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
-        },
-        error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
-        }
-    })
-}
+// function changeOrderStatusNew(order_id, order_status) {
+//     var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", { transports: ['websocket', 'polling', 'flashsocket'] });
+//
+//     var orderId = order_id;
+//     $.ajax({
+//         url: baseURL + '/orders/change-status/' + orderId + '/' + order_status,
+//         type: 'GET',
+//         success: function (response) {
+//             console.log("response", response)
+//             if (response.status == 1) {
+//                 $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
+//                 // $('.order-detail-popup').modal('hide')
+//                 $('.order-status-' + response.orderId).addClass(response.color);
+//                 $('.order-status-' + response.orderId).text(response.text);
+//             }
+//             if (response.orderStatus == "6") {
+//                 $('#order-' + response.orderId).remove();
+//                 var currentOrderCount = $('.order-count').text();
+//                 $('.order-count').html(currentOrderCount - 1);
+//                 $('.count-order').html(currentOrderCount - 1);
+//                 window.location.reload()
+//             }
+//             socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
+//         },
+//         error: function (response) {
+//             var errorMessage = JSON.parse(response.responseText).message
+//             alert(errorMessage);
+//         }
+//     })
+// }
 
 function assignDeliverer(order_id, deliverer_id) {
     var orderId = order_id;

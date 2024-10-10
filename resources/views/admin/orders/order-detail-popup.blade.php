@@ -409,9 +409,19 @@ $restaurantDetail = getRestaurantDetail();
             mapTypeControl: false,
             styles: [
                 {
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [{ visibility: "off" }] // Hide all roads
+                },
+                {
+                    featureType: "road",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }] // Hide road labels
+                },
+                {
                     featureType: "poi",
                     elementType: "labels",
-                    stylers: [{ visibility: "off" }] // Hide points of interest
+                    stylers: [{ visibility: "off" }] // Hide points of interest labels
                 },
                 {
                     featureType: "transit.station",
@@ -446,7 +456,8 @@ $restaurantDetail = getRestaurantDetail();
         directionsService.route({
                 origin: origin,
                 destination: destination,
-                travelMode: 'DRIVING' // You can change this to WALKING, BICYCLING, or TRANSIT
+                travelMode: 'DRIVING', // You can change this to WALKING, BICYCLING, or TRANSIT
+                avoidHighways: true // Avoid highways
             },
             (response, status) => {
                 if (status === 'OK') {

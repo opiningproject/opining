@@ -355,13 +355,14 @@ stroke: #ffffff;
 .items-in-row * {font-size: 14px;font-weight: 500;}
 .dish-ing {font-weight: 400 !important;}
 .items-in-row .price {font-weight: 600;font-size: 15px;min-width: 150px;}
-.items-in-row .item-option h5 {font-size: 16px;}
-.items-in-row .item-option h6 {font-size: 14px;font-weight: 600;}
-.items-in-row .item-option ul li {font-weight: 400;font-size: 13px;display: flex;align-items: center;}
+.items-in-row .item-option h5 {font-size: 15px;white-space: nowrap;}
+.items-in-row .item-option h6 {font-size: 15px;font-weight: 500;}
+.items-in-row .item-option ul li {font-weight: 500;font-size: 14px;display: flex;align-items: center;white-space: nowrap;}
 .dish-details-row {display: flex;flex-wrap: wrap;margin: 0px -20px;}
 .dish-details-row .ord_listing {flex: 0 0 100%;max-width: 100%;margin-bottom: 30px !important;}
 .items-in-row .item-option ul li span {flex: 0 0 20px;max-width: 20px;}
 .order-detail-popup .tab-pane {padding-left: 0px;padding-right: 0px;}
+.items-in-row .num-items {flex: auto;padding-right: 20px;}
 .items-in-row .num-items h4 {flex: 0 0 30px;max-width: 30px;}
 .items-in-row ul {list-style-type: none;padding-left: 10px;}
 .order-detail-popup .table-content * {font-size: 14px;}

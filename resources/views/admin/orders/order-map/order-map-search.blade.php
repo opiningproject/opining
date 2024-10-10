@@ -18,7 +18,7 @@ use App\Enums\PaymentType;
                             <h3 class="expectedDeliveryTime-{{ $ord->id }}">
                                 {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                             </h3>
-                            <label class="success">{{ $ord->delivery_time }}</label>
+                            <label class="success cursor-pointer">{{ $ord->delivery_time }}</label>
                         </div>
 
                         <div class="details">

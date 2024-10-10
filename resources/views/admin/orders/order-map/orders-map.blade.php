@@ -62,58 +62,6 @@
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ trans('rest.food_order.filter_orders') }}
                                         </button>
-{{--                                        <ul class="dropdown-menu order-filter" aria-labelledby="dropdownMenuButton">--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="all"--}}
-{{--                                                           name="all"><label for="all" class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.all') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="online"--}}
-{{--                                                           name="online"><label for="online" class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.online_orders') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="manual"--}}
-{{--                                                           name="manual"><label for="manual" class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.manual_orders') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="delivery"--}}
-{{--                                                           name="delivery"><label for="delivery" class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.delivery') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="takeaway"--}}
-{{--                                                           name="takeaway"><label for="takeaway" class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.take_away') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="open"--}}
-{{--                                                           name="open"><label for="open" class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.open_orders') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <label class="checkbox-label">--}}
-{{--                                                    <input type="checkbox" class="checkbox" id="delivered"--}}
-{{--                                                           name="delivered"><label for="delivered"--}}
-{{--                                                                                   class="checkmark"></label>--}}
-{{--                                                    {{ trans('rest.food_order.delivered_orders') }}--}}
-{{--                                                </label>--}}
-{{--                                            </li>--}}
-{{--                                        </ul>--}}
                                         <div class="dropdown-menu order-filter  dropdown-menu-end"
                                              aria-labelledby="dropdownMenuButton">
 
@@ -227,16 +175,6 @@
                                                                class="order-type-label order-type-takeaway-label">Ready |
                                                             Delivery</label>
                                                     </div>
-
-                                                    <div class="clearfix">
-                                                        <input type="checkbox" id="delivered"
-                                                               class="order-type-input order-type-takeaway-input"
-                                                               name="delivered_canceled" />
-                                                        <label for="order-type-takeaway"
-                                                               class="order-type-label order-type-takeaway-label">Delivered |
-                                                            Canceled</label>
-                                                    </div>
-
                                                 </div>
                                             </div>
 
@@ -271,7 +209,7 @@
                                                     <h3 class="expectedDeliveryTime-{{ $ord->id }}">
                                                         {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                                                     </h3>
-                                                    <label class="success">{{ $ord->delivery_time }}</label>
+                                                    <label class="success cursor-pointer">{{ $ord->delivery_time }}</label>
                                                 </div>
 
                                                 <div class="details">

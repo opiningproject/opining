@@ -31,8 +31,6 @@
                                 </svg>
 
                             </a>
-
-                            {{--                        <h1 class="mb-0">Orders <label>15</label></h1> --}}
                             <h1 class="mb-0 title">@yield('page_title', 'Dashboard')
                                 @hasSection('order_count')
                                     <label class="count count-order">@yield('order_count')</label>

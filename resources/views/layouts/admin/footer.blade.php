@@ -140,7 +140,7 @@
         success: function (data) {
             if(data) {
                 $('#order-modal-div').html(data)
-                $('.order-notification-popup').modal('show')
+                // $('.order-notification-popup').modal('show')
                 // Check if there are more than 10 orders displayed
                 console.log("length", $('.order-column:first .order-col').length)
 
@@ -178,7 +178,8 @@ function getLiveOrderList() {
                 // var height = $('.order-col:last').height();
                 $('.order-column:first').prepend(data.data)
                 $('.order-col:first').css({ 'height': orderColHeight})
-                $('.order-notification-popup').modal('show')
+                // $('.order-notification-popup').modal('show')
+                orderDetailNew(data.orderId).click()
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);
                 $('.count-order').html(currentOrderCount + 1);

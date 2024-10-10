@@ -203,7 +203,7 @@ class NewOrdersController extends Controller
             $orders->where(function ($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
                 if (in_array('online', $filters)) {
-                    $query->orWhere('is_online_order', '1')->where('order_status', '!=', OrderStatus::Delivered);
+                    $query->orWhere('is_online_order', '1')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
                 }
 
                 if (in_array('manual', $filters)) {
@@ -446,7 +446,7 @@ class NewOrdersController extends Controller
                 $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>';
             }
             if ($orders->delivery_time == 'ASAP') {
-                $html .= '<label class="success"> ' . $orders->delivery_time . ' </label>';
+                $html .= '<label class="success cursor-pointer"> ' . $orders->delivery_time . ' </label>';
             }
 
             $html .= '</div>
@@ -469,7 +469,7 @@ class NewOrdersController extends Controller
             </div>
         </div>';
 
-            return response()->json(['data' => $html]);
+            return response()->json(['data' => $html, 'orderId' => $orders->id]);
 
         } catch (Exception $exception) {
             return response::json(['status' => 400, 'message' => $exception->getMessage()]);
@@ -552,6 +552,26 @@ class NewOrdersController extends Controller
         $getOrderData->save();
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
         return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateWishedTime(Request $request)
+    {
+        $getOrderData = Order::find($request->orderId);
+        if ($getOrderData->delivery_time == "ASAP") {
+            $getOrderData->expected_delivery_time = date('H:i:s', strtotime($request->expected_time));
+        } else {
+            $getOrderData->delivery_time = date('H:i:s', strtotime($request->expected_time));
+        }
+        $getOrderData->save();
+        $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
+        if ($getOrderData->delivery_time != "ASAP") {
+            $expected_delivery_time = date('H:i', strtotime($getOrderData->delivery_time));
+        }
+        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'orderData' => $getOrderData]);
     }
 
     /**
@@ -783,7 +803,7 @@ class NewOrdersController extends Controller
             $orders->where(function ($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
                 if (in_array('online', $filters)) {
-                    $query->orWhere('is_online_order', '1')->where('order_status', '!=', OrderStatus::Delivered);
+                    $query->orWhere('is_online_order', '1')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
                 }
 
                 if (in_array('manual', $filters)) {

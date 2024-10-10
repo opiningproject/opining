@@ -44,10 +44,9 @@ $restaurantDetail = getRestaurantDetail();
                     <div class="order-cols-status">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::InKitchen ? 'active' : '' }}">
-                            <input id="inKitchen-order" type="radio" class="order-status-radio"
-                                name="order-status-option"
-                                {{ $order->order_status == OrderStatus::InKitchen ? 'checked' : '' }}
-                                onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::InKitchen }}')" />
+                            <input id="inKitchen-order" type="radio" class="order-status-radio" name="orderStatus"
+                                   {{ $order->order_status == OrderStatus::InKitchen ? 'checked' : '' }}
+                                   onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::InKitchen }}')" />
                             <span for="inKitchen-order"></span>
                             <label>{{ trans('modal.order_detail.in_kitchen') }}</label>
                         </label>
@@ -56,10 +55,9 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="order-cols-status">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::OutForDelivery ? 'active' : '' }}">
-                                <input id="outForDelivery-order" type="radio" class="order-status-radio"
-                                    name="order-status-option"
-                                    {{ $order->order_status == OrderStatus::OutForDelivery ? 'checked' : '' }}
-                                    onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::OutForDelivery }}')" />
+                                <input id="outForDelivery-order" type="radio" class="order-status-radio" name="orderStatus"
+                                       {{ $order->order_status == OrderStatus::OutForDelivery ? 'checked' : '' }}
+                                       onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::OutForDelivery }}')" />
                                 <span for="outForDelivery-order"></span>
                                 <label>{{ trans('modal.order_detail.out_for_delivery') }}</label>
                             </label>
@@ -68,10 +66,9 @@ $restaurantDetail = getRestaurantDetail();
                         <div class="order-cols-status">
                             <label
                                 class="order-status-option status-option {{ $order->order_status == OrderStatus::ReadyForPickup ? 'active' : '' }}">
-                                <input id="outForDelivery-order" type="radio" class="order-status-radio"
-                                    name="order-status-option"
-                                    {{ $order->order_status == OrderStatus::ReadyForPickup ? 'checked' : '' }}
-                                    onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::ReadyForPickup }}')" />
+                                <input id="outForDelivery-order" type="radio" class="order-status-radio" name="orderStatus"
+                                       {{ $order->order_status == OrderStatus::ReadyForPickup ? 'checked' : '' }}
+                                       onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::ReadyForPickup }}')" />
                                 <span for="outForDelivery-order"></span>
                                 <label>{{ trans('modal.order_detail.ready_for_pickup') }}</label>
                             </label>
@@ -81,10 +78,9 @@ $restaurantDetail = getRestaurantDetail();
                     <div class="order-cols-status">
                         <label
                             class="order-status-option status-option {{ $order->order_status == OrderStatus::Delivered ? 'active' : '' }}">
-                            <input id="delivered-order" type="radio" class="order-status-radio"
-                                name="order-status-option"
-                                {{ $order->order_status == OrderStatus::Delivered ? 'checked' : '' }}
-                                onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::Delivered }}')" />
+                            <input id="delivered-order" type="radio" class="order-status-radio" name="orderStatus"
+                                   {{ $order->order_status == OrderStatus::Delivered ? 'checked' : '' }}
+                                   onclick="changeOrderStatusNew({{ $order->id }},'{{ OrderStatus::Delivered }}')" />
                             <span for="delivered-order"></span>
                             <label>{{ trans('modal.order_detail.delivered') }}</label>
                         </label>
@@ -195,7 +191,7 @@ $restaurantDetail = getRestaurantDetail();
                                         <label>{{ trans('modal.order_detail.wished_time') }} </label>
                                         <div class="timing-col">
                                             <div class="t-box bg-transperent"></div>
-                                            <div class="text-uppercase">{{ $order->delivery_time }}</div>
+                                            <div class="text-uppercase">{{ $order->delivery_time == 'ASAP' ? $order->delivery_time : date('H:i', strtotime(\Carbon\Carbon::parse($order->delivery_time))) }}</div>
                                             <div class="t-box bg-transperent"></div>
                                         </div>
                                     </div>
@@ -205,12 +201,17 @@ $restaurantDetail = getRestaurantDetail();
                                         <div class="timing-col">
                                             <button class="t-box update-delivery-time">-5</button>
                                             <div class="text-uppercase custom-timing">
-                                                <input type="text" class="expected_time_order" value="{{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}" />
-                                                </input>
+                                                @if($order->delivery_time != 'ASAP')
+                                                    <input type="text" class="expected_time_order" value="{{ date('H:i', strtotime(\Carbon\Carbon::parse($order->delivery_time))) }}" />
+                                                @else
+                                                    <input type="text" class="expected_time_order" oninput="validateTimeInput(this)" value="{{ $order->expected_delivery_time ? date('H:i', strtotime($order->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($order->created_at)->addMinutes($orderDeliveryTime))) }}" />
+                                                @endif
+
                                             </div>
                                             <button class="t-box update-delivery-time">+5</button>
                                         </div>
                                     </div>
+                                    <label class="expected_time_order_error error d-none"> The new time cannot be earlier than the existing time. </label>
                                 </div>
                             </div>
                         </div>
@@ -234,7 +235,6 @@ $restaurantDetail = getRestaurantDetail();
                                                     @if (count($dish->orderDishOptionDetails) > 0)
                                                         <h6>Options</h6>
                                                         @php
-                                                            /*old code comment on 13-08-2024*/
                                                             $htmlStringDishOptionCategory =
                                                                 getDishOptionCategoryName(
                                                                     $dish->orderDishOptionDetails->pluck(
@@ -368,6 +368,18 @@ $restaurantDetail = getRestaurantDetail();
     src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_place_key') }}&callback=initOrderMap"
     async defer></script>
 <script>
+
+    // validation for only number and colon sign allow
+    function validateTimeInput(input) {
+        // Replace anything that's not a digit or a colon with an empty string
+        input.value = input.value.replace(/[^0-9:]/g, '');
+
+        // If the format doesn't match HH:MM, truncate extra characters
+        if (input.value.length > 5) {
+            input.value = input.value.slice(0, 5);
+        }
+    }
+
     let orderMap;
     let directionsService;
     let directionsRenderer;

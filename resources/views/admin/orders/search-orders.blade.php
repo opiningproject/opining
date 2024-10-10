@@ -19,7 +19,7 @@ use App\Enums\PaymentType;
                                 {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                             </h3>
 {{--                            @if ($ord->delivery_time != 'ASAP')--}}
-                                <label class="success">{{ $ord->delivery_time }}</label>
+                                <label class="success cursor-pointer">{{ $ord->delivery_time }}</label>
 {{--                            @endif--}}
                             </div>
 

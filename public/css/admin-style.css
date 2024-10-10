@@ -597,6 +597,8 @@ stroke: #ffffff;
     outline: none;
     box-shadow: none;
 }
+
+.create-order-breadcrumb {margin: 2px -7px 0px -7px;}
 .ml-content .content * {font-size: 15px;}
 .ml-content .content p{font-size: 15px;font-weight: 300;}
 .ml-content .content b {font-weight: 600;}

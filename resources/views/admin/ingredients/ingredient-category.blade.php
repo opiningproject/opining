@@ -62,9 +62,9 @@
                                             </div>
                                             <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="discountpercentage" class="form-label"></label>
+                                                    <label for="discountpercentage" class="form-label">&nbsp;</label>
                                                     <button type="submit"
-                                                            class="btn btn-site-theme btn-default d-block w-130px mt-3 save-ing-cat-div">
+                                                            class="btn btn-site-theme btn-default d-block w-130px save-ing-cat-div">
                                                         <span class="align-middle">{{ trans('rest.button.add') }}</span>
                                                     </button>
                                                 </div>
@@ -120,7 +120,7 @@
                                                             </a>
                                                             <a class="btn btn-site-theme btn-default save-edit-btn d-block"
                                                                id="save-edit-btn{{ $category->id }}"
-                                                               style="width: 50%;margin-left: 0%; display: none!important;"
+                                                               style="width: 50%;margin-left: 25%; display: none!important;"
                                                                data-id="{{ $category->id }}">
                                                                 <span
                                                                     class="align-middle">{{ trans('rest.button.save') }}</span>

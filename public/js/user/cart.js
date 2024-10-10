@@ -25,12 +25,12 @@ $(function () {
         var type = $(this).data('type')
 
         if (type == "2") {
-            let newHeights = invoiceHeight - 11;
+            let newHeights = invoiceHeight + 15;
 
             addPaddingToCouponTag(type,newHeights)
             $('.minimum_amount').hide()
         } else {
-            let newHeight = invoiceHeight + 20;
+            let newHeight = invoiceHeight + 15;
 
             addPaddingToCouponTag(type,newHeight)
             $('.minimum_amount').show()

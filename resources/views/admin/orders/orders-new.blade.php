@@ -3,7 +3,7 @@
 @section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
 @section('content')
     <?php
-//dd(\Carbon\Carbon::now(), RoundCreatedAt(\Carbon\Carbon::now()), \Carbon\Carbon::now()->ceilMinute(5));
+    //dd(\Carbon\Carbon::now(), RoundCreatedAt(\Carbon\Carbon::now()), \Carbon\Carbon::now()->ceilMinute(5));
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
@@ -30,6 +30,14 @@
                                     style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
                                         width="20" /> Map</a>
+
+                                <a href="{{ route('create-order') }}"
+                                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
+                                    style="min-width: auto">
+                                    <img src="{{ asset('images/create-order.png') }}" />
+                                    <img src="{{ asset('images/create-order-white.png') }}" class="d-none" />
+                                    {{ trans('rest.food_order.create_order') }}</a>
+
                             </div>
 
                             {{-- <h1 class="page-title me-auto">{{ trans('rest.food_order.orders') }} <span
@@ -249,9 +257,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
+                                {{-- <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
                                     <span>{{ trans('rest.food_order.create_order') }}</span>
-                                </a>
+                                </a> --}}
 
                                 <button type="button"
                                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
@@ -281,7 +289,8 @@
                                                         </h3>
                                                     @endif
                                                     @if ($ord->delivery_time == 'ASAP')
-                                                        <label class="cursor-pointer success">{{ $ord->delivery_time }}</label>
+                                                        <label
+                                                            class="cursor-pointer success">{{ $ord->delivery_time }}</label>
                                                     @endif
                                                 </div>
 
@@ -300,10 +309,10 @@
                                                                     echo $userDetails->house_no . ', ' . $userDetails->street_name;
                                                                     ?>
                                                                 </p>
-{{--                                                            @else--}}
-{{--                                                                <p class="mb-0">--}}
-{{--                                                                    {{ getRestaurantDetail()->rest_address }}--}}
-{{--                                                                </p>--}}
+                                                                {{--                                                            @else --}}
+                                                                {{--                                                                <p class="mb-0"> --}}
+                                                                {{--                                                                    {{ getRestaurantDetail()->rest_address }} --}}
+                                                                {{--                                                                </p> --}}
                                                             @endif
                                                         </div>
                                                     </div>
@@ -359,10 +368,10 @@
         </div>
         <!-- start footer -->
         {{--    @include('admin.orders.order-detail-popup') --}}
-{{--check on monday--}}
-    {{--        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1"--}}
-{{--            aria-labelledby="orderDetailModal" aria-hidden="true">--}}
-{{--        </div>--}}
+        {{-- check on monday --}}
+        {{--        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1" --}}
+        {{--            aria-labelledby="orderDetailModal" aria-hidden="true"> --}}
+        {{--        </div> --}}
 
         @include('admin.orders.order-setting-popup')
         @include('layouts.admin.footer_design')
@@ -380,7 +389,7 @@
                 var columnGap = 10; // Space between columns and between items
 
                 // Determine the maximum number of items per column dynamically based on screen height
-                var maxItemsPerColumn = screenHeight > 1079 ?
+                var maxItemsPerColumn = screenHeight > 5000 ?
                     Math.floor(availableHeight / (76 + columnGap)) :
                     8; // Above 1080px, the number of items per column is dynamic
 

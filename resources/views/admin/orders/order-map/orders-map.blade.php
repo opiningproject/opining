@@ -47,23 +47,23 @@
 
                                 <div class="order-radio-group">
                                     <div class="radio-col">
-                                        <div class="radio-container">
-                                            <input type="radio" id="radio1" name="New">
-                                            <label class="radio-custom" for="radio1"></label>
+                                        <div class="radio-container order-type-label">
+                                            <input type="radio" id="new" name="order_type" value="new" checked>
+                                            <label class="radio-custom" for="new"></label>
                                             <span class="radio-label">New</span>
                                         </div>
                                     </div>
                                     <div class="radio-col">
-                                        <div class="radio-container">
-                                            <input type="radio" id="radio2" name="New">
-                                            <label class="radio-custom" for="radio1"></label>
+                                        <div class="radio-container order-type-label">
+                                            <input type="radio" id="in_kitchen" name="order_type" value="in_kitchen">
+                                            <label class="radio-custom" for="in_kitchen"></label>
                                             <span class="radio-label">In kitchen</span>
                                         </div>
                                     </div>
                                     <div class="radio-col">
-                                        <div class="radio-container">
-                                            <input type="radio" id="radio3" name="New">
-                                            <label class="radio-custom" for="radio1"></label>
+                                        <div class="radio-container order-type-label">
+                                            <input type="radio" id="delivery" name="order_type" value="delivery">
+                                            <label class="radio-custom" for="delivery"></label>
                                             <span class="radio-label">Delivery</span>
                                         </div>
                                     </div>

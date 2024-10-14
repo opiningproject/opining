@@ -43,70 +43,6 @@ $(document).on('click', '#cancel-order-btn', function () {
     })
 })
 
-
-// screen wise show pagination code
-document.addEventListener('DOMContentLoaded', function () {
-    let screenWidth = window.innerWidth;
-    let screenHeight = window.innerHeight; // Get screen height
-    let perPage = 24;
-
-    // Adjust perPage based on both screen width and height
-    if (screenHeight < 769) {
-        // perPage = 18;
-    }
-    else if (screenHeight > 1040) {
-        // perPage = 36;
-    }
-    else if (screenHeight > 1000) {
-        // perPage = 27;
-    }
-    else if (screenHeight > 900) {
-        // perPage = 24;
-    }
-        // else if (screenHeight > 880) {
-        //     perPage = 30;
-    // }
-    else if (screenHeight < 769) {
-        // perPage = 24;
-    }
-    else if (screenHeight < 768) {
-        // perPage = 21;
-    }
-    else {
-        // perPage = 24;
-    }
-
-    // Get the currently stored per_page value from sessionStorage
-    const storedPerPage = sessionStorage.getItem('per_page_value');
-    // Check if per_page is already set in sessionStorage to avoid repeated reloads
-    if (storedPerPage !== perPage.toString()) {
-        // Send AJAX request to store perPage in session
-        sessionStorage.setItem('per_page_value', perPage.toString());
-        fetch('/set-per-page', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({ per_page: perPage })
-        }).then(response => {
-            return response.json();
-        }).then(data => {
-            if (data.success) {
-                // Set a flag in sessionStorage so that we don't reload again
-                // sessionStorage.setItem('per_page_value', perPage.toString());
-                // Reload the page to apply pagination with the new per_page value
-                window.location.reload();
-            }
-        }).catch(error => {
-            console.error('Error setting per_page:', error);
-        });
-    }
-});
-
-
-
-
 // order-status-option active inactive
 $(document).ready(function () {
     $(document).on('change', '.order-status-option input[type="radio"]', function () {
@@ -115,12 +51,6 @@ $(document).ready(function () {
     });
 });
 
-//show order setting popup
-$(document).on('click', '.order-setting', function () {
-    $('.order-setting-popup').modal('show');
-    $('#radio-button-error').remove();
-    $('.error').remove();
-})
 
 $(function () {
     var filters = [];
@@ -170,63 +100,13 @@ $(function () {
         });
     }
 
-    if (filters.length > 0) {
-        $('.count-filter').removeClass('d-none');
-        $('.count-filter').text(filters.length);
-    } else {
-        $('.count-filter').addClass('d-none');
-    }
-
-    $('.order-type-label').on('click', function() {
-        // Find the corresponding checkbox
-        var checkbox = $(this).prev('.order-type-input'); // Assumes label is immediately after checkbox
-        // Toggle the checked state of the checkbox
-        checkbox.prop('checked', !checkbox.prop('checked'));
-
-        // Add or remove the 'checked' class based on the checkbox state
-        if (checkbox.prop('checked')) {
-            checkbox.addClass('checked'); // Add 'checked' class if checked
-        } else {
-            checkbox.removeClass('checked'); // Remove 'checked' class if unchecked
-        }
-        // Log the currently checked checkboxes
+    $('.order-radio-group input[type="radio"]').on('click', function() {
+        // Get the selected radio value
         filters = [];
-        $('.order-type-input:checked').each(function() {
-            filters.push($(this).attr('id'));
-        });
-        if (filters.length > 0) {
-            $('.count-filter').removeClass('d-none');
-            $('.count-filter').text(filters.length);
-        } else {
-            $('.count-filter').addClass('d-none');
-        }
-        searchFilterAjax(search, searchOption, filters);
+        var selectedValue = $(this).val();
+        filters.push($(this).val());
+        searchFilterAjax(search, searchOption, filters)
     });
-
-
-
-    $(document).on('click', '.saveReset', function (e) {
-        $.ajax({
-            url: baseURL + '/save-reset',
-            type: 'GET',
-            success: function (response) {
-                console.log("response", response)
-                if (response.status == "success"){
-                    $('.order-setting-popup').modal('hide')
-                    $('.timezone-setting').prop('selectedIndex', 0);
-                    $('input[name="date_type"]').removeAttr('checked');
-                    // $('.date_type').prop('checked', false);
-                    $('#order-setting-form').trigger("reset");
-                    searchFilterAjax(search, searchOption, filters);
-                }
-
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                alert(errorMessage);
-            }
-        })
-    })
 
     function searchFilterAjax(search, searchOption, filters) {
         $.ajax({
@@ -246,110 +126,6 @@ $(function () {
         });
     }
     //order setting js code start
-// order-setting-form
-    function parseDate(value) {
-        var parts = value.split('-');
-        return new Date(parts[2], parts[1] - 1, parts[0]);
-    }
-    $.validator.addMethod('validDate', function (value, element) {
-        return this.optional(element) || /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-[0-9]{4}$/.test(value);
-    }, 'Please provide a date in the dd-mm-yyyy format');
-
-    // Method to ensure start date is before end date
-    $.validator.addMethod('dateBefore', function (value, element, params) {
-        var endDate = $(params).val();
-        if (!endDate) return true; // Skip comparison if endDate is empty
-        var startDate = parseDate(value);
-        var endDateObj = parseDate(endDate);
-
-        return this.optional(element) || startDate <= endDateObj;
-    }, 'Must be before the end date.');
-
-    // Method to ensure end date is after start date
-    $.validator.addMethod('dateAfter', function (value, element, params) {
-        var startDate = $(params).val();
-        if (!startDate) return true; // Skip comparison if startDate is empty
-        var endDate = parseDate(value);
-        var startDateObj = parseDate(startDate);
-
-        return this.optional(element) || endDate >= startDateObj;
-    }, 'Must be after the start date.');
-
-    $(".order-setting-form").validate({
-        rules: {
-            timezone_setting: {
-                required: true
-            },
-            start_date: {
-                required: true,
-                validDate: true,
-                dateBefore: '#end-date'
-            },
-            end_date: {
-                required: true,
-                validDate: true,
-                dateAfter: '#start-date'
-            }
-        },
-        highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error');
-            $(element).addClass('border-red-500'); // Tailwind CSS class for red border
-        },
-        unhighlight: function (element) {
-            $(element).closest('.form-group').removeClass('has-error');
-            $(element).removeClass('border-red-500');
-            $(element).addClass('border-green-500'); // Tailwind CSS class for green border
-        },
-        errorPlacement: function (error, element) {
-            if (element.attr("name") == "start_date") {
-                error.insertAfter(".start-date-input");
-            } else if (element.attr("name") == "end_date") {
-                error.insertAfter(".end-date-input");
-            } else {
-                error.insertAfter(element); // Default placement for other fields
-            }
-            return false;
-        },
-        submitHandler: function (form) { // <- pass 'form' argument in
-            $(".submit").attr("disabled", true);
-            saveOrderSetting(); // <- use 'form' argument here.
-        }
-    });
-
-// Add deliverers
-    function saveOrderSetting() {
-        var delivererData = new FormData(document.getElementById('order-setting-form'));
-        $('#radio-button-error').remove()
-        if ($('#order-setting-date').prop('checked') == true) {
-            if (!$('input[name="date_type"]:checked').length) {
-                var errorMessage = '<label style="color: red" id="radio-button-error" className="error radio-button-error" htmlFor="timezone_setting">Please select at least one date option before saving.</label>';
-                $('.date-range-section').append(errorMessage)
-                return false;
-            }
-            saveOrderSettingAjaxCall(delivererData)
-        } else {
-            saveOrderSettingAjaxCall(delivererData)
-        }
-    }
-    function saveOrderSettingAjaxCall(delivererData) {
-        $.ajax({
-            url: baseURL + '/save-order-setting',
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            data: delivererData,
-            success: function (response) {
-                if (response.status == 'success') {
-                    $('.order-setting-popup').modal('hide');
-                    searchFilterAjax(search, searchOption, filters);
-                }
-            },
-            error: function (response) {
-                var errorMessage = JSON.parse(response.responseText).message
-                toastr.error(errorMessage)
-            }
-        })
-    }
 });
 
 function orderDetailNew(id) {
@@ -462,159 +238,7 @@ function disabledOldOrderStatus() {
 
 // Call the function to initialize it
 disabledOldOrderStatus();
-/*function disabledOldOrderStatus() {
-    const radios = document.querySelectorAll('.order-status-radio');
 
-    // Define the allowed transitions between statuses
-    const orderStatusMap = {
-        'accepted-order': ['inKitchen-order'], // Only In Kitchen can be enabled from New Order
-        'inKitchen-order': ['outForDelivery-order'], // Only Out For Delivery can be enabled from In Kitchen
-        'outForDelivery-order': ['delivered-order'], // Only Delivered can be enabled from Out For Delivery
-        'delivered-order': [] // No further status transitions from Delivered, so everything else is disabled
-    };
-
-    // Function to update the status of radio buttons
-    function updateRadioStatus() {
-        // Find how many radios are checked
-        const checkedRadios = document.querySelectorAll('.order-status-radio:checked');
-
-        // If no radio button is checked, disable all radio buttons
-        if (checkedRadios.length === 0) {
-            radios.forEach(radio => {
-                radio.disabled = true;
-            });
-            return; // Exit early if no radio buttons are checked
-        }
-
-        // If a radio is checked, enable/disable the relevant radios
-        radios.forEach(radio => {
-            if (radio.checked) {
-                const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
-                radios.forEach(r => {
-                    // Enable only the radios in the allowed transition map, disable others
-                    if (enabledRadios.includes(r.id)) {
-                        r.disabled = false; // Enable the valid next step
-                    } else if (r.id !== radio.id) {
-                        r.disabled = true; // Disable all other radios except the current one
-                    }
-                });
-            }
-        });
-    }
-
-    // Initialize radio buttons on page load
-    updateRadioStatus();
-
-    // Add change event listener to radio buttons
-    radios.forEach(radio => {
-        radio.addEventListener('change', function () {
-            // Enable all radios first, then re-apply the disabling logic
-            radios.forEach(r => r.disabled = false); // Enable all radios first
-            updateRadioStatus(); // Apply disabling logic based on the new selection
-        });
-    });
-}
-
-// Example usage
-disabledOldOrderStatus();*/
-
-
-// checked all checkboxs on click all checkbox.
-/*$('#all').on('change', function () {
-    // Check or uncheck all checkboxes based on 'all' checkbox state
-    $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
-});
-
-// If any individual checkbox is unchecked, also uncheck 'all'
-$('.order-filter .checkbox').not('#all').on('change', function () {
-    if (!$(this).is(':checked')) {
-        $('#all').prop('checked', false);
-    }
-});
-
-// Check if all checkboxes are selected, and if so, check 'all'
-$('.order-filter .checkbox').not('#all').on('change', function () {
-    if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
-        $('#all').prop('checked', true);
-    }
-});*/
-
-// Define the date range picker on the start date input
-// var start = moment();
-// var end = moment();
-
-$('#start-date, #end-date').daterangepicker({
-    singleDatePicker: true, // Allow selecting a date range
-    showDropdowns: true,      // Show year and month dropdowns
-    locale: {
-        format: 'DD-MM-YYYY'
-    },
-    maxDate: moment(), // Set the maximum date to today
-    autoclose: true,
-});
-
-// Handle apply event to update both start and end date inputs
-$('#start-date').on('apply.daterangepicker', function (ev, picker) {
-    // Update start date field
-    $('#start-date').val(picker.startDate.format('DD-MM-YYYY'));
-});
-$('#end-date').on('apply.daterangepicker', function (ev, picker) {
-    // Update end date field
-    $('#end-date').val(picker.endDate.format('DD-MM-YYYY'));
-});
-
-// Optional: Clear the date inputs on cancel
-$('#start-date').on('cancel.daterangepicker', function (ev, picker) {
-    $('#start-date').val('');
-    $('#end-date').val('');
-});
-$('#end-date').on('cancel.daterangepicker', function (ev, picker) {
-    $('#start-date').val('');
-    $('#end-date').val('');
-});
-
-// Set placeholders for both inputs
-$('#start-date').attr('placeholder', 'Select Date Range');
-$('#end-date').attr('placeholder', 'Select Date Range');
-
-// show hide specific timezone specific day
-document.addEventListener('DOMContentLoaded', function () {
-    const timezoneRadio = document.getElementById('order-setting-timezone');
-    const dateRadio = document.getElementById('order-setting-date');
-    const timezoneSetting = document.getElementById('timezone-setting');
-    const dateRange = document.getElementById('date-range');
-
-    function toggleSettings() {
-        //timezone
-        // 1 is use for timezon and 2 is use for specific-day
-        if (timezoneRadio.checked) {
-            timezoneSetting.classList.remove('d-none');
-            dateRange.classList.add('d-none');
-            $('.specific-timezone').addClass('active')
-            $('.specific-day').removeClass('active')
-            $('#order-setting-custom-time').val('');
-            $('.order_setting_type').val("1");
-            $('#radio-button-error').remove();
-        } else if (dateRadio.checked) {
-            timezoneSetting.classList.add('d-none');
-            dateRange.classList.remove('d-none');
-            $('.specific-timezone').removeClass('active')
-            $('.specific-day').addClass('active')
-            $('.timezone-setting').prop('selectedIndex', 0);
-            $('.order_setting_type').val("2");
-            $('#radio-button-error').remove();
-
-            $(this).closest('.status-option').addClass('active')
-        }
-    }
-
-    // Add event listeners
-    timezoneRadio.addEventListener('change', toggleSettings);
-    dateRadio.addEventListener('change', toggleSettings);
-
-    // Initial check in case of pre-selected values when modal loads
-    toggleSettings();
-});
 
 $(document).on('click', '.update-delivery-time', function () {
     var getMinute = $(this).text(); // +5 or -5
@@ -673,19 +297,6 @@ $(document).on('click', '.update-delivery-time', function () {
         }
     });
 });
-
-
-$(document).on('click', '.custom_time_order_setting', function () {
-    $('.custom-date-selector').removeClass('d-none')
-    $('#radio-button-error').remove();
-})
-
-$(document).on('click', '.date_type', function () {
-    $('#start-date').val('');
-    $('#end-date').val('');
-    $('#radio-button-error').remove();
-    $('.custom-date-selector').addClass('d-none')
-})
 
 $(document).ready(function () {
     var currentUrl = window.location.href;

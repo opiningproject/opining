@@ -42,6 +42,7 @@ class NewOrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
+        $perPage = isset($request->per_page) ? $request->per_page : 24;
         $getResturentData = json_decode(getRestaurantDetail()->params, true);
         $order_settings = $getResturentData['order_settings'];
         $timezoneSetting = $order_settings['timezone_setting'];
@@ -60,7 +61,7 @@ class NewOrdersController extends Controller
             }
         }
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 24);
+//        $perPage = request()->input('per_page', 24);
 
         $start_date = $request->get('start_date');
         $end_date = $request->get('end_date');
@@ -84,6 +85,7 @@ class NewOrdersController extends Controller
         }
 
         $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
+//        dump(count($orders));
         if ($request->ajax()) {
             $filters = $request->get('filters');
             if ($request->has('search') && $request->search != null || !empty($filters)) {
@@ -92,9 +94,9 @@ class NewOrdersController extends Controller
                 $data['orders'] = $orders;
                 $data['orderDeliveryTime'] = $orderDeliveryTime;
             }
-            return view('admin.orders.search-orders', ['orders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime]);
+            return view('admin.orders.search-orders', ['orders' => $data['orders'], 'orderDeliveryTime' => $orderDeliveryTime, 'perPage' => $perPage]);
         }
-        return view('admin.orders.orders-new', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders, 'lastPage' => $orders->lastPage()]);
+        return view('admin.orders.orders-new', ['orderDeliveryTime' => $orderDeliveryTime, 'allOrders' => $orders, 'perPage' => $perPage, 'lastPage' => $orders->lastPage()]);
     }
 
     public function orderSearchFilter(Request $request)
@@ -117,8 +119,8 @@ class NewOrdersController extends Controller
             }
         }
         $pageNumber = request()->input('page', 1);
-        $perPage = request()->input('per_page', 24);
-
+        $perPage = isset($request->per_page) ? $request->per_page : 24;
+//        $perPage = request()->input('per_page', 24);
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
             $searchType = $request->input('searchOption');
@@ -648,17 +650,18 @@ class NewOrdersController extends Controller
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
         $allOpenOrder = Order::with('orderUserDetails')->where('is_cart', '0')->where('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->get();
-        $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $orders = Order::where('order_status', OrderStatus::Accepted)->orderBy('created_at', 'desc');
+        //        $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
         $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
-        if ($timezoneSetting != null) {
-            $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
-        } elseif ($specificDaySetting != null) {
-            if ($specificDaySetting == 'custom_date') {
-                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
-            } else {
-                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
-            }
-        }
+//        if ($timezoneSetting != null) {
+//            $orders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+//        } elseif ($specificDaySetting != null) {
+//            if ($specificDaySetting == 'custom_date') {
+//                $orders = $orders->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
+//            } else {
+//                $orders = $this->orderSettingFilter($specificDaySetting, $orders);
+//            }
+//        }
         $pageNumber = request()->input('page', 1);
         $perPage = request()->input('per_page', 24);
 
@@ -811,7 +814,7 @@ class NewOrdersController extends Controller
                 }
 
                 if (in_array('delivery', $filters)) {
-                    $query->orWhere('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                    $query->where('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
                 }
 
                 if (in_array('takeaway', $filters)) {
@@ -824,6 +827,14 @@ class NewOrdersController extends Controller
 
                 if (in_array('delivered', $filters)) {
                     $query->orWhere('order_status', OrderStatus::Delivered);
+                }
+
+                if (in_array('in_kitchen', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::InKitchen);
+                }
+
+                if (in_array('new', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::Accepted);
                 }
             });
         }

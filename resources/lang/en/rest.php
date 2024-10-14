@@ -274,6 +274,8 @@ return [
 			'permit_doc' => 'Company Permit Document',
 			'service_charge' => 'Service Charge',
 			'opening_hours' => 'Restaurant Opening Hours',
+			'opening_hours_delivery' => 'Restaurant Opening for Delivery',
+			'opening_hours_take_away' => 'Restaurant Opening for Takeaway',
 			'logout' => 'Logout',
 			'delivery_time' => 'Delivery Time',
 			'take_away_time' => 'Take Away Time'

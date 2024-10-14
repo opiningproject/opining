@@ -20,20 +20,56 @@
 
                             <div class="d-flex align-items-center btn-grp-gap-10 btn-grp-tab">
                                 <button type="button" name="clear" value="all" id="clear"
-                                        class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
-                                        style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}"
-                                                                     class="svg" height="20" width="20" /> Order List
+                                    class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
+                                    style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}"
+                                        class="svg" height="20" width="20" /> Order List
                                 </button>
 
                                 <button type="button"
-                                        class="btn btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
-                                        style="min-width: auto">
+                                    class="btn btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
+                                    style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
-                                         width="20" /> Map
+                                        width="20" /> Map
                                 </button>
+
+                                <a href="{{ route('create-order') }}"
+                                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
+                                    style="min-width: auto">
+                                    <img src="{{ asset('images/create-order.png') }}" />
+                                    <img src="{{ asset('images/create-order-white.png') }}" class="d-none" />
+                                    {{ trans('rest.food_order.create_order') }}</a>
+
+                                </a>
                             </div>
-                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
-                                <div class="header-filter-order d-flex align-items-center flex-wrap">
+                            <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap radio-btn-group"
+                                id="order-dilters">
+
+
+                                <div class="order-radio-group">
+                                    <div class="radio-col">
+                                        <div class="radio-container order-type-label">
+                                            <input type="radio" id="new" name="order_type" value="new" checked>
+                                            <label class="radio-custom" for="new"></label>
+                                            <span class="radio-label">New</span>
+                                        </div>
+                                    </div>
+                                    <div class="radio-col">
+                                        <div class="radio-container order-type-label">
+                                            <input type="radio" id="in_kitchen" name="order_type" value="in_kitchen">
+                                            <label class="radio-custom" for="in_kitchen"></label>
+                                            <span class="radio-label">In kitchen</span>
+                                        </div>
+                                    </div>
+                                    <div class="radio-col">
+                                        <div class="radio-container order-type-label">
+                                            <input type="radio" id="delivery" name="order_type" value="delivery">
+                                            <label class="radio-custom" for="delivery"></label>
+                                            <span class="radio-label">Delivery</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="header-filter-order d-flex align-items-center flex-wrap  d-none">
 
                                     <div class="drop_with_search">
                                         <div class="select-options">
@@ -53,34 +89,34 @@
                                         <div class="search-has col order-filters-search">
                                             <span class="fa fa-search form-control-feedback"></span>
                                             <input type="text" class="form-control" id="search-order-new"
-                                                   value="{{ request()->query('search', '') }}" placeholder="Search">
+                                                value="{{ request()->query('search', '') }}" placeholder="Search">
                                         </div>
                                     </div>
                                     <div class="dropdown custom-dropdown customer-dropdown">
                                         <span class="count count-filter d-none"> </span>
                                         <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ trans('rest.food_order.filter_orders') }}
                                         </button>
                                         <div class="dropdown-menu order-filter  dropdown-menu-end"
-                                             aria-labelledby="dropdownMenuButton">
+                                            aria-labelledby="dropdownMenuButton">
 
                                             <h3 class="title-hr">Order Type</h3>
                                             <div class="options">
                                                 <div class="order-type-group">
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="delivery"
-                                                               class="order-type-input order-type-delivery-input"
-                                                               name="delivery" />
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="delivery" />
                                                         <label for="order-type-delivery"
-                                                               class="order-type-label order-type-delivery-label">Delivery</label>
+                                                            class="order-type-label order-type-delivery-label">Delivery</label>
                                                     </div>
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="takeaway"
-                                                               class="order-type-input order-type-delivery-input"
-                                                               name="take_away" />
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="take_away" />
                                                         <label for="order-type-delivery"
-                                                               class="order-type-label order-type-delivery-label">Take
+                                                            class="order-type-label order-type-delivery-label">Take
                                                             Away</label>
                                                     </div>
 
@@ -92,34 +128,34 @@
                                                 <div class="order-type-group">
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="online"
-                                                               class="order-type-input order-type-delivery-input"
-                                                               name="website" />
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="website" />
                                                         <label for="order-type-delivery"
-                                                               class="order-type-label order-type-delivery-label">Website</label>
+                                                            class="order-type-label order-type-delivery-label">Website</label>
                                                     </div>
 
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="manual"
-                                                               class="order-type-input order-type-delivery-input"
-                                                               name="manual" />
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="manual" />
                                                         <label for="order-type-delivery"
-                                                               class="order-type-label order-type-delivery-label">Manual</label>
+                                                            class="order-type-label order-type-delivery-label">Manual</label>
                                                     </div>
 
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="takeaway_com"
-                                                               class="order-type-input order-type-takeaway-input"
-                                                               name="takeaway_com" />
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="takeaway_com" />
                                                         <label for="order-type-takeaway"
-                                                               class="order-type-label order-type-takeaway-label">Takeaway.com</label>
+                                                            class="order-type-label order-type-takeaway-label">Takeaway.com</label>
                                                     </div>
 
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="uber_eats"
-                                                               class="order-type-input order-type-takeaway-input"
-                                                               name="uber_eats" />
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="uber_eats" />
                                                         <label for="order-type-takeaway"
-                                                               class="order-type-label order-type-takeaway-label">UberEats</label>
+                                                            class="order-type-label order-type-takeaway-label">UberEats</label>
                                                     </div>
 
                                                 </div>
@@ -130,17 +166,17 @@
                                                 <div class="order-type-group">
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="paid"
-                                                               class="order-type-input order-type-delivery-input"
-                                                               name="paid" />
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="paid" />
                                                         <label for="order-type-delivery"
-                                                               class="order-type-label order-type-delivery-label">Paid</label>
+                                                            class="order-type-label order-type-delivery-label">Paid</label>
                                                     </div>
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="cash"
-                                                               class="order-type-input order-type-takeaway-input"
-                                                               name="cash" />
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="cash" />
                                                         <label for="order-type-takeaway"
-                                                               class="order-type-label order-type-takeaway-label">Cash</label>
+                                                            class="order-type-label order-type-takeaway-label">Cash</label>
                                                     </div>
 
                                                 </div>
@@ -151,28 +187,28 @@
                                                 <div class="order-type-group">
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="open"
-                                                               class="order-type-input order-type-delivery-input"
-                                                               name="new_order" />
+                                                            class="order-type-input order-type-delivery-input"
+                                                            name="new_order" />
                                                         <label for="order-type-delivery"
-                                                               class="order-type-label order-type-delivery-label">New
+                                                            class="order-type-label order-type-delivery-label">New
                                                             Order</label>
                                                     </div>
 
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="in_kitchen"
-                                                               class="order-type-input order-type-takeaway-input"
-                                                               name="in_kitchen" />
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="in_kitchen" />
                                                         <label for="order-type-takeaway"
-                                                               class="order-type-label order-type-takeaway-label">In
+                                                            class="order-type-label order-type-takeaway-label">In
                                                             Kitchen</label>
                                                     </div>
 
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="ready_delivery"
-                                                               class="order-type-input order-type-takeaway-input"
-                                                               name="ready_delivery" />
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="ready_delivery" />
                                                         <label for="order-type-takeaway"
-                                                               class="order-type-label order-type-takeaway-label">Ready |
+                                                            class="order-type-label order-type-takeaway-label">Ready |
                                                             Delivery</label>
                                                     </div>
                                                 </div>
@@ -181,96 +217,100 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
+
+                                {{-- <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
                                     <span>{{ trans('rest.food_order.create_order') }}</span>
-                                </a>
+                                </a> --}}
 
                                 <button type="button"
-                                        class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
-                                        style="min-width: auto">
+                                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting  d-none"
+                                    style="min-width: auto">
                                     <img src="{{ asset('images/admin-menu-icons/header-settings.svg') }}" class="svg"
-                                         height="20" width="20" /> {{ trans('rest.food_order.settings') }}</button>
+                                        height="20" width="20" /> {{ trans('rest.food_order.settings') }}</button>
 
                             </div>
                         </div>
                         <div class="row map-order-listing-row">
-                        <div class="col-md-8">
-                            <div id="orders-map-marker" style="height: calc(100vh - 230px);border-radius: 16px;overflow: hidden;"></div>
-                        </div>
-                        <div class="orderList col-md-4">
-                            <div class="order-listing-container">
-                                <div class="order-row">
-                                    @foreach ($allOrders as $key => $ord)
-                                        <?php $userDetails = $ord->orderUserDetails; ?>
-                                        <div class="order-col cursor-pointer" id="order-{{ $ord->id }}"
-                                             data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
-                                            <div class="order-box">
-                                                <div class="timing">
-                                                    <h3 class="expectedDeliveryTime-{{ $ord->id }}">
-                                                        {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
-                                                    </h3>
-                                                    <label class="success cursor-pointer">{{ $ord->delivery_time }}</label>
-                                                </div>
+                            <div class="col-md-8">
+                                <div id="orders-map-marker"
+                                    style="height: calc(100vh - 230px);border-radius: 16px;overflow: hidden;"></div>
+                            </div>
+                            <div class="orderList col-md-4">
+                                <div class="order-listing-container">
+                                    <div class="order-row">
+                                        @foreach ($allOrders as $key => $ord)
+                                            <?php $userDetails = $ord->orderUserDetails; ?>
+                                            <div class="order-col cursor-pointer" id="order-{{ $ord->id }}"
+                                                data-id="{{ $ord->id }}"
+                                                onclick="orderDetailNew({{ $ord->id }})">
+                                                <div class="order-box">
+                                                    <div class="timing">
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                            {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                                                        </h3>
+                                                        <label
+                                                            class="success cursor-pointer">{{ $ord->delivery_time }}</label>
+                                                    </div>
 
-                                                <div class="details">
-                                                    <div class="left">
-                                                        <div class="text-label">
-                                                            <h4>{{ $userDetails->order_name }}</h4>
-                                                            @if ($ord->order_type == OrderType::Delivery)
-                                                                <p class="mb-0">
-                                                                    <?php
-                                                                    echo $userDetails->house_no . ', ' . $userDetails->street_name;
-                                                                    ?>
-                                                                </p>
-                                                            @endif
+                                                    <div class="details">
+                                                        <div class="left">
+                                                            <div class="text-label">
+                                                                <h4>{{ $userDetails->order_name }}</h4>
+                                                                @if ($ord->order_type == OrderType::Delivery)
+                                                                    <p class="mb-0">
+                                                                        <?php
+                                                                        echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                                                        ?>
+                                                                    </p>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="actions">
-                                                    <h5 class="mb-0 price_status">
-                                                        <b>€{{ number_format($ord->total_amount, 2) }}</b>
-                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
-                                                            <img src="{{ asset('images/cod_icon.png') }}" class="svg"
-                                                                 height="20" width="20" />
-                                                        @endif
-                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Card)
-                                                            <img src="{{ asset('images/purse.svg') }}" class="svg"
-                                                                 height="20" width="20" />
-                                                        @endif
-                                                        @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
-                                                            <img src="{{ asset('images/paid-deal.svg') }}" class="svg"
-                                                                 height="20" width="20" />
-                                                        @endif
-                                                    </h5>
-                                                    <button
-                                                        class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}">
-                                                        {{ orderStatusBox($ord)->text }}</button>
+                                                    <div class="actions">
+                                                        <h5 class="mb-0 price_status">
+                                                            <b>€{{ number_format($ord->total_amount, 2) }}</b>
+                                                            @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
+                                                                <img src="{{ asset('images/cod_icon.png') }}"
+                                                                    class="svg" height="20" width="20" />
+                                                            @endif
+                                                            @if ($ord->payment_type == \App\Enums\PaymentType::Card)
+                                                                <img src="{{ asset('images/purse.svg') }}" class="svg"
+                                                                    height="20" width="20" />
+                                                            @endif
+                                                            @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
+                                                                <img src="{{ asset('images/paid-deal.svg') }}"
+                                                                    class="svg" height="20" width="20" />
+                                                            @endif
+                                                        </h5>
+                                                        <button
+                                                            class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}">
+                                                            {{ orderStatusBox($ord)->text }}</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
+                                    <!-- Pagination -->
+                                    <nav aria-label="Page navigation example">
+                                        {{ $allOrders->links() }}
+                                    </nav>
+
+                                    <!-- Filter buttons -->
+                                    <div class="filter-btn-group d-none">
+                                        <button type="button" class="btn">
+                                            <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />
+                                        </button>
+
+                                        <button type="button" class="btn order-setting">
+                                            <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
-                                <!-- Pagination -->
-                                <nav aria-label="Page navigation example">
-                                    {{ $allOrders->links() }}
-                                </nav>
-
-                                <!-- Filter buttons -->
-                                <div class="filter-btn-group d-none">
-                                    <button type="button" class="btn">
-                                        <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />
-                                    </button>
-
-                                    <button type="button" class="btn order-setting">
-                                        <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </main>
@@ -278,9 +318,9 @@
         </div>
         <!-- start footer -->
         {{--    @include('admin.orders.order-detail-popup') --}}
-{{--        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1"--}}
-{{--            aria-labelledby="orderDetailModal" aria-hidden="true">--}}
-{{--        </div>--}}
+        {{--        <div class="modal fade custom-modal order-detail-popup" id="orderDetailModal" tabindex="-1" --}}
+        {{--            aria-labelledby="orderDetailModal" aria-hidden="true"> --}}
+        {{--        </div> --}}
         @include('admin.orders.order-setting-popup')
         @include('layouts.admin.footer_design')
         @include('admin.modals.change-order-status')
@@ -308,15 +348,18 @@
                 },
                 zoom: 10,
                 mapTypeControl: false,
-                styles: [
-                    {
+                styles: [{
                         featureType: "poi",
                         elementType: "labels",
-                        stylers: [{ visibility: "off" }] // Hide points of interest
+                        stylers: [{
+                            visibility: "off"
+                        }] // Hide points of interest
                     },
                     {
                         featureType: "transit.station",
-                        stylers: [{ visibility: "off" }] // Hide transit stations
+                        stylers: [{
+                            visibility: "off"
+                        }] // Hide transit stations
                     }
                 ]
             });
@@ -346,7 +389,7 @@
                 }
             });
         }
-            $(document).ready(function() {
+        $(document).ready(function() {
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
                 var availableHeight = screenHeight - 230; // Space for margins, headers, etc.

@@ -1,12 +1,31 @@
 @extends('layouts.app')
 @section('page_title')
-    <a href="{{route('orders')}}">Orders</a> <span class="create-order-breadcrumb" > > </span> Create Order
+    <a href="{{ route('orders') }}">Orders</a> <span class="create-order-breadcrumb"> > </span> Create Order
 @endsection
 @section('content')
 
     <div class="main-content">
-        <div class="header-belt">
-            <h1 class="title mb-0"></h1>
+        <div class="header-belt section-page-title d-flex align-items-center justify-content-between gap-2 order-page-bar">
+            <div class="d-flex align-items-center btn-grp-gap-10 btn-grp-tab">
+                <button type="button" name="clear" value="all" id="clear"
+                    class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
+                    style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}" class="svg"
+                        height="20" width="20" /> Order List</button>
+
+                <a href="{{ route('ordersMap') }}"
+                    class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
+                    style="min-width: auto">
+                    <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
+                        width="20" /> Map</a>
+
+                <a href="{{ route('create-order') }}"
+                    class="btn bg-white btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
+                    style="min-width: auto">
+                    <img src="{{ asset('images/create-order.png') }}" class="d-none"  />
+                    <img src="{{ asset('images/create-order-white.png') }}" />
+                    {{ trans('rest.food_order.create_order') }}</a>
+
+            </div>
 
             <div class="btns-group">
                 <div class="search-box">
@@ -28,7 +47,7 @@
                         @foreach ($categories as $key => $cat)
                             <?php
                             $selected = '';
-
+                            
                             if (!isset($_GET['all']) && $cat_id == '') {
                                 if ($key == 0) {
                                     $selected = 'active';
@@ -39,12 +58,13 @@
                                 }
                             }
                             ?>
-                            <li class="category-{{$cat->id}}">
-                                <a class="category {{$selected}}" onclick="getDishes({{ $cat->id }})" href="javascript:void(0)">{{$cat->name}}</a>
+                            <li class="category-{{ $cat->id }}">
+                                <a class="category {{ $selected }}" onclick="getDishes({{ $cat->id }})"
+                                    href="javascript:void(0)">{{ $cat->name }}</a>
                             </li>
                         @endforeach
                     </ul>
-                    <h2 class="sub-title">{{$category->name}}</h2>
+                    <h2 class="sub-title">{{ $category->name }}</h2>
 
                     <div class="order-listing-row">
                         @if (count($dishes) > 0)
@@ -52,44 +72,43 @@
                                 <?php
                                 $disableBtn = '';
                                 $customizeBtn = false;
-
+                                
                                 //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                 if ($dish->out_of_stock == '1') {
                                     $disableBtn = 'disabled';
                                     $customizeBtn = true;
                                 }
-
+                                
                                 if (count($dish->ingredientsWithoutTrash) == 0) {
                                     $customizeBtn = true;
                                 }
-
+                                
                                 ?>
-                        <div class="order-listing-col">
-                            <div class="dish-box">
-                                @if ($dish->percentage_off > 0)
-                                    <label class="discount">{{ $dish->percentage_off }}%</label>
-                                @endif
-                                <div class="image">
-                                    <img src="{{ $dish->image }}" alt="" />
-                                </div>
-
-                                <div class="details">
-                                    <h3>{{ $dish->name }}</h3>
-                                    <button type="button" class="btn price-btn"
-                                            onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
-                                            id="dish-cart-lbl-{{ $dish->id }}">
-                                        @if ($dish->out_of_stock == '1')
-                                            {{ trans('user.dashboard.out_of_stock') }}
-                                        @else
-                                            <img src="{{ asset('images/plus-up.svg') }}" class="svg"
-                                                 height="9"
-                                                 width="9">€{{ number_format($dish->price, 2) }}
+                                <div class="order-listing-col">
+                                    <div class="dish-box">
+                                        @if ($dish->percentage_off > 0)
+                                            <label class="discount">{{ $dish->percentage_off }}%</label>
                                         @endif
-                                    </button>
-                                    <a href="#" class="customizable">Customizable</a>
+                                        <div class="image">
+                                            <img src="{{ $dish->image }}" alt="" />
+                                        </div>
+
+                                        <div class="details">
+                                            <h3>{{ $dish->name }}</h3>
+                                            <button type="button" class="btn price-btn"
+                                                onclick="customizeDish({{ $dish->id }})" {{ $disableBtn }}
+                                                id="dish-cart-lbl-{{ $dish->id }}">
+                                                @if ($dish->out_of_stock == '1')
+                                                    {{ trans('user.dashboard.out_of_stock') }}
+                                                @else
+                                                    <img src="{{ asset('images/plus-up.svg') }}" class="svg"
+                                                        height="9" width="9">€{{ number_format($dish->price, 2) }}
+                                                @endif
+                                            </button>
+                                            <a href="#" class="customizable">Customizable</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
                             @endforeach
                         @endif
                     </div>

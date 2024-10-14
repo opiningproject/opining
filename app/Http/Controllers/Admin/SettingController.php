@@ -49,7 +49,8 @@ class SettingController extends Controller
         $terms_nl = CMS::where('type', 'terms')->where('lang', 'nl')->pluck('content')->first();
 
         $user = RestaurantDetail::where('user_id', Auth::user()->id)->firstOrFail();
-        $operating_days = OperatingHour::all();
+        $operating_days = OperatingHour::where('order_type', OrderType::Delivery)->get();
+        $operating_days_takeAway = OperatingHour::where('order_type', OrderType::TakeAway)->get();
 
 
         /*echo "<pre>";
@@ -58,6 +59,7 @@ class SettingController extends Controller
 
         return view('admin.settings.index', [
             'operating_days' => $operating_days,
+            'operating_days_takeAway' => $operating_days_takeAway,
             'user' => $user,
             'zipcodes' => $zipcodes,
             'privacy_policy_en' => $privacy_policy_en,

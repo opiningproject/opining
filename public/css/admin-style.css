@@ -86,7 +86,7 @@ stroke: #ffffff;
     max-width: 32.3%;
     width: 100%;
 }
-.section-page-title .radio-btn-group .order-radio-group {display: flex;gap: 0px;justify-content: flex-end;width: 100%;margin: 0px -7px;} 
+.section-page-title .radio-btn-group .order-radio-group {display: flex;gap: 0px;justify-content: flex-end;width: 100%;margin: 0px -7px;}
 .section-page-title .radio-btn-group .order-radio-group .radio-col {padding: 0px 7px; flex: 0 0 33.33%;
     max-width: 33.33%;}
 .section-page-title .radio-btn-group .radio-container {
@@ -888,3 +888,4 @@ stroke: #ffffff;
 .order-listing-container::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb, .order-content-box::-webkit-scrollbar-thumb, .footer-box-main::-webkit-scrollbar-thumb, .customer-dropdown ul::-webkit-scrollbar-thumb {background-color: var(--theme-gray4);border-radius: 5px;}
 
 .order-listing-container .order-column .order-col {max-height: 120px;}
+.orders-new-pagination .form-control {min-height: 40px !important;}

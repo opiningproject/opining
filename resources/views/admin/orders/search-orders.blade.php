@@ -72,6 +72,17 @@ use App\Enums\PaymentType;
     </div>
 
     <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
+        <div class="ms-auto d-flex align-items-center custom-pagination orders-new-pagination justify-content-start w-100">
+            <label class="text-nowrap">{{ trans('rest.button.rows_per_page') }}</label>
+            <select id="per_page_dropdown" onchange="" class="form-control bg-white ms-2">
+                @for ($i = 18; $i <= 24; $i += 6)
+                    <option {{ $perPage == $i ? 'selected' : '' }}
+                            value="{{ Request::url() . '?per_page=' }}{{ $i }}">
+                        {{ $i }}
+                    </option>
+                @endfor
+            </select>
+        </div>
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
             {{ $orders->appends(['search' => request()->input('search')])->links() }}

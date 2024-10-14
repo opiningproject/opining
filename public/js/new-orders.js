@@ -123,20 +123,25 @@ $(document).on('click', '.order-setting', function () {
 })
 
 $(function () {
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var perPage = urlParams.get('per_page');
+
     var filters = [];
     var search = '';
     var searchOption = '';
+    var perPageNew = perPage ? perPage : 24;
     // Keyup search handler
     $(document).on('change', '#order-tabs-dropdown', function () {
         search = $('#search-order-new').val();
         searchOption = $('#order-tabs-dropdown').val();
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters, perPageNew)
     });
 
     $(document).on('keyup', '#search-order-new', function () {
         search = $(this).val();
         searchOption = $('#order-tabs-dropdown').val();
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters, perPageNew)
     });
 
     // Bind pagination link click event only once
@@ -200,7 +205,7 @@ $(function () {
         } else {
             $('.count-filter').addClass('d-none');
         }
-        searchFilterAjax(search, searchOption, filters);
+        searchFilterAjax(search, searchOption, filters, perPageNew);
     });
 
 
@@ -217,7 +222,7 @@ $(function () {
                     $('input[name="date_type"]').removeAttr('checked');
                     // $('.date_type').prop('checked', false);
                     $('#order-setting-form').trigger("reset");
-                    searchFilterAjax(search, searchOption, filters);
+                    searchFilterAjax(search, searchOption, filters, perPageNew);
                 }
 
             },
@@ -228,13 +233,14 @@ $(function () {
         })
     })
 
-    function searchFilterAjax(search, searchOption, filters) {
+    function searchFilterAjax(search, searchOption, filters, perPageNew) {
         $.ajax({
             url: baseURL + '/orders', // Ensure this matches your route
             type: 'GET',
             data: {
                 search,
                 searchOption,
+                per_page:perPageNew,
                 filters: filters.length > 0 ? filters : [],
             },
             success: function (response) {
@@ -341,7 +347,7 @@ $(function () {
             success: function (response) {
                 if (response.status == 'success') {
                     $('.order-setting-popup').modal('hide');
-                    searchFilterAjax(search, searchOption, filters);
+                    searchFilterAjax(search, searchOption, filters, perPageNew);
                 }
             },
             error: function (response) {
@@ -350,7 +356,21 @@ $(function () {
             }
         })
     }
+    console.log("perPageNew", perPageNew)
+    $(document).on('change', '#per_page_dropdown', function () {
+        var url = this.value;
+        var urlObject = new URL(url); // Create a URL object from the string
+
+        // Get the 'per_page' parameter value using URLSearchParams
+        var urlPerPage = urlObject.searchParams.get('per_page');
+        perPageNew = urlPerPage
+        // return false;
+        searchFilterAjax(search, searchOption, filters, perPageNew)
+        // window.open(url, '_parent');
+        // searchFilterAjax(search, searchOption, filters);
+    })
 });
+
 
 function orderDetailNew(id) {
     $.ajax({

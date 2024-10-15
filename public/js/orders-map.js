@@ -84,9 +84,9 @@ $(function () {
                 url: url,
                 type: 'GET',
                 data: {
-                    search: search,
-                    searchOption: searchOption,
-                    filters: filters,
+                    search,
+                    searchOption,
+                    filters: filters.length > 0 ? filters : [],
                 },
                 datatype: 'json',
                 success: function (response) {
@@ -100,16 +100,20 @@ $(function () {
         });
     }
 
-    $('.order-radio-group input[type="radio"]').on('click', function() {
-        // Get the selected radio value
+    $('.radio-col').on('click', function(e) {
+        e.preventDefault();
+
+        var $checkbox = $(this).find('input[type="checkbox"]');
+
+        $checkbox.prop('checked', !$checkbox.prop('checked'));
+
         filters = [];
-        // var selectedValue = $(this).val();
-        $('.order-radio-group input[type="radio"]:checked').each(function() {
+        $('input[type="checkbox"]:checked').each(function() {
             filters.push($(this).val());
         });
-        // filters.push($(this).val());
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters);
     });
+
 
     function searchFilterAjax(search, searchOption, filters) {
         $.ajax({

@@ -48,22 +48,19 @@
                                 <div class="order-radio-group">
                                     <div class="radio-col">
                                         <div class="radio-container order-type-label">
-                                            <input type="radio" id="new" name="new" value="new" checked>
-                                            <label class="radio-custom" for="new"></label>
+                                            <input type="checkbox" class="checkbox-round" id="new" name="new" value="new" checked>
                                             <span class="radio-label">New</span>
                                         </div>
                                     </div>
                                     <div class="radio-col">
                                         <div class="radio-container order-type-label">
-                                            <input type="radio" id="in_kitchen" name="in_kitchen" value="in_kitchen">
-                                            <label class="radio-custom" for="in_kitchen"></label>
+                                            <input type="checkbox" class="checkbox-round" id="in_kitchen" name="in_kitchen" value="in_kitchen">
                                             <span class="radio-label">In kitchen</span>
                                         </div>
                                     </div>
                                     <div class="radio-col">
                                         <div class="radio-container order-type-label">
-                                            <input type="radio" id="delivery" name="delivery" value="delivery">
-                                            <label class="radio-custom" for="delivery"></label>
+                                            <input type="checkbox" class="checkbox-round" id="delivery" name="delivery" value="delivery">
                                             <span class="radio-label">Delivery</span>
                                         </div>
                                     </div>

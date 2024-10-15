@@ -28,12 +28,12 @@ class WorkingDaysSeeder extends Seeder
         $createCmsData = [];
 
         // Insert all days for Order Type 1 first
-//        foreach ($days as $day) {
-//            $createCmsData[] = [
-//                'day' => $day['day'],
-//                'order_type' => 1
-//            ];
-//        }
+        foreach ($days as $day) {
+            $createCmsData[] = [
+                'day' => $day['day'],
+                'order_type' => 1
+            ];
+        }
 
         // Insert all days for Order Type 2 next
         foreach ($days as $day) {

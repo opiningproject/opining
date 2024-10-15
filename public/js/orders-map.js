@@ -103,8 +103,11 @@ $(function () {
     $('.order-radio-group input[type="radio"]').on('click', function() {
         // Get the selected radio value
         filters = [];
-        var selectedValue = $(this).val();
-        filters.push($(this).val());
+        // var selectedValue = $(this).val();
+        $('.order-radio-group input[type="radio"]:checked').each(function() {
+            filters.push($(this).val());
+        });
+        // filters.push($(this).val());
         searchFilterAjax(search, searchOption, filters)
     });
 

@@ -70,15 +70,15 @@
                                     </div>
                                     <div class="dropdown custom-dropdown customer-dropdown">
                                         <span class="count count-filter d-none"> </span>
-                                        <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                aria-expanded="true">
                                             {{ trans('rest.food_order.filter_orders') }}
                                         </button>
 
-                                        <div class="dropdown-menu order-filter  dropdown-menu-end"
-                                            aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-menu order-filter dropdown-menu-end dropdownMenuButton" aria-labelledby="dropdownMenuButton">
 
-                                            <h3 class="title-hr">Order Type</h3>
+
+                                        <h3 class="title-hr">Order Type</h3>
                                             <div class="options">
                                                 <div class="order-type-group">
                                                     <div class="clearfix">
@@ -202,59 +202,6 @@
                                             </div>
 
                                         </div>
-                                        <ul class="dropdown-menu order-filter  dropdown-menu-end"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="all"
-                                                        name="all"><label for="all" class="checkmark"></label>
-                                                    {{ trans('rest.food_order.all') }}
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="online"
-                                                        name="online"><label for="online" class="checkmark"></label>
-                                                    {{ trans('rest.food_order.online_orders') }}
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="manual"
-                                                        name="manual"><label for="manual" class="checkmark"></label>
-                                                    {{ trans('rest.food_order.manual_orders') }}
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="delivery"
-                                                        name="delivery"><label for="delivery" class="checkmark"></label>
-                                                    {{ trans('rest.food_order.delivery') }}
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="takeaway"
-                                                        name="takeaway"><label for="takeaway" class="checkmark"></label>
-                                                    {{ trans('rest.food_order.take_away') }}
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="open"
-                                                        name="open"><label for="open" class="checkmark"></label>
-                                                    {{ trans('rest.food_order.open_orders') }}
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="checkbox-label">
-                                                    <input type="checkbox" class="checkbox" id="delivered"
-                                                        name="delivered"><label for="delivered"
-                                                        class="checkmark"></label>
-                                                    {{ trans('rest.food_order.delivered_orders') }}
-                                                </label>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                                 {{-- <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
@@ -344,11 +291,40 @@
                                 </div>
                             </div>
 
+{{--                            <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">--}}
+{{--                                <div class="ms-auto d-flex align-items-center custom-pagination orders-new-pagination justify-content-start w-100">--}}
+{{--                                    <label class="text-nowrap">{{ trans('rest.button.rows_per_page') }}</label>--}}
+{{--                                    <select id="per_page_dropdown" onchange="" class="form-control bg-white ms-2">--}}
+{{--                                        @for ($i = 18; $i <= 27; $i += 3)--}}
+{{--                                            <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url() . '?per_page=' . $i }}">--}}
+{{--                                                {{ $i }}--}}
+{{--                                            </option>--}}
+{{--                                        @endfor--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                                <!-- Pagination -->--}}
+{{--                                <nav aria-label="Page navigation example">--}}
+{{--                                    {{ $allOrders->links() }}--}}
+{{--                                </nav>--}}
+
+{{--                                <!-- Filter buttons -->--}}
+{{--                                <div class="filter-btn-group d-none">--}}
+{{--                                    <button type="button" class="btn">--}}
+{{--                                        <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />--}}
+{{--                                    </button>--}}
+
+{{--                                    <button type="button" class="btn order-setting">--}}
+{{--                                        <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+                            <input type="hidden" class="numberOfPerPage" value="{{ $perPage }}">
                             <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
+                                <!-- Rows per page -->
                                 <div class="ms-auto d-flex align-items-center custom-pagination orders-new-pagination justify-content-start w-100">
                                     <label class="text-nowrap">{{ trans('rest.button.rows_per_page') }}</label>
-                                    <select id="per_page_dropdown" onchange="" class="form-control bg-white ms-2">
-                                        @for ($i = 18; $i <= 24; $i += 6)
+                                    <select id="per_page_dropdown" class="form-control bg-white ms-2">
+                                        @for ($i = 18; $i <= 27; $i += 3)
                                             <option {{ $perPage == $i ? 'selected' : '' }}
                                                     value="{{ Request::url() . '?per_page=' }}{{ $i }}">
                                                 {{ $i }}
@@ -356,22 +332,74 @@
                                         @endfor
                                     </select>
                                 </div>
+
                                 <!-- Pagination -->
                                 <nav aria-label="Page navigation example">
-                                    {{ $allOrders->links() }}
+                                    <ul class="pagination justify-content-center">
+                                        <!-- Previous Page Link -->
+                                        @if ($allOrders->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true">
+                                                <span class="page-link">&lsaquo; Back</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $allOrders->previousPageUrl() }}" rel="prev">&lsaquo; Back</a>
+                                            </li>
+                                        @endif
+
+                                    <!-- Pagination Elements -->
+                                        @php
+                                            $totalPages = $allOrders->lastPage();
+                                            $currentPage = $allOrders->currentPage();
+                                            $startPage = max(1, $currentPage - 2); // Start 2 pages before the current page
+                                            $endPage = min($totalPages, $currentPage + 2); // End 2 pages after the current page
+                                        @endphp
+
+                                    <!-- Always show first page and ... if needed -->
+                                        @if ($startPage > 1)
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $allOrders->url(1) }}">1</a>
+                                            </li>
+                                            @if ($startPage > 1)
+                                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                                            @endif
+                                        @endif
+
+                                    <!-- Display range of pages -->
+                                        @for ($i = $startPage; $i <= $endPage; $i++)
+                                            @if ($i == $currentPage)
+                                                <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+                                            @else
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{{ $allOrders->url($i) }}">{{ $i }}</a>
+                                                </li>
+                                            @endif
+                                        @endfor
+
+                                    <!-- Always show last page and ... if needed -->
+                                        @if ($endPage < $totalPages)
+                                            @if ($endPage < $totalPages - 1)
+                                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                                            @endif
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $allOrders->url($totalPages) }}">{{ $totalPages }}</a>
+                                            </li>
+                                        @endif
+
+                                    <!-- Next Page Link -->
+                                        @if ($allOrders->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $allOrders->nextPageUrl() }}" rel="next">Next &rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true">
+                                                <span class="page-link">Next &rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
                                 </nav>
-
-                                <!-- Filter buttons -->
-                                <div class="filter-btn-group d-none">
-                                    <button type="button" class="btn">
-                                        <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />
-                                    </button>
-
-                                    <button type="button" class="btn order-setting">
-                                        <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />
-                                    </button>
-                                </div>
                             </div>
+
                         </div>
                     </div>
                 </main>
@@ -394,6 +422,10 @@
     <script type="text/javascript" src="{{ asset('js/new-orders.js') }}"></script>
     <script>
         $(document).ready(function() {
+            let numberOfColumn = 8
+            if ($('.numberOfPerPage').val() == 18) {
+                numberOfColumn = 6
+            }
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
                 var availableHeight = screenHeight - 230; // Space for margins, headers, etc.
@@ -402,7 +434,7 @@
                 // Determine the maximum number of items per column dynamically based on screen height
                 var maxItemsPerColumn = screenHeight > 5000 ?
                     Math.floor(availableHeight / (76 + columnGap)) :
-                    8; // Above 1080px, the number of items per column is dynamic
+                    numberOfColumn; // Above 1080px, the number of items per column is dynamic
 
                 // Determine itemMinHeight based on screen height
                 var itemMinHeight = screenHeight < 800 ? 58 : 76;

@@ -411,12 +411,12 @@ $restaurantDetail = getRestaurantDetail();
                 {
                     featureType: "road",
                     elementType: "geometry",
-                    stylers: [{ visibility: "off" }] // Hide all roads
+                    stylers: [{ visibility: "on" }] // Hide all roads
                 },
                 {
                     featureType: "road",
                     elementType: "labels",
-                    stylers: [{ visibility: "off" }] // Hide road labels
+                    stylers: [{ visibility: "on" }] // Hide road labels
                 },
                 {
                     featureType: "poi",

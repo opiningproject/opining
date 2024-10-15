@@ -246,7 +246,10 @@ class NewOrdersController extends Controller
                 }
 
                 if (in_array('delivered', $filters)) {
-                    $query->orWhereIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                    $query->orWhere('order_status', OrderStatus::Delivered);
+                }
+                if (in_array('canceled', $filters)) {
+                    $query->orWhere('order_status', OrderStatus::Cancelled);
                 }
             });
         }

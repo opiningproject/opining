@@ -192,10 +192,16 @@
                                                     <div class="clearfix">
                                                         <input type="checkbox" id="delivered"
                                                             class="order-type-input order-type-takeaway-input"
-                                                            name="delivered_canceled" />
+                                                            name="delivered" />
                                                         <label for="order-type-takeaway"
-                                                            class="order-type-label order-type-takeaway-label">Delivered |
-                                                            Canceled</label>
+                                                            class="order-type-label order-type-takeaway-label">Delivered</label>
+                                                    </div>
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" id="canceled"
+                                                            class="order-type-input order-type-takeaway-input"
+                                                            name="canceled" />
+                                                        <label for="order-type-takeaway"
+                                                            class="order-type-label order-type-takeaway-label">Canceled</label>
                                                     </div>
 
                                                 </div>

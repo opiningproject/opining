@@ -887,3 +887,6 @@ stroke: #ffffff;
 .order-listing-container::-webkit-scrollbar, body::-webkit-scrollbar, .order-content-box::-webkit-scrollbar, .footer-box-main::-webkit-scrollbar, .customer-dropdown ul::-webkit-scrollbar{width: 5px;height: 3px;}
 .order-listing-container::-webkit-scrollbar-track, body::-webkit-scrollbar-track, .order-content-box::-webkit-scrollbar-track, .footer-box-main::-webkit-scrollbar-track, .customer-dropdown ul::-webkit-scrollbar-track {border-radius: 5px;background-color: var(--theme-white1);}
 .order-listing-container::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb, .order-content-box::-webkit-scrollbar-thumb, .footer-box-main::-webkit-scrollbar-thumb, .customer-dropdown ul::-webkit-scrollbar-thumb {background-color: var(--theme-gray4);border-radius: 5px;}
+
+.checkbox-round {position: relative;width: 12px;height: 12px;float: left;border-radius: 50%;vertical-align: middle;border: 1px solid #292929;-webkit-appearance: none;outline: none;cursor: pointer;transition: 0.5s;}
+.checkbox-round:checked {background-color: #292929;box-shadow: inset 0px 0px 0px 2px #ffffff;}

@@ -201,7 +201,7 @@
                                                             class="order-type-input order-type-takeaway-input"
                                                             name="canceled" />
                                                         <label for="order-type-takeaway"
-                                                            class="order-type-label order-type-takeaway-label">Canceled</label>
+                                                            class="order-type-label order-type-takeaway-label">Cancelled</label>
                                                     </div>
 
                                                 </div>

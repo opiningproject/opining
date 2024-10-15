@@ -205,19 +205,19 @@ class NewOrdersController extends Controller
             $orders->where(function ($query) use ($filters) {
                 // Apply filters based on the selected checkboxes within a group
                 if (in_array('online', $filters)) {
-                    $query->orWhere('is_online_order', '1')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                    $query->orWhere('is_online_order', '1')->whereNotIn('order_status', [OrderStatus::Cancelled]);
                 }
 
                 if (in_array('manual', $filters)) {
-                    $query->orWhere('is_online_order', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                    $query->orWhere('is_online_order', '0')->whereNotIn('order_status', [OrderStatus::Cancelled]);
                 }
 
                 if (in_array('delivery', $filters)) {
-                    $query->orWhere('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                    $query->orWhere('order_type', OrderType::Delivery)->whereNotIn('order_status', [OrderStatus::Cancelled]);
                 }
 
                 if (in_array('takeaway', $filters)) {
-                    $query->orWhere('order_type', OrderType::TakeAway)->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled]);
+                    $query->orWhere('order_type', OrderType::TakeAway)->whereNotIn('order_status', [OrderStatus::Cancelled]);
                 }
 
                 if (in_array('open', $filters)) {

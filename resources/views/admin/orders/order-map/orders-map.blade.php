@@ -48,21 +48,21 @@
                                 <div class="order-radio-group">
                                     <div class="radio-col">
                                         <div class="radio-container order-type-label">
-                                            <input type="radio" id="new" name="order_type" value="new" checked>
+                                            <input type="radio" id="new" name="new" value="new" checked>
                                             <label class="radio-custom" for="new"></label>
                                             <span class="radio-label">New</span>
                                         </div>
                                     </div>
                                     <div class="radio-col">
                                         <div class="radio-container order-type-label">
-                                            <input type="radio" id="in_kitchen" name="order_type" value="in_kitchen">
+                                            <input type="radio" id="in_kitchen" name="in_kitchen" value="in_kitchen">
                                             <label class="radio-custom" for="in_kitchen"></label>
                                             <span class="radio-label">In kitchen</span>
                                         </div>
                                     </div>
                                     <div class="radio-col">
                                         <div class="radio-container order-type-label">
-                                            <input type="radio" id="delivery" name="order_type" value="delivery">
+                                            <input type="radio" id="delivery" name="delivery" value="delivery">
                                             <label class="radio-custom" for="delivery"></label>
                                             <span class="radio-label">Delivery</span>
                                         </div>

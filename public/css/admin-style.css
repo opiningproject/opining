@@ -86,9 +86,8 @@ stroke: #ffffff;
     max-width: 32.3%;
     width: 100%;
 }
-.section-page-title .radio-btn-group .order-radio-group {display: flex;gap: 0px;justify-content: flex-end;width: 100%;margin: 0px -7px;}
-.section-page-title .radio-btn-group .order-radio-group .radio-col {padding: 0px 7px; flex: 0 0 33.33%;
-    max-width: 33.33%;}
+.section-page-title .radio-btn-group .order-radio-group {display: flex;gap: 0px;justify-content: flex-end;width: 103%;margin: 0px -5px;}
+.section-page-title .radio-btn-group .order-radio-group .radio-col {padding: 0px 7px; flex: 0 0 33.33%;max-width: 33.33%;}
 .section-page-title .radio-btn-group .radio-container {
     display: flex;align-items: center;
     justify-content: flex-start;
@@ -122,9 +121,8 @@ stroke: #ffffff;
     font-weight: 400;
     font-size: 12px;
     position: absolute;
-    left: 0px;
+    left: 42px;
     right: 0px;
-    text-align: center;
     pointer-events: none;
 }
 
@@ -351,7 +349,7 @@ stroke: #ffffff;
 .order-listing-container .order-col .order-box .details .left p {display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
 .order-page .pagination-custom, .order-page .pagination {display: flex;gap: 6px;padding: 0px;}
 .order-page .pagination-custom .page-item .page-link, .order-page .pagination .page-item .page-link {border-radius: 10px;padding: 0px 5px;width: 50px;height: 36px;display: flex;align-items: center;justify-content: center;text-align: center;flex: 0 0 36px;max-width: 36px;background: #ffffff;border: 0px !important;box-shadow: none;font-size: 14px;outline: none;min-width: 50px;box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.25);}
-.order-page .pagination .page-item:first-child .page-link, .order-page .pagination .page-item:last-child .page-link {font-size: 26px;}
+.order-page .pagination .page-item:first-child .page-link, .order-page .pagination .page-item:last-child .page-link {font-size: 12px;}
 .order-page .pagination-custom .page-item.active .page-link, .order-page .pagination .page-item.active .page-link {background-color: #646464 !important;color: #ffffff !important;border: none;}
 .order-page .pagination-custom .page-item .page-link:hover, .order-page .pagination .page-item .page-link:hover {background-color: #646464 !important;color: #ffffff !important;}
 .order-page .filter-btn-group {display: flex;gap: 10px;padding-left: 24px;}
@@ -847,7 +845,10 @@ stroke: #ffffff;
 .signin-card .card-body {padding: 20px;}
 .popular-item-grid {grid-template-columns: repeat(2, 1fr);grid-column-gap: 15px;}
 .bestselling-item-grid {grid-template-columns: repeat(2, 1fr);grid-column-gap: 15px;}
-    .category-section .swiper-container .category-swiper-slider .category-slider .category-element {flex: 0 0 25%;max-width: 25%;}
+.category-section .swiper-container .category-swiper-slider .category-slider .category-element {flex: 0 0 25%;max-width: 25%;}
+.section-page-title .radio-btn-group .order-radio-group {width: 101%;margin: 0px -10px 0px 4px;}
+.section-page-title .radio-btn-group .radio-container .radio-label {left: 32px;}
+.section-page-title .radio-btn-group .radio-container .radio-custom {margin-left: -7px !important;}
 }
 @media screen and (max-width: 1200px) {
     .order-page-bar .drop_with_search .select-options .form-control {width: 130px;}
@@ -886,6 +887,3 @@ stroke: #ffffff;
 .order-listing-container::-webkit-scrollbar, body::-webkit-scrollbar, .order-content-box::-webkit-scrollbar, .footer-box-main::-webkit-scrollbar, .customer-dropdown ul::-webkit-scrollbar{width: 5px;height: 3px;}
 .order-listing-container::-webkit-scrollbar-track, body::-webkit-scrollbar-track, .order-content-box::-webkit-scrollbar-track, .footer-box-main::-webkit-scrollbar-track, .customer-dropdown ul::-webkit-scrollbar-track {border-radius: 5px;background-color: var(--theme-white1);}
 .order-listing-container::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb, .order-content-box::-webkit-scrollbar-thumb, .footer-box-main::-webkit-scrollbar-thumb, .customer-dropdown ul::-webkit-scrollbar-thumb {background-color: var(--theme-gray4);border-radius: 5px;}
-
-.order-listing-container .order-column .order-col {max-height: 120px;}
-.orders-new-pagination .form-control {min-height: 40px !important;}

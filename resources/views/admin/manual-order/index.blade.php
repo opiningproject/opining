@@ -1,8 +1,10 @@
 @extends('layouts.app')
-@section('page_title')
-    <a href="{{ route('orders') }}">Orders</a> <span class="create-order-breadcrumb"> > </span> Create Order
-@endsection
+@section('page_title', 'Orders')
+@section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
 @section('content')
+{{--@section('page_title')--}}
+{{--    <a href="{{ route('orders') }}">Orders</a> <span class="create-order-breadcrumb"> > </span> Create Order--}}
+{{--@endsection--}}
 
     <div class="main-content">
         <div class="header-belt section-page-title d-flex align-items-center justify-content-between gap-2 order-page-bar">
@@ -47,7 +49,7 @@
                         @foreach ($categories as $key => $cat)
                             <?php
                             $selected = '';
-                            
+
                             if (!isset($_GET['all']) && $cat_id == '') {
                                 if ($key == 0) {
                                     $selected = 'active';
@@ -72,17 +74,17 @@
                                 <?php
                                 $disableBtn = '';
                                 $customizeBtn = false;
-                                
+
                                 //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                 if ($dish->out_of_stock == '1') {
                                     $disableBtn = 'disabled';
                                     $customizeBtn = true;
                                 }
-                                
+
                                 if (count($dish->ingredientsWithoutTrash) == 0) {
                                     $customizeBtn = true;
                                 }
-                                
+
                                 ?>
                                 <div class="order-listing-col">
                                     <div class="dish-box">

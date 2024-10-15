@@ -162,6 +162,7 @@ $(function () {
                     search: search,
                     searchOption: searchOption,
                     filters: filters,
+                    per_page:perPageNew,
                 },
                 datatype: 'json',
                 success: function (response) {
@@ -206,6 +207,9 @@ $(function () {
             $('.count-filter').addClass('d-none');
         }
         searchFilterAjax(search, searchOption, filters, perPageNew);
+    });
+    $('.dropdown-menu').on('click', function(e) {
+        e.stopPropagation();
     });
 
 
@@ -364,6 +368,7 @@ $(function () {
         // Get the 'per_page' parameter value using URLSearchParams
         var urlPerPage = urlObject.searchParams.get('per_page');
         perPageNew = urlPerPage
+        $('.numberOfPerPage').val(urlPerPage)
         // return false;
         searchFilterAjax(search, searchOption, filters, perPageNew)
         // window.open(url, '_parent');

@@ -101,11 +101,11 @@ use App\Enums\PaymentType;
                 <!-- Previous Page Link -->
                 @if ($orders->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true">
-                        <span class="page-link">&lsaquo; Back</span>
+                        <span class="page-link"><span>&lsaquo;</span> Back</span>
                     </li>
                 @else
                     <li class="page-item">
-                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" rel="prev">&lsaquo; Back</a>
+                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" rel="prev"><span>&lsaquo;</span> Back</a>
                     </li>
                 @endif
 
@@ -151,11 +151,11 @@ use App\Enums\PaymentType;
             <!-- Next Page Link -->
                 @if ($orders->hasMorePages())
                     <li class="page-item">
-                        <a class="page-link" href="{{ $orders->nextPageUrl() }}" rel="next">Next &rsaquo;</a>
+                        <a class="page-link" href="{{ $orders->nextPageUrl() }}" rel="next">Next <span>&rsaquo;</span></a>
                     </li>
                 @else
                     <li class="page-item disabled" aria-disabled="true">
-                        <span class="page-link">Next &rsaquo;</span>
+                        <span class="page-link">Next <span>&rsaquo;</span></span>
                     </li>
                 @endif
             </ul>

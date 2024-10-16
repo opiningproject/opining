@@ -717,7 +717,7 @@ stroke: #ffffff;
 .order-page .order-pagination {position: relative;top: 0px;}
 
 .orderList-col .order-listing-container {
-    max-height: calc(100vh - 177px);
+    max-height: calc(100vh - 180px);
 }
 
 .map-order-listing-row .orderList .order-listing-container{width: 100%;}

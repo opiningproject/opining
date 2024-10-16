@@ -37,7 +37,7 @@
                                     style="min-width: auto">
                                     <img src="{{ asset('images/create-order.png') }}" />
                                     <img src="{{ asset('images/create-order-white.png') }}" class="d-none" />
-                                    {{ trans('rest.food_order.create_order') }}</a>
+                                    {{ trans('rest.food_order.create_order') }}
 
                                 </a>
                             </div>

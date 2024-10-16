@@ -406,6 +406,7 @@ class NewOrdersController extends Controller
                 if (in_array('delivered', $filters)) {
                     $query->orWhere('order_status', OrderStatus::Delivered);
                 }
+
             });
         }
 

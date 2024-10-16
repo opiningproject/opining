@@ -39,8 +39,8 @@ use App\Enums\PaymentType;
                             <h5 class="mb-0 price_status">
                                 <b>€{{ number_format($ord->total_amount, 2) }}</b>
                                 @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
-                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="20"
-                                         width="20" />
+                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="16"
+                                         width="16" />
                                 @endif
                                 @if ($ord->payment_type == \App\Enums\PaymentType::Card)
                                     <img src="{{ asset('images/purse.svg') }}" class="svg" height="20"

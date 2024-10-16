@@ -348,11 +348,11 @@
                                         <!-- Previous Page Link -->
                                         @if ($allOrders->onFirstPage())
                                             <li class="page-item disabled" aria-disabled="true">
-                                                <span class="page-link">&lsaquo; Back</span>
+                                                <span class="page-link"><span>&lsaquo;</span> Back</span>
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $allOrders->previousPageUrl() }}" rel="prev">&lsaquo; Back</a>
+                                                <a class="page-link" href="{{ $allOrders->previousPageUrl() }}" rel="prev"><span>&lsaquo;</span> Back</a>
                                             </li>
                                         @endif
 
@@ -398,11 +398,11 @@
                                     <!-- Next Page Link -->
                                         @if ($allOrders->hasMorePages())
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $allOrders->nextPageUrl() }}" rel="next">Next &rsaquo;</a>
+                                                <a class="page-link" href="{{ $allOrders->nextPageUrl() }}" rel="next">Next <span>&rsaquo;</span></a>
                                             </li>
                                         @else
                                             <li class="page-item disabled" aria-disabled="true">
-                                                <span class="page-link">Next &rsaquo;</span>
+                                                <span class="page-link">Next <span>&rsaquo;</span></span>
                                             </li>
                                         @endif
                                     </ul>

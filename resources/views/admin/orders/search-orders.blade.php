@@ -15,13 +15,23 @@ use App\Enums\PaymentType;
                 <div class="order-col cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                     <div class="order-box">
                         <div class="timing">
-                            <h3 class="expectedDeliveryTime-{{ $ord->id }}">
-                                {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
-                            </h3>
-{{--                            @if ($ord->delivery_time != 'ASAP')--}}
-                                <label class="success cursor-pointer">{{ $ord->delivery_time }}</label>
-{{--                            @endif--}}
-                            </div>
+                            @if ($ord->delivery_time == 'ASAP')
+                                <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                    {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
+                                </h3>
+                            @else
+                                <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                    {{ date('H:i', strtotime($ord->delivery_time)) }}
+                                </h3>
+                            @endif
+                            @if ($ord->delivery_time == 'ASAP')
+                                <label
+                                    class="cursor-pointer success">{{ $ord->delivery_time }}</label>
+{{--                            @else--}}
+{{--                                <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
+{{--                                     class="svg"/>--}}
+                            @endif
+                        </div>
 
                         <div class="details">
                             <div class="left">
@@ -162,6 +172,9 @@ use App\Enums\PaymentType;
         let numberOfColumn = 8
         if ($('.numberOfPerPage').val() == 18) {
             numberOfColumn = 6
+        }
+        if ($('.numberOfPerPage').val() == 21) {
+            numberOfColumn = 7
         }
         function arrangeOrderCols() {
             var screenHeight = $(window).height();

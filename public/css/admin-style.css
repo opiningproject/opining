@@ -370,7 +370,6 @@ stroke: #ffffff;
 .order-page .filter-btn-group button img {max-width: 20px;margin: 0px auto;}
 .order-page .filter-btn-group button:hover {background-color: #555;}
 .count-filter{background-color: black;color: white;height: 18px;width: 19px;border-radius: 50%;display: inline-block;position: absolute;left: initial;top: -8px;right: -3px;}
-.order-col .order-box svg { position: relative;top: 5px;}
 
 /* Order Details popup css */
  .order-detail-popup .modal-dialog {max-width: 1274px;width: 100%;}

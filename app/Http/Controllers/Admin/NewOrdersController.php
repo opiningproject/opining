@@ -450,7 +450,7 @@ class NewOrdersController extends Controller
                 $html .= '<h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>';
             } else {
                 $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>
-                         <img src="'+$customTimeIcon+'" height="12px" width="12px"class="svg" />';
+                         <img src="' . $customTimeIcon . '" height="12px" width="12px" class="svg" />';
             }
             if ($orders->delivery_time == 'ASAP') {
                 $html .= '<label class="success cursor-pointer"> ' . $orders->delivery_time . ' </label>';

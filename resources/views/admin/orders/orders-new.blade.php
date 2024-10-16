@@ -34,8 +34,8 @@
                                 <a href="{{ route('create-order') }}"
                                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
                                     style="min-width: auto">
-                                    <img src="{{ asset('images/create-order.png') }}" />
-                                    <img src="{{ asset('images/create-order-white.png') }}" class="d-none" />
+                                    <img src="{{ asset('images/create-order.svg') }}" width="16" class="svg"  />
+                                    <img src="{{ asset('images/create-order-white.svg') }}" width="16" class="svg d-none" />
                                     {{ trans('rest.food_order.create_order') }}</a>
 
                             </div>
@@ -279,7 +279,7 @@
                                                         <b>€{{ number_format($ord->total_amount, 2) }}</b>
                                                         @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
                                                             <img src="{{ asset('images/cod_icon.png') }}" class="svg"
-                                                                height="20" width="20" />
+                                                                height="16" width="16" />
                                                         @endif
                                                         @if ($ord->payment_type == \App\Enums\PaymentType::Card)
                                                             <img src="{{ asset('images/purse.svg') }}" class="svg"

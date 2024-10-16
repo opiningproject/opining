@@ -244,6 +244,9 @@
                                                     @if ($ord->delivery_time == 'ASAP')
                                                         <label
                                                             class="cursor-pointer success">{{ $ord->delivery_time }}</label>
+{{--                                                        @else--}}
+{{--                                                            <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
+{{--                                                                 class="svg" />--}}
                                                     @endif
                                                 </div>
 
@@ -429,9 +432,12 @@
     <script>
         $(document).ready(function() {
             let numberOfColumn = 8
-            if ($('.numberOfPerPage').val() == 18) {
-                numberOfColumn = 6
+            if ($('.numberOfPerPage').val() == 21) {
+                numberOfColumn = 7
+            } if ($('.numberOfPerPage').val() == 21) {
+                numberOfColumn = 7
             }
+            console.log("numberOfColumn",numberOfColumn, $('.numberOfPerPage').val())
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
                 var availableHeight = screenHeight - 230; // Space for margins, headers, etc.

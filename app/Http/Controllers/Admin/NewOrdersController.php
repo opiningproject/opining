@@ -406,6 +406,7 @@ class NewOrdersController extends Controller
                 if (in_array('delivered', $filters)) {
                     $query->orWhere('order_status', OrderStatus::Delivered);
                 }
+
             });
         }
 
@@ -438,6 +439,7 @@ class NewOrdersController extends Controller
             if ($orders->payment_type == \App\Enums\PaymentType::Ideal) {
                 $iconImage = asset('images/paid-deal.svg');
             }
+            $customTimeIcon = asset('images/custom_time_icon.svg');
             $lableIcon = asset('images/opening-label.svg');
             $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
             $html = '<div class="order-col cursor-pointer" id="order-' . $orders->id . '" data-id="' . $orders->id . '" onclick="orderDetailNew(' . $orders->id . ')">
@@ -448,7 +450,8 @@ class NewOrdersController extends Controller
             if ($orders->delivery_time == 'ASAP') {
                 $html .= '<h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>';
             } else {
-                $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>';
+                $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>
+                         <img src="' . $customTimeIcon . '" height="12px" width="12px" class="svg" />';
             }
             if ($orders->delivery_time == 'ASAP') {
                 $html .= '<label class="success cursor-pointer"> ' . $orders->delivery_time . ' </label>';

@@ -27,9 +27,9 @@ use App\Enums\PaymentType;
                             @if ($ord->delivery_time == 'ASAP')
                                 <label
                                     class="cursor-pointer success">{{ $ord->delivery_time }}</label>
-{{--                            @else--}}
-{{--                                <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
-{{--                                     class="svg"/>--}}
+                            @else
+                                <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"
+                                     class="svg"/>
                             @endif
                         </div>
 
@@ -59,8 +59,8 @@ use App\Enums\PaymentType;
                             <h5 class="mb-0 price_status">
                                 <b>€{{ number_format($ord->total_amount, 2) }}</b>
                                 @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
-                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="20"
-                                        width="20" />
+                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="16"
+                                        width="16" />
                                 @endif
                                 @if ($ord->payment_type == \App\Enums\PaymentType::Card)
                                     <img src="{{ asset('images/purse.svg') }}" class="svg" height="20"
@@ -101,11 +101,11 @@ use App\Enums\PaymentType;
                 <!-- Previous Page Link -->
                 @if ($orders->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true">
-                        <span class="page-link">&lsaquo; Back</span>
+                        <span class="page-link"><span>&lsaquo;</span> Back</span>
                     </li>
                 @else
                     <li class="page-item">
-                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" rel="prev">&lsaquo; Back</a>
+                        <a class="page-link" href="{{ $orders->previousPageUrl() }}" rel="prev"><span>&lsaquo;</span> Back</a>
                     </li>
                 @endif
 
@@ -151,11 +151,11 @@ use App\Enums\PaymentType;
             <!-- Next Page Link -->
                 @if ($orders->hasMorePages())
                     <li class="page-item">
-                        <a class="page-link" href="{{ $orders->nextPageUrl() }}" rel="next">Next &rsaquo;</a>
+                        <a class="page-link" href="{{ $orders->nextPageUrl() }}" rel="next">Next <span>&rsaquo;</span></a>
                     </li>
                 @else
                     <li class="page-item disabled" aria-disabled="true">
-                        <span class="page-link">Next &rsaquo;</span>
+                        <span class="page-link">Next <span>&rsaquo;</span></span>
                     </li>
                 @endif
             </ul>

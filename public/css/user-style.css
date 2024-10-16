@@ -321,7 +321,7 @@ a {text-decoration: none;color: var(--theme-dark1);}
 .offer-card-banner h2 {color: var(--theme-text-white);font-size: 46px;font-weight: 700;letter-spacing: 0.5px;text-transform: capitalize;margin-bottom: 15px;}
 .offer-card-banner p {color: var(--theme-text-white);font-size: 34px;letter-spacing: 0.5px;}
 .category-section .category-slider .category-element .card {padding: 20px;text-align: center;border-color: transparent;border-radius: 10px;align-items: center;border: 1px solid transparent;-webkit-transition: all .3s linear;-moz-transition: all .3s linear;-o-transition: all .3s linear;-ms-transition: all .3s linear;transition: all .3s linear;}
-.category-section .category-slider .category-element .card p {font-size: 16px;color: #000000 !important;}
+.category-section .category-slider .category-element .card p {font-size: 16px;color: #000000 !important;white-space: nowrap;}
 .category-slider {padding: 10px 0px;}
 .category-section .category-slider .category-element .card.active {background-color: #e7e7e7;color: #ffffff;box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 4px 1px;}
 .category-swiper-slider .swiper-slide.selected-cart-active .card {background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(94, 94, 94, 1));border-color: #777777;}
@@ -724,7 +724,7 @@ footer .footer-copyright-text {color: rgba(255, 255, 255, 0.7);font-size: 12px;l
 .cart-section .cart-amount-cal-data .prev-input-group .input-group-icon {top: 50% !important;transform: translateY(-50%) !important;}
 
 .category-swiper-slider .category-element {
-  width: auto !important;
+  width: auto;
   min-width: initial;
 }
 

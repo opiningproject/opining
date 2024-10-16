@@ -74,32 +74,32 @@ $(document).ready(function () {
         },
         breakpoints: {
             375: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 10,
                 autoplay: false,
             },
             425: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 10,
                 autoplay: false,
             },
             575: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 10,
                 autoplay: false,
             },
             640: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 20,
                 autoplay: false,
             },
             700: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 20,
                 autoplay: false,
             },
             758: {
-                slidesPerView: 4,
+                slidesPerView: 'auto',
                 spaceBetween: 20,
                 autoplay: false,
             },

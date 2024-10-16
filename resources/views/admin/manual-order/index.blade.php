@@ -23,8 +23,8 @@
                 <a href="{{ route('create-order') }}"
                     class="btn bg-white btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
                     style="min-width: auto">
-                    <img src="{{ asset('images/create-order.png') }}" class="d-none"  />
-                    <img src="{{ asset('images/create-order-white.png') }}" />
+                    <img src="{{ asset('images/create-order.svg') }}" width="16" class="svg d-none"  />
+                    <img src="{{ asset('images/create-order-white.svg') }}" width="16" class="svg" />
                     {{ trans('rest.food_order.create_order') }}</a>
 
             </div>

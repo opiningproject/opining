@@ -35,8 +35,8 @@
                                 <a href="{{ route('create-order') }}"
                                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
                                     style="min-width: auto">
-                                    <img src="{{ asset('images/create-order.png') }}" />
-                                    <img src="{{ asset('images/create-order-white.png') }}" class="d-none" />
+                                    <img src="{{ asset('images/create-order.svg') }}" width="16" class="svg"  />
+                                    <img src="{{ asset('images/create-order-white.svg') }}" width="16" class="svg d-none" />
                                     {{ trans('rest.food_order.create_order') }}</a>
 
                                 </a>
@@ -230,9 +230,9 @@
                         <div class="row map-order-listing-row">
                             <div class="col-md-8">
                                 <div id="orders-map-marker"
-                                    style="height: calc(100vh - 230px);border-radius: 16px;overflow: hidden;"></div>
+                                    style="height: calc(100vh - 177px);border-radius: 16px;overflow: hidden;"></div>
                             </div>
-                            <div class="orderList col-md-4">
+                            <div class="orderList orderList-col col-md-4">
                                 <div class="order-listing-container">
                                     <div class="order-row">
                                         @foreach ($allOrders as $key => $ord)
@@ -269,7 +269,7 @@
                                                             <b>€{{ number_format($ord->total_amount, 2) }}</b>
                                                             @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
                                                                 <img src="{{ asset('images/cod_icon.png') }}"
-                                                                    class="svg" height="20" width="20" />
+                                                                    class="svg" height="16" width="16" />
                                                             @endif
                                                             @if ($ord->payment_type == \App\Enums\PaymentType::Card)
                                                                 <img src="{{ asset('images/purse.svg') }}" class="svg"

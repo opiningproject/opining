@@ -194,7 +194,7 @@
                                                         <img src="{{ $cat->image }}" class="img-fluid svg" alt="bakery"
                                                             width="56" height="56" />
                                                     </span>
-                                                    <p class="mb-0 text-truncate text-muted" title="{{ $cat->name }}">
+                                                    <p class="mb-0 text-muted" title="{{ $cat->name }}">
                                                         {{ $cat->name }}
                                                     </p>
                                                     <a href="javascript:void(0)" onclick="getDishes({{ $cat->id }})"

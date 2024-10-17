@@ -503,7 +503,7 @@ stroke: #ffffff;
 /* Checked state styles ends */
 
 /* New header css */
-.header-top {position: sticky;background: #ffffff;padding: 15px 0px;z-index: 9;top: 0px;}
+.header-top {position: sticky;background: #ffffff;padding: 15px 0px;z-index: 9;top: 0px;max-height: 62px;}
 .header-top .header-container {padding: 0px 34px;}
 .header-top .header-container .header-row {display: flex;align-items: center;justify-content: space-between;gap: 10px;}
 .header-top .header-container .header-row .left {display: flex;align-items: center;column-gap: 23px;}

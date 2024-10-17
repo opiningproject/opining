@@ -313,9 +313,9 @@
                                 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto head-title top-head-title">
                                 {{ trans('user.cart.title') }} </h4>
 
-                            <h4 class="d-none position-absolute start-0 top-0 pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown"
-                                id="head-dropdown-btn">
-                                <img src="{{ asset('images/map-t-icon.png') }}" alt="" />
+                            {{-- <h4 class="d-none position-absolute start-0 top-0 pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown"
+                                id="head-dropdown--btn">
+                                <img src="{{ asset('images/map-t-icon.png') }}" width="15" alt="" />
                                 Tochtstraat 40
                                 <span class="arrow-icon">
 
@@ -325,10 +325,10 @@
                                     </svg>
 
                                 </span>
-                            </h4>
+                            </h4> --}}
 
 
-                            <div class="d-none address-select-modal-mobile">
+                            {{-- <div class="d-none address-select-modal-mobile">
 
                                 <div class="address-select-modal-inn cart-sidebar-mobile">
                                     <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab" role="tablist">
@@ -443,7 +443,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                             <button type="button"
                                 class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 me-md-2 mt-md-2 end-0 ms-2 bg-arrow-mobile"
@@ -868,7 +868,7 @@
                                                         {{ count($cart) > 0 ? 'style=display:none' : '' }}>
                                                         <span class="mobile-empty-img d-none">
                                                             {{--                                                        <img src="{{ asset('images/middle-empty-cart.png') }}" alt="" class="svg" height="128" width="132"> --}}
-                                                            <img src="{{ asset('images/middle-empty-cart.png') }}" />
+                                                            <img src="{{ asset('images/middle-empty-cart-a.png') }}" />
                                                         </span>
                                                         <span class="desktop-empty-img">
                                                             {{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132"> --}}
@@ -888,7 +888,7 @@
                                                         </p>
                                                         <span class="mobile-empty-img d-none">
                                                             {{--                                                        <img src="{{ asset('images/middle-empty-cart.png') }}" alt="" class="svg" height="128" width="132"> --}}
-                                                            <img src="{{ asset('images/middle-empty-cart.png') }}" />
+                                                            <img src="{{ asset('images/middle-empty-cart-a.png') }}" />
                                                         </span>
                                                         <span class="desktop-empty-img">
                                                             {{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132"> --}}

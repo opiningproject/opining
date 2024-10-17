@@ -327,7 +327,7 @@
 {{--                                    </button>--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
-                            <input type="hidden" class="numberOfPerPage" value="{{ $perPage }}">
+                            <input type="hidden" class="numberOfPerPage" id="numberOfPerPage" value="{{ $perPage }}">
                             <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
                                 <!-- Rows per page -->
                                 <div class="ms-auto d-flex align-items-center custom-pagination orders-new-pagination justify-content-start w-100">
@@ -432,12 +432,16 @@
     <script>
         $(document).ready(function() {
             let numberOfColumn = 8
+            if ($('.numberOfPerPage').val() == 18) {
+                numberOfColumn = 6
+            }
             if ($('.numberOfPerPage').val() == 21) {
                 numberOfColumn = 7
-            } if ($('.numberOfPerPage').val() == 21) {
-                numberOfColumn = 7
             }
-            console.log("numberOfColumn",numberOfColumn, $('.numberOfPerPage').val())
+            if ($('.numberOfPerPage').val() == 27) {
+                numberOfColumn = 9
+            }
+            console.log("numberOfColumn", numberOfColumn, "$('#numberOfPerPage').val()", $('#numberOfPerPage').val())
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
                 var availableHeight = screenHeight - 230; // Space for margins, headers, etc.

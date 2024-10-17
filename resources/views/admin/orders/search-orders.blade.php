@@ -7,12 +7,12 @@ use App\Enums\PaymentType;
 ?>
 
 @if (count($orders))
-    <div class="order-listing-container">
+    <div class="order-listing-container order-listing-container-search">
         <div class="order-row">
             @foreach ($orders as $key => $ord)
                 <?php $userDetails = $ord->orderUserDetails; ?>
 
-                <div class="order-col cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
+                <div class="order-col order-col-search cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                     <div class="order-box">
                         <div class="timing">
                             @if ($ord->delivery_time == 'ASAP')
@@ -80,7 +80,7 @@ use App\Enums\PaymentType;
             @endforeach
         </div>
     </div>
-    <input type="hidden" class="numberOfPerPage" value="{{ $perPage }}">
+    <input type="hidden" id="numberOfPerPageSearch" class="numberOfPerPage" value="{{ $perPage }}">
     <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
         <!-- Rows per page -->
         <div class="ms-auto d-flex align-items-center custom-pagination orders-new-pagination justify-content-start w-100">
@@ -170,12 +170,16 @@ use App\Enums\PaymentType;
 <script>
     $(document).ready(function() {
         let numberOfColumn = 8
-        if ($('.numberOfPerPage').val() == 18) {
+        if ($('#numberOfPerPage').val() == 18) {
             numberOfColumn = 6
         }
-        if ($('.numberOfPerPage').val() == 21) {
+        if ($('#numberOfPerPage').val() == 21) {
             numberOfColumn = 7
         }
+        if ($('#numberOfPerPage').val() == 27) {
+            numberOfColumn = 9
+        }
+        console.log("numberOfColumnSearchPage", numberOfColumn, "SearchPage", $('#numberOfPerPage').val())
         function arrangeOrderCols() {
             var screenHeight = $(window).height();
             var availableHeight = screenHeight - 230; // Space for margins, headers, etc.
@@ -192,8 +196,8 @@ use App\Enums\PaymentType;
             // Calculate the height of each item dynamically based on available space
             var dynamicItemHeight = (availableHeight - (maxItemsPerColumn - 1) * columnGap) / maxItemsPerColumn;
 
-            var $orderCols = $('.order-col');
-            var $container = $('.order-listing-container');
+            var $orderCols = $('.order-col-search');
+            var $container = $('.order-listing-container-search');
 
             // Clear any existing columns
             $container.empty();

@@ -119,7 +119,7 @@ class NewOrdersController extends Controller
             }
         }
         $pageNumber = request()->input('page', 1);
-        $perPage = isset($request->per_page) ? $request->per_page : 24;
+        $perPageFilter = isset($request->per_page) ? $request->per_page : 24;
 //        $perPage = request()->input('per_page', 24);
         // Check if the search term and search option are present
         if ($request->has('search') && $request->has('searchOption')) {
@@ -253,8 +253,8 @@ class NewOrdersController extends Controller
                 }
             });
         }
-        $orders = $orders->paginate($perPage, ['*'], 'page', $pageNumber);
-
+        $orders = $orders->paginate($perPageFilter, ['*'], 'page', $pageNumber);
+        dump(count($orders));
         return [
             'orders' => $orders
         ];

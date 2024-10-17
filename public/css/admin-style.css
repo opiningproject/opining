@@ -637,6 +637,8 @@ stroke: #ffffff;
 
 .timing-col .custom-timing {border-radius: 5px;text-align: center !important;border: 1px solid #bbbbbb;overflow: hidden;}
 .timing-col .custom-timing .expected_time_order {width: 100%;border: 0px;height: 100%;box-shadow: none;font-size: 15px;color: #303030;text-align: center;padding: 2px 5px;outline: none;}
+.text-custom-light-green {color: var(--theme-success3) !important;}
+label.error { color: #E41A1A !important;}
 
 /* Custom radio button */
 .radio-label-t .radio-label span {width: 14px;height: 14px;border: 1px solid #3BCE62;border-radius: 50%;display: inline-block;position: relative;margin-right: 8px;}

@@ -257,6 +257,9 @@ Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     //    manual order routes
     Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
     Route::get('/get-dish/{cat_id}', [ManualOrdersController::class, 'getDishes']);
+    Route::post('/add-cart/{id}', [ManualOrdersController::class, 'addCustomizedDish']);
+    Route::post('/create-customer', [ManualOrdersController::class, 'createCustomer']);
+
 
     //    Integrations order routes
     Route::get('/integrations', [IntegrationsController::class, 'index'])->name('integrations');

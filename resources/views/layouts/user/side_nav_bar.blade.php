@@ -1,3 +1,15 @@
+<?php
+use App\Models\Address;
+$zipcode = session('zipcode');
+$house_no = session('house_no');
+$street_name = session('street_name');
+$city = session('city');
+$min_order_price = session('min_order_price');
+$delivery_charge = session('delivery_charge');
+$deliveryTime = getRestaurantDetail()->delivery_time;
+$takeAwayTime = getRestaurantDetail()->take_away_time;
+?>
+@if (Route::currentRouteName() == 'user.dashboard')
 <div class="d-none address-select-modal-mobile address--select-modal-mobile">
     <div class="address-select-modal-inn cart-sidebar-mobile">
         <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab" role="tablist">
@@ -36,32 +48,39 @@
 
         <div class="tab-pane-mobile pb-1">
             <div class="delivery-tab-mobile">
-                <div class="select-address-row d-flex justify-content-between align-items-center mb-3">
-                    <div class="address-radio d-flex align-items-center">
-                        <div class="radio-container">
-                            <input type="radio" id="radio1" name="location">
-                            <label class="radio-custom" for="radio1"></label>
-                            <span class="radio-label">Tochtstraat 40</span>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0)" class="delete-address">
-                        <img src="{{ asset('images/add-delete-ico.svg') }}" alt="" class="svg"
-                            height="15" width="15" /></a>
-                </div>
+                @if (count($addresses) > 0)
+                    @foreach ($addresses as $key => $add)
+                        <?php
+                        $selectedAddress = '<span class="success-ico blank"></span>';
+                        $selected = false;
+                        $style = '';
 
-                <div class="select-address-row d-flex justify-content-between align-items-center mb-3">
-                    <div class="address-radio d-flex align-items-center">
-                        <div class="radio-container">
-                            <input type="radio" id="radio1" name="location">
-                            <label class="radio-custom" for="radio1"></label>
-                            <span class="radio-label">Jacob Catsstraat 83A</span>
+                        if (session('address') == $add->id) {
+                            $selected = true;
+                            $addressText = 'Selected';
+                            $selectedAddress = '<span class="success-ico"><img src="' . asset("images/success-icon.svg") . '" class="svg" width="14" height="11"></span>';
+                            $style = 'pointer-events:none;cursor:default';
+                        }
+                        ?>
+                        <div class="select-address-row d-flex justify-content-between align-items-center mb-3 "
+                             id="address-mobile-{{ $add->id }}">
+                            <div class="address-radio d-flex align-items-center">
+                                <div class="radio-container">
+                                    <input type="radio" name="selected_address" class="select-address-btn"
+                                           id="radio{{ $add->id }}"
+                                           value="{{ $add->id }}"
+                                           {{ $selected ? 'checked' : '' }}  data-selected-address="{{session('address')}}">
+                                    {{--                            <input type="radio" id="radio1" name="location">--}}
+                                    <label class="radio-custom" for="radio{{ $add->id }}"></label>
+                                    <span class="radio-label">{{ $add->street_name }}, {{ $add->house_no }}</span>
+                                </div>
+                            </div>
+                            <a href="javascript:void(0)" class="delete-address">
+                                <img src="{{ asset('images/add-delete-ico.svg') }}" alt="" class="svg"
+                                     height="15" width="15"/></a>
                         </div>
-                    </div>
-                    <a href="javascript:void(0)" class="delete-address">
-                        <img src="{{ asset('images/add-delete-ico.svg') }}" alt="" class="svg"
-                            height="15" width="15" /></a>
-                </div>
-
+                    @endforeach
+                @endif
                 <div
                     class="select-address-row d-flex justify-content-between align-items-center mb-1 add-select-address-row flex-wrap">
                     <div class="address-radio d-flex align-items-center mb-3">
@@ -77,22 +96,25 @@
                         </div>
                     </div>
 
-                    <foam action="" class="address-add-form d-flex gap-2">
+                    <form action="" id="address-form-mobile" class="address-add-form d-flex gap-2">
+                        @csrf
                         <div class="form-group mb-0 zip">
-                            <input type="text" placeholder="Zip code" class="form-control" />
+                            <input type="text" placeholder="Zip code" name="zipcode"
+                                   id="zipcode" class="form-control" value="{{ $zipcode }}" required />
                         </div>
 
                         <div class="form-group house-number mb-0">
-                            <input type="text" placeholder="House Number" class="form-control" />
+                            <input type="text" placeholder="House Number" name="house_no"
+                                   id="house_no" class="form-control" value="{{ $house_no }}" required />
                         </div>
 
                         <div class="form-group btn-cl mb-0">
-                            <button type="" class="btn btn-site-theme">
+                            <button type="submit" class="btn btn-site-theme">
                                 <img src="{{ asset('images/btn-arrow.svg') }}" alt="" class="svg"
-                                    height="15" width="15" />
+                                     height="15" width="15"/>
                             </button>
                         </div>
-                        </form>
+                    </form>
 
                 </div>
             </div>
@@ -113,7 +135,7 @@
     </div>
 
 </div>
-
+@endif
 <aside class="menu-sidebar sticky-top">
     <div class="menu-sidebar-inner menu-sidebar--address">
         <div class="bd-navbar-toggle">
@@ -126,11 +148,26 @@
         </div>
 
         <div class="siderbarmenu-brand">
-
+            @if (Route::currentRouteName() == 'user.dashboard')
             <h4 class="pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown mb-0 d-none"
                 id="head-dropdown-btn">
                 <img src="{{ asset('images/map-t-icon.png') }}" width="15" alt="" />
-                Tochtstraat 40
+
+                <p id="zip_address_mobile" class="mb-0">
+
+                    @if($user || $user->cart && $user->cart->order_type == 1)
+                        @if ($street_name)
+                            {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
+                        @else
+                            {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                        @endif
+                    @else
+                        {{ getRestaurantDetail()->rest_address }}
+                    @endif
+                </p>
+                <p id="zip_address_mobile_takw_away" class="mb-0 d-none">
+                    {{ getRestaurantDetail()->rest_address }}
+                </p>
                 <span class="arrow-icon">
 
                     <svg width="9" height="5" viewBox="0 0 9 5" fill="none"
@@ -140,8 +177,7 @@
 
                 </span>
             </h4>
-
-
+            @endif
 
             <a href="{{ route('user.dashboard') }}" class="navbar-brand sidebar-logo">
                 <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">

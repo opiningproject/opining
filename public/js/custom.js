@@ -135,6 +135,8 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#head-dropdown-btn').on('click', function () {
     $('.address-select-modal-mobile, .top-head-dropdown, .cartSidebarCustom').toggleClass('active');
+    $('.menu-sidebar').toggleClass('address-active');
+    $('body').toggleClass('overflow-hidden');
   });
 
   // Prevent the click event from closing when clicking inside the modal
@@ -146,6 +148,8 @@ $(document).ready(function () {
   $(document).on('click', function (e) {
     if (!$(e.target).closest('.address-select-modal-mobile, .cart-sidebar-mobile, #head-dropdown-btn').length) {
       $('.address-select-modal-mobile, .top-head-dropdown, .cartSidebarCustom, .cart-sidebar-mobile').removeClass('active');
+      $('.menu-sidebar').removeClass('active');
+      $('body').removeClass('overflow-hidden');
     }
   });
 });

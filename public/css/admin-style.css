@@ -326,6 +326,7 @@ stroke: #ffffff;
     color: #000000;
     padding: 12px 20px;
     border-radius: 5px;
+    height: 42px;
 }
 .order-page-bar .a {font-size: 12px;font-weight: 400;border: 0px;min-height: 42px;min-width: 250px;color: #000000;}
 

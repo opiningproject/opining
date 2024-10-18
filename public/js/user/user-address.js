@@ -71,9 +71,6 @@ $(function () {
             },
         },
         submitHandler: function (form) {
-            console.log("Validation passed");
-            console.log($.fn.validate ? "Validation loaded" : "Validation not loaded");
-
             validateZipcodeMobile()
         }
     });
@@ -397,7 +394,7 @@ function deleteAddress(id) {
         url: baseURL + '/user/delete-address/' + id,
         type: 'GET',
         success: function (response) {
-            $('#address-' + id).remove();
+            $('#address-mobile-' + id).remove();
 
             var mainDiv = $('#addresses-length');
             // Find all div elements inside the main div
@@ -434,8 +431,8 @@ function validateZipcodeMobile() {
         success: function (response) {
 
             if (response.status == 2) {
-                $('#zipcode-error').text(response.message);
-                $('#zipcode-error').css("display", "block");
+                $('#zipcode-error-mobile').text(response.message);
+                $('#zipcode-error-mobile').css("display", "block");
             } else {
                 let currentUrl = window.location.href;
 

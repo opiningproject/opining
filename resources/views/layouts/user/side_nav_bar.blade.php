@@ -48,7 +48,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
         </ul>
 
         <div class="tab-pane-mobile pb-1">
-            <div class="delivery-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'd-none' : '' }}">
+            <div class="delivery-tab-mobile addresses-length {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'd-none' : '' }}">
                 @if (count($addresses) > 0)
                     @foreach ($addresses as $key => $add)
                         <?php
@@ -63,7 +63,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                             $style = 'pointer-events:none;cursor:default';
                         }
                         ?>
-                        <div class="select-address-row d-flex justify-content-between align-items-center mb-3 "
+                        <div class="select-address-row d-flex justify-content-between align-items-center mb-3 total-addresses"
                              id="address-mobile-{{ $add->id }}">
                             <div class="address-radio d-flex align-items-center">
                                 <div class="radio-container">
@@ -76,9 +76,12 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                                     <span class="radio-label">{{ $add->street_name }}, {{ $add->house_no }}</span>
                                 </div>
                             </div>
-                            <a href="javascript:void(0)" class="delete-address">
-                                <img src="{{ asset('images/add-delete-ico.svg') }}" alt="" class="svg"
-                                     height="15" width="15"/></a>
+                            @if(count($addresses) > 1)
+                                <a href="javascript:void(0)" class="delete-address" onclick="deleteAddress({{ $add->id }})">
+                                    <img src="{{ asset('images/add-delete-ico.svg') }}" alt="" class="svg"
+                                         height="15" width="15"/>
+                                </a>
+                            @endif
                         </div>
                     @endforeach
                 @endif
@@ -119,6 +122,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
 
                 </div>
             </div>
+            <label id="zipcode-error-mobile" class="error" for="zipcodeErrorMobile" style="display: none"></label>
 
             <div class="takeAway-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? '' : 'd-none' }}">
 

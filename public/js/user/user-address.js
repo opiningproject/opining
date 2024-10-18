@@ -288,6 +288,10 @@ $(function () {
         // Perform any additional logic such as form submission or updating the UI.
     });
 
+    $('.top-head-dropdown').on('click', function() {
+        $(".zipcode-error-mobile").addClass('d-none');
+    });
+
     $.validator.addMethod(
         "alphaNumericalRegex",
         function(value, element, regexp) {
@@ -431,8 +435,9 @@ function validateZipcodeMobile() {
         success: function (response) {
 
             if (response.status == 2) {
-                $('#zipcode-error-mobile').text(response.message);
-                $('#zipcode-error-mobile').css("display", "block");
+                $('.zipcode-error-mobile').text(response.message);
+                $('.zipcode-error-mobile').css("display", "block");
+                $('.zipcode-error-mobile').removeClass("d-none");
             } else {
                 let currentUrl = window.location.href;
 

@@ -441,7 +441,7 @@
             if ($('.numberOfPerPage').val() == 27) {
                 numberOfColumn = 9
             }
-            console.log("numberOfColumn", numberOfColumn, "$('#numberOfPerPage').val()", $('#numberOfPerPage').val())
+            
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
                 var availableHeight = screenHeight - 230; // Space for margins, headers, etc.

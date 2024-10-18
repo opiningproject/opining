@@ -169,16 +169,16 @@ use App\Enums\PaymentType;
 <script>
     $(document).ready(function() {
         let numberOfColumn = 8
-        if ($('#numberOfPerPage').val() == 18) {
+        if ($('.numberOfPerPage').val() == 18) {
             numberOfColumn = 6
         }
-        if ($('#numberOfPerPage').val() == 21) {
+        if ($('.numberOfPerPage').val() == 21) {
             numberOfColumn = 7
         }
-        if ($('#numberOfPerPage').val() == 27) {
+        if ($('.numberOfPerPage').val() == 27) {
             numberOfColumn = 9
         }
-        console.log("numberOfColumnSearchPage", numberOfColumn, "SearchPage", $('#numberOfPerPage').val())
+
         function arrangeOrderCols() {
             var screenHeight = $(window).height();
             var availableHeight = screenHeight - 230; // Space for margins, headers, etc.

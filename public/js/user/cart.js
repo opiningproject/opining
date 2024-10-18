@@ -50,13 +50,13 @@ $(function () {
             $('.desktop-pill-takeAway').removeClass('show active')
             $('.delivery-tab-mobile').removeClass('d-none')
             $('.takeAway-tab-mobile').addClass('d-none')
-            $("#zip_address_mobile").html('');
+            // $("#zip_address_mobile").html('');
             $("#zip_address_mobile_takw_away").addClass('d-none');
             $("#zip_address_mobile").removeClass('d-none');
             if ($('#zip_address_mobile').text().trim() === '') {
                 $('.addressError').removeClass('d-none');
             } else {
-                $('.addressError').removeClass('d-none');
+                $('.addressError').addClass('d-none');
             }
         }
 

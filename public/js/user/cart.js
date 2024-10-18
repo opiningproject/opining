@@ -179,8 +179,9 @@ $(function () {
                             $('.addressError').removeClass('d-none');
                         }
                     }
-
-                    // toastr.error(response.message);
+                    if ($(window).width() <= 767) {
+                        toastr.error(response.message);
+                    }
                 }
             },
             error: function (response) {

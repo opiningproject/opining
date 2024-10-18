@@ -346,7 +346,8 @@ stroke: #ffffff;
 .order-listing-container .order-col .order-box .details {display: flex;align-items: center;justify-content: space-between;border-right: 1px solid #D6D6D6;padding-right: 15px;border-left: 1px solid #D6D6D6;padding-left: 18px;flex: auto;padding-top: 10px;padding-bottom: 10px;}
 .order-listing-container .order-col .order-box .timing {flex: 0 0 90px;max-width: 90px;display: flex;align-items: center;justify-content: center;flex-direction: column;white-space: nowrap;position: relative;top: 2px;}
 .price_status b {font-weight: 500 !important;}
-.price_status img{object-fit: contain;object-position: center;max-height: 16px;}
+.price_status img{object-fit: contain;object-position: center;max-height: 16px; margin-top: 10px}
+.price_status svg{margin-top: 10px}
 .price_status {flex: 0 0 90px;max-width: 90px;width: 90px;display: flex;align-items: center;justify-content: center;flex-direction: column;}
 .order-col .order-box .details .left {display: flex;align-items: center;column-gap: 18px;}
 .order-col .order-box .details .left h4 {font-weight: 500;margin-bottom: 4px;}

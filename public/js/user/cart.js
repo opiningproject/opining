@@ -38,6 +38,7 @@ $(function () {
             $("#zip_address_mobile_takw_away").removeClass('d-none');
             $("#zip_address_mobile").addClass('d-none');
             $('.addressError').addClass('d-none');
+            $(".zipcode-error-mobile").addClass('d-none');
             // console.log($('.takeAway-tab-mobile-address').text())
         } else {
             let newHeight = invoiceHeight + 15;

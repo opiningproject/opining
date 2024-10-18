@@ -122,7 +122,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
 
                 </div>
             </div>
-            <label id="zipcode-error-mobile" class="error" for="zipcodeErrorMobile" style="display: none"></label>
+            <label id="zipcode-error-mobile" class="error zipcode-error-mobile" for="zipcodeErrorMobile" style="display: none"></label>
 
             <div class="takeAway-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? '' : 'd-none' }}">
 

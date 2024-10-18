@@ -27,24 +27,23 @@ use App\Enums\PaymentType;
                             @if ($ord->delivery_time == 'ASAP')
                                 <label
                                     class="cursor-pointer success">{{ $ord->delivery_time }}</label>
-                            @else
-                                <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"
-                                     class="svg"/>
+{{--                            @else--}}
+{{--                                <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
+{{--                                     class="svg"/>--}}
                             @endif
                         </div>
 
                         <div class="details">
                             <div class="left">
                                 <div class="label-icon">
-                                    <img src="{{ asset('images/opening-label.svg') }}"
-                                         class="svg" />
+                                    <img src="{{ asset('images/opening-label.svg') }}"class="svg" />
                                 </div>
                                 <div class="text-label">
                                     <h4>{{ $userDetails ? $userDetails->order_name : 'no name' }}</h4>
                                     @if ($ord->order_type == OrderType::Delivery)
                                         <p class="mb-0">
                                             <?php
-                                            echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                            echo $userDetails->street_name . ', ' . $userDetails->house_no;
                                             ?>
                                         </p>
                                         {{--                                @else--}}

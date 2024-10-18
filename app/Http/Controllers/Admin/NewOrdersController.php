@@ -426,7 +426,7 @@ class NewOrdersController extends Controller
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
-            $address = $orders->order_type == OrderType::Delivery ? $userDetails->house_no . ', ' . $userDetails->street_name : '';
+            $address = $orders->order_type == OrderType::Delivery ? $userDetails->street_name . ', ' .  $userDetails->house_no : '';
             $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
 //                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
@@ -450,8 +450,7 @@ class NewOrdersController extends Controller
             if ($orders->delivery_time == 'ASAP') {
                 $html .= '<h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>';
             } else {
-                $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>
-                         <img src="' . $customTimeIcon . '" height="12px" width="12px" class="svg" />';
+                $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>';
             }
             if ($orders->delivery_time == 'ASAP') {
                 $html .= '<label class="success cursor-pointer"> ' . $orders->delivery_time . ' </label>';

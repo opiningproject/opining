@@ -74,7 +74,7 @@ $(function () {
             console.log("Validation passed");
             console.log($.fn.validate ? "Validation loaded" : "Validation not loaded");
 
-            validateZipcode()
+            validateZipcodeMobile()
         }
     });
 
@@ -265,14 +265,13 @@ $(function () {
     }
 
     $(document).on('click', '.select-address-btn', function () {
-        console.log("select-address-btn");
-
         var parentId = $(this).closest('div[id^="address-"]').attr('id');
         var addressId = parentId.split('-')[1];
         var $parentDiv = $(this).closest('.total-addresses');
 
         // Call the common function to handle the selection
         handleAddressSelection(addressId, $parentDiv, $(this));
+        $('.addressError').addClass('d-none')
     });
 
 
@@ -288,7 +287,7 @@ $(function () {
 
         // Call the handleAddressSelection function
         handleAddressSelection(addressId, $parentDiv, $(this));
-
+        $('.addressError').addClass('d-none')
         // Perform any additional logic such as form submission or updating the UI.
     });
 
@@ -348,6 +347,7 @@ function validateZipcode() {
                         $('#zipcode').val(response.zipcode)
 
                         // checkout button enables disable as per client feeedback july 2024 CR points
+                        $('.min_order_price').html(response.min_order_price.toFixed(2))
                         var min_order_price = $('.min_order_price').html()
                         // var currentAmount = $('.bill-total-count').html()
                         var currentAmount = $('.bill-count').html()
@@ -410,6 +410,80 @@ function deleteAddress(id) {
                 $('#address-' + id).remove();
             }
 
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+//for mobile address design
+function validateZipcodeMobile() {
+    var zipcode = $('#zipcode_mobile').val();
+    var house_no = $('#house_no_mobile').val();
+    console.log("innn")
+    var url = baseURL + '/user/dashboard';
+
+    $.ajax({
+        url: baseURL + '/validateZipcode',
+        type: 'POST',
+        data: {
+            zipcode, house_no
+        },
+        success: function (response) {
+
+            if (response.status == 2) {
+                $('#zipcode-error').text(response.message);
+                $('#zipcode-error').css("display", "block");
+            } else {
+                let currentUrl = window.location.href;
+
+                if(url !== currentUrl) {
+                    window.location.href = url;
+                } else {
+                    if(response.zipcode && response.house_number) {
+
+                        let houseNumber = response.house_number;
+                        let zipcode = response.zipcode;
+                        let city = response.city;
+                        let street_name = response.street_name;
+                        let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                        if (street_name) {
+                            displayText = street_name + ' ' + houseNumber ;
+                        }
+                        $("#zip_address").html('');
+                        $("#zip_address").html('<p class="mb-0">' + displayText + '</p>');
+                        $("#zip_address_mobile").html('');
+                        $("#zip_address_mobile").html('<p class="mb-0">' + displayText + '</p>');
+                        $('#addressChangeModal').modal('hide');
+
+                        // After closing modal set updated values
+                        // $('#addressChangeModal').on('hidden.bs.modal', function () {
+                            $('#house_no_mobile').val(response.house_number)
+                            $('#zipcode_mobile').val(response.zipcode)
+
+                            // checkout button enables disable as per client feeedback july 2024 CR points
+                             $('.min_order_price').html(response.min_order_price.toFixed(2))
+                            var min_order_price_mobile = response.min_order_price.toFixed(2)
+                            // var currentAmount = $('.bill-total-count').html()
+                            var currentAmountMobile = $('.bill-count').html()
+
+                            currentAmountMobile = currentAmountMobile.replace('€', '')
+                        console.log("currentAmountMobile", currentAmountMobile, "min_order_price_mobile", min_order_price_mobile)
+                            if (parseFloat(currentAmountMobile) >= parseFloat(min_order_price_mobile)) {
+                                $('.checkout-sticky-btn').removeClass('show-hide-btn');
+                            } else {
+                                $('.checkout-sticky-btn').addClass('show-hide-btn');
+                            }
+                            $('.minimum_amount').show();
+                            $('.minimum_amount').html('<span class="minimum_amounts">'+ 'minimum €' + response.min_order_price.toFixed(2) +'</span>')
+                        // });
+                        // $('.minimum_amount').show();
+                        // $('.minimum_amount').html('<span class="minimum_amounts">'+ '(minimum €' + response.min_order_price.toFixed(2) +')</span>')
+                    }
+                }
+            }
         },
         error: function (response) {
             var errorMessage = JSON.parse(response.responseText).message

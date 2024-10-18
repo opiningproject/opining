@@ -19,7 +19,7 @@
                                     <img src="{{ asset('images/zipcode-svg-up.svg') }}" alt="zipcode"
                                         class="img-fluid svg" width="22" height="16" />
                                 </span>
-                                <input type="text" class="form-control form-control-icon ps-5" maxlength="10"
+                                <input type="text" class="form-control zipcode form-control-icon ps-5" maxlength="10"
                                     placeholder="{{ trans('modal.address.zipcode') }}" value="{{ $zipcode }}"
                                     name="zipcode" id="zipcode" required />
                                 <label id="zipcode-error" class="error" for="zipcode" style="display: none"></label>
@@ -73,7 +73,7 @@
                                                 {{ $add->street_name }} <br/>{{ $add->city }} {{ $add->zipcode }}</p>
                                             <div class="d-flex align-items-center justify-content-end ps-3 align-items-center ms-auto">
                                                 {{-- <a href="javascript:void(0);" class="btn btn-xs-sm btn-site-theme text-capitalize select-address-btn" {{ $style }} data-id="{{ $add->id }}">{{ $addressText }}</a> --}}
-                                         
+
 
                                                 @if(count($addresses) > 1)
                                                     <a class="btn-icon ms-2 p-2 delete-address {{ $selected  == true ? 'd-none' : '' }}" onclick="deleteAddress({{ $add->id }})">

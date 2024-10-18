@@ -37,6 +37,7 @@ $(function () {
             $('.takeAway-tab-mobile').removeClass('d-none')
             $("#zip_address_mobile_takw_away").removeClass('d-none');
             $("#zip_address_mobile").addClass('d-none');
+            $('.addressError').addClass('d-none');
             // console.log($('.takeAway-tab-mobile-address').text())
         } else {
             let newHeight = invoiceHeight + 15;
@@ -49,9 +50,14 @@ $(function () {
             $('.desktop-pill-takeAway').removeClass('show active')
             $('.delivery-tab-mobile').removeClass('d-none')
             $('.takeAway-tab-mobile').addClass('d-none')
-            // $("#zip_address_mobile").html('');
+            $("#zip_address_mobile").html('');
             $("#zip_address_mobile_takw_away").addClass('d-none');
             $("#zip_address_mobile").removeClass('d-none');
+            if ($('#zip_address_mobile').text().trim() === '') {
+                $('.addressError').removeClass('d-none');
+            } else {
+                $('.addressError').removeClass('d-none');
+            }
         }
 
         var zipcode = $('#del-zipcode').val()
@@ -170,6 +176,7 @@ $(function () {
                                 targetElement.removeClass('shake');
                                 $('.cart-sidebar .cart-address-row').css('box-shadow', '1px 2px 10px 8px rgba(0, 0, 0, 0.08)');
                             }, 500);
+                            $('.addressError').removeClass('d-none');
                         }
                     }
 

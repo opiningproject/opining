@@ -244,9 +244,9 @@
                                                     @if ($ord->delivery_time == 'ASAP')
                                                         <label
                                                             class="cursor-pointer success">{{ $ord->delivery_time }}</label>
-                                                        @else
-                                                            <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"
-                                                                 class="svg" />
+{{--                                                        @else--}}
+{{--                                                            <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
+{{--                                                                 class="svg" />--}}
                                                     @endif
                                                 </div>
 
@@ -262,7 +262,7 @@
                                                             @if ($ord->order_type == OrderType::Delivery)
                                                                 <p class="mb-0">
                                                                     <?php
-                                                                    echo $userDetails->house_no . ', ' . $userDetails->street_name;
+                                                                    echo $userDetails->street_name . ', ' . $userDetails->house_no;
                                                                     ?>
                                                                 </p>
                                                                 {{--                                                            @else --}}

@@ -9,6 +9,7 @@ $delivery_charge = session('delivery_charge');
 $deliveryTime = getRestaurantDetail()->delivery_time;
 $takeAwayTime = getRestaurantDetail()->take_away_time;
 ?>
+<!--new address design start-->
 @if (Route::currentRouteName() == 'user.dashboard')
 <div class="d-none address-select-modal-mobile address--select-modal-mobile">
     <div class="address-select-modal-inn cart-sidebar-mobile">
@@ -47,7 +48,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
         </ul>
 
         <div class="tab-pane-mobile pb-1">
-            <div class="delivery-tab-mobile">
+            <div class="delivery-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'd-none' : '' }}">
                 @if (count($addresses) > 0)
                     @foreach ($addresses as $key => $add)
                         <?php
@@ -100,12 +101,12 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                         @csrf
                         <div class="form-group mb-0 zip">
                             <input type="text" placeholder="Zip code" name="zipcode"
-                                   id="zipcode" class="form-control" value="{{ $zipcode }}" required />
+                                   id="zipcode_mobile" class="form-control zipcode" value="{{ $zipcode }}" required />
                         </div>
 
                         <div class="form-group house-number mb-0">
                             <input type="text" placeholder="House Number" name="house_no"
-                                   id="house_no" class="form-control" value="{{ $house_no }}" required />
+                                   id="house_no_mobile" class="form-control" value="{{ $house_no }}" required />
                         </div>
 
                         <div class="form-group btn-cl mb-0">
@@ -119,14 +120,14 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                 </div>
             </div>
 
-            <div class="takeAway-tab-mobile d-none">
+            <div class="takeAway-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? '' : 'd-none' }}">
 
                 <div class="radio-container">
-                    <input type="radio" id="radio1" name="location">
+                    <input type="radio" id="radio1" checked name="location">
                     <label class="radio-custom" for="radio1"></label>
                     <span class="radio-label">
                         <h3>pick up at</h3>
-                        <p class="mb-0">Tochtstraat 40, 3036SK Rotterdam</p>
+                        <p class="mb-0"> {{ getRestaurantDetail()->rest_address }}</p>
                     </span>
                 </div>
 
@@ -136,6 +137,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
 
 </div>
 @endif
+<!--new address design end-->
 <aside class="menu-sidebar sticky-top">
     <div class="menu-sidebar-inner menu-sidebar--address">
         <div class="bd-navbar-toggle">
@@ -148,14 +150,16 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
         </div>
 
         <div class="siderbarmenu-brand">
-            @if (Route::currentRouteName() == 'user.dashboard')
+            <!--new address design start-->
+            @if (Route::currentRouteName() == 'user.dashboard' && auth()->user())
             <h4 class="pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown mb-0 d-none"
                 id="head-dropdown-btn">
+
+                <img src="{{ asset('images/addressError.svg') }}" class="addressError d-none" width="19" alt="" />
                 <img src="{{ asset('images/map-t-icon.png') }}" width="15" alt="" />
 
                 <p id="zip_address_mobile" class="mb-0">
-
-                    @if($user || $user->cart && $user->cart->order_type == 1)
+                    @if($zipcode || $user->cart && $user->cart->order_type == 1)
                         @if ($street_name)
                             {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
                         @else
@@ -165,7 +169,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                         {{ getRestaurantDetail()->rest_address }}
                     @endif
                 </p>
-                <p id="zip_address_mobile_takw_away" class="mb-0 d-none">
+                 <p id="zip_address_mobile_takw_away" class="mb-0 d-none">
                     {{ getRestaurantDetail()->rest_address }}
                 </p>
                 <span class="arrow-icon">
@@ -178,10 +182,11 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                 </span>
             </h4>
             @endif
-
             <a href="{{ route('user.dashboard') }}" class="navbar-brand sidebar-logo">
                 <img src="{{ getRestaurantDetail()->restaurant_logo }}" class="web-logo">
             </a>
+
+            <!--new address design end-->
         </div>
 
         <div class="bd-navbar-toggle cartsidebar-icon ms-auto align-items-center">

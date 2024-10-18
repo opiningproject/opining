@@ -9,15 +9,15 @@
     $min_order_price = session('min_order_price');
     $delivery_charge = session('delivery_charge');
     $showModal = 0;
-    
+
     if (!session('showLoginModal')) {
         $showModal = 1;
         Session::put('showLoginModal', '1', '1440');
     }
-    
+
     $cartValue = 0;
     $dishOptionCategoryTotalAmount = 0;
-    
+
     ?>
     <div class="main">
         <div class="main-view">
@@ -30,7 +30,7 @@
                                 <h1 class="page-title">{{ trans('user.dashboard.title') }}</h1>
                             </div>
                             <div
-                                class="searcheaderBox d-none d-md-flex align-items-center form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
+                                class="searcheaderBox d-md-flex align-items-center form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
                                 <button type="button"
                                     class="btn-close d-block position-absolute d-md-none top-0 mt-2 end-0 me-2"
                                     id="closeSearch"></button>
@@ -176,7 +176,7 @@
                                         @foreach ($categories as $key => $cat)
                                             <?php
                                             $selected = '';
-                                            
+
                                             if (!isset($_GET['all']) && $cat_id == '') {
                                                 if ($key == 0) {
                                                     $selected = 'selected-cart-active';
@@ -225,17 +225,17 @@
                                             <?php
                                             $disableBtn = '';
                                             $customizeBtn = false;
-                                            
+
                                             //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                             if ($dish->out_of_stock == '1') {
                                                 $disableBtn = 'disabled';
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             if (count($dish->ingredientsWithoutTrash) == 0) {
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             ?>
                                             <div class="card food-detail-card shadow-mobile">
                                                 @if ($dish->percentage_off > 0)
@@ -304,6 +304,7 @@
                         <!-- end category list section -->
                     </div>
                 </main>
+
                 <aside class="cart-sidebar sticky-top h-lg-100vh cartSidebarCustom">
                     <div class="offcanvas-xxl offcanvas-end h-100 overflow-auto cartoffCanvas" tabindex="-1"
                         id="bdSidebarCart" aria-labelledby="bdSidebarCartOffcanvasLabel">
@@ -313,10 +314,23 @@
                                 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto head-title top-head-title">
                                 {{ trans('user.cart.title') }} </h4>
 
-                            <h4 class="d-none position-absolute start-0 top-0 pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown"
-                                id="head-dropdown-btn">
-                                <img src="{{ asset('images/map-t-icon.png') }}" alt="" />
-                                Tochtstraat 40
+                            {{-- <h4 class="d-none position-absolute start-0 top-0 pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown"
+                                id="head-dropdown--btn">
+                                <img src="{{ asset('images/map-t-icon.png') }}" width="15" alt="" />
+                                <p id="zip_address_mobile" class="mb-0">
+                                @if($user && $user->cart && $user->cart->order_type == 1)
+                                    @if ($street_name)
+                                        {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
+                                    @else
+                                        {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                    @endif
+                                @else
+                                    {{ getRestaurantDetail()->rest_address }}
+                                @endif
+                                </p>
+                                <p id="zip_address_mobile_takw_away" class="mb-0 d-none">
+                                    {{ getRestaurantDetail()->rest_address }}
+                                </p>
                                 <span class="arrow-icon">
 
                                     <svg width="9" height="5" viewBox="0 0 9 5" fill="none"
@@ -325,10 +339,10 @@
                                     </svg>
 
                                 </span>
-                            </h4>
+                            </h4> --}}
 
 
-                            <div class="d-none address-select-modal-mobile">
+                            {{-- <div class="d-none address-select-modal-mobile">
 
                                 <div class="address-select-modal-inn cart-sidebar-mobile">
                                     <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab" role="tablist">
@@ -367,35 +381,43 @@
                                         </li>
                                     </ul>
 
-                                    <div class="tab-pane-mobile pb-1">
-                                        <div class="delivery-tab-mobile">
-                                            <div
-                                                class="select-address-row d-flex justify-content-between align-items-center mb-4">
-                                                <div class="address-radio d-flex align-items-center">
-                                                    <div class="radio-container">
-                                                        <input type="radio" id="radio1" name="location">
-                                                        <label class="radio-custom" for="radio1"></label>
-                                                        <span class="radio-label">Tochtstraat 40</span>
-                                                    </div>
-                                                </div>
-                                                <a href="javascript:void(0)" class="delete-address">
-                                                    <img src="{{ asset('images/add-delete-ico.svg') }}" alt=""
-                                                        class="svg" height="15" width="15" /></a>
-                                            </div>
+                                    <div class="tab-pane-mobile pb-1" id="pills-home" >
+                                        <div class="delivery-tab-mobile {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? '' : 'd-none' }}">
+                                            @if (count($addresses) > 0)
+                                                @foreach ($addresses as $key => $add)
+                                                    <?php
+                                                    $selectedAddress = '<span class="success-ico blank"></span>';
+                                                    $selected = false;
+                                                    $style = '';
 
-                                            <div
-                                                class="select-address-row d-flex justify-content-between align-items-center mb-4">
-                                                <div class="address-radio d-flex align-items-center">
-                                                    <div class="radio-container">
-                                                        <input type="radio" id="radio1" name="location">
-                                                        <label class="radio-custom" for="radio1"></label>
-                                                        <span class="radio-label">Jacob Catsstraat 83A</span>
+                                                    if (session('address') == $add->id) {
+                                                        $selected = true;
+                                                        $addressText = 'Selected';
+                                                        $selectedAddress = '<span class="success-ico"><img src="' . asset("images/success-icon.svg") . '" class="svg" width="14" height="11"></span>';
+                                                        $style = 'pointer-events:none;cursor:default';
+                                                    }
+                                                    ?>
+                                                    <div id="address-mobile-{{ $add->id }}"
+                                                        class="select-address-row select-address-btn d-flex justify-content-between align-items-center mb-4">
+                                                        <div class="address-radio d-flex align-items-center">
+                                                            <div class="radio-container">
+                                                                <!-- Use a proper unique ID and same name for the radio buttons in this group -->
+                                                                <input type="radio" name="selected_address" class="select-address-btn"
+                                                                       id="radio{{ $add->id }}"
+                                                                       value="{{ $add->id }}" {{ $selected ? 'checked' : '' }}  data-selected-address="{{session('address')}}">
+                                                                <label class="radio-custom"
+                                                                       for="radio{{ $add->id }}"></label>
+                                                                <span
+                                                                    class="radio-label">{{ $add->street_name }}, {{ $add->house_no }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="delete-address" onclick="deleteAddress({{ $add->id }})">
+                                                            <img src="{{ asset('images/add-delete-ico.svg') }}" alt=""
+                                                                 class="svg" height="15" width="15"/>
+                                                        </a>
                                                     </div>
-                                                </div>
-                                                <a href="javascript:void(0)" class="delete-address">
-                                                    <img src="{{ asset('images/add-delete-ico.svg') }}" alt=""
-                                                        class="svg" height="15" width="15" /></a>
-                                            </div>
+                                                @endforeach
+                                            @endif
 
                                             <div
                                                 class="select-address-row d-flex justify-content-between align-items-center mb-1 add-select-address-row flex-wrap">
@@ -414,36 +436,39 @@
                                                     </div>
                                                 </div>
 
-                                                <foam action="" class="address-add-form d-flex gap-2">
+                                                <form id="address-form-mobile" class="address-add-form d-flex gap-2">
+                                                    @csrf
                                                     <div class="form-group mb-0 zip">
-                                                        <input type="text" placeholder="Zip code"
-                                                            class="form-control" />
+                                                        <input type="text" placeholder="Zip code" name="zipcode"
+                                                               id="zipcode" class="form-control" value="{{ $zipcode }}" required />
                                                     </div>
 
                                                     <div class="form-group house-number mb-0">
-                                                        <input type="text" placeholder="House Number"
-                                                            class="form-control" />
+                                                        <input type="text" placeholder="House Number" name="house_no"
+                                                               id="house_no" class="form-control" value="{{ $house_no }}" required />
                                                     </div>
 
                                                     <div class="form-group btn-cl mb-0">
-                                                        <button type="" class="btn btn-site-theme">
+                                                        <button type="submit" class="btn btn-site-theme">
                                                             <img src="{{ asset('images/btn-arrow.svg') }}" alt=""
-                                                                class="svg" height="15" width="15" />
+                                                                 class="svg" height="15" width="15"/>
                                                         </button>
                                                     </div>
-                                                    </form>
+                                                </form>
+                                                <label id="zipcode-error" class="error" for="zipcode" style="display: none"></label>
+
 
                                             </div>
                                         </div>
 
-                                        <div class="takeAway-tab-mobile d-none">
+                                        <div class="takeAway-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? '' : 'd-none' }}" id="pills-profile">
                                             <h3>pick up at</h3>
-                                            <p class="mb-0">Tochtstraat 40, 3036SK Rotterdam</p>
+                                            <p class="mb-0 takeAway-tab-mobile-address">{{ getRestaurantDetail()->rest_address }}</p>
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                             <button type="button"
                                 class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 me-md-2 mt-md-2 end-0 ms-2 bg-arrow-mobile"
@@ -530,7 +555,7 @@
                                             </ul>
 
                                             <div class="d-flex flex-column flex-fill tab-content" id="pills-tabContent">
-                                                <div class="pills-home tab-pane fade {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? 'show active' : '' }}"
+                                                <div class="pills-home tab-pane desktop-pill-home pills-profile-mobile-hide fade {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? 'show active' : '' }}"
                                                     id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                                                     tabindex="0">
 
@@ -586,7 +611,7 @@
                                                     </div> --}}
                                                 </div>
 
-                                                <div class="tab-pane pills-profile-mobile-hide fade {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'show active' : '' }}"
+                                                <div class="tab-pane desktop-pill-takeAway pills-profile-mobile-hide fade {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'show active' : '' }}"
                                                     id="pills-profile" role="tabpanel"
                                                     aria-labelledby="pills-profile-tab" tabindex="0">
                                                     <div class="form-group addressMobile cart-address-row flex-wrap w-100">
@@ -868,7 +893,7 @@
                                                         {{ count($cart) > 0 ? 'style=display:none' : '' }}>
                                                         <span class="mobile-empty-img d-none">
                                                             {{--                                                        <img src="{{ asset('images/middle-empty-cart.png') }}" alt="" class="svg" height="128" width="132"> --}}
-                                                            <img src="{{ asset('images/middle-empty-cart.png') }}" />
+                                                            <img src="{{ asset('images/middle-empty-cart-a.png') }}" />
                                                         </span>
                                                         <span class="desktop-empty-img">
                                                             {{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132"> --}}
@@ -888,7 +913,7 @@
                                                         </p>
                                                         <span class="mobile-empty-img d-none">
                                                             {{--                                                        <img src="{{ asset('images/middle-empty-cart.png') }}" alt="" class="svg" height="128" width="132"> --}}
-                                                            <img src="{{ asset('images/middle-empty-cart.png') }}" />
+                                                            <img src="{{ asset('images/middle-empty-cart-a.png') }}" />
                                                         </span>
                                                         <span class="desktop-empty-img">
                                                             {{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132"> --}}

@@ -12,13 +12,13 @@
                 <button type="button" name="clear" value="all" id="clear"
                     class="btn bg-white d-flex align-items-center gap-3 justify-content-center"
                     style="min-width: auto"><img src="{{ asset('images/admin-menu-icons/order-list.svg') }}" class="svg"
-                        height="20" width="20" /> Order List</button>
+                        height="20" width="20" /> {{ trans('rest.manual_order.order_list') }}</button>
 
                 <a href="{{ route('ordersMap') }}"
                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center"
                     style="min-width: auto">
                     <img src="{{ asset('images/admin-menu-icons/map.svg') }}" class="svg" height="20"
-                        width="20" /> Map</a>
+                        width="20" /> {{ trans('rest.manual_order.map') }}</a>
 
                 <a href="{{ route('create-order') }}"
                     class="btn bg-white btn-site-theme text-black d-flex align-items-center gap-3 justify-content-center"
@@ -32,12 +32,12 @@
             <div class="btns-group">
                 <div class="search-box">
                     <div class="form-group mb-0">
-                        <input type="text" placeholder="Search" class="form-control" />
+                        <input type="text" placeholder="{{ trans('rest.manual_order.search') }}" class="form-control" />
                         <span class="fa fa-search form-control-feedback"></span>
                     </div>
                 </div>
-                <button class="btn">Add Custom Item</button>
-                <button class="btn btn-danger">Clear All</button>
+                <button class="btn">{{ trans('rest.manual_order.add_custom_item') }}</button>
+                <button class="btn btn-danger">{{ trans('rest.manual_order.clear_all') }}</button>
             </div>
         </div>
 
@@ -107,7 +107,7 @@
                                                         height="9" width="9">€{{ number_format($dish->price, 2) }}
                                                 @endif
                                             </button>
-                                            <a href="#" class="customizable">Customizable</a>
+                                            <a href="#" class="customizable">{{ trans('rest.manual_order.customizable') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -119,18 +119,19 @@
                     <div class="order-content-box">
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/order-type-ml.svg') }}" alt="" /></span> ORDER
-                                TYPE
+                                <span><img src="{{ asset('images/order-type-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.order_type') }}
+
                             </h3>
 
                             <div class="ml-content">
                                 <div class="radio-group">
                                     <label class="radio-option">
-                                        <input type="radio" name="order-type" checked>
+                                        <input type="radio" name="order-type" value="2" checked>
                                         <span>{{ trans('user.cart.take_away') }}</span>
                                     </label>
                                     <label class="radio-option">
-                                        <input type="radio" name="order-type">
+                                        <input type="radio" name="order-type" value="1">
                                         <span>{{ trans('user.cart.delivery') }}</span>
                                     </label>
                                 </div>
@@ -140,20 +141,19 @@
 
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/user-ml.svg') }}" alt="" /></span> CUSTOMER
-                                DETAILS
+                                <span><img src="{{ asset('images/user-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.customer_details') }}
                             </h3>
-
 
                             <div class="ml-content">
                                 <div class="radio-group mb-4">
                                     <label class="radio-option">
                                         <input type="radio" name="order-type-a" checked>
-                                        <span>add customer</span>
+                                        <span>{{ trans('rest.manual_order.add_customer') }}</span>
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="order-type-a">
-                                        <span>Don’t Show</span>
+                                        <span>{{ trans('rest.manual_order.dont_Show') }}</span>
                                     </label>
                                 </div>
 
@@ -171,20 +171,11 @@
                                                     data-name="Layer 1">
                                                     <path
                                                         d="m12 0a12 12 0 1 0 12 12 12.013 12.013 0 0 0 -12-12zm0 22a10 10 0 1 1 10-10 10.011 10.011 0 0 1 -10 10zm5-10a1 1 0 0 1 -1 1h-3v3a1 1 0 0 1 -2 0v-3h-3a1 1 0 0 1 0-2h3v-3a1 1 0 0 1 2 0v3h3a1 1 0 0 1 1 1z" />
-                                                </svg>Create a new sustomer</button>
+                                                </svg>{{ trans('rest.manual_order.create_customer') }}</button>
                                             <ul>
-                                                <li>binaca_pollema@hotmail.com</li>
-                                                <li>brandingdoc@gmail.com</li>
-                                                <li>daniallearoma@hotmail.com</li>
-                                                <li>binaca_pollema@hotmail.com</li>
-                                                <li>brandingdoc@gmail.com</li>
-                                                <li>daniallearoma@hotmail.com</li>
-                                                <li>binaca_pollema@hotmail.com</li>
-                                                <li>brandingdoc@gmail.com</li>
-                                                <li>daniallearoma@hotmail.com</li>
-                                                <li>binaca_pollema@hotmail.com</li>
-                                                <li>brandingdoc@gmail.com</li>
-                                                <li>daniallearoma@hotmail.com</li>
+                                                @foreach($users as $user)
+                                                    <li id="user_id" value="{{ $user->id }}">{{$user->fullname}}</li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -205,8 +196,8 @@
                             </button>
 
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/user-ml.svg') }}" alt="" /></span> CUSTOMER
-                                DETAILS
+                                <span><img src="{{ asset('images/user-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.customer_details') }}
                             </h3>
 
                             <div class="ml-content">
@@ -216,12 +207,12 @@
                                     <p class="mb-0">Serdarorman74@Gmail.Com</p>
                                     <p>+31614522453</p>
 
-                                    <h4><b>Shipping Address</b></h4>
+                                    <h4><b>{{ trans('rest.manual_order.shipping_address') }}</b></h4>
                                     <p class="mb-1">Tochtstraat 40<br>3036 SK Rotterdam</p>
 
                                     <p><a href="#">View Map</a></p>
 
-                                    <h4><b>Billing Address</b></h4>
+                                    <h4><b>{{ trans('rest.manual_order.billing_address') }}</b></h4>
                                     <p>Same As Shipping Adress</p>
                                 </div>
 
@@ -230,119 +221,119 @@
 
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/order-ml.svg') }}" alt="" /></span> ORDER
+                                <span><img src="{{ asset('images/order-ml.svg') }}" alt="" /></span> {{ trans('rest.manual_order.order') }}
                             </h3>
 
                             <div class="ml-content">
 
                                 <div class="order-dt-row">
-                                    <div class="order-dt-col">
-                                        <div class="order-dt-box">
-                                            <div class="order-title">
-                                                <h2><a href="#"><b>1</b> <span class="name">big mac with
-                                                            Cheese</span></a></h2>
-                                                <h3 class="price">+€20</h3>
-                                            </div>
+{{--                                    <div class="order-dt-col">--}}
+{{--                                        <div class="order-dt-box">--}}
+{{--                                            <div class="order-title">--}}
+{{--                                                <h2><a href="#"><b>1</b> <span class="name">big mac with--}}
+{{--                                                            Cheese</span></a></h2>--}}
+{{--                                                <h3 class="price">+€20</h3>--}}
+{{--                                            </div>--}}
 
-                                            <ul>
-                                                <li>+ Onion (€1,50)</li>
-                                                <li>- Peppers (€2,00)</li>
-                                            </ul>
+{{--                                            <ul>--}}
+{{--                                                <li>+ Onion (€1,50)</li>--}}
+{{--                                                <li>- Peppers (€2,00)</li>--}}
+{{--                                            </ul>--}}
 
-                                            <div class="order-footer">
-                                                <div class="note">
-                                                    <a href="#">Add notes</a>
-                                                </div>
+{{--                                            <div class="order-footer">--}}
+{{--                                                <div class="note">--}}
+{{--                                                    <a href="#">Add notes</a>--}}
+{{--                                                </div>--}}
 
-                                                <div class="add-remove-item">
-                                                    <div class="foodqty">
-                                                        <span class="minus">
-                                                            <i class="fas fa-minus align-middle"></i>
-                                                        </span>
+{{--                                                <div class="add-remove-item">--}}
+{{--                                                    <div class="foodqty">--}}
+{{--                                                        <span class="minus">--}}
+{{--                                                            <i class="fas fa-minus align-middle"></i>--}}
+{{--                                                        </span>--}}
 
-                                                        <input type="number" class="count" value="1" />
+{{--                                                        <input type="number" class="count" value="1" />--}}
 
-                                                        <span class="plus">
-                                                            <i class="fas fa-plus align-middle"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                                        <span class="plus">--}}
+{{--                                                            <i class="fas fa-plus align-middle"></i>--}}
+{{--                                                        </span>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="order-dt-col">
+{{--                                    <div class="order-dt-col">--}}
 
-                                        <div class="order-dt-box">
-                                            <div class="order-title">
-                                                <h2><a href="#"><b>3</b> <span class="name">big mac with
-                                                            Cheese</span></a></h2>
-                                                <h3 class="price">+€20</h3>
-                                            </div>
+{{--                                        <div class="order-dt-box">--}}
+{{--                                            <div class="order-title">--}}
+{{--                                                <h2><a href="#"><b>3</b> <span class="name">big mac with--}}
+{{--                                                            Cheese</span></a></h2>--}}
+{{--                                                <h3 class="price">+€20</h3>--}}
+{{--                                            </div>--}}
 
-                                            <ul>
-                                                <li>+ Onion (€1,50)</li>
-                                                <li>- Peppers (€2,00)</li>
-                                            </ul>
+{{--                                            <ul>--}}
+{{--                                                <li>+ Onion (€1,50)</li>--}}
+{{--                                                <li>- Peppers (€2,00)</li>--}}
+{{--                                            </ul>--}}
 
-                                            <div class="order-footer">
-                                                <div class="note">
-                                                    <a href="#">Add notes</a>
-                                                </div>
+{{--                                            <div class="order-footer">--}}
+{{--                                                <div class="note">--}}
+{{--                                                    <a href="#">Add notes</a>--}}
+{{--                                                </div>--}}
 
-                                                <div class="add-remove-item">
-                                                    <div class="foodqty">
-                                                        <span class="minus">
-                                                            <i class="fas fa-minus align-middle"></i>
-                                                        </span>
+{{--                                                <div class="add-remove-item">--}}
+{{--                                                    <div class="foodqty">--}}
+{{--                                                        <span class="minus">--}}
+{{--                                                            <i class="fas fa-minus align-middle"></i>--}}
+{{--                                                        </span>--}}
 
-                                                        <input type="number" class="count" value="3" />
+{{--                                                        <input type="number" class="count" value="3" />--}}
 
-                                                        <span class="plus">
-                                                            <i class="fas fa-plus align-middle"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                                        <span class="plus">--}}
+{{--                                                            <i class="fas fa-plus align-middle"></i>--}}
+{{--                                                        </span>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="order-dt-col">
+{{--                                    <div class="order-dt-col">--}}
 
-                                        <div class="order-dt-box">
-                                            <div class="order-title">
-                                                <h2><a href="#"><b>1</b> <span class="name">big mac with
-                                                            Cheese</span></a></h2>
-                                                <h3 class="price">+€20</h3>
-                                            </div>
+{{--                                        <div class="order-dt-box">--}}
+{{--                                            <div class="order-title">--}}
+{{--                                                <h2><a href="#"><b>1</b> <span class="name">big mac with--}}
+{{--                                                            Cheese</span></a></h2>--}}
+{{--                                                <h3 class="price">+€20</h3>--}}
+{{--                                            </div>--}}
 
-                                            <ul>
-                                                <li>+ Onion (€1,50)</li>
-                                                <li>- Peppers (€2,00)</li>
-                                            </ul>
+{{--                                            <ul>--}}
+{{--                                                <li>+ Onion (€1,50)</li>--}}
+{{--                                                <li>- Peppers (€2,00)</li>--}}
+{{--                                            </ul>--}}
 
-                                            <div class="order-footer">
-                                                <div class="note">
-                                                    <a href="#">Please make the burger extra hot and
-                                                        with less sauce</a>
-                                                </div>
+{{--                                            <div class="order-footer">--}}
+{{--                                                <div class="note">--}}
+{{--                                                    <a href="#">Please make the burger extra hot and--}}
+{{--                                                        with less sauce</a>--}}
+{{--                                                </div>--}}
 
-                                                <div class="add-remove-item">
-                                                    <div class="foodqty">
-                                                        <span class="minus">
-                                                            <i class="fas fa-minus align-middle"></i>
-                                                        </span>
+{{--                                                <div class="add-remove-item">--}}
+{{--                                                    <div class="foodqty">--}}
+{{--                                                        <span class="minus">--}}
+{{--                                                            <i class="fas fa-minus align-middle"></i>--}}
+{{--                                                        </span>--}}
 
-                                                        <input type="number" class="count" value="1" />
+{{--                                                        <input type="number" class="count" value="1" />--}}
 
-                                                        <span class="plus">
-                                                            <i class="fas fa-plus align-middle"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                                        <span class="plus">--}}
+{{--                                                            <i class="fas fa-plus align-middle"></i>--}}
+{{--                                                        </span>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
 
                             </div>
@@ -350,18 +341,19 @@
 
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/wished-ml.svg') }}" alt="" /></span> WISHED TIME
+                                <span><img src="{{ asset('images/wished-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.wished_time') }}
                             </h3>
 
                             <div class="ml-content">
                                 <div class="radio-group">
                                     <label class="radio-option">
                                         <input type="radio" name="wished-type" checked>
-                                        <span>ASAP</span>
+                                        <span>{{ trans('rest.manual_order.asap') }}</span>
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="wished-type">
-                                        <span>Custom Time</span>
+                                        <span>{{ trans('rest.manual_order.custom_time') }}</span>
                                     </label>
                                 </div>
                             </div>
@@ -369,19 +361,19 @@
 
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/discount-ml.svg') }}" alt="" /></span> ADD
-                                DISCOUNT
+                                <span><img src="{{ asset('images/discount-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.add_discount') }}
                             </h3>
 
                             <div class="ml-content">
                                 <div class="radio-group mb-4">
                                     <label class="radio-option">
                                         <input type="radio" name="discount-type" checked>
-                                        <span>Add Discount</span>
+                                        <span>{{ trans('rest.manual_order.add_discount') }}</span>
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="discount-type">
-                                        <span>No Discount</span>
+                                        <span>{{ trans('rest.manual_order.no_discount') }}</span>
                                     </label>
                                 </div>
 
@@ -395,7 +387,8 @@
 
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/note-ml.svg') }}" alt="" /></span> ADD NOTE
+                                <span><img src="{{ asset('images/note-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.add_note') }}
                             </h3>
 
                             <div class="form-group mb-0">
@@ -408,18 +401,60 @@
                                 <table class="table mb-0" border="0" cellspacing="0" cellpadding="0">
                                     <tbody>
                                         <tr>
-                                            <td>Item Total (minimum €10,00)</td>
-                                            <td class="text-end">€49,00</td>
+{{--                                            <td class="text-muted-1 bill-count-name">{{ trans('rest.manual_order.item_total') }}</td>--}}
+{{--                                            <td class="min_order_price" style="display: none">0.00</td>--}}
+{{--                                            <td class="text-muted-1 minimum_amount" style="">(minimum €0.00)</td>--}}
+{{--                                            <td class="bill-count" id="total-cart-bill">€49,00</td>--}}
+{{--                                            <input type="hidden" id="total-cart-bill-amount" value="">--}}
+                                            <td class="text-start">
+                                                <span class="text-muted-1 bill-count-name">{{ trans('rest.manual_order.item_total') }}</span>
+
+                                                <span class="min_order_price" style="display: none">
+                                                    0.00</span>
+                                                <span class="text-muted-1 minimum_amount" style="">(minimum €0.00)
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="bill-count" id="total-cart-bill">€0.00</span>
+                                                <input type="hidden" id="total-cart-bill-amount" value="">
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Service</td>
-                                            <td class="text-end">€1,99</td>
+<!--                                            <td>{{ trans('rest.manual_order.service') }}</td>
+                                            <td class="text-end">€1,99</td>-->
+                                                <td class="text-start">
+                                                    <span class="text-muted-1 bill-count-name">Service charge</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="bill-count">€2.00</span>
+                                                    <input type="hidden" id="service-charge" value="2">
+                                                </td>
+                                        </tr>
+                                        <tr id="delivery-charge-tab">
+                                            <td class="text-start">
+                                                <span class="text-muted-1 bill-count-name delivery_charge_name">Delivery Charge</span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="bill-count delivery_charge_amount">€0.00</span>
+                                                <input type="hidden" id="delivery-charge" value="">
+                                            </td>
+                                        </tr>
+                                        <tr class="item-discount" id="item-discount" >
+                                            <td class="text-start">
+                                                <span class="text-custom-light-green bill-count-name">Item discount</span>
+                                                <input type="hidden" id="coupon-discount" value="0">
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="text-custom-light-green bill-count" id="coupon-discount-text">-€0.00
+                                                </span>
+                                                <input type="hidden" id="coupon-discount-percent" value="0">
+                                            </td>
                                         </tr>
                                     </tbody>
 
                                     <tfoot>
                                         <tr>
-                                            <td>Total</td>
+                                            <td>{{ trans('rest.manual_order.total') }}</td>
                                             <td class="text-end">€50,99</td>
                                         </tr>
                                     </tfoot>
@@ -429,25 +464,26 @@
 
                         <div class="manual-order-box">
                             <h3 class="title-icon">
-                                <span><img src="{{ asset('images/payment-ml.svg') }}" alt="" /></span> PAYMENT
+                                <span><img src="{{ asset('images/payment-ml.svg') }}" alt="" /></span>
+                                {{ trans('rest.manual_order.payment') }}
                             </h3>
 
                             <div class="ml-content">
                                 <div class="radio-group">
                                     <label class="radio-option">
-                                        <input type="radio" name="payment-type" checked>
-                                        <span>Cash</span>
+                                        <input type="radio" name="payment-type" value="cash" id="cash" checked >
+                                        <span>{{ trans('rest.manual_order.cash') }}</span>
                                     </label>
                                     <label class="radio-option">
-                                        <input type="radio" name="payment-type">
-                                        <span>Mark As Paid</span>
+                                        <input type="radio" name="payment-type" id="mark_as_paid" value="mark_as_paid">
+                                        <span>{{ trans('rest.manual_order.mark_as_paid') }}</span>
                                     </label>
                                 </div>
 
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-site-theme">Proceed order</button>
+                        <button type="submit" class="btn btn-site-theme">{{ trans('rest.manual_order.proceed_order') }}</button>
                     </div>
                 </div>
             </div>

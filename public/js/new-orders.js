@@ -369,6 +369,7 @@ $(function () {
         var urlPerPage = urlObject.searchParams.get('per_page');
         perPageNew = urlPerPage
         $('.numberOfPerPage').val(urlPerPage)
+        $('#numberOfPerPageSearch').val(urlPerPage)
         // return false;
         searchFilterAjax(search, searchOption, filters, perPageNew)
         // window.open(url, '_parent');

@@ -2,13 +2,85 @@ $(function () {
     $('.add-customer').on("click", function () {
         $('.create-customer-popup').modal('show')
     });
+
+    $(function () {
+        $("#create-user-form").validate({
+            rules: {
+                first_name: {
+                    required: true
+                },
+                last_name: {
+                    required: true
+                },
+                email: {
+                    required: true
+                },
+                phone: {
+                    required: true
+                },
+                street: {
+                    required: true
+                },
+                house_number: {
+                    required: true
+                },
+                postal_code: {
+                    required: true
+                },
+                city: {
+                    required: true
+                }
+            },
+            submitHandler: function (form) {
+                saveCustomer()
+            }
+        });
+    })
+
+    function saveCustomer() {
+        var customerData = new FormData(document.getElementById('create-user-form'));
+
+        $.ajax({
+            url: baseURL + '/create-customer',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: customerData,
+            success: function (response) {
+                console.log(response)
+                if (response.status == 200) {
+                    toastr.success(response.message)
+                    setTimeout(function(){ window.location.reload(); }, 500);
+                    $('#createCustomerModal').modal('hide');
+                    $('#create-user-form')[0].reset();
+                }else{
+                    toastr.error(response.message)
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                toastr.error(errorMessage)
+            }
+        })
+    }
+
+
+    $('.modal-footer .close').on('click', function() {
+        $('#createCustomerModal').modal('hide');
+        $('#create-user-form')[0].reset();
+    });
+
+    // Close modal when the close icon (top right) is clicked
+    $('.modal-header .close').on('click', function() {
+        $('#createCustomerModal').modal('hide');
+        $('#create-user-form')[0].reset();
+    });
+
+
+
 })
 function getDishes(catId) {
     console.log("eee", $(this))
-    // var targetOffset = $('.section-page-title').offset().top;
-    // $('html, body').animate({
-    //     scrollTop: targetOffset
-    // }, 500);
     $('.tab-listing .category').removeClass('active');  // Remove active class from all
     $('.category-' + catId + ' .category').addClass('active');
     if(!catId) {
@@ -20,9 +92,6 @@ function getDishes(catId) {
         url: `${baseURL}/get-dish/${catId}`,
         type: 'GET',
         success: function (response) {
-
-            // window.history.pushState('',app_name, '/user/dashboard/'+catId);
-
             // update view all button attribute id
             $('#view-all-dishes').attr('data-category-id',catId);
 
@@ -31,8 +100,8 @@ function getDishes(catId) {
         },
         error: function (response) {}
     })
-
 }
+
 function activateSlide(categoryId) {
 
     // Find the index of the slide with the given category ID
@@ -77,6 +146,251 @@ function customizeDish(id, doesExist=0)
             alert(errorMessage);
         }
     })
+}
+// add Sub Dish Ingredient
+function addSubDishIngredientQuantities(IngDishId, operator, dishId) {
+
+    var currentQty = parseInt($('#dishIng' + IngDishId).val());
+    var amount = parseFloat($('#ing-price-val' + IngDishId).text().replace(/,/g, ''))
+    var totalDishQty = parseInt($('#totalDishQty').val())
+
+    if (operator == '-') {
+        if (currentQty != 0) {
+            $('#dishIng' + IngDishId).val(currentQty - 1);
+            updateCartAmount(dishId, (amount * totalDishQty), 'sub')
+        }
+    }
+
+    if (operator == '+') {
+        $('#dishIng' + IngDishId).val(currentQty + 1);
+        updateCartAmount(dishId, (amount * totalDishQty), 'add')
+    }
+}
+
+function updateCartAmount(dishId, amount, type, dish = 0) {
+    var currentVal = $('#total-amt' + dishId).text().replace(/,/g, '')
+    var ingAmount = 0.00
+
+    if (dish == 1) {
+        if ($('.dishPaidIngQty').length) {
+            $('.dishPaidIngQty').each(function (index, element) {
+                if ($(element).val() > 0) {
+                    ingAmount += parseFloat($(element).data('price')) * parseInt($(element).val())
+                }
+            })
+        }
+    }
+
+    if (type == 'add') {
+        $('#total-amt' + dishId).text((parseFloat(currentVal) + (parseFloat(amount) + parseFloat(ingAmount))).toFixed(2))
+    } else if (type == 'sub') {
+        $('#total-amt' + dishId).text((parseFloat(currentVal) - (parseFloat(amount) + parseFloat(ingAmount))).toFixed(2))
+    }
+
+}
 
 
+function addDishOptionPrice(dishId,amount) {
+    var totalAmount = 0
+    var lastAmount = 0 ;
+    var ingAmount = 0.00
+
+    if ($('.dishPaidIngQty').length) {
+        $('.dishPaidIngQty').each(function (index, element) {
+            if ($(element).val() > 0) {
+                ingAmount += parseFloat($(element).data('price')) * parseInt($(element).val())
+            }
+        })
+    }
+    $('.dish-option-select').each(function () {
+        let selectedOption = $(this).find('option:selected');
+        let amount = parseFloat(selectedOption.data('price')) || 0;
+        totalAmount += amount;
+    });
+    let currentVal = parseFloat($('#total-amt' + dishId).text().replace(/,/g, '')) || 0;
+    if (lastAmount > 0 ) {
+        currentVal -= lastAmount;
+    }
+    lastAmount = totalAmount;
+    // Update the total amount directly
+    var newAmount = parseFloat($('#dish-org-price').val()) + parseFloat(totalAmount) + parseFloat(ingAmount);
+    $('#total-amt' + dishId).text((newAmount).toFixed(2));
+    // console.log("totalAmount", totalAmount, parseFloat($('#dish-org-price').val()), $('#dish-org-price').val())
+    // var newAmount = $('#dish-org-price').val() + totalAmount
+    // updateCartAmount(dishId, totalAmount, 'add')
+}
+
+
+function addCustomizedCart(id, doesExist = 0) {
+
+    var dishData = new FormData();
+    var totalDishQty = $('#totalDishQty').val()
+
+    // old code comment 13-08-2024
+    /*$("#dish-option" + id).on('change', function () {
+        $('.dish-option-error').hide();
+    })*/
+
+    var isValid = true;
+
+    // Check each dropdown
+    $('.dish-option-select').each(function () {
+        if ($(this).val() === null) {
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').removeClass('d-none');
+            isValid = false;
+        } else {
+            dishData.append('option[]', $(this).val())
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').hide();
+        }
+        $(".dish-option-select").on('change', function () {
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').hide();
+        })
+
+    });
+
+    if (isValid == true) {
+        $(".dish-option-select").change(function () {
+            $(this).closest('.custom-default-dropdown').find('.dish-option-error').hide();
+        })
+        if ($('.dishFreeIngQty').length) {
+            $('.dishFreeIngQty:checked').each(function (index, element) {
+                dishData.append('freeIng[]', $(element).data('id'))
+            })
+        }
+
+        if ($('.dishPaidIngQty').length) {
+            $('.dishPaidIngQty').each(function (index, element) {
+                if ($(element).val() > 0) {
+                    dishData.append('paidIng[' + $(element).data('id') + ']', $(element).val())
+                }
+            })
+        }
+
+        dishData.append('dishQty', totalDishQty)
+        dishData.append('doesExist', doesExist)
+
+        $.ajax({
+            url: baseURL + '/add-cart/' + id,
+            type: 'POST',
+            data: dishData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+
+                // if (response.status == 401) {
+                //     $('#signInModal').modal('show');
+                //     return false;
+                // }
+
+                if (response.status == 200) {
+                    $('#customisableModal').modal('hide');
+
+                    if ($('#qty-' + response.message.addedDishId).length > 0) {
+                        var totalAmount
+                        if (doesExist == 0) {
+                            var currentVal = $('#qty-' + response.message.addedDishId).val()
+                            totalAmount = parseInt(currentVal) + parseInt(totalDishQty)
+                        } else {
+                            totalAmount = parseInt(totalDishQty)
+                            $('#item-ing-desc' + doesExist).html(response.message.ingListData)
+                            $('#qty-' + doesExist).attr('data-ing', response.message.paidIngAmt)
+                        }
+                        // old code commented 13-08-2024
+                        /*if (response.message.dishOption) {
+                            $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
+                            $('#dish-option-' + response.message.addedDishId).text(response.message.dishOption.option_en);
+                        }*/
+                        if (response.message.dishOption) {
+                            $('#dish-option-' + response.message.addedDishId).attr('data-dish-option', response.message.dishOption.option_en)
+                            $('#dish-option-' + response.message.addedDishId).html(response.message.dishOption);
+                        }
+                        $('#qty-' + response.message.addedDishId).val(totalAmount)
+
+                        //update dish qty realtime code
+                        $('#quantity-' + response.message.addedDishId).html(totalAmount)
+                    } else {
+                        /*$("#dish-cart-lbl-" + id).text('Added to cart');
+                            $("#dish-cart-lbl-" + id).prop('disabled',
+                        );*/
+                        $('.order-dt-row').append(response.message.cartHtml);
+                        $('#cart-item-count').text(parseInt($('#cart-item-count').text()) + 1)
+                        $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) + 1)
+                    }
+
+
+
+                    $('#empty-cart-div').hide()
+                    $('#checkout-cart').removeClass('d-none')
+                    $('#cart-bill-div').removeClass('d-none')
+                    $('#cart-amount-cal-data').show()
+                    // when update ingredients then update amount in cart.
+                    var totalAmounts  = parseFloat(response.message.totalAmount + response.message.paidIngAmt + response.message.optionTotalAmount).toFixed(2)
+                    $('#cart-item-price' + response.message.addedDishId).html('+€' + totalAmounts)
+                    $('#dish-price-' + response.message.addedDishId).val(totalAmounts)
+                    // when update ingredients then update amount in cart.
+                    calculateTotalCartAmount()
+
+                }
+
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                toastr.error(errorMessage)
+                // alert(errorMessage);;
+            }
+        })
+    }
+}
+
+function calculateTotalCartAmount() {
+
+    var totalAmt = 0.00;
+    var serviceCharge = $('#service-charge').val()
+    var deliveryCharge = $('#delivery-charge').val()
+
+    var couponDiscountPercent = $('#coupon-discount-percent').val()
+    var couponDiscount = 0.00
+
+    $('.cart-amt').each(function (index, element) {
+        var id = $(element).data('id')
+        var itemAmount = (parseFloat($(element).val()) * parseFloat($('#dish-price-' + id).val()))
+
+        $('#cart-item-price' + id).text('+€' + itemAmount.toFixed(2))
+        $('#paid-ing-price' + id).text('+€' + (parseFloat($(element).val()) * parseFloat($(element).attr('data-ing'))).toFixed(2))
+        // old code comment on 13-08-2024
+        // totalAmt += itemAmount + parseFloat(parseFloat($(element).val()) * parseFloat($(element).attr('data-ing')))
+        totalAmt += itemAmount
+    })
+
+    $('#total-cart-bill').text('€' + totalAmt.toFixed(2))
+    $('#total-cart-bill-amount').val(totalAmt.toFixed(2))
+
+    couponDiscount = parseFloat(couponDiscountPercent) * totalAmt
+    totalAmt += parseFloat(serviceCharge)
+    if(deliveryCharge) {
+        totalAmt += parseFloat(deliveryCharge)
+    }
+    totalAmt -= parseFloat(couponDiscount)
+
+    $('#coupon-discount-text').text('-€' + couponDiscount.toFixed(2))
+    $('#coupon-discount').val(couponDiscount.toFixed(2))
+
+    $('#gross-total-bill').text('€' + totalAmt.toFixed(2))
+    $('#gross-total-bill1').text('€' + totalAmt.toFixed(2))
+
+    // checkout button enables disable as per client feeedback july 2024 CR points
+    var min_order_price = $('.min_order_price').html()
+    var currentAmount = $('.bill-count').html()
+    console.log("currentAmount",currentAmount)
+    currentAmount = currentAmount.replace('€', '')
+
+    if ($('.TakeAway-tab .active').length == 0) {
+        if (parseFloat(currentAmount) >= parseFloat(min_order_price)) {
+            $('.checkout-sticky-btn').removeClass('show-hide-btn');
+        } else {
+            $('.checkout-sticky-btn').addClass('show-hide-btn');
+        }
+    } else {
+        $('.checkout-sticky-btn').removeClass('show-hide-btn');
+    }
 }

@@ -26,18 +26,6 @@
                 <div class="header-filter-order d-flex align-items-center flex-wrap">
 
                     <div class="drop_with_search">
-                        <div class="select-options">
-                            <select class="form-control" id="order-tabs-dropdown">
-                                <option value="all" selected>{{ trans('rest.sidebar.all') }}
-                                </option>
-                                <option value="name">{{ trans('rest.food_order.name') }}</option>
-                                <option value="phone_number">{{ trans('rest.food_order.phone_number') }}
-                                </option>
-                                <option value="address">{{ trans('rest.food_order.address') }}</option>
-                                <option value="zip_code">{{ trans('rest.food_order.zip_code') }}</option>
-                                <option value="dish">Email</option>
-                            </select>
-                        </div>
                         <div class="search-has col order-filters-search">
                             <span class="fa fa-search form-control-feedback"></span>
                             <input type="text" class="form-control" id="search-order-new"
@@ -45,11 +33,11 @@
                         </div>
                     </div>
                 </div>
-                <button type="button"
-                        class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
-                        style="min-width: auto">
-                    <img src="{{ asset('images/admin-menu-icons/header-settings.svg') }}" class="svg"
-                         height="20" width="20" /> {{ trans('rest.food_order.settings') }}</button>
+                <div class="add-customer customer-create">
+                    <a class="btn m-auto btn-site-theme" data-id="1" tabindex="0">
+                        Add Customer
+                    </a>
+                </div>
 
             </div>
         </div>
@@ -71,95 +59,66 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">{{ trans('rest.deliverers.first_name') }}</th>
-                                    <th scope="col" class="text-center">{{ trans('rest.deliverers.last_name') }}</th>
-                                    <th scope="col" class="text-center">Street</th>
-                                    <th scope="col" class="text-center">Zip Code</th>
-                                    <th scope="col" class="text-center">City</th>
-                                    <th scope="col" class="text-center">{{ trans('rest.deliverers.phone') }}</th>
-                                    <th scope="col" class="text-center">{{ trans('rest.deliverers.email') }}</th>
-                                    <th scope="col" class="text-center">Orders</th>
-                                    <th scope="col" class="text-center">Total</th>
-                                    <th scope="col" class="text-center">Block/Unblock</th>
-                                    <th scope="col" class="text-center">{{ trans('rest.button.action') }}</th>
+                                    <th scope="col" class="text-left">{{ trans('rest.deliverers.name') }}</th>
+{{--                                    <th scope="col" class="text-center">{{ trans('rest.deliverers.last_name') }}</th>--}}
+{{--                                    <th scope="col" class="text-center">Street</th>--}}
+{{--                                    <th scope="col" class="text-center">Zip Code</th>--}}
+{{--                                    <th scope="col" class="text-center">City</th>--}}
+                                    <th scope="col" class="text-left">{{ trans('rest.deliverers.email') }}</th>
+                                    <th scope="col" class="text-left">{{ trans('rest.deliverers.phone') }}</th>
+                                    <th scope="col" class="text-left">Address</th>
+                                    <th scope="col" class="text-left">Orders</th>
+                                    <th scope="col" class="text-left">Total</th>
+                                    <th scope="col" class="text-left">{{ trans('rest.button.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody id="delivererTbody">
                                 {{--                                            @foreach ($delivererUser as $deliverers)--}}
-                                {{--                                            <tr id="ing-tr{{ $category->id }}">--}}
+                                @for($i = 0; $i < 3; $i++ )
                                 <tr id="deliverer-tr-$deliverers_id" draggable="true"
                                     class="delivererRow" data-id="1">
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               data-id="1"
-                                               value="Serdar"
-                                               id="first_name1 " readonly/>
+                                    <td class="text-left">
+                                        <lable class="text-center m-auto" id="first_name1"> Serdar Orman </lable>
                                     </td>
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="Orman"
-                                               id="last_name1" readonly/>
+                                    <td class="text-left">
+                                        <lable class="text-center m-auto" id="email"> serdarorman74@gmail.com </lable>
                                     </td>
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="Tochtstraat 40"
-                                               id="street" readonly/>
+
+                                    <td class="text-left">
+                                        <lable class="text-center m-auto" id="phone"> 0614522453 </lable>
                                     </td>
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="3036sk"
-                                               id="zip_code" readonly/>
+
+                                    <td class="text-left">
+                                        <select class="form-control">
+                                            <option> Tochtstraat 40  3036SK Rotterdam </option>
+                                            <option> Tochtstraat 40  3036SK Rotterdam </option>
+                                            <option> Tochtstraat 40  3036SK Rotterdam </option>
+                                            <option> Tochtstraat 40  3036SK Rotterdam </option>
+                                            <option> Tochtstraat 40  3036SK Rotterdam </option>
+                                            <option> Tochtstraat 40  3036SK Rotterdam </option>
+                                        </select>
                                     </td>
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="Rotterdam"
-                                               id="city" readonly/>
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               data-id="1"
-                                               value="0614522453"
-                                               id="phone-1" readonly/>
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="text" class="form-control text-center m-auto"
-                                               value="serdarorman74@gmail.com"
-                                               id="email-1" readonly/>
-                                    </td>
-                                    <td class="text-center">
+
+                                    <td class="text-left">
                                         <lable class="text-center m-auto"> 15 </lable>
                                     </td>
-                                    <td class="text-center">
+
+                                    <td class="text-left">
                                         <lable class="text-center m-auto"> €722,06 </lable>
                                     </td>
-                                    <td class="text-center">
-                                        <div class="form-check form-switch custom-switch justify-content-center ps-0">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="deliverer_status_1"
-                                                   checked>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="d-flex flex-nowrap gap-2">
-                                            <a class="btn btn-site-theme btn-icon edit-deliverer-icon"
+
+                                    <td class="text-left">
+                                        <div class="m-auto">
+                                            <a class="btn m-auto btn-site-theme edit-deliverer-icon"
                                                id="edit-btn-1"
                                                data-id="1" tabindex="0">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a class="btn btn-site-theme btn-icon del-deliverer-icon"
-                                               id="del-btn-1"
-                                               data-id="1">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                            <a class="btn btn-site-theme btn-default save-edit-btn d-block"
-                                               id="save-edit-btn1"
-                                               style="width: auto;margin-left: 0px; display: none!important;"
-                                               data-id="1">
-                                                                <span
-                                                                    class="align-middle">{{ trans('rest.button.save') }}</span>
+                                                <i class="fa-regular fa-eye"></i>
+                                                Customer Overview
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
+                                @endfor
                                 {{--                                            @endforeach--}}
                                 </tbody>
                             </table>
@@ -170,8 +129,7 @@
                                 <label>{{ trans('rest.button.rows_per_page') }}</label>
                                 <select id="per_page_dropdown" onchange="">
                                     @for($i=5; $i<=20; $i+=5)
-                                        <option
-                                            value="{{ $i }}">
+                                        <option value="{{ $i }}">
                                             {{ $i }}
                                         </option>
                                     @endfor
@@ -184,8 +142,10 @@
             </section>
         </div>
     </div>
+    @include('admin.manual-order.create-customer-popup')
 @endsection
 @section('script')
+    <script type="text/javascript" src="{{ asset('js/manual-order.js') }}"></script>
     <script>
         var dishValidation = {
             save_btn: '{{ trans('rest.button.save') }}',

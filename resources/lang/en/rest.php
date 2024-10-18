@@ -521,9 +521,10 @@ return [
     ],
     'deliverers' => [
         'title' => 'Deliverers',
+        'name' => 'Name',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
-        'email' => 'Email',
+        'email' => 'E-mail',
         'phone' => 'Phone Number',
         'status' => 'Status',
     ],

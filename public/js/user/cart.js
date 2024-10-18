@@ -182,6 +182,7 @@ $(function () {
                     }
                     if ($(window).width() <= 767) {
                         toastr.error(response.message);
+                        $('#zip_address_mobile').html('');
                     }
                 }
             },

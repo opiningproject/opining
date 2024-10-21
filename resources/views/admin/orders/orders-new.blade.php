@@ -3,7 +3,6 @@
 @section('order_count', getOpenOrders()) <!-- Dynamically set the count -->
 @section('content')
     <?php
-    //dd(\Carbon\Carbon::now(), RoundCreatedAt(\Carbon\Carbon::now()), \Carbon\Carbon::now()->ceilMinute(5));
     use App\Enums\OrderStatus;
     use App\Enums\OrderType;
     use App\Enums\PaymentStatus;
@@ -441,7 +440,7 @@
             if ($('.numberOfPerPage').val() == 27) {
                 numberOfColumn = 9
             }
-            
+
             function arrangeOrderCols() {
                 var screenHeight = $(window).height();
                 var availableHeight = screenHeight - 230; // Space for margins, headers, etc.

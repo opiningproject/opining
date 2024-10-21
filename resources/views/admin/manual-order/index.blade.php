@@ -134,6 +134,10 @@
                                         <input type="radio" name="order-type" value="1">
                                         <span>{{ trans('user.cart.delivery') }}</span>
                                     </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="order-type" value="1">
+                                        <span>{{ trans('user.cart.cashdesk') }}</span>
+                                    </label>
                                 </div>
 
                             </div>
@@ -146,16 +150,16 @@
                             </h3>
 
                             <div class="ml-content">
-                                <div class="radio-group mb-4">
-                                    <label class="radio-option">
-                                        <input type="radio" name="order-type-a" checked>
-                                        <span>{{ trans('rest.manual_order.add_customer') }}</span>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="order-type-a">
-                                        <span>{{ trans('rest.manual_order.dont_Show') }}</span>
-                                    </label>
-                                </div>
+{{--                                <div class="radio-group mb-4">--}}
+{{--                                    <label class="radio-option">--}}
+{{--                                        <input type="radio" name="order-type-a" checked>--}}
+{{--                                        <span>{{ trans('rest.manual_order.add_customer') }}</span>--}}
+{{--                                    </label>--}}
+{{--                                    <label class="radio-option">--}}
+{{--                                        <input type="radio" name="order-type-a">--}}
+{{--                                        <span>{{ trans('rest.manual_order.dont_Show') }}</span>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
 
                                 <div class="search-dropdown-option">
                                     <div class="search-box">

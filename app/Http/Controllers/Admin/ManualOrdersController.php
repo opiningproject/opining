@@ -216,11 +216,9 @@ class ManualOrdersController extends Controller
                         })->get();
                 } else {
                     $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->get();
-//                    dd($dishExist);
                 }
 
                 if ($dishExist) {
-//                    dd('22222222');
 
                     foreach ($dishExist as $item) {
 
@@ -242,9 +240,7 @@ class ManualOrdersController extends Controller
                         }
                     }
                 }
-//                dd($sameDish);
                 if ($sameDish == 0) {
-//                    dd('sssss');
                     /*$orderDetails = OrderDetail::find($request->doesExist);
 
                     $orderDetails->orderDishDetails()->delete();
@@ -311,7 +307,6 @@ class ManualOrdersController extends Controller
                     $response['cartHtml'] = $this->cartHtml($orderDetails);
                 }
             } else {
-//                dd('123123');
                 if($dish->option &&  $request->option) {
                     $optionName = $dish->option->where('id', $request->option)->where('dish_id',$dish->id)->first() ?? '';
                 }
@@ -404,7 +399,6 @@ class ManualOrdersController extends Controller
             $response['optionTotalAmount'] = $optionTotalAmount ?? 0;
 //            $response['totalAmount'] = $orderDetails->total_price ?? '';  // old code comment aug cr.
             $response['totalAmount'] = $dish->price ?? '';
-//            dd($response);
             return response::json(['status' => 200, 'message' => $response]);
 
 

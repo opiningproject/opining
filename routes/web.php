@@ -71,6 +71,7 @@ Route::middleware(['localization'])->group(function () {
 
     Route::group(['prefix' => '/user'], function () {
         Route::get('/dashboard/{cat_id?}', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/dashboard-new/{cat_id?}', [App\Http\Controllers\User\HomeController::class, 'dashboardNew'])->name('user.dashboardNew');
         Route::post('/login', [App\Http\Controllers\User\AuthController::class, 'login']);
         Route::post('/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
         Route::post('/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');

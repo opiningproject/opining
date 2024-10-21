@@ -394,3 +394,63 @@ function calculateTotalCartAmount() {
         $('.checkout-sticky-btn').removeClass('show-hide-btn');
     }
 }
+// Ensure the DOM is fully loaded before attaching the event
+$('#house_number, #postal_code').on('blur', function() {
+    // Get values from both inputs
+    var houseNumber = $('#house_number').val();
+    var postalCode = $('#postal_code').val();
+
+    // Call your function and pass the values
+    handleInputValues(postalCode, houseNumber);
+});
+
+// Function to handle the values from both inputs
+function handleInputValues(zipcode, house_no) {
+    console.log('House Number:', house_no);
+    console.log('Postal Code:', zipcode);
+    // var zipcode = $('#zipcode').val();
+    // var house_no = $('#house_no').val();
+
+    // Add your logic here
+    // Example: You can check if both values are filled
+    if (zipcode === '' || house_no === '') {
+        // alert('Both fields are required');
+    } else {
+
+
+        var url = baseURL + '/user/dashboard';
+
+        $.ajax({
+            url: baseURL + '/validateZipcode',
+            type: 'POST',
+            data: {
+                zipcode, house_no
+            },
+            success: function (response) {
+
+                if (response.status == 2) {
+                    $('#zipcode-error').text(response.message);
+                    $('#zipcode-error').css("display", "block");
+                } else {
+                    if(response.zipcode && response.house_number) {
+
+                        let houseNumber = response.house_number;
+                        let zipcode = response.zipcode;
+                        let city = response.city;
+                        let street_name = response.street_name;
+                        let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                        $('#street').val(street_name);
+                        $('#city').val(city);
+
+                    }
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+        // Call any other function or logic you need
+        console.log('Both values are filled, proceed...');
+    }
+}

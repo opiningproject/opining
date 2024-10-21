@@ -285,7 +285,13 @@ $(function () {
         // Call the handleAddressSelection function
         handleAddressSelection(addressId, $parentDiv, $(this));
         $('.addressError').addClass('d-none')
+        $('.address-select-modal-mobile').removeClass('active')
+        $('#address-form-mobile').addClass('d-none');
         // Perform any additional logic such as form submission or updating the UI.
+    });
+
+    $('.add-address-button').on('click', function() {
+        $('#address-form-mobile').removeClass('d-none');
     });
 
     $('.top-head-dropdown').on('click', function() {

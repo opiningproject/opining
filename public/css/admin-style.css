@@ -303,7 +303,7 @@ stroke: #ffffff;
 .menu-sidebar .menu-sidebar-content .side-bar-menu .nav-item {margin-bottom: 0px !important;}
 
 /* New order page css */
- .order-page .order-page-bar {position: relative;margin-bottom: 30px !important;}
+ .order-page .order-page-bar {position: relative;margin-bottom: 24px !important;}
 .order-page-bar .page-title {font-size: 34px;font-weight: normal;color: #292929;display: flex;gap: 10px;line-height: inherit;}
 .order-page-bar .page-title .count {display: inline-flex;align-items: center;justify-content: center;text-align: center;background: #D9D9D9;border-radius: 5px;color: #000000;font-size: 24px;height: 48px;min-width: 48px;}
 .order-page-bar .drop_with_search {display: flex;background: #ffffff;border-radius: 5px;overflow: hidden;}
@@ -765,7 +765,7 @@ color: #ffffff !important
 .section-page-title .page-title {font-size: 26px !important;}
 .order-listing-container {display: flex;flex-wrap: wrap;height: 100vh;max-height: calc(100vh - 220px);margin: 0px -5px;}
 .order-listing-container .order-column {display: flex;flex-direction: column;flex: 0 0 33.33%;max-width: 33.33%;}
-.order-listing-container .order-column .order-col {padding: 0px 5px 0px;margin-bottom: 10px;max-height: 90px;}
+.order-listing-container .order-column .order-col {padding: 0px 5px 0px;margin-bottom: 10px;max-height: 74px;}
 .order-listing-container .order-column .order-col:last-child {margin-bottom: 0px !important;}
 .order-page .order-pagination {position: relative;top: 0px;}
 

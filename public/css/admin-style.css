@@ -939,3 +939,17 @@ label.error { color: #E41A1A !important;}
 
 .checkbox-round {position: relative;width: 12px;height: 12px;float: left;border-radius: 50%;vertical-align: middle;border: 1px solid #292929;-webkit-appearance: none;outline: none;cursor: pointer;transition: 0.5s;}
 .checkbox-round:checked {background-color: #292929;box-shadow: inset 0px 0px 0px 2px #ffffff;}
+
+.dropdown-toggle-select::after {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+    padding-top: 1px;
+}
+
+.dropdown-toggle-select select {
+    background: none !important;
+}

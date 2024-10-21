@@ -26,11 +26,11 @@
                 <main class="bd-main content-main-part">
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between">
-                            <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
+                            <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12  title-search-mobile">
                                 <h1 class="page-title">{{ trans('user.dashboard.title') }}</h1>
                             </div>
                             <div
-                                class="searcheaderBox d-md-flex align-items-center form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
+                                class="searcheaderBox d-none d-md-flex align-items-center form-group mb-0 has-search position-relative searcheatbox col-xxl-4 col-xl-4 col-lg-7 col-md-6 col-sm-12 col-12 text-end">
                                 <button type="button"
                                     class="btn-close d-block position-absolute d-md-none top-0 mt-2 end-0 me-2"
                                     id="closeSearch"></button>

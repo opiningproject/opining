@@ -20,8 +20,8 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                     id="pills-home-tab" data-bs-toggle="pill" data-type="{{ \App\Enums\OrderType::Delivery }}"
                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
                     aria-selected="true">
-                    <img src="{{ asset('images/scoter1.svg') }}" alt="" class="svg" height="23"
-                        width="22" />
+                    <img src="{{ asset('images/delivery-bike-w.png') }}" alt="" class="svg normal" height="20"  />
+                        <img src="{{ asset('images/delivery-bike-b.png') }}" alt="" class="svg active d-none" height="20"  />
                     <div class="btn-text">
                         {{ trans('user.cart.delivery') }}
                         <span> {{ $deliveryTime }}</span>
@@ -37,8 +37,8 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                     id="pills-profile-tab" data-bs-toggle="pill" data-type="{{ \App\Enums\OrderType::TakeAway }}"
                     data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                     aria-selected="false">
-                    <img src="{{ asset('images/takeaway-icon.svg') }}" alt="" class="svg" height="23"
-                        width="22" />
+                    <img src="{{ asset('images/take-away-w.png') }}" alt="" class="svg normal" height="22"  />
+                    <img src="{{ asset('images/take-away-b.png') }}" alt="" class="svg active d-none" height="22"  />
                     <div class="btn-text">
                         {{ trans('user.cart.take_away') }}
                         <span> {{ $takeAwayTime }}</span>
@@ -86,7 +86,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                     @endforeach
                 @endif
                 <div
-                    class="select-address-row d-flex justify-content-between align-items-center mb-1 add-select-address-row flex-wrap">
+                    class="select-address-row d-flex justify-content-between align-items-center add-select-address-row flex-wrap mb-0">
                     <div class="address-radio d-flex align-items-center mb-3">
                         <div class="add-radio-container">
                             <span class="icon">
@@ -159,8 +159,8 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
             <h4 class="pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown mb-0 d-none"
                 id="head-dropdown-btn">
 
-                <img src="{{ asset('images/addressError.svg') }}" class="addressError d-none" width="19" alt="" />
-                <img src="{{ asset('images/map-t-icon.png') }}" width="15" alt="" />
+                <img src="{{ asset('images/addressError.svg') }}" class="addressError d-none" width="11" alt="" />
+                <img src="{{ asset('images/map-t-icon.png') }}" width="11" alt="" />
 
                 <p id="zip_address_mobile" class="mb-0">
                     @if($zipcode || $user->cart && $user->cart->order_type == 1)

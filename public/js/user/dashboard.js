@@ -56,8 +56,8 @@ var swiper = '';
 $(document).ready(function () {
 
     swiper = new Swiper(".category-swiper-slider", {
-        slidesPerView: 3,
-        spaceBetween: 12,
+        slidesPerView: 'auto',
+        spaceBetween: 10,
         progress : 1,
         speed: 100,
         freeMode: true,
@@ -90,68 +90,68 @@ $(document).ready(function () {
             },
             640: {
                 slidesPerView: 'auto',
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             700: {
                 slidesPerView: 'auto',
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             758: {
                 slidesPerView: 'auto',
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             768: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             800: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             988: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1024: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1100: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1200: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1300: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1400: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1700: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1800: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1920: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             2560: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
         },
     });

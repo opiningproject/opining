@@ -138,19 +138,19 @@
 
                             </h3>
 
-                            <div class="ml-content">
+                            <div class="ml-content ml-content--tab">
                                 <div class="radio-group">
-                                    <label class="radio-option">
+                                    <label class="radio-option active">
                                         <input type="radio" name="order-type" value="2" checked>
-                                        <span>{{ trans('user.cart.take_away') }}</span>
+                                        {{ trans('user.cart.take_away') }}
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="order-type" value="1">
-                                        <span>{{ trans('user.cart.delivery') }}</span>
+                                    {{ trans('user.cart.delivery') }}
                                     </label>
                                     <label class="radio-option">
                                         <input type="radio" name="order-type" value="1">
-                                        <span>{{ trans('user.cart.cashdesk') }}</span>
+                                       {{ trans('user.cart.cashdesk') }}
                                     </label>
                                 </div>
 

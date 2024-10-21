@@ -454,3 +454,74 @@ function handleInputValues(zipcode, house_no) {
         console.log('Both values are filled, proceed...');
     }
 }
+
+function updateDishQty(operator, maxQty, dish_id) {
+    var current_qty = parseInt($('input[name=qty-' + dish_id + ']').val());
+
+    if (operator == '-' && !isNaN(current_qty) && current_qty > 0) {
+        $('input[name=qty-' + dish_id + ']').val(current_qty - 1);
+        $('#quantity-'+ dish_id).text(current_qty - 1);
+    }
+
+    if (operator == '+' && !isNaN(current_qty)) {
+        /*if (current_qty >= maxQty) {
+            toastr.error(validationMsg.quantity_error)
+            return false;
+        }*/
+
+        $('input[name=qty-' + dish_id + ']').val(current_qty + 1);
+        $('#quantity-'+ dish_id).text(current_qty + 1);
+    }
+
+    var current_qty = parseInt($('input[name=qty-' + dish_id + ']').val());
+
+    $.ajax({
+        type: 'POST',
+        url: baseURL + '/ update-dish-qty',
+        data: {
+            dish_id, operator, current_qty
+        },
+        success: function (response) {
+
+            if (response.status == 1 && parseInt(current_qty) == 0) {
+                $("#cart-" + dish_id).remove();
+                $('#cart-item-count').text(parseInt($('#cart-item-count').text()) - 1)
+                $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) - 1)
+                $("#dish-cart-lbl-" + dish_id).text('Add +');
+                $("#dish-cart-lbl-" + dish_id).prop('disabled', false);
+
+                if ($('.cart-amt').length > 0) {
+                    $('#empty-cart-div').hide()
+                    $('#checkout-cart').removeClass('d-none')
+                    $('#cart-bill-div').removeClass('d-none')
+                } else {
+                    $('#empty-cart-div').show()
+                    $('#checkout-cart').addClass('d-none')
+                    $('#cart-bill-div').addClass('d-none')
+                    $('#cart-amount-cal-data').hide()
+                }
+
+                if (response.message) {
+                    $("#coupon_code_apply_btn").show();
+                    $("#coupon_code_remove_btn").hide();
+                    $('#coupon_code').val('');
+                    $("#coupon_code").prop('readonly', false);
+                    $('#coupon-discount').val(0)
+                    $('#coupon-discount-percent').val(0.0)
+                    $('#coupon-discount-text').val('-€0')
+                    $('#item-discount').hide()
+                    calculateTotalCartAmount()
+                }
+
+            }
+
+            $('#paid-ing-price' + dish_id).text('+€' + (parseFloat($('#qty-' + dish_id).val()) * parseFloat($('#qty-' + dish_id).attr('data-ing'))).toFixed(2))
+            calculateTotalCartAmount()
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
+        }
+    })
+}

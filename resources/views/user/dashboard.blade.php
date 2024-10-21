@@ -807,30 +807,28 @@
 
                                                                                                 <div class="foodqty mt-0">
                                                                                                     <span class="minus"
-                                                                                                        onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})">
+                                                                                                          onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i
                                                                                                             class="fas fa-minus align-middle"></i>
                                                                                                     </span>
                                                                                                     <input type="number"
-                                                                                                        readonly
-                                                                                                        class="count cart-amt"
-                                                                                                        id="qty-{{ $dish->id }}"
-                                                                                                        name="qty-{{ $dish->id }}"
-                                                                                                        value="{{ $dish->qty }}"
-                                                                                                        data-ing="{{ $paidIngredient }}"
-                                                                                                        data-id="{{ $dish->id }}" />
+                                                                                                           readonly
+                                                                                                           class="count cart-amt"
+                                                                                                           id="qty-{{ $dish->id }}"
+                                                                                                           name="qty-{{ $dish->id }}"
+                                                                                                           value="{{ $dish->qty }}"
+                                                                                                           data-ing="{{ $paidIngredient }}"
+                                                                                                           data-id="{{ $dish->id }}"/>
                                                                                                     <input type="hidden"
-                                                                                                        id="dish-price-{{ $dish->id }}"
-                                                                                                        value="{{ $dish->dish->price + $totalAmount + $dishOptionCategoryTotalAmount }}" />
+                                                                                                           id="dish-price-{{ $dish->id }}"
+                                                                                                           value="{{ $dish->dish->price + $totalAmount + $dishOptionCategoryTotalAmount }}"/>
                                                                                                     <span class="plus"
-                                                                                                        onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
+                                                                                                          onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i
                                                                                                             class="fas fa-plus align-middle"></i>
                                                                                                     </span>
                                                                                                 </div>
                                                                                             </div>
-
-
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

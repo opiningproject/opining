@@ -11,6 +11,8 @@ use App\Models\Dish;
 use App\Models\DishIngredient;
 use App\Models\DishOptionCategory;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\OrderDishDetail;
 use App\Models\OrderDishOptionDetails;
 use App\Models\TrackOrder;
 use App\Models\User;
@@ -37,10 +39,16 @@ class ManualOrdersController extends Controller
      */
     public function index(Request $request, $id = null)
     {
+        $couponCode = '';
+        $couponDiscount = 0;
+        $couponPercent = 0;
         $categories = Category::orderBy('sort_order', 'asc')->get();
         $users = User::where('user_role', UserType::User)->get();
         $category = '';
-
+        $cart = OrderDetail::select('*')->orderBy('id', 'desc')->where([
+            ['user_id', 0],
+            ['is_cart', '1']
+        ])->get();
         if ($request->cat_id) {
             $dishes = Dish::with('favorite')->where('category_id', $request->cat_id);
             $category = Category::find($request->cat_id);
@@ -63,8 +71,26 @@ class ManualOrdersController extends Controller
             $dishes = [];
 
         }
+//        if ($cart) {
+//            if (isset($user->cart)) {
+//                $couponCode = $user->cart->coupon_code;
+//                $couponDiscount = $user->cart->coupon_discount;
+//                if ($user->cart->coupon)
+//                    $couponPercent = $user->cart->coupon->percentage_off/100;
+//            }
+//        }
+        $serviceCharge = getRestaurantDetail()->service_charge;
+        $deliveryTime = getRestaurantDetail()->delivery_time;
+        $takeAwayTime = getRestaurantDetail()->take_away_time;
         return view('admin.manual-order.index', [
             'categories' => $categories,
+            'cart' => $cart,
+            'serviceCharge' => $serviceCharge,
+            'deliveryTime' => $deliveryTime,
+            'takeAwayTime' => $takeAwayTime,
+            'couponCode' => $couponCode,
+            'couponDiscount' => $couponDiscount,
+            'couponDiscountPercent' => $couponPercent,
             'users' => $users,
             'dishes' => $dishes,
             'category' => $category,
@@ -129,7 +155,7 @@ class ManualOrdersController extends Controller
         $html ="<div class='order-dt-col' id=cart-$cart->id>
                     <div class='order-dt-box'>
                         <div class='order-title'>
-                            <h2><a href='#'><b id='quantity-$cart->id'class='item-name pe-2 mb-0 item-order'>$cart->qty</b>
+                            <h2><a href='#'><b id='quantity-$cart->id' class='item-name pe-2 mb-0 item-order'>$cart->qty</b>
                             <span class='name item-name' onclick='customizeDish($dish->id, $cart->id);'>$dish->name</span>
                             </a>
                             </h2>
@@ -171,6 +197,7 @@ class ManualOrdersController extends Controller
      */
     public function addCustomizedDish(Request $request, string $id)
     {
+//        dd($request->all());
         if (!Auth::user()) {
             return response::json(['status' => 401, 'message' => '']);
         }
@@ -179,10 +206,15 @@ class ManualOrdersController extends Controller
             $user = Auth::user();
 
             $user_id = $user->id;
+            if ($user->id == 1) {
+                $user_id = 0;
+            }
             $order = $user->cart;
+//            dump($order);
             $order_type = session('zipcode') == null ?  '2' : '1';
             if (empty($order)) {
                 $order = $user->cart()->create([
+                    'user_id'=> 0,
                     'is_cart' => 1,
                     'order_type' => $order_type
                 ]);
@@ -190,7 +222,15 @@ class ManualOrdersController extends Controller
                 $order->order_type = $order_type;
                 $order->save();
             }
+            if ($user->id == 1) {
+                if ($order) {
+                    $order->is_online_order = 0;
+                    $order->user_id = 0;
+                    $order->save();
+                }
+            }
 
+//            dd($order);
             $order->fresh();
             $dish = Dish::find($id);
 
@@ -241,20 +281,6 @@ class ManualOrdersController extends Controller
                     }
                 }
                 if ($sameDish == 0) {
-                    /*$orderDetails = OrderDetail::find($request->doesExist);
-
-                    $orderDetails->orderDishDetails()->delete();
-
-                    $cartArr = [
-                        "price" => $dish->price,
-                        "qty" => $request->dishQty,
-                        "dish_option_id" => $request->option ?? null,
-                        "total_price" => $dish->price * $request->dishQty,
-                    ];
-
-                    $orderDetails->update(
-                        $cartArr
-                    );*/
 
                     $cartArr = [
                         "user_id" => $user_id,
@@ -311,8 +337,8 @@ class ManualOrdersController extends Controller
                     $optionName = $dish->option->where('id', $request->option)->where('dish_id',$dish->id)->first() ?? '';
                 }
                 $sameDish = $request->doesExist;
-                $orderDetails = $order->dishDetails()->find($request->doesExist);
-//                ->update([
+//                old code
+                $orderDetails = OrderDetail::find($request->doesExist);
                 $orderDetails->qty = $request->dishQty;
                 $orderDetails->price = $dish->price;
                 $orderDetails->total_price = $orderDetails->qty * $dish->price;
@@ -360,33 +386,6 @@ class ManualOrdersController extends Controller
 //                $paidIngAmt *= $request->dishQty;
 
             }
-
-            /*if (isset($request->freeIng)) {
-                foreach ($request->freeIng as $freeIng) {
-                    $orderDetails->orderDishDetails()->create([
-                        'dish_id' => $id,
-                        'dish_ingredient_id' => $freeIng
-                    ]);
-                }
-            }
-            $paidIngAmt = 0.00;
-            if (isset($request->paidIng)) {
-                foreach ($request->paidIng as $key => $paidIng) {
-
-                    $ing = DishIngredient::find($key);
-                    $paidIngAmt += ($paidIng * $ing->price);
-                    $orderDetails->orderDishDetails()->create([
-                        'dish_id' => $id,
-                        'dish_ingredient_id' => $key,
-                        'is_free' => '0',
-                        'quantity' => $paidIng,
-                        'price' => $ing->price
-                    ]);
-                }
-            }
-            if ($cartData) {
-                $response['cartHtml'] = $this->cartHtml($orderDetails);
-            }*/
             if (request('option')) {
                 $optionName = getDishOptionCategoryName(request('option'));
                 $optionTotalAmount = getDishOptionCategoryTotalAmount(request('option'));
@@ -404,6 +403,45 @@ class ManualOrdersController extends Controller
 
         } catch (Exception $e) {
             return response::json(['status' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateDishQty(Request $request)
+    {
+        try {
+            $coupon = false;
+            $user = Auth::user();
+            if ($request->current_qty >= 1) {
+
+                $user->cart->dishDetails()->find($request->dish_id)->update([
+                        'qty' => DB::raw('qty ' . $request->operator . '1'),
+                        'total_price' => DB::raw('qty * price'),
+                    ]
+                );
+            } else {
+
+                $dish = OrderDetail::find($request->dish_id);
+
+                if($dish){
+                    OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
+                    $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
+                }
+            }
+
+            if (count($user->cart->dishDetails) == 0) {
+                $coupon = true;
+                $user->cart()->update([
+                    'coupon_id' => null,
+                    'coupon_code' => null,
+                    'coupon_discount' => 0.00
+                ]);
+
+            }
+
+            return response::json(['status' => 1, 'message' => $coupon]);
+
+        } catch (Exception $e) {
+            return response::json(['status' => 0, 'message' => $e->getMessage()]);
         }
     }
 

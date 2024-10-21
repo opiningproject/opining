@@ -80,7 +80,6 @@ $(function () {
 
 })
 function getDishes(catId) {
-    console.log("eee", $(this))
     $('.tab-listing .category').removeClass('active');  // Remove active class from all
     $('.category-' + catId + ' .category').addClass('active');
     if(!catId) {
@@ -124,7 +123,7 @@ function customizeDish(id, doesExist=0)
 {
     console.log("in")
     $.ajax({
-        url: baseURL+'/user/get-dish-details/'+id+'/'+doesExist,
+        url: baseURL+'/get-dish-details/'+id+'/'+doesExist,
         type: 'GET',
         success: function (response) {
 
@@ -221,7 +220,7 @@ function addDishOptionPrice(dishId,amount) {
 }
 
 
-function addCustomizedCart(id, doesExist = 0) {
+function addCustomizedCartCustom(id, doesExist = 0) {
 
     var dishData = new FormData();
     var totalDishQty = $('#totalDishQty').val()
@@ -270,7 +269,7 @@ function addCustomizedCart(id, doesExist = 0) {
         dishData.append('doesExist', doesExist)
 
         $.ajax({
-            url: baseURL + '/add-cart/' + id,
+            url: baseURL + '/custom-add-cart/' + id,
             type: 'POST',
             data: dishData,
             processData: false,
@@ -393,4 +392,135 @@ function calculateTotalCartAmount() {
     } else {
         $('.checkout-sticky-btn').removeClass('show-hide-btn');
     }
+}
+// Ensure the DOM is fully loaded before attaching the event
+$('#house_number, #postal_code').on('blur', function() {
+    // Get values from both inputs
+    var houseNumber = $('#house_number').val();
+    var postalCode = $('#postal_code').val();
+
+    // Call your function and pass the values
+    handleInputValues(postalCode, houseNumber);
+});
+
+// Function to handle the values from both inputs
+function handleInputValues(zipcode, house_no) {
+    console.log('House Number:', house_no);
+    console.log('Postal Code:', zipcode);
+    // var zipcode = $('#zipcode').val();
+    // var house_no = $('#house_no').val();
+
+    // Add your logic here
+    // Example: You can check if both values are filled
+    if (zipcode === '' || house_no === '') {
+        // alert('Both fields are required');
+    } else {
+
+
+        var url = baseURL + '/user/dashboard';
+
+        $.ajax({
+            url: baseURL + '/validateZipcode',
+            type: 'POST',
+            data: {
+                zipcode, house_no
+            },
+            success: function (response) {
+
+                if (response.status == 2) {
+                    $('#zipcode-error').text(response.message);
+                    $('#zipcode-error').css("display", "block");
+                } else {
+                    if(response.zipcode && response.house_number) {
+
+                        let houseNumber = response.house_number;
+                        let zipcode = response.zipcode;
+                        let city = response.city;
+                        let street_name = response.street_name;
+                        let displayText = houseNumber ? houseNumber + ', ' + zipcode : '';
+                        $('#street').val(street_name);
+                        $('#city').val(city);
+
+                    }
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+        // Call any other function or logic you need
+        console.log('Both values are filled, proceed...');
+    }
+}
+
+function updateDishQty(operator, maxQty, dish_id) {
+    var current_qty = parseInt($('input[name=qty-' + dish_id + ']').val());
+
+    if (operator == '-' && !isNaN(current_qty) && current_qty > 0) {
+        $('input[name=qty-' + dish_id + ']').val(current_qty - 1);
+        $('#quantity-'+ dish_id).text(current_qty - 1);
+    }
+
+    if (operator == '+' && !isNaN(current_qty)) {
+        /*if (current_qty >= maxQty) {
+            toastr.error(validationMsg.quantity_error)
+            return false;
+        }*/
+
+        $('input[name=qty-' + dish_id + ']').val(current_qty + 1);
+        $('#quantity-'+ dish_id).text(current_qty + 1);
+    }
+
+    var current_qty = parseInt($('input[name=qty-' + dish_id + ']').val());
+
+    $.ajax({
+        type: 'POST',
+        url: baseURL + '/custom-update-dish-qty',
+        data: {
+            dish_id, operator, current_qty
+        },
+        success: function (response) {
+
+            if (response.status == 1 && parseInt(current_qty) == 0) {
+                $("#cart-" + dish_id).remove();
+                $('#cart-item-count').text(parseInt($('#cart-item-count').text()) - 1)
+                $('#cart-count-sticky').text(parseInt($('#cart-count-sticky').text()) - 1)
+                $("#dish-cart-lbl-" + dish_id).text('Add +');
+                $("#dish-cart-lbl-" + dish_id).prop('disabled', false);
+
+                if ($('.cart-amt').length > 0) {
+                    $('#empty-cart-div').hide()
+                    $('#checkout-cart').removeClass('d-none')
+                    $('#cart-bill-div').removeClass('d-none')
+                } else {
+                    $('#empty-cart-div').show()
+                    $('#checkout-cart').addClass('d-none')
+                    $('#cart-bill-div').addClass('d-none')
+                    $('#cart-amount-cal-data').hide()
+                }
+
+                if (response.message) {
+                    $("#coupon_code_apply_btn").show();
+                    $("#coupon_code_remove_btn").hide();
+                    $('#coupon_code').val('');
+                    $("#coupon_code").prop('readonly', false);
+                    $('#coupon-discount').val(0)
+                    $('#coupon-discount-percent').val(0.0)
+                    $('#coupon-discount-text').val('-€0')
+                    $('#item-discount').hide()
+                    calculateTotalCartAmount()
+                }
+
+            }
+
+            $('#paid-ing-price' + dish_id).text('+€' + (parseFloat($('#qty-' + dish_id).val()) * parseFloat($('#qty-' + dish_id).attr('data-ing'))).toFixed(2))
+            calculateTotalCartAmount()
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            toastr.error(errorMessage)
+            // alert(errorMessage);;
+        }
+    })
 }

@@ -79,7 +79,8 @@ return [
 		'total' => 'Total',
 		'minimum_amount' => 'minimum €',
 		'checkout' => 'Checkout',
-		'add_more' => 'Add More'
+		'add_more' => 'Add More',
+		'cashdesk' => 'Cashdesk'
 	],
 
 	'checkout' => [

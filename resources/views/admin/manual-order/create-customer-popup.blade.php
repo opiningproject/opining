@@ -66,7 +66,7 @@
                         <div class="col-md-6 mt-0">
                             <div class="form-group">
                                 <label>House Number</label>
-                                <input type="text" class="form-control" name="house_number" id="house_number"/>
+                                <input type="text" class="form-control house_number" name="house_number" id="house_number"/>
                             </div>
                         </div>
 

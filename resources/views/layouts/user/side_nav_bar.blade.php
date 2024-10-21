@@ -87,7 +87,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                 @endif
                 <div
                     class="select-address-row d-flex justify-content-between align-items-center add-select-address-row flex-wrap mb-0">
-                    <div class="address-radio add-address-button d-flex align-items-center mb-3">
+                    <div class="address-radio add-address-button d-flex align-items-center mb-0">
                         <div class="add-radio-container">
                             <span class="icon">
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -100,7 +100,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                         </div>
                     </div>
 
-                    <form action="" id="address-form-mobile" class="address-add-form d-flex gap-2 d-none">
+                    <form action="" id="address-form-mobile" class="address-add-form d-flex gap-2 d-none mt-3">
                         @csrf
                         <div class="form-group mb-0 zip">
                             <input type="text" placeholder="Zip code" name="zipcode"
@@ -130,7 +130,7 @@ $takeAwayTime = getRestaurantDetail()->take_away_time;
                     <input type="radio" id="radio1" checked name="location">
                     <label class="radio-custom" for="radio1"></label>
                     <span class="radio-label">
-                        <h3>pick up at</h3>
+                        <h3 class="mb-0">Pick up at</h3>
                         <p class="mb-0"> {{ getRestaurantDetail()->rest_address }}</p>
                     </span>
                 </div>

@@ -80,7 +80,6 @@ $(function () {
 
 })
 function getDishes(catId) {
-    console.log("eee", $(this))
     $('.tab-listing .category').removeClass('active');  // Remove active class from all
     $('.category-' + catId + ' .category').addClass('active');
     if(!catId) {
@@ -124,7 +123,7 @@ function customizeDish(id, doesExist=0)
 {
     console.log("in")
     $.ajax({
-        url: baseURL+'/user/get-dish-details/'+id+'/'+doesExist,
+        url: baseURL+'/get-dish-details/'+id+'/'+doesExist,
         type: 'GET',
         success: function (response) {
 
@@ -221,7 +220,7 @@ function addDishOptionPrice(dishId,amount) {
 }
 
 
-function addCustomizedCart(id, doesExist = 0) {
+function addCustomizedCartCustom(id, doesExist = 0) {
 
     var dishData = new FormData();
     var totalDishQty = $('#totalDishQty').val()
@@ -270,7 +269,7 @@ function addCustomizedCart(id, doesExist = 0) {
         dishData.append('doesExist', doesExist)
 
         $.ajax({
-            url: baseURL + '/add-cart/' + id,
+            url: baseURL + '/custom-add-cart/' + id,
             type: 'POST',
             data: dishData,
             processData: false,
@@ -477,7 +476,7 @@ function updateDishQty(operator, maxQty, dish_id) {
 
     $.ajax({
         type: 'POST',
-        url: baseURL + '/ update-dish-qty',
+        url: baseURL + '/custom-update-dish-qty',
         data: {
             dish_id, operator, current_qty
         },

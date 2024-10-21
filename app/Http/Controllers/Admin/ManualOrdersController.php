@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;
 use Response;
 use Mail;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use function React\Promise\all;
 
@@ -195,7 +196,7 @@ class ManualOrdersController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function addCustomizedDish(Request $request, string $id)
+    public function addCustomizedDishCustom(Request $request, string $id)
     {
 //        dd($request->all());
         if (!Auth::user()) {
@@ -203,34 +204,22 @@ class ManualOrdersController extends Controller
         }
 
         try {
-            $user = Auth::user();
-
-            $user_id = $user->id;
-            if ($user->id == 1) {
-                $user_id = 0;
-            }
-            $order = $user->cart;
-//            dump($order);
+            $order = Order::where('user_id', 0)->where('is_online_order', 0)->first();
+            $user_id = 0;
             $order_type = session('zipcode') == null ?  '2' : '1';
-            if (empty($order)) {
-                $order = $user->cart()->create([
+            if (!$order) {
+                $order = Order::create([
                     'user_id'=> 0,
                     'is_cart' => 1,
                     'order_type' => $order_type
                 ]);
             } else {
                 $order->order_type = $order_type;
+                $order->is_online_order = 0;
+                $order->user_id = 0;
                 $order->save();
             }
-            if ($user->id == 1) {
-                if ($order) {
-                    $order->is_online_order = 0;
-                    $order->user_id = 0;
-                    $order->save();
-                }
-            }
 
-//            dd($order);
             $order->fresh();
             $dish = Dish::find($id);
 
@@ -243,11 +232,7 @@ class ManualOrdersController extends Controller
             ksort($selectedPaidIng);
             sort($selectedFreeIng);
 
-            if($request->doesExist == 0){
-//                dump('in');
-//                old option id code comment on 12-08-2024
-//                $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)->whereDishOptionId($request->option)->get();
-
+            if($request->doesExist == 0) {
                 if ($request->option) {
                     $requestOptions = $request->option; // This is the array of option IDs
                     $dishExist = $order->dishDetails()->with('orderDishIngredients')->whereDishId($id)
@@ -412,8 +397,8 @@ class ManualOrdersController extends Controller
             $coupon = false;
             $user = Auth::user();
             if ($request->current_qty >= 1) {
-
-                $user->cart->dishDetails()->find($request->dish_id)->update([
+                $dish = OrderDetail::find($request->dish_id);
+                OrderDetail::where('id', $request->dish_id)->update([
                         'qty' => DB::raw('qty ' . $request->operator . '1'),
                         'total_price' => DB::raw('qty * price'),
                     ]
@@ -424,7 +409,7 @@ class ManualOrdersController extends Controller
 
                 if($dish){
                     OrderDishDetail::whereOrderDetailId($request->dish_id)->forceDelete();
-                    $user->cart->dishDetails()->find($request->dish_id)->forceDelete();
+                    OrderDetail::find($request->dish_id)->forceDelete();
                 }
             }
 

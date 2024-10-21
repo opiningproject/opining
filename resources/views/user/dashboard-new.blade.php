@@ -3,7 +3,6 @@
     <div class="main">
         <div class="main-view">
             <div class="container-fluid bd-gutter bd-layout">
-                @include('layouts.user.side_nav_bar')
                 <main class="bd-main content-main-part">
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between">
@@ -15,13 +14,7 @@
                 </main>
             </div>
         </div>
-        <!-- start footer -->
-        @include('layouts.user.footer_design')
-        <!-- end footer -->
     </div>
-
-{{--    @include('user.modals.address')--}}
-{{--    @include('user.modals.customize-dish')--}}
 @endsection
 
 @section('script')

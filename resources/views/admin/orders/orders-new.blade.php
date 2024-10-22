@@ -224,7 +224,7 @@
                                             <div class="order-box">
                                                 <div class="timing">
                                                     @if ($ord->delivery_time == 'ASAP')
-                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') ? 'color: #DA3030': 'color: #292929' }}" >
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') && !in_array($ord->order_status, [6, 7]) ? 'color: #DA3030': 'color: #292929' }}" >
                                                             {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                                                         </h3>
                                                     @else
@@ -234,7 +234,7 @@
                                                     @endif
                                                     @if ($ord->delivery_time == 'ASAP')
                                                         <label
-                                                            class="cursor-pointer success asap-time-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') ? 'color: #DA3030 !important': 'color: #292929' }}">{{ $ord->delivery_time }}</label>
+                                                            class="cursor-pointer success asap-time-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') && !in_array($ord->order_status, [6, 7]) ? 'color: #DA3030 !important': 'color: #292929' }}">{{ $ord->delivery_time }}</label>
                                                     @endif
                                                 </div>
 

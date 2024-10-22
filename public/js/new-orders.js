@@ -690,6 +690,8 @@ $(document).on('click', '.update-delivery-time', function () {
         success: function (response) {
             if (response.status == 'success') {
                 $('.expected_time_order').val(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).css('color', response.color);
+                $('.asap-time-' + orderId).attr('style', 'color: ' + response.color + ' !important');
                 $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
             }
         },
@@ -762,6 +764,8 @@ function updateDeliveryTime(newTime,orderId) {
         success: function (response) {
             if (response.status == 'success') {
                 $('.expected_time_order').text(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).css('color', response.color);
+                $('.asap-time-' + orderId).attr('style', 'color: ' + response.color + ' !important');
                 $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
             } else {
                 alert('Failed to update the expected delivery time.');
@@ -772,3 +776,23 @@ function updateDeliveryTime(newTime,orderId) {
         }
     });
 }
+
+$('.order-setting-tab a').click(function() {
+    // Remove the 'active' class from all tabs
+    $('.order-setting-tab a').removeClass('active');
+
+    // Add 'active' class to the clicked tab
+    $(this).addClass('active');
+
+    // Hide all content divs
+    $('.setting-panel-tab').addClass('d-none');
+
+    // Show the corresponding content div based on the clicked tab
+    if ($(this).text() === "Time") {
+        $('#tab-time').removeClass('d-none');
+    } else if ($(this).text() === "Sort") {
+        $('#sort-time').removeClass('d-none');
+    } else if ($(this).text() === "Display") {
+        $('#display-time').removeClass('d-none');
+    }
+});

@@ -16,7 +16,7 @@ use App\Enums\PaymentType;
                     <div class="order-box">
                         <div class="timing">
                             @if ($ord->delivery_time == 'ASAP')
-                                <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                <h3 class="expectedDeliveryTime-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') ? 'color: #DA3030': 'color: #292929' }}" >
                                     {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                                 </h3>
                             @else
@@ -26,10 +26,9 @@ use App\Enums\PaymentType;
                             @endif
                             @if ($ord->delivery_time == 'ASAP')
                                 <label
-                                    class="cursor-pointer success">{{ $ord->delivery_time }}</label>
-{{--                            @else--}}
-{{--                                <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
-{{--                                     class="svg"/>--}}
+                                    class="cursor-pointer success asap-time-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') ? 'color: #DA3030 !important': 'color: #292929' }}">
+                                    {{ $ord->delivery_time }}
+                                </label>
                             @endif
                         </div>
 
@@ -43,20 +42,18 @@ use App\Enums\PaymentType;
                                     @if ($ord->order_type == OrderType::Delivery)
                                         <p class="mb-0">
                                             <?php
-                                            echo $userDetails->street_name . ', ' . $userDetails->house_no;
+                                            echo $userDetails->street_name . ' ' . $userDetails->house_no;
                                             ?>
                                         </p>
-                                        {{--                                @else--}}
-                                        {{--                                    <p class="mb-0">--}}
-                                        {{--                                        {{ getRestaurantDetail()->rest_address }}--}}
-                                        {{--                                    </p>--}}
                                     @endif
                                 </div>
                             </div>
                         </div>
                         <div class="actions">
                             <h5 class="mb-0 price_status">
-                                <b>€{{ number_format($ord->total_amount, 2) }}</b>
+                                <b style="{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'color: #DA3030; !important;' : 'color: #292929' }}">
+                                    €{{ number_format($ord->total_amount, 2) }}
+                                </b>
                                 @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
                                     <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="16"
                                         width="16" />

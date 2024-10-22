@@ -566,6 +566,8 @@ return [
         'last_30_days' => 'Last 30 Days',
         'custom' => 'Custom',
         'order_setting_updated' => 'Order setting updated successfully.',
+        'latest_orders_first' => 'Latest Orders First',
+        'newest_orders_first' => 'Newest Orders First',
     ],
     'manual_order' => [
         'title' => 'Deliverers',

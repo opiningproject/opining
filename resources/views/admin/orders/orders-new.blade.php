@@ -38,11 +38,6 @@
                                     {{ trans('rest.food_order.create_order') }}</a>
 
                             </div>
-
-                            {{-- <h1 class="page-title me-auto">{{ trans('rest.food_order.orders') }} <span
-                                    class="count count-order"> {{ getOpenOrders() }} </span></h1> --}}
-
-
                             <div class="btn-grp btn-grp-gap-10 d-flex align-items-center flex-wrap" id="order-dilters">
                                 <div class="header-filter-order d-flex align-items-center flex-wrap">
 
@@ -209,9 +204,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <a href="{{ route('create-order') }}" class="btn btn-site-theme create-order-manual">
-                                    <span>{{ trans('rest.food_order.create_order') }}</span>
-                                </a> --}}
 
                                 <button type="button"
                                     class="btn bg-white text-black d-flex align-items-center gap-3 justify-content-center order-setting"
@@ -232,7 +224,7 @@
                                             <div class="order-box">
                                                 <div class="timing">
                                                     @if ($ord->delivery_time == 'ASAP')
-                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}">
+                                                        <h3 class="expectedDeliveryTime-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') ? 'color: #DA3030': 'color: #292929' }}" >
                                                             {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                                                         </h3>
                                                     @else
@@ -242,10 +234,7 @@
                                                     @endif
                                                     @if ($ord->delivery_time == 'ASAP')
                                                         <label
-                                                            class="cursor-pointer success">{{ $ord->delivery_time }}</label>
-{{--                                                        @else--}}
-{{--                                                            <img src="{{ asset('images/custom_time_icon.svg') }}" height="12px" width="12px"--}}
-{{--                                                                 class="svg" />--}}
+                                                            class="cursor-pointer success asap-time-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') ? 'color: #DA3030 !important': 'color: #292929' }}">{{ $ord->delivery_time }}</label>
                                                     @endif
                                                 </div>
 
@@ -261,13 +250,9 @@
                                                             @if ($ord->order_type == OrderType::Delivery)
                                                                 <p class="mb-0">
                                                                     <?php
-                                                                    echo $userDetails->street_name . ', ' . $userDetails->house_no;
+                                                                    echo $userDetails->street_name . ' ' . $userDetails->house_no;
                                                                     ?>
                                                                 </p>
-                                                                {{--                                                            @else --}}
-                                                                {{--                                                                <p class="mb-0"> --}}
-                                                                {{--                                                                    {{ getRestaurantDetail()->rest_address }} --}}
-                                                                {{--                                                                </p> --}}
                                                             @endif
                                                         </div>
                                                     </div>
@@ -275,7 +260,9 @@
 
                                                 <div class="actions">
                                                     <h5 class="mb-0 price_status">
-                                                        <b>€{{ number_format($ord->total_amount, 2) }}</b>
+                                                        <b style="{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'color: #DA3030; !important;' : 'color: #292929' }}">
+                                                            €{{ number_format($ord->total_amount, 2) }}
+                                                        </b>
                                                         @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
                                                             <img src="{{ asset('images/cod_icon.png') }}" class="svg"
                                                                 height="16" width="16" />
@@ -298,34 +285,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
-{{--                            <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">--}}
-{{--                                <div class="ms-auto d-flex align-items-center custom-pagination orders-new-pagination justify-content-start w-100">--}}
-{{--                                    <label class="text-nowrap">{{ trans('rest.button.rows_per_page') }}</label>--}}
-{{--                                    <select id="per_page_dropdown" onchange="" class="form-control bg-white ms-2">--}}
-{{--                                        @for ($i = 18; $i <= 27; $i += 3)--}}
-{{--                                            <option {{ $perPage == $i ? 'selected' : '' }} value="{{ Request::url() . '?per_page=' . $i }}">--}}
-{{--                                                {{ $i }}--}}
-{{--                                            </option>--}}
-{{--                                        @endfor--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                                <!-- Pagination -->--}}
-{{--                                <nav aria-label="Page navigation example">--}}
-{{--                                    {{ $allOrders->links() }}--}}
-{{--                                </nav>--}}
-
-{{--                                <!-- Filter buttons -->--}}
-{{--                                <div class="filter-btn-group d-none">--}}
-{{--                                    <button type="button" class="btn">--}}
-{{--                                        <img src="{{ asset(path: 'images/map-white.svg') }}" alt="Bike" />--}}
-{{--                                    </button>--}}
-
-{{--                                    <button type="button" class="btn order-setting">--}}
-{{--                                        <img src="{{ asset(path: 'images/setting-white.svg') }}" alt="Bike" />--}}
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <input type="hidden" class="numberOfPerPage" id="numberOfPerPage" value="{{ $perPage }}">
                             <div class="d-flex justify-content-end align-items-center pt-1 order-pagination">
                                 <!-- Rows per page -->

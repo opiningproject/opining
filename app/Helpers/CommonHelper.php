@@ -704,7 +704,7 @@ if (!function_exists('RoundUpEstimatedTime')) {
         }
 
         $expectedDeliveryTime = $hours . ':' . str_pad($roundedMinutes, 2, '0', STR_PAD_LEFT);
-        $expectedDeliveryTime =  \Carbon\Carbon::parse($expectedDeliveryTime)->addMinutes($addMinutes)->format('H:i:s');
+        $expectedDeliveryTime =  \Carbon\Carbon::parse($expectedDeliveryTime)->addMinutes($addMinutes);
         return $expectedDeliveryTime;
 
 

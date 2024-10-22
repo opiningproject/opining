@@ -767,7 +767,7 @@ label.error { color: #E41A1A !important;}
     font-weight: 300;
 }
 
-.order-setting-tab-content .radio-tabs .radio-tabs .status-option [type="radio"]:checked+span, 
+.order-setting-tab-content .radio-tabs .status-option span, 
 .order-setting-tab-content .radio-tabs .status-option [type="radio"]:not(:checked)+span {
     opacity: 0;
     position: absolute;

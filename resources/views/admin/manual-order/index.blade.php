@@ -506,7 +506,7 @@
             </div>
         </div>
     </div>
-    @include('user.modals.customize-dish')
+    @include('admin.modals.customize-dish')
     @include('admin.manual-order.create-customer-popup')
 @endsection
 {{-- create-customer-popup --}}

@@ -789,7 +789,7 @@ label.error { color: #E41A1A !important;}
 .order-display-checking {
     position: relative;
 }
-.order-display-checking .form-check .form-check-input {height: 24px;}
+.order-display-checking .form-check .form-check-input {height: 24px;width: 50px;}
 .order-display-checking .form-check {
     display: flex;
     align-items: center;

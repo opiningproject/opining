@@ -1598,6 +1598,38 @@ footer .m-title {font-weight: 500;margin-bottom: 15px !important;font-size: 16px
 .takeAway-tab-mobile p {font-size: 11px;font-weight: 300;color: #292929;}
 .select-address-row  {min-height: 24px;}
 
+/* new footer css */
+.footerBot {
+  padding: 37px 0px 15px;
+  background: #EBEBEB;
+}
+
+.footerBot .social {
+  list-style-type: none;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 20px;
+}
+
+.footerBot .social li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerBot .social li a img{
+  height: 17px;
+  object-fit: contain;
+  object-position: center;
+}
+.footerBot p {font-size: 10px;font-weight: 300;color: rgba(0, 0, 0, 0.5);margin-bottom: 10px;letter-spacing: 1px;}
+.footerBot p a {color: rgba(0, 0, 0, 0.5);}
+.footerBot p a:hover {color: #000000;}
+.underline {text-decoration: underline;}
+
 @media (max-width: 1800px) {
   .coupon-card-row .coupon-row-grid {margin: 0px -10px;}
 .coupon-card-row .coupon-row-grid .coupon-col {margin-bottom: 20px;padding: 0px 10px;}

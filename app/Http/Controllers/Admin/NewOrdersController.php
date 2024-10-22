@@ -426,7 +426,7 @@ class NewOrdersController extends Controller
         try {
             $orders = Order::with('orderUserDetails')->where('is_cart', '0')->orderBy('id', 'desc')->first();
             $userDetails = $orders->orderUserDetails;
-            $address = $orders->order_type == OrderType::Delivery ? $userDetails->street_name . ', ' .  $userDetails->house_no : '';
+            $address = $orders->order_type == OrderType::Delivery ? $userDetails->street_name . ' ' .  $userDetails->house_no : '';
             $order_type = trans('rest.food_order.take_away');
             if ($orders->order_type == OrderType::Delivery) {
 //                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
@@ -555,10 +555,14 @@ class NewOrdersController extends Controller
     {
         $getOrderData = Order::find($request->orderId);
         $updatedDeliveryTime = \Carbon\Carbon::parse($request->curruntTime)->addMinutes($request->getMinute);
-        $getOrderData->expected_delivery_time = $updatedDeliveryTime->format('H:i:s');
+        $getOrderData->expected_delivery_time = $updatedDeliveryTime;
         $getOrderData->save();
+        $color = '#292929';
+        if ($getOrderData->expected_delivery_time < date('Y-m-d H:i:s')) {
+            $color = '#DA3030';
+        }
         $expected_delivery_time = date('H:i', strtotime($getOrderData->expected_delivery_time));
-        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'color' => $color, 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 
     /**
@@ -569,7 +573,14 @@ class NewOrdersController extends Controller
     {
         $getOrderData = Order::find($request->orderId);
         if ($getOrderData->delivery_time == "ASAP") {
-            $getOrderData->expected_delivery_time = date('H:i:s', strtotime($request->expected_time));
+//            $getOrderData->expected_delivery_time = date('H:i:s', strtotime($request->expected_time));
+            $date = date('Y-m-d', strtotime($getOrderData->expected_delivery_time));
+            $newDateTime = $date . ' ' . date('H:i:s', strtotime($request->expected_time));
+            $getOrderData->expected_delivery_time = $newDateTime;
+            $color = '#292929';
+            if ($getOrderData->expected_delivery_time < date('Y-m-d H:i:s')) {
+                $color = '#DA3030';
+            }
         } else {
             $getOrderData->delivery_time = date('H:i:s', strtotime($request->expected_time));
         }
@@ -578,7 +589,7 @@ class NewOrdersController extends Controller
         if ($getOrderData->delivery_time != "ASAP") {
             $expected_delivery_time = date('H:i', strtotime($getOrderData->delivery_time));
         }
-        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'expected_time_order' => $expected_delivery_time, 'orderData' => $getOrderData]);
+        return response()->json(['status' => 'success', 'orderId' => $getOrderData->id, 'color' => $color, 'expected_time_order' => $expected_delivery_time, 'orderData' => $getOrderData]);
     }
 
     /**

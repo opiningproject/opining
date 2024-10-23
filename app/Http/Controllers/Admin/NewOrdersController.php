@@ -473,8 +473,7 @@ class NewOrdersController extends Controller
                 $html .= '<label class="success cursor-pointer" style="' . $styleExpectedDeliveryTime . '"> ' . $orders->delivery_time . ' </label>';
             }
             $style = $orders->payment_type == PaymentType::Cash && $orders->order_status != OrderStatus::Delivered
-                ? 'color: #DA3030 !important;'
-                : 'color: #292929;';
+                ? 'color: #DA3030 !important;': 'color: #292929;';
 
             $html .= '</div>
                 <div class="details">

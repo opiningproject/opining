@@ -145,12 +145,12 @@ $displayOrderSetting = $params['display_order_settings'];
 
                             <div class="radio-group date-options-row mb-3">
                                 <label class="radio-option date_type">
-                                    <input type="radio" name="date_type" value="desc">
-                                    <span>{{ trans('rest.order_screen_settings.latest_orders_first') }}</span>
-                                </label>
-                                <label class="radio-option date_type">
                                     <input type="radio" name="date_type" value="asc">
                                     <span>{{ trans('rest.order_screen_settings.newest_orders_first') }}</span>
+                                </label>
+                                <label class="radio-option date_type">
+                                    <input type="radio" name="date_type" value="desc">
+                                    <span>{{ trans('rest.order_screen_settings.older_orders_first') }}</span>
                                 </label>
                             </div>
 

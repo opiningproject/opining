@@ -375,6 +375,34 @@ $(function () {
         // window.open(url, '_parent');
         // searchFilterAjax(search, searchOption, filters);
     })
+
+    // display-order-settings ajax call
+    $('.setting-checkbox').on('change', function() {
+        // Get the ID of the clicked checkbox
+        var settingKey = $(this).data('setting');
+        var isChecked = $(this).is(':checked') ? 1 : 0;
+
+        // AJAX call to update the setting
+        $.ajax({
+            url:  baseURL + '/update-display-order-setting',
+            type: 'POST',
+            data: {
+                time_orders_top: $('#flexSwitchCheckDefault1').is(':checked') ? 1 : 0,
+                display_red_color: $('#flexSwitchCheckDefault2').is(':checked') ? 1 : 0
+            },
+            success: function(response) {
+                if (response.status == 'success') {
+                    searchFilterAjax(search, searchOption, filters, perPageNew);
+                } else {
+                    console.log('Failed to update setting');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error occurred:', error);
+            }
+        });
+    });
+
 });
 
 
@@ -488,82 +516,6 @@ function disabledOldOrderStatus() {
 
 // Call the function to initialize it
 disabledOldOrderStatus();
-/*function disabledOldOrderStatus() {
-    const radios = document.querySelectorAll('.order-status-radio');
-
-    // Define the allowed transitions between statuses
-    const orderStatusMap = {
-        'accepted-order': ['inKitchen-order'], // Only In Kitchen can be enabled from New Order
-        'inKitchen-order': ['outForDelivery-order'], // Only Out For Delivery can be enabled from In Kitchen
-        'outForDelivery-order': ['delivered-order'], // Only Delivered can be enabled from Out For Delivery
-        'delivered-order': [] // No further status transitions from Delivered, so everything else is disabled
-    };
-
-    // Function to update the status of radio buttons
-    function updateRadioStatus() {
-        // Find how many radios are checked
-        const checkedRadios = document.querySelectorAll('.order-status-radio:checked');
-
-        // If no radio button is checked, disable all radio buttons
-        if (checkedRadios.length === 0) {
-            radios.forEach(radio => {
-                radio.disabled = true;
-            });
-            return; // Exit early if no radio buttons are checked
-        }
-
-        // If a radio is checked, enable/disable the relevant radios
-        radios.forEach(radio => {
-            if (radio.checked) {
-                const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
-                radios.forEach(r => {
-                    // Enable only the radios in the allowed transition map, disable others
-                    if (enabledRadios.includes(r.id)) {
-                        r.disabled = false; // Enable the valid next step
-                    } else if (r.id !== radio.id) {
-                        r.disabled = true; // Disable all other radios except the current one
-                    }
-                });
-            }
-        });
-    }
-
-    // Initialize radio buttons on page load
-    updateRadioStatus();
-
-    // Add change event listener to radio buttons
-    radios.forEach(radio => {
-        radio.addEventListener('change', function () {
-            // Enable all radios first, then re-apply the disabling logic
-            radios.forEach(r => r.disabled = false); // Enable all radios first
-            updateRadioStatus(); // Apply disabling logic based on the new selection
-        });
-    });
-}
-
-// Example usage
-disabledOldOrderStatus();*/
-
-
-// checked all checkboxs on click all checkbox.
-/*$('#all').on('change', function () {
-    // Check or uncheck all checkboxes based on 'all' checkbox state
-    $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
-});
-
-// If any individual checkbox is unchecked, also uncheck 'all'
-$('.order-filter .checkbox').not('#all').on('change', function () {
-    if (!$(this).is(':checked')) {
-        $('#all').prop('checked', false);
-    }
-});
-
-// Check if all checkboxes are selected, and if so, check 'all'
-$('.order-filter .checkbox').not('#all').on('change', function () {
-    if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
-        $('#all').prop('checked', true);
-    }
-});*/
 
 // Define the date range picker on the start date input
 // var start = moment();

@@ -49,7 +49,13 @@ class NewOrdersController extends Controller
         $specificDaySetting = $order_settings['expiry_date'];
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
-        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $displayOrderSetting = $getResturentData['display_order_settings'];
+        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC");
+        if ($displayOrderSetting['time_orders_top'] == "1") {
+            $orders = $orders->orderBy('delivery_time', 'desc');
+        } else {
+            $orders = $orders->orderBy('created_at', 'desc');
+        }
         $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
             $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
@@ -107,7 +113,14 @@ class NewOrdersController extends Controller
         $specificDaySetting = $order_settings['expiry_date'];
         $startDate = $order_settings['start_date'];
         $endDate = $order_settings['end_date'];
-        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
+        $displayOrderSetting = $getResturentData['display_order_settings'];
+        $orders = Order::where('is_cart', '0')->orderByRaw("FIELD(order_status, '6', '7') ASC");
+        if ($displayOrderSetting['time_orders_top'] == "1") {
+            $orders = $orders->orderBy('delivery_time', 'desc');
+        } else {
+            $orders = $orders->orderBy('created_at', 'desc');
+        }
+
         $orderDeliveryTime = (int)Str::between(getRestaurantDetail()->delivery_time, '-', ' Min');
         if ($timezoneSetting != null) {
             $orders = Order::where('is_cart', '0')->where('created_at', '>=', Carbon::now()->subHours((int)$timezoneSetting))->orderByRaw("FIELD(order_status, '6', '7') ASC")->orderBy('created_at', 'desc');
@@ -428,6 +441,10 @@ class NewOrdersController extends Controller
             $userDetails = $orders->orderUserDetails;
             $address = $orders->order_type == OrderType::Delivery ? $userDetails->street_name . ' ' .  $userDetails->house_no : '';
             $order_type = trans('rest.food_order.take_away');
+            $styleExpectedDeliveryTime = $orders->expected_delivery_time < date('Y-m-d H:i:s') && !in_array($orders->order_status, [6, 7])
+                ? 'color: #DA3030 !important;'
+                : 'color: #292929;';
+
             if ($orders->order_type == OrderType::Delivery) {
 //                $address = $userDetails->house_no . ', ' . $userDetails->street_name;
                 $order_type = trans('rest.food_order.delivery');
@@ -448,13 +465,16 @@ class NewOrdersController extends Controller
 
             // Add the condition using raw PHP
             if ($orders->delivery_time == 'ASAP') {
-                $html .= '<h3 class="expectedDeliveryTime-' . $orders->id . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>';
+                $html .= '<h3 class="expectedDeliveryTime-' . $orders->id . '" style="' . $styleExpectedDeliveryTime . '">' . date('H:i', strtotime(\Carbon\Carbon::parse($orders->expected_delivery_time))) . '</h3>';
             } else {
-                $html .= '<h3 class="expectedDeliveryTime-{{ $ord->id }}">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>';
+                $html .= '<h3 class="expectedDeliveryTime-'. $ord->id .'">' . date('H:i', strtotime($orders->delivery_time)) . '</h3>';
             }
             if ($orders->delivery_time == 'ASAP') {
-                $html .= '<label class="success cursor-pointer"> ' . $orders->delivery_time . ' </label>';
+                $html .= '<label class="success cursor-pointer" style="' . $styleExpectedDeliveryTime . '"> ' . $orders->delivery_time . ' </label>';
             }
+            $style = $orders->payment_type == PaymentType::Cash && $orders->order_status != OrderStatus::Delivered
+                ? 'color: #DA3030 !important;'
+                : 'color: #292929;';
 
             $html .= '</div>
                 <div class="details">
@@ -470,7 +490,7 @@ class NewOrdersController extends Controller
                 </div>
 
                 <div class="actions">
-                    <h5 class="mb-0 price_status"><b>€' . number_format($orders->total_amount, 2) . '</b> <img src="' . $iconImage . '" class="svg" height="20" width="20"/></h5>
+                    <h5 class="mb-0 price_status"> <b style="' . $style . '">€' . number_format($orders->total_amount, 2) . '</b></h5>
                     <button href="#" class="orderDetails order-status-' . $orders->id . ' btn ' . orderStatusBox($orders)->color . '" onclick="orderDetailNew(' . $orders->id . ')">' . orderStatusBox($orders)->text . '</button>
                 </div>
             </div>
@@ -544,8 +564,39 @@ class NewOrdersController extends Controller
         $restaurant->params = json_encode($params);
         $restaurant->save();
 
-        return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
+        return response()->json(['status' => 'success', 'message' => trans('rest.order_screen_settings.order_setting_updated')]);
     }
+
+    public function updateDisplayOrderSetting(Request $request)
+    {
+        $restaurant = RestaurantDetail::findOrFail(1);
+
+        $params = json_decode($restaurant->params, true);
+
+        if (is_null($params)) {
+            $params = [];
+        }
+
+        if (!isset($params['display_order_settings'])) {
+            $params['display_order_settings'] = [];
+        }
+
+        if ($request->has('time_orders_top')) {
+            $params['display_order_settings']['time_orders_top'] = $request->input('time_orders_top');
+        }
+        if ($request->has('display_red_color')) {
+            $params['display_order_settings']['display_red_color'] = $request->input('display_red_color');
+        }
+        // Save the updated settings back to the params field
+        $restaurant->params = json_encode($params);
+        $restaurant->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('rest.order_screen_settings.order_setting_updated'),
+        ]);
+    }
+
 
     /**
      * @param Request $request

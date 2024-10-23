@@ -83,38 +83,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="integration-col">
-                        <div class="integration-card">
-                            <div class="card-head">
-                                <div class="card-logo">
-                                    <img src="{{ asset('images/deliveroo.png') }}" alt="" />
-                                </div>
-
-                                <label class="radio-label-t">
-                                    <input type="radio" name="option" id="radio1" checked />
-                                    <span class="radio-label">
-                                        <span></span> Connected
-                                    </span>
-                                </label>
-                            </div>
-
-                            <h3 class="int-name"><a href="#">Deliveroo</a></h3>
-
-                            <div class="content">
-                                <p>Display your online orders of Deliveroo on opining</p>
-                            </div>
-
-                            <div class="ftr-btns row g-2">
-                                <div class="col-sm-6">
-                                    <button type="submit">Configure</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button type="submit">Manage</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

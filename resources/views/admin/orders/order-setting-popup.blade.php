@@ -1,6 +1,8 @@
 <?php
 $params = json_decode(getRestaurantDetail()->params, true);
 $payment_settings = $params['order_settings'];
+$displayOrderSetting = $params['display_order_settings'];
+
 ?>
 
 <div class="modal fade custom-modal order-setting-popup" id="orderSettingModal" tabindex="-1"
@@ -161,19 +163,12 @@ $payment_settings = $params['order_settings'];
                         <div class="order-display-checking">
                             <div class="form-check form-switch">
                                 <label class="form-check-label" for="flexSwitchCheckDefault1">Time orders on top</label>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                <input class="form-check-input setting-checkbox" type="checkbox" id="flexSwitchCheckDefault1" data-setting="time_orders_top" {{ $displayOrderSetting['time_orders_top'] == "1" ? 'checked' : '' }} >
                             </div>
 
                             <div class="form-check form-switch">
-                                <label class="form-check-label" for="flexSwitchCheckDefault2">Display red color on
-                                    orders that are late.</label>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2">
-                            </div>
-
-                            <div class="form-check form-switch">
-                                <label class="form-check-label" for="flexSwitchCheckDefault3">Show older open orders
-                                    always</label>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3">
+                                <label class="form-check-label" for="flexSwitchCheckDefault2">Display red color on orders that are late.</label>
+                                <input class="form-check-input setting-checkbox" type="checkbox" id="flexSwitchCheckDefault2" data-setting="display_red_color" {{ $displayOrderSetting['display_red_color'] == "1" ? 'checked' : '' }}>
                             </div>
                         </div>
                     </div>

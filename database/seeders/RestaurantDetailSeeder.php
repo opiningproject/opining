@@ -33,6 +33,10 @@ class RestaurantDetailSeeder extends Seeder
                     "expiry_date" => null,
                     "timezone_setting" => null,
                     "order_setting_type" => null
+                ],
+                "display_order_settings" => [
+                    "time_orders_top" => "0",
+                    "display_red_color" => "0",
                 ]
             ]),
             'delivery_time' => '20-45 Min',

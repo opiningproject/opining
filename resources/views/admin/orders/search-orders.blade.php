@@ -3,20 +3,29 @@
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
 use App\Enums\PaymentType;
-
+$params = json_decode(getRestaurantDetail()->params, true);
+$displayOrderSetting = $params['display_order_settings'];
 ?>
 
 @if (count($orders))
     <div class="order-listing-container order-listing-container-search">
         <div class="order-row">
             @foreach ($orders as $key => $ord)
-                <?php $userDetails = $ord->orderUserDetails; ?>
+                <?php $userDetails = $ord->orderUserDetails;
+                $style = "";
+                if($displayOrderSetting['display_red_color'] == "1") {
+                    $style = $ord->expected_delivery_time < date('Y-m-d H:i:s') && !in_array($ord->order_status, [6, 7])
+                        ? 'color: #DA3030 !important;'
+                        : 'color: #292929;';
+                }
+
+                ?>
 
                 <div class="order-col order-col-search cursor-pointer" id="order-{{ $ord->id }}" data-id="{{ $ord->id }}" onclick="orderDetailNew({{ $ord->id }})">
                     <div class="order-box">
                         <div class="timing">
                             @if ($ord->delivery_time == 'ASAP')
-                                <h3 class="expectedDeliveryTime-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') && !in_array($ord->order_status, [6, 7]) ? 'color: #DA3030': 'color: #292929' }}" >
+                                <h3 class="expectedDeliveryTime-{{ $ord->id }}" style="{{ $style }}" >
                                     {{ $ord->expected_delivery_time ? date('H:i', strtotime($ord->expected_delivery_time)) : date('H:i', strtotime(\Carbon\Carbon::parse($ord->created_at)->addMinutes($orderDeliveryTime))) }}
                                 </h3>
                             @else
@@ -26,7 +35,7 @@ use App\Enums\PaymentType;
                             @endif
                             @if ($ord->delivery_time == 'ASAP')
                                 <label
-                                    class="cursor-pointer success asap-time-{{ $ord->id }}" style="{{ $ord->expected_delivery_time < date('Y-m-d H:i:s') && !in_array($ord->order_status, [6, 7]) ? 'color: #DA3030 !important': 'color: #292929' }}">
+                                    class="cursor-pointer success asap-time-{{ $ord->id }}" style="{{ $style }}">
                                     {{ $ord->delivery_time }}
                                 </label>
                             @endif
@@ -54,18 +63,18 @@ use App\Enums\PaymentType;
                                 <b style="{{ $ord->payment_type == PaymentType::Cash && $ord->order_status != OrderStatus::Delivered ? 'color: #DA3030; !important;' : 'color: #292929' }}">
                                     €{{ number_format($ord->total_amount, 2) }}
                                 </b>
-                                @if ($ord->payment_type == \App\Enums\PaymentType::Cash)
-                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="16"
-                                        width="16" />
-                                @endif
-                                @if ($ord->payment_type == \App\Enums\PaymentType::Card)
-                                    <img src="{{ asset('images/purse.svg') }}" class="svg" height="20"
-                                        width="20" />
-                                @endif
-                                @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)
-                                    <img src="{{ asset('images/paid-deal.svg') }}" class="svg" height="20"
-                                        width="20" />
-                                @endif
+{{--                                @if ($ord->payment_type == \App\Enums\PaymentType::Cash)--}}
+{{--                                    <img src="{{ asset('images/cod_icon.png') }}" class="svg" height="16"--}}
+{{--                                        width="16" />--}}
+{{--                                @endif--}}
+{{--                                @if ($ord->payment_type == \App\Enums\PaymentType::Card)--}}
+{{--                                    <img src="{{ asset('images/purse.svg') }}" class="svg" height="20"--}}
+{{--                                        width="20" />--}}
+{{--                                @endif--}}
+{{--                                @if ($ord->payment_type == \App\Enums\PaymentType::Ideal)--}}
+{{--                                    <img src="{{ asset('images/paid-deal.svg') }}" class="svg" height="20"--}}
+{{--                                        width="20" />--}}
+{{--                                @endif--}}
                             </h5>
                             <button
                                 class="orderDetails order-status-{{ $ord->id }} btn {{ orderStatusBox($ord)->color }}"

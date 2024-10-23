@@ -1598,6 +1598,135 @@ footer .m-title {font-weight: 500;margin-bottom: 15px !important;font-size: 16px
 .takeAway-tab-mobile p {font-size: 11px;font-weight: 300;color: #292929;}
 .select-address-row  {min-height: 24px;}
 
+
+/* New home page css */
+.home-page {
+  position: relative;
+  background: #ffffff;
+  padding-top: 100px;
+}
+
+.headerTop header {
+  width: 100%;
+  max-width: 1260px;
+  margin: 0px auto;
+  padding: 10px 15px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  background: #ffffff;
+  z-index: 99;
+}
+
+.headerTop .header-logo img {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+
+/* Styling for the navigation links */
+.headerTop .nav-link {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: capitalize;
+  color: #000000;
+  min-width: 160px;
+  text-align: center;
+}
+
+/* Highlight active link */
+.headerTop .nav-link.fw-bold {
+  font-weight: 500;
+}
+
+/* Button styles */
+.headerTop .btn {min-width: 138px;display: flex;align-items: center;justify-content: center;font-size: 12px;height: 38px;border-radius: 10px;text-align: center;font-weight: 400;border: 1px solid #000000;}
+
+.headerTop .btn-dark {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(94, 94, 94, 1));
+  color: #ffffff;
+}
+
+.headerTop .btn-dark:hover {
+ background: linear-gradient(to bottom, rgba(77, 77, 77, 0.8), rgba(0, 0, 0, 1)) !important;
+  border-color: #000;
+}
+
+.headerTop .btns-header {
+  display: flex;
+  gap: 12px;
+}
+.headerTop .dropdown-menu {
+  border-radius: 10px;
+}
+.headerTop .dropdown-menu .dropdown-item {
+  font-size: 12px;
+  color: #000000;
+}
+
+.order-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.icon {
+  font-size: 40px;
+  color: #333;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  padding: 20px;
+  transition: all 0.3s;
+  z-index: 9999;
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.sidebar ul li {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.close-btn {
+  color: #fff;
+  font-size: 30px;
+  background: none;
+  border: none;
+  float: right;
+}
+
+
+.sidebar.active {
+  display: block;
+  left: 0;
+}
+
+.navbar-toggler {
+  font-size: 30px;
+  border: none;
+  background: none;
+}
+
+
+
 /* new footer css */
 .footerBot {
   padding: 37px 0px 15px;
@@ -1651,6 +1780,14 @@ footer .m-title {font-weight: 500;margin-bottom: 15px !important;font-size: 16px
 .section-page-title {margin-bottom: 15px !important;}
 }
 
+@media (max-width: 991px) {
+.headerTop .nav-link {
+  min-width: 70px;
+}
+.headerTop .btn {
+  min-width: initial;
+}
+}
 @media (max-width: 767px) {
   .add-more-btn-sticky {height: 49px !important;display: flex !important;justify-content: center;align-items: center;}
   .coupon-row-grid .coupon-flex .right-cp p {font-size: 12px;}
@@ -1707,6 +1844,86 @@ footer .footer-link ul li {margin-bottom: 6px !important;}
   padding: 20px 36px 5px;
   border-top: 1px solid #e6e6e6;
 }
+.home-page {
+  padding-top: 20px;
+}
+
+.headerTop .btns-header {
+  display: none !important;
+}
+.headerTop header {
+  justify-content: center !important;
+}
+
+.headerTop header .navbar-toggler {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.headerTop header #navbar {
+  position: fixed;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  max-width: 265px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(94, 94, 94, 1));
+  z-index: 9999;
+  top: 0px;
+  padding: 15px;
+  padding-top: 30px;
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  -o-transition: all 300ms linear;
+  -ms-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+.headerTop header #navbar .nav-link {
+  width: 100%;
+  text-align: left;
+  padding: 10px 10px;
+}
+
+.headerTop header #navbar * {color: #ffffff !important;}
+
+.headerTop #navbar #close-menu {
+  display: inline-block !important;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 1;
+}
+
+
+.headerTop header #navbar .dropdown-menu {
+  width: 100%;
+}
+.headerTop header #navbar .dropdown-menu * {
+  color: #000000 !important;
+}
+
+.headerTop .dropdown-toggle::after {
+  float: right;
+}
+#navbar.active {
+  display: block !important;
+}
+
+#navbar::after {
+  /* top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  content: "";
+  right: 0px;
+  position: absolute; */
+}
+
 }
 
 .menu-sidebar--address .head-title.top-head-title {

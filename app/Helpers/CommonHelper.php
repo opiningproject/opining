@@ -497,11 +497,7 @@ if (!function_exists('uploadImageToLocal')) {
 if (!function_exists('getOpenOrders')) {
     function getOpenOrders()
     {
-<<<<<<< HEAD
-        $openOrders = Order::where('is_cart', '0')->where('order_status','<>',OrderStatus::Delivered)->get();
-=======
         $openOrders = Order::where('is_cart', '0')->whereNotIn('order_status', [OrderStatus::Delivered, OrderStatus::Cancelled])->get();
->>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
 
         return count($openOrders);
     }
@@ -656,12 +652,8 @@ if (!function_exists('orderStatusBox')) {
             2 => 'outline-warning',       // In Kitchen
             4 => 'outline-success',       // Ready For Pickup
             5 => 'outline-success',       // Out For Delivery
-<<<<<<< HEAD
-            6 => 'btn-danger-outline'     // Delivered
-=======
             6 => 'btn-danger-outline',     // Delivered
             7 => 'outline-danger',        // New Order
->>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
         ];
 
         // Define status-text mappings
@@ -670,12 +662,8 @@ if (!function_exists('orderStatusBox')) {
             2 => 'In Kitchen',
             4 => 'Ready For Pickup',
             5 => 'Out For Delivery',
-<<<<<<< HEAD
-            6 => 'Delivered'
-=======
             6 => 'Delivered',
             7 => 'Cancelled'
->>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a
         ];
 
         // Get the color and text based on the status
@@ -686,7 +674,6 @@ if (!function_exists('orderStatusBox')) {
         // You could add more custom logic here if needed, based on the order type
         return $order;
     }
-<<<<<<< HEAD
 
 
 }
@@ -792,8 +779,7 @@ function getSiteHost($request){
     }
     return $siteUrl;
 }
-=======
-}
+
 
 if (!function_exists('RoundUpEstimatedTime')) {
     function RoundUpEstimatedTime($expectedDeliveryTime, $addMinutes)
@@ -818,4 +804,3 @@ if (!function_exists('RoundUpEstimatedTime')) {
 
     }
 }
->>>>>>> 66ba50cc9d588342bf99ec817bc605a8a921f10a

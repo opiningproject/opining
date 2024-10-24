@@ -71,6 +71,16 @@ class MainController extends Controller
     {
         if (Auth::check()) {
             return redirect('/dashboard'); // Adjust this path as needed
+        } elseif($request->input('token')) {
+            $authToken = $request->input('token');
+            $authData = json_decode(base64_decode($authToken), true);
+            if(isset($authData['email'])) {
+                $tuser = User::where('email', $authData['email'])->first();
+                if ($tuser) {
+                    Auth::login($tuser);
+                    return redirect('/dashboard');
+                }
+            }
         }
         $host = $request->getHost();
         $domain_code = $this->extractDomainCode($request);
@@ -245,7 +255,11 @@ class MainController extends Controller
                 if(!empty($tenant)){
                     tenancy()->initialize($tenant);
                 }
-                $redirectUrl = 'http://' . $newDomain . '/dashboard';
+                $token = base64_encode(json_encode([
+                    'email' => $request->user_email,
+                    'timestamp' => time() + 300,  // Token valid for 5 minutes
+                ]));
+                $redirectUrl = 'http://' . $newDomain . '/login?token=' . urlencode($token);
                 /* $redirectUrl = formatUrl($redirectUrl); */
 
          // Find the user by the provided user_email

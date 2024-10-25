@@ -9,15 +9,14 @@
     $min_order_price = session('min_order_price');
     $delivery_charge = session('delivery_charge');
     $showModal = 0;
-    
     if (!session('showLoginModal')) {
         $showModal = 1;
         Session::put('showLoginModal', '1', '1440');
     }
-    
+
     $cartValue = 0;
     $dishOptionCategoryTotalAmount = 0;
-    
+
     ?>
     <div class="main">
         <div class="main-view">
@@ -26,7 +25,7 @@
                 <main class="bd-main content-main-part">
                     <div class="main-content">
                         <div class="section-page-title main-page-title row justify-content-between">
-                            <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12">
+                            <div class="col-xxl-6 col-xl-6 col-lg-5 col-md-6 col-sm-6 col-12  title-search-mobile">
                                 <h1 class="page-title">{{ trans('user.dashboard.title') }}</h1>
                             </div>
                             <div
@@ -69,38 +68,37 @@
                         <div class="banner_home_slider mb-2">
                             <div class="swiper banner-swiper-slider">
                                 <div class="category-slider swiper-wrapper pt-0 pb-0">
-                                    @foreach($bannerData as $bannerKey => $bannerValue)
-                                    <div class="swiper-slide">
-                                        <div class="offer-card-banner offercard-slider w-100 mb-0">
-                                            <div class="card position-relative">
-                                                <div class="bg-offercard-circle-1">
-                                                    <img class="svg" src="{{ asset('images/ban-grade1.svg') }}"
-                                                        alt="" width="175" height="102">
-                                                </div>
-                                                <div class="bg-offercard-circle-2">
-                                                    <img class="svg" src="{{ asset('images/ban-grade2.svg') }}"
-                                                        alt="" width="285" height="114">
-                                                </div>
-                                                <div class="bg-offercard-circle-3">
-                                                    <img class="svg" src="{{ asset('images/ban-grade3.svg') }}"
-                                                        alt="" width="175" height="144">
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="text-content">
-                                                        <h2>{{ $bannerValue->content}}</h2>
-                                                        <a href="#"
-                                                            class="btn btn-site-theme fw-400 text-uppercase font-sebibold">See
-                                                            How</a>
+                                    @foreach ($bannerData as $bannerKey => $bannerValue)
+                                        <div class="swiper-slide">
+                                            <div class="offer-card-banner offercard-slider w-100 mb-0">
+                                                <div class="card position-relative">
+                                                    <div class="bg-offercard-circle-1">
+                                                        <img class="svg" src="{{ asset('images/ban-grade1.svg') }}"
+                                                            alt="" width="175" height="102">
                                                     </div>
+                                                    <div class="bg-offercard-circle-2">
+                                                        <img class="svg" src="{{ asset('images/ban-grade2.svg') }}"
+                                                            alt="" width="285" height="114">
+                                                    </div>
+                                                    <div class="bg-offercard-circle-3">
+                                                        <img class="svg" src="{{ asset('images/ban-grade3.svg') }}"
+                                                            alt="" width="175" height="144">
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="text-content">
+                                                            <h2>{{ $bannerValue->content }}</h2>
+                                                            <a href="#"
+                                                                class="btn btn-site-theme fw-400 text-uppercase font-sebibold">See
+                                                                How</a>
+                                                        </div>
 
-                                                    <div class="img-content">
-                                                        <img src="{{ $bannerValue->image }}"
-                                                            alt="Banner Slider One" />
+                                                        <div class="img-content">
+                                                            <img src="{{ $bannerValue->image }}" alt="Banner Slider One" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     @endforeach
 
                                     {{-- <div class="swiper-slide">
@@ -177,7 +175,6 @@
                                         @foreach ($categories as $key => $cat)
                                             <?php
                                             $selected = '';
-                                            
                                             if (!isset($_GET['all']) && $cat_id == '') {
                                                 if ($key == 0) {
                                                     $selected = 'selected-cart-active';
@@ -192,10 +189,10 @@
                                                 data-category-id={{ $cat->id }}>
                                                 <div class="card shadow-mobile">
                                                     <span class="dish-item-icon">
-                                                        <img src="{{ $cat->image }}" class="img-fluid svg"
-                                                            alt="bakery" width="56" height="56" />
+                                                        <img src="{{ $cat->image }}" class="img-fluid svg" alt="bakery"
+                                                            width="56" height="56" />
                                                     </span>
-                                                    <p class="mb-0 text-truncate text-muted" title="{{ $cat->name }}">
+                                                    <p class="mb-0 text-muted" title="{{ $cat->name }}">
                                                         {{ $cat->name }}
                                                     </p>
                                                     <a href="javascript:void(0)" onclick="getDishes({{ $cat->id }})"
@@ -214,10 +211,10 @@
                             <div class="section-page-title">
                                 <h1 class="section-title dish-list">{{ $category ? $category->name : '' }}</h1>
                                 <!--                            <a href="{{ route('user.dashboard') }}?all=1" type="button" class="viewall-btn">{{ trans('user.button.view_all') }}
-                                                                    <span>
-                                                                        <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
-                                                                                                                        </span>
-                                                                                                                    </a>-->
+                                                                                                                <span>
+                                                                                                                    <img src="{{ asset('images/view.svg') }}" alt="" class="svg" height="24" width="24">
+                                                                                                                                                                    </span>
+                                                                                                                                                                </a>-->
                             </div>
                             <div class="dish-details-div">
                                 <div class="category-list-item-grid">
@@ -226,17 +223,16 @@
                                             <?php
                                             $disableBtn = '';
                                             $customizeBtn = false;
-                                            
                                             //                                        if ($dish->qty == 0 || $dish->out_of_stock == '1') {
                                             if ($dish->out_of_stock == '1') {
                                                 $disableBtn = 'disabled';
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             if (count($dish->ingredientsWithoutTrash) == 0) {
                                                 $customizeBtn = true;
                                             }
-                                            
+
                                             ?>
                                             <div class="card food-detail-card shadow-mobile">
                                                 @if ($dish->percentage_off > 0)
@@ -313,55 +309,212 @@
                             <h4
                                 class="d-block position-absolute d-xxl-none start-0 top-0 pt-2 d-xxl-none text-center end-0 mx-auto head-title top-head-title">
                                 {{ trans('user.cart.title') }} </h4>
+
+                            {{-- <h4 class="d-none position-absolute start-0 top-0 pt-2 text-center end-0 mx-auto head-title top-head-title top-head-dropdown"
+                                id="head-dropdown--btn">
+                                <img src="{{ asset('images/map-t-icon.png') }}" width="15" alt="" />
+                                <p id="zip_address_mobile" class="mb-0">
+                                @if($user && $user->cart && $user->cart->order_type == 1)
+                                    @if ($street_name)
+                                        {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
+                                    @else
+                                        {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                    @endif
+                                @else
+                                    {{ getRestaurantDetail()->rest_address }}
+                                @endif
+                                </p>
+                                <p id="zip_address_mobile_takw_away" class="mb-0 d-none">
+                                    {{ getRestaurantDetail()->rest_address }}
+                                </p>
+                                <span class="arrow-icon">
+
+                                    <svg width="9" height="5" viewBox="0 0 9 5" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.5 5L0.602887 0.499999L8.39711 0.5L4.5 5Z" fill="black" />
+                                    </svg>
+
+                                </span>
+                            </h4> --}}
+
+
+                            {{-- <div class="d-none address-select-modal-mobile">
+
+                                <div class="address-select-modal-inn cart-sidebar-mobile">
+                                    <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab" role="tablist">
+                                        <li class="nav-item delivery-tab" role="presentation">
+                                            <button
+                                                class="nav-link {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? 'active' : '' }} pills-delivery-tab delivery-tab"
+                                                id="pills-home-tab" data-bs-toggle="pill"
+                                                data-type="{{ \App\Enums\OrderType::Delivery }}"
+                                                data-bs-target="#pills-home" type="button" role="tab"
+                                                aria-controls="pills-home" aria-selected="true">
+                                                <img src="{{ asset('images/scoter1.svg') }}" alt=""
+                                                    class="svg" height="23" width="22" />
+                                                <div class="btn-text">
+                                                    {{ trans('user.cart.delivery') }}
+                                                    <span> {{ $deliveryTime }}</span>
+                                                </div>
+                                            </button>
+
+                                            <input type="hidden" value="{{ $house_no }}" id="del-house-no">
+                                            <input type="hidden" value="{{ $zipcode }}" id="del-zipcode">
+                                        </li>
+                                        <li class="nav-item TakeAway-tab" role="presentation">
+                                            <button
+                                                class="nav-link {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'active' : '' }} pills-delivery-tab TakeAway-tab"
+                                                id="pills-profile-tab" data-bs-toggle="pill"
+                                                data-type="{{ \App\Enums\OrderType::TakeAway }}"
+                                                data-bs-target="#pills-profile" type="button" role="tab"
+                                                aria-controls="pills-profile" aria-selected="false">
+                                                <img src="{{ asset('images/takeaway-icon.svg') }}" alt=""
+                                                    class="svg" height="23" width="22" />
+                                                <div class="btn-text">
+                                                    {{ trans('user.cart.take_away') }}
+                                                    <span> {{ $takeAwayTime }}</span>
+                                                </div>
+                                            </button>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-pane-mobile pb-1" id="pills-home" >
+                                        <div class="delivery-tab-mobile {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? '' : 'd-none' }}">
+                                            @if (count($addresses) > 0)
+                                                @foreach ($addresses as $key => $add)
+                                                    <?php
+                                                    $selectedAddress = '<span class="success-ico blank"></span>';
+                                                    $selected = false;
+                                                    $style = '';
+
+                                                    if (session('address') == $add->id) {
+                                                        $selected = true;
+                                                        $addressText = 'Selected';
+                                                        $selectedAddress = '<span class="success-ico"><img src="' . asset("images/success-icon.svg") . '" class="svg" width="14" height="11"></span>';
+                                                        $style = 'pointer-events:none;cursor:default';
+                                                    }
+                                                    ?>
+                                                    <div id="address-mobile-{{ $add->id }}"
+                                                        class="select-address-row select-address-btn d-flex justify-content-between align-items-center mb-4">
+                                                        <div class="address-radio d-flex align-items-center">
+                                                            <div class="radio-container">
+                                                                <!-- Use a proper unique ID and same name for the radio buttons in this group -->
+                                                                <input type="radio" name="selected_address" class="select-address-btn"
+                                                                       id="radio{{ $add->id }}"
+                                                                       value="{{ $add->id }}" {{ $selected ? 'checked' : '' }}  data-selected-address="{{session('address')}}">
+                                                                <label class="radio-custom"
+                                                                       for="radio{{ $add->id }}"></label>
+                                                                <span
+                                                                    class="radio-label">{{ $add->street_name }}, {{ $add->house_no }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="javascript:void(0)" class="delete-address" onclick="deleteAddress({{ $add->id }})">
+                                                            <img src="{{ asset('images/add-delete-ico.svg') }}" alt=""
+                                                                 class="svg" height="15" width="15"/>
+                                                        </a>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+
+                                            <div
+                                                class="select-address-row d-flex justify-content-between align-items-center mb-1 add-select-address-row flex-wrap">
+                                                <div class="address-radio d-flex align-items-center mb-3">
+                                                    <div class="add-radio-container">
+                                                        <span class="icon">
+                                                            <svg width="12" height="12" viewBox="0 0 12 12"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 1L6 11" stroke="black" stroke-width="1.5"
+                                                                    stroke-linecap="round" />
+                                                                <path d="M11 6L1 6" stroke="black" stroke-width="1.5"
+                                                                    stroke-linecap="round" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="radio-label">Add new address</span>
+                                                    </div>
+                                                </div>
+
+                                                <form id="address-form-mobile" class="address-add-form d-flex gap-2">
+                                                    @csrf
+                                                    <div class="form-group mb-0 zip">
+                                                        <input type="text" placeholder="Zip code" name="zipcode"
+                                                               id="zipcode" class="form-control" value="{{ $zipcode }}" required />
+                                                    </div>
+
+                                                    <div class="form-group house-number mb-0">
+                                                        <input type="text" placeholder="House Number" name="house_no"
+                                                               id="house_no" class="form-control" value="{{ $house_no }}" required />
+                                                    </div>
+
+                                                    <div class="form-group btn-cl mb-0">
+                                                        <button type="submit" class="btn btn-site-theme">
+                                                            <img src="{{ asset('images/btn-arrow.svg') }}" alt=""
+                                                                 class="svg" height="15" width="15"/>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                                <label id="zipcode-error" class="error" for="zipcode" style="display: none"></label>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="takeAway-tab-mobile {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? '' : 'd-none' }}" id="pills-profile">
+                                            <h3>pick up at</h3>
+                                            <p class="mb-0 takeAway-tab-mobile-address">{{ getRestaurantDetail()->rest_address }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div> --}}
+
                             <button type="button"
                                 class="btn-close d-block position-absolute d-xxl-none top-0 mt-1 me-md-2 mt-md-2 end-0 ms-2 bg-arrow-mobile"
                                 data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarCart">
                                 <i class="fa-solid fa-angle-left d-none"></i>
                             </button>
                             <div class="navbar navbar-expand-lg pt-3 pt-xxl-0 h-lg-100">
-                                <div class="cart-sidebar-content position-relative h-100">
+                                <div class="cart-sidebar-content position-relative h-100 cart-sidebar-mobile-ui">
                                     <div class="navbar-collapse cartbox-collapse h-100">
                                         <div class="cart-custom-tab cart-tab custom-tabs d-flex flex-column h-100">
                                             <!--                                            <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab"
-                                                                                    role="tablist">
-                                                                                    <li class="nav-item delivery-tab" role="presentation">
-                                                                                        <button
-                                                                                            class="nav-link {{ $zipcode || ($user != '' && $user->cart && $user->cart->order_type == 1) ? 'active' : '' }} pills-delivery-tab delivery-tab"
-                                                                                            id="pills-home-tab" data-bs-toggle="pill"
-                                                                                            data-type="{{ \App\Enums\OrderType::Delivery }}"
-                                                                                            data-bs-target="#pills-home" type="button" role="tab"
-                                                                                            aria-controls="pills-home" aria-selected="true">
-                                                                                            <img src="{{ asset('images/scoter1.svg') }}" alt=""
-                                                                                                class="svg" height="23" width="26" />
-                                                                                            <div class="btn-text">
-                                                                                                {{ trans('user.cart.delivery') }}
-                                                                                <span> {{ $deliveryTime }}</span>
-                                                                                            </div>
-                                                                                        </button>
+                                                                                                                                role="tablist">
+                                                                                                                                <li class="nav-item delivery-tab" role="presentation">
+                                                                                                                                    <button
+                                                                                                                                        class="nav-link {{ $zipcode || ($user != '' && $user->cart && $user->cart->order_type == 1) ? 'active' : '' }} pills-delivery-tab delivery-tab"
+                                                                                                                                        id="pills-home-tab" data-bs-toggle="pill"
+                                                                                                                                        data-type="{{ \App\Enums\OrderType::Delivery }}"
+                                                                                                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                                                                                                        aria-controls="pills-home" aria-selected="true">
+                                                                                                                                        <img src="{{ asset('images/scoter1.svg') }}" alt=""
+                                                                                                                                            class="svg" height="23" width="26" />
+                                                                                                                                        <div class="btn-text">
+                                                                                                                                            {{ trans('user.cart.delivery') }}
+                                                                                                                            <span> {{ $deliveryTime }}</span>
+                                                                                                                                        </div>
+                                                                                                                                    </button>
 
-                                                                                        <input type="hidden" value="{{ $house_no }}" id="del-house-no">
-                                                                                        <input type="hidden" value="{{ $zipcode }}" id="del-zipcode">
-                                                                                    </li>
-                                                                                    <li class="nav-item TakeAway-tab" role="presentation">
-                                                                                        <button
-                                                                                            class="nav-link {{ !$zipcode && ($user != '' && $user->cart && $user->cart->order_type == 2) ? 'active' : '' }} pills-delivery-tab TakeAway-tab"
-                                                                                            id="pills-profile-tab" data-bs-toggle="pill"
-                                                                                            data-type="{{ \App\Enums\OrderType::TakeAway }}"
-                                                                                            data-bs-target="#pills-profile" type="button" role="tab"
-                                                                                            aria-controls="pills-profile" aria-selected="false">
-                                                                                            <img src="{{ asset('images/takeaway-icon.svg') }}" alt=""
-                                                                                                class="svg" height="23" width="23" />
+                                                                                                                                    <input type="hidden" value="{{ $house_no }}" id="del-house-no">
+                                                                                                                                    <input type="hidden" value="{{ $zipcode }}" id="del-zipcode">
+                                                                                                                                </li>
+                                                                                                                                <li class="nav-item TakeAway-tab" role="presentation">
+                                                                                                                                    <button
+                                                                                                                                        class="nav-link {{ !$zipcode && ($user != '' && $user->cart && $user->cart->order_type == 2) ? 'active' : '' }} pills-delivery-tab TakeAway-tab"
+                                                                                                                                        id="pills-profile-tab" data-bs-toggle="pill"
+                                                                                                                                        data-type="{{ \App\Enums\OrderType::TakeAway }}"
+                                                                                                                                        data-bs-target="#pills-profile" type="button" role="tab"
+                                                                                                                                        aria-controls="pills-profile" aria-selected="false">
+                                                                                                                                        <img src="{{ asset('images/takeaway-icon.svg') }}" alt=""
+                                                                                                                                            class="svg" height="23" width="23" />
 
-                                                                                            <div class="btn-text">
-                                                                                                {{ trans('user.cart.take_away') }}
-                                                                                <span> {{ $takeAwayTime }}</span>
-                                                                                            </div>
-                                                                                        </button>
+                                                                                                                                        <div class="btn-text">
+                                                                                                                                            {{ trans('user.cart.take_away') }}
+                                                                                                                            <span> {{ $takeAwayTime }}</span>
+                                                                                                                                        </div>
+                                                                                                                                    </button>
 
-                                                                                    </li>
-                                                                                </ul>-->
-                                            <ul class="nav nav-fill nav-fillMobile cart-top-tab" id="pills-tab"
-                                                role="tablist">
+                                                                                                                                </li>
+                                                                                                                            </ul>-->
+                                            <ul class="nav nav-fill nav-fillMobile cart-top-tab cart-sidebar-mobile"
+                                                id="pills-tab" role="tablist">
                                                 <li class="nav-item delivery-tab" role="presentation">
                                                     <button
                                                         class="nav-link {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? 'active' : '' }} pills-delivery-tab delivery-tab"
@@ -398,7 +551,7 @@
                                             </ul>
 
                                             <div class="d-flex flex-column flex-fill tab-content" id="pills-tabContent">
-                                                <div class="pills-home tab-pane fade {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? 'show active' : '' }}"
+                                                <div class="pills-home tab-pane desktop-pill-home pills-profile-mobile-hide fade {{ $zipcode || ($user && $user->cart && $user->cart->order_type == 1) ? 'show active' : '' }}"
                                                     id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                                                     tabindex="0">
 
@@ -454,7 +607,7 @@
                                                     </div> --}}
                                                 </div>
 
-                                                <div class="tab-pane fade {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'show active' : '' }}"
+                                                <div class="tab-pane desktop-pill-takeAway pills-profile-mobile-hide fade {{ !$zipcode && (!$user || !$user->cart || $user->cart->order_type == 2) ? 'show active' : '' }}"
                                                     id="pills-profile" role="tabpanel"
                                                     aria-labelledby="pills-profile-tab" tabindex="0">
                                                     <div class="form-group addressMobile cart-address-row flex-wrap w-100">
@@ -650,30 +803,28 @@
 
                                                                                                 <div class="foodqty mt-0">
                                                                                                     <span class="minus"
-                                                                                                        onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})">
+                                                                                                          onclick="updateDishQty('-',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i
                                                                                                             class="fas fa-minus align-middle"></i>
                                                                                                     </span>
                                                                                                     <input type="number"
-                                                                                                        readonly
-                                                                                                        class="count cart-amt"
-                                                                                                        id="qty-{{ $dish->id }}"
-                                                                                                        name="qty-{{ $dish->id }}"
-                                                                                                        value="{{ $dish->qty }}"
-                                                                                                        data-ing="{{ $paidIngredient }}"
-                                                                                                        data-id="{{ $dish->id }}" />
+                                                                                                           readonly
+                                                                                                           class="count cart-amt"
+                                                                                                           id="qty-{{ $dish->id }}"
+                                                                                                           name="qty-{{ $dish->id }}"
+                                                                                                           value="{{ $dish->qty }}"
+                                                                                                           data-ing="{{ $paidIngredient }}"
+                                                                                                           data-id="{{ $dish->id }}"/>
                                                                                                     <input type="hidden"
-                                                                                                        id="dish-price-{{ $dish->id }}"
-                                                                                                        value="{{ $dish->dish->price + $totalAmount + $dishOptionCategoryTotalAmount }}" />
+                                                                                                           id="dish-price-{{ $dish->id }}"
+                                                                                                           value="{{ $dish->dish->price + $totalAmount + $dishOptionCategoryTotalAmount }}"/>
                                                                                                     <span class="plus"
-                                                                                                        onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
+                                                                                                          onclick="updateDishQty('+',{{ $dish->dish->qty }},{{ $dish->id }})">
                                                                                                         <i
                                                                                                             class="fas fa-plus align-middle"></i>
                                                                                                     </span>
                                                                                                 </div>
                                                                                             </div>
-
-
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -692,11 +843,11 @@
                                                         <div class="cart-amount-cal-data" id="cart-amount-cal-data"
                                                             {{ count($cart) > 0 ? '' : 'style=display:none' }}>
                                                             <!--                                                      <div class="form-group prev-input-group custom-icon-input-group">
-                                                                                                                                            <span class="input-group-icon">
-                                                                                                                                              <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg img-fluid" height="22" width="25">
-                                                                                                                                            </span>
-                                                                                                                                            <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}" placeholder="{{ trans('user.cart.instruction') }}" />
-                                                                                                                                          </div>-->
+                                                                                                                                                                                        <span class="input-group-icon">
+                                                                                                                                                                                          <img src="{{ asset('images/scoter-yellow.svg') }}" alt="" class="svg img-fluid" height="22" width="25">
+                                                                                                                                                                                        </span>
+                                                                                                                                                                                        <input type="text" class="form-control bg-gray custom-control-with-icon ps-5" id="delivery_instruction" maxlength="50" value="{{ $user->cart ? $user->cart->delivery_note : '' }}" placeholder="{{ trans('user.cart.instruction') }}" />
+                                                                                                                                                                                      </div>-->
                                                             <div class="mb-4 pb-3">
                                                                 <div
                                                                     class="form-group prev-input-group position-relative d-flex align-items-center mb-0">
@@ -734,7 +885,11 @@
 
                                                     <div class="empty-card-div w-100 mt-lg-5 pt-lg-5" id="empty-cart-div"
                                                         {{ count($cart) > 0 ? 'style=display:none' : '' }}>
-                                                        <span>
+                                                        <span class="mobile-empty-img d-none">
+                                                            {{--                                                        <img src="{{ asset('images/middle-empty-cart.png') }}" alt="" class="svg" height="128" width="132"> --}}
+                                                            <img src="{{ asset('images/middle-empty-cart-a.png') }}" />
+                                                        </span>
+                                                        <span class="desktop-empty-img">
                                                             {{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132"> --}}
                                                             <img src="{{ getRestaurantDetail()->restaurant_logo }}"
                                                                 class="web-logo opacity-50">
@@ -750,7 +905,11 @@
                                                         <p class="empty-card-text text-muted-1 mb-2">
                                                             {{ trans('user.cart.empty') }}
                                                         </p>
-                                                        <span>
+                                                        <span class="mobile-empty-img d-none">
+                                                            {{--                                                        <img src="{{ asset('images/middle-empty-cart.png') }}" alt="" class="svg" height="128" width="132"> --}}
+                                                            <img src="{{ asset('images/middle-empty-cart-a.png') }}" />
+                                                        </span>
+                                                        <span class="desktop-empty-img">
                                                             {{--                                                        <img src="{{ asset('images/empty-card.svg') }}" alt="" class="svg" height="128" width="132"> --}}
                                                             <img src="{{ getRestaurantDetail()->restaurant_logo }}"
                                                                 class="web-logo opacity-50">

@@ -163,5 +163,6 @@ $(document).on('click','#menu-sidebar', function () {
     checkScreenSize();
 });
 $(document).on('click','#menu-sidebar-close', function () {
+    setTimeout(function(){ $('body').removeClass('title-becomes') }, 200);
     checkScreenSize1();
 });

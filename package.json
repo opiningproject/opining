@@ -22,17 +22,8 @@
         "laravel-echo": "^1.16.1",
         "mysql": "^2.18.1",
         "pusher-js": "^8.4.0-rc2",
-        "require": "^0.4.4",
+        "require": "^2.4.20",
         "socket.io": "^4.7.5",
         "toastr": "^2.1.4"
-    },
-    "name": "opining",
-    "version": "1.0.0",
-    "description": "",
-    "main": "server.js",
-    "directories": {
-        "test": "tests"
-    },
-    "author": "",
-    "license": "ISC"
+    }
 }

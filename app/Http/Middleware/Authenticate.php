@@ -15,7 +15,7 @@ class Authenticate extends Middleware
         if($request->route()->action['prefix'] == '/user'){
             return $request->expectsJson() ? null : route('user.home');
         }else{
-            return $request->expectsJson() ? null : route('loginNotice');
+            return $request->expectsJson() ? null : route('login');
         }
     }
 }

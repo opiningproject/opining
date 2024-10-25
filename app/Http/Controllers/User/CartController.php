@@ -612,7 +612,7 @@ class CartController extends Controller
                 }
 
                 if ($now < $restaurantHours->start_time && $now > $restaurantHours->end_time) {
-                    return response::json(['status' => 412, 'message' => trans('user.message.restaurant_closed')]);
+                    return response::json(['status' => 412, 'restaurant_closed'=>'true', 'message' => trans('user.message.restaurant_closed')]);
                 }
 
                 if ($user->cart->order_type == OrderType::Delivery) {

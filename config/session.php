@@ -155,8 +155,7 @@ return [
     |
     */
 
-/*     'domain' => env('SESSION_DOMAIN'), */
-    'domain' => '.' . config('app.admin_domain'),'.' . config('app.main_domain'),
+    'domain' => env('SESSION_DOMAIN'),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +168,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE',true),
+    'secure' => env('SESSION_SECURE_COOKIE'),
 
     /*
     |--------------------------------------------------------------------------

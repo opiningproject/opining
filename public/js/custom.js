@@ -107,5 +107,49 @@ $(document).ready(function () {
     $('body').removeClass('sidebar-toggle-body');
   });
 
-  
+
+});
+
+$(document).ready(function () {
+  // Show dropdown on focus or click
+  $('#createCustomerInput').on('focus click', function () {
+    $('#createCustomerDropdown').show();
+  });
+
+  // Hide dropdown when clicking outside
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.form-group').length) {
+      $('#createCustomerDropdown').hide();
+    }
+  });
+
+  // Prevent dropdown closing when clicking inside it
+  $('#createCustomerDropdown').on('click', function (e) {
+    e.stopPropagation();
+  });
+});
+
+
+// Mobile cart dropdown script
+
+$(document).ready(function () {
+  $('#head-dropdown-btn').on('click', function () {
+    $('.address-select-modal-mobile, .top-head-dropdown, .cartSidebarCustom').toggleClass('active');
+    $('.menu-sidebar').toggleClass('address-active');
+    $('body').toggleClass('overflow-hidden');
+  });
+
+  // Prevent the click event from closing when clicking inside the modal
+  $('.address-select-modal-mobile, .cart-sidebar-mobile').on('click', function (e) {
+    e.stopPropagation();
+  });
+
+  // Remove 'active' class when clicking outside the modal or cart sidebar
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.address-select-modal-mobile, .cart-sidebar-mobile, #head-dropdown-btn').length) {
+      $('.address-select-modal-mobile, .top-head-dropdown, .cartSidebarCustom, .cart-sidebar-mobile').removeClass('active');
+      $('.menu-sidebar').removeClass('active');
+      $('body').removeClass('overflow-hidden');
+    }
+  });
 });

@@ -98,10 +98,12 @@ if($user->cart && $user->cart->order_type == 2) {
                                                                 <h3>{{ session('zipcode') ? trans('user.checkout.delivery_address') : trans('user.checkout.takeaway_address') }}
                                                                 </h3>
                                                                 <p class="mb-0">
-                                                                    @if ($street_name)
-                                                                        {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
-                                                                    @elseif (session('zipcode') && !$street_name)
-                                                                        {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                                                    @if(session('zipcode'))
+                                                                        @if(!$street_name)
+                                                                            {{ $house_no ? $house_no . ', ' . $zipcode : '' }}
+                                                                        @else
+                                                                            {{ ($street_name ? $street_name : '') . ' ' . ($house_no ? $house_no : '') }}
+                                                                        @endif
                                                                     @else
                                                                         {{ getRestaurantDetail()->rest_address }}
                                                                     @endif
@@ -1069,7 +1071,8 @@ if($user->cart && $user->cart->order_type == 2) {
                 var streetName = $('#street_name').val()
                 var houseNo = $('#house_no').val()
                 var city = $('#city').val()
-                var address = houseNo + ' ' + streetName + ' ' + city
+                var zipcode = $('#zipcode').val()
+                var address = zipcode
 
                 try {
                     var geocoder = new google.maps.Geocoder();
@@ -1088,7 +1091,8 @@ if($user->cart && $user->cart->order_type == 2) {
                     //alert(err)
                 }
             }
-
+            // console.log('longitude', longitude, 'latitude', latitude)
+            // return false
             checkoutData.append('longitude', longitude)
             checkoutData.append('latitude', latitude)
 

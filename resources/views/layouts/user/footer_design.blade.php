@@ -1,4 +1,28 @@
-<footer id="footer-style">
+<div class="footerBot">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <ul class="social">
+                    <li><a href="#" target="_blank">
+                            <img src="{{ asset('images/instagram-f.png') }}" alt="" />
+                        </a></li>
+                    <li><a href="#" target="_blank">
+                            <img src="{{ asset('images/tiktok-f.png') }}" alt="" />
+                        </a></li>
+                    <li><a href="#" target="_blank">
+                            <img src="{{ asset('images/facebook-f.png') }}" alt="" />
+                        </a></li>
+                </ul>
+
+                <p><a href="#">Privacy & Terms</a></p>
+                <p class="mb-0">&copy; Copyright 2024 - Gomeal Pizzeria -  <img src="{{ asset('images/thunder-icon.png') }}" height="10" alt="" /> by <a href="#" class="underline">Opining</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <footer id="footer-style" class="d-none">
     <div class="footer-link-item-grid">
     </div>
     <div class="container">
@@ -61,39 +85,32 @@
                             <li class="mb-0 mb-md-2"><span class="d-block m-title">{{ trans('user.footer.opening_hours') }}</span></li>
                             <?php
 
-                            $days = App\Models\OperatingHour::all();
+$days = App\Models\OperatingHour::all();
 
-                            if(!empty($days))
-                            {
-                                // Initialize an array to store grouped days
-                                $groupedDays = array();
+if (!empty($days)) {
+    // Initialize an array to store grouped days
+    $groupedDays = array();
 
-                                // Group days with the same opening and closing times
-                                foreach ($days as $day => $times)
-                                {
-                                    $formattedTimes =  date("H:i", strtotime($times['start_time'])) .' - '. date("H:i", strtotime($times['end_time']));
+    // Group days with the same opening and closing times
+    foreach ($days as $day => $times) {
+        $formattedTimes = date("H:i", strtotime($times['start_time'])) . ' - ' . date("H:i", strtotime($times['end_time']));
 
-                                    if (!isset($groupedDays[$formattedTimes]))
-                                    {
-                                        $groupedDays[$formattedTimes] = array();
-                                    }
+        if (!isset($groupedDays[$formattedTimes])) {
+            $groupedDays[$formattedTimes] = array();
+        }
 
-                                    $groupedDays[$formattedTimes][] = $times->day;
-                                }
+        $groupedDays[$formattedTimes][] = $times->day;
+    }
 
-                                // Display the result
-                                foreach ($groupedDays as $formattedTimes => $days)
-                                {
-                                    if(count($days) > 2)
-                                    {
-                                         echo '<li  class="mb-2">'.$days[0].' - '.$days[count($days)-1]." : $formattedTimes</li>";
-                                    }
-                                    else
-                                    {
-                                         echo '<li  class="mb-2">'.implode(' - ', $days) . " : $formattedTimes</li>";
-                                    }
-                                }
-                            }
+    // Display the result
+    foreach ($groupedDays as $formattedTimes => $days) {
+        if (count($days) > 2) {
+            echo '<li  class="mb-2">' . $days[0] . ' - ' . $days[count($days) - 1] . " : $formattedTimes</li>";
+        } else {
+            echo '<li  class="mb-2">' . implode(' - ', $days) . " : $formattedTimes</li>";
+        }
+    }
+}
 
                             ?>
                         </ul>
@@ -107,4 +124,8 @@
         <p class="mb-1 footer-copyright-text">{{ trans('user.footer.rights_reserved',['app_name' => env('APP_NAME')]) }}</p>
         <p class="d-block d-md-none footer-bottom-link mb-0"><a href="{{ route('terms') }}">{{ trans('user.footer.terms') }}</a>  -  <a href="{{ route('privacy-policy') }}">{{ trans('user.footer.privacy') }}</a></p>
     </div>
+<<<<<<< HEAD
 </footer>
+=======
+</footer> -->
+>>>>>>> gitlab/main

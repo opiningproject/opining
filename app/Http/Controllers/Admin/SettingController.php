@@ -49,7 +49,8 @@ class SettingController extends Controller
         $terms_nl = CMS::where('type', 'terms')->where('lang', 'nl')->pluck('content')->first();
 
         $user = RestaurantDetail::where('user_id', Auth::user()->id)->firstOrFail();
-        $operating_days = OperatingHour::all();
+        $operating_days = OperatingHour::where('order_type', OrderType::Delivery)->get();
+        $operating_days_takeAway = OperatingHour::where('order_type', OrderType::TakeAway)->get();
 
 
         /*echo "<pre>";
@@ -58,6 +59,7 @@ class SettingController extends Controller
 
         return view('admin.settings.index', [
             'operating_days' => $operating_days,
+            'operating_days_takeAway' => $operating_days_takeAway,
             'user' => $user,
             'zipcodes' => $zipcodes,
             'privacy_policy_en' => $privacy_policy_en,
@@ -346,4 +348,11 @@ class SettingController extends Controller
         return response()->json(['status' => 'success', 'message' => trans('rest.settings.checkout_setting.payment_setting_updated')]);
     }
 
+    public function updateNotificationSound(Request $request)
+    {
+        $restaurant = RestaurantDetail::findOrFail(1);
+        $restaurant->order_notif_sound = $request->order_notif_sound ? '1' : '0';
+        $restaurant->save();
+        return response()->json(['status' => 'success']);
+    }
 }

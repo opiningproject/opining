@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DeliverersController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\DishOptionCategoryController;
@@ -19,8 +20,10 @@ use App\Http\Controllers\Admin\OldOrdersController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\MainController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\IntegrationsController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,6 +93,7 @@ Route::middleware(['localization'])->group(function () {
 
     Route::group(['prefix' => '/user'], function () {
         Route::get('/dashboard/{cat_id?}', [App\Http\Controllers\User\HomeController::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/dashboard-new/{cat_id?}', [App\Http\Controllers\User\HomeController::class, 'dashboardNew'])->name('user.dashboardNew');
         Route::post('/login', [App\Http\Controllers\User\AuthController::class, 'login']);
         Route::post('/signup', [App\Http\Controllers\User\AuthController::class, 'signup']);
         Route::post('/forgot-password', [App\Http\Controllers\User\AuthController::class, 'forgotPassword'])->name('forgot-password');
@@ -112,6 +116,8 @@ Route::middleware(['localization'])->group(function () {
 
 });
 
+Auth::routes(['register' => false]);
+
 Route::get('change-lang/{lang}', function ($lang) {
     session(['Accept-Language' => $lang]);
     return redirect()->back();
@@ -122,7 +128,7 @@ Route::get('change-theme/{theme}', function ($currency) {
     return redirect()->back();
 });
 
-Route::middleware(['auth', 'guest', 'localization','SwitchDatabase'])->group(function () {
+Route::middleware(['auth', 'guest', 'localization'])->group(function () {
     // dashboard route
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('dashboard/statistics', [HomeController::class, 'getDashboardStatistics'])->name('dashboard.statistics');
@@ -193,12 +199,10 @@ Route::middleware(['auth', 'guest', 'localization','SwitchDatabase'])->group(fun
         Route::post('/update-checkout-setting', [SettingController::class, 'updatePaymentSetting'])->name('settings.update-checkout-setting');
         Route::post('/change-refund-status', [SettingController::class, 'changeRefundStatus'])->name('settings.change-refund-status');
     });
+    Route::post('/update-notification-sound', [SettingController::class, 'updateNotificationSound'])->name('updateNotificationSound');
 
     // Domain Setting route
-    /* Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index'); */
- 
-    Route::resource('/domain-setting', DomainSettingController::class);
-
+    Route::get('/domain-setting', [DomainSettingController::class, 'index'])->name('domainSetting.index');
     // Domain Setting route
 
     Route::resource('/banners', BannerController::class);
@@ -256,13 +260,17 @@ Route::middleware(['auth', 'guest', 'localization','SwitchDatabase'])->group(fun
     Route::get('/orders/{date_filter?}', [NewOrdersController::class, 'index'])->name('orders');
     Route::post('/orders/getRealTimeOrder', [NewOrdersController::class, 'getRealTimeOrder'])->name('getRealTimeOrder');
     Route::get('/orders/order-detail/{order_id}', [NewOrdersController::class, 'orderDetail'])->name('order-detail');
-    Route::get('/orders/change-status/{id}', [NewOrdersController::class, 'changeStatusNew']);
+    Route::get('/orders/change-status/{id}/{order_status}', [NewOrdersController::class, 'changeStatusNew']);
     Route::get('/add-deliverer/{order_id}/{deliverer_id}', [NewOrdersController::class, 'addDeliverer']);
     Route::post('/save-order-setting', [NewOrdersController::class, 'updateOrderSetting'])->name('updateOrderSetting');
+    Route::post('/update-display-order-setting', [NewOrdersController::class, 'updateDisplayOrderSetting'])->name('updateOrderSetting');
     Route::post('/update-delivery-time', [NewOrdersController::class, 'updateDeliveryTime'])->name('updateDeliveryTime');
+    Route::post('/update-wished-time', [NewOrdersController::class, 'updateWishedTime'])->name('updateWishedTime');
     Route::get('/get-order-setting', [NewOrdersController::class, 'getOrderSetting'])->name('getOrderSetting');
     Route::get('/orders/print-label/{order_id}', [NewOrdersController::class, 'orderPrintLabel'])->name('orders.printLabel');
     Route::get('/cancel-order/{order_id}/{status}', [NewOrdersController::class, 'cancelOrder'])->name('orders.cancelOrder');
+    Route::get('/save-reset', [NewOrdersController::class, 'saveReset'])->name('saveReset');
+    Route::get('/orders-map', [NewOrdersController::class, 'ordersMap'])->name('ordersMap');
 
     Route::post('/set-per-page', function (Request $request) {
         $request->session()->put('per_page', $request->input('per_page'));
@@ -270,7 +278,19 @@ Route::middleware(['auth', 'guest', 'localization','SwitchDatabase'])->group(fun
     });
 
     //    manual order routes
-    Route::get('/create-order', [ManualOrdersController::class, 'index']);
+    Route::get('/create-order', [ManualOrdersController::class, 'index'])->name('create-order');
+    Route::get('/get-dish/{cat_id}', [ManualOrdersController::class, 'getDishes']);
+    Route::post('/custom-add-cart/{id}', [ManualOrdersController::class, 'addCustomizedDishCustom']);
+    Route::post('/custom-update-dish-qty', [ManualOrdersController::class, 'updateDishQty']);
+    Route::get('/get-dish-details/{id}/{doesExist}', [DishController::class, 'getDishDetails']);
+    Route::post('/create-customer', [ManualOrdersController::class, 'createCustomer']);
+
+
+    //    Integrations order routes
+    Route::get('/integrations', [IntegrationsController::class, 'index'])->name('integrations');
+
+    // customer order routes
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
 
     //  deliverers routes
     Route::resource('deliverers', DeliverersController::class);

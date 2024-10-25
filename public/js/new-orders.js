@@ -19,15 +19,16 @@ $(document).on('click', '#cancel-order-btn', function () {
     var status = $('.cancel_order').val();
 
     $.ajax({
-        url: baseURL+'/cancel-order/'+ id + '/' + status,
+        url: baseURL + '/cancel-order/' + id + '/' + status,
         type: 'GET',
         success: function (response) {
-          /*  $('#deleteZipcodeModal').modal('toggle');
-            $('.zipcode-row-' + id).remove();
-            toastr.success(response.message)*/
+            /*  $('#deleteZipcodeModal').modal('toggle');
+              $('.zipcode-row-' + id).remove();
+              toastr.success(response.message)*/
             if (response.status == 1) {
                 $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
                 $('.order-detail-popup').modal('hide')
+                $('#order-' + response.orderId).remove();
                 $('.order-status-' + response.orderId).addClass(response.color);
                 $('.order-status-' + response.orderId).text(response.text);
                 var currentOrderCount = $('.order-count').text();
@@ -44,19 +45,37 @@ $(document).on('click', '#cancel-order-btn', function () {
 
 
 // screen wise show pagination code
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let screenWidth = window.innerWidth;
     let screenHeight = window.innerHeight; // Get screen height
-    let perPage = 24; // Default value
+    let perPage = 24;
 
     // Adjust perPage based on both screen width and height
-    if (screenHeight < 768) {
-        perPage = 21; // Large screen
-    } else if (screenHeight < 900) {
-        perPage = 21; // Medium screen
-    } else {
-        perPage = 24; // Small screen
+    if (screenHeight < 769) {
+        // perPage = 18;
     }
+    else if (screenHeight > 1040) {
+        // perPage = 36;
+    }
+    else if (screenHeight > 1000) {
+        // perPage = 27;
+    }
+    else if (screenHeight > 900) {
+        // perPage = 24;
+    }
+    // else if (screenHeight > 880) {
+    //     perPage = 30;
+    // }
+    else if (screenHeight < 769) {
+        // perPage = 24;
+    }
+    else if (screenHeight < 768) {
+        // perPage = 21;
+    }
+    else {
+        // perPage = 24;
+    }
+
     // Get the currently stored per_page value from sessionStorage
     const storedPerPage = sessionStorage.getItem('per_page_value');
     // Check if per_page is already set in sessionStorage to avoid repeated reloads
@@ -98,25 +117,31 @@ $(document).ready(function () {
 
 //show order setting popup
 $(document).on('click', '.order-setting', function () {
-    $('.order-setting-popup').modal('show')
+    $('.order-setting-popup').modal('show');
+    $('#radio-button-error').remove();
+    $('.error').remove();
 })
 
-
 $(function () {
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var perPage = urlParams.get('per_page');
+
     var filters = [];
     var search = '';
     var searchOption = '';
+    var perPageNew = perPage ? perPage : 24;
     // Keyup search handler
     $(document).on('change', '#order-tabs-dropdown', function () {
         search = $('#search-order-new').val();
         searchOption = $('#order-tabs-dropdown').val();
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters, perPageNew)
     });
 
     $(document).on('keyup', '#search-order-new', function () {
         search = $(this).val();
         searchOption = $('#order-tabs-dropdown').val();
-        searchFilterAjax(search, searchOption, filters)
+        searchFilterAjax(search, searchOption, filters, perPageNew)
     });
 
     // Bind pagination link click event only once
@@ -137,6 +162,7 @@ $(function () {
                     search: search,
                     searchOption: searchOption,
                     filters: filters,
+                    per_page:perPageNew,
                 },
                 datatype: 'json',
                 success: function (response) {
@@ -157,36 +183,68 @@ $(function () {
         $('.count-filter').addClass('d-none');
     }
 
-    $('.order-filter input[type="checkbox"]').on('change', function () {
-        // Clear the filters array before adding new ones
+    $('.order-type-label').on('click', function() {
+        // Find the corresponding checkbox
+        var checkbox = $(this).prev('.order-type-input'); // Assumes label is immediately after checkbox
+        // Toggle the checked state of the checkbox
+        checkbox.prop('checked', !checkbox.prop('checked'));
+
+        // Add or remove the 'checked' class based on the checkbox state
+        if (checkbox.prop('checked')) {
+            checkbox.addClass('checked'); // Add 'checked' class if checked
+        } else {
+            checkbox.removeClass('checked'); // Remove 'checked' class if unchecked
+        }
+        // Log the currently checked checkboxes
         filters = [];
-
-        if ($('.order-filter input[type="checkbox"]:checked').length > 0) {
-            $('.order-filter input[type="checkbox"]:checked').each(function () {
-                filters.push($(this).attr('id')); // Get the ID of the checkbox (e.g., 'online', 'manual')
-            });
-
-            var uniqueValues = new Set(filters);
-            var uniqueCount = uniqueValues.size;
-
+        $('.order-type-input:checked').each(function() {
+            filters.push($(this).attr('id'));
+        });
+        if (filters.length > 0) {
             $('.count-filter').removeClass('d-none');
-            $('.count-filter').text(uniqueCount);
+            $('.count-filter').text(filters.length);
         } else {
             $('.count-filter').addClass('d-none');
-            filters = [];
         }
-        // Send filters via AJAX
-        searchFilterAjax(search, searchOption, filters);
+        searchFilterAjax(search, searchOption, filters, perPageNew);
+    });
+    $('.dropdown-menu').on('click', function(e) {
+        e.stopPropagation();
     });
 
 
-    function searchFilterAjax(search, searchOption, filters) {
+
+    $(document).on('click', '.saveReset', function (e) {
+        $.ajax({
+            url: baseURL + '/save-reset',
+            type: 'GET',
+            success: function (response) {
+                console.log("response", response)
+                if (response.status == "success"){
+                    $('.order-setting-popup').modal('hide')
+                    $('.timezone-setting').prop('selectedIndex', 0);
+                    $('input[name="date_type"]').removeAttr('checked');
+                    // $('.date_type').prop('checked', false);
+                    $('#order-setting-form').trigger("reset");
+                    searchFilterAjax(search, searchOption, filters, perPageNew);
+                }
+
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                alert(errorMessage);
+            }
+        })
+    })
+
+    function searchFilterAjax(search, searchOption, filters, perPageNew) {
         $.ajax({
             url: baseURL + '/orders', // Ensure this matches your route
             type: 'GET',
             data: {
                 search,
                 searchOption,
+                per_page:perPageNew,
                 filters: filters.length > 0 ? filters : [],
             },
             success: function (response) {
@@ -197,7 +255,156 @@ $(function () {
             }
         });
     }
+    //order setting js code start
+// order-setting-form
+    function parseDate(value) {
+        var parts = value.split('-');
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    }
+    $.validator.addMethod('validDate', function (value, element) {
+        return this.optional(element) || /^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-[0-9]{4}$/.test(value);
+    }, 'Please provide a date in the dd-mm-yyyy format');
+
+    // Method to ensure start date is before end date
+    $.validator.addMethod('dateBefore', function (value, element, params) {
+        var endDate = $(params).val();
+        if (!endDate) return true; // Skip comparison if endDate is empty
+        var startDate = parseDate(value);
+        var endDateObj = parseDate(endDate);
+
+        return this.optional(element) || startDate <= endDateObj;
+    }, 'Must be before the end date.');
+
+    // Method to ensure end date is after start date
+    $.validator.addMethod('dateAfter', function (value, element, params) {
+        var startDate = $(params).val();
+        if (!startDate) return true; // Skip comparison if startDate is empty
+        var endDate = parseDate(value);
+        var startDateObj = parseDate(startDate);
+
+        return this.optional(element) || endDate >= startDateObj;
+    }, 'Must be after the start date.');
+
+    $(".order-setting-form").validate({
+        rules: {
+            timezone_setting: {
+                required: true
+            },
+            start_date: {
+                required: true,
+                validDate: true,
+                dateBefore: '#end-date'
+            },
+            end_date: {
+                required: true,
+                validDate: true,
+                dateAfter: '#start-date'
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+            $(element).addClass('border-red-500'); // Tailwind CSS class for red border
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+            $(element).removeClass('border-red-500');
+            $(element).addClass('border-green-500'); // Tailwind CSS class for green border
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "start_date") {
+                error.insertAfter(".start-date-input");
+            } else if (element.attr("name") == "end_date") {
+                error.insertAfter(".end-date-input");
+            } else {
+                error.insertAfter(element); // Default placement for other fields
+            }
+            return false;
+        },
+        submitHandler: function (form) { // <- pass 'form' argument in
+            $(".submit").attr("disabled", true);
+            saveOrderSetting(); // <- use 'form' argument here.
+        }
+    });
+
+// Add deliverers
+    function saveOrderSetting() {
+        var delivererData = new FormData(document.getElementById('order-setting-form'));
+        $('#radio-button-error').remove()
+        if ($('#order-setting-date').prop('checked') == true) {
+            if (!$('input[name="date_type"]:checked').length) {
+                    var errorMessage = '<label style="color: red" id="radio-button-error" className="error radio-button-error" htmlFor="timezone_setting">Please select at least one date option before saving.</label>';
+                    $('.date-range-section').append(errorMessage)
+                return false;
+                }
+            saveOrderSettingAjaxCall(delivererData)
+        } else {
+            saveOrderSettingAjaxCall(delivererData)
+        }
+    }
+    function saveOrderSettingAjaxCall(delivererData) {
+        $.ajax({
+            url: baseURL + '/save-order-setting',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: delivererData,
+            success: function (response) {
+                if (response.status == 'success') {
+                    $('.order-setting-popup').modal('hide');
+                    searchFilterAjax(search, searchOption, filters, perPageNew);
+                }
+            },
+            error: function (response) {
+                var errorMessage = JSON.parse(response.responseText).message
+                toastr.error(errorMessage)
+            }
+        })
+    }
+    console.log("perPageNew", perPageNew)
+    $(document).on('change', '#per_page_dropdown', function () {
+        var url = this.value;
+        var urlObject = new URL(url); // Create a URL object from the string
+
+        // Get the 'per_page' parameter value using URLSearchParams
+        var urlPerPage = urlObject.searchParams.get('per_page');
+        perPageNew = urlPerPage
+        $('.numberOfPerPage').val(urlPerPage)
+        $('#numberOfPerPageSearch').val(urlPerPage)
+        // return false;
+        searchFilterAjax(search, searchOption, filters, perPageNew)
+        // window.open(url, '_parent');
+        // searchFilterAjax(search, searchOption, filters);
+    })
+
+    // display-order-settings ajax call
+    $('.setting-checkbox').on('change', function() {
+        // Get the ID of the clicked checkbox
+        var settingKey = $(this).data('setting');
+        var isChecked = $(this).is(':checked') ? 1 : 0;
+
+        // AJAX call to update the setting
+        $.ajax({
+            url:  baseURL + '/update-display-order-setting',
+            type: 'POST',
+            data: {
+                time_orders_top: $('#flexSwitchCheckDefault1').is(':checked') ? 1 : 0,
+                display_red_color: $('#flexSwitchCheckDefault2').is(':checked') ? 1 : 0
+            },
+            success: function(response) {
+                if (response.status == 'success') {
+                    searchFilterAjax(search, searchOption, filters, perPageNew);
+                } else {
+                    console.log('Failed to update setting');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error occurred:', error);
+            }
+        });
+    });
+
 });
+
 
 function orderDetailNew(id) {
     $.ajax({
@@ -218,40 +425,42 @@ function orderDetailNew(id) {
     })
 }
 
-function changeOrderStatusNew(order_id,order_status) {
-    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", {transports: ['websocket', 'polling', 'flashsocket']});
-
-    var orderId = order_id;
-    $.ajax({
-        url: baseURL+'/orders/change-status/'+ orderId,
-        type: 'GET',
-        success: function (response) {
-            console.log("response", response)
-            if (response.status == 1) {
-                $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
-                $('.order-detail-popup').modal('hide')
-                $('.order-status-' + response.orderId).addClass(response.color);
-                $('.order-status-' + response.orderId).text(response.text);
-            }
-            if (response.orderStatus == "6") {
-                var currentOrderCount = $('.order-count').text();
-                $('.order-count').html(currentOrderCount - 1);
-                $('.count-order').html(currentOrderCount - 1);
-            }
-            socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
-        },
-        error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            alert(errorMessage);
-        }
-    })
-}
+// function changeOrderStatusNew(order_id, order_status) {
+//     var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", { transports: ['websocket', 'polling', 'flashsocket'] });
+//
+//     var orderId = order_id;
+//     $.ajax({
+//         url: baseURL + '/orders/change-status/' + orderId + '/' + order_status,
+//         type: 'GET',
+//         success: function (response) {
+//             console.log("response", response)
+//             if (response.status == 1) {
+//                 $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
+//                 // $('.order-detail-popup').modal('hide')
+//                 $('.order-status-' + response.orderId).addClass(response.color);
+//                 $('.order-status-' + response.orderId).text(response.text);
+//             }
+//             if (response.orderStatus == "6") {
+//                 $('#order-' + response.orderId).remove();
+//                 var currentOrderCount = $('.order-count').text();
+//                 $('.order-count').html(currentOrderCount - 1);
+//                 $('.count-order').html(currentOrderCount - 1);
+//                 window.location.reload()
+//             }
+//             socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
+//         },
+//         error: function (response) {
+//             var errorMessage = JSON.parse(response.responseText).message
+//             alert(errorMessage);
+//         }
+//     })
+// }
 
 function assignDeliverer(order_id, deliverer_id) {
     var orderId = order_id;
     var delivererId = deliverer_id;
     $.ajax({
-        url: baseURL+'/add-deliverer/'+ orderId + '/' + deliverer_id,
+        url: baseURL + '/add-deliverer/' + orderId + '/' + deliverer_id,
         type: 'GET',
         success: function (response) {
             console.log("response", response)
@@ -269,41 +478,29 @@ function assignDeliverer(order_id, deliverer_id) {
 function disabledOldOrderStatus() {
     const radios = document.querySelectorAll('.order-status-radio');
 
-    // Define the allowed transitions between statuses
-    const orderStatusMap = {
-        'accepted-order': ['inKitchen-order'], // Only In Kitchen can be enabled from New Order
-        'inKitchen-order': ['outForDelivery-order'], // Only Out For Delivery can be enabled from In Kitchen
-        'outForDelivery-order': ['delivered-order'], // Only Delivered can be enabled from Out For Delivery
-        'delivered-order': [] // No further status transitions from Delivered, so everything else is disabled
-    };
-
     // Function to update the status of radio buttons
     function updateRadioStatus() {
-        // Find how many radios are checked
-        const checkedRadios = document.querySelectorAll('.order-status-radio:checked');
+        // Find the checked radio button
+        const checkedRadio = document.querySelector('.order-status-radio:checked');
 
-        // If no radio button is checked, disable all radio buttons
-        if (checkedRadios.length === 0) {
+        if (checkedRadio) {
+            let disablePrevious = true; // Flag to disable previous radios
             radios.forEach(radio => {
-                radio.disabled = true;
+                if (radio === checkedRadio) {
+                    disablePrevious = false; // Stop disabling after the checked radio
+                }
+                if (disablePrevious) {
+                    radio.disabled = true; // Disable previous radios
+                } else {
+                    radio.disabled = false; // Keep the current and future radios enabled
+                }
             });
-            return; // Exit early if no radio buttons are checked
+        } else {
+            // If no radio is checked, enable all radios
+            radios.forEach(radio => {
+                radio.disabled = false;
+            });
         }
-
-        // If a radio is checked, enable/disable the relevant radios
-        radios.forEach(radio => {
-            if (radio.checked) {
-                const enabledRadios = orderStatusMap[radio.id]; // Get allowed statuses for the checked radio
-                radios.forEach(r => {
-                    // Enable only the radios in the allowed transition map, disable others
-                    if (enabledRadios.includes(r.id)) {
-                        r.disabled = false; // Enable the valid next step
-                    } else if (r.id !== radio.id) {
-                        r.disabled = true; // Disable all other radios except the current one
-                    }
-                });
-            }
-        });
     }
 
     // Initialize radio buttons on page load
@@ -311,140 +508,55 @@ function disabledOldOrderStatus() {
 
     // Add change event listener to radio buttons
     radios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            // Enable all radios first, then re-apply the disabling logic
-            radios.forEach(r => r.disabled = false); // Enable all radios first
-            updateRadioStatus(); // Apply disabling logic based on the new selection
+        radio.addEventListener('change', function () {
+            updateRadioStatus(); // Apply the disabling logic based on the new selection
         });
     });
 }
 
-// Example usage
+// Call the function to initialize it
 disabledOldOrderStatus();
 
+// Define the date range picker on the start date input
+// var start = moment();
+// var end = moment();
 
-// checked all checkboxs on click all checkbox.
-$('#all').on('change', function() {
-    // Check or uncheck all checkboxes based on 'all' checkbox state
-    $('.order-filter .checkbox').not('#all').prop('checked', $(this).is(':checked'));
-});
-
-// If any individual checkbox is unchecked, also uncheck 'all'
-$('.order-filter .checkbox').not('#all').on('change', function() {
-    if (!$(this).is(':checked')) {
-        $('#all').prop('checked', false);
-    }
-});
-
-// Check if all checkboxes are selected, and if so, check 'all'
-$('.order-filter .checkbox').not('#all').on('change', function() {
-    if ($('.order-filter .checkbox').not('#all').length === $('.order-filter .checkbox:checked').not('#all').length) {
-        $('#all').prop('checked', true);
-    }
-});
-
-
-
-//order setting js code start
-// order-setting-form
-$(".order-setting-form").validate({
-    rules: {
-        timezone_setting:{
-            required: true
-        },
-        expiry_date:{
-            required: true
-        }
+$('#start-date, #end-date').daterangepicker({
+    singleDatePicker: true, // Allow selecting a date range
+    showDropdowns: true,      // Show year and month dropdowns
+    locale: {
+        format: 'DD-MM-YYYY'
     },
-    highlight: function(element) {
-        $(element).closest('.form-group').addClass('has-error');
-        $(element).addClass('border-red-500'); // Tailwind CSS class for red border
-    },
-    unhighlight: function(element) {
-        $(element).closest('.form-group').removeClass('has-error');
-        $(element).removeClass('border-red-500');
-        $(element).addClass('border-green-500'); // Tailwind CSS class for green border
-    },
-    errorPlacement: function(error, element) {
-      error.insertAfter(element); // Default placement for other fields
-        return false;
-    },
-    submitHandler: function(form) { // <- pass 'form' argument in
-        $(".submit").attr("disabled", true);
-        saveOrderSetting(); // <- use 'form' argument here.
-    }
+    maxDate: moment(), // Set the maximum date to today
+    autoclose: true,
 });
 
-// Add deliverers
-function saveOrderSetting() {
-    var delivererData = new FormData(document.getElementById('order-setting-form'));
-    $.ajax({
-        url: baseURL + '/save-order-setting',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: delivererData,
-        success: function (response) {
-            if (response.status == 'success') {
-                $('.order-setting-popup').modal('hide');
-            }
-        },
-        error: function (response) {
-            var errorMessage = JSON.parse(response.responseText).message
-            toastr.error(errorMessage)
-            // alert(errorMessage);
-        }
-    })
-}
-// Show date picker code
-var start = moment().subtract(10, 'days');
-var end = moment();
-
-var dateRange = ''
-var existingDate = $('.order-setting-custom-time').val() ?? null;
-    $('#order-setting-custom-time').daterangepicker({
-        startDate: start,
-        endDate: end,
-        maxDate: moment(),
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    });
-if (existingDate) {
-    var dates = existingDate.split(' - ');
-    var start_date = dates[0];
-    var end_date = dates[1];
-    $('#order-setting-custom-time').data('daterangepicker').setStartDate(moment(start_date, 'DD-MM-YYYY'));
-    $('#order-setting-custom-time').data('daterangepicker').setEndDate(moment(end_date, 'DD-MM-YYYY'));
-    $('#order-setting-custom-time').val(start_date + ' - ' + end_date);
-} else {
-    $('#order-setting-custom-time').val('')
-}
-$('#order-setting-custom-time').attr('placeholder', 'Select Date Range')
-
-$('#order-setting-custom-time').on('apply.daterangepicker', function (ev, picker) {
-
-    dateRange = $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
-
-    var start_date = picker.startDate.format('DD-MM-YYYY');
-    var end_date = picker.endDate.format('DD-MM-YYYY');
-
-    value = "start_date=" + start_date + "&end_date=" + end_date;
-
-    // window.location.href = `${baseURL}/orders?${value}`;
+// Handle apply event to update both start and end date inputs
+$('#start-date').on('apply.daterangepicker', function (ev, picker) {
+    // Update start date field
+    $('#start-date').val(picker.startDate.format('DD-MM-YYYY'));
+});
+$('#end-date').on('apply.daterangepicker', function (ev, picker) {
+    // Update end date field
+    $('#end-date').val(picker.endDate.format('DD-MM-YYYY'));
 });
 
-$('#order-setting-custom-time').on('cancel.daterangepicker', function (ev, picker) {
-    $(this).val('');
+// Optional: Clear the date inputs on cancel
+$('#start-date').on('cancel.daterangepicker', function (ev, picker) {
+    $('#start-date').val('');
+    $('#end-date').val('');
 });
+$('#end-date').on('cancel.daterangepicker', function (ev, picker) {
+    $('#start-date').val('');
+    $('#end-date').val('');
+});
+
+// Set placeholders for both inputs
+$('#start-date').attr('placeholder', 'Select Date Range');
+$('#end-date').attr('placeholder', 'Select Date Range');
 
 // show hide specific timezone specific day
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const timezoneRadio = document.getElementById('order-setting-timezone');
     const dateRadio = document.getElementById('order-setting-date');
     const timezoneSetting = document.getElementById('timezone-setting');
@@ -460,13 +572,15 @@ document.addEventListener('DOMContentLoaded', function() {
             $('.specific-day').removeClass('active')
             $('#order-setting-custom-time').val('');
             $('.order_setting_type').val("1");
+            $('#radio-button-error').remove();
         } else if (dateRadio.checked) {
             timezoneSetting.classList.add('d-none');
             dateRange.classList.remove('d-none');
             $('.specific-timezone').removeClass('active')
             $('.specific-day').addClass('active')
-            $('.timezone-setting').prop('selectedIndex',0);
+            $('.timezone-setting').prop('selectedIndex', 0);
             $('.order_setting_type').val("2");
+            $('#radio-button-error').remove();
 
             $(this).closest('.status-option').addClass('active')
         }
@@ -483,7 +597,7 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).on('click', '.update-delivery-time', function () {
     var getMinute = $(this).text(); // +5 or -5
     var orderId = $('.order_id').val();
-    var curruntTime = $('.expected_time_order').text();
+    var curruntTime = $('.expected_time_order').val();
 
     // Convert the current time (HH:mm) to minutes for easier comparison
     var timeParts = curruntTime.split(':');
@@ -527,7 +641,9 @@ $(document).on('click', '.update-delivery-time', function () {
         },
         success: function (response) {
             if (response.status == 'success') {
-                $('.expected_time_order').text(response.expected_time_order);
+                $('.expected_time_order').val(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).css('color', response.color);
+                $('.asap-time-' + orderId).attr('style', 'color: ' + response.color + ' !important');
                 $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
             }
         },
@@ -539,25 +655,96 @@ $(document).on('click', '.update-delivery-time', function () {
 });
 
 
-/*$(document).on('click', '.order_details_button', function () {
-    var urlLastElement = document.location.pathname
-    if (urlLastElement == '/orders') {
-        let id = $(this).attr("data-id");
-        $('.order-' + id).addClass('active');
-        $('.order-notification-popup').modal('hide')
-    } else {
-        $('.order-notification-popup').modal('hide')
-    }
+$(document).on('click', '.custom_time_order_setting', function () {
+    $('.custom-date-selector').removeClass('d-none')
+    $('#radio-button-error').remove();
+})
 
-})*/
+$(document).on('click', '.date_type', function () {
+    $('#start-date').val('');
+    $('#end-date').val('');
+    $('#radio-button-error').remove();
+    $('.custom-date-selector').addClass('d-none')
+})
 
 $(document).ready(function () {
     var currentUrl = window.location.href;
     var lastElement = currentUrl.split('/').pop();
-// Check if lastElement is a number, and then call a function
+    // Check if lastElement is a number, and then call a function
     if (!isNaN(lastElement)) {
         orderDetailNew(lastElement)
     } else {
         console.log("The last element is not a number.");
+    }
+});
+
+
+$(document).on('focus', '.expected_time_order', function () {
+    // Store the original time value when the input gains focus
+    $(this).data('original-time', this.value);
+});
+
+$(document).on('change', '.expected_time_order', function () {
+    let newTime = this.value;
+    let originalTime = $(this).data('original-time');
+    let orderId = $('.order_id').val();
+    console.log("Original Time: ", originalTime);
+    console.log("New Time: ", newTime);
+
+    if (/^\d{2}:\d{2}$/.test(newTime)) {
+        if (newTime >= originalTime) {
+            $('.expected_time_order_error').addClass('d-none')
+            updateDeliveryTime(newTime, orderId,);
+        } else {
+            $('.expected_time_order').val(originalTime)
+            $('.expected_time_order_error').removeClass('d-none')
+        }
+    } else {
+        alert('Please enter a valid time in HH:MM format.');
+    }
+});
+
+function updateDeliveryTime(newTime,orderId) {
+    // Perform an AJAX call
+    $.ajax({
+        url: baseURL + '/update-wished-time', // Your Laravel route to handle the request
+        method: 'POST',
+        data: {
+            orderId: orderId,
+            expected_time: newTime
+        },
+        success: function (response) {
+            if (response.status == 'success') {
+                $('.expected_time_order').text(response.expected_time_order);
+                $('.expectedDeliveryTime-' + orderId).css('color', response.color);
+                $('.asap-time-' + orderId).attr('style', 'color: ' + response.color + ' !important');
+                $('.expectedDeliveryTime-' + orderId).text(response.expected_time_order);
+            } else {
+                alert('Failed to update the expected delivery time.');
+            }
+        },
+        error: function () {
+            alert('Error updating the expected delivery time.');
+        }
+    });
+}
+
+$('.order-setting-tab a').click(function() {
+    // Remove the 'active' class from all tabs
+    $('.order-setting-tab a').removeClass('active');
+
+    // Add 'active' class to the clicked tab
+    $(this).addClass('active');
+
+    // Hide all content divs
+    $('.setting-panel-tab').addClass('d-none');
+
+    // Show the corresponding content div based on the clicked tab
+    if ($(this).text() === "Time") {
+        $('#tab-time').removeClass('d-none');
+    } else if ($(this).text() === "Sort") {
+        $('#sort-time').removeClass('d-none');
+    } else if ($(this).text() === "Display") {
+        $('#display-time').removeClass('d-none');
     }
 });

@@ -25,15 +25,40 @@ $(function () {
         var type = $(this).data('type')
 
         if (type == "2") {
-            let newHeights = invoiceHeight - 11;
+            let newHeights = invoiceHeight + 15;
 
             addPaddingToCouponTag(type,newHeights)
             $('.minimum_amount').hide()
+            $('.desktop-pill-home').removeClass('show active')
+            $('.desktop-pill-home').addClass('d-none');
+            $('.desktop-pill-takeAway').addClass('show active')
+
+            $('.delivery-tab-mobile').addClass('d-none')
+            $('.takeAway-tab-mobile').removeClass('d-none')
+            $("#zip_address_mobile_takw_away").removeClass('d-none');
+            $("#zip_address_mobile").addClass('d-none');
+            $('.addressError').addClass('d-none');
+            $(".zipcode-error-mobile").addClass('d-none');
+            // console.log($('.takeAway-tab-mobile-address').text())
         } else {
-            let newHeight = invoiceHeight + 20;
+            let newHeight = invoiceHeight + 15;
 
             addPaddingToCouponTag(type,newHeight)
             $('.minimum_amount').show()
+            $('.desktop-pill-home').addClass('show active');
+            $('.desktop-pill-home').removeClass('d-none');
+
+            $('.desktop-pill-takeAway').removeClass('show active')
+            $('.delivery-tab-mobile').removeClass('d-none')
+            $('.takeAway-tab-mobile').addClass('d-none')
+            // $("#zip_address_mobile").html('');
+            $("#zip_address_mobile_takw_away").addClass('d-none');
+            $("#zip_address_mobile").removeClass('d-none');
+            if ($('#zip_address_mobile').text().trim() === '') {
+                $('.addressError').removeClass('d-none');
+            } else {
+                $('.addressError').addClass('d-none');
+            }
         }
 
         var zipcode = $('#del-zipcode').val()
@@ -128,6 +153,10 @@ $(function () {
                 } else if (response.status == 200) {
                     window.location.replace(baseURL + '/user/checkout')
                 } else {
+                    console.log("response", response.restaurant_closed == 'true')
+                    if (response.restaurant_closed == 'true') {
+                        toastr.error(response.message);
+                    }
                     // alert(response.message);
                     var errorOccurred = true; // Replace this with actual error detection logic
                     if (errorOccurred) {
@@ -148,10 +177,13 @@ $(function () {
                                 targetElement.removeClass('shake');
                                 $('.cart-sidebar .cart-address-row').css('box-shadow', '1px 2px 10px 8px rgba(0, 0, 0, 0.08)');
                             }, 500);
+                            $('.addressError').removeClass('d-none');
                         }
                     }
-
-                    // toastr.error(response.message);
+                    if ($(window).width() <= 767) {
+                        toastr.error(response.message);
+                        $('#zip_address_mobile').html('');
+                    }
                 }
             },
             error: function (response) {

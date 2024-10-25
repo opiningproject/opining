@@ -33,12 +33,12 @@ class Order extends Model
 
     public function getDeliveryTimeAttribute($value)
     {
-        return $value ? date('g:i A',strtotime($value)) : 'ASAP';
+        return $value ? date('H:i',strtotime($value)) : 'ASAP';
     }
 
     public function getCreatedAtAttribute($value)
     {
-        return date('F d, Y, g:i A',strtotime($value));
+        return date('F d, Y, H:i',strtotime($value));
     }
 
     public function getItemTotalAttribute()

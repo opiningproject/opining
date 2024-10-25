@@ -79,8 +79,8 @@ class ChatController extends Controller
         $chats = $chats->groupBy(function($date) {
             return \Carbon\Carbon::parse($date->created_at)->format('d-M-Y');
         });
-
-        return view('admin.chats.messages', ['messages' => $chats, "pageCount" => $pageCount]);
+        $unreadCount = getUnreadChatCount();
+        return view('admin.chats.messages', ['messages' => $chats, "pageCount" => $pageCount, "unreadCount" => $unreadCount]);
     }
 
     /**

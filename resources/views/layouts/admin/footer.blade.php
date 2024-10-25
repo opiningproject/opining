@@ -70,7 +70,33 @@
             }
         });
 
+        // notification sound update on click sound icon
+        $('.sound-check').on('click', function() {
+            var soundStatus = $(this).find('.orderNotifSound');
+            // Get the current value (either "0" or "1")
+            var currentValue = soundStatus.val();
+            if (currentValue == 1) {
+                soundStatus.val(0); // Set to "0"
+                // Hide the volume icon and show the volume-slash icon
+                $(this).find('.volumeOn').addClass('d-none');
+                $(this).find('.volumeOff').removeClass('d-none');
+            } else {
+                soundStatus.val(1); // Set to "1"
+                // Show the volume icon and hide the volume-slash icon
+                $(this).find('.volumeOff').addClass('d-none');
+                $(this).find('.volumeOn').removeClass('d-none');
+            }
+            $.ajax({
+                url: baseURL + '/update-notification-sound',
+                method: 'POST',
+                data: { order_notif_sound: soundStatus.val() },
+                success: function(response) {
+                    console.log('Sound status updated');
+                }
+            });
+        });
     });
+
 
     /*jQuery(document).ajaxStart(function(){
         $('#loader').removeClass('d-none');
@@ -105,7 +131,7 @@
     });
     // code for open popup
     checkNotifiedOrdersPopup()
-
+    var orderColHeight = $('.order-col:last').height();
     function checkNotifiedOrdersPopup() {
 
     $.ajax({
@@ -114,11 +140,14 @@
         success: function (data) {
             if(data) {
                 $('#order-modal-div').html(data)
-                $('.order-notification-popup').modal('show')
+                // $('.order-notification-popup').modal('show')
                 // Check if there are more than 10 orders displayed
-                if ($('.order-col').length == 12) {
-                    // Remove the last order element
-                    $('.order-col:last').remove();
+                console.log("length", $('.order-column:first .order-col').length)
+
+                if ($('.order-column:first .order-col').length == 8) {
+                    // Remove the last order-col from the first order-column only
+                    orderColHeight = $('.order-col:first').height()
+                    $('.order-column:first .order-col:last').remove();
                 }
                 @if(getRestaurantDetail()->order_notif_sound)
                 // $('.myaudio').play();
@@ -146,8 +175,11 @@ function getLiveOrderList() {
         datatype: 'json',
         success: function (data) {
             if(data) {
-                $('.order-row').prepend(data.data)
-                $('.order-notification-popup').modal('show')
+                // var height = $('.order-col:last').height();
+                $('.order-column:first').prepend(data.data)
+                $('.order-col:first').css({ 'height': orderColHeight})
+                // $('.order-notification-popup').modal('show')
+                orderDetailsNew(data.orderId)
                 var currentOrderCount = parseInt($('.order-count').text());
                 $('.order-count').html(currentOrderCount + 1);
                 $('.count-order').html(currentOrderCount + 1);

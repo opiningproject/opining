@@ -41,6 +41,6 @@ class DomainSettingController extends Controller
 
         /* Domain::create($request->all()); */
         return redirect()->route('settings');
+        // return view('admin.settings.domain-setting');
     }
-
 }

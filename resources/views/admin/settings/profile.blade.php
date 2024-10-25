@@ -168,10 +168,37 @@
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                         <div class="form-group mb-0">
-                            <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.opening_hours') }}</label>
+                            <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.opening_hours_delivery') }}</label>
                             <div class="schedule-table bg-lightgray border-custom-1 rounded-custom-12" style="font-family:'Sebino-Medium', sans-serif;font-size: 14px;">
                                 <div class="row">
                                     @foreach($operating_days as $time)
+                                        <div class="col-6 mb-3 d-flex justify-content-between">
+                                            <div class="">
+                                                {{ $time->day }}
+                                            </div>
+                                            <input type="hidden" value="{{ $time->id }}" name="id[]">
+                                            <div class="time-day-name">
+                                                <div class="form-group mb-0">
+                                                    <input type="text" class="timepicker form-control time-form-control profile_start_time" id="start_time{{ $time->id }}" data-id="{{ $time->id }}" value="{{ date('H:i',strtotime($time->start_time)) }}" name="start_time[]" style="max-height: fit-content">
+                                                </div>
+                                                -
+                                                <div class="form-group mb-0">
+                                                    <input type="text" class="timepicker form-control time-form-control profile_end_time" id="end_time{{ $time->id }}" data-id="{{ $time->id }}" value="{{ date('H:i',strtotime($time->end_time)) }}" name="end_time[]" style="max-height: fit-content">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="form-group mb-0">
+                            <label for="servicecharge" class="form-label">{{ trans('rest.settings.profile.opening_hours_take_away') }}</label>
+                            <div class="schedule-table bg-lightgray border-custom-1 rounded-custom-12" style="font-family:'Sebino-Medium', sans-serif;font-size: 14px;">
+                                <div class="row">
+                                    @foreach($operating_days_takeAway as $time)
                                         <div class="col-6 mb-3 d-flex justify-content-between">
                                             <div class="">
                                                 {{ $time->day }}

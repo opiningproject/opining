@@ -231,3 +231,93 @@ function loadMoreData(currentPage, url) {
 }
 
 
+function orderDetailsNew(id) {
+    $.ajax({
+        url: baseURL + '/orders/order-detail/' + id,
+        type: 'GET',
+        success: function (response) {
+            if (response.status == 1) {
+                // $('.order-notification-popup').modal('hide')
+                $('.order-detail-popup').html(response.data);
+                $('.order-detail-popup').modal('show')
+                console.log("test")
+                disabledOldOrdersStatus()
+            }
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+
+function disabledOldOrdersStatus() {
+    const radios = document.querySelectorAll('.order-status-radio');
+
+    // Function to update the status of radio buttons
+    function updateRadioStatus() {
+        // Find the checked radio button
+        const checkedRadio = document.querySelector('.order-status-radio:checked');
+
+        if (checkedRadio) {
+            let disablePrevious = true; // Flag to disable previous radios
+            radios.forEach(radio => {
+                if (radio === checkedRadio) {
+                    disablePrevious = false; // Stop disabling after the checked radio
+                }
+                if (disablePrevious) {
+                    radio.disabled = true; // Disable previous radios
+                } else {
+                    radio.disabled = false; // Keep the current and future radios enabled
+                }
+            });
+        } else {
+            // If no radio is checked, enable all radios
+            radios.forEach(radio => {
+                radio.disabled = false;
+            });
+        }
+    }
+
+    // Initialize radio buttons on page load
+    updateRadioStatus();
+
+    // Add change event listener to radio buttons
+    radios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            updateRadioStatus(); // Apply the disabling logic based on the new selection
+        });
+    });
+}
+
+function changeOrderStatusNew(order_id, order_status) {
+    var socket = io("https://gomeal-qa.inheritxdev.in/web-socket", { transports: ['websocket', 'polling', 'flashsocket'] });
+
+    var orderId = order_id;
+    $.ajax({
+        url: baseURL + '/orders/change-status/' + orderId + '/' + order_status,
+        type: 'GET',
+        success: function (response) {
+            console.log("response", response)
+            if (response.status == 1) {
+                $('.order-status-' + response.orderId).removeClass('outline-danger outline-warning outline-success btn-danger-outline outline-secondary');
+                // $('.order-detail-popup').modal('hide')
+                $('.order-status-' + response.orderId).addClass(response.color);
+                $('.order-status-' + response.orderId).text(response.text);
+            }
+            if (response.orderStatus == "6") {
+                $('#order-' + response.orderId).remove();
+                var currentOrderCount = $('.order-count').text();
+                $('.order-count').html(currentOrderCount - 1);
+                $('.count-order').html(currentOrderCount - 1);
+                window.location.reload()
+            }
+            socket.emit('orderTrackAdmin', response.orderId, response.updatedStatus, response.orderDate);
+        },
+        error: function (response) {
+            var errorMessage = JSON.parse(response.responseText).message
+            alert(errorMessage);
+        }
+    })
+}
+

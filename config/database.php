@@ -37,12 +37,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'database' => 'go-meal',
+            'database' => 'opining',
 //            'url' => ' localhost',
-            'host' => '164.90.253.87',
+            'host' => 'localhost',
             'port' => '3306',
-            'username' => 'go-meal',
-            'password' => 'GgiJ-9j$ceDn6oF',
+            'username' => 'root',
+            'password' => '',
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

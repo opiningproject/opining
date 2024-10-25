@@ -128,7 +128,7 @@ Route::get('change-theme/{theme}', function ($currency) {
     return redirect()->back();
 });
 
-Route::middleware(['auth', 'guest', 'localization'])->group(function () {
+Route::middleware(['auth', 'localization'])->group(function () {
     // dashboard route
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('dashboard/statistics', [HomeController::class, 'getDashboardStatistics'])->name('dashboard.statistics');

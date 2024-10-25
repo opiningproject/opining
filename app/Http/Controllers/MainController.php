@@ -69,19 +69,19 @@ class MainController extends Controller
 
     public function restaurantAdminLogin(Request $request,$domain_code)
     {
-        if (Auth::check()) {
-            return redirect('/dashboard'); // Adjust this path as needed
-        } elseif($request->input('token')) {
-            $authToken = $request->input('token');
-            $authData = json_decode(base64_decode($authToken), true);
-            if(isset($authData['email'])) {
-                $tuser = User::where('email', $authData['email'])->first();
-                if ($tuser) {
-                    Auth::login($tuser);
-                    return redirect('/dashboard');
-                }
-            }
-        }
+        // if (Auth::check()) {
+        //     return redirect('/dashboard'); // Adjust this path as needed
+        // } elseif($request->input('token')) {
+        //     $authToken = $request->input('token');
+        //     $authData = json_decode(base64_decode($authToken), true);
+        //     if(isset($authData['email'])) {
+        //         $tuser = User::where('email', $authData['email'])->first();
+        //         if ($tuser) {
+        //             Auth::login($tuser);
+        //             return redirect('/dashboard');
+        //         }
+        //     }
+        // }
         $host = $request->getHost();
         $domain_code = $this->extractDomainCode($request);
         $admin_domain = config('app.admin_domain');
@@ -112,31 +112,31 @@ class MainController extends Controller
             Log::warning('Request to non-admin domain: ' . $host);
         } */
   
-    if ($request->isMethod('post')) {
-         // Validate the login credentials
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        $user = User::where('email', $request->email)->first();
-        Log::info('Login Email ' . $request->email);
-        if ($user) {
-            if (Auth::attempt(['email' => $user->email, 'password' => $request->input('password')])) {
-                Auth::login($user);
-                Session::put('tenancy_db_name', $tenancy_db_name);
-                Session::put('tenancy_domain_code', $domain_code);
-                return redirect()->intended('dashboard'); // Redirect to intended page
-            /*  $redirectUrl = 'http://' . $admin_domain . '/dashboard';
-                return redirect()->to($redirectUrl); */
+        if ($request->isMethod('post')) {
+            // Validate the login credentials
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            $user = User::where('email', $request->email)->first();
+            Log::info('Login Email ' . $request->email);
+            if ($user) {
+                if (Auth::attempt(['email' => $user->email, 'password' => $request->input('password')])) {
+                    Auth::login($user);
+                    Session::put('tenancy_db_name', $tenancy_db_name);
+                    Session::put('tenancy_domain_code', $domain_code);
+                    return redirect()->intended('dashboard'); // Redirect to intended page
+                /*  $redirectUrl = 'http://' . $admin_domain . '/dashboard';
+                    return redirect()->to($redirectUrl); */
+                } else {
+                    return back()->withErrors(['password' => 'Invalid credentials']);
+                    Log::info('Invalid credentials');
+                }
             } else {
-                return back()->withErrors(['password' => 'Invalid credentials']);
-                Log::info('Invalid credentials');
+                Log::info('User is not found');
+                return back()->withErrors(['email' => 'Either the email or password is incorrect.']);
             }
-        } else {
-            Log::info('User is not found');
-            return back()->withErrors(['email' => 'Either the email or password is incorrect.']);
-        }
-    }   
+        }   
         return view('auth.restaurant-admin-login', compact('domain_code'));
     }
 

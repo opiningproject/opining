@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as Image;
 use App\Models\RestaurantDetail;
 use App\Models\User;
+use App\Models\Chat;
 use App\Enums\OrderStatus;
 use App\Enums\OrderType;
+use GuzzleHttp\Client;
 
 if (!function_exists('activeMenu')) {
     function activeMenu($path)
@@ -503,9 +505,18 @@ if (!function_exists('getOpenOrders')) {
     }
 }
 
+if (!function_exists('getUnreadChatCount')) {
+    function getUnreadChatCount()
+    {
+        $getUnreadChatCount = Chat::where('is_read', '0')->where('receiver_id', '1')->get();
+
+        return count($getUnreadChatCount);
+    }
+}
+
 if (!function_exists('validateAddressByPostCode')) {
     function validateAddressByPostCode ($data) {
-
+//        $getLatLong = getLatLongFromZipcode($data['zipcode']);
         $curl = curl_init();
         $postCodeApiKey = config('params.postCodeApiKey');
         curl_setopt_array($curl, array(
@@ -523,7 +534,6 @@ if (!function_exists('validateAddressByPostCode')) {
         ));
 
         $response = curl_exec($curl);
-//        dd($response);
         $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
         if ($httpcode == 400 || $httpcode == 404) {
@@ -653,7 +663,7 @@ if (!function_exists('orderStatusBox')) {
             4 => 'outline-success',       // Ready For Pickup
             5 => 'outline-success',       // Out For Delivery
             6 => 'btn-danger-outline',     // Delivered
-            7 => 'outline-danger',        // New Order
+            7 => 'btn-danger-outline',        // Cancelled
         ];
 
         // Define status-text mappings
@@ -798,9 +808,54 @@ if (!function_exists('RoundUpEstimatedTime')) {
         }
 
         $expectedDeliveryTime = $hours . ':' . str_pad($roundedMinutes, 2, '0', STR_PAD_LEFT);
-        $expectedDeliveryTime =  \Carbon\Carbon::parse($expectedDeliveryTime)->addMinutes($addMinutes)->format('H:i:s');
+        $expectedDeliveryTime =  \Carbon\Carbon::parse($expectedDeliveryTime)->addMinutes($addMinutes);
         return $expectedDeliveryTime;
 
 
     }
 }
+
+if (!function_exists('RoundCreatedAt')) {
+    function RoundCreatedAt($createdAtDate)
+    {
+        $time = \Carbon\Carbon::createFromTimeString($createdAtDate);
+
+// If it's already a multiple of 5, keep it unchanged
+        if ($time->minute % 5 === 0) {
+            $roundedTime = $time; // Remains as is
+        } else {
+            // Otherwise, round up to the next multiple of 5
+            $roundedTime = $time->ceilMinute(5);
+        }
+
+        return $roundedTime;
+    }
+}
+
+//if (!function_exists('getLatLongFromZipcode')) {
+//    function getLatLongFromZipcode($zipcode)
+//    {
+//        $apiKey = config('services.google_place_key'); // Replace with your Google Maps API Key
+//        $client = new Client();
+//
+//        $response = $client->get('https://maps.googleapis.com/maps/api/geocode/json', [
+//            'query' => [
+//                'address' => $zipcode,
+//                'key' => $apiKey,
+//            ]
+//        ]);
+//
+//
+//        $data = json_decode($response->getBody(), true);
+//
+//        if ($data['status'] === 'OK') {
+//            // Extract latitude and longitude from the response
+//            $lat = $data['results'][0]['geometry']['location']['lat'];
+//            $lng = $data['results'][0]['geometry']['location']['lng'];
+//            return ['lat' => $lat, 'lng' => $lng];
+//        }
+//
+//        return null; // If no result is found
+//    }
+//}
+

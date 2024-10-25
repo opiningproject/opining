@@ -254,7 +254,7 @@ $(function () {
         console.log("in",id, "ingredientId", ingredientId, "dishName", dishName)
 
         var html = '<span class="badge text-bg-yellow mt-1">' + dishName + '<a ' +
-            'href="javascript:void(0);"><i class="fa-solid fa-xmark align-middle del-dish-icon new-dish new-added-dish' + ingredientId + '" data-dish-id="' + id + '" data-id="' + ingredientId + '" data-name="' + dishName + '"></i></a></span>';
+            'href="javascript:void(0);"><i id="new-dish '+ id +'" class="fa-solid fa-xmark align-middle del-dish-icon new-dish new-added-dish' + ingredientId + '" data-dish-id="' + id + '" data-id="' + ingredientId + '" data-name="' + dishName + '"></i></a></span>';
         $('.dish-tray' + ingredientId).append(html)
         $(this).find(':selected').remove()
         $(this).val('')

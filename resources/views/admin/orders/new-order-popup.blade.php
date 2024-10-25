@@ -35,7 +35,7 @@ use App\Enums\PaymentType;
                     <div class="orderTop d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
                         <div class="left d-flex align-items-center">
                             <h3 class="font-14">{{ trans('rest.food_order.order') }} #{{ $order->id }}</h3>
-                            <h3 class="font-14">&nbsp;{{$order->created_at}}</h3>
+                            <h3 class="font-14">&nbsp;{{date('F d, Y, H:i', strtotime($order->created_at))}}</h3>
                         </div>
                         <div class="right d-flex align-items-center ml-auto font-14">
                             <h3 class="font-14"><i class="fa fa-phone font-12 text-yellow-2"></i> +31 {{ $userDetails->order_contact_number ?? "-"}} </h3>

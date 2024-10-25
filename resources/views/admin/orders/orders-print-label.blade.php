@@ -19,7 +19,9 @@
             max-width: 100%; /* Full width */
             font-size: 14px;
         }
-
+        .header-top {
+            display: none !important;
+        }
         .header {
             text-align: center;
             margin-bottom: 10px; /* Adjust margin */

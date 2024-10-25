@@ -56,8 +56,8 @@ var swiper = '';
 $(document).ready(function () {
 
     swiper = new Swiper(".category-swiper-slider", {
-        slidesPerView: 3,
-        spaceBetween: 12,
+        slidesPerView: 'auto',
+        spaceBetween: 10,
         progress : 1,
         speed: 100,
         freeMode: true,
@@ -74,84 +74,84 @@ $(document).ready(function () {
         },
         breakpoints: {
             375: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 10,
                 autoplay: false,
             },
             425: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 10,
                 autoplay: false,
             },
             575: {
-                slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 10,
                 autoplay: false,
             },
             640: {
-                slidesPerView: 3,
-                spaceBetween: 20,
+                slidesPerView: 'auto',
+                spaceBetween: 10,
                 autoplay: false,
             },
             700: {
-                slidesPerView: 3,
-                spaceBetween: 20,
+                slidesPerView: 'auto',
+                spaceBetween: 10,
                 autoplay: false,
             },
             758: {
-                slidesPerView: 4,
-                spaceBetween: 20,
+                slidesPerView: 'auto',
+                spaceBetween: 10,
                 autoplay: false,
             },
             768: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             800: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
                 autoplay: false,
             },
             988: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1024: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1100: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1200: {
                 slidesPerView: 3,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1300: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1400: {
                 slidesPerView: 4,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1700: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1800: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             1920: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
             2560: {
                 slidesPerView: 6,
-                spaceBetween: 20,
+                spaceBetween: 10,
             },
         },
     });
@@ -233,13 +233,13 @@ function checkScreenSize() {
     if ($(window).width() <= 767) {
         $('body').addClass('body-bg-mobile');
         var invoiceHeight = $('.cartSidebarCustom .bill-detail-invoice').height();
-        var newHeight = invoiceHeight + 20;
+        var newHeight = invoiceHeight + 15;
         $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
 
         if ($('.pills-delivery-tab.active').data('type') == "1") {
             $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
         } else {
-            newHeight = invoiceHeight - 20
+            newHeight = invoiceHeight + 15
             $('.cartSidebarCustom .cartoffCanvas').css('padding-bottom', newHeight + 'px');
         }
     } else {
